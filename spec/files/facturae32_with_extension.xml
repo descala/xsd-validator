@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<facturae:Facturae xmlns:facturae="http://www.facturae.es/Facturae/2009/v3.2/Facturae" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.facturae.es/Facturae/2009/v3.2/Facturae http://www.facturae.es/NR/rdonlyres/2DF1A921-9E57-4A24-85D8-14FE74E0FB31/0/Facturaev3_2.xsd">
+  <FileHeader>
+    <SchemaVersion>3.2</SchemaVersion>
+    <Modality>I</Modality>
+    <InvoiceIssuerType>TE</InvoiceIssuerType>
+    <ThirdParty>
+      <TaxIdentification>
+        <PersonTypeCode>J</PersonTypeCode>
+        <ResidenceTypeCode>R</ResidenceTypeCode>
+        <TaxIdentificationNumber>ESB63276174</TaxIdentificationNumber>
+      </TaxIdentification>
+      <LegalEntity>
+        <CorporateName>INVINET SISTEMES 2003, SL</CorporateName>
+        <AddressInSpain>
+          <Address>CL. RIBES 31 ENTLO.4</Address>
+          <PostCode>08013</PostCode>
+          <Town>BARCELONA</Town>
+          <Province>BARCELONA</Province>
+          <CountryCode>ESP</CountryCode>
+        </AddressInSpain>
+      </LegalEntity>
+    </ThirdParty>
+    <Batch>
+      <BatchIdentifier>A08876310N5026469</BatchIdentifier>
+      <InvoicesCount>1</InvoicesCount>
+      <TotalInvoicesAmount>
+        <TotalAmount>74.00</TotalAmount>
+      </TotalInvoicesAmount>
+      <TotalOutstandingAmount>
+        <TotalAmount>74.00</TotalAmount>
+      </TotalOutstandingAmount>
+      <TotalExecutableAmount>
+        <TotalAmount>74.00</TotalAmount>
+      </TotalExecutableAmount>
+      <InvoiceCurrencyCode>EUR</InvoiceCurrencyCode>
+    </Batch>
+  </FileHeader>
+  <Parties>
+    <SellerParty>
+      <TaxIdentification>
+        <PersonTypeCode>J</PersonTypeCode>
+        <ResidenceTypeCode>R</ResidenceTypeCode>
+        <TaxIdentificationNumber>ESA08876310</TaxIdentificationNumber>
+      </TaxIdentification>
+      <LegalEntity>
+        <CorporateName>SUMINISTROS HOSPITALARIOS S.A.</CorporateName>
+        <AddressInSpain>
+          <Address>CL.TORTOSA, 191-201</Address>
+          <PostCode>08918</PostCode>
+          <Town>BADALONA</Town>
+          <Province>BARCELONA</Province>
+          <CountryCode>ESP</CountryCode>
+        </AddressInSpain>
+        <ContactDetails>
+          <Telephone>934607923</Telephone>
+          <TeleFax>934607921</TeleFax>
+          <WebAddress>www.shmedical.net</WebAddress>
+          <ElectronicMail>facturaelectronica@ashmed.net</ElectronicMail>
+          <ContactPersons>SUMINISTROS HOSPITALARIOS S.A.</ContactPersons>
+        </ContactDetails>
+      </LegalEntity>
+    </SellerParty>
+    <BuyerParty>
+      <TaxIdentification>
+        <PersonTypeCode>J</PersonTypeCode>
+        <ResidenceTypeCode>R</ResidenceTypeCode>
+        <TaxIdentificationNumber>ESQ8555011I</TaxIdentificationNumber>
+      </TaxIdentification>
+      <AdministrativeCentres>
+        <AdministrativeCentre>
+          <CentreCode>A05008801</CentreCode>
+          <RoleTypeCode>01</RoleTypeCode>
+          <Name>Dirección Gerencia Hosp.Univ.de Canarias</Name>
+          <AddressInSpain>
+            <Address>C/Ofra s/n La Cuesta</Address>
+            <PostCode>38010</PostCode>
+            <Town>San Cristóbal de La Laguna</Town>
+            <Province>Santa Cruz de Teneri</Province>
+            <CountryCode>ESP</CountryCode>
+          </AddressInSpain>
+          <CentreDescription>Dirección Gerencia Hosp.Univ.de Canarias</CentreDescription>
+        </AdministrativeCentre>
+        <AdministrativeCentre>
+          <CentreCode>A05008801</CentreCode>
+          <RoleTypeCode>02</RoleTypeCode>
+          <Name>Dirección Gerencia Hosp.Univ.de Canarias</Name>
+          <AddressInSpain>
+            <Address>C/ Ofra s/n La Cuesta</Address>
+            <PostCode>38010</PostCode>
+            <Town>San Cristóbal de La Laguna</Town>
+            <Province>Santa Cruz de Teneri</Province>
+            <CountryCode>ESP</CountryCode>
+          </AddressInSpain>
+          <CentreDescription>Dirección Gerencia Hosp.Univ.de Canarias</CentreDescription>
+        </AdministrativeCentre>
+        <AdministrativeCentre>
+          <CentreCode>A05008801</CentreCode>
+          <RoleTypeCode>03</RoleTypeCode>
+          <Name>Dirección Gerencia Hosp.Univ.de Canarias</Name>
+          <AddressInSpain>
+            <Address>C/ Ofra s/n La Cuesta</Address>
+            <PostCode>38010</PostCode>
+            <Town>San Cristóbal de La Laguna</Town>
+            <Province>Santa Cruz de Teneri</Province>
+            <CountryCode>ESP</CountryCode>
+          </AddressInSpain>
+          <CentreDescription>Dirección Gerencia Hosp.Univ.de Canarias</CentreDescription>
+        </AdministrativeCentre>
+        <AdministrativeCentre>
+          <RoleTypeCode>04</RoleTypeCode>
+          <Name>HOSPITAL UNIVERSITARIO DE CANARIAS</Name>
+          <AddressInSpain>
+            <Address>C/ PABELLON DEL GOBIERO OFRA, S/N</Address>
+            <PostCode>38320</PostCode>
+            <Town>LAGUNA,LA</Town>
+            <Province>STA CRUZ DE TENERIFE</Province>
+            <CountryCode>ESP</CountryCode>
+          </AddressInSpain>
+        </AdministrativeCentre>
+        <AdministrativeCentre>
+          <RoleTypeCode>05</RoleTypeCode>
+          <Name>HOSPITAL UNIVERSITARIO DE CANARIAS</Name>
+          <AddressInSpain>
+            <Address>C/ PABELLON DEL GOBIERO OFRA, S/N</Address>
+            <PostCode>38320</PostCode>
+            <Town>LAGUNA,LA</Town>
+            <Province>STA CRUZ DE TENERIFE</Province>
+            <CountryCode>ESP</CountryCode>
+          </AddressInSpain>
+        </AdministrativeCentre>
+      </AdministrativeCentres>
+      <LegalEntity>
+        <CorporateName>SERVICIO CANARIO DE SALUD</CorporateName>
+        <TradeName>HOSPITAL UNIVERSITARIO DE CANARIAS</TradeName>
+        <AddressInSpain>
+          <Address>AVENIDA  JUAN XXIII, 17 - PLANTA 6ª</Address>
+          <PostCode>35004</PostCode>
+          <Town>LAS PALMAS DE GRAN CANARIA</Town>
+          <Province>LAS PALMAS</Province>
+          <CountryCode>ESP</CountryCode>
+        </AddressInSpain>
+        <ContactDetails>
+          <ElectronicMail>proveedoreshuc.scs@gobiernodecanarias.org</ElectronicMail>
+          <ContactPersons>EVA HERNANDEZ</ContactPersons>
+        </ContactDetails>
+      </LegalEntity>
+    </BuyerParty>
+  </Parties>
+  <Invoices>
+    <Invoice>
+      <InvoiceHeader>
+        <InvoiceNumber>N5026469</InvoiceNumber>
+        <InvoiceDocumentType>FC</InvoiceDocumentType>
+        <InvoiceClass>OO</InvoiceClass>
+      </InvoiceHeader>
+      <InvoiceIssueData>
+        <IssueDate>2015-12-09</IssueDate>
+        <InvoiceCurrencyCode>EUR</InvoiceCurrencyCode>
+        <TaxCurrencyCode>EUR</TaxCurrencyCode>
+        <LanguageName>es</LanguageName>
+      </InvoiceIssueData>
+      <TaxesOutputs>
+        <Tax>
+          <TaxTypeCode>01</TaxTypeCode>
+          <TaxRate>0.00</TaxRate>
+          <TaxableBase>
+            <TotalAmount>74.00</TotalAmount>
+          </TaxableBase>
+          <TaxAmount>
+            <TotalAmount>0.00</TotalAmount>
+          </TaxAmount>
+        </Tax>
+      </TaxesOutputs>
+      <InvoiceTotals>
+        <TotalGrossAmount>74.00</TotalGrossAmount>
+        <TotalGrossAmountBeforeTaxes>74.00</TotalGrossAmountBeforeTaxes>
+        <TotalTaxOutputs>0.00</TotalTaxOutputs>
+        <TotalTaxesWithheld>0.00</TotalTaxesWithheld>
+        <InvoiceTotal>74.00</InvoiceTotal>
+        <TotalOutstandingAmount>74.00</TotalOutstandingAmount>
+        <TotalExecutableAmount>74.00</TotalExecutableAmount>
+      </InvoiceTotals>
+      <Items>
+        <InvoiceLine>
+          <ReceiverTransactionReference>4500938730</ReceiverTransactionReference>
+          <FileReference>HUC-CA-016/13</FileReference>
+          <FileDate>2015-01-01</FileDate>
+          <SequenceNumber>1</SequenceNumber>
+          <DeliveryNotesReferences>
+            <DeliveryNote>
+              <DeliveryNoteNumber>A1142686</DeliveryNoteNumber>
+              <DeliveryNoteDate>2015-12-09</DeliveryNoteDate>
+            </DeliveryNote>
+          </DeliveryNotesReferences>
+          <ItemDescription>TAPONAMIENTO NASAL EXPAND. 45MM S/TUBO REF.66100</ItemDescription>
+          <Quantity>20</Quantity>
+          <UnitPriceWithoutTax>3.700000</UnitPriceWithoutTax>
+          <TotalCost>74.000000</TotalCost>
+          <GrossAmount>74.000000</GrossAmount>
+          <TaxesOutputs>
+            <Tax>
+              <TaxTypeCode>01</TaxTypeCode>
+              <TaxRate>0.00</TaxRate>
+              <TaxableBase>
+                <TotalAmount>74.00</TotalAmount>
+              </TaxableBase>
+              <TaxAmount>
+                <TotalAmount>0.00</TotalAmount>
+              </TaxAmount>
+            </Tax>
+          </TaxesOutputs>
+          <ArticleCode>65074</ArticleCode>
+          <Extensions>
+            <scs:SCSExtension xmlns:scs="http://pefac.gobcan.es/scs/facturae/extension/v1.0">
+            </scs:SCSExtension>
+          </Extensions>
+        </InvoiceLine>
+      </Items>
+      <PaymentDetails>
+        <Installment>
+          <InstallmentDueDate>2016-02-09</InstallmentDueDate>
+          <InstallmentAmount>74.00</InstallmentAmount>
+          <PaymentMeans>04</PaymentMeans>
+          <AccountToBeCredited>
+            <IBAN>ES5720389238946000155448</IBAN>
+            <BankCode>CAHMESMMXXX</BankCode>
+          </AccountToBeCredited>
+          <CollectionAdditionalInformation>N.Fra.: N5026469</CollectionAdditionalInformation>
+        </Installment>
+      </PaymentDetails>
+      <AdditionalData>
+        <InvoiceAdditionalInformation>S.Ped: 4500938730    N.Alb: A1142686    INVERSION SUJETO PASIVO ART.19.1.2º a) LEY 20/1991</InvoiceAdditionalInformation>
+      </AdditionalData>
+    </Invoice>
+  </Invoices>
+<ds:Signature Id="Signature-8006dbe3-a700-4b2c-b715-eb8c88936111-Signature" xmlns:ds="http://www.w3.org/2000/09/xmldsig#"><ds:SignedInfo><ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/><ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><ds:Reference Id="Reference-40755c80-e856-491c-b2c4-f4d82cdecc22" URI=""><ds:Transforms><ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><ds:DigestValue>jpbqY7WTCtMDzmFajTT/YRF1wtY=</ds:DigestValue></ds:Reference><ds:Reference Type="http://uri.etsi.org/01903#SignedProperties" URI="#Signature-8006dbe3-a700-4b2c-b715-eb8c88936111-SignedProperties"><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><ds:DigestValue>0GAdxQTnQ0AtEqJ63nv/IivEXO0=</ds:DigestValue></ds:Reference><ds:Reference URI="#Signature-8006dbe3-a700-4b2c-b715-eb8c88936111-KeyInfo"><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><ds:DigestValue>5VH0xjXfzjfp+2Wwvzs1R8GBEvI=</ds:DigestValue></ds:Reference></ds:SignedInfo><ds:SignatureValue Id="Signature-8006dbe3-a700-4b2c-b715-eb8c88936111-SignatureValue">H0vSQ8slnfB2kLxfQK/03t3bGOi1XspCMEIlfF4T38HB01AdcWX8ATocB4cEqXBrhd5O+OMt2NTC
+mxx3Fg2jRGZYZPkle89DGQdHIEGxBHX4CxCN7riOzZ+549/ZpvEiWNKUDcsYFfNGxlt+iBrTdQ2e
+XdNNBVfQHSBAxTvuVJNurTaCHvHax+LDS3xkKfDFH5lLqQumjgPobrEoUQyPpXkYDIKX9sVXO3mF
+zsayF/SrXSauXU8LcWs/TkLF2W567E8YR7thl3rG3LUBEHvCqqVJvLQ1r2l57skXC/4P8av4fXFK
+eh29r7a5jTzcy1Er5jnnVy2eI8sAvuW41C9ltA==</ds:SignatureValue><ds:KeyInfo Id="Signature-8006dbe3-a700-4b2c-b715-eb8c88936111-KeyInfo"><ds:X509Data><ds:X509Certificate>MIIE0zCCBDygAwIBAgIEPSScsTANBgkqhkiG9w0BAQUFADA2MQswCQYDVQQGEwJFUzENMAsGA1UE
+ChMERk5NVDEYMBYGA1UECxMPRk5NVCBDbGFzZSAyIENBMB4XDTE0MTIzMDIyMTQxM1oXDTE2MTIz
+MDIyMTQxM1owgbAxCzAJBgNVBAYTAkVTMQ0wCwYDVQQKEwRGTk1UMRgwFgYDVQQLEw9GTk1UIENs
+YXNlIDIgQ0ExEjAQBgNVBAsTCTcwMzAxMTI1MTFkMGIGA1UEAxNbRU5USURBRCBJTlZJTkVUIFNJ
+U1RFTUVTIDIwMDMgU0wgLSBDSUYgQjYzMjc2MTc0IC0gTk9NQlJFIEJBVVNBIFBFUklTIE9SSU9M
+IC0gTklGIDQ2MjI4MTYwVDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAOhTJcQCvEFq
+7qhkpWCH2DH8CNS7mBXvWgW3vmVLF557YyJVxhiaEq5PPJNbcEb+/2ERAkadmarx4NkkNpOmAu5f
+VbIoqGU/X4Lpha95UtWSQBTJcRQTes2WrGu7FXyN0mRlwAMv0/BdZ+TWZkFLAC0vvNBRziLQ1VPj
+V4SAOOWmMMz2oqTZrRVgG6CxztH2WbtQnUr7hX0PcR989zEJW6LSjdtEAHyHf7gsCvD8tx9WPbDm
+r7WVFSi4wgNYeOHeEVbHZp+Zo8EPgQTVPV0//p0Q1smxOg1vAiN76WRtWy6mKTAI/hubO1V0FzLE
+anriUItsx/xKtzLjOa0ZjaLWzksCAwEAAaOCAe0wggHpMIGwBgNVHREEgagwgaWkgaIwgZ8xGDAW
+BgkrBgEEAaxmAQcTCUI2MzI3NjE3NDEnMCUGCSsGAQQBrGYBBhMYSU5WSU5FVCBTSVNURU1FUyAy
+MDAzIFNMMRgwFgYJKwYBBAGsZgEEEwk0NjIyODE2MFQxFDASBgkrBgEEAaxmAQMTBVBFUklTMRQw
+EgYJKwYBBAGsZgECEwVCQVVTQTEUMBIGCSsGAQQBrGYBARMFT1JJT0wwCQYDVR0TBAIwADArBgNV
+HRAEJDAigA8yMDE0MTIzMDIyMTQxM1qBDzIwMTYxMjMwMjIxNDEzWjALBgNVHQ8EBAMCBaAwEQYJ
+YIZIAYb4QgEBBAQDAgWgMB0GA1UdDgQWBBQaWJZCX+7kHtI/43440oaTt8SshTAfBgNVHSMEGDAW
+gBRAmnZEl3QHxKwUyx6NTzpFfDDXYTA+BgkrBgEEAaxmASEEMRYvQ0VSVElGSUNBRE8gRVhDTFVT
+SVZPIFBBUkEgRUwgQU1CSVRPIFRSSUJVVEFSSU8wXAYDVR0fBFUwUzBRoE+gTaRLMEkxCzAJBgNV
+BAYTAkVTMQ0wCwYDVQQKEwRGTk1UMRgwFgYDVQQLEw9GTk1UIENsYXNlIDIgQ0ExETAPBgNVBAMT
+CENSTDE2MTg4MA0GCSqGSIb3DQEBBQUAA4GBAFA7BUHGqaY3rsT52Yf9FDm+0+0KLZ04m3iNhXC6
+FMJm3dWmIIewz6gKhlnveQcEcO/wcQWvD++6GyljQdBWmqHt0rx2yqLAazgYMBvJS70uMJPl4R0Y
+bOwujEJGPlRtITGzvKPClVtFJGVjM+qbK209wWZJodtk2VeOxoNzEKD4</ds:X509Certificate><ds:X509Certificate>MIIC+TCCAmKgAwIBAgIENvEbGTANBgkqhkiG9w0BAQUFADA2MQswCQYDVQQGEwJFUzENMAsGA1UE
+ChMERk5NVDEYMBYGA1UECxMPRk5NVCBDbGFzZSAyIENBMB4XDTk5MDMxODE0NTYxOVoXDTE5MDMx
+ODE1MjYxOVowNjELMAkGA1UEBhMCRVMxDTALBgNVBAoTBEZOTVQxGDAWBgNVBAsTD0ZOTVQgQ2xh
+c2UgMiBDQTCBnTANBgkqhkiG9w0BAQEFAAOBiwAwgYcCgYEAmD+tGTaTPT7+dkIU/TVv8fqtInpY
+40bQXcZa+WItjzFe/rQw/lB0rNadHeBixkndFBJ9cQusBsE/1waH4JCJ1uXjA7LyJ7GfM8iqazZK
+o8Q/eUGdiUYvKz5j1DhWkaodsQ1CdU3zh07jD03MtGy/YhOH6tCbjrbi/xn0lAnVlmECAQOjggEU
+MIIBEDARBglghkgBhvhCAQEEBAMCAAcwWAYDVR0fBFEwTzBNoEugSaRHMEUxCzAJBgNVBAYTAkVT
+MQ0wCwYDVQQKEwRGTk1UMRgwFgYDVQQLEw9GTk1UIENsYXNlIDIgQ0ExDTALBgNVBAMTBENSTDEw
+KwYDVR0QBCQwIoAPMTk5OTAzMTgxNDU2MTlagQ8yMDE5MDMxODE0NTYxOVowCwYDVR0PBAQDAgEG
+MB8GA1UdIwQYMBaAFECadkSXdAfErBTLHo1POkV8MNdhMB0GA1UdDgQWBBRAmnZEl3QHxKwUyx6N
+TzpFfDDXYTAMBgNVHRMEBTADAQH/MBkGCSqGSIb2fQdBAAQMMAobBFY0LjADAgSQMA0GCSqGSIb3
+DQEBBQUAA4GBAGFMoHxZY1tm+O5lE85DgEe5sjXJyITHa3NgReSdN531jiW5+aqqyuP4Q5wvoIkF
+sUUylCoeA41dpt7PV5Xa3yZgX8vflR64zgjY+IrJT6lodZPjLwVMZGACokIeb4ZoZVUO2ENv8pEx
+PqNHPCgFr0W2nSJMJntLfVsV+RlG3whd</ds:X509Certificate></ds:X509Data><ds:KeyValue><ds:RSAKeyValue><ds:Modulus>6FMlxAK8QWruqGSlYIfYMfwI1LuYFe9aBbe+ZUsXnntjIlXGGJoSrk88k1twRv7/YRECRp2ZqvHg
+2SQ2k6YC7l9VsiioZT9fgumFr3lS1ZJAFMlxFBN6zZasa7sVfI3SZGXAAy/T8F1n5NZmQUsALS+8
+0FHOItDVU+NXhIA45aYwzPaipNmtFWAboLHO0fZZu1CdSvuFfQ9xH3z3MQlbotKN20QAfId/uCwK
+8Py3H1Y9sOavtZUVKLjCA1h44d4RVsdmn5mjwQ+BBNU9XT/+nRDWybE6DW8CI3vpZG1bLqYpMAj+
+G5s7VXQXMsRqeuJQi2zH/Eq3MuM5rRmNotbOSw==</ds:Modulus><ds:Exponent>AQAB</ds:Exponent></ds:RSAKeyValue></ds:KeyValue></ds:KeyInfo><ds:Object><xades:QualifyingProperties Id="Signature-8006dbe3-a700-4b2c-b715-eb8c88936111-QualifyingProperties" Target="#Signature-8006dbe3-a700-4b2c-b715-eb8c88936111-Signature" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xades="http://uri.etsi.org/01903/v1.3.2#"><xades:SignedProperties Id="Signature-8006dbe3-a700-4b2c-b715-eb8c88936111-SignedProperties"><xades:SignedSignatureProperties><xades:SigningTime>2015-12-15T11:00:33+01:00</xades:SigningTime><xades:SigningCertificate><xades:Cert><xades:CertDigest><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><ds:DigestValue>ArtZYjkvV/6JeAPHJACqccFBMJ8=</ds:DigestValue></xades:CertDigest><xades:IssuerSerial><ds:X509IssuerName>OU=FNMT Clase 2 CA, O=FNMT, C=ES</ds:X509IssuerName><ds:X509SerialNumber>1025809585</ds:X509SerialNumber></xades:IssuerSerial></xades:Cert></xades:SigningCertificate><xades:SignaturePolicyIdentifier><xades:SignaturePolicyId><xades:SigPolicyId><xades:Identifier>http://www.facturae.es/politica_de_firma_formato_facturae/politica_de_firma_formato_facturae_v3_1.pdf</xades:Identifier><xades:Description>facturae31</xades:Description></xades:SigPolicyId><xades:SigPolicyHash><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><ds:DigestValue>Ohixl6upD6av8N7pEvDABhEL6hM=</ds:DigestValue></xades:SigPolicyHash></xades:SignaturePolicyId></xades:SignaturePolicyIdentifier><xades:SignerRole><xades:ClaimedRoles><xades:ClaimedRole>emisor</xades:ClaimedRole></xades:ClaimedRoles></xades:SignerRole></xades:SignedSignatureProperties><xades:SignedDataObjectProperties><xades:DataObjectFormat ObjectReference="#Reference-40755c80-e856-491c-b2c4-f4d82cdecc22"><xades:Description/><xades:ObjectIdentifier><xades:Identifier Qualifier="OIDAsURN">urn:oid:1.2.840.10003.5.109.10</xades:Identifier><xades:Description/></xades:ObjectIdentifier><xades:MimeType>text/xml</xades:MimeType><xades:Encoding>UTF-8</xades:Encoding></xades:DataObjectFormat></xades:SignedDataObjectProperties></xades:SignedProperties></xades:QualifyingProperties></ds:Object></ds:Signature></facturae:Facturae>

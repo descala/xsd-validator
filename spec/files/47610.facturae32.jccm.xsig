@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?><facturae:Facturae xmlns:facturae="http://www.facturae.es/Facturae/2009/v3.2/Facturae" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.facturae.es/Facturae/2009/v3.2/Facturae http://www.facturae.es/NR/rdonlyres/2DF1A921-9E57-4A24-85D8-14FE74E0FB31/0/Facturaev3_2.xsd">
+  <FileHeader>
+    <SchemaVersion>3.2</SchemaVersion>
+    <Modality>I</Modality>
+    <InvoiceIssuerType>TE</InvoiceIssuerType>
+    <ThirdParty>
+      <TaxIdentification>
+        <PersonTypeCode>J</PersonTypeCode>
+        <ResidenceTypeCode>R</ResidenceTypeCode>
+        <TaxIdentificationNumber>B63276174</TaxIdentificationNumber>
+      </TaxIdentification>
+      <LegalEntity>
+        <CorporateName>Invinet Sistemes 2003, S.L</CorporateName>
+        <AddressInSpain>
+          <Address>Ribes 31</Address>
+          <PostCode>08013</PostCode>
+          <Town>Barcelona</Town>
+          <Province>Barcelona</Province>
+          <CountryCode>ESP</CountryCode>
+        </AddressInSpain>
+      </LegalEntity>
+    </ThirdParty>
+    <Batch>
+      <BatchIdentifier>ESA08876310N4026963</BatchIdentifier>
+      <InvoicesCount>1</InvoicesCount>
+      <TotalInvoicesAmount>
+        <TotalAmount>326.66</TotalAmount>
+      </TotalInvoicesAmount>
+      <TotalOutstandingAmount>
+        <TotalAmount>326.66</TotalAmount>
+      </TotalOutstandingAmount>
+      <TotalExecutableAmount>
+        <TotalAmount>326.66</TotalAmount>
+      </TotalExecutableAmount>
+      <InvoiceCurrencyCode>EUR</InvoiceCurrencyCode>
+    </Batch>
+  </FileHeader>
+  <Parties>
+    <SellerParty>
+      <TaxIdentification>
+        <PersonTypeCode>J</PersonTypeCode>
+        <ResidenceTypeCode>R</ResidenceTypeCode>
+        <TaxIdentificationNumber>ESA08876310</TaxIdentificationNumber>
+      </TaxIdentification>
+      <LegalEntity>
+        <CorporateName>SUMINISTROS HOSPITALARIOS, S.A.</CorporateName>
+        <AddressInSpain>
+          <Address>C/ TORTOSA, 199 - 201</Address>
+          <PostCode>08921</PostCode>
+          <Town>BADALONA</Town>
+          <Province>BARCELONA</Province>
+          <CountryCode>ESP</CountryCode>
+        </AddressInSpain>
+        <ContactDetails>
+          <WebAddress>www.shmedical.net</WebAddress>
+          <ElectronicMail>natalia@ashmed.net</ElectronicMail>
+        </ContactDetails>
+      </LegalEntity>
+    </SellerParty>
+    <BuyerParty>
+      <TaxIdentification>
+        <PersonTypeCode>J</PersonTypeCode>
+        <ResidenceTypeCode>R</ResidenceTypeCode>
+        <TaxIdentificationNumber>ESQ4500146H</TaxIdentificationNumber>
+      </TaxIdentification>
+      <AdministrativeCentres>
+        <AdministrativeCentre>
+          <CentreCode>A08005173</CentreCode>
+          <RoleTypeCode>02</RoleTypeCode>
+          <AddressInSpain>
+            <Address>CL. HUERFANOS CRISTIANOS 5</Address>
+            <PostCode>45071</PostCode>
+            <Town>TOLEDO</Town>
+            <Province>TOLEDO</Province>
+            <CountryCode>ESP</CountryCode>
+          </AddressInSpain>
+        </AdministrativeCentre>
+      </AdministrativeCentres>
+      <LegalEntity>
+        <CorporateName>SERVICIO DE SALUD DE CASTILLA LA MANCHA</CorporateName>
+        <AddressInSpain>
+          <Address>CL. HUERFANOS CRISTIANOS 5</Address>
+          <PostCode>45071</PostCode>
+          <Town>TOLEDO</Town>
+          <Province>TOLEDO</Province>
+          <CountryCode>ESP</CountryCode>
+        </AddressInSpain>
+        <ContactDetails>
+          <ElectronicMail>descala@ingent.net</ElectronicMail>
+          <ContactPersons/>
+        </ContactDetails>
+      </LegalEntity>
+    </BuyerParty>
+  </Parties>
+  <Invoices>
+    <Invoice>
+      <InvoiceHeader>
+        <InvoiceNumber>N4026963</InvoiceNumber>
+        <InvoiceDocumentType>FC</InvoiceDocumentType>
+        <InvoiceClass>OO</InvoiceClass>
+      </InvoiceHeader>
+      <InvoiceIssueData>
+        <IssueDate>2014-12-16</IssueDate>
+        <InvoiceCurrencyCode>EUR</InvoiceCurrencyCode>
+        <TaxCurrencyCode>EUR</TaxCurrencyCode>
+        <LanguageName>es</LanguageName>
+      </InvoiceIssueData>
+      <TaxesOutputs>
+        <Tax>
+          <TaxTypeCode>01</TaxTypeCode>
+          <TaxRate>10.00</TaxRate>
+          <TaxableBase>
+            <TotalAmount>296.95</TotalAmount>
+          </TaxableBase>
+          <TaxAmount>
+            <TotalAmount>29.70</TotalAmount>
+          </TaxAmount>
+        </Tax>
+      </TaxesOutputs>
+      <InvoiceTotals>
+        <TotalGrossAmount>296.95</TotalGrossAmount>
+        <TotalGrossAmountBeforeTaxes>296.95</TotalGrossAmountBeforeTaxes>
+        <TotalTaxOutputs>29.70</TotalTaxOutputs>
+        <TotalTaxesWithheld>0.00</TotalTaxesWithheld>
+        <InvoiceTotal>326.66</InvoiceTotal>
+        <TotalOutstandingAmount>326.66</TotalOutstandingAmount>
+        <TotalExecutableAmount>326.66</TotalExecutableAmount>
+      </InvoiceTotals>
+      <Items>
+        <InvoiceLine>
+          <ReceiverContractReference/>
+          <ReceiverTransactionReference/>
+          <ItemDescription>KIT DVE ANTIM + CAT.VENTRICULAR VG 8,5F R.50-0870</ItemDescription>
+          <Quantity>1.0</Quantity>
+          <UnitOfMeasure>01</UnitOfMeasure>
+          <UnitPriceWithoutTax>148.476000</UnitPriceWithoutTax>
+          <TotalCost>148.476000</TotalCost>
+          <GrossAmount>148.476000</GrossAmount>
+          <TaxesOutputs>
+            <Tax>
+              <TaxTypeCode>01</TaxTypeCode>
+              <TaxRate>10.00</TaxRate>
+              <TaxableBase>
+                <TotalAmount>148.48</TotalAmount>
+              </TaxableBase>
+              <TaxAmount>
+                <TotalAmount>14.85</TotalAmount>
+              </TaxAmount>
+            </Tax>
+          </TaxesOutputs>
+          <ArticleCode>35023</ArticleCode>
+        </InvoiceLine>
+        <InvoiceLine>
+          <ReceiverContractReference/>
+          <ReceiverTransactionReference/>
+          <ItemDescription>KIT DVE ANTIM + CAT.VENTRICULAR VG 8,5F R.50-0870</ItemDescription>
+          <Quantity>1.0</Quantity>
+          <UnitOfMeasure>01</UnitOfMeasure>
+          <UnitPriceWithoutTax>148.476000</UnitPriceWithoutTax>
+          <TotalCost>148.476000</TotalCost>
+          <GrossAmount>148.476000</GrossAmount>
+          <TaxesOutputs>
+            <Tax>
+              <TaxTypeCode>01</TaxTypeCode>
+              <TaxRate>10.00</TaxRate>
+              <TaxableBase>
+                <TotalAmount>148.48</TotalAmount>
+              </TaxableBase>
+              <TaxAmount>
+                <TotalAmount>14.85</TotalAmount>
+              </TaxAmount>
+            </Tax>
+          </TaxesOutputs>
+          <ArticleCode>35023</ArticleCode>
+        </InvoiceLine>
+      </Items>
+      <PaymentDetails>
+        <Installment>
+          <InstallmentDueDate>2015-02-16</InstallmentDueDate>
+          <InstallmentAmount>326.66</InstallmentAmount>
+          <PaymentMeans>04</PaymentMeans>
+          <AccountToBeCredited>
+            <IBAN>ES5720389238946000155448</IBAN>
+            <BankCode>CAHMESMMXXX</BankCode>
+          </AccountToBeCredited>
+        </Installment>
+      </PaymentDetails>
+    </Invoice>
+  </Invoices>
+<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#" Id="Signature_1"><ds:SignedInfo Id="Signature_1_SignedInfo_1"><ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/><ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><ds:Reference Id="Signature_1_Reference_1" URI=""><ds:Transforms><ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><ds:DigestValue>VwcrqjXGX3QnUiB+GKvMSkLO9iA=</ds:DigestValue></ds:Reference><ds:Reference Id="Signature_1_Reference_2" Type="http://uri.etsi.org/01903#SignedProperties" URI="#Signature_1_SignedProperties_1"><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><ds:DigestValue>t+NegK1/XcztqRiupnAEcPikJW0=</ds:DigestValue></ds:Reference><ds:Reference Id="Signature_1_Reference_3" URI="#Signature_1_KeyInfo_1"><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><ds:DigestValue>iR416MzxHndTSQddAZ34CthvOFg=</ds:DigestValue></ds:Reference></ds:SignedInfo><ds:SignatureValue Id="Signature_1_SignatureValue_1">D8kxZrUGYcCSx9TuOAdLOwq41kClRBKDjxG80Pt7QEqQj3zO6JPiUk4oHkMY8qU5
+sb8jyOqUVi5zx9GFFJ0G7LKSe3me6YYDEggkCAEjb7KF8uPv5nJqv0pBX1GkkWAR
+q5sIZV8qYS3fm/3sj7fVH5RBK5LlAsISPKsShAB7bWTweSp7hESlc+1Sa3zLv/aT
+m2t7IqA85fjzdYAf41H7fzn0Exima4MTyVOS2NExypfdU2hKwhlrjjca9BG7MRdj
+4oCzqIZnVfdDR3nbMyzLriB3TwmJ1gREiCte9BDvQiy6Jw6D5Fm6MrkjkHUOty1G
+SnTL2cGr1QnEKeSUwMvILQ==</ds:SignatureValue><ds:KeyInfo Id="Signature_1_KeyInfo_1"><ds:X509Data><ds:X509Certificate>MIIE0zCCBDygAwIBAgIEPO1pODANBgkqhkiG9w0BAQUFADA2MQswCQYDVQQGEwJF
+UzENMAsGA1UEChMERk5NVDEYMBYGA1UECxMPRk5NVCBDbGFzZSAyIENBMB4XDTEz
+MDExMDExMzYzOFoXDTE1MDExMDExMzYzOFowgbAxCzAJBgNVBAYTAkVTMQ0wCwYD
+VQQKEwRGTk1UMRgwFgYDVQQLEw9GTk1UIENsYXNlIDIgQ0ExEjAQBgNVBAsTCTcw
+MzAxMTI1MTFkMGIGA1UEAxNbRU5USURBRCBJTlZJTkVUIFNJU1RFTUVTIDIwMDMg
+U0wgLSBDSUYgQjYzMjc2MTc0IC0gTk9NQlJFIEJBVVNBIFBFUklTIE9SSU9MIC0g
+TklGIDQ2MjI4MTYwVDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBANcW
+V8R8MrYAOyoX5GawaXNvLuMkeKKFbyOl8nLlclw5oToe5l1UIG2YNllN1X7jUWbw
+F4RRKooX598hCCvsyVpH9BVRflahDDzh2FrJo65hFnHKvxf5SLIGbpswh2UttKx4
+WtizH0BV75Y4ReFjpu7tanT+h6mdbLz1J/mH2T06Lr4JTC2DWJAH7jE1Zmpj5Ig5
+ZT6V6o6LHZRH/Yt1f9h9Y+arWXzVjySre3H/aWb0/WAmw/1YXt66cnwF/sB/g0UI
+ejZurtEwHrNVc4FE36z+q91UeT1o56svexvz/uF8wV6OOmQkDKQBI/05NgLjbuIw
+gFb/7BUGzYV1doKqEY8CAwEAAaOCAe0wggHpMIGwBgNVHREEgagwgaWkgaIwgZ8x
+GDAWBgkrBgEEAaxmAQcTCUI2MzI3NjE3NDEnMCUGCSsGAQQBrGYBBhMYSU5WSU5F
+VCBTSVNURU1FUyAyMDAzIFNMMRgwFgYJKwYBBAGsZgEEEwk0NjIyODE2MFQxFDAS
+BgkrBgEEAaxmAQMTBVBFUklTMRQwEgYJKwYBBAGsZgECEwVCQVVTQTEUMBIGCSsG
+AQQBrGYBARMFT1JJT0wwCQYDVR0TBAIwADArBgNVHRAEJDAigA8yMDEzMDExMDEx
+MzYzOFqBDzIwMTUwMTEwMTEzNjM4WjALBgNVHQ8EBAMCBaAwEQYJYIZIAYb4QgEB
+BAQDAgWgMB0GA1UdDgQWBBRDqrffgRbJB3ugce23sFHe28flojAfBgNVHSMEGDAW
+gBRAmnZEl3QHxKwUyx6NTzpFfDDXYTA+BgkrBgEEAaxmASEEMRYvQ0VSVElGSUNB
+RE8gRVhDTFVTSVZPIFBBUkEgRUwgQU1CSVRPIFRSSUJVVEFSSU8wXAYDVR0fBFUw
+UzBRoE+gTaRLMEkxCzAJBgNVBAYTAkVTMQ0wCwYDVQQKEwRGTk1UMRgwFgYDVQQL
+Ew9GTk1UIENsYXNlIDIgQ0ExETAPBgNVBAMTCENSTDExMzY1MA0GCSqGSIb3DQEB
+BQUAA4GBAEVpNyY7UxE8KCLkp06xRTPsvqUgFar9b3R+alyg8+I5lKvAI7XJaovU
+Pp3qdhkt54huyD8TXQ9o/1gKbfv/RRSsozBs8+pCvMyXLWVbRHXhNq9TeN6+HzFK
+bMC8hAU9a5SuqXyDlOL3XutA3RuJfXk9hX0P8hgAMKteXrF+15iv</ds:X509Certificate></ds:X509Data><ds:KeyValue><ds:RSAKeyValue><ds:Modulus>1xZXxHwytgA7KhfkZrBpc28u4yR4ooVvI6XycuVyXDmhOh7mXVQgbZg2WU3VfuNR
+ZvAXhFEqihfn3yEIK+zJWkf0FVF+VqEMPOHYWsmjrmEWccq/F/lIsgZumzCHZS20
+rHha2LMfQFXvljhF4WOm7u1qdP6HqZ1svPUn+YfZPTouvglMLYNYkAfuMTVmamPk
+iDllPpXqjosdlEf9i3V/2H1j5qtZfNWPJKt7cf9pZvT9YCbD/Vhe3rpyfAX+wH+D
+RQh6Nm6u0TAes1VzgUTfrP6r3VR5PWjnqy97G/P+4XzBXo46ZCQMpAEj/Tk2AuNu
+4jCAVv/sFQbNhXV2gqoRjw==</ds:Modulus><ds:Exponent>AQAB</ds:Exponent></ds:RSAKeyValue></ds:KeyValue></ds:KeyInfo><ds:Object Id="Signature_1_Object_1"><xades:QualifyingProperties xmlns:xades="http://uri.etsi.org/01903/v1.3.2#" Id="Signature_1_QualifyingProperties_1" Target="#Signature_1"><xades:SignedProperties Id="Signature_1_SignedProperties_1"><xades:SignedSignatureProperties Id="Signature_1_SignedSignatureProperties_1"><xades:SigningTime>2015-01-08T13:56:24+01:00</xades:SigningTime><xades:SigningCertificate><xades:Cert><xades:CertDigest><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><ds:DigestValue>JqvyxsV2JUCK4K8k/EplFevLsTs=</ds:DigestValue></xades:CertDigest><xades:IssuerSerial><ds:X509IssuerName>OU=FNMT Clase 2 CA,O=FNMT,C=ES</ds:X509IssuerName><ds:X509SerialNumber>1022191928</ds:X509SerialNumber></xades:IssuerSerial></xades:Cert></xades:SigningCertificate><xades:SignaturePolicyIdentifier><xades:SignaturePolicyId><xades:SigPolicyId><xades:Identifier Qualifier="OIDAsURI">http://www.facturae.es/politica_de_firma_formato_facturae/politica_de_firma_formato_facturae_v3_1.pdf</xades:Identifier><xades:Description>Política de firma electrónica para facturación electrónica con formato Facturae</xades:Description></xades:SigPolicyId><xades:SigPolicyHash><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><ds:DigestValue>Ohixl6upD6av8N7pEvDABhEL6hM=</ds:DigestValue></xades:SigPolicyHash></xades:SignaturePolicyId></xades:SignaturePolicyIdentifier><xades:SignerRole><xades:ClaimedRoles><xades:ClaimedRole>Emisor</xades:ClaimedRole></xades:ClaimedRoles></xades:SignerRole></xades:SignedSignatureProperties></xades:SignedProperties></xades:QualifyingProperties></ds:Object></ds:Signature></facturae:Facturae>
