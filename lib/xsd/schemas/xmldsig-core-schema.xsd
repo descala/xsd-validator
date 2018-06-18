@@ -31,6 +31,8 @@
         targetNamespace="http://www.w3.org/2000/09/xmldsig#"
         version="0.1" elementFormDefault="qualified"> 
 
+<import namespace="http://uri.etsi.org/01903/v1.3.2#" schemaLocation="XAdES.xsd"/>
+
 <!-- Basic Types Defined for Signatures -->
 
 <simpleType name="CryptoBinary">
@@ -197,7 +199,7 @@
 <complexType name="X509IssuerSerialType"> 
   <sequence> 
     <element name="X509IssuerName" type="string"/> 
-    <element name="X509SerialNumber" type="integer"/> 
+    <element name="X509SerialNumber" type="string"/>
   </sequence>
 </complexType>
 
