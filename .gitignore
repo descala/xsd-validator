@@ -1,5 +1,6 @@
 /.bundle/
 /.yardoc
+/Gemfile.lock
 /_yardoc/
 /coverage/
 /doc/
@@ -9,3 +10,13 @@
 
 # rspec failure tracking
 .rspec_status
+
+# Ignore bundler config.
+/.bundle
+/vendor/bundle
+
+# Ignore all logfiles and tempfiles.
+/log/*.log*
+/tmp
+
+.byebug_history

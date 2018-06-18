@@ -1,4 +1,5 @@
 require "xsd/validator/version"
+require 'nokogiri'
 
 module Xsd
   module Validator
@@ -6,6 +7,9 @@ module Xsd
     SII_INFORMACION = "https://www2.agenciatributaria.gob.es/static_files/common/internet/dep/aplicaciones/es/aeat/ssii/fact/ws/SuministroInformacion.xsd"
     GIPUZKOA_SII_LR = "https://egoitza.gipuzkoa.eus/ogasuna/sii/ficheros/SuministroLR.xsd"
     BIZKAIA_SII_LR = "http://www.bizkaia.eus/ogasuna/sii/documentos/SuministroLR.xsd"
+
+    class ValidationError < RuntimeError
+    end
 
     def xsd_validate(doc)
       doc=Nokogiri::XML(doc) unless doc.is_a? Nokogiri::XML::Document
@@ -18,6 +22,12 @@ module Xsd
         errors = xsd.validate(doc)
       end
       errors
+    end
+
+    def xsd_validate!(doc)
+      errors = xsd_validate(doc)
+      raise ValidationError.new(errors.join("\n")) if errors.any?
+      return true
     end
 
     def root_namespace(doc)
@@ -35,6 +45,8 @@ module Xsd
       doc=Nokogiri::XML(doc) unless doc.is_a? Nokogiri::XML::Document
       namespace = root_namespace(doc)
       case namespace
+      when "http://www.facturae.gob.es/formato/Versiones/Facturaev3_2_2.xml"
+        schema_path('facturae322.xsd')
       when "http://www.peppol.eu/schema/pd/businesscard/20160112/"
         schema_path('peppol-directory-business-card-20160112.xsd')
       when "http://www.facturae.es/Facturae/2014/v3.2.1/Facturae"
@@ -59,7 +71,6 @@ module Xsd
       when BIZKAIA_SII_LR
         schema_path('sii_bizkaia/SuministroLR.xsd')
       else
-        logger.error "XsdValidator: I don't have the XSD for namespace '#{namespace}'"
         raise StandardError.new("Unknown namespace #{namespace}")
       end
     end
@@ -67,7 +78,7 @@ module Xsd
     private
 
     def schema_path(xsdname)
-      File.expand_path("../xsd/schemas/#{xsdname}", __FILE__)
+      File.expand_path("../schemas/#{xsdname}", __FILE__)
     end
   end
 end

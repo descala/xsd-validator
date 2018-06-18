@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SuministroLRFacturasEmitidas xmlns="https://www2.agenciatributaria.gob.es/static_files/common/internet/dep/aplicaciones/es/aeat/ssii/fact/ws/SuministroLR.xsd" xmlns:sii="https://www2.agenciatributaria.gob.es/static_files/common/internet/dep/aplicaciones/es/aeat/ssii/fact/ws/SuministroInformacion.xsd">
+  <sii:Cabecera>
+    <sii:IDVersionSii>1.0</sii:IDVersionSii>
+    <sii:Titular>
+      <sii:NombreRazon>Invinet Sistemes</sii:NombreRazon>
+      <sii:NIF>B63276174</sii:NIF>
+    </sii:Titular>
+    <sii:TipoComunicacion>A0</sii:TipoComunicacion>
+  </sii:Cabecera>
+  <RegistroLRFacturasEmitidas>
+    <sii:PeriodoImpositivo>
+      <sii:Ejercicio>2016</sii:Ejercicio>
+      <sii:Periodo>07</sii:Periodo>
+    </sii:PeriodoImpositivo>
+    <IDFactura>
+      <sii:IDEmisorFactura>
+        <sii:NIF>B63276174</sii:NIF>
+      </sii:IDEmisorFactura>
+      <sii:NumSerieFacturaEmisor>2016-140</sii:NumSerieFacturaEmisor>
+      <sii:FechaExpedicionFacturaEmisor>01-07-2016</sii:FechaExpedicionFacturaEmisor>
+    </IDFactura>
+    <FacturaExpedida>
+      <sii:TipoFactura>F1</sii:TipoFactura>
+      <sii:FechaOperacion>19-06-2017</sii:FechaOperacion>
+      <sii:ClaveRegimenEspecialOTrascendencia>01</sii:ClaveRegimenEspecialOTrascendencia>
+      <sii:ImporteTotal>121</sii:ImporteTotal>
+      <sii:DescripcionOperacion>Servicio B2B</sii:DescripcionOperacion>
+      <sii:Contraparte>
+        <sii:NombreRazon>Nom Client</sii:NombreRazon>
+        <sii:NIF>B61243473</sii:NIF>
+      </sii:Contraparte>
+      <sii:TipoDesglose>
+        <sii:DesgloseFactura>
+          <sii:Sujeta>
+            <sii:NoExenta>
+              <sii:TipoNoExenta>S1</sii:TipoNoExenta>
+              <sii:DesgloseIVA>
+                <sii:DetalleIVA>
+                  <sii:TipoImpositivo>21.00</sii:TipoImpositivo>
+                  <sii:BaseImponible>100.00</sii:BaseImponible>
+                  <sii:CuotaRepercutida>21.00</sii:CuotaRepercutida>
+                </sii:DetalleIVA>
+              </sii:DesgloseIVA>
+            </sii:NoExenta>
+          </sii:Sujeta>
+        </sii:DesgloseFactura>
+      </sii:TipoDesglose>
+    </FacturaExpedida>
+  </RegistroLRFacturasEmitidas>
+</SuministroLRFacturasEmitidas>

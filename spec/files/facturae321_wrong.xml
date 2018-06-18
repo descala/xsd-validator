@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fe:Facturae xmlns:fe="http://www.facturae.es/Facturae/2014/v3.2.1/Facturae">
+  <FileHeader>
+    <SchemaVersion>3.2.1</SchemaVersion>
+    <Modality>I</Modality>
+    <InvoiceIssuerType>EM</InvoiceIssuerType>
+    <Batch>
+      <BatchIdentifier>B62989264225278</BatchIdentifier>
+      <InvoicesCount>1</InvoicesCount>
+      <TotalInvoicesAmount>
+        <TotalAmount>3391.00000000</TotalAmount>
+      </TotalInvoicesAmount>
+      <TotalOutstandingAmount>
+        <TotalAmount>3391.00000000</TotalAmount>
+      </TotalOutstandingAmount>
+      <TotalExecutableAmount>
+        <TotalAmount>3391.00000000</TotalAmount>
+      </TotalExecutableAmount>
+      <InvoiceCurrencyCode>EUR</InvoiceCurrencyCode>
+    </Batch>
+  </FileHeader>
+  <WrongTag>I don't belog here</WrongTag>
+  <Parties>
+    <SellerParty>
+      <TaxIdentification>
+        <PersonTypeCode>J</PersonTypeCode>
+        <ResidenceTypeCode>R</ResidenceTypeCode>
+        <TaxIdentificationNumber>B62989264</TaxIdentificationNumber>
+      </TaxIdentification>
+      <LegalEntity>
+        <CorporateName>CARDIOLINK, S. L.</CorporateName>
+        <AddressInSpain>
+          <Address>CL Córcega 270  3 1</Address>
+          <PostCode>08008</PostCode>
+          <Town>BARCELONA</Town>
+          <Province>BARCELONA</Province>
+          <CountryCode>ESP</CountryCode>
+        </AddressInSpain>
+        <ContactDetails>
+          <Telephone>93-237.38.50</Telephone>
+          <TeleFax>93-415.37.73</TeleFax>
+          <WebAddress/>
+          <ElectronicMail>cardiolink@cardiolink.es</ElectronicMail>
+          <ContactPersons>GATELL FERRE, JOSEP</ContactPersons>
+        </ContactDetails>
+      </LegalEntity>
+    </SellerParty>
+    <BuyerParty>
+      <TaxIdentification>
+        <PersonTypeCode>J</PersonTypeCode>
+        <ResidenceTypeCode>R</ResidenceTypeCode>
+        <TaxIdentificationNumber>Q8555011I</TaxIdentificationNumber>
+      </TaxIdentification>
+      <AdministrativeCentres>
+        <AdministrativeCentre>
+          <CentreCode>A06006318</CentreCode>
+          <RoleTypeCode>01</RoleTypeCode>
+          <AddressInSpain>
+            <Address> Ofra s/n. La Cuesta La Laguna</Address>
+            <PostCode>38320</PostCode>
+            <Town>La Laguna</Town>
+            <Province>SANTA CRUZ DE TENERI</Province>
+            <CountryCode>ESP</CountryCode>
+          </AddressInSpain>
+          <CentreDescription>Oficina contable</CentreDescription>
+        </AdministrativeCentre>
+        <AdministrativeCentre>
+          <CentreCode>A05008801</CentreCode>
+          <RoleTypeCode>02</RoleTypeCode>
+          <AddressInSpain>
+            <Address> Ofra s/n. La Cuesta La Laguna</Address>
+            <PostCode>38320</PostCode>
+            <Town>La Laguna</Town>
+            <Province>SANTA CRUZ DE TENERI</Province>
+            <CountryCode>ESP</CountryCode>
+          </AddressInSpain>
+          <CentreDescription>Órgano gestor</CentreDescription>
+        </AdministrativeCentre>
+        <AdministrativeCentre>
+          <CentreCode>A05008801</CentreCode>
+          <RoleTypeCode>03</RoleTypeCode>
+          <AddressInSpain>
+            <Address> Ofra s/n. La Cuesta La Laguna</Address>
+            <PostCode>38320</PostCode>
+            <Town>La Laguna</Town>
+            <Province>SANTA CRUZ DE TENERI</Province>
+            <CountryCode>ESP</CountryCode>
+          </AddressInSpain>
+          <CentreDescription>Unidad tramitadora</CentreDescription>
+        </AdministrativeCentre>
+      </AdministrativeCentres>
+      <LegalEntity>
+        <CorporateName>CONSORCIO SANITARIO DE TENERIFE</CorporateName>
+        <AddressInSpain>
+          <Address> Ofra s/n. La Cuesta La Laguna</Address>
+          <PostCode>38320</PostCode>
+          <Town>La Laguna</Town>
+          <Province>SANTA CRUZ DE TENERI</Province>
+          <CountryCode>ESP</CountryCode>
+        </AddressInSpain>
+        <ContactDetails>
+          <Telephone>922 678 000</Telephone>
+          <TeleFax>922 66 26 28</TeleFax>
+          <WebAddress/>
+          <ElectronicMail>aperez@hospitabidan.com,endovascularmedica@gmail.com</ElectronicMail>
+          <ContactPersons/>
+        </ContactDetails>
+      </LegalEntity>
+    </BuyerParty>
+  </Parties>
+  <Invoices>
+    <Invoice>
+      <InvoiceHeader>
+        <InvoiceNumber>225278</InvoiceNumber>
+        <InvoiceSeriesCode/>
+        <InvoiceDocumentType>FC</InvoiceDocumentType>
+        <InvoiceClass>OO</InvoiceClass>
+      </InvoiceHeader>
+      <InvoiceIssueData>
+        <IssueDate>2015-02-05</IssueDate>
+        <InvoiceCurrencyCode>EUR</InvoiceCurrencyCode>
+        <TaxCurrencyCode>EUR</TaxCurrencyCode>
+        <LanguageName>es</LanguageName>
+      </InvoiceIssueData>
+      <TaxesOutputs>
+        <Tax>
+          <TaxTypeCode>01</TaxTypeCode>
+          <TaxRate>0.00000000</TaxRate>
+          <TaxableBase>
+            <TotalAmount>3391.00000000</TotalAmount>
+          </TaxableBase>
+          <TaxAmount>
+            <TotalAmount>0.00000000</TotalAmount>
+          </TaxAmount>
+        </Tax>
+      </TaxesOutputs>
+      <InvoiceTotals>
+        <TotalGrossAmount>3391.00000000</TotalGrossAmount>
+        <TotalGeneralDiscounts>0.00000000</TotalGeneralDiscounts>
+        <TotalGeneralSurcharges>0.00000000</TotalGeneralSurcharges>
+        <TotalGrossAmountBeforeTaxes>3391.00000000</TotalGrossAmountBeforeTaxes>
+        <TotalTaxOutputs>0.00000000</TotalTaxOutputs>
+        <TotalTaxesWithheld>0.00000000</TotalTaxesWithheld>
+        <InvoiceTotal>3391.00000000</InvoiceTotal>
+        <TotalOutstandingAmount>3391.00000000</TotalOutstandingAmount>
+        <TotalPaymentsOnAccount>0.00000000</TotalPaymentsOnAccount>
+        <TotalExecutableAmount>3391.00000000</TotalExecutableAmount>
+      </InvoiceTotals>
+      <Items>
+        <InvoiceLine>
+          <FileReference>50/S/10/SU/CO/A/105</FileReference>
+          <DeliveryNotesReferences>
+            <DeliveryNote>
+              <DeliveryNoteNumber>0</DeliveryNoteNumber>
+              <DeliveryNoteDate>1899-01-01</DeliveryNoteDate>
+            </DeliveryNote>
+          </DeliveryNotesReferences>
+          <ItemDescription>Válvula mecánica ON-X aórtica Anatómica 19. Extended</ItemDescription>
+          <Quantity>1</Quantity>
+          <UnitOfMeasure>01</UnitOfMeasure>
+          <UnitPriceWithoutTax>3391.00000000</UnitPriceWithoutTax>
+          <TotalCost>3391.00000000</TotalCost>
+          <DiscountsAndRebates>
+            <Discount>
+              <DiscountReason>Descuento comercial</DiscountReason>
+              <DiscountRate>0.00000000</DiscountRate>
+              <DiscountAmount>0.00000000</DiscountAmount>
+            </Discount>
+          </DiscountsAndRebates>
+          <GrossAmount>3391.00000000</GrossAmount>
+          <TaxesOutputs>
+            <Tax>
+              <TaxTypeCode>01</TaxTypeCode>
+              <TaxRate>0.00000000</TaxRate>
+              <TaxableBase>
+                <TotalAmount>3391.00000000</TotalAmount>
+              </TaxableBase>
+              <TaxAmount>
+                <TotalAmount>0.00000000</TotalAmount>
+              </TaxAmount>
+            </Tax>
+          </TaxesOutputs>
+          <TransactionDate>2015-02-05</TransactionDate>
+          <AdditionalLineItemInformation>Precio IGIC incl.: 3.493,04 TOTAL
+
+Nota: Factura exenta de IVA según el artículo 21 Ley 37/1992.
+
+Nota: ''Se invierte el Sujeto Pasivo. Artículo 19.1.2º a) de la Ley 20/1991 de 7 de Junio, de modificación de los aspectos fiscales del Régimen Económico Fiscal de Canarias''.
+
+Nota: El crédito representado por la presente factura y sus derechos accesorios han sido CEDIDOS a IOS FINANCE EFC SA NIF A-64512759 con domicilio en c/ Manila 57-59 bajos B de Barcelona. Por lo tanto, rogamos que el pago sea por TRANSFERENCIA, a la orden de la Sociedad Cesionaria a IOS FINANCE EFC SA CTA. CTE. nº 0019-0020-96-4010187916. Dichos datos únicamente se podrán modificar previa notificación fehaciente por parte de IOS FINANCE EFC, S.A</AdditionalLineItemInformation>
+          <ArticleCode>110-ONXANE-19</ArticleCode>
+        </InvoiceLine>
+      </Items>
+      <PaymentDetails>
+        <Installment>
+          <InstallmentDueDate>2015-04-05</InstallmentDueDate>
+          <InstallmentAmount>3391.00</InstallmentAmount>
+          <PaymentMeans>04</PaymentMeans>
+          <AccountToBeCredited>
+            <IBAN>ES8321001174060200064960</IBAN>
+            <BankCode>2100</BankCode>
+            <BranchCode>1174</BranchCode>
+          </AccountToBeCredited>
+        </Installment>
+      </PaymentDetails>
+      <AdditionalData>
+        <InvoiceAdditionalInformation/>
+      </AdditionalData>
+    </Invoice>
+  </Invoices>
+</fe:Facturae>
