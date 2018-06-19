@@ -72,4 +72,9 @@ RSpec.describe Xsd::Validator do
     expect { xsd_validate!(doc) }.to raise_error(Xsd::Validator::ValidationError)
   end
 
+  it 'validates facture32 with signature and xades extensions' do
+    doc=File.read('spec/files/xades.xml')
+    expect(xsd_validate!(doc)).to eq(true)
+  end
+
 end
