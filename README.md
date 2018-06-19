@@ -1,8 +1,8 @@
 # Xsd::Validator
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/xsd/validator`. To experiment with that code, run `bin/console` for an interactive prompt.
+Validate XML files with XML Schema Definition (XSD). Based on the great [Nokogiri](https://github.com/sparklemotion/nokogiri) gem.
 
-TODO: Delete this and the text above, and describe your gem
+So far we are focused almost exclusivelly on validate different invoice formats (Facturae, PEPPOL UBL, ...), but we belive that this gem can be of general use. We are open to Pull Requests to support other kinds of XML files.
 
 ## Installation
 
@@ -40,4 +40,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Xsd::Validator project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/xsd-validator/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the Xsd::Validator project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/descala/xsd-validator/blob/master/CODE_OF_CONDUCT.md).
