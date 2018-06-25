@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SuministroLRFacturasEmitidas xmlns="http://www.bizkaia.eus/ogasuna/sii/documentos/SuministroLR.xsd" xmlns:sii="http://www.bizkaia.eus/ogasuna/sii/documentos/SuministroInformacion.xsd">
+  <sii:Cabecera>
+    <sii:IDVersionSii>1.1</sii:IDVersionSii>
+    <sii:Titular>
+      <sii:NombreRazon>Sii Test (NIF invinet)</sii:NombreRazon>
+      <sii:NIF>B63276174</sii:NIF>
+    </sii:Titular>
+    <sii:TipoComunicacion>A0</sii:TipoComunicacion>
+  </sii:Cabecera>
+  <RegistroLRFacturasEmitidas>
+    <sii:PeriodoLiquidacion>
+      <sii:Ejercicio>2018</sii:Ejercicio>
+      <sii:Periodo>06</sii:Periodo>
+    </sii:PeriodoLiquidacion>
+    <IDFactura>
+      <sii:IDEmisorFactura>
+        <sii:NIF>B08902892</sii:NIF>
+      </sii:IDEmisorFactura>
+      <sii:NumSerieFacturaEmisor>0901080393</sii:NumSerieFacturaEmisor>
+      <sii:FechaExpedicionFacturaEmisor>25-06-2018</sii:FechaExpedicionFacturaEmisor>
+    </IDFactura>
+    <FacturaExpedida>
+      <sii:TipoFactura>F1</sii:TipoFactura>
+      <sii:ClaveRegimenEspecialOTrascendencia>01</sii:ClaveRegimenEspecialOTrascendencia>
+      <sii:ImporteTotal>7091.73</sii:ImporteTotal>
+      <sii:DescripcionOperacion>REPARACIÓN EFECTUADA SEGÚN PRESUPUESTO EN SUS EQUIPOS-MODERNIZACIÓN ELEVADOR</sii:DescripcionOperacion>
+      <sii:Contraparte>
+        <sii:NombreRazon>CDP RB. MARQUESA DE CASTELLBELL 46</sii:NombreRazon>
+        <sii:NIF>H59676783</sii:NIF>
+      </sii:Contraparte>
+      <sii:TipoDesglose>
+        <sii:DesgloseFactura>
+          <sii:Sujeta>
+            <sii:NoExenta>
+              <sii:TipoNoExenta>S1</sii:TipoNoExenta>
+              <sii:DesgloseIVA>
+                <sii:DetalleIVA>
+                  <sii:TipoImpositivo>21.00</sii:TipoImpositivo>
+                  <sii:BaseImponible>5860.93</sii:BaseImponible>
+                  <sii:CuotaRepercutida>1230.80</sii:CuotaRepercutida>
+                </sii:DetalleIVA>
+              </sii:DesgloseIVA>
+            </sii:NoExenta>
+          </sii:Sujeta>
+        </sii:DesgloseFactura>
+      </sii:TipoDesglose>
+    </FacturaExpedida>
+  </RegistroLRFacturasEmitidas>
+</SuministroLRFacturasEmitidas>

@@ -60,6 +60,10 @@ RSpec.describe Xsd::Validator do
     expect(xsd_validate!(doc)).to eq(true)
     doc=File.read('spec/files/sii/sii-factura-emitida1.xml')
     expect(xsd_validate!(doc)).to eq(true)
+    doc=File.read('spec/files/sii/sii-factura-bizkaia.xml')
+    expect(xsd_validate!(doc)).to eq(true)
+    doc=File.read('spec/files/sii/sii-factura-gipuzkoa.xml')
+    expect(xsd_validate!(doc)).to eq(true)
   end
 
   it 'raises error if namespace is unknown' do

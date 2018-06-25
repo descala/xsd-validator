@@ -75,14 +75,14 @@ module Xsd
         when '1.0'
           schema_path('sii_gipuzkoa/SuministroLR.xsd')
         else
-          schema_path('sii_gipuzkoa/v11_SuministroLR.xsd')
+          schema_path('sii_gipuzkoa/v11/SuministroLR.xsd')
         end
       when BIZKAIA_SII_LR
         case doc.xpath('//sii:Cabecera/sii:IDVersionSii', sii: BIZKAIA_SII_INFORMACION).text
         when '1.0'
           schema_path('sii_bizkaia/SuministroLR.xsd')
         else
-          schema_path('sii_bizkaia/v11_SuministroLR.xsd')
+          schema_path('sii_bizkaia/v11/SuministroLR.xsd')
         end
       else
         raise StandardError.new("Unknown namespace #{namespace}")
