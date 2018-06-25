@@ -6,7 +6,9 @@ module Xsd
     SII_LR = "https://www2.agenciatributaria.gob.es/static_files/common/internet/dep/aplicaciones/es/aeat/ssii/fact/ws/SuministroLR.xsd"
     SII_INFORMACION = "https://www2.agenciatributaria.gob.es/static_files/common/internet/dep/aplicaciones/es/aeat/ssii/fact/ws/SuministroInformacion.xsd"
     GIPUZKOA_SII_LR = "https://egoitza.gipuzkoa.eus/ogasuna/sii/ficheros/SuministroLR.xsd"
+    GIPUZKOA_SII_INFORMACION = "https://egoitza.gipuzkoa.eus/ogasuna/sii/ficheros/SuministroInformacion.xsd"
     BIZKAIA_SII_LR = "http://www.bizkaia.eus/ogasuna/sii/documentos/SuministroLR.xsd"
+    BIZKAIA_SII_INFORMACION = "http://www.bizkaia.eus/ogasuna/sii/documentos/SuministroInformacion.xsd"
 
     class ValidationError < RuntimeError
     end
@@ -69,9 +71,19 @@ module Xsd
           schema_path('sii_v06/SuministroLR.xsd')
         end
       when GIPUZKOA_SII_LR
-        schema_path('sii_gipuzkoa/SuministroLR.xsd')
+        case doc.xpath('//sii:Cabecera/sii:IDVersionSii', sii: GIPUZKOA_SII_INFORMACION).text
+        when '1.0'
+          schema_path('sii_gipuzkoa/SuministroLR.xsd')
+        else
+          schema_path('sii_gipuzkoa/v11_SuministroLR.xsd')
+        end
       when BIZKAIA_SII_LR
-        schema_path('sii_bizkaia/SuministroLR.xsd')
+        case doc.xpath('//sii:Cabecera/sii:IDVersionSii', sii: BIZKAIA_SII_INFORMACION).text
+        when '1.0'
+          schema_path('sii_bizkaia/SuministroLR.xsd')
+        else
+          schema_path('sii_bizkaia/v11_SuministroLR.xsd')
+        end
       else
         raise StandardError.new("Unknown namespace #{namespace}")
       end
