@@ -59,6 +59,8 @@ module Xsd
         schema_path('facturae30.xsd')
       when SII_LR
         case doc.xpath('//sii:Cabecera/sii:IDVersionSii', sii: SII_INFORMACION).text
+        when '1.1'
+          schema_path('sii_v11/SuministroLR.xsd')
         when '1.0'
           schema_path('sii_v10/SuministroLR.xsd')
         when '0.7'
