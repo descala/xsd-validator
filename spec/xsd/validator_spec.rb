@@ -50,9 +50,16 @@ RSpec.describe Xsd::Validator do
     expect(xsd_validate!(doc)).to eq(true)
   end
 
-  it 'validates facture322 with face b2b extensions' do
-    doc=File.read('spec/files/facturae322.xml')
-    expect(xsd_validate!(doc)).to eq(true)
+  describe 'validates facturae322 with face b2b extension' do
+    it 'version 1.0' do
+      doc=File.read('spec/files/facturae322.xml')
+      expect(xsd_validate!(doc)).to eq(true)
+    end
+
+    it 'version 1.1' do
+      doc=File.read('spec/files/facturae322_fb2b11.xml')
+      expect(xsd_validate!(doc)).to eq(true)
+    end
   end
 
   it 'validates SII documents' do

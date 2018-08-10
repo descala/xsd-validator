@@ -2,6 +2,7 @@
 <xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.facturae.gob.es/formato/Versiones/Facturaev3_2_2.xml" targetNamespace="http://www.facturae.gob.es/formato/Versiones/Facturaev3_2_2.xml" version="3.2.2">
     <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
 	<xs:import namespace="http://www.facturae.es/Facturae/Extensions/FB2B" schemaLocation="fb2b_extension.xsd"/>
+	<xs:import namespace="http://www.facturae.es/Facturae/Extensions/FaceB2BExtensionv1_1" schemaLocation="fb2b_extension11.xsd"/>
 	<xs:element name="Facturae">
 		<xs:annotation>
 			<xs:documentation xml:lang="en"> Element ORIGIN of Facturae Invoices File.</xs:documentation>
