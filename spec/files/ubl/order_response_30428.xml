@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OrderResponse xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:qdt="urn:oasis:names:specification:ubl:schema:xsd:QualifiedDataTypes-2" xmlns:udt="urn:oasis:names:specification:ubl:schema:xsd:UnqualifiedDataTypes-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:OrderResponse-2">
+  <cbc:UBLVersionID>2.1</cbc:UBLVersionID>
+  <cbc:CustomizationID>urn:www.cenbii.eu:transaction:biitrns076:ver2.0:extended:urn:www.peppol.eu:bis:peppol28a:ver1.0</cbc:CustomizationID>
+  <cbc:ProfileID>urn:www.cenbii.eu:profile:bii28:ver2.0</cbc:ProfileID>
+  <cbc:ID>xxx</cbc:ID>
+  <cbc:IssueDate>2019-04-08</cbc:IssueDate>
+  <cbc:IssueTime>17:46:48</cbc:IssueTime>
+  <cbc:OrderResponseCode listID="UNCL1225">xxx</cbc:OrderResponseCode>
+  <cbc:DocumentCurrencyCode listID="ISO4217">xxx</cbc:DocumentCurrencyCode>
+  <cac:OrderReference>
+    <cbc:ID>xxx</cbc:ID>
+  </cac:OrderReference>
+  <cac:SellerSupplierParty>
+    <cac:Party>
+      <cbc:EndpointID schemeID="GLN">xxx</cbc:EndpointID>
+      <cac:PartyIdentification>
+        <cbc:ID schemeID="ZZZ">xxx</cbc:ID>
+      </cac:PartyIdentification>
+      <cac:PartyName>
+        <cbc:Name>Spentex BCA Limited</cbc:Name>
+      </cac:PartyName>
+    </cac:Party>
+  </cac:SellerSupplierParty>
+  <cac:BuyerCustomerParty>
+    <cac:Party>
+      <cbc:EndpointID schemeID="GLN">xxx</cbc:EndpointID>
+      <cac:PartyIdentification>
+        <cbc:ID schemeID="GLN">xxx</cbc:ID>
+      </cac:PartyIdentification>
+      <cac:PartyName>
+        <cbc:Name>xxx</cbc:Name>
+      </cac:PartyName>
+    </cac:Party>
+  </cac:BuyerCustomerParty>
+  <cac:Delivery>
+    <cac:PromisedDeliveryPeriod>
+      <cbc:StartDate>2019-04-17</cbc:StartDate>
+      <cbc:EndDate>2019-04-17</cbc:EndDate>
+    </cac:PromisedDeliveryPeriod>
+  </cac:Delivery>
+  <cac:OrderLine>
+    <cac:LineItem>
+      <cbc:ID>xxx</cbc:ID>
+      <cbc:Quantity unitCode="PA" unitCodeListID="UNECERec20">100</cbc:Quantity>
+      <cbc:LineExtensionAmount currencyID="GBP">1.0900</cbc:LineExtensionAmount>
+      <cac:Price>
+        <cbc:PriceAmount currencyID="GBP">1.0900</cbc:PriceAmount>
+      </cac:Price>
+      <cac:Item>
+        <cbc:Description>xxx</cbc:Description>
+        <cbc:Name>xxx</cbc:Name>
+        <cac:SellersItemIdentification>
+          <cbc:ID>xxx</cbc:ID>
+        </cac:SellersItemIdentification>
+        <cac:StandardItemIdentification>
+          <cbc:ID schemeID="GTIN">xxxxx</cbc:ID>
+        </cac:StandardItemIdentification>
+        <cac:ClassifiedTaxCategory>
+          <cbc:ID schemeID="UNCL5305">xxx</cbc:ID>
+          <cbc:Percent>20.000</cbc:Percent>
+          <cac:TaxScheme>
+            <cbc:ID>xxx</cbc:ID>
+          </cac:TaxScheme>
+        </cac:ClassifiedTaxCategory>
+        <cac:AdditionalItemProperty>
+          <cbc:Name>BuyersItemIdentification</cbc:Name>
+          <cbc:Value>xxx</cbc:Value>
+        </cac:AdditionalItemProperty>
+      </cac:Item>
+    </cac:LineItem>
+  </cac:OrderLine>
+</OrderResponse>
