@@ -47,18 +47,6 @@ module Xsd
       doc=Nokogiri::XML(doc) unless doc.is_a? Nokogiri::XML::Document
       namespace = root_namespace(doc)
       case namespace
-      when "http://www.facturae.gob.es/formato/Versiones/Facturaev3_2_2.xml"
-        schema_path('facturae322.xsd')
-      when "http://www.peppol.eu/schema/pd/businesscard/20160112/"
-        schema_path('peppol-directory-business-card-20160112.xsd')
-      when "http://www.facturae.es/Facturae/2014/v3.2.1/Facturae"
-        schema_path('facturae321.xsd')
-      when "http://www.facturae.es/Facturae/2009/v3.2/Facturae"
-        schema_path('facturae32.xsd')
-      when "http://www.facturae.es/Facturae/2007/v3.1/Facturae"
-        schema_path('facturae31.xsd')
-      when "http://www.facturae.es/Facturae/2007/v3.0/Facturae"
-        schema_path('facturae30.xsd')
       when SII_LR
         case doc.xpath('//sii:Cabecera/sii:IDVersionSii', sii: SII_INFORMACION).text
         when '1.1'
@@ -85,13 +73,50 @@ module Xsd
           schema_path('sii_bizkaia/v11/SuministroLR.xsd')
         end
       else
-        raise StandardError.new("Unknown namespace #{namespace}")
+        xmlns_path = File.expand_path("../xmlns/#{Validator.normalize_xmlns(namespace)}", __FILE__)
+        if File.exists?(xmlns_path)
+          File.realdirpath(xmlns_path)
+        else
+          raise StandardError.new("Unknown namespace #{namespace}")
+        end
+      end
+    end
+
+    # Setup symlinks from xmlns to shcemas
+    def self.symlink
+      Dir.chdir('lib/xsd/schemas/') do
+        Dir["**/*.xsd"].each do |xsdname|
+          doc = Nokogiri::XML(File.read(schema_path(xsdname)))
+          xmlns = doc.namespaces['xmlns']
+          if xmlns == 'http://www.w3.org/2001/XMLSchema'
+            xmlns = doc.namespaces.to_a[1][1]
+          end
+          Dir.chdir('../xmlns/') do
+            begin
+              from = "../schemas/#{xsdname}"
+              to = normalize_xmlns(xmlns)
+              File.symlink(from, to)
+            rescue Errno::EEXIST, TypeError
+              # already exists or nil
+            else
+              puts "#{from} -> #{to}"
+            end
+          end
+        end
       end
     end
 
     private
 
     def schema_path(xsdname)
+      Validator.schema_path(xsdname)
+    end
+
+    def self.normalize_xmlns(xmlns)
+      xmlns.gsub(/[^\w_\-\.#]+/,'_') rescue nil
+    end
+
+    def self.schema_path(xsdname)
       File.expand_path("../schemas/#{xsdname}", __FILE__)
     end
   end
