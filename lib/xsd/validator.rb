@@ -87,9 +87,13 @@ module Xsd
       Dir.chdir('lib/xsd/schemas/') do
         Dir["**/*.xsd"].each do |xsdname|
           doc = Nokogiri::XML(File.read(schema_path(xsdname)))
-          xmlns = doc.namespaces['xmlns']
-          if xmlns == 'http://www.w3.org/2001/XMLSchema'
-            xmlns = doc.namespaces.to_a[1][1]
+          if doc.root['targetNamespace']
+            xmlns = doc.root['targetNamespace']
+          else
+            xmlns = doc.namespaces['xmlns']
+            if xmlns == 'http://www.w3.org/2001/XMLSchema'
+              xmlns = doc.namespaces.to_a[1][1]
+            end
           end
           Dir.chdir('../xmlns/') do
             begin
