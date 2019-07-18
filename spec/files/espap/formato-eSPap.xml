@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:ebc="urn:espap:names:specification:ubl:schema:xsd:BasicComponents-2" xmlns:eac="urn:espap:names:specification:ubl:schema:xsd:AggregateComponents-2">
+  <cbc:UBLVersionID>2.1</cbc:UBLVersionID>
+  <cbc:CustomizationID>UBL-2.1-eSPap</cbc:CustomizationID>
+  <cbc:ProfileID>urn:www:espap:pt:profiles:profile1:ver1.0</cbc:ProfileID>
+  <cbc:ID>20170017564839</cbc:ID>
+  <cbc:UUID>93283-902338-8464584-93737</cbc:UUID>
+  <cbc:IssueDate>2017-07-04</cbc:IssueDate>
+  <cbc:DueDate>2017-08-04</cbc:DueDate>
+  <cbc:DocumentCurrencyCode listID="ISO4217">BOB</cbc:DocumentCurrencyCode>
+  <eac:AccountingSupplierParty>
+    <eac:Party>
+      <cac:PartyName>
+        <cbc:Name>Fornecedor/Destinatário</cbc:Name>
+      </cac:PartyName>
+      <eac:PostalAddress>
+        <cbc:StreetName>!#$%()*+,-./ 0123456789:;=?@ABCDEF</cbc:StreetName>
+        <cbc:CityName>!#$%()*+,-./ 0123456789:;=?@ABCDEF</cbc:CityName>
+        <cbc:PostalZone>!#$%()*+,-./ 0123456789:;=?@ABCDEFGHIJKLMNOPQRSTUV</cbc:PostalZone>
+        <eac:Country>
+          <cbc:IdentificationCode listID="ISO3166-1:Alpha2">ES</cbc:IdentificationCode>
+        </eac:Country>
+      </eac:PostalAddress>
+      <eac:PartyTaxScheme>
+        <cbc:CompanyID>PT111111111</cbc:CompanyID>
+        <eac:TaxScheme>
+          <cbc:ID schemeID="UN/ECE 5153" schemeAgencyID="6">AAA</cbc:ID>
+        </eac:TaxScheme>
+      </eac:PartyTaxScheme>
+      <cac:Contact>
+        <cbc:ElectronicMail>fornecedor@net.net</cbc:ElectronicMail>
+      </cac:Contact>
+    </eac:Party>
+  </eac:AccountingSupplierParty>
+  <eac:AccountingCustomerParty>
+    <eac:Party>
+      <cac:PartyName>
+        <cbc:Name>Cliente/Remetente</cbc:Name>
+      </cac:PartyName>
+      <eac:PartyTaxScheme>
+        <cbc:CompanyID>PT222222222</cbc:CompanyID>
+        <eac:TaxScheme>
+          <cbc:ID schemeID="UN/ECE 5153" schemeAgencyID="6">AAA</cbc:ID>
+        </eac:TaxScheme>
+      </eac:PartyTaxScheme>
+      <cac:Contact>
+        <cbc:ElectronicMail>cliente@net.net</cbc:ElectronicMail>
+      </cac:Contact>
+    </eac:Party>
+  </eac:AccountingCustomerParty>
+  <eac:TaxTotal>
+    <cbc:TaxAmount currencyID="BOB">951330010925.56</cbc:TaxAmount>
+    <eac:TaxSubtotal>
+      <cbc:TaxableAmount currencyID="BOB">2114536587965.24</cbc:TaxableAmount>
+      <cbc:TaxAmount currencyID="BOB">951330010925.56</cbc:TaxAmount>
+      <eac:TaxCategory>
+        <cbc:ID schemeID="UN/ECE 5305" schemeAgencyID="6">AA</cbc:ID>
+        <cbc:Percent>44.99</cbc:Percent>
+        <cbc:TaxExemptionReasonCode>!#$%(</cbc:TaxExemptionReasonCode>
+        <cbc:TaxExemptionReason>!#$%()*+,-./ 0123456789:;=?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~€ÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïñòóôõöùúûüýÿ!#$%()*+,-./ 0123456789:;=?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~€ÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïñòóôõöùúûüýÿ!#$%()*+,-./ 0123456789:;=?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~€ÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïñòóôõöùúûüýÿ!#$%()*+,-./ 0123456789:;=?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~€ÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïñòóôõöùúûüýÿ!#$%()*+,-./ 0123456789:;=?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~€ÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïñòóôõöùúûüýÿ!#$%()*+,-./ 0123456789:;=?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~€ÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïñòóôõöùúûüýÿ!#$%()*+,-./ 0123456789:;=?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~€ÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïñòóôõöùúûüýÿ!#$%()</cbc:TaxExemptionReason>
+        <eac:TaxScheme>
+          <cbc:ID schemeID="UN/ECE 5153" schemeAgencyID="6">CAP</cbc:ID>
+        </eac:TaxScheme>
+      </eac:TaxCategory>
+    </eac:TaxSubtotal>
+  </eac:TaxTotal>
+  <eac:LegalMonetaryTotal>
+    <cbc:LineExtensionAmount currencyID="BOB">1587158715872.41</cbc:LineExtensionAmount>
+    <cbc:TaxExclusiveAmount currencyID="BOB">327158715872.41</cbc:TaxExclusiveAmount>
+    <cbc:TaxInclusiveAmount currencyID="BOB">1278488726797.88</cbc:TaxInclusiveAmount>
+    <cbc:AllowanceTotalAmount currencyID="BOB">3611045630778.05</cbc:AllowanceTotalAmount>
+    <cbc:ChargeTotalAmount currencyID="BOB">2351045630778.05</cbc:ChargeTotalAmount>
+    <cbc:PrepaidAmount currencyID="BOB">899.11</cbc:PrepaidAmount>
+    <cbc:PayableRoundingAmount currencyID="BOB">-0.09</cbc:PayableRoundingAmount>
+    <cbc:PayableAmount currencyID="BOB">100695733050.19</cbc:PayableAmount>
+  </eac:LegalMonetaryTotal>
+  <eac:InvoiceLine>
+    <cbc:ID>111</cbc:ID>
+    <cbc:InvoicedQuantity unitCode="KGM">1.587</cbc:InvoicedQuantity>
+    <cbc:LineExtensionAmount currencyID="BOB">0.00000016</cbc:LineExtensionAmount>
+    <eac:Item>
+      <cbc:Name>!#$%()*+,-./ 0123456789:;=?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~€ÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïñòóôõöùúûüýÿ!#$%()*+,-./ 0123456789:;=?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~€ÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïñòóôõöùúûüýÿ!#$%()*+,-./ 0123456789:;=?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~€ÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜàáâãäçèéêëìíîïñòóôõöùúûüýÿ!#$%()*+,-./ 0123456789:;=?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopq</cbc:Name>
+      <eac:ClassifiedTaxCategory>
+        <cbc:Percent>0</cbc:Percent>
+        <eac:TaxScheme>
+          <cbc:ID schemeID="UN/ECE 5153" schemeAgencyID="6">AAA</cbc:ID>
+        </eac:TaxScheme>
+      </eac:ClassifiedTaxCategory>
+    </eac:Item>
+    <cac:Price>
+      <cbc:PriceAmount currencyID="BOB">999999.99999999</cbc:PriceAmount>
+    </cac:Price>
+  </eac:InvoiceLine>
+  <eac:BrokerParty>
+    <ebc:RepositoryID>333333333</ebc:RepositoryID>
+    <ebc:TransactionID>444444444444</ebc:TransactionID>
+    <ebc:InputType>EDI</ebc:InputType>
+  </eac:BrokerParty>
+</Invoice>

@@ -10,6 +10,8 @@ module Xsd
     BIZKAIA_SII_LR = "http://www.bizkaia.eus/ogasuna/sii/documentos/SuministroLR.xsd"
     BIZKAIA_SII_INFORMACION = "http://www.bizkaia.eus/ogasuna/sii/documentos/SuministroInformacion.xsd"
 
+    UBL_DOCUMENT = /urn:oasis:names:specification:ubl:schema:xsd:Invoice-2/
+
     class ValidationError < RuntimeError
     end
 
@@ -72,13 +74,18 @@ module Xsd
         else
           schema_path('sii_bizkaia/v11/SuministroLR.xsd')
         end
-      else
-        xmlns_path = File.expand_path("../xmlns/#{Validator.normalize_xmlns(namespace)}", __FILE__)
-        if File.exists?(xmlns_path)
-          File.realdirpath(xmlns_path)
+      when UBL_DOCUMENT
+        # eSPap uses the same namespace as UBL :(
+        case doc.xpath('//cbc:CustomizationID', cbc: "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2").text
+        when 'UBL-2.1-eSPap'
+          schema_path('espap/maindoc/UBL-eSPap-Invoice-2.1.xsd')
         else
-          raise StandardError.new("Unknown namespace #{namespace}")
+          # Normal UBL
+          standard_path(namespace)
         end
+
+      else
+        standard_path(namespace)
       end
     end
 
@@ -122,6 +129,15 @@ module Xsd
 
     def self.schema_path(xsdname)
       File.expand_path("../schemas/#{xsdname}", __FILE__)
+    end
+
+    def standard_path(namespace)
+      xmlns_path ||= File.expand_path("../xmlns/#{Validator.normalize_xmlns(namespace)}", __FILE__)
+      if File.exists?(xmlns_path)
+        File.realdirpath(xmlns_path)
+      else
+        raise StandardError.new("Unknown namespace #{namespace}")
+      end
     end
   end
 end
