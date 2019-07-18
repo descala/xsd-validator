@@ -95,5 +95,6 @@
     <ebc:RepositoryID>333333333</ebc:RepositoryID>
     <ebc:TransactionID>444444444444</ebc:TransactionID>
     <ebc:InputType>EDI</ebc:InputType>
+    <ebc:ReceivedDate>2017-08-04</ebc:ReceivedDate>
   </eac:BrokerParty>
 </Invoice>
