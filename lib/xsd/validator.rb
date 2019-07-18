@@ -18,14 +18,9 @@ module Xsd
     def xsd_validate(doc)
       doc=Nokogiri::XML(doc) unless doc.is_a? Nokogiri::XML::Document
       xsd_path=root_namespace_xsd(doc)
-      xsd = File.read(xsd_path)
-      errors = nil
-      # El chdir és perquè el xsd agafi el schemaLocation
-      Dir.chdir(File.dirname(xsd_path)) do
-        xsd = Nokogiri::XML::Schema(xsd)
-        errors = xsd.validate(doc)
-      end
-      errors
+      xsd_file = File.open(xsd_path,'rb')
+      xsd = Nokogiri::XML::Schema(xsd_file)
+      xsd.validate(doc)
     end
 
     def xsd_validate!(doc)
