@@ -28,12 +28,12 @@ RSpec.describe Xsd::Validator do
   end
 
   it 'raises ValidationError for an invalid XML' do
-    doc=File.read('spec/files/facturae321_wrong.xml')
+    doc=File.read('spec/files/xsd/facturae321_wrong.xml')
     expect { xsd_validate!(doc) }.to raise_error(Xsd::Validator::ValidationError)
   end
 
   it 'validates spec files' do
-    Dir["spec/files/**/*"].each do |filename|
+    Dir["spec/files/xsd/**/*"].each do |filename|
       next if filename =~ /wrong/
       doc=File.read(filename) rescue next
       expect(xsd_validate(doc)).to eq([]), "Error validating fixture #{filename}"
