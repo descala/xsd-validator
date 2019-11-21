@@ -15,7 +15,6 @@ module Sch
         compiled_schematron = File.read(xslt_path(schematron_file))
         validation_result = Schematron::XSLT2.validate(compiled_schematron, doc)
         errors = errors + Schematron::XSLT2.get_errors(validation_result)
-        puts schematron_file
       end
       return errors
     end
