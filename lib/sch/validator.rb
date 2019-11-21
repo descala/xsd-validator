@@ -15,6 +15,7 @@ module Sch
         compiled_schematron = File.read(xslt_path(schematron_file))
         validation_result = Schematron::XSLT2.validate(compiled_schematron, doc)
         errors = errors + Schematron::XSLT2.get_errors(validation_result)
+        puts schematron_file
       end
       return errors
     end
@@ -34,6 +35,8 @@ module Sch
         %w(CEN-EN16931-UBL.sch PEPPOL-EN16931-UBL.sch)
       when 'urn:cen.eu:en16931:2017#conformant#urn:fdc:peppol.eu:2017:poacc:billing:international:aunz:3.0'
         %w(AUNZ-UBL-validation.sch AUNZ-PEPPOL-validation.sch)
+      when 'urn:www.cenbii.eu:transaction:biitrns010:ver2.0:extended:urn:www.peppol.eu:bis:peppol5a:ver2.0'
+        %w(BIICORE-UBL-T10.sch BIIRULES-UBL-T10.sch OPENPEPPOLCORE-UBL-T10.sch OPENPEPPOL-UBL-T10.sch)
       else
         raise StandardError.new("Unkown CustomizationID '#{customization_id}'")
       end
@@ -42,7 +45,7 @@ module Sch
     # Creates compiled xslt
     def self.compile
       Dir.chdir('lib/sch/schemas/') do
-        Dir["**/*.sch"].each do |schematron_file|
+        Dir["*.sch","*/*.sch"].each do |schematron_file|
           cache_xslt = "../compiled/#{File.basename(schematron_file)}.xslt"
           compiled_schematron = Schematron::XSLT2.compile(File.read(schematron_file))
           File.write(cache_xslt, compiled_schematron)
