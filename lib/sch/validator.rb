@@ -46,10 +46,18 @@ module Sch
       Dir.chdir('lib/sch/schemas/') do
         Dir["*.sch","*/*.sch"].each do |schematron_file|
           cache_xslt = "../compiled/#{File.basename(schematron_file)}.xslt"
-          compiled_schematron = Schematron::XSLT2.compile(File.read(schematron_file))
+          compiled_schematron = schematron_compile(schematron_file)
           File.write(cache_xslt, compiled_schematron)
         end
       end
+    end
+
+    # schematron-wrapper patch ################
+    def self.schematron_compile(file_path)
+      # process_includes does not work in /tmp. it needs access to included files
+      temp_schematron = Schematron::XSLT2.execute_transform(Schematron::XSLT2::DSDL_INCLUDES_PATH, file_path)
+      temp_schematron = Schematron::XSLT2.expand_abstract_patterns(temp_schematron)
+      Schematron::XSLT2.create_stylesheet(temp_schematron)
     end
 
     private
