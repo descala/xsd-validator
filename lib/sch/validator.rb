@@ -36,6 +36,15 @@ module Sch
         %w(AUNZ-UBL-validation.sch AUNZ-PEPPOL-validation.sch)
       when 'urn:www.cenbii.eu:transaction:biitrns010:ver2.0:extended:urn:www.peppol.eu:bis:peppol5a:ver2.0'
         %w(BIICORE-UBL-T10.sch BIIRULES-UBL-T10.sch OPENPEPPOLCORE-UBL-T10.sch OPENPEPPOL-UBL-T10.sch)
+
+      # PEPPOL Message Level Response 3.0 (T71)
+      when 'urn:fdc:peppol.eu:poacc:trns:mlr:3'
+        %w(PEPPOLBIS-T71.sch)
+
+      # PEPPOL Invoice Response 3.0 (T111)
+      when 'urn:fdc:peppol.eu:poacc:trns:invoice_response:3'
+        %w(PEPPOLBIS-T111.sch)
+
       else
         raise StandardError.new("Unkown CustomizationID '#{customization_id}'")
       end
