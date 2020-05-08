@@ -45,6 +45,10 @@ module Sch
       when 'urn:fdc:peppol.eu:poacc:trns:invoice_response:3'
         %w(PEPPOLBIS-T111.sch)
 
+      # PEPPOL Despatch Advice transaction 3.1 (T16)
+      when 'urn:fdc:peppol.eu:poacc:trns:despatch_advice:3'
+        %w(PEPPOLBIS-T16.sch)
+
       else
         raise StandardError.new("Unkown CustomizationID '#{customization_id}'")
       end
