@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:ccts="urn:un:unece:uncefact:documentation:2" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:qdt="urn:oasis:names:specification:ubl:schema:xsd:QualifiedDatatypes-2" xmlns:udt="urn:un:unece:uncefact:data:specification:UnqualifiedDataTypesSchemaModule:2">
+  <cbc:CustomizationID>urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0</cbc:CustomizationID>
+  <cbc:ProfileID>urn:fdc:peppol.eu:2017:poacc:billing:01:1.0</cbc:ProfileID>
+  <cbc:ID>SK1 FAS</cbc:ID>
+  <cbc:IssueDate>2019-10-28</cbc:IssueDate>
+  <cbc:DueDate>2019-11-27</cbc:DueDate>
+  <cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode>
+  <cbc:Note>En liten anteckning</cbc:Note>
+  <cbc:TaxPointDate>2019-10-21</cbc:TaxPointDate>
+  <cbc:DocumentCurrencyCode>SEK</cbc:DocumentCurrencyCode>
+  <cbc:AccountingCost>KST444</cbc:AccountingCost>
+  <cbc:BuyerReference>YY256220</cbc:BuyerReference>
+  <cac:InvoicePeriod>
+    <cbc:StartDate>2019-10-01</cbc:StartDate>
+    <cbc:EndDate>2019-10-28</cbc:EndDate>
+  </cac:InvoicePeriod>
+  <cac:OrderReference>
+    <cbc:ID>O101</cbc:ID>
+    <cbc:SalesOrderID>Forderref 123</cbc:SalesOrderID>
+  </cac:OrderReference>
+  <cac:DespatchDocumentReference>
+    <cbc:ID>FS 222</cbc:ID>
+  </cac:DespatchDocumentReference>
+  <cac:ReceiptDocumentReference>
+    <cbc:ID>Mottagref</cbc:ID>
+  </cac:ReceiptDocumentReference>
+  <cac:OriginatorDocumentReference>
+    <cbc:ID>UHref</cbc:ID>
+  </cac:OriginatorDocumentReference>
+  <cac:ContractDocumentReference>
+    <cbc:ID>Avtal-test 123</cbc:ID>
+  </cac:ContractDocumentReference>
+  <cac:ProjectReference>
+    <cbc:ID>123.pdf</cbc:ID>
+  </cac:ProjectReference>
+  <cac:AccountingSupplierParty>
+    <cac:Party>
+      <cbc:EndpointID schemeID="0007">5568344146</cbc:EndpointID>
+      <cac:PartyName>
+        <cbc:Name>PSK Konsult AB</cbc:Name>
+      </cac:PartyName>
+      <cac:PostalAddress>
+        <cbc:StreetName>Lottas väg 13</cbc:StreetName>
+        <cbc:CityName>Lerum</cbc:CityName>
+        <cbc:PostalZone>44392</cbc:PostalZone>
+        <cac:Country>
+          <cbc:IdentificationCode>SE</cbc:IdentificationCode>
+        </cac:Country>
+      </cac:PostalAddress>
+      <cac:PartyTaxScheme>
+        <cbc:CompanyID>SE556834414601</cbc:CompanyID>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:PartyTaxScheme>
+      <cac:PartyLegalEntity>
+        <cbc:RegistrationName>PSK Konsult AB</cbc:RegistrationName>
+        <cbc:CompanyID>thisiswrong5568344146</cbc:CompanyID>
+      </cac:PartyLegalEntity>
+      <cac:Contact>
+        <cbc:Name>Thomas Pettersson</cbc:Name>
+        <cbc:Telephone>+46705328202</cbc:Telephone>
+        <cbc:ElectronicMail>thomas.pettersson@psk-konsult.se</cbc:ElectronicMail>
+      </cac:Contact>
+    </cac:Party>
+  </cac:AccountingSupplierParty>
+  <cac:AccountingCustomerParty>
+    <cac:Party>
+      <cbc:EndpointID schemeID="0007">2120001710</cbc:EndpointID>
+      <cac:PartyName>
+        <cbc:Name>Skövde Kommun test</cbc:Name>
+      </cac:PartyName>
+      <cac:PostalAddress>
+        <cbc:StreetName>Ekonomiavdelningen - inköpsgruppen</cbc:StreetName>
+        <cbc:CityName>Skövde </cbc:CityName>
+        <cbc:PostalZone>54183</cbc:PostalZone>
+        <cac:Country>
+          <cbc:IdentificationCode>SE</cbc:IdentificationCode>
+        </cac:Country>
+      </cac:PostalAddress>
+      <cac:PartyLegalEntity>
+        <cbc:RegistrationName>Skövde Kommun test</cbc:RegistrationName>
+        <cbc:CompanyID schemeID="0007">2120001710</cbc:CompanyID>
+      </cac:PartyLegalEntity>
+      <cac:Contact>
+        <cbc:Name>Ewa Wärnå Sektor styrning och verksamhetsstöd (SSV)</cbc:Name>
+        <cbc:Telephone>0500-49 85 85</cbc:Telephone>
+        <cbc:ElectronicMail>Eva.Warna@skovde.se</cbc:ElectronicMail>
+      </cac:Contact>
+    </cac:Party>
+  </cac:AccountingCustomerParty>
+  <cac:Delivery>
+    <cbc:ActualDeliveryDate>2019-10-22</cbc:ActualDeliveryDate>
+    <cac:DeliveryLocation>
+      <cbc:ID schemeID="GLN">
+          7312345678901
+        </cbc:ID>
+      <cac:Address>
+        <cbc:StreetName>Vadsbovägen 11</cbc:StreetName>
+        <cbc:AdditionalStreetName>Port 1</cbc:AdditionalStreetName>
+        <cbc:CityName>Skövde</cbc:CityName>
+        <cbc:PostalZone>54126</cbc:PostalZone>
+        <cac:Country>
+          <cbc:IdentificationCode>SE</cbc:IdentificationCode>
+        </cac:Country>
+      </cac:Address>
+    </cac:DeliveryLocation>
+  </cac:Delivery>
+  <cac:PaymentMeans>
+    <cbc:PaymentMeansCode name="">30</cbc:PaymentMeansCode>
+    <cac:PayeeFinancialAccount>
+      <cbc:ID>SE3095000099601805833728</cbc:ID>
+      <cac:FinancialInstitutionBranch>
+        <cbc:ID>NDEASESS</cbc:ID>
+      </cac:FinancialInstitutionBranch>
+    </cac:PayeeFinancialAccount>
+  </cac:PaymentMeans>
+  <cac:AllowanceCharge>
+    <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+    <cbc:AllowanceChargeReason>Mängdrabatt</cbc:AllowanceChargeReason>
+    <cbc:MultiplierFactorNumeric>25.00</cbc:MultiplierFactorNumeric>
+    <cbc:Amount currencyID="SEK">6.00</cbc:Amount>
+    <cbc:BaseAmount currencyID="SEK">24.00</cbc:BaseAmount>
+    <cac:TaxCategory>
+      <cbc:ID>S</cbc:ID>
+      <cbc:Percent>25.00</cbc:Percent>
+      <cac:TaxScheme>
+        <cbc:ID>VAT</cbc:ID>
+      </cac:TaxScheme>
+    </cac:TaxCategory>
+  </cac:AllowanceCharge>
+  <cac:AllowanceCharge>
+    <cbc:ChargeIndicator>true</cbc:ChargeIndicator>
+    <cbc:AllowanceChargeReason>Biljett</cbc:AllowanceChargeReason>
+    <cbc:MultiplierFactorNumeric>15.00</cbc:MultiplierFactorNumeric>
+    <cbc:Amount currencyID="SEK">3.60</cbc:Amount>
+    <cbc:BaseAmount currencyID="SEK">24.00</cbc:BaseAmount>
+    <cac:TaxCategory>
+      <cbc:ID>S</cbc:ID>
+      <cbc:Percent>25.00</cbc:Percent>
+      <cac:TaxScheme>
+        <cbc:ID>VAT</cbc:ID>
+      </cac:TaxScheme>
+    </cac:TaxCategory>
+  </cac:AllowanceCharge>
+  <cac:TaxTotal>
+    <cbc:TaxAmount currencyID="SEK">5.40</cbc:TaxAmount>
+    <cac:TaxSubtotal>
+      <cbc:TaxableAmount currencyID="SEK">21.60</cbc:TaxableAmount>
+      <cbc:TaxAmount currencyID="SEK">5.40</cbc:TaxAmount>
+      <cac:TaxCategory>
+        <cbc:ID>S</cbc:ID>
+        <cbc:Percent>25.00</cbc:Percent>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:TaxCategory>
+    </cac:TaxSubtotal>
+  </cac:TaxTotal>
+  <cac:LegalMonetaryTotal>
+    <cbc:LineExtensionAmount currencyID="SEK">24.00</cbc:LineExtensionAmount>
+    <cbc:TaxExclusiveAmount currencyID="SEK">21.60</cbc:TaxExclusiveAmount>
+    <cbc:TaxInclusiveAmount currencyID="SEK">27.00</cbc:TaxInclusiveAmount>
+    <cbc:AllowanceTotalAmount currencyID="SEK">6.00</cbc:AllowanceTotalAmount>
+    <cbc:ChargeTotalAmount currencyID="SEK">3.60</cbc:ChargeTotalAmount>
+    <cbc:PayableAmount currencyID="SEK">27.00</cbc:PayableAmount>
+  </cac:LegalMonetaryTotal>
+  <cac:InvoiceLine>
+    <cbc:ID>1</cbc:ID>
+    <cbc:InvoicedQuantity unitCode="HUR">1.0</cbc:InvoicedQuantity>
+    <cbc:LineExtensionAmount currencyID="SEK">1.00</cbc:LineExtensionAmount>
+    <cac:Item>
+      <cbc:Name>Konsultarvode</cbc:Name>
+      <cac:ClassifiedTaxCategory>
+        <cbc:ID>S</cbc:ID>
+        <cbc:Percent>25.00</cbc:Percent>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:ClassifiedTaxCategory>
+    </cac:Item>
+    <cac:Price>
+      <cbc:PriceAmount currencyID="SEK">1.00</cbc:PriceAmount>
+    </cac:Price>
+  </cac:InvoiceLine>
+  <cac:InvoiceLine>
+    <cbc:ID>2</cbc:ID>
+    <cbc:InvoicedQuantity unitCode="KMT">10.0</cbc:InvoicedQuantity>
+    <cbc:LineExtensionAmount currencyID="SEK">20.00</cbc:LineExtensionAmount>
+    <cac:Item>
+      <cbc:Name>Resekostnad</cbc:Name>
+      <cac:ClassifiedTaxCategory>
+        <cbc:ID>S</cbc:ID>
+        <cbc:Percent>25.00</cbc:Percent>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:ClassifiedTaxCategory>
+    </cac:Item>
+    <cac:Price>
+      <cbc:PriceAmount currencyID="SEK">2.00</cbc:PriceAmount>
+    </cac:Price>
+  </cac:InvoiceLine>
+  <cac:InvoiceLine>
+    <cbc:ID>3</cbc:ID>
+    <cbc:InvoicedQuantity unitCode="EA">1.0</cbc:InvoicedQuantity>
+    <cbc:LineExtensionAmount currencyID="SEK">3.00</cbc:LineExtensionAmount>
+    <cac:Item>
+      <cbc:Name>Tidning</cbc:Name>
+      <cac:ClassifiedTaxCategory>
+        <cbc:ID>S</cbc:ID>
+        <cbc:Percent>25.00</cbc:Percent>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:ClassifiedTaxCategory>
+    </cac:Item>
+    <cac:Price>
+      <cbc:PriceAmount currencyID="SEK">3.00</cbc:PriceAmount>
+    </cac:Price>
+  </cac:InvoiceLine>
+</Invoice>

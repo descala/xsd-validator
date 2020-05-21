@@ -9,19 +9,56 @@ module Sch
     class ValidationError < RuntimeError
     end
 
+    class ValidationWarning < RuntimeError
+    end
+
+    class ResultHandler
+      def initialize(validation_result)
+        @document = Nokogiri::XML(validation_result) do |config|
+          config.options = Nokogiri::XML::ParseOptions::NOBLANKS | Nokogiri::XML::ParseOptions::NOENT
+        end
+      end
+
+      def errors
+        build_result('fatal')
+      end
+
+      def warnings
+        build_result('warning')
+      end
+
+      def build_result(flag)
+        result = []
+        @document.xpath("//svrl:failed-assert[@flag='#{flag}']").each do |element|
+          h = element.attributes.map{|k,v| [k, v.to_s]}.to_h
+          h.delete('test')
+          description = element.xpath('./svrl:text').text.strip
+          if description !~ /#{h['id']}/
+            description = "[#{h['id']}] #{description}"
+          end
+          result << "#{flag.upcase}: #{description} #{h}"
+        end
+        result
+      end
+    end
+
     def sch_validate(doc)
       errors = []
+      warnings = []
       schematrons(doc).each do |schematron_file|
         compiled_schematron = File.read(xslt_path(schematron_file))
         validation_result = Schematron::XSLT2.validate(compiled_schematron, doc)
-        errors = errors + Schematron::XSLT2.get_errors(validation_result)
+        result_handler = ResultHandler.new(validation_result)
+        errors = errors + result_handler.errors
+        warnings = warnings + result_handler.warnings
       end
-      return errors
+      return errors, warnings
     end
 
     def sch_validate!(doc)
-      errors = sch_validate(doc)
-      raise ValidationError.new(errors.join("\n")) if errors.any?
+      errors, warnings = sch_validate(doc)
+      raise ValidationError.new((errors+warnings).join("\n")) if errors.any?
+      raise ValidationWarning.new(warnings.join("\n")) if warnings.any?
       return true
     end
 
