@@ -86,6 +86,14 @@ module Sch
       when 'urn:fdc:peppol.eu:poacc:trns:despatch_advice:3'
         %w(PEPPOLBIS-T16.sch)
 
+      # XRechnung UBL
+      when 'urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_1.2'
+        if doc_nokogiri.root.name == 'Invoice'
+          %w(XRechnung-UBL-validation-Invoice.sch)
+        else
+          %w(XRechnung-UBL-validation-CreditNote.sch)
+        end
+
       else
         raise StandardError.new("Unkown CustomizationID '#{customization_id}'")
       end
@@ -94,7 +102,7 @@ module Sch
     # Creates compiled xslt
     def self.compile
       Dir.chdir('lib/sch/schemas/') do
-        Dir["*.sch","*/*.sch"].each do |schematron_file|
+        Dir["*.sch","*/*.sch","xrechnung/*/*.sch"].each do |schematron_file|
           cache_xslt = "../compiled/#{File.basename(schematron_file)}.xslt"
           compiled_schematron = schematron_compile(schematron_file)
           File.write(cache_xslt, compiled_schematron)
