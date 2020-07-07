@@ -96,7 +96,6 @@ module Sch
 
       # NL CIUS / SimplerInvoicing
       when 'urn:cen.eu:en16931:2017#compliant#urn:fdc:nen.nl:nlcius:v1.0'
-        puts "***********"
         %w(si-ubl-2.0.sch)
 
       else
