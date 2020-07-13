@@ -89,9 +89,9 @@ module Sch
       # XRechnung UBL
       when 'urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_1.2'
         if doc_nokogiri.root.name == 'Invoice'
-          %w(XRechnung-UBL-validation-Invoice.sch)
+          %w(CEN-EN16931-UBL.sch XRechnung-UBL-validation-Invoice.sch)
         else
-          %w(XRechnung-UBL-validation-CreditNote.sch)
+          %w(CEN-EN16931-UBL.sch XRechnung-UBL-validation-CreditNote.sch)
         end
 
       # NL CIUS / SimplerInvoicing
