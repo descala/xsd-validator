@@ -10,7 +10,7 @@ module Xsd
     BIZKAIA_SII_LR = "http://www.bizkaia.eus/ogasuna/sii/documentos/SuministroLR.xsd"
     BIZKAIA_SII_INFORMACION = "http://www.bizkaia.eus/ogasuna/sii/documentos/SuministroInformacion.xsd"
 
-    UBL_DOCUMENT = /urn:oasis:names:specification:ubl:schema:xsd:Invoice-2/
+    UBL_DOCUMENT = /urn:oasis:names:specification:ubl:schema:xsd:/
 
     class ValidationError < RuntimeError
     end
@@ -75,8 +75,8 @@ module Xsd
         when 'UBL-2.1-eSPap'
           schema_path('espap/maindoc/UBL-eSPap-Invoice-2.1.xsd')
         else
-          # Normal UBL
-          standard_path(namespace)
+          ubl_version = doc.xpath('//cbc:UBLVersionID', cbc: "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2").text
+          standard_path("#{namespace}_ubl#{ubl_version}")
         end
 
       else
@@ -91,6 +91,10 @@ module Xsd
           doc = Nokogiri::XML(File.read(schema_path(xsdname)))
           if doc.root['targetNamespace']
             xmlns = doc.root['targetNamespace']
+            if xmlns =~ UBL_DOCUMENT and doc.root['version']
+              # ubl 2.0 i 2.1 tenen el mateix targetNamespace, afegim la versio
+              xmlns = "#{xmlns}_ubl#{doc.root['version']}"
+            end
           else
             xmlns = doc.namespaces['xmlns']
             if xmlns == 'http://www.w3.org/2001/XMLSchema'

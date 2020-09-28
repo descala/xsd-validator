@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CreditNote xmlns="urn:oasis:names:specification:ubl:schema:xsd:CreditNote-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:ccts="urn:un:unece:uncefact:documentation:2" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:qdt="urn:oasis:names:specification:ubl:schema:xsd:QualifiedDatatypes-2" xmlns:udt="urn:un:unece:uncefact:data:specification:UnqualifiedDataTypesSchemaModule:2">
+  <cbc:UBLVersionID>2.0</cbc:UBLVersionID>
+  <cbc:CustomizationID schemeID="PEPPOL">urn:www.cenbii.eu:transaction:biicoretrdm014:ver1.0:#urn:www.peppol.eu:bis:peppol5a:ver1.0</cbc:CustomizationID>
+  <cbc:ProfileID>urn:www.cenbii.eu:profile:bii05:ver1.0</cbc:ProfileID>
+  <cbc:ID>40005849</cbc:ID>
+  <cbc:IssueDate>2020-07-31</cbc:IssueDate>
+  <cbc:Note>Correction reason: 16</cbc:Note>
+  <cbc:DocumentCurrencyCode listID="ISO4217">EUR</cbc:DocumentCurrencyCode>
+  <cac:InvoicePeriod>
+    <cbc:StartDate>2020-07-31</cbc:StartDate>
+    <cbc:EndDate>2020-09-29</cbc:EndDate>
+  </cac:InvoicePeriod>
+  <cac:OrderReference>
+    <cbc:ID>2020-21684-0</cbc:ID>
+  </cac:OrderReference>
+  <cac:BillingReference>
+    <cac:InvoiceDocumentReference>
+      <cbc:ID>40005613</cbc:ID>
+    </cac:InvoiceDocumentReference>
+  </cac:BillingReference>
+  <cac:AdditionalDocumentReference>
+    <cbc:ID>40005613</cbc:ID>
+    <cbc:DocumentType>Despatch Advice</cbc:DocumentType>
+  </cac:AdditionalDocumentReference>
+  <cac:AdditionalDocumentReference>
+    <cbc:ID>40005613</cbc:ID>
+    <cbc:DocumentType>File Reference</cbc:DocumentType>
+  </cac:AdditionalDocumentReference>
+  <cac:AccountingSupplierParty>
+    <cac:Party>
+      <cbc:EndpointID schemeID="NL:VAT">006859926B01</cbc:EndpointID>
+      <cac:PartyName>
+        <cbc:Name>Houtschild Booksellers</cbc:Name>
+      </cac:PartyName>
+      <cac:PostalAddress>
+        <cbc:StreetName>Sir Winston Churchilllaan 281</cbc:StreetName>
+        <cbc:CityName>Rijswijk</cbc:CityName>
+        <cbc:PostalZone>2288DA</cbc:PostalZone>
+        <cac:Country>
+          <cbc:IdentificationCode listID="ISO3166-1:Alpha2">NL</cbc:IdentificationCode>
+        </cac:Country>
+      </cac:PostalAddress>
+      <cac:PartyTaxScheme>
+        <cbc:CompanyID schemeID="NL:VAT">NL006859926B01</cbc:CompanyID>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:PartyTaxScheme>
+      <cac:PartyLegalEntity>
+        <cbc:RegistrationName>Houtschild Booksellers</cbc:RegistrationName>
+        <cbc:CompanyID schemeID="NL:KVK">27106535</cbc:CompanyID>
+      </cac:PartyLegalEntity>
+      <cac:Contact>
+        <cbc:Telephone>+31704130600</cbc:Telephone>
+        <cbc:ElectronicMail>info@houtschild.nl</cbc:ElectronicMail>
+      </cac:Contact>
+    </cac:Party>
+  </cac:AccountingSupplierParty>
+  <cac:AccountingCustomerParty>
+    <cac:Party>
+      <cbc:EndpointID schemeID="GLN">5425025839827</cbc:EndpointID>
+      <cac:PartyName>
+        <cbc:Name>Directorate-General for Translation</cbc:Name>
+      </cac:PartyName>
+      <cac:PostalAddress>
+        <cbc:StreetName>G6 10/30</cbc:StreetName>
+        <cbc:CityName>BRUSSELS</cbc:CityName>
+        <cbc:PostalZone>1049</cbc:PostalZone>
+        <cac:Country>
+          <cbc:IdentificationCode listID="ISO3166-1:Alpha2">BE</cbc:IdentificationCode>
+        </cac:Country>
+      </cac:PostalAddress>
+      <cac:PartyTaxScheme>
+        <cbc:CompanyID schemeID="GLN">BE5425025839827</cbc:CompanyID>
+        <cac:TaxScheme>
+          <cbc:ID>ZZZ</cbc:ID>
+        </cac:TaxScheme>
+      </cac:PartyTaxScheme>
+      <cac:PartyLegalEntity>
+        <cbc:RegistrationName>Directorate-General for Translation</cbc:RegistrationName>
+        <cbc:CompanyID schemeID="GLN">5425025839827</cbc:CompanyID>
+      </cac:PartyLegalEntity>
+      <cac:Contact>
+        <cbc:Telephone>+32 (0) 2 296 39 64</cbc:Telephone>
+        <cbc:ElectronicMail>DGT-ACQUISITIONS@ec.europa.eu</cbc:ElectronicMail>
+      </cac:Contact>
+    </cac:Party>
+  </cac:AccountingCustomerParty>
+  <cac:TaxTotal>
+    <cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
+    <cac:TaxSubtotal>
+      <cbc:TaxableAmount currencyID="EUR">48.74</cbc:TaxableAmount>
+      <cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
+      <cac:TaxCategory>
+        <cbc:ID schemeID="UNCL5305">E</cbc:ID>
+        <cbc:Percent>0.00</cbc:Percent>
+        <cbc:TaxExemptionReason>VAT Exemption / European Union / Article 151 of Council Directive 2006/112/EC</cbc:TaxExemptionReason>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:TaxCategory>
+    </cac:TaxSubtotal>
+  </cac:TaxTotal>
+  <cac:LegalMonetaryTotal>
+    <cbc:LineExtensionAmount currencyID="EUR">48.74</cbc:LineExtensionAmount>
+    <cbc:TaxExclusiveAmount currencyID="EUR">48.74</cbc:TaxExclusiveAmount>
+    <cbc:TaxInclusiveAmount currencyID="EUR">48.74</cbc:TaxInclusiveAmount>
+    <cbc:PayableAmount currencyID="EUR">48.74</cbc:PayableAmount>
+  </cac:LegalMonetaryTotal>
+  <cac:CreditNoteLine>
+    <cbc:ID>1</cbc:ID>
+    <cbc:Note>delivery note number: 40100865; ponumber: 2020-21684-0; </cbc:Note>
+    <cbc:CreditedQuantity unitCode="EA">1.0</cbc:CreditedQuantity>
+    <cbc:LineExtensionAmount currencyID="EUR">24.37</cbc:LineExtensionAmount>
+    <cac:Item>
+      <cbc:Name>STN EN 197-1 Cement. Cast 1 Electronic Standard With ability to print, copy text and pictures SK</cbc:Name>
+      <cac:ClassifiedTaxCategory>
+        <cbc:ID schemeID="UNCL5305">E</cbc:ID>
+        <cbc:Percent>0.00</cbc:Percent>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:ClassifiedTaxCategory>
+    </cac:Item>
+    <cac:Price>
+      <cbc:PriceAmount currencyID="EUR">24.37</cbc:PriceAmount>
+    </cac:Price>
+  </cac:CreditNoteLine>
+  <cac:CreditNoteLine>
+    <cbc:ID>2</cbc:ID>
+    <cbc:Note>delivery note number: 40100870; ponumber: 2020-21684-0; </cbc:Note>
+    <cbc:CreditedQuantity unitCode="EA">1.0</cbc:CreditedQuantity>
+    <cbc:LineExtensionAmount currencyID="EUR">24.37</cbc:LineExtensionAmount>
+    <cac:Item>
+      <cbc:Name>STN EN 197-1 Cement. Cast 1 Electronic Standard With ability to print, copy text and pictures EN</cbc:Name>
+      <cac:ClassifiedTaxCategory>
+        <cbc:ID schemeID="UNCL5305">E</cbc:ID>
+        <cbc:Percent>0.00</cbc:Percent>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:ClassifiedTaxCategory>
+    </cac:Item>
+    <cac:Price>
+      <cbc:PriceAmount currencyID="EUR">24.37</cbc:PriceAmount>
+    </cac:Price>
+  </cac:CreditNoteLine>
+</CreditNote>
