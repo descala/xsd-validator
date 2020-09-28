@@ -76,6 +76,9 @@ module Xsd
           schema_path('espap/maindoc/UBL-eSPap-Invoice-2.1.xsd')
         else
           ubl_version = doc.xpath('//cbc:UBLVersionID', cbc: "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2").text
+          if ubl_version.nil? or ubl_version == ''
+            ubl_version = '2.1'
+          end
           standard_path("#{namespace}_ubl#{ubl_version}")
         end
 
