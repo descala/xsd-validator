@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns3:SignedServiceMetadata xmlns="http://busdox.org/transport/identifiers/1.0/" xmlns:ns2="http://www.w3.org/2005/08/addressing" xmlns:ns3="http://busdox.org/serviceMetadata/publishing/1.0/">
+  <ns3:ServiceMetadata>
+    <ns3:ServiceInformation>
+      <ParticipantIdentifier scheme="iso6523-actorid-upis">9920:esb63276174</ParticipantIdentifier>
+      <DocumentIdentifier scheme="busdox-docid-qns">urn:oasis:names:specification:ubl:schema:xsd:ApplicationResponse-2::ApplicationResponse##urn:fdc:peppol.eu:poacc:trns:invoice_response:3::2.1</DocumentIdentifier>
+      <ns3:ProcessList>
+        <ns3:Process>
+          <ProcessIdentifier scheme="cenbii-procid-ubl">urn:fdc:peppol.eu:poacc:bis:invoice_response:3</ProcessIdentifier>
+          <ns3:ServiceEndpointList>
+            <ns3:Endpoint transportProfile="peppol-transport-as4-v2_0">
+              <ns2:EndpointReference>
+                <ns2:Address>https://ws.b2brouter.com/as4</ns2:Address>
+                <ns2:ReferenceParameters/>
+                <ns2:Metadata/>
+              </ns2:EndpointReference>
+              <ns3:RequireBusinessLevelSignature>false</ns3:RequireBusinessLevelSignature>
+              <ns3:MinimumAuthenticationLevel>1</ns3:MinimumAuthenticationLevel>
+              <ns3:ServiceActivationDate>2020-06-12T00:00:00+00:00</ns3:ServiceActivationDate>
+              <ns3:ServiceExpirationDate>2030-09-28T00:00:00+02:00</ns3:ServiceExpirationDate>
+              <ns3:Certificate>MIIFqzCCA5OgAwIBAgIQMfcngqgKCskXhHGC+B3JwzANBgkqhkiG9w0BAQsFADBO
+MQswCQYDVQQGEwJCRTEZMBcGA1UEChMQT3BlblBFUFBPTCBBSVNCTDEkMCIGA1UE
+AxMbUEVQUE9MIEFDQ0VTUyBQT0lOVCBDQSAtIEcyMB4XDTIwMDUyNTAwMDAwMFoX
+DTIyMDUxNTIzNTk1OVowVTESMBAGA1UEAwwJUERLMDAwMDE2MR0wGwYDVQQLDBRQ
+RVBQT0wgUFJPRFVDVElPTiBBUDETMBEGA1UECgwKQjJCIFJvdXRlcjELMAkGA1UE
+BhMCRVMwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC6QiZaiF2UBT71
+f+imx2D/1oQFgZKD2sSE8XnDL6SCvpMm8brUUxvQDDGYyDxziQ59pKvFvHus1lBN
+CWdlhWyUT2BaikIpYIGzncgxjNHABTQRzvSesVtcWlGuVHm24E2Vzfob4ZQBYlw3
+bI5Zpr5wNpkttI020Ks/iBIliEZ6LmPKzg6Y/p2FUf8nCycxRWs+gNqa92pFmHiR
+6xiDeKM1ZPqz839a3Qy72WcgxdOIR+FNyUhcsNCgcaMs90KKoQQqN31WmXT7iBaz
+YtO5XuEpD58W/EWdWtxLReqR8UDS13IZIQNu4yYvDdaoTSAJzJ+Dvcu4641oe+hM
+/kk1qEmNAgMBAAGjggF8MIIBeDAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB/wQEAwID
+qDAWBgNVHSUBAf8EDDAKBggrBgEFBQcDAjAdBgNVHQ4EFgQUUZGQLFWFJkMGG1fC
+OC5TfdX8gk8wXQYDVR0fBFYwVDBSoFCgToZMaHR0cDovL3BraS1jcmwuc3ltYXV0
+aC5jb20vY2FfN2JlZGNiY2M0ZjcyNGVmZTMwZDUwMDZkZGE2ODFiYTAvTGF0ZXN0
+Q1JMLmNybDA3BggrBgEFBQcBAQQrMCkwJwYIKwYBBQUHMAGGG2h0dHA6Ly9wa2kt
+b2NzcC5zeW1hdXRoLmNvbTAfBgNVHSMEGDAWgBSHJd9bI6bEO/mf3xulIJHd5PQ8
+gTAtBgpghkgBhvhFARADBB8wHQYTYIZIAYb4RQEQAQIDAQGBstf0NhYGOTU3NjA4
+MDkGCmCGSAGG+EUBEAUEKzApAgEAFiRhSFIwY0hNNkx5OXdhMmt0Y21FdWMzbHRZ
+WFYwYUM1amIyMD0wDQYJKoZIhvcNAQELBQADggIBAIAatl78E+Aj0BqhbBZ3Jw8Z
+tm47ruZR5o690D0kJMXGdX6ZF6hT2YSAfq8aQzzlh6PVD0VsATyLL0s1hNGgmFC4
+zUrdC3Q2nbMEX3BngSbV/M4MeW3oq6BsOWh4dxM01NHX0yXNFMyjPTCf+ehkh0+H
+xghR0M8TQ0ZyGwHAiRIDejeIrtvBJuf/iPCjpfFwyX8IjCkndcBRak6R3VAB/Mke
+axPDxNYU+jS2FA0thbttARTAiLGLg8jZkpKryG2InqF2t095Lgz8ImQjyE3zqQ6S
+UdyJQmEI37iWHvSMpzBF0vSE5DlwNVEs31+RsZ92pNIi03gdhNAUtFTyiXT0ED9t
+AOZaiXdW0xnqV4mhZVFKxBZidBPqntyw18K23fpNVxrqS9wmXQxXy1HWeQ3ze/lV
+/SH4B7MPlALBLA8F2jjC+YAc+mx/pJWGPjS1Q37ntgrplJ0NrKF0p+Mbjn23Iu5y
+smzseZThWCWgYJrOyhQRZf1A5j3uDQgKL9W4MNkNNLHf/vGMrKvFyb1sLV+LH193
+EL6bF/QrC680HU79YARCd2KeLNQGhzD6WnU9LjLIDCxmngAwinrqfG7rnf7AKzH4
+5gmnj2H2JN7nUDtZT2ffj9XoSCsXlKc5JGs2XeFnP+bjxRCFmGFTVhk+3B+zH1D7
+efy6F4OMFZgc6nMckNHh</ns3:Certificate>
+              <ns3:ServiceDescription>B2Brouter Production AP</ns3:ServiceDescription>
+              <ns3:TechnicalContactUrl>comercial@invinet.org</ns3:TechnicalContactUrl>
+              <ns3:TechnicalInformationUrl>http://en.invinet.org/e-business/peppol.html</ns3:TechnicalInformationUrl>
+            </ns3:Endpoint>
+            <ns3:Endpoint transportProfile="busdox-transport-as2-ver1p0">
+              <ns2:EndpointReference>
+                <ns2:Address>https://ws.b2brouter.com/as2</ns2:Address>
+                <ns2:ReferenceParameters/>
+                <ns2:Metadata/>
+              </ns2:EndpointReference>
+              <ns3:RequireBusinessLevelSignature>false</ns3:RequireBusinessLevelSignature>
+              <ns3:MinimumAuthenticationLevel>1</ns3:MinimumAuthenticationLevel>
+              <ns3:ServiceActivationDate>2020-09-21T14:15:25+02:00</ns3:ServiceActivationDate>
+              <ns3:ServiceExpirationDate>2030-09-28T00:00:00</ns3:ServiceExpirationDate>
+              <ns3:Certificate>MIIFqzCCA5OgAwIBAgIQMfcngqgKCskXhHGC+B3JwzANBgkqhkiG9w0BAQsFADBO
+MQswCQYDVQQGEwJCRTEZMBcGA1UEChMQT3BlblBFUFBPTCBBSVNCTDEkMCIGA1UE
+AxMbUEVQUE9MIEFDQ0VTUyBQT0lOVCBDQSAtIEcyMB4XDTIwMDUyNTAwMDAwMFoX
+DTIyMDUxNTIzNTk1OVowVTESMBAGA1UEAwwJUERLMDAwMDE2MR0wGwYDVQQLDBRQ
+RVBQT0wgUFJPRFVDVElPTiBBUDETMBEGA1UECgwKQjJCIFJvdXRlcjELMAkGA1UE
+BhMCRVMwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC6QiZaiF2UBT71
+f+imx2D/1oQFgZKD2sSE8XnDL6SCvpMm8brUUxvQDDGYyDxziQ59pKvFvHus1lBN
+CWdlhWyUT2BaikIpYIGzncgxjNHABTQRzvSesVtcWlGuVHm24E2Vzfob4ZQBYlw3
+bI5Zpr5wNpkttI020Ks/iBIliEZ6LmPKzg6Y/p2FUf8nCycxRWs+gNqa92pFmHiR
+6xiDeKM1ZPqz839a3Qy72WcgxdOIR+FNyUhcsNCgcaMs90KKoQQqN31WmXT7iBaz
+YtO5XuEpD58W/EWdWtxLReqR8UDS13IZIQNu4yYvDdaoTSAJzJ+Dvcu4641oe+hM
+/kk1qEmNAgMBAAGjggF8MIIBeDAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB/wQEAwID
+qDAWBgNVHSUBAf8EDDAKBggrBgEFBQcDAjAdBgNVHQ4EFgQUUZGQLFWFJkMGG1fC
+OC5TfdX8gk8wXQYDVR0fBFYwVDBSoFCgToZMaHR0cDovL3BraS1jcmwuc3ltYXV0
+aC5jb20vY2FfN2JlZGNiY2M0ZjcyNGVmZTMwZDUwMDZkZGE2ODFiYTAvTGF0ZXN0
+Q1JMLmNybDA3BggrBgEFBQcBAQQrMCkwJwYIKwYBBQUHMAGGG2h0dHA6Ly9wa2kt
+b2NzcC5zeW1hdXRoLmNvbTAfBgNVHSMEGDAWgBSHJd9bI6bEO/mf3xulIJHd5PQ8
+gTAtBgpghkgBhvhFARADBB8wHQYTYIZIAYb4RQEQAQIDAQGBstf0NhYGOTU3NjA4
+MDkGCmCGSAGG+EUBEAUEKzApAgEAFiRhSFIwY0hNNkx5OXdhMmt0Y21FdWMzbHRZ
+WFYwYUM1amIyMD0wDQYJKoZIhvcNAQELBQADggIBAIAatl78E+Aj0BqhbBZ3Jw8Z
+tm47ruZR5o690D0kJMXGdX6ZF6hT2YSAfq8aQzzlh6PVD0VsATyLL0s1hNGgmFC4
+zUrdC3Q2nbMEX3BngSbV/M4MeW3oq6BsOWh4dxM01NHX0yXNFMyjPTCf+ehkh0+H
+xghR0M8TQ0ZyGwHAiRIDejeIrtvBJuf/iPCjpfFwyX8IjCkndcBRak6R3VAB/Mke
+axPDxNYU+jS2FA0thbttARTAiLGLg8jZkpKryG2InqF2t095Lgz8ImQjyE3zqQ6S
+UdyJQmEI37iWHvSMpzBF0vSE5DlwNVEs31+RsZ92pNIi03gdhNAUtFTyiXT0ED9t
+AOZaiXdW0xnqV4mhZVFKxBZidBPqntyw18K23fpNVxrqS9wmXQxXy1HWeQ3ze/lV
+/SH4B7MPlALBLA8F2jjC+YAc+mx/pJWGPjS1Q37ntgrplJ0NrKF0p+Mbjn23Iu5y
+smzseZThWCWgYJrOyhQRZf1A5j3uDQgKL9W4MNkNNLHf/vGMrKvFyb1sLV+LH193
+EL6bF/QrC680HU79YARCd2KeLNQGhzD6WnU9LjLIDCxmngAwinrqfG7rnf7AKzH4
+5gmnj2H2JN7nUDtZT2ffj9XoSCsXlKc5JGs2XeFnP+bjxRCFmGFTVhk+3B+zH1D7
+efy6F4OMFZgc6nMckNHh</ns3:Certificate>
+              <ns3:ServiceDescription>B2Brouter Production AP</ns3:ServiceDescription>
+              <ns3:TechnicalContactUrl>comercial@invinet.org</ns3:TechnicalContactUrl>
+              <ns3:TechnicalInformationUrl>http://en.invinet.org/e-business/peppol.html</ns3:TechnicalInformationUrl>
+            </ns3:Endpoint>
+          </ns3:ServiceEndpointList>
+        </ns3:Process>
+      </ns3:ProcessList>
+    </ns3:ServiceInformation>
+  </ns3:ServiceMetadata>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+  <SignedInfo>
+    <CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+    <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+    <Reference URI="">
+      <Transforms>
+        <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+        </Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+        <DigestValue>6MozS2QPSinZPNF5yckrwmTaSJc=</DigestValue>
+      </Reference>
+  </SignedInfo>
+  <SignatureValue>jH/05/aVfuQXL5UgoUWVMA3GeW0XqGExNzs3VkPKoaNVQBsANCgCJw1rfrkDpgdND+2vVFmkbXIpcm0/KjJ/k+eMJqlYSX4XdHLdubmoqJI5uWipUhlWNfVDce90ZTSluP/dvhV3rSg4nx4BptfUc/0HZDu8oJR2/yQe+5L/scLfSYDUY75bo1ejR+D0IVIZD+DMwI7xSkrzX12Vqj2fmnnI9XSN/SqqfXZW0TOxQ6gkxOzxqUMspHQxpUEO3F5wfhHgDq4G1RrZ7mB3dy2XiJZoDvW7cBDcYP5wfeKPcIp5wPO0kPHVC4mT9YhdtTT7ALFEwIlSaHoSukmlhK6gwA==</SignatureValue>
+  <KeyInfo>
+    <X509Data>
+      <X509IssuerSerial>
+        <X509IssuerName>CN=PEPPOL SERVICE METADATA PUBLISHER CA - G2,O=OpenPEPPOL AISBL,C=BE</X509IssuerName>
+        <X509SerialNumber>98462304321843145522677668475310067957</X509SerialNumber>
+      </X509IssuerSerial>
+      <X509SubjectName>C=ES,O=B2B Router,OU=PEPPOL PRODUCTION SMP,CN=PDK000016</X509SubjectName>
+      <X509Certificate>MIIFujCCA6KgAwIBAgIQShMmaEeU1ll+BNyBx95Q9TANBgkqhkiG9w0BAQsF
+ADBcMQswCQYDVQQGEwJCRTEZMBcGA1UEChMQT3BlblBFUFBPTCBBSVNCTDEy
+MDAGA1UEAxMpUEVQUE9MIFNFUlZJQ0UgTUVUQURBVEEgUFVCTElTSEVSIENB
+IC0gRzIwHhcNMjAwNTI1MDAwMDAwWhcNMjIwNTE1MjM1OTU5WjBWMRIwEAYD
+VQQDDAlQREswMDAwMTYxHjAcBgNVBAsMFVBFUFBPTCBQUk9EVUNUSU9OIFNN
+UDETMBEGA1UECgwKQjJCIFJvdXRlcjELMAkGA1UEBhMCRVMwggEiMA0GCSqG
+SIb3DQEBAQUAA4IBDwAwggEKAoIBAQDQNGRrOowpwbnAoKyf0a5KqtdP1Yur
+VnNwigtwNCyC0PztU8fkWSeO6rpre2/wT876GjKId1+6NALMzQk5eKanKh+X
+NpDObY1OVsnLpFDIw4tXbHcqXbZL7JfF3QvJlLZWc+IwIrQ8x0WXihsTIoeg
+awyDY8Avs7FnV9jd9LRaGapG32k+vcJd+PGZhum+fAHDHchUWkbBtPzbjRfr
+r4GBlXduuL81YhZUWhm7/Dr7XGDkv89/3FdFfwj+TDH3R5N1a2UwpjL1xzHc
+9EpDhS3yFSdjjnvUUNd5dje9ABYL2Xa43RfJMjqXBNXk4LytyErPdgS9PEQD
+dkcKIsaiER1RAgMBAAGjggF8MIIBeDAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB
+/wQEAwIDqDAWBgNVHSUBAf8EDDAKBggrBgEFBQcDAjAdBgNVHQ4EFgQUv8dR
+U7EybHFLZZxDV2eI5fHlUY4wXQYDVR0fBFYwVDBSoFCgToZMaHR0cDovL3Br
+aS1jcmwuc3ltYXV0aC5jb20vY2FfYjViMzY0YjA3M2U2ZGRjZGIzMzM1MDE4
+M2EzZWUzZTEvTGF0ZXN0Q1JMLmNybDA3BggrBgEFBQcBAQQrMCkwJwYIKwYB
+BQUHMAGGG2h0dHA6Ly9wa2ktb2NzcC5zeW1hdXRoLmNvbTAfBgNVHSMEGDAW
+gBQqN3YVyu6QH6+ZpWNslTs2p6NEcDAtBgpghkgBhvhFARADBB8wHQYTYIZI
+AYb4RQEQAQIDAQGBstiEUhYGOTU3NjA4MDkGCmCGSAGG+EUBEAUEKzApAgEA
+FiRhSFIwY0hNNkx5OXdhMmt0Y21FdWMzbHRZWFYwYUM1amIyMD0wDQYJKoZI
+hvcNAQELBQADggIBAFBMvGqa0vn2RTf/v4dTyCx2oo0SLz77WJfXsC1x0I+7
+nWgJyQGOnFhXhYCJFbj6Ccw/78RXLWrkAbp2CetXlydwVce0icn91Cy4oA3m
+PULrIWU9SzmT4otbLAw0IfQQkXs1KLybXM144PD9ma+qlFaMR6b3Cp1jRNZD
+fHm/nCpUlP3nbK9qQhhXcvTlbI/yIo/4cdPD21u1Hn1mWloDHFQZOuPntVbs
+Con4fLMu0hYuysSE4aL5/GeiM9wIua8yicBtpD1pGHkGXDNf7lRVyik8A107
+1B/a6XV4SbDqUuBY5R7zD2MIN+hTyuYPHFcT3UVv1J3FszdPU3LAJhW/2tZ/
+g0uVJSxyekOlUtrjrlm4/A785y/6TO8TzkFcSBvHqSnb8r5Z5VbeXzFbE2v9
+6Wio6+G0x/Pozt5exDDklM2UEC04yaRJn4Y9Kv+sObN8tXPUICDd87wY0tYL
+Yj7NB7P6pHw5a44c+zyozIUk7X+Dq6PgA22wIOOlAzmAvzVT7xsd6WQJvs/D
+GqcTY0H5QePMePDFmqZCAqfN7MuALVoIaAfjWdNNWKQn8Wot/IBL0OBH7C1v
+PAiZQ4b5VqpL2PIvRbA2KLvCrAT0Q7hIsbW2qIlpcQ4RPG+0ThhdKDwgw0df
+9zii7f3pvp/fYqDbruzzzDgIv3enM6tZRGwDZNE6
+</X509Certificate>
+    </X509Data>
+  </KeyInfo>
+</Signature>
+</ns3:SignedServiceMetadata>
