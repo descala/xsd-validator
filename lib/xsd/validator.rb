@@ -83,19 +83,28 @@ module Xsd
         end
 
       else
+        ubl_version = doc.xpath('//cbc:UBLVersionID', cbc: "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2").text
+        if ubl_version.nil? or ubl_version == ''
+          ubl_version = '2.1'
+        end
         standard_path(namespace)
       end
     end
 
     # Setup symlinks from xmlns to shcemas
     def self.symlink
+      symlinks = {}
       Dir.chdir('lib/xsd/schemas/') do
         Dir["**/*.xsd"].each do |xsdname|
           doc = Nokogiri::XML(File.read(schema_path(xsdname)))
           if doc.root['targetNamespace']
             xmlns = doc.root['targetNamespace']
             if xmlns =~ UBL_DOCUMENT and doc.root['version']
-              # ubl 2.0 i 2.1 tenen el mateix targetNamespace, afegim la versio
+              if doc.root['version'] == '2.1'
+                # add extra link without _ubl2.1 suffix to use it as default
+                symlinks[xmlns] = xsdname
+              end
+              # ubl 2.0 & 2.1 share the same targetNamespace, we add version
               xmlns = "#{xmlns}_ubl#{doc.root['version']}"
             end
           else
@@ -104,16 +113,19 @@ module Xsd
               xmlns = doc.namespaces.to_a[1][1]
             end
           end
-          Dir.chdir('../xmlns/') do
-            begin
-              from = "../schemas/#{xsdname}"
-              to = normalize_xmlns(xmlns)
-              File.symlink(from, to)
-            rescue Errno::EEXIST, TypeError
-              # already exists or nil
-            else
-              puts "#{from} -> #{to}"
-            end
+          symlinks[xmlns] = xsdname
+        end
+      end
+      Dir.chdir('lib/xsd/xmlns/') do
+        symlinks.each do |to, from|
+          begin
+            from = "../schemas/#{from}"
+            to = normalize_xmlns(to)
+            File.symlink(from, to)
+          rescue Errno::EEXIST, TypeError
+            # already exists or nil
+          else
+            puts "#{from} -> #{to}"
           end
         end
       end
