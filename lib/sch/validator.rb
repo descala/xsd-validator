@@ -5,6 +5,7 @@ module Sch
   module Validator
 
     CBC = "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+    RAM = "urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100"
 
     class ValidationError < RuntimeError
     end
@@ -64,8 +65,11 @@ module Sch
 
     def schematrons(doc)
       doc_nokogiri =Nokogiri::XML(doc) unless doc.is_a? Nokogiri::XML::Document
-      # Assume UBL
+      # Assume UBL or CII
       customization_id = doc_nokogiri.xpath('//cbc:CustomizationID', cbc: CBC).text
+      if customization_id.empty?
+        customization_id = doc_nokogiri.xpath('//ram:GuidelineSpecifiedDocumentContextParameter/ram:ID', ram: RAM).text
+      end
       case customization_id
       when 'urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0'
         %w(CEN-EN16931-UBL.sch PEPPOL-EN16931-UBL.sch)
