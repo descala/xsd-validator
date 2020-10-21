@@ -91,11 +91,13 @@ module Sch
         %w(PEPPOLBIS-T16.sch)
 
       # XRechnung UBL
-      when 'urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_1.2'
+      when 'urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_1.2', 'urn:cen.eu:en16931#compliant#factur-x.eu:1p0:basic'
         if doc_nokogiri.root.name == 'Invoice'
           %w(CEN-EN16931-UBL.sch XRechnung-UBL-validation-Invoice.sch)
-        else
+        elsif doc_nokogiri.root.name == 'CreditNote'
           %w(CEN-EN16931-UBL.sch XRechnung-UBL-validation-CreditNote.sch)
+        else
+          %w(CEN-EN16931-UBL.sch)
         end
 
       # NL CIUS / SimplerInvoicing
