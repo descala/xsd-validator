@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Invoice xmlns="urn:sfti:documents:BasicInvoice:1:0" xmlns:cac="urn:oasis:names:tc:ubl:CommonAggregateComponents:1:0" xmlns:cbc="urn:oasis:names:tc:ubl:CommonBasicComponents:1:0" xmlns:ccts="urn:oasis:names:tc:ubl:CoreComponentParameters:1:0" xmlns:cct="urn:oasis:names:tc:ubl:CoreComponentTypes:1:0" xmlns:sdt="urn:oasis:names:tc:ubl:SpecializedDatatypes:1:0" xmlns:udt="urn:oasis:names:tc:ubl:UnspecializedDatatypes:1:0" xmlns:rsn="urn:oasis:names:tc:ubl:codelist:AllowanceChargeReasonCode:1:0" xmlns:chn="urn:oasis:names:tc:ubl:codelist:ChannelCode:1:0" xmlns:chc="urn:oasis:names:tc:ubl:codelist:ChipCode:1:0" xmlns:cnt="urn:oasis:names:tc:ubl:codelist:CountryIdentificationCode:1:0" xmlns:cur="urn:oasis:names:tc:ubl:codelist:CurrencyCode:1:0" xmlns:stat="urn:oasis:names:tc:ubl:codelist:DocumentStatusCode:1:0" xmlns:lat="urn:oasis:names:tc:ubl:codelist:LatitudeDirectionCode:1:0" xmlns:lstat="urn:oasis:names:tc:ubl:codelist:LineStatusCode:1:0" xmlns:lon="urn:oasis:names:tc:ubl:codelist:LongitudeDirectionCode:1:0" xmlns:pty="urn:oasis:names:tc:ubl:codelist:PaymentMeansCode:1:0" xmlns:sst="urn:oasis:names:tc:ubl:codelist:SubstitutionStatusCode:1:0" xmlns:cac0="urn:sfti:CommonAggregateComponents:1:0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ID>08/001</ID>
+  <cbc:IssueDate>2008-11-24</cbc:IssueDate>
+  <InvoiceTypeCode>380</InvoiceTypeCode>
+  <InvoiceCurrencyCode>EUR</InvoiceCurrencyCode>
+  <LineItemCountNumeric>2</LineItemCountNumeric>
+  <cac0:BuyerParty>
+    <cac0:Party>
+      <cac0:PartyName>
+        <cbc:Name>Some non'ascii chars ñª long name that may be truncated, Inc</cbc:Name>
+      </cac0:PartyName>
+      <cac0:Address>
+        <cbc:StreetName>Ribes, 00</cbc:StreetName>
+        <cbc:CityName>Barcelona</cbc:CityName>
+        <cbc:PostalZone>08013</cbc:PostalZone>
+        <cac0:Country>
+          <cac0:IdentificationCode>ES</cac0:IdentificationCode>
+        </cac0:Country>
+      </cac0:Address>
+      <cac0:PartyTaxScheme>
+        <cac0:CompanyID>ESB10317980</cac0:CompanyID>
+        <cac0:TaxScheme>
+          <cac0:ID>VAT</cac0:ID>
+        </cac0:TaxScheme>
+      </cac0:PartyTaxScheme>
+      <cac0:PartyTaxScheme>
+        <cac0:CompanyID/>
+        <cac0:TaxScheme>
+          <cac0:ID>SWT</cac0:ID>
+        </cac0:TaxScheme>
+      </cac0:PartyTaxScheme>
+      <cac0:Contact>
+        <cbc:ElectronicMail>client1@email.com</cbc:ElectronicMail>
+      </cac0:Contact>
+    </cac0:Party>
+  </cac0:BuyerParty>
+  <cac0:SellerParty>
+    <cac0:Party>
+      <cac0:PartyName>
+        <cbc:Name>Business</cbc:Name>
+      </cac0:PartyName>
+      <cac0:Address>
+        <cbc:StreetName>street, 12</cbc:StreetName>
+        <cbc:CityName>Barcelona</cbc:CityName>
+        <cbc:PostalZone>08720</cbc:PostalZone>
+        <cac0:Country>
+          <cac0:IdentificationCode>ES</cac0:IdentificationCode>
+        </cac0:Country>
+      </cac0:Address>
+      <cac0:PartyTaxScheme>
+        <cac0:CompanyID>ES77310058C</cac0:CompanyID>
+        <cac0:TaxScheme>
+          <cac0:ID>SWT</cac0:ID>
+        </cac0:TaxScheme>
+      </cac0:PartyTaxScheme>
+      <cac0:Contact>
+        <cbc:ElectronicMail>business@foo.bar</cbc:ElectronicMail>
+      </cac0:Contact>
+    </cac0:Party>
+  </cac0:SellerParty>
+  <cac0:PaymentMeans>
+    <cac0:PaymentMeansTypeCode>49</cac0:PaymentMeansTypeCode>
+    <cbc:DuePaymentDate>2008-12-01</cbc:DuePaymentDate>
+  </cac0:PaymentMeans>
+  <cac0:TaxTotal>
+    <cbc:TotalTaxAmount amountCurrencyID="EUR">0.00</cbc:TotalTaxAmount>
+    <cac0:TaxSubTotal>
+      <cbc:TaxableAmount amountCurrencyID="EUR">925.68</cbc:TaxableAmount>
+      <cbc:TaxAmount amountCurrencyID="EUR">0.00</cbc:TaxAmount>
+      <cac0:TaxCategory>
+        <cac0:ID>E</cac0:ID>
+        <cbc:Percent>0.00</cbc:Percent>
+        <cac0:TaxScheme>
+          <cac0:ID>VAT</cac0:ID>
+        </cac0:TaxScheme>
+      </cac0:TaxCategory>
+    </cac0:TaxSubTotal>
+  </cac0:TaxTotal>
+  <cac0:LegalTotal>
+    <cbc:LineExtensionTotalAmount amountCurrencyID="EUR">925.68</cbc:LineExtensionTotalAmount>
+    <cbc:TaxExclusiveTotalAmount amountCurrencyID="EUR">925.68</cbc:TaxExclusiveTotalAmount>
+    <cbc:TaxInclusiveTotalAmount amountCurrencyID="EUR">925.68</cbc:TaxInclusiveTotalAmount>
+  </cac0:LegalTotal>
+  <cac0:InvoiceLine>
+    <cac0:ID>1</cac0:ID>
+    <cbc:InvoicedQuantity quantityUnitCode="EA">1.0</cbc:InvoicedQuantity>
+    <cbc:LineExtensionAmount amountCurrencyID="EUR">925.68</cbc:LineExtensionAmount>
+    <cac0:Item>
+      <cbc:Description>bla bla bla</cbc:Description>
+      <cac0:BasePrice>
+        <cbc:PriceAmount amountCurrencyID="EUR">925.68</cbc:PriceAmount>
+      </cac0:BasePrice>
+    </cac0:Item>
+  </cac0:InvoiceLine>
+  <RequisitionistDocumentReference>
+    <cac0:ID/>
+  </RequisitionistDocumentReference>
+</Invoice>
