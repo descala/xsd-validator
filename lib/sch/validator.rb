@@ -97,7 +97,7 @@ module Sch
         elsif doc_nokogiri.root.name == 'CreditNote'
           %w(CEN-EN16931-UBL.sch XRechnung-UBL-validation-CreditNote.sch)
         else
-          %w(CEN-EN16931-UBL.sch)
+          %w(CEN-EN16931-UBL.sch EN16931-CII-validation.sch)
         end
 
       # NL CIUS / SimplerInvoicing
