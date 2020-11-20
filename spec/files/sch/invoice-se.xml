@@ -93,7 +93,7 @@
   <cac:Delivery>
     <cbc:ActualDeliveryDate>2019-10-22</cbc:ActualDeliveryDate>
     <cac:DeliveryLocation>
-      <cbc:ID schemeID="GLN">
+      <cbc:ID schemeID="0088">
           7312345678901
         </cbc:ID>
       <cac:Address>

@@ -344,7 +344,7 @@
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="matches(normalize-space(), '^[0-9]+$') and u:gln(normalize-space())">
                <xsl:attribute name="id">PEPPOL-COMMON-R040</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -387,10 +387,10 @@
    <!--PATTERN -->
    <xsl:variable name="clUNCL1001_T01" select="tokenize('220 227', '\s')"/>
    <xsl:variable name="cleas"
-                 select="tokenize('0002 0007 0009 0037 0060 0088 0096 0097 0106 0130 0135 0142 0151 0183 0184 0190 0191 0192 0193 0195 0196 0198 0199 0200 0201 0202 0204 9901 9906 9907 9910 9913 9914 9915 9918 9919 9920 9922 9923 9924 9925 9926 9927 9928 9929 9930 9931 9932 9933 9934 9935 9936 9937 9938 9939 9940 9941 9942 9943 9944 9945 9946 9947 9948 9949 9950 9951 9952 9953 9955 9956 9957 9958', '\s')"/>
+                 select="tokenize('0002 0007 0009 0037 0060 0088 0096 0097 0106 0130 0135 0142 0151 0183 0184 0190 0191 0192 0193 0195 0196 0198 0199 0200 0201 0202 0204 0208 0209 9901 9906 9907 9910 9913 9914 9915 9918 9919 9920 9922 9923 9924 9925 9926 9927 9928 9929 9930 9931 9932 9933 9934 9935 9936 9937 9938 9939 9940 9941 9942 9943 9944 9945 9946 9947 9948 9949 9950 9951 9952 9953 9955 9956 9957', '\s')"/>
    <xsl:variable name="clTrueFalse" select="tokenize('true false', '\s')"/>
    <xsl:variable name="clISO4217"
-                 select="tokenize('AED AFN ALL AMD ANG ANG AOA ARS AUD AUD AUD AUD AUD AUD AUD AUD AWG AZN BAM BBD BDT BGN BHD BIF BMD BND BOB BOV BRL BSD BTN BWP BYN BZD CAD CDF CHE CHF CHF CHW CLF CLP CNY COP COU CRC CUC CUP CVE CZK DJF DKK DKK DKK DOP DZD EGP ERN ETB EUR EUR EUR EUR EUR EUR EUR EUR EUR EUR EUR EUR EUR EUR EUR EUR EUR EUR EUR EUR EUR EUR EUR EUR EUR EUR EUR EUR EUR EUR EUR EUR EUR EUR EUR FJD FKP GBP GBP GBP GBP GEL GHS GIP GMD GNF GTQ GYD HKD HNL HRK HTG HUF IDR ILS INR INR IQD IRR ISK JMD JOD JPY KES KGS KHR KMF KPW KRW KWD KYD KZT LAK LBP LKR LRD LSL LYD MAD MAD MDL MGA MKD MMK MNT MOP MRU MUR MVR MWK MXN MXV MYR MZN NAD NGN NIO NOK NOK NOK NPR NZD NZD NZD NZD NZD OMR PAB PEN PGK PHP PKR PLN PYG QAR RON RSD RUB RWF SAR SBD SCR SDG SEK SGD SHP SLL SOS SRD SSP STN SVC SYP SZL THB TJS TMT TND TOP TRY TTD TWD TZS UAH UGX USD USD USD USD USD USD USD USD USD USD USD USD USD USD USD USD USD USD USD USN UYI UYU UZS VEF VND VUV WST XAF XAF XAF XAF XAF XAF XAG XAU XBA XBB XBC XBD XCD XCD XCD XCD XCD XCD XCD XCD XDR XOF XOF XOF XOF XOF XOF XOF XOF XPD XPF XPF XPF XPT XSU XTS XUA YER ZAR ZAR ZAR ZMW ZWL', '\s')"/>
+                 select="tokenize('AED AFN ALL AMD ANG AOA ARS AUD AWG AZN BAM BBD BDT BGN BHD BIF BMD BND BOB BOV BRL BSD BTN BWP BYN BZD CAD CDF CHE CHF CHW CLF CLP CNY COP COU CRC CUC CUP CVE CZK DJF DKK DOP DZD EGP ERN ETB EUR FJD FKP GBP GEL GHS GIP GMD GNF GTQ GYD HKD HNL HRK HTG HUF IDR ILS INR IQD IRR ISK JMD JOD JPY KES KGS KHR KMF KPW KRW KWD KYD KZT LAK LBP LKR LRD LSL LYD MAD MDL MGA MKD MMK MNT MOP MRU MUR MVR MWK MXN MXV MYR MZN NAD NGN NIO NOK NPR NZD OMR PAB PEN PGK PHP PKR PLN PYG QAR RON RSD RUB RWF SAR SBD SCR SDG SEK SGD SHP SLL SOS SRD SSP STN SVC SYP SZL THB TJS TMT TND TOP TRY TTD TWD TZS UAH UGX USD USN UYI UYU UZS VEF VND VUV WST XAF XAG XAU XBA XBB XBC XBD XCD XDR XOF XPD XPF XPT XSU XTS XUA YER ZAR ZMW ZWL', '\s')"/>
    <xsl:variable name="clUNCL5189"
                  select="tokenize('41 42 60 62 63 64 65 66 67 68 70 71 88 95 100 102 103 104 105', '\s')"/>
    <xsl:variable name="clUNCL5305" select="tokenize('AE E S Z G O K L M', '\s')"/>
@@ -401,14 +401,14 @@
    <xsl:variable name="clISO3166"
                  select="tokenize('AD AE AF AG AI AL AM AO AQ AR AS AT AU AW AX AZ BA BB BD BE BF BG BH BI BJ BL BM BN BO BQ BR BS BT BV BW BY BZ CA CC CD CF CG CH CI CK CL CM CN CO CR CU CV CW CX CY CZ DE DJ DK DM DO DZ EC EE EG EH ER ES ET FI FJ FK FM FO FR GA GB GD GE GF GG GH GI GL GM GN GP GQ GR GS GT GU GW GY HK HM HN HR HT HU ID IE IL IM IN IO IQ IR IS IT JE JM JO JP KE KG KH KI KM KN KP KR KW KY KZ LA LB LC LI LK LR LS LT LU LV LY MA MC MD ME MF MG MH MK ML MM MN MO MP MQ MR MS MT MU MV MW MX MY MZ NA NC NE NF NG NI NL NO NP NR NU NZ OM PA PE PF PG PH PK PL PM PN PR PS PT PW PY QA RE RO RS RU RW SA SB SC SD SE SG SH SI SJ SK SL SM SN SO SR SS ST SV SX SY SZ TC TD TF TG TH TJ TK TL TM TN TO TR TT TV TW TZ UA UG UM US UY UZ VA VC VE VG VI VN VU WF WS YE YT ZA ZM ZW 1A', '\s')"/>
    <xsl:variable name="clICD"
-                 select="tokenize('0002 0003 0004 0005 0006 0007 0008 0009 0010 0011 0012 0013 0014 0015 0016 0017 0018 0019 0020 0021 0022 0023 0024 0025 0026 0027 0028 0029 0030 0031 0032 0033 0034 0035 0036 0037 0038 0039 0040 0041 0042 0043 0044 0045 0046 0047 0048 0049 0050 0051 0052 0053 0054 0055 0056 0057 0058 0059 0060 0061 0062 0063 0064 0065 0066 0067 0068 0069 0070 0071 0072 0073 0074 0075 0076 0077 0078 0079 0080 0081 0082 0083 0084 0085 0086 0087 0088 0089 0090 0091 0093 0094 0095 0096 0097 0098 0099 0100 0101 0102 0104 0105 0106 0107 0108 0109 0110 0111 0112 0113 0114 0115 0116 0117 0118 0119 0120 0121 0122 0123 0124 0125 0126 0127 0128 0129 0130 0131 0132 0133 0134 0135 0136 0137 0138 0139 0140 0141 0142 0143 0144 0145 0146 0147 0148 0149 0150 0151 0152 0153 0154 0155 0156 0157 0158 0159 0160 0161 0162 0163 0164 0165 0166 0167 0168 0169 0170 0171 0172 0173 0174 0175 0176 0177 0178 0179 0180 0183 0184 0185 0186 0187 0188 0189 0190 0191 0192 0193 0194 0195 0196 0197 0198 0199 0200 0201 0202 0203 0204', '\s')"/>
+                 select="tokenize('0002 0003 0004 0005 0006 0007 0008 0009 0010 0011 0012 0013 0014 0015 0016 0017 0018 0019 0020 0021 0022 0023 0024 0025 0026 0027 0028 0029 0030 0031 0032 0033 0034 0035 0036 0037 0038 0039 0040 0041 0042 0043 0044 0045 0046 0047 0048 0049 0050 0051 0052 0053 0054 0055 0056 0057 0058 0059 0060 0061 0062 0063 0064 0065 0066 0067 0068 0069 0070 0071 0072 0073 0074 0075 0076 0077 0078 0079 0080 0081 0082 0083 0084 0085 0086 0087 0088 0089 0090 0091 0093 0094 0095 0096 0097 0098 0099 0100 0101 0102 0104 0105 0106 0107 0108 0109 0110 0111 0112 0113 0114 0115 0116 0117 0118 0119 0120 0121 0122 0123 0124 0125 0126 0127 0128 0129 0130 0131 0132 0133 0134 0135 0136 0137 0138 0139 0140 0141 0142 0143 0144 0145 0146 0147 0148 0149 0150 0151 0152 0153 0154 0155 0156 0157 0158 0159 0160 0161 0162 0163 0164 0165 0166 0167 0168 0169 0170 0171 0172 0173 0174 0175 0176 0177 0178 0179 0180 0183 0184 0185 0186 0187 0188 0189 0190 0191 0192 0193 0194 0195 0196 0197 0198 0199 0200 0201 0202 0203 0204 0205 0206 0207 0208 0209', '\s')"/>
    <xsl:variable name="clMimeCode"
                  select="tokenize('application/pdf image/png image/jpeg image/tiff application/acad application/dwg drawing/dwg application/vnd.openxmlformats-officedocument.spreadsheetml.sheet application/vnd.oasis.opendocument.spreadsheet', '\s')"/>
    <xsl:variable name="clUNCL7161"
                  select="tokenize('AA AAA AAC AAD AAE AAF AAH AAI AAS AAT AAV AAY AAZ ABA ABB ABC ABD ABF ABK ABL ABN ABR ABS ABT ABU ACF ACG ACH ACI ACJ ACK ACL ACM ACS ADC ADE ADJ ADK ADL ADM ADN ADO ADP ADQ ADR ADT ADW ADY ADZ AEA AEB AEC AED AEF AEH AEI AEJ AEK AEL AEM AEN AEO AEP AES AET AEU AEV AEW AEX AEY AEZ AJ AU CA CAB CAD CAE CAF CAI CAJ CAK CAL CAM CAN CAO CAP CAQ CAR CAS CAT CAU CAV CAW CD CG CS CT DAB DAD DL EG EP ER FAA FAB FAC FC FH FI GAA HAA HD HH IAA IAB ID IF IR IS KO L1 LA LAA LAB LF MAE MI ML NAA OA PA PAA PC PL RAB RAC RAD RAF RE RF RH RV SA SAA SAD SAE SAI SG SH SM SU TAB TAC TT TV V1 V2 WH XAA YY ZZZ', '\s')"/>
 
 	  <!--RULE -->
-   <xsl:template match="/ubl:Order" priority="1331" mode="M12">
+   <xsl:template match="/ubl:Order" priority="1337" mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="/ubl:Order"/>
 
 		    <!--ASSERT -->
@@ -549,48 +549,48 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="/ubl:Order/cbc:CustomizationID" priority="1330" mode="M12">
+   <xsl:template match="/ubl:Order/cbc:CustomizationID" priority="1336" mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cbc:CustomizationID"/>
       <xsl:apply-templates select="*" mode="M12"/>
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="/ubl:Order/cbc:ProfileID" priority="1329" mode="M12">
+   <xsl:template match="/ubl:Order/cbc:ProfileID" priority="1335" mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cbc:ProfileID"/>
       <xsl:apply-templates select="*" mode="M12"/>
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="/ubl:Order/cbc:ID" priority="1328" mode="M12">
+   <xsl:template match="/ubl:Order/cbc:ID" priority="1334" mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="/ubl:Order/cbc:ID"/>
       <xsl:apply-templates select="*" mode="M12"/>
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="/ubl:Order/cbc:SalesOrderID" priority="1327" mode="M12">
+   <xsl:template match="/ubl:Order/cbc:SalesOrderID" priority="1333" mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cbc:SalesOrderID"/>
       <xsl:apply-templates select="*" mode="M12"/>
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="/ubl:Order/cbc:IssueDate" priority="1326" mode="M12">
+   <xsl:template match="/ubl:Order/cbc:IssueDate" priority="1332" mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cbc:IssueDate"/>
       <xsl:apply-templates select="*" mode="M12"/>
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="/ubl:Order/cbc:IssueTime" priority="1325" mode="M12">
+   <xsl:template match="/ubl:Order/cbc:IssueTime" priority="1331" mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cbc:IssueTime"/>
       <xsl:apply-templates select="*" mode="M12"/>
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="/ubl:Order/cbc:OrderTypeCode" priority="1324" mode="M12">
+   <xsl:template match="/ubl:Order/cbc:OrderTypeCode" priority="1330" mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cbc:OrderTypeCode"/>
 
@@ -613,14 +613,14 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="/ubl:Order/cbc:Note" priority="1323" mode="M12">
+   <xsl:template match="/ubl:Order/cbc:Note" priority="1329" mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="/ubl:Order/cbc:Note"/>
       <xsl:apply-templates select="*" mode="M12"/>
    </xsl:template>
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cbc:DocumentCurrencyCode"
-                 priority="1322"
+                 priority="1328"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cbc:DocumentCurrencyCode"/>
@@ -644,21 +644,21 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="/ubl:Order/cbc:CustomerReference" priority="1321" mode="M12">
+   <xsl:template match="/ubl:Order/cbc:CustomerReference" priority="1327" mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cbc:CustomerReference"/>
       <xsl:apply-templates select="*" mode="M12"/>
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="/ubl:Order/cbc:AccountingCost" priority="1320" mode="M12">
+   <xsl:template match="/ubl:Order/cbc:AccountingCost" priority="1326" mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cbc:AccountingCost"/>
       <xsl:apply-templates select="*" mode="M12"/>
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="/ubl:Order/cac:ValidityPeriod" priority="1319" mode="M12">
+   <xsl:template match="/ubl:Order/cac:ValidityPeriod" priority="1325" mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:ValidityPeriod"/>
 
@@ -681,7 +681,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:ValidityPeriod/cbc:EndDate"
-                 priority="1318"
+                 priority="1324"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:ValidityPeriod/cbc:EndDate"/>
@@ -689,7 +689,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="/ubl:Order/cac:ValidityPeriod/*" priority="1317" mode="M12">
+   <xsl:template match="/ubl:Order/cac:ValidityPeriod/*" priority="1323" mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:ValidityPeriod/*"/>
 
@@ -712,7 +712,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:QuotationDocumentReference"
-                 priority="1316"
+                 priority="1322"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:QuotationDocumentReference"/>
@@ -736,7 +736,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:QuotationDocumentReference/cbc:ID"
-                 priority="1315"
+                 priority="1321"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:QuotationDocumentReference/cbc:ID"/>
@@ -745,7 +745,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:QuotationDocumentReference/*"
-                 priority="1314"
+                 priority="1320"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:QuotationDocumentReference/*"/>
@@ -769,7 +769,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:OrderDocumentReference"
-                 priority="1313"
+                 priority="1319"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:OrderDocumentReference"/>
@@ -793,7 +793,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:OrderDocumentReference/cbc:ID"
-                 priority="1312"
+                 priority="1318"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:OrderDocumentReference/cbc:ID"/>
@@ -802,7 +802,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:OrderDocumentReference/*"
-                 priority="1311"
+                 priority="1317"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:OrderDocumentReference/*"/>
@@ -826,7 +826,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:OriginatorDocumentReference"
-                 priority="1310"
+                 priority="1316"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:OriginatorDocumentReference"/>
@@ -850,7 +850,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:OriginatorDocumentReference/cbc:ID"
-                 priority="1309"
+                 priority="1315"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:OriginatorDocumentReference/cbc:ID"/>
@@ -859,7 +859,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:OriginatorDocumentReference/*"
-                 priority="1308"
+                 priority="1314"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:OriginatorDocumentReference/*"/>
@@ -883,7 +883,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AdditionalDocumentReference"
-                 priority="1307"
+                 priority="1313"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AdditionalDocumentReference"/>
@@ -907,7 +907,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AdditionalDocumentReference/cbc:ID"
-                 priority="1306"
+                 priority="1312"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AdditionalDocumentReference/cbc:ID"/>
@@ -916,7 +916,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AdditionalDocumentReference/cbc:DocumentType"
-                 priority="1305"
+                 priority="1311"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AdditionalDocumentReference/cbc:DocumentType"/>
@@ -925,7 +925,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AdditionalDocumentReference/cac:Attachment"
-                 priority="1304"
+                 priority="1310"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AdditionalDocumentReference/cac:Attachment"/>
@@ -934,7 +934,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AdditionalDocumentReference/cac:Attachment/cbc:EmbeddedDocumentBinaryObject"
-                 priority="1303"
+                 priority="1309"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AdditionalDocumentReference/cac:Attachment/cbc:EmbeddedDocumentBinaryObject"/>
@@ -989,7 +989,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference"
-                 priority="1302"
+                 priority="1308"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference"/>
@@ -1013,7 +1013,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:URI"
-                 priority="1301"
+                 priority="1307"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:URI"/>
@@ -1022,7 +1022,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/*"
-                 priority="1300"
+                 priority="1306"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/*"/>
@@ -1046,7 +1046,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AdditionalDocumentReference/cac:Attachment/*"
-                 priority="1299"
+                 priority="1305"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AdditionalDocumentReference/cac:Attachment/*"/>
@@ -1070,7 +1070,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AdditionalDocumentReference/*"
-                 priority="1298"
+                 priority="1304"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AdditionalDocumentReference/*"/>
@@ -1093,7 +1093,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="/ubl:Order/cac:Contract" priority="1297" mode="M12">
+   <xsl:template match="/ubl:Order/cac:Contract" priority="1303" mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Contract"/>
 
@@ -1115,14 +1115,14 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="/ubl:Order/cac:Contract/cbc:ID" priority="1296" mode="M12">
+   <xsl:template match="/ubl:Order/cac:Contract/cbc:ID" priority="1302" mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Contract/cbc:ID"/>
       <xsl:apply-templates select="*" mode="M12"/>
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="/ubl:Order/cac:Contract/*" priority="1295" mode="M12">
+   <xsl:template match="/ubl:Order/cac:Contract/*" priority="1301" mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Contract/*"/>
 
@@ -1145,7 +1145,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty"
-                 priority="1294"
+                 priority="1300"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty"/>
@@ -1169,7 +1169,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/cac:Party"
-                 priority="1293"
+                 priority="1299"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/cac:Party"/>
@@ -1208,7 +1208,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cbc:EndpointID"
-                 priority="1292"
+                 priority="1298"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cbc:EndpointID"/>
@@ -1248,7 +1248,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PartyIdentification"
-                 priority="1291"
+                 priority="1297"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PartyIdentification"/>
@@ -1272,7 +1272,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PartyIdentification/cbc:ID"
-                 priority="1290"
+                 priority="1296"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PartyIdentification/cbc:ID"/>
@@ -1297,7 +1297,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PartyName"
-                 priority="1289"
+                 priority="1295"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PartyName"/>
@@ -1321,7 +1321,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PartyName/cbc:Name"
-                 priority="1288"
+                 priority="1294"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PartyName/cbc:Name"/>
@@ -1330,7 +1330,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress"
-                 priority="1287"
+                 priority="1293"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress"/>
@@ -1354,7 +1354,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:StreetName"
-                 priority="1286"
+                 priority="1292"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:StreetName"/>
@@ -1363,7 +1363,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:AdditionalStreetName"
-                 priority="1285"
+                 priority="1291"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:AdditionalStreetName"/>
@@ -1372,7 +1372,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:CityName"
-                 priority="1284"
+                 priority="1290"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:CityName"/>
@@ -1381,7 +1381,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:PostalZone"
-                 priority="1283"
+                 priority="1289"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:PostalZone"/>
@@ -1390,7 +1390,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:CountrySubentity"
-                 priority="1282"
+                 priority="1288"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:CountrySubentity"/>
@@ -1399,7 +1399,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cac:AddressLine"
-                 priority="1281"
+                 priority="1287"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cac:AddressLine"/>
@@ -1408,7 +1408,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cac:AddressLine/cbc:Line"
-                 priority="1280"
+                 priority="1286"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cac:AddressLine/cbc:Line"/>
@@ -1417,7 +1417,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cac:Country"
-                 priority="1279"
+                 priority="1285"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cac:Country"/>
@@ -1441,7 +1441,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode"
-                 priority="1278"
+                 priority="1284"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode"/>
@@ -1466,7 +1466,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cac:Country/*"
-                 priority="1277"
+                 priority="1283"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cac:Country/*"/>
@@ -1490,7 +1490,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/*"
-                 priority="1276"
+                 priority="1282"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/*"/>
@@ -1514,7 +1514,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme"
-                 priority="1275"
+                 priority="1281"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme"/>
@@ -1553,7 +1553,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cbc:CompanyID"
-                 priority="1274"
+                 priority="1280"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cbc:CompanyID"/>
@@ -1562,7 +1562,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme"
-                 priority="1273"
+                 priority="1279"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme"/>
@@ -1586,7 +1586,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:ID"
-                 priority="1272"
+                 priority="1278"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:ID"/>
@@ -1595,7 +1595,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/*"
-                 priority="1271"
+                 priority="1277"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/*"/>
@@ -1619,7 +1619,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/*"
-                 priority="1270"
+                 priority="1276"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/*"/>
@@ -1643,7 +1643,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity"
-                 priority="1269"
+                 priority="1275"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity"/>
@@ -1667,7 +1667,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationName"
-                 priority="1268"
+                 priority="1274"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationName"/>
@@ -1676,7 +1676,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyID"
-                 priority="1267"
+                 priority="1273"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyID"/>
@@ -1701,7 +1701,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress"
-                 priority="1266"
+                 priority="1272"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress"/>
@@ -1725,7 +1725,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CityName"
-                 priority="1265"
+                 priority="1271"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CityName"/>
@@ -1734,7 +1734,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:Country"
-                 priority="1264"
+                 priority="1270"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:Country"/>
@@ -1758,7 +1758,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:Country/cbc:IdentificationCode"
-                 priority="1263"
+                 priority="1269"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:Country/cbc:IdentificationCode"/>
@@ -1783,7 +1783,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:Country/*"
-                 priority="1262"
+                 priority="1268"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:Country/*"/>
@@ -1807,7 +1807,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/*"
-                 priority="1261"
+                 priority="1267"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/*"/>
@@ -1831,7 +1831,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/*"
-                 priority="1260"
+                 priority="1266"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/*"/>
@@ -1855,7 +1855,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:Contact"
-                 priority="1259"
+                 priority="1265"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:Contact"/>
@@ -1864,7 +1864,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:Contact/cbc:Name"
-                 priority="1258"
+                 priority="1264"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:Contact/cbc:Name"/>
@@ -1873,7 +1873,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:Contact/cbc:Telephone"
-                 priority="1257"
+                 priority="1263"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:Contact/cbc:Telephone"/>
@@ -1882,7 +1882,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:Contact/cbc:ElectronicMail"
-                 priority="1256"
+                 priority="1262"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:Contact/cbc:ElectronicMail"/>
@@ -1891,7 +1891,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:Contact/*"
-                 priority="1255"
+                 priority="1261"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/cac:Party/cac:Contact/*"/>
@@ -1915,7 +1915,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/cac:Party/*"
-                 priority="1254"
+                 priority="1260"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/cac:Party/*"/>
@@ -1939,7 +1939,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:BuyerCustomerParty/*"
-                 priority="1253"
+                 priority="1259"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:BuyerCustomerParty/*"/>
@@ -1963,7 +1963,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:SellerSupplierParty"
-                 priority="1252"
+                 priority="1258"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:SellerSupplierParty"/>
@@ -1987,7 +1987,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:SellerSupplierParty/cac:Party"
-                 priority="1251"
+                 priority="1257"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:SellerSupplierParty/cac:Party"/>
@@ -2041,7 +2041,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:SellerSupplierParty/cac:Party/cbc:EndpointID"
-                 priority="1250"
+                 priority="1256"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:SellerSupplierParty/cac:Party/cbc:EndpointID"/>
@@ -2081,7 +2081,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PartyIdentification"
-                 priority="1249"
+                 priority="1255"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PartyIdentification"/>
@@ -2105,7 +2105,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PartyIdentification/cbc:ID"
-                 priority="1248"
+                 priority="1254"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PartyIdentification/cbc:ID"/>
@@ -2130,7 +2130,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PartyName"
-                 priority="1247"
+                 priority="1253"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PartyName"/>
@@ -2154,7 +2154,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PartyName/cbc:Name"
-                 priority="1246"
+                 priority="1252"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PartyName/cbc:Name"/>
@@ -2163,7 +2163,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PostalAddress"
-                 priority="1245"
+                 priority="1251"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PostalAddress"/>
@@ -2187,7 +2187,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:StreetName"
-                 priority="1244"
+                 priority="1250"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:StreetName"/>
@@ -2196,7 +2196,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:AdditionalStreetName"
-                 priority="1243"
+                 priority="1249"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:AdditionalStreetName"/>
@@ -2205,7 +2205,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:CityName"
-                 priority="1242"
+                 priority="1248"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:CityName"/>
@@ -2214,7 +2214,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:PostalZone"
-                 priority="1241"
+                 priority="1247"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:PostalZone"/>
@@ -2223,7 +2223,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:CountrySubentity"
-                 priority="1240"
+                 priority="1246"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:CountrySubentity"/>
@@ -2232,7 +2232,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cac:AddressLine"
-                 priority="1239"
+                 priority="1245"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cac:AddressLine"/>
@@ -2241,7 +2241,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cac:AddressLine/cbc:Line"
-                 priority="1238"
+                 priority="1244"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cac:AddressLine/cbc:Line"/>
@@ -2250,7 +2250,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cac:Country"
-                 priority="1237"
+                 priority="1243"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cac:Country"/>
@@ -2274,7 +2274,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode"
-                 priority="1236"
+                 priority="1242"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode"/>
@@ -2299,7 +2299,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cac:Country/*"
-                 priority="1235"
+                 priority="1241"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cac:Country/*"/>
@@ -2323,7 +2323,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/*"
-                 priority="1234"
+                 priority="1240"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/*"/>
@@ -2347,7 +2347,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity"
-                 priority="1233"
+                 priority="1239"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity"/>
@@ -2371,7 +2371,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationName"
-                 priority="1232"
+                 priority="1238"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationName"/>
@@ -2380,7 +2380,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyID"
-                 priority="1231"
+                 priority="1237"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyID"/>
@@ -2405,7 +2405,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress"
-                 priority="1230"
+                 priority="1236"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress"/>
@@ -2429,7 +2429,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CityName"
-                 priority="1229"
+                 priority="1235"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CityName"/>
@@ -2438,7 +2438,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:Country"
-                 priority="1228"
+                 priority="1234"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:Country"/>
@@ -2462,7 +2462,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:Country/cbc:IdentificationCode"
-                 priority="1227"
+                 priority="1233"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:Country/cbc:IdentificationCode"/>
@@ -2487,7 +2487,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:Country/*"
-                 priority="1226"
+                 priority="1232"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:Country/*"/>
@@ -2511,7 +2511,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/*"
-                 priority="1225"
+                 priority="1231"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/*"/>
@@ -2535,7 +2535,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/*"
-                 priority="1224"
+                 priority="1230"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/*"/>
@@ -2559,7 +2559,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:Contact"
-                 priority="1223"
+                 priority="1229"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:Contact"/>
@@ -2568,7 +2568,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:Contact/cbc:Name"
-                 priority="1222"
+                 priority="1228"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:Contact/cbc:Name"/>
@@ -2577,7 +2577,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:Contact/cbc:Telephone"
-                 priority="1221"
+                 priority="1227"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:Contact/cbc:Telephone"/>
@@ -2586,7 +2586,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:Contact/cbc:ElectronicMail"
-                 priority="1220"
+                 priority="1226"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:Contact/cbc:ElectronicMail"/>
@@ -2595,7 +2595,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:Contact/*"
-                 priority="1219"
+                 priority="1225"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:SellerSupplierParty/cac:Party/cac:Contact/*"/>
@@ -2619,7 +2619,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:SellerSupplierParty/cac:Party/*"
-                 priority="1218"
+                 priority="1224"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:SellerSupplierParty/cac:Party/*"/>
@@ -2643,7 +2643,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:SellerSupplierParty/*"
-                 priority="1217"
+                 priority="1223"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:SellerSupplierParty/*"/>
@@ -2667,7 +2667,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:OriginatorCustomerParty"
-                 priority="1216"
+                 priority="1222"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:OriginatorCustomerParty"/>
@@ -2691,7 +2691,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:OriginatorCustomerParty/cac:Party"
-                 priority="1215"
+                 priority="1221"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:OriginatorCustomerParty/cac:Party"/>
@@ -2700,7 +2700,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:OriginatorCustomerParty/cac:Party/cac:PartyIdentification"
-                 priority="1214"
+                 priority="1220"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:OriginatorCustomerParty/cac:Party/cac:PartyIdentification"/>
@@ -2724,7 +2724,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:OriginatorCustomerParty/cac:Party/cac:PartyIdentification/cbc:ID"
-                 priority="1213"
+                 priority="1219"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:OriginatorCustomerParty/cac:Party/cac:PartyIdentification/cbc:ID"/>
@@ -2749,7 +2749,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:OriginatorCustomerParty/cac:Party/cac:PartyName"
-                 priority="1212"
+                 priority="1218"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:OriginatorCustomerParty/cac:Party/cac:PartyName"/>
@@ -2773,7 +2773,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:OriginatorCustomerParty/cac:Party/cac:PartyName/cbc:Name"
-                 priority="1211"
+                 priority="1217"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:OriginatorCustomerParty/cac:Party/cac:PartyName/cbc:Name"/>
@@ -2782,7 +2782,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:OriginatorCustomerParty/cac:Party/cac:Contact"
-                 priority="1210"
+                 priority="1216"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:OriginatorCustomerParty/cac:Party/cac:Contact"/>
@@ -2791,7 +2791,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:OriginatorCustomerParty/cac:Party/cac:Contact/cbc:Name"
-                 priority="1209"
+                 priority="1215"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:OriginatorCustomerParty/cac:Party/cac:Contact/cbc:Name"/>
@@ -2800,7 +2800,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:OriginatorCustomerParty/cac:Party/cac:Contact/cbc:Telephone"
-                 priority="1208"
+                 priority="1214"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:OriginatorCustomerParty/cac:Party/cac:Contact/cbc:Telephone"/>
@@ -2809,7 +2809,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:OriginatorCustomerParty/cac:Party/cac:Contact/cbc:ElectronicMail"
-                 priority="1207"
+                 priority="1213"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:OriginatorCustomerParty/cac:Party/cac:Contact/cbc:ElectronicMail"/>
@@ -2818,7 +2818,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:OriginatorCustomerParty/cac:Party/cac:Contact/*"
-                 priority="1206"
+                 priority="1212"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:OriginatorCustomerParty/cac:Party/cac:Contact/*"/>
@@ -2842,7 +2842,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:OriginatorCustomerParty/cac:Party/*"
-                 priority="1205"
+                 priority="1211"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:OriginatorCustomerParty/cac:Party/*"/>
@@ -2866,7 +2866,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:OriginatorCustomerParty/*"
-                 priority="1204"
+                 priority="1210"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:OriginatorCustomerParty/*"/>
@@ -2890,7 +2890,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty"
-                 priority="1203"
+                 priority="1209"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty"/>
@@ -2914,7 +2914,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/cac:Party"
-                 priority="1202"
+                 priority="1208"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/cac:Party"/>
@@ -2953,7 +2953,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cbc:EndpointID"
-                 priority="1201"
+                 priority="1207"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cbc:EndpointID"/>
@@ -2993,7 +2993,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PartyIdentification"
-                 priority="1200"
+                 priority="1206"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PartyIdentification"/>
@@ -3017,7 +3017,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PartyIdentification/cbc:ID"
-                 priority="1199"
+                 priority="1205"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PartyIdentification/cbc:ID"/>
@@ -3042,7 +3042,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PartyName"
-                 priority="1198"
+                 priority="1204"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PartyName"/>
@@ -3066,7 +3066,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PartyName/cbc:Name"
-                 priority="1197"
+                 priority="1203"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PartyName/cbc:Name"/>
@@ -3075,7 +3075,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress"
-                 priority="1196"
+                 priority="1202"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress"/>
@@ -3099,7 +3099,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:StreetName"
-                 priority="1195"
+                 priority="1201"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:StreetName"/>
@@ -3108,7 +3108,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:AdditionalStreetName"
-                 priority="1194"
+                 priority="1200"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:AdditionalStreetName"/>
@@ -3117,7 +3117,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:CityName"
-                 priority="1193"
+                 priority="1199"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:CityName"/>
@@ -3126,7 +3126,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:PostalZone"
-                 priority="1192"
+                 priority="1198"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:PostalZone"/>
@@ -3135,7 +3135,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:CountrySubentity"
-                 priority="1191"
+                 priority="1197"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:CountrySubentity"/>
@@ -3144,7 +3144,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:AddressLine"
-                 priority="1190"
+                 priority="1196"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:AddressLine"/>
@@ -3153,7 +3153,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:AddressLine/cbc:Line"
-                 priority="1189"
+                 priority="1195"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:AddressLine/cbc:Line"/>
@@ -3162,7 +3162,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:Country"
-                 priority="1188"
+                 priority="1194"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:Country"/>
@@ -3186,7 +3186,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode"
-                 priority="1187"
+                 priority="1193"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode"/>
@@ -3211,7 +3211,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:Country/*"
-                 priority="1186"
+                 priority="1192"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:Country/*"/>
@@ -3235,7 +3235,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/*"
-                 priority="1185"
+                 priority="1191"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/*"/>
@@ -3259,7 +3259,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme"
-                 priority="1184"
+                 priority="1190"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme"/>
@@ -3298,7 +3298,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cbc:CompanyID"
-                 priority="1183"
+                 priority="1189"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cbc:CompanyID"/>
@@ -3307,7 +3307,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme"
-                 priority="1182"
+                 priority="1188"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme"/>
@@ -3331,7 +3331,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:ID"
-                 priority="1181"
+                 priority="1187"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:ID"/>
@@ -3340,7 +3340,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/*"
-                 priority="1180"
+                 priority="1186"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/*"/>
@@ -3364,7 +3364,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/*"
-                 priority="1179"
+                 priority="1185"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/*"/>
@@ -3388,7 +3388,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity"
-                 priority="1178"
+                 priority="1184"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity"/>
@@ -3412,7 +3412,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationName"
-                 priority="1177"
+                 priority="1183"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationName"/>
@@ -3421,7 +3421,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyID"
-                 priority="1176"
+                 priority="1182"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyID"/>
@@ -3446,7 +3446,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress"
-                 priority="1175"
+                 priority="1181"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress"/>
@@ -3470,7 +3470,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CityName"
-                 priority="1174"
+                 priority="1180"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CityName"/>
@@ -3479,7 +3479,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:Country"
-                 priority="1173"
+                 priority="1179"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:Country"/>
@@ -3503,7 +3503,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:Country/cbc:IdentificationCode"
-                 priority="1172"
+                 priority="1178"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:Country/cbc:IdentificationCode"/>
@@ -3528,7 +3528,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:Country/*"
-                 priority="1171"
+                 priority="1177"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:Country/*"/>
@@ -3552,7 +3552,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/*"
-                 priority="1170"
+                 priority="1176"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/*"/>
@@ -3576,7 +3576,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/*"
-                 priority="1169"
+                 priority="1175"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/*"/>
@@ -3600,7 +3600,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:Contact"
-                 priority="1168"
+                 priority="1174"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:Contact"/>
@@ -3609,7 +3609,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:Contact/cbc:Name"
-                 priority="1167"
+                 priority="1173"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:Contact/cbc:Name"/>
@@ -3618,7 +3618,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:Contact/cbc:Telephone"
-                 priority="1166"
+                 priority="1172"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:Contact/cbc:Telephone"/>
@@ -3627,7 +3627,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:Contact/cbc:ElectronicMail"
-                 priority="1165"
+                 priority="1171"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:Contact/cbc:ElectronicMail"/>
@@ -3636,7 +3636,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:Contact/*"
-                 priority="1164"
+                 priority="1170"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/cac:Party/cac:Contact/*"/>
@@ -3660,7 +3660,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/cac:Party/*"
-                 priority="1163"
+                 priority="1169"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/cac:Party/*"/>
@@ -3684,7 +3684,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AccountingCustomerParty/*"
-                 priority="1162"
+                 priority="1168"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AccountingCustomerParty/*"/>
@@ -3707,7 +3707,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="/ubl:Order/cac:Delivery" priority="1161" mode="M12">
+   <xsl:template match="/ubl:Order/cac:Delivery" priority="1167" mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery"/>
       <xsl:apply-templates select="*" mode="M12"/>
@@ -3715,7 +3715,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:DeliveryLocation"
-                 priority="1160"
+                 priority="1166"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:DeliveryLocation"/>
@@ -3739,7 +3739,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:DeliveryLocation/cbc:ID"
-                 priority="1159"
+                 priority="1165"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:DeliveryLocation/cbc:ID"/>
@@ -3764,7 +3764,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:DeliveryLocation/cbc:Name"
-                 priority="1158"
+                 priority="1164"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:DeliveryLocation/cbc:Name"/>
@@ -3773,7 +3773,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:DeliveryLocation/cac:Address"
-                 priority="1157"
+                 priority="1163"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:DeliveryLocation/cac:Address"/>
@@ -3797,7 +3797,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:StreetName"
-                 priority="1156"
+                 priority="1162"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:StreetName"/>
@@ -3806,7 +3806,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:AdditionalStreetName"
-                 priority="1155"
+                 priority="1161"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:AdditionalStreetName"/>
@@ -3815,7 +3815,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:CityName"
-                 priority="1154"
+                 priority="1160"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:CityName"/>
@@ -3824,7 +3824,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:PostalZone"
-                 priority="1153"
+                 priority="1159"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:PostalZone"/>
@@ -3833,7 +3833,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:CountrySubentity"
-                 priority="1152"
+                 priority="1158"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:CountrySubentity"/>
@@ -3842,7 +3842,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:DeliveryLocation/cac:Address/cac:AddressLine"
-                 priority="1151"
+                 priority="1157"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:DeliveryLocation/cac:Address/cac:AddressLine"/>
@@ -3866,7 +3866,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:DeliveryLocation/cac:Address/cac:AddressLine/cbc:Line"
-                 priority="1150"
+                 priority="1156"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:DeliveryLocation/cac:Address/cac:AddressLine/cbc:Line"/>
@@ -3875,7 +3875,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:DeliveryLocation/cac:Address/cac:Country"
-                 priority="1149"
+                 priority="1155"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:DeliveryLocation/cac:Address/cac:Country"/>
@@ -3899,7 +3899,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:DeliveryLocation/cac:Address/cac:Country/cbc:IdentificationCode"
-                 priority="1148"
+                 priority="1154"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:DeliveryLocation/cac:Address/cac:Country/cbc:IdentificationCode"/>
@@ -3924,7 +3924,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:DeliveryLocation/cac:Address/cac:Country/*"
-                 priority="1147"
+                 priority="1153"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:DeliveryLocation/cac:Address/cac:Country/*"/>
@@ -3948,7 +3948,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:DeliveryLocation/cac:Address/*"
-                 priority="1146"
+                 priority="1152"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:DeliveryLocation/cac:Address/*"/>
@@ -3972,7 +3972,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:DeliveryLocation/*"
-                 priority="1145"
+                 priority="1151"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:DeliveryLocation/*"/>
@@ -3996,7 +3996,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:RequestedDeliveryPeriod"
-                 priority="1144"
+                 priority="1150"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:RequestedDeliveryPeriod"/>
@@ -4005,7 +4005,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:RequestedDeliveryPeriod/cbc:StartDate"
-                 priority="1143"
+                 priority="1149"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:RequestedDeliveryPeriod/cbc:StartDate"/>
@@ -4014,7 +4014,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:RequestedDeliveryPeriod/cbc:EndDate"
-                 priority="1142"
+                 priority="1148"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:RequestedDeliveryPeriod/cbc:EndDate"/>
@@ -4023,7 +4023,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:RequestedDeliveryPeriod/*"
-                 priority="1141"
+                 priority="1147"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:RequestedDeliveryPeriod/*"/>
@@ -4047,7 +4047,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:DeliveryParty"
-                 priority="1140"
+                 priority="1146"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:DeliveryParty"/>
@@ -4071,7 +4071,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:PartyIdentification"
-                 priority="1139"
+                 priority="1145"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:PartyIdentification"/>
@@ -4095,7 +4095,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:PartyIdentification/cbc:ID"
-                 priority="1138"
+                 priority="1144"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:PartyIdentification/cbc:ID"/>
@@ -4120,7 +4120,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:PartyName"
-                 priority="1137"
+                 priority="1143"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:PartyName"/>
@@ -4144,7 +4144,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:PartyName/cbc:Name"
-                 priority="1136"
+                 priority="1142"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:PartyName/cbc:Name"/>
@@ -4153,7 +4153,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:Contact"
-                 priority="1135"
+                 priority="1141"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:Contact"/>
@@ -4162,7 +4162,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:Contact/cbc:Name"
-                 priority="1134"
+                 priority="1140"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:Contact/cbc:Name"/>
@@ -4171,7 +4171,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:Contact/cbc:Telephone"
-                 priority="1133"
+                 priority="1139"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:Contact/cbc:Telephone"/>
@@ -4180,7 +4180,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:Contact/cbc:ElectronicMail"
-                 priority="1132"
+                 priority="1138"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:Contact/cbc:ElectronicMail"/>
@@ -4189,7 +4189,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:Contact/*"
-                 priority="1131"
+                 priority="1137"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:Contact/*"/>
@@ -4213,7 +4213,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:PostalAddress"
-                 priority="1130"
+                 priority="1136"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:PostalAddress"/>
@@ -4237,7 +4237,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:PostalAddress/cbc:StreetName"
-                 priority="1129"
+                 priority="1135"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:PostalAddress/cbc:StreetName"/>
@@ -4246,7 +4246,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:PostalAddress/cbc:AdditionalStreetName"
-                 priority="1128"
+                 priority="1134"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:PostalAddress/cbc:AdditionalStreetName"/>
@@ -4255,7 +4255,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:PostalAddress/cbc:CityName"
-                 priority="1127"
+                 priority="1133"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:PostalAddress/cbc:CityName"/>
@@ -4264,7 +4264,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:PostalAddress/cbc:PostalZone"
-                 priority="1126"
+                 priority="1132"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:PostalAddress/cbc:PostalZone"/>
@@ -4273,7 +4273,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:PostalAddress/cbc:CountrySubentity"
-                 priority="1125"
+                 priority="1131"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:PostalAddress/cbc:CountrySubentity"/>
@@ -4282,7 +4282,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:PostalAddress/cac:AddressLine"
-                 priority="1124"
+                 priority="1130"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:PostalAddress/cac:AddressLine"/>
@@ -4306,7 +4306,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:PostalAddress/cac:AddressLine/cbc:Line"
-                 priority="1123"
+                 priority="1129"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:PostalAddress/cac:AddressLine/cbc:Line"/>
@@ -4315,7 +4315,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:PostalAddress/cac:Country"
-                 priority="1122"
+                 priority="1128"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:PostalAddress/cac:Country"/>
@@ -4339,7 +4339,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:PostalAddress/cac:Country/cbc:IdentificationCode"
-                 priority="1121"
+                 priority="1127"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:PostalAddress/cac:Country/cbc:IdentificationCode"/>
@@ -4364,7 +4364,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:PostalAddress/cac:Country/*"
-                 priority="1120"
+                 priority="1126"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:PostalAddress/cac:Country/*"/>
@@ -4388,7 +4388,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:PostalAddress/*"
-                 priority="1119"
+                 priority="1125"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:DeliveryParty/cac:PostalAddress/*"/>
@@ -4412,7 +4412,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:Delivery/cac:DeliveryParty/*"
-                 priority="1118"
+                 priority="1124"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/cac:DeliveryParty/*"/>
@@ -4435,7 +4435,82 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="/ubl:Order/cac:Delivery/*" priority="1117" mode="M12">
+   <xsl:template match="/ubl:Order/cac:Delivery/cac:Shipment"
+                 priority="1123"
+                 mode="M12">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="/ubl:Order/cac:Delivery/cac:Shipment"/>
+      <xsl:apply-templates select="*" mode="M12"/>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="/ubl:Order/cac:Delivery/cac:Shipment/cac:TransportHandlingUnit"
+                 priority="1122"
+                 mode="M12">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="/ubl:Order/cac:Delivery/cac:Shipment/cac:TransportHandlingUnit"/>
+      <xsl:apply-templates select="*" mode="M12"/>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="/ubl:Order/cac:Delivery/cac:Shipment/cac:TransportHandlingUnit/cbc:ShippingMarks"
+                 priority="1121"
+                 mode="M12">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="/ubl:Order/cac:Delivery/cac:Shipment/cac:TransportHandlingUnit/cbc:ShippingMarks"/>
+      <xsl:apply-templates select="*" mode="M12"/>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="/ubl:Order/cac:Delivery/cac:Shipment/cac:TransportHandlingUnit/*"
+                 priority="1120"
+                 mode="M12">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="/ubl:Order/cac:Delivery/cac:Shipment/cac:TransportHandlingUnit/*"/>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="false()"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
+               <xsl:attribute name="id">PEPPOL-T01-B18301</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>Document MUST NOT contain elements not part of the data model.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <xsl:apply-templates select="*" mode="M12"/>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="/ubl:Order/cac:Delivery/cac:Shipment/*"
+                 priority="1119"
+                 mode="M12">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="/ubl:Order/cac:Delivery/cac:Shipment/*"/>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="false()"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
+               <xsl:attribute name="id">PEPPOL-T01-B18201</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>Document MUST NOT contain elements not part of the data model.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <xsl:apply-templates select="*" mode="M12"/>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="/ubl:Order/cac:Delivery/*" priority="1118" mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:Delivery/*"/>
 
@@ -4457,7 +4532,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="/ubl:Order/cac:DeliveryTerms" priority="1116" mode="M12">
+   <xsl:template match="/ubl:Order/cac:DeliveryTerms" priority="1117" mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:DeliveryTerms"/>
       <xsl:apply-templates select="*" mode="M12"/>
@@ -4465,7 +4540,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:DeliveryTerms/cbc:ID"
-                 priority="1115"
+                 priority="1116"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:DeliveryTerms/cbc:ID"/>
@@ -4474,7 +4549,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:DeliveryTerms/cbc:SpecialTerms"
-                 priority="1114"
+                 priority="1115"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:DeliveryTerms/cbc:SpecialTerms"/>
@@ -4483,7 +4558,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:DeliveryTerms/cac:DeliveryLocation"
-                 priority="1113"
+                 priority="1114"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:DeliveryTerms/cac:DeliveryLocation"/>
@@ -4493,7 +4568,7 @@
          <xsl:when test="cbc:ID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:ID">
-               <xsl:attribute name="id">PEPPOL-T01-B18501</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B18801</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -4507,7 +4582,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:DeliveryTerms/cac:DeliveryLocation/cbc:ID"
-                 priority="1112"
+                 priority="1113"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:DeliveryTerms/cac:DeliveryLocation/cbc:ID"/>
@@ -4516,7 +4591,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:DeliveryTerms/cac:DeliveryLocation/*"
-                 priority="1111"
+                 priority="1112"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:DeliveryTerms/cac:DeliveryLocation/*"/>
@@ -4526,7 +4601,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T01-B18502</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B18802</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -4539,7 +4614,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="/ubl:Order/cac:DeliveryTerms/*" priority="1110" mode="M12">
+   <xsl:template match="/ubl:Order/cac:DeliveryTerms/*" priority="1111" mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:DeliveryTerms/*"/>
 
@@ -4548,7 +4623,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T01-B18201</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B18501</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -4561,7 +4636,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="/ubl:Order/cac:PaymentTerms" priority="1109" mode="M12">
+   <xsl:template match="/ubl:Order/cac:PaymentTerms" priority="1110" mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:PaymentTerms"/>
 
@@ -4570,7 +4645,7 @@
          <xsl:when test="cbc:Note"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:Note">
-               <xsl:attribute name="id">PEPPOL-T01-B18701</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B19001</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -4584,7 +4659,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:PaymentTerms/cbc:Note"
-                 priority="1108"
+                 priority="1109"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:PaymentTerms/cbc:Note"/>
@@ -4592,7 +4667,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="/ubl:Order/cac:PaymentTerms/*" priority="1107" mode="M12">
+   <xsl:template match="/ubl:Order/cac:PaymentTerms/*" priority="1108" mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:PaymentTerms/*"/>
 
@@ -4601,7 +4676,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T01-B18702</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B19002</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -4614,7 +4689,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="/ubl:Order/cac:AllowanceCharge" priority="1106" mode="M12">
+   <xsl:template match="/ubl:Order/cac:AllowanceCharge" priority="1107" mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AllowanceCharge"/>
 
@@ -4623,7 +4698,7 @@
          <xsl:when test="cbc:ChargeIndicator"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:ChargeIndicator">
-               <xsl:attribute name="id">PEPPOL-T01-B18901</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B19201</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -4639,7 +4714,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="cbc:AllowanceChargeReason">
-               <xsl:attribute name="id">PEPPOL-T01-B18902</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B19202</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -4654,7 +4729,7 @@
          <xsl:when test="cbc:Amount"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:Amount">
-               <xsl:attribute name="id">PEPPOL-T01-B18903</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B19203</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -4668,7 +4743,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AllowanceCharge/cbc:ChargeIndicator"
-                 priority="1105"
+                 priority="1106"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AllowanceCharge/cbc:ChargeIndicator"/>
@@ -4679,7 +4754,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="(some $code in $clTrueFalse satisfies $code = normalize-space(text()))">
-               <xsl:attribute name="id">PEPPOL-T01-B19001</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B19301</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -4693,7 +4768,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AllowanceCharge/cbc:AllowanceChargeReasonCode"
-                 priority="1104"
+                 priority="1105"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AllowanceCharge/cbc:AllowanceChargeReasonCode"/>
@@ -4704,7 +4779,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="(some $code in $clUNCL5189 satisfies $code = normalize-space(text())) or (some $code in $clUNCL7161 satisfies $code = normalize-space(text()))">
-               <xsl:attribute name="id">PEPPOL-T01-B19101</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B19401</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -4718,7 +4793,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AllowanceCharge/cbc:AllowanceChargeReason"
-                 priority="1103"
+                 priority="1104"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AllowanceCharge/cbc:AllowanceChargeReason"/>
@@ -4727,7 +4802,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AllowanceCharge/cbc:MultiplierFactorNumeric"
-                 priority="1102"
+                 priority="1103"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AllowanceCharge/cbc:MultiplierFactorNumeric"/>
@@ -4736,7 +4811,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AllowanceCharge/cbc:Amount"
-                 priority="1101"
+                 priority="1102"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AllowanceCharge/cbc:Amount"/>
@@ -4746,7 +4821,7 @@
          <xsl:when test="@currencyID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@currencyID">
-               <xsl:attribute name="id">PEPPOL-T01-B19401</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B19701</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -4762,7 +4837,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="not(@currencyID) or (some $code in $clISO4217 satisfies $code = @currencyID)">
-               <xsl:attribute name="id">PEPPOL-T01-B19402</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B19702</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -4776,7 +4851,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AllowanceCharge/cbc:BaseAmount"
-                 priority="1100"
+                 priority="1101"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AllowanceCharge/cbc:BaseAmount"/>
@@ -4786,7 +4861,7 @@
          <xsl:when test="@currencyID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@currencyID">
-               <xsl:attribute name="id">PEPPOL-T01-B19601</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B19901</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -4802,7 +4877,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="not(@currencyID) or (some $code in $clISO4217 satisfies $code = @currencyID)">
-               <xsl:attribute name="id">PEPPOL-T01-B19602</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B19902</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -4816,83 +4891,10 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AllowanceCharge/cac:TaxCategory"
-                 priority="1099"
+                 priority="1100"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AllowanceCharge/cac:TaxCategory"/>
-
-		    <!--ASSERT -->
-      <xsl:choose>
-         <xsl:when test="cbc:ID"/>
-         <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:ID">
-               <xsl:attribute name="id">PEPPOL-T01-B19801</xsl:attribute>
-               <xsl:attribute name="flag">fatal</xsl:attribute>
-               <xsl:attribute name="location">
-                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-               </xsl:attribute>
-               <svrl:text>Element 'cbc:ID' MUST be provided.</svrl:text>
-            </svrl:failed-assert>
-         </xsl:otherwise>
-      </xsl:choose>
-
-		    <!--ASSERT -->
-      <xsl:choose>
-         <xsl:when test="cac:TaxScheme"/>
-         <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cac:TaxScheme">
-               <xsl:attribute name="id">PEPPOL-T01-B19802</xsl:attribute>
-               <xsl:attribute name="flag">fatal</xsl:attribute>
-               <xsl:attribute name="location">
-                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-               </xsl:attribute>
-               <svrl:text>Element 'cac:TaxScheme' MUST be provided.</svrl:text>
-            </svrl:failed-assert>
-         </xsl:otherwise>
-      </xsl:choose>
-      <xsl:apply-templates select="*" mode="M12"/>
-   </xsl:template>
-
-	  <!--RULE -->
-   <xsl:template match="/ubl:Order/cac:AllowanceCharge/cac:TaxCategory/cbc:ID"
-                 priority="1098"
-                 mode="M12">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:Order/cac:AllowanceCharge/cac:TaxCategory/cbc:ID"/>
-
-		    <!--ASSERT -->
-      <xsl:choose>
-         <xsl:when test="(some $code in $clUNCL5305 satisfies $code = normalize-space(text()))"/>
-         <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="(some $code in $clUNCL5305 satisfies $code = normalize-space(text()))">
-               <xsl:attribute name="id">PEPPOL-T01-B19901</xsl:attribute>
-               <xsl:attribute name="flag">fatal</xsl:attribute>
-               <xsl:attribute name="location">
-                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-               </xsl:attribute>
-               <svrl:text>Value MUST be part of code list 'Duty or tax or fee category code (UNCL5305)'.</svrl:text>
-            </svrl:failed-assert>
-         </xsl:otherwise>
-      </xsl:choose>
-      <xsl:apply-templates select="*" mode="M12"/>
-   </xsl:template>
-
-	  <!--RULE -->
-   <xsl:template match="/ubl:Order/cac:AllowanceCharge/cac:TaxCategory/cbc:Percent"
-                 priority="1097"
-                 mode="M12">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:Order/cac:AllowanceCharge/cac:TaxCategory/cbc:Percent"/>
-      <xsl:apply-templates select="*" mode="M12"/>
-   </xsl:template>
-
-	  <!--RULE -->
-   <xsl:template match="/ubl:Order/cac:AllowanceCharge/cac:TaxCategory/cac:TaxScheme"
-                 priority="1096"
-                 mode="M12">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:Order/cac:AllowanceCharge/cac:TaxCategory/cac:TaxScheme"/>
 
 		    <!--ASSERT -->
       <xsl:choose>
@@ -4908,12 +4910,85 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="cac:TaxScheme"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cac:TaxScheme">
+               <xsl:attribute name="id">PEPPOL-T01-B20102</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>Element 'cac:TaxScheme' MUST be provided.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <xsl:apply-templates select="*" mode="M12"/>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="/ubl:Order/cac:AllowanceCharge/cac:TaxCategory/cbc:ID"
+                 priority="1099"
+                 mode="M12">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="/ubl:Order/cac:AllowanceCharge/cac:TaxCategory/cbc:ID"/>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="(some $code in $clUNCL5305 satisfies $code = normalize-space(text()))"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="(some $code in $clUNCL5305 satisfies $code = normalize-space(text()))">
+               <xsl:attribute name="id">PEPPOL-T01-B20201</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>Value MUST be part of code list 'Duty or tax or fee category code (UNCL5305)'.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <xsl:apply-templates select="*" mode="M12"/>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="/ubl:Order/cac:AllowanceCharge/cac:TaxCategory/cbc:Percent"
+                 priority="1098"
+                 mode="M12">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="/ubl:Order/cac:AllowanceCharge/cac:TaxCategory/cbc:Percent"/>
+      <xsl:apply-templates select="*" mode="M12"/>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="/ubl:Order/cac:AllowanceCharge/cac:TaxCategory/cac:TaxScheme"
+                 priority="1097"
+                 mode="M12">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="/ubl:Order/cac:AllowanceCharge/cac:TaxCategory/cac:TaxScheme"/>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="cbc:ID"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:ID">
+               <xsl:attribute name="id">PEPPOL-T01-B20401</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>Element 'cbc:ID' MUST be provided.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
       <xsl:apply-templates select="*" mode="M12"/>
    </xsl:template>
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AllowanceCharge/cac:TaxCategory/cac:TaxScheme/cbc:ID"
-                 priority="1095"
+                 priority="1096"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AllowanceCharge/cac:TaxCategory/cac:TaxScheme/cbc:ID"/>
@@ -4922,7 +4997,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AllowanceCharge/cac:TaxCategory/cac:TaxScheme/*"
-                 priority="1094"
+                 priority="1095"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AllowanceCharge/cac:TaxCategory/cac:TaxScheme/*"/>
@@ -4932,7 +5007,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T01-B20102</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B20402</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -4946,7 +5021,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AllowanceCharge/cac:TaxCategory/*"
-                 priority="1093"
+                 priority="1094"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AllowanceCharge/cac:TaxCategory/*"/>
@@ -4956,7 +5031,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T01-B19803</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B20103</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -4969,7 +5044,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="/ubl:Order/cac:AllowanceCharge/*" priority="1092" mode="M12">
+   <xsl:template match="/ubl:Order/cac:AllowanceCharge/*" priority="1093" mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AllowanceCharge/*"/>
 
@@ -4978,7 +5053,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T01-B18904</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B19204</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -4991,7 +5066,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="/ubl:Order/cac:TaxTotal" priority="1091" mode="M12">
+   <xsl:template match="/ubl:Order/cac:TaxTotal" priority="1092" mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:TaxTotal"/>
 
@@ -5000,7 +5075,7 @@
          <xsl:when test="cbc:TaxAmount"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:TaxAmount">
-               <xsl:attribute name="id">PEPPOL-T01-B20301</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B20601</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -5014,111 +5089,10 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:TaxTotal/cbc:TaxAmount"
-                 priority="1090"
+                 priority="1091"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:TaxTotal/cbc:TaxAmount"/>
-
-		    <!--ASSERT -->
-      <xsl:choose>
-         <xsl:when test="@currencyID"/>
-         <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@currencyID">
-               <xsl:attribute name="id">PEPPOL-T01-B20401</xsl:attribute>
-               <xsl:attribute name="flag">fatal</xsl:attribute>
-               <xsl:attribute name="location">
-                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-               </xsl:attribute>
-               <svrl:text>Attribute 'currencyID' MUST be present.</svrl:text>
-            </svrl:failed-assert>
-         </xsl:otherwise>
-      </xsl:choose>
-
-		    <!--ASSERT -->
-      <xsl:choose>
-         <xsl:when test="not(@currencyID) or (some $code in $clISO4217 satisfies $code = @currencyID)"/>
-         <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="not(@currencyID) or (some $code in $clISO4217 satisfies $code = @currencyID)">
-               <xsl:attribute name="id">PEPPOL-T01-B20402</xsl:attribute>
-               <xsl:attribute name="flag">fatal</xsl:attribute>
-               <xsl:attribute name="location">
-                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-               </xsl:attribute>
-               <svrl:text>Value MUST be part of code list 'Currency codes (ISO 4217)'.</svrl:text>
-            </svrl:failed-assert>
-         </xsl:otherwise>
-      </xsl:choose>
-      <xsl:apply-templates select="*" mode="M12"/>
-   </xsl:template>
-
-	  <!--RULE -->
-   <xsl:template match="/ubl:Order/cac:TaxTotal/*" priority="1089" mode="M12">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:Order/cac:TaxTotal/*"/>
-
-		    <!--ASSERT -->
-      <xsl:choose>
-         <xsl:when test="false()"/>
-         <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T01-B20302</xsl:attribute>
-               <xsl:attribute name="flag">fatal</xsl:attribute>
-               <xsl:attribute name="location">
-                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-               </xsl:attribute>
-               <svrl:text>Document MUST NOT contain elements not part of the data model.</svrl:text>
-            </svrl:failed-assert>
-         </xsl:otherwise>
-      </xsl:choose>
-      <xsl:apply-templates select="*" mode="M12"/>
-   </xsl:template>
-
-	  <!--RULE -->
-   <xsl:template match="/ubl:Order/cac:AnticipatedMonetaryTotal"
-                 priority="1088"
-                 mode="M12">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:Order/cac:AnticipatedMonetaryTotal"/>
-
-		    <!--ASSERT -->
-      <xsl:choose>
-         <xsl:when test="cbc:LineExtensionAmount"/>
-         <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:LineExtensionAmount">
-               <xsl:attribute name="id">PEPPOL-T01-B20601</xsl:attribute>
-               <xsl:attribute name="flag">fatal</xsl:attribute>
-               <xsl:attribute name="location">
-                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-               </xsl:attribute>
-               <svrl:text>Element 'cbc:LineExtensionAmount' MUST be provided.</svrl:text>
-            </svrl:failed-assert>
-         </xsl:otherwise>
-      </xsl:choose>
-
-		    <!--ASSERT -->
-      <xsl:choose>
-         <xsl:when test="cbc:PayableAmount"/>
-         <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:PayableAmount">
-               <xsl:attribute name="id">PEPPOL-T01-B20602</xsl:attribute>
-               <xsl:attribute name="flag">fatal</xsl:attribute>
-               <xsl:attribute name="location">
-                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-               </xsl:attribute>
-               <svrl:text>Element 'cbc:PayableAmount' MUST be provided.</svrl:text>
-            </svrl:failed-assert>
-         </xsl:otherwise>
-      </xsl:choose>
-      <xsl:apply-templates select="*" mode="M12"/>
-   </xsl:template>
-
-	  <!--RULE -->
-   <xsl:template match="/ubl:Order/cac:AnticipatedMonetaryTotal/cbc:LineExtensionAmount"
-                 priority="1087"
-                 mode="M12">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:Order/cac:AnticipatedMonetaryTotal/cbc:LineExtensionAmount"/>
 
 		    <!--ASSERT -->
       <xsl:choose>
@@ -5154,18 +5128,79 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="/ubl:Order/cac:AnticipatedMonetaryTotal/cbc:TaxExclusiveAmount"
-                 priority="1086"
+   <xsl:template match="/ubl:Order/cac:TaxTotal/*" priority="1090" mode="M12">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="/ubl:Order/cac:TaxTotal/*"/>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="false()"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
+               <xsl:attribute name="id">PEPPOL-T01-B20602</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>Document MUST NOT contain elements not part of the data model.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <xsl:apply-templates select="*" mode="M12"/>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="/ubl:Order/cac:AnticipatedMonetaryTotal"
+                 priority="1089"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:Order/cac:AnticipatedMonetaryTotal/cbc:TaxExclusiveAmount"/>
+                       context="/ubl:Order/cac:AnticipatedMonetaryTotal"/>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="cbc:LineExtensionAmount"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:LineExtensionAmount">
+               <xsl:attribute name="id">PEPPOL-T01-B20901</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>Element 'cbc:LineExtensionAmount' MUST be provided.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="cbc:PayableAmount"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:PayableAmount">
+               <xsl:attribute name="id">PEPPOL-T01-B20902</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>Element 'cbc:PayableAmount' MUST be provided.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <xsl:apply-templates select="*" mode="M12"/>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="/ubl:Order/cac:AnticipatedMonetaryTotal/cbc:LineExtensionAmount"
+                 priority="1088"
+                 mode="M12">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="/ubl:Order/cac:AnticipatedMonetaryTotal/cbc:LineExtensionAmount"/>
 
 		    <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="@currencyID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@currencyID">
-               <xsl:attribute name="id">PEPPOL-T01-B20901</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B21001</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -5181,7 +5216,47 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="not(@currencyID) or (some $code in $clISO4217 satisfies $code = @currencyID)">
-               <xsl:attribute name="id">PEPPOL-T01-B20902</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B21002</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>Value MUST be part of code list 'Currency codes (ISO 4217)'.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <xsl:apply-templates select="*" mode="M12"/>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="/ubl:Order/cac:AnticipatedMonetaryTotal/cbc:TaxExclusiveAmount"
+                 priority="1087"
+                 mode="M12">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="/ubl:Order/cac:AnticipatedMonetaryTotal/cbc:TaxExclusiveAmount"/>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="@currencyID"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@currencyID">
+               <xsl:attribute name="id">PEPPOL-T01-B21201</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>Attribute 'currencyID' MUST be present.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="not(@currencyID) or (some $code in $clISO4217 satisfies $code = @currencyID)"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="not(@currencyID) or (some $code in $clISO4217 satisfies $code = @currencyID)">
+               <xsl:attribute name="id">PEPPOL-T01-B21202</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -5195,7 +5270,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AnticipatedMonetaryTotal/cbc:TaxInclusiveAmount"
-                 priority="1085"
+                 priority="1086"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AnticipatedMonetaryTotal/cbc:TaxInclusiveAmount"/>
@@ -5205,7 +5280,7 @@
          <xsl:when test="@currencyID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@currencyID">
-               <xsl:attribute name="id">PEPPOL-T01-B21101</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B21401</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -5221,7 +5296,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="not(@currencyID) or (some $code in $clISO4217 satisfies $code = @currencyID)">
-               <xsl:attribute name="id">PEPPOL-T01-B21102</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B21402</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -5235,7 +5310,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AnticipatedMonetaryTotal/cbc:AllowanceTotalAmount"
-                 priority="1084"
+                 priority="1085"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AnticipatedMonetaryTotal/cbc:AllowanceTotalAmount"/>
@@ -5245,7 +5320,7 @@
          <xsl:when test="@currencyID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@currencyID">
-               <xsl:attribute name="id">PEPPOL-T01-B21301</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B21601</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -5261,7 +5336,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="not(@currencyID) or (some $code in $clISO4217 satisfies $code = @currencyID)">
-               <xsl:attribute name="id">PEPPOL-T01-B21302</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B21602</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -5275,7 +5350,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AnticipatedMonetaryTotal/cbc:ChargeTotalAmount"
-                 priority="1083"
+                 priority="1084"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AnticipatedMonetaryTotal/cbc:ChargeTotalAmount"/>
@@ -5285,7 +5360,7 @@
          <xsl:when test="@currencyID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@currencyID">
-               <xsl:attribute name="id">PEPPOL-T01-B21501</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B21801</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -5301,7 +5376,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="not(@currencyID) or (some $code in $clISO4217 satisfies $code = @currencyID)">
-               <xsl:attribute name="id">PEPPOL-T01-B21502</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B21802</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -5315,7 +5390,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AnticipatedMonetaryTotal/cbc:PrepaidAmount"
-                 priority="1082"
+                 priority="1083"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AnticipatedMonetaryTotal/cbc:PrepaidAmount"/>
@@ -5325,7 +5400,7 @@
          <xsl:when test="@currencyID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@currencyID">
-               <xsl:attribute name="id">PEPPOL-T01-B21701</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B22001</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -5341,7 +5416,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="not(@currencyID) or (some $code in $clISO4217 satisfies $code = @currencyID)">
-               <xsl:attribute name="id">PEPPOL-T01-B21702</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B22002</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -5355,7 +5430,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AnticipatedMonetaryTotal/cbc:PayableRoundingAmount"
-                 priority="1081"
+                 priority="1082"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AnticipatedMonetaryTotal/cbc:PayableRoundingAmount"/>
@@ -5365,7 +5440,7 @@
          <xsl:when test="@currencyID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@currencyID">
-               <xsl:attribute name="id">PEPPOL-T01-B21901</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B22201</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -5381,7 +5456,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="not(@currencyID) or (some $code in $clISO4217 satisfies $code = @currencyID)">
-               <xsl:attribute name="id">PEPPOL-T01-B21902</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B22202</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -5395,7 +5470,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AnticipatedMonetaryTotal/cbc:PayableAmount"
-                 priority="1080"
+                 priority="1081"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AnticipatedMonetaryTotal/cbc:PayableAmount"/>
@@ -5405,7 +5480,7 @@
          <xsl:when test="@currencyID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@currencyID">
-               <xsl:attribute name="id">PEPPOL-T01-B22101</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B22401</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -5421,7 +5496,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="not(@currencyID) or (some $code in $clISO4217 satisfies $code = @currencyID)">
-               <xsl:attribute name="id">PEPPOL-T01-B22102</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B22402</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -5435,7 +5510,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:AnticipatedMonetaryTotal/*"
-                 priority="1079"
+                 priority="1080"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:AnticipatedMonetaryTotal/*"/>
@@ -5445,7 +5520,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T01-B20603</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B20903</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -5458,7 +5533,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="/ubl:Order/cac:OrderLine" priority="1078" mode="M12">
+   <xsl:template match="/ubl:Order/cac:OrderLine" priority="1079" mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:OrderLine"/>
 
@@ -5467,7 +5542,7 @@
          <xsl:when test="cac:LineItem"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cac:LineItem">
-               <xsl:attribute name="id">PEPPOL-T01-B22301</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B22601</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -5481,7 +5556,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:OrderLine/cbc:Note"
-                 priority="1077"
+                 priority="1078"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:OrderLine/cbc:Note"/>
@@ -5490,7 +5565,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:OrderLine/cac:LineItem"
-                 priority="1076"
+                 priority="1077"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:OrderLine/cac:LineItem"/>
@@ -5500,7 +5575,7 @@
          <xsl:when test="cbc:ID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:ID">
-               <xsl:attribute name="id">PEPPOL-T01-B22501</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B22801</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -5515,7 +5590,7 @@
          <xsl:when test="cbc:Quantity"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:Quantity">
-               <xsl:attribute name="id">PEPPOL-T01-B22502</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B22802</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -5530,7 +5605,7 @@
          <xsl:when test="cac:Item"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cac:Item">
-               <xsl:attribute name="id">PEPPOL-T01-B22503</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B22803</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -5544,7 +5619,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:OrderLine/cac:LineItem/cbc:ID"
-                 priority="1075"
+                 priority="1076"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:OrderLine/cac:LineItem/cbc:ID"/>
@@ -5553,7 +5628,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:OrderLine/cac:LineItem/cbc:Quantity"
-                 priority="1074"
+                 priority="1075"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:OrderLine/cac:LineItem/cbc:Quantity"/>
@@ -5563,7 +5638,7 @@
          <xsl:when test="@unitCode"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@unitCode">
-               <xsl:attribute name="id">PEPPOL-T01-B22701</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B23001</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -5579,7 +5654,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="not(@unitCode) or (some $code in $clUNECERec20 satisfies $code = @unitCode)">
-               <xsl:attribute name="id">PEPPOL-T01-B22702</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B23002</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -5593,7 +5668,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:OrderLine/cac:LineItem/cbc:LineExtensionAmount"
-                 priority="1073"
+                 priority="1074"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:OrderLine/cac:LineItem/cbc:LineExtensionAmount"/>
@@ -5603,7 +5678,7 @@
          <xsl:when test="@currencyID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@currencyID">
-               <xsl:attribute name="id">PEPPOL-T01-B22901</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B23201</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -5619,7 +5694,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="not(@currencyID) or (some $code in $clISO4217 satisfies $code = @currencyID)">
-               <xsl:attribute name="id">PEPPOL-T01-B22902</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B23202</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -5633,7 +5708,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:OrderLine/cac:LineItem/cbc:PartialDeliveryIndicator"
-                 priority="1072"
+                 priority="1073"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:OrderLine/cac:LineItem/cbc:PartialDeliveryIndicator"/>
@@ -5644,7 +5719,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="(some $code in $clTrueFalse satisfies $code = normalize-space(text()))">
-               <xsl:attribute name="id">PEPPOL-T01-B23101</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B23401</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -5658,7 +5733,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:OrderLine/cac:LineItem/cbc:AccountingCost"
-                 priority="1071"
+                 priority="1072"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:OrderLine/cac:LineItem/cbc:AccountingCost"/>
@@ -5667,7 +5742,7 @@
 
 	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:OrderLine/cac:LineItem/cac:Delivery"
-                 priority="1070"
+                 priority="1071"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Order/cac:OrderLine/cac:LineItem/cac:Delivery"/>
@@ -5678,12 +5753,37 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="cac:RequestedDeliveryPeriod">
-               <xsl:attribute name="id">PEPPOL-T01-B23301</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B23601</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>Element 'cac:RequestedDeliveryPeriod' MUST be provided.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <xsl:apply-templates select="*" mode="M12"/>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="/ubl:Order/cac:OrderLine/cac:LineItem/cac:Delivery/cbc:ID"
+                 priority="1070"
+                 mode="M12">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="/ubl:Order/cac:OrderLine/cac:LineItem/cac:Delivery/cbc:ID"/>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="not(@schemeID) or (some $code in $clICD satisfies $code = @schemeID)"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="not(@schemeID) or (some $code in $clICD satisfies $code = @schemeID)">
+               <xsl:attribute name="id">PEPPOL-T01-B23701</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>Value MUST be part of code list 'ISO 6523 ICD list'.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -5729,7 +5829,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T01-B23401</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B23901</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -5753,7 +5853,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T01-B23302</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B23602</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -5786,7 +5886,7 @@
          <xsl:when test="cbc:ID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:ID">
-               <xsl:attribute name="id">PEPPOL-T01-B23801</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B24301</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -5811,7 +5911,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="not(@schemeID) or (some $code in $clICD satisfies $code = @schemeID)">
-               <xsl:attribute name="id">PEPPOL-T01-B23901</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B24401</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -5835,7 +5935,7 @@
          <xsl:when test="cbc:Name"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:Name">
-               <xsl:attribute name="id">PEPPOL-T01-B24101</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B24601</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -5868,7 +5968,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T01-B23701</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B24201</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -5892,7 +5992,7 @@
          <xsl:when test="cbc:ChargeIndicator"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:ChargeIndicator">
-               <xsl:attribute name="id">PEPPOL-T01-B24301</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B24801</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -5907,7 +6007,7 @@
          <xsl:when test="cbc:Amount"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:Amount">
-               <xsl:attribute name="id">PEPPOL-T01-B24302</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B24802</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -5941,7 +6041,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="(some $code in $clUNCL5189 satisfies $code = normalize-space(text())) or (some $code in $clUNCL7161 satisfies $code = normalize-space(text()))">
-               <xsl:attribute name="id">PEPPOL-T01-B24501</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B25001</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -5983,134 +6083,6 @@
          <xsl:when test="@currencyID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@currencyID">
-               <xsl:attribute name="id">PEPPOL-T01-B24801</xsl:attribute>
-               <xsl:attribute name="flag">fatal</xsl:attribute>
-               <xsl:attribute name="location">
-                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-               </xsl:attribute>
-               <svrl:text>Attribute 'currencyID' MUST be present.</svrl:text>
-            </svrl:failed-assert>
-         </xsl:otherwise>
-      </xsl:choose>
-
-		    <!--ASSERT -->
-      <xsl:choose>
-         <xsl:when test="not(@currencyID) or (some $code in $clISO4217 satisfies $code = @currencyID)"/>
-         <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="not(@currencyID) or (some $code in $clISO4217 satisfies $code = @currencyID)">
-               <xsl:attribute name="id">PEPPOL-T01-B24802</xsl:attribute>
-               <xsl:attribute name="flag">fatal</xsl:attribute>
-               <xsl:attribute name="location">
-                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-               </xsl:attribute>
-               <svrl:text>Value MUST be part of code list 'Currency codes (ISO 4217)'.</svrl:text>
-            </svrl:failed-assert>
-         </xsl:otherwise>
-      </xsl:choose>
-      <xsl:apply-templates select="*" mode="M12"/>
-   </xsl:template>
-
-	  <!--RULE -->
-   <xsl:template match="/ubl:Order/cac:OrderLine/cac:LineItem/cac:AllowanceCharge/cbc:BaseAmount"
-                 priority="1052"
-                 mode="M12">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:Order/cac:OrderLine/cac:LineItem/cac:AllowanceCharge/cbc:BaseAmount"/>
-
-		    <!--ASSERT -->
-      <xsl:choose>
-         <xsl:when test="@currencyID"/>
-         <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@currencyID">
-               <xsl:attribute name="id">PEPPOL-T01-B25001</xsl:attribute>
-               <xsl:attribute name="flag">fatal</xsl:attribute>
-               <xsl:attribute name="location">
-                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-               </xsl:attribute>
-               <svrl:text>Attribute 'currencyID' MUST be present.</svrl:text>
-            </svrl:failed-assert>
-         </xsl:otherwise>
-      </xsl:choose>
-
-		    <!--ASSERT -->
-      <xsl:choose>
-         <xsl:when test="not(@currencyID) or (some $code in $clISO4217 satisfies $code = @currencyID)"/>
-         <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="not(@currencyID) or (some $code in $clISO4217 satisfies $code = @currencyID)">
-               <xsl:attribute name="id">PEPPOL-T01-B25002</xsl:attribute>
-               <xsl:attribute name="flag">fatal</xsl:attribute>
-               <xsl:attribute name="location">
-                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-               </xsl:attribute>
-               <svrl:text>Value MUST be part of code list 'Currency codes (ISO 4217)'.</svrl:text>
-            </svrl:failed-assert>
-         </xsl:otherwise>
-      </xsl:choose>
-      <xsl:apply-templates select="*" mode="M12"/>
-   </xsl:template>
-
-	  <!--RULE -->
-   <xsl:template match="/ubl:Order/cac:OrderLine/cac:LineItem/cac:AllowanceCharge/*"
-                 priority="1051"
-                 mode="M12">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:Order/cac:OrderLine/cac:LineItem/cac:AllowanceCharge/*"/>
-
-		    <!--ASSERT -->
-      <xsl:choose>
-         <xsl:when test="false()"/>
-         <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T01-B24303</xsl:attribute>
-               <xsl:attribute name="flag">fatal</xsl:attribute>
-               <xsl:attribute name="location">
-                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-               </xsl:attribute>
-               <svrl:text>Document MUST NOT contain elements not part of the data model.</svrl:text>
-            </svrl:failed-assert>
-         </xsl:otherwise>
-      </xsl:choose>
-      <xsl:apply-templates select="*" mode="M12"/>
-   </xsl:template>
-
-	  <!--RULE -->
-   <xsl:template match="/ubl:Order/cac:OrderLine/cac:LineItem/cac:Price"
-                 priority="1050"
-                 mode="M12">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:Order/cac:OrderLine/cac:LineItem/cac:Price"/>
-
-		    <!--ASSERT -->
-      <xsl:choose>
-         <xsl:when test="cbc:PriceAmount"/>
-         <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:PriceAmount">
-               <xsl:attribute name="id">PEPPOL-T01-B25201</xsl:attribute>
-               <xsl:attribute name="flag">fatal</xsl:attribute>
-               <xsl:attribute name="location">
-                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-               </xsl:attribute>
-               <svrl:text>Element 'cbc:PriceAmount' MUST be provided.</svrl:text>
-            </svrl:failed-assert>
-         </xsl:otherwise>
-      </xsl:choose>
-      <xsl:apply-templates select="*" mode="M12"/>
-   </xsl:template>
-
-	  <!--RULE -->
-   <xsl:template match="/ubl:Order/cac:OrderLine/cac:LineItem/cac:Price/cbc:PriceAmount"
-                 priority="1049"
-                 mode="M12">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:Order/cac:OrderLine/cac:LineItem/cac:Price/cbc:PriceAmount"/>
-
-		    <!--ASSERT -->
-      <xsl:choose>
-         <xsl:when test="@currencyID"/>
-         <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@currencyID">
                <xsl:attribute name="id">PEPPOL-T01-B25301</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -6140,6 +6112,134 @@
    </xsl:template>
 
 	  <!--RULE -->
+   <xsl:template match="/ubl:Order/cac:OrderLine/cac:LineItem/cac:AllowanceCharge/cbc:BaseAmount"
+                 priority="1052"
+                 mode="M12">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="/ubl:Order/cac:OrderLine/cac:LineItem/cac:AllowanceCharge/cbc:BaseAmount"/>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="@currencyID"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@currencyID">
+               <xsl:attribute name="id">PEPPOL-T01-B25501</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>Attribute 'currencyID' MUST be present.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="not(@currencyID) or (some $code in $clISO4217 satisfies $code = @currencyID)"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="not(@currencyID) or (some $code in $clISO4217 satisfies $code = @currencyID)">
+               <xsl:attribute name="id">PEPPOL-T01-B25502</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>Value MUST be part of code list 'Currency codes (ISO 4217)'.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <xsl:apply-templates select="*" mode="M12"/>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="/ubl:Order/cac:OrderLine/cac:LineItem/cac:AllowanceCharge/*"
+                 priority="1051"
+                 mode="M12">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="/ubl:Order/cac:OrderLine/cac:LineItem/cac:AllowanceCharge/*"/>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="false()"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
+               <xsl:attribute name="id">PEPPOL-T01-B24803</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>Document MUST NOT contain elements not part of the data model.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <xsl:apply-templates select="*" mode="M12"/>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="/ubl:Order/cac:OrderLine/cac:LineItem/cac:Price"
+                 priority="1050"
+                 mode="M12">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="/ubl:Order/cac:OrderLine/cac:LineItem/cac:Price"/>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="cbc:PriceAmount"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:PriceAmount">
+               <xsl:attribute name="id">PEPPOL-T01-B25701</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>Element 'cbc:PriceAmount' MUST be provided.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <xsl:apply-templates select="*" mode="M12"/>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="/ubl:Order/cac:OrderLine/cac:LineItem/cac:Price/cbc:PriceAmount"
+                 priority="1049"
+                 mode="M12">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="/ubl:Order/cac:OrderLine/cac:LineItem/cac:Price/cbc:PriceAmount"/>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="@currencyID"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@currencyID">
+               <xsl:attribute name="id">PEPPOL-T01-B25801</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>Attribute 'currencyID' MUST be present.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="not(@currencyID) or (some $code in $clISO4217 satisfies $code = @currencyID)"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="not(@currencyID) or (some $code in $clISO4217 satisfies $code = @currencyID)">
+               <xsl:attribute name="id">PEPPOL-T01-B25802</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>Value MUST be part of code list 'Currency codes (ISO 4217)'.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <xsl:apply-templates select="*" mode="M12"/>
+   </xsl:template>
+
+	  <!--RULE -->
    <xsl:template match="/ubl:Order/cac:OrderLine/cac:LineItem/cac:Price/cbc:BaseQuantity"
                  priority="1048"
                  mode="M12">
@@ -6152,7 +6252,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="not(@unitCode) or (some $code in $clUNECERec20 satisfies $code = @unitCode)">
-               <xsl:attribute name="id">PEPPOL-T01-B25501</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B26001</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -6176,7 +6276,7 @@
          <xsl:when test="cbc:ChargeIndicator"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:ChargeIndicator">
-               <xsl:attribute name="id">PEPPOL-T01-B25701</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B26201</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -6191,7 +6291,7 @@
          <xsl:when test="cbc:Amount"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:Amount">
-               <xsl:attribute name="id">PEPPOL-T01-B25702</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B26202</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -6216,7 +6316,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="normalize-space(text()) = 'false'">
-               <xsl:attribute name="id">PEPPOL-T01-B25801</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B26301</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -6240,7 +6340,7 @@
          <xsl:when test="@currencyID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@currencyID">
-               <xsl:attribute name="id">PEPPOL-T01-B25901</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B26401</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -6256,7 +6356,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="not(@currencyID) or (some $code in $clISO4217 satisfies $code = @currencyID)">
-               <xsl:attribute name="id">PEPPOL-T01-B25902</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B26402</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -6280,7 +6380,7 @@
          <xsl:when test="@currencyID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@currencyID">
-               <xsl:attribute name="id">PEPPOL-T01-B26101</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B26601</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -6296,7 +6396,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="not(@currencyID) or (some $code in $clISO4217 satisfies $code = @currencyID)">
-               <xsl:attribute name="id">PEPPOL-T01-B26102</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B26602</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -6320,7 +6420,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T01-B25703</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B26203</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -6344,7 +6444,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T01-B25202</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B25702</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -6368,7 +6468,7 @@
          <xsl:when test="cbc:Name"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:Name">
-               <xsl:attribute name="id">PEPPOL-T01-B26301</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B26801</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -6410,7 +6510,7 @@
          <xsl:when test="cbc:ID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:ID">
-               <xsl:attribute name="id">PEPPOL-T01-B26601</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B27101</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -6443,7 +6543,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T01-B26602</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B27102</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -6467,7 +6567,7 @@
          <xsl:when test="cbc:ID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:ID">
-               <xsl:attribute name="id">PEPPOL-T01-B26801</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B27301</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -6500,7 +6600,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T01-B26802</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B27302</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -6524,7 +6624,7 @@
          <xsl:when test="cbc:ID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:ID">
-               <xsl:attribute name="id">PEPPOL-T01-B27001</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B27501</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -6548,7 +6648,7 @@
          <xsl:when test="@schemeID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
-               <xsl:attribute name="id">PEPPOL-T01-B27101</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B27601</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -6564,7 +6664,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="not(@schemeID) or (some $code in $clICD satisfies $code = @schemeID)">
-               <xsl:attribute name="id">PEPPOL-T01-B27102</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B27602</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -6588,7 +6688,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T01-B27002</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B27502</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -6612,7 +6712,7 @@
          <xsl:when test="cbc:ID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:ID">
-               <xsl:attribute name="id">PEPPOL-T01-B27301</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B27801</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -6645,7 +6745,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T01-B27302</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B27802</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -6678,7 +6778,7 @@
          <xsl:when test="@listID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@listID">
-               <xsl:attribute name="id">PEPPOL-T01-B27601</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B28101</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -6694,7 +6794,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="not(@listID) or (some $code in $clUNCL7143 satisfies $code = @listID)">
-               <xsl:attribute name="id">PEPPOL-T01-B27602</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B28102</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -6718,7 +6818,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T01-B27501</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B28001</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -6742,7 +6842,7 @@
          <xsl:when test="cbc:ID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:ID">
-               <xsl:attribute name="id">PEPPOL-T01-B28001</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B28501</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -6757,7 +6857,7 @@
          <xsl:when test="cac:TaxScheme"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cac:TaxScheme">
-               <xsl:attribute name="id">PEPPOL-T01-B28002</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B28502</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -6782,7 +6882,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="(some $code in $clUNCL5305 satisfies $code = normalize-space(text()))">
-               <xsl:attribute name="id">PEPPOL-T01-B28101</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B28601</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -6815,7 +6915,7 @@
          <xsl:when test="cbc:ID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:ID">
-               <xsl:attribute name="id">PEPPOL-T01-B28301</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B28801</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -6848,7 +6948,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T01-B28302</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B28802</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -6872,7 +6972,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T01-B28003</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B28503</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -6896,7 +6996,7 @@
          <xsl:when test="cbc:Name"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:Name">
-               <xsl:attribute name="id">PEPPOL-T01-B28501</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B29001</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -6911,7 +7011,7 @@
          <xsl:when test="cbc:Value"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:Value">
-               <xsl:attribute name="id">PEPPOL-T01-B28502</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B29002</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -6944,7 +7044,7 @@
          <xsl:when test="@listID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@listID">
-               <xsl:attribute name="id">PEPPOL-T01-B28701</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B29201</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -6977,7 +7077,7 @@
          <xsl:when test="@unitCode"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@unitCode">
-               <xsl:attribute name="id">PEPPOL-T01-B29001</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B29501</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -6993,7 +7093,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="not(@unitCode) or (some $code in $clUNECERec20 satisfies $code = @unitCode)">
-               <xsl:attribute name="id">PEPPOL-T01-B29002</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B29502</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -7026,7 +7126,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T01-B28503</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B29003</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -7086,7 +7186,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T01-B29501</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B30001</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -7110,7 +7210,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T01-B29301</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B29801</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -7134,7 +7234,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T01-B26302</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B26802</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -7158,7 +7258,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T01-B22504</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B22804</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -7180,7 +7280,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T01-B22302</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T01-B22602</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
