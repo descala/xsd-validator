@@ -168,7 +168,7 @@
    <!--SCHEMA SETUP-->
    <xsl:template match="/">
       <svrl:schematron-output xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                              title="Schematron Version 1.3.0 - XRechnung 1.2.2 compatible - UBL - CreditNote"
+                              title="Schematron Version 1.4.0 - XRechnung 2.0.0 compatible - UBL - CreditNote"
                               schemaVersion="">
          <xsl:comment>
             <xsl:value-of select="$archiveDirParameter"/>   
@@ -198,7 +198,7 @@
    </xsl:template>
 
    <!--SCHEMATRON PATTERNS-->
-   <svrl:text xmlns:svrl="http://purl.oclc.org/dsdl/svrl">Schematron Version 1.3.0 - XRechnung 1.2.2 compatible - UBL - CreditNote</svrl:text>
+   <svrl:text xmlns:svrl="http://purl.oclc.org/dsdl/svrl">Schematron Version 1.4.0 - XRechnung 2.0.0 compatible - UBL - CreditNote</svrl:text>
 
    <!--PATTERN UBL-model-->
 
@@ -314,6 +314,23 @@
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>[BR-DE-21] Das Element "Specification identifier" (BT-24) soll syntaktisch der Kennung des Standards XRechnung entsprechen.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="count(cac:AdditionalDocumentReference) = count(cac:AdditionalDocumentReference[not(./cac:Attachment/cbc:EmbeddedDocumentBinaryObject/@filename = preceding-sibling::cac:AdditionalDocumentReference/cac:Attachment/cbc:EmbeddedDocumentBinaryObject/@filename)])"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="count(cac:AdditionalDocumentReference) = count(cac:AdditionalDocumentReference[not(./cac:Attachment/cbc:EmbeddedDocumentBinaryObject/@filename = preceding-sibling::cac:AdditionalDocumentReference/cac:Attachment/cbc:EmbeddedDocumentBinaryObject/@filename)])">
+               <xsl:attribute name="id">BR-DE-22</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>[BR-DE-22] Not all filename attributes of the embeddedDocumentBinaryObject elements are unique
+        </svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -531,10 +548,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="         not(cbc:PaymentMeansCode = '58') or          matches(cac:PayeeFinancialAccount/cbc:ID, '^[A-Z]{2}[0-9]{2}[a-zA-Z0-9]{0,30}$') and          xs:integer(         replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(         upper-case(concat(substring(cac:PayeeFinancialAccount/cbc:ID,5),substring(cac:PayeeFinancialAccount/cbc:ID,1,4)))         ,'A','10'),'B','11'),'C','12'),'D','13'),'E','14'),'F','15'),'G','16'),'H','17'),'I','18'),'J','19'),'K','20'),'L','21'),'M','22')         ,'N','23'),'O','24'),'P','25'),'Q','26'),'R','27'),'S','28'),'T','29'),'U','30'),'V','31'),'W','32'),'X','33'),'Y','34'),'Z','35')         ) mod 97 = 1         "/>
+         <xsl:when test="not(cbc:PaymentMeansCode = '58') or  matches(normalize-space(replace(cac:PayeeFinancialAccount/cbc:ID, '([ \n\r\t\s])', '')), '^[A-Z]{2}[0-9]{2}[a-zA-Z0-9]{0,30}$') and xs:integer(string-join(for $cp in string-to-codepoints(concat(substring(normalize-space(replace(cac:PayeeFinancialAccount/cbc:ID, '([ \n\r\t\s])', '')),5),upper-case(substring(normalize-space(replace(cac:PayeeFinancialAccount/cbc:ID, '([ \n\r\t\s])', '')),1,2)),substring(normalize-space(replace(cac:PayeeFinancialAccount/cbc:ID, '([ \n\r\t\s])', '')),3,2))) return  (if($cp &gt; 64) then $cp - 55 else  $cp - 48),'')) mod 97 = 1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="not(cbc:PaymentMeansCode = '58') or matches(cac:PayeeFinancialAccount/cbc:ID, '^[A-Z]{2}[0-9]{2}[a-zA-Z0-9]{0,30}$') and xs:integer( replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace( upper-case(concat(substring(cac:PayeeFinancialAccount/cbc:ID,5),substring(cac:PayeeFinancialAccount/cbc:ID,1,4))) ,'A','10'),'B','11'),'C','12'),'D','13'),'E','14'),'F','15'),'G','16'),'H','17'),'I','18'),'J','19'),'K','20'),'L','21'),'M','22') ,'N','23'),'O','24'),'P','25'),'Q','26'),'R','27'),'S','28'),'T','29'),'U','30'),'V','31'),'W','32'),'X','33'),'Y','34'),'Z','35') ) mod 97 = 1">
+                                test="not(cbc:PaymentMeansCode = '58') or matches(normalize-space(replace(cac:PayeeFinancialAccount/cbc:ID, '([ \n\r\t\s])', '')), '^[A-Z]{2}[0-9]{2}[a-zA-Z0-9]{0,30}$') and xs:integer(string-join(for $cp in string-to-codepoints(concat(substring(normalize-space(replace(cac:PayeeFinancialAccount/cbc:ID, '([ \n\r\t\s])', '')),5),upper-case(substring(normalize-space(replace(cac:PayeeFinancialAccount/cbc:ID, '([ \n\r\t\s])', '')),1,2)),substring(normalize-space(replace(cac:PayeeFinancialAccount/cbc:ID, '([ \n\r\t\s])', '')),3,2))) return (if($cp &gt; 64) then $cp - 55 else $cp - 48),'')) mod 97 = 1">
                <xsl:attribute name="id">BR-DE-19</xsl:attribute>
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
@@ -547,10 +564,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="         not(cbc:PaymentMeansCode = '59') or          matches(cac:PaymentMandate/cac:PayerFinancialAccount/cbc:ID, '^[A-Z]{2}[0-9]{2}[a-zA-Z0-9]{0,30}$') and          xs:integer(         replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(         upper-case(concat(substring(cac:PaymentMandate/cac:PayerFinancialAccount/cbc:ID,5),substring(cac:PaymentMandate/cac:PayerFinancialAccount/cbc:ID,1,4)))         ,'A','10'),'B','11'),'C','12'),'D','13'),'E','14'),'F','15'),'G','16'),'H','17'),'I','18'),'J','19'),'K','20'),'L','21'),'M','22')         ,'N','23'),'O','24'),'P','25'),'Q','26'),'R','27'),'S','28'),'T','29'),'U','30'),'V','31'),'W','32'),'X','33'),'Y','34'),'Z','35')         ) mod 97 = 1"/>
+         <xsl:when test="not(cbc:PaymentMeansCode = '59') or  matches(normalize-space(replace(cac:PaymentMandate/cac:PayerFinancialAccount/cbc:ID, '([ \n\r\t\s])', '')), '^[A-Z]{2}[0-9]{2}[a-zA-Z0-9]{0,30}$') and xs:integer(string-join(for $cp in string-to-codepoints(concat(substring(normalize-space(replace(cac:PaymentMandate/cac:PayerFinancialAccount/cbc:ID, '([ \n\r\t\s])', '')),5),upper-case(substring(normalize-space(replace(cac:PaymentMandate/cac:PayerFinancialAccount/cbc:ID, '([ \n\r\t\s])', '')),1,2)),substring(normalize-space(replace(cac:PaymentMandate/cac:PayerFinancialAccount/cbc:ID, '([ \n\r\t\s])', '')),3,2))) return  (if($cp &gt; 64) then $cp - 55 else  $cp - 48),'')) mod 97 = 1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="not(cbc:PaymentMeansCode = '59') or matches(cac:PaymentMandate/cac:PayerFinancialAccount/cbc:ID, '^[A-Z]{2}[0-9]{2}[a-zA-Z0-9]{0,30}$') and xs:integer( replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace( upper-case(concat(substring(cac:PaymentMandate/cac:PayerFinancialAccount/cbc:ID,5),substring(cac:PaymentMandate/cac:PayerFinancialAccount/cbc:ID,1,4))) ,'A','10'),'B','11'),'C','12'),'D','13'),'E','14'),'F','15'),'G','16'),'H','17'),'I','18'),'J','19'),'K','20'),'L','21'),'M','22') ,'N','23'),'O','24'),'P','25'),'Q','26'),'R','27'),'S','28'),'T','29'),'U','30'),'V','31'),'W','32'),'X','33'),'Y','34'),'Z','35') ) mod 97 = 1">
+                                test="not(cbc:PaymentMeansCode = '59') or matches(normalize-space(replace(cac:PaymentMandate/cac:PayerFinancialAccount/cbc:ID, '([ \n\r\t\s])', '')), '^[A-Z]{2}[0-9]{2}[a-zA-Z0-9]{0,30}$') and xs:integer(string-join(for $cp in string-to-codepoints(concat(substring(normalize-space(replace(cac:PaymentMandate/cac:PayerFinancialAccount/cbc:ID, '([ \n\r\t\s])', '')),5),upper-case(substring(normalize-space(replace(cac:PaymentMandate/cac:PayerFinancialAccount/cbc:ID, '([ \n\r\t\s])', '')),1,2)),substring(normalize-space(replace(cac:PaymentMandate/cac:PayerFinancialAccount/cbc:ID, '([ \n\r\t\s])', '')),3,2))) return (if($cp &gt; 64) then $cp - 55 else $cp - 48),'')) mod 97 = 1">
                <xsl:attribute name="id">BR-DE-20</xsl:attribute>
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">

@@ -168,8 +168,9 @@
    <!--SCHEMA SETUP-->
    <xsl:template match="/">
       <svrl:schematron-output xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                              title="Schematron Version 1.3.0 - XRechnung 1.2.2 compatible - UBL - Invoice"
+                              title="Schematron Version 1.4.0 - XRechnung 2.0.0 compatible - UBL - Invoice"
                               schemaVersion="">
+         <xsl:attribute name="phase">xrechnung-model</xsl:attribute>
          <xsl:comment>
             <xsl:value-of select="$archiveDirParameter"/>   
 		 <xsl:value-of select="$archiveNameParameter"/>  
@@ -194,11 +195,20 @@
             <xsl:apply-templates/>
          </svrl:active-pattern>
          <xsl:apply-templates select="/" mode="M7"/>
+         <svrl:active-pattern>
+            <xsl:attribute name="document">
+               <xsl:value-of select="document-uri(/)"/>
+            </xsl:attribute>
+            <xsl:attribute name="id">ubl-extension-pattern</xsl:attribute>
+            <xsl:attribute name="name">ubl-extension-pattern</xsl:attribute>
+            <xsl:apply-templates/>
+         </svrl:active-pattern>
+         <xsl:apply-templates select="/" mode="M8"/>
       </svrl:schematron-output>
    </xsl:template>
 
    <!--SCHEMATRON PATTERNS-->
-   <svrl:text xmlns:svrl="http://purl.oclc.org/dsdl/svrl">Schematron Version 1.3.0 - XRechnung 1.2.2 compatible - UBL - Invoice</svrl:text>
+   <svrl:text xmlns:svrl="http://purl.oclc.org/dsdl/svrl">Schematron Version 1.4.0 - XRechnung 2.0.0 compatible - UBL - Invoice</svrl:text>
 
    <!--PATTERN model-pattern-->
 
@@ -304,16 +314,33 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="cbc:CustomizationID = 'urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_1.2'"/>
+         <xsl:when test="cbc:CustomizationID = 'urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_2.0' or cbc:CustomizationID = 'urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_2.0#conformant#urn:xoev-de:kosit:extension:xrechnung_2.0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="cbc:CustomizationID = 'urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_1.2'">
+                                test="cbc:CustomizationID = 'urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_2.0' or cbc:CustomizationID = 'urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_2.0#conformant#urn:xoev-de:kosit:extension:xrechnung_2.0'">
                <xsl:attribute name="id">BR-DE-21</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>[BR-DE-21] Das Element "Specification identifier" (BT-24) soll syntaktisch der Kennung des Standards XRechnung entsprechen.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="count(cac:AdditionalDocumentReference) = count(cac:AdditionalDocumentReference[not(./cac:Attachment/cbc:EmbeddedDocumentBinaryObject/@filename = preceding-sibling::cac:AdditionalDocumentReference/cac:Attachment/cbc:EmbeddedDocumentBinaryObject/@filename)])"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="count(cac:AdditionalDocumentReference) = count(cac:AdditionalDocumentReference[not(./cac:Attachment/cbc:EmbeddedDocumentBinaryObject/@filename = preceding-sibling::cac:AdditionalDocumentReference/cac:Attachment/cbc:EmbeddedDocumentBinaryObject/@filename)])">
+               <xsl:attribute name="id">BR-DE-22</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>[BR-DE-22] Not all filename attributes of the embeddedDocumentBinaryObject elements are unique
+    </svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -531,10 +558,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="   not(cbc:PaymentMeansCode = '58') or          matches(cac:PayeeFinancialAccount/cbc:ID, '[A-Z]{2}[0-9]{2}[a-zA-Z0-9]{0,30}') and          xs:integer(         replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(         upper-case(concat(substring(cac:PayeeFinancialAccount/cbc:ID,5),substring(cac:PayeeFinancialAccount/cbc:ID,1,4)))         ,'A','10'),'B','11'),'C','12'),'D','13'),'E','14'),'F','15'),'G','16'),'H','17'),'I','18'),'J','19'),'K','20'),'L','21'),'M','22')         ,'N','23'),'O','24'),'P','25'),'Q','26'),'R','27'),'S','28'),'T','29'),'U','30'),'V','31'),'W','32'),'X','33'),'Y','34'),'Z','35')         ) mod 97 = 1     "/>
+         <xsl:when test="not(cbc:PaymentMeansCode = '58') or  matches(normalize-space(replace(cac:PayeeFinancialAccount/cbc:ID, '([ \n\r\t\s])', '')), '^[A-Z]{2}[0-9]{2}[a-zA-Z0-9]{0,30}$') and xs:integer(string-join(for $cp in string-to-codepoints(concat(substring(normalize-space(replace(cac:PayeeFinancialAccount/cbc:ID, '([ \n\r\t\s])', '')),5),upper-case(substring(normalize-space(replace(cac:PayeeFinancialAccount/cbc:ID, '([ \n\r\t\s])', '')),1,2)),substring(normalize-space(replace(cac:PayeeFinancialAccount/cbc:ID, '([ \n\r\t\s])', '')),3,2))) return  (if($cp &gt; 64) then $cp - 55 else  $cp - 48),'')) mod 97 = 1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="not(cbc:PaymentMeansCode = '58') or matches(cac:PayeeFinancialAccount/cbc:ID, '[A-Z]{2}[0-9]{2}[a-zA-Z0-9]{0,30}') and xs:integer( replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace( upper-case(concat(substring(cac:PayeeFinancialAccount/cbc:ID,5),substring(cac:PayeeFinancialAccount/cbc:ID,1,4))) ,'A','10'),'B','11'),'C','12'),'D','13'),'E','14'),'F','15'),'G','16'),'H','17'),'I','18'),'J','19'),'K','20'),'L','21'),'M','22') ,'N','23'),'O','24'),'P','25'),'Q','26'),'R','27'),'S','28'),'T','29'),'U','30'),'V','31'),'W','32'),'X','33'),'Y','34'),'Z','35') ) mod 97 = 1">
+                                test="not(cbc:PaymentMeansCode = '58') or matches(normalize-space(replace(cac:PayeeFinancialAccount/cbc:ID, '([ \n\r\t\s])', '')), '^[A-Z]{2}[0-9]{2}[a-zA-Z0-9]{0,30}$') and xs:integer(string-join(for $cp in string-to-codepoints(concat(substring(normalize-space(replace(cac:PayeeFinancialAccount/cbc:ID, '([ \n\r\t\s])', '')),5),upper-case(substring(normalize-space(replace(cac:PayeeFinancialAccount/cbc:ID, '([ \n\r\t\s])', '')),1,2)),substring(normalize-space(replace(cac:PayeeFinancialAccount/cbc:ID, '([ \n\r\t\s])', '')),3,2))) return (if($cp &gt; 64) then $cp - 55 else $cp - 48),'')) mod 97 = 1">
                <xsl:attribute name="id">BR-DE-19</xsl:attribute>
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
@@ -547,10 +574,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="not(cbc:PaymentMeansCode = '59') or matches(cac:PaymentMandate/cac:PayerFinancialAccount/cbc:ID, '[A-Z]{2}[0-9]{2}[a-zA-Z0-9]{0,30}') and          xs:integer(         replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(         upper-case(concat(substring(cac:PaymentMandate/cac:PayerFinancialAccount/cbc:ID,5),substring(cac:PaymentMandate/cac:PayerFinancialAccount/cbc:ID,1,4)))         ,'A','10'),'B','11'),'C','12'),'D','13'),'E','14'),'F','15'),'G','16'),'H','17'),'I','18'),'J','19'),'K','20'),'L','21'),'M','22')         ,'N','23'),'O','24'),'P','25'),'Q','26'),'R','27'),'S','28'),'T','29'),'U','30'),'V','31'),'W','32'),'X','33'),'Y','34'),'Z','35') ) mod 97 = 1"/>
+         <xsl:when test="not(cbc:PaymentMeansCode = '59') or  matches(normalize-space(replace(cac:PaymentMandate/cac:PayerFinancialAccount/cbc:ID, '([ \n\r\t\s])', '')), '^[A-Z]{2}[0-9]{2}[a-zA-Z0-9]{0,30}$') and xs:integer(string-join(for $cp in string-to-codepoints(concat(substring(normalize-space(replace(cac:PaymentMandate/cac:PayerFinancialAccount/cbc:ID, '([ \n\r\t\s])', '')),5),upper-case(substring(normalize-space(replace(cac:PaymentMandate/cac:PayerFinancialAccount/cbc:ID, '([ \n\r\t\s])', '')),1,2)),substring(normalize-space(replace(cac:PaymentMandate/cac:PayerFinancialAccount/cbc:ID, '([ \n\r\t\s])', '')),3,2))) return  (if($cp &gt; 64) then $cp - 55 else  $cp - 48),'')) mod 97 = 1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="not(cbc:PaymentMeansCode = '59') or matches(cac:PaymentMandate/cac:PayerFinancialAccount/cbc:ID, '[A-Z]{2}[0-9]{2}[a-zA-Z0-9]{0,30}') and xs:integer( replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace( upper-case(concat(substring(cac:PaymentMandate/cac:PayerFinancialAccount/cbc:ID,5),substring(cac:PaymentMandate/cac:PayerFinancialAccount/cbc:ID,1,4))) ,'A','10'),'B','11'),'C','12'),'D','13'),'E','14'),'F','15'),'G','16'),'H','17'),'I','18'),'J','19'),'K','20'),'L','21'),'M','22') ,'N','23'),'O','24'),'P','25'),'Q','26'),'R','27'),'S','28'),'T','29'),'U','30'),'V','31'),'W','32'),'X','33'),'Y','34'),'Z','35') ) mod 97 = 1">
+                                test="not(cbc:PaymentMeansCode = '59') or matches(normalize-space(replace(cac:PaymentMandate/cac:PayerFinancialAccount/cbc:ID, '([ \n\r\t\s])', '')), '^[A-Z]{2}[0-9]{2}[a-zA-Z0-9]{0,30}$') and xs:integer(string-join(for $cp in string-to-codepoints(concat(substring(normalize-space(replace(cac:PaymentMandate/cac:PayerFinancialAccount/cbc:ID, '([ \n\r\t\s])', '')),5),upper-case(substring(normalize-space(replace(cac:PaymentMandate/cac:PayerFinancialAccount/cbc:ID, '([ \n\r\t\s])', '')),1,2)),substring(normalize-space(replace(cac:PaymentMandate/cac:PayerFinancialAccount/cbc:ID, '([ \n\r\t\s])', '')),3,2))) return (if($cp &gt; 64) then $cp - 55 else $cp - 48),'')) mod 97 = 1">
                <xsl:attribute name="id">BR-DE-20</xsl:attribute>
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
@@ -590,5 +617,68 @@
    <xsl:template match="text()" priority="-1" mode="M7"/>
    <xsl:template match="@*|node()" priority="-2" mode="M7">
       <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M7"/>
+   </xsl:template>
+
+   <!--PATTERN ubl-extension-pattern-->
+   <xsl:variable name="isExtension"
+                 select="exists(/ubl:Invoice/cbc:CustomizationID[text() = 'urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_2.0#conformant#urn:xoev-de:kosit:extension:xrechnung_2.0'])"/>
+
+	  <!--RULE -->
+   <xsl:template match="cbc:EmbeddedDocumentBinaryObject[$isExtension]"
+                 priority="1001"
+                 mode="M8">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="cbc:EmbeddedDocumentBinaryObject[$isExtension]"/>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test=".[@mimeCode = 'application/pdf' or @mimeCode = 'image/png' or @mimeCode = 'image/jpeg' or @mimeCode = 'text/csv' or @mimeCode = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' or @mimeCode = 'application/vnd.oasis.opendocument.spreadsheet' or @mimeCode = 'application/xml']"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test=".[@mimeCode = 'application/pdf' or @mimeCode = 'image/png' or @mimeCode = 'image/jpeg' or @mimeCode = 'text/csv' or @mimeCode = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' or @mimeCode = 'application/vnd.oasis.opendocument.spreadsheet' or @mimeCode = 'application/xml']">
+               <xsl:attribute name="id">BR-DEX-01</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>[BR-DEX-01] Das Element <xsl:text/>
+                  <xsl:value-of select="name(.)"/>
+                  <xsl:text/> "Attached Document" (BT-125) benutzt einen nicht zulässigen MIME-Code: <xsl:text/>
+                  <xsl:value-of select="@mimeCode"/>
+                  <xsl:text/>. Im Falle einer Extension darf zusätzlich zu der Liste der mime codes (definiert in Abschnitt 8.2, "Binary Object") der MIME-Code application/xml genutzt werden.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M8"/>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="/ubl:Invoice[$isExtension]" priority="1000" mode="M8">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="/ubl:Invoice[$isExtension]"/>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="count(//cac:SubInvoiceLine) = 0 or (sum(./cac:InvoiceLine/xs:decimal(cbc:LineExtensionAmount)) = sum(child::cac:InvoiceLine/cac:SubInvoiceLine/xs:decimal(cbc:LineExtensionAmount))) and (count(//cac:SubInvoiceLine[xs:decimal(cbc:LineExtensionAmount) = sum(child::cac:SubInvoiceLine/xs:decimal(cbc:LineExtensionAmount))]) = count(//cac:SubInvoiceLine[count(cac:SubInvoiceLine) &gt; 0]))"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="count(//cac:SubInvoiceLine) = 0 or (sum(./cac:InvoiceLine/xs:decimal(cbc:LineExtensionAmount)) = sum(child::cac:InvoiceLine/cac:SubInvoiceLine/xs:decimal(cbc:LineExtensionAmount))) and (count(//cac:SubInvoiceLine[xs:decimal(cbc:LineExtensionAmount) = sum(child::cac:SubInvoiceLine/xs:decimal(cbc:LineExtensionAmount))]) = count(//cac:SubInvoiceLine[count(cac:SubInvoiceLine) &gt; 0]))">
+               <xsl:attribute name="id">BR-DEX-02</xsl:attribute>
+               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>[BR-DEX-02] Der Wert von "Invoice line net amount" (BT-131) einer "INVOICE LINE"
+        (BG-25) oder einer "SUB INVOICE LINE" (BG-DEX-01) soll der Summe
+        der "Invoice line net amount" (BT-131) der direkt darunterliegenden "SUB
+        INVOICE LINE" (BG-DEX-01) entsprechen.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M8"/>
+   </xsl:template>
+   <xsl:template match="text()" priority="-1" mode="M8"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M8">
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M8"/>
    </xsl:template>
 </xsl:stylesheet>

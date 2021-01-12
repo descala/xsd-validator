@@ -169,7 +169,7 @@
    <!--SCHEMA SETUP-->
    <xsl:template match="/">
       <svrl:schematron-output xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                              title="Schematron Version 1.3.0 - XRechnung&#xA;        1.2.2 compatible - CII"
+                              title="Schematron Version 1.4.0 - XRechnung&#xA;        2.0.0 compatible - CII"
                               schemaVersion="2.0.0">
          <xsl:comment>
             <xsl:value-of select="$archiveDirParameter"/>   
@@ -200,8 +200,8 @@
    </xsl:template>
 
    <!--SCHEMATRON PATTERNS-->
-   <svrl:text xmlns:svrl="http://purl.oclc.org/dsdl/svrl">Schematron Version 1.3.0 - XRechnung
-        1.2.2 compatible - CII</svrl:text>
+   <svrl:text xmlns:svrl="http://purl.oclc.org/dsdl/svrl">Schematron Version 1.4.0 - XRechnung
+        2.0.0 compatible - CII</svrl:text>
 
    <!--PATTERN CII-model-->
 
@@ -306,6 +306,23 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="count(//ram:AdditionalReferencedDocument) = count(//ram:AdditionalReferencedDocument[not(./ram:AttachmentBinaryObject/@filename = preceding-sibling::ram:AdditionalReferencedDocument/ram:AttachmentBinaryObject/@filename)])"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="count(//ram:AdditionalReferencedDocument) = count(//ram:AdditionalReferencedDocument[not(./ram:AttachmentBinaryObject/@filename = preceding-sibling::ram:AdditionalReferencedDocument/ram:AttachmentBinaryObject/@filename)])">
+               <xsl:attribute name="id">BR-DE-22</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>[BR-DE-22] Not all filename attributes of the embeddedDocumentBinaryObject elements are unique
+        </svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
       <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M7"/>
    </xsl:template>
 
@@ -318,10 +335,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="ram:GuidelineSpecifiedDocumentContextParameter/ram:ID = 'urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_1.2'"/>
+         <xsl:when test="ram:GuidelineSpecifiedDocumentContextParameter/ram:ID = 'urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_2.0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="ram:GuidelineSpecifiedDocumentContextParameter/ram:ID = 'urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_1.2'">
+                                test="ram:GuidelineSpecifiedDocumentContextParameter/ram:ID = 'urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_2.0'">
                <xsl:attribute name="id">BR-DE-21</xsl:attribute>
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
@@ -547,12 +564,12 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="         not(ram:TypeCode = '58') or          matches(ram:PayeePartyCreditorFinancialAccount/ram:IBANID, '^[A-Z]{2}[0-9]{2}[a-zA-Z0-9]{0,30}$') and          xs:integer(         replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(         upper-case(concat(substring(ram:PayeePartyCreditorFinancialAccount/ram:IBANID,5),substring(ram:PayeePartyCreditorFinancialAccount/ram:IBANID,1,4)))         ,'A','10'),'B','11'),'C','12'),'D','13'),'E','14'),'F','15'),'G','16'),'H','17'),'I','18'),'J','19'),'K','20'),'L','21'),'M','22')         ,'N','23'),'O','24'),'P','25'),'Q','26'),'R','27'),'S','28'),'T','29'),'U','30'),'V','31'),'W','32'),'X','33'),'Y','34'),'Z','35')         ) mod 97 = 1         "/>
+         <xsl:when test="not(ram:TypeCode = '58') or  matches(normalize-space(replace(ram:PayeePartyCreditorFinancialAccount/ram:IBANID, '([ \n\r\t\s])', '')), '^[A-Z]{2}[0-9]{2}[a-zA-Z0-9]{0,30}$') and xs:integer(string-join(for $cp in string-to-codepoints(concat(substring(normalize-space(replace(ram:PayeePartyCreditorFinancialAccount/ram:IBANID, '([ \n\r\t\s])', '')),5),upper-case(substring(normalize-space(replace(ram:PayeePartyCreditorFinancialAccount/ram:IBANID, '([ \n\r\t\s])', '')),1,2)),substring(normalize-space(replace(ram:PayeePartyCreditorFinancialAccount/ram:IBANID, '([ \n\r\t\s])', '')),3,2))) return  (if($cp &gt; 64) then $cp - 55 else  $cp - 48),'')) mod 97 = 1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="not(ram:TypeCode = '58') or matches(ram:PayeePartyCreditorFinancialAccount/ram:IBANID, '^[A-Z]{2}[0-9]{2}[a-zA-Z0-9]{0,30}$') and xs:integer( replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace( upper-case(concat(substring(ram:PayeePartyCreditorFinancialAccount/ram:IBANID,5),substring(ram:PayeePartyCreditorFinancialAccount/ram:IBANID,1,4))) ,'A','10'),'B','11'),'C','12'),'D','13'),'E','14'),'F','15'),'G','16'),'H','17'),'I','18'),'J','19'),'K','20'),'L','21'),'M','22') ,'N','23'),'O','24'),'P','25'),'Q','26'),'R','27'),'S','28'),'T','29'),'U','30'),'V','31'),'W','32'),'X','33'),'Y','34'),'Z','35') ) mod 97 = 1">
+                                test="not(ram:TypeCode = '58') or matches(normalize-space(replace(ram:PayeePartyCreditorFinancialAccount/ram:IBANID, '([ \n\r\t\s])', '')), '^[A-Z]{2}[0-9]{2}[a-zA-Z0-9]{0,30}$') and xs:integer(string-join(for $cp in string-to-codepoints(concat(substring(normalize-space(replace(ram:PayeePartyCreditorFinancialAccount/ram:IBANID, '([ \n\r\t\s])', '')),5),upper-case(substring(normalize-space(replace(ram:PayeePartyCreditorFinancialAccount/ram:IBANID, '([ \n\r\t\s])', '')),1,2)),substring(normalize-space(replace(ram:PayeePartyCreditorFinancialAccount/ram:IBANID, '([ \n\r\t\s])', '')),3,2))) return (if($cp &gt; 64) then $cp - 55 else $cp - 48),'')) mod 97 = 1">
                <xsl:attribute name="id">BR-DE-19</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -563,10 +580,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="         not(ram:TypeCode = '59') or          matches(ram:PayerPartyDebtorFinancialAccount/ram:IBANID, '^[A-Z]{2}[0-9]{2}[a-zA-Z0-9]{0,30}$') and          xs:integer(         replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(         upper-case(concat(substring(ram:PayerPartyDebtorFinancialAccount/ram:IBANID,5),substring(ram:PayerPartyDebtorFinancialAccount/ram:IBANID,1,4)))         ,'A','10'),'B','11'),'C','12'),'D','13'),'E','14'),'F','15'),'G','16'),'H','17'),'I','18'),'J','19'),'K','20'),'L','21'),'M','22')         ,'N','23'),'O','24'),'P','25'),'Q','26'),'R','27'),'S','28'),'T','29'),'U','30'),'V','31'),'W','32'),'X','33'),'Y','34'),'Z','35')         ) mod 97 = 1"/>
+         <xsl:when test="not(ram:TypeCode = '59') or  matches(normalize-space(replace(ram:PayerPartyDebtorFinancialAccount/ram:IBANID, '([ \n\r\t\s])', '')), '^[A-Z]{2}[0-9]{2}[a-zA-Z0-9]{0,30}$') and xs:integer(string-join(for $cp in string-to-codepoints(concat(substring(normalize-space(replace(ram:PayerPartyDebtorFinancialAccount/ram:IBANID, '([ \n\r\t\s])', '')),5),upper-case(substring(normalize-space(replace(ram:PayerPartyDebtorFinancialAccount/ram:IBANID, '([ \n\r\t\s])', '')),1,2)),substring(normalize-space(replace(ram:PayerPartyDebtorFinancialAccount/ram:IBANID, '([ \n\r\t\s])', '')),3,2))) return  (if($cp &gt; 64) then $cp - 55 else  $cp - 48),'')) mod 97 = 1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="not(ram:TypeCode = '59') or matches(ram:PayerPartyDebtorFinancialAccount/ram:IBANID, '^[A-Z]{2}[0-9]{2}[a-zA-Z0-9]{0,30}$') and xs:integer( replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace( upper-case(concat(substring(ram:PayerPartyDebtorFinancialAccount/ram:IBANID,5),substring(ram:PayerPartyDebtorFinancialAccount/ram:IBANID,1,4))) ,'A','10'),'B','11'),'C','12'),'D','13'),'E','14'),'F','15'),'G','16'),'H','17'),'I','18'),'J','19'),'K','20'),'L','21'),'M','22') ,'N','23'),'O','24'),'P','25'),'Q','26'),'R','27'),'S','28'),'T','29'),'U','30'),'V','31'),'W','32'),'X','33'),'Y','34'),'Z','35') ) mod 97 = 1">
+                                test="not(ram:TypeCode = '59') or matches(normalize-space(replace(ram:PayerPartyDebtorFinancialAccount/ram:IBANID, '([ \n\r\t\s])', '')), '^[A-Z]{2}[0-9]{2}[a-zA-Z0-9]{0,30}$') and xs:integer(string-join(for $cp in string-to-codepoints(concat(substring(normalize-space(replace(ram:PayerPartyDebtorFinancialAccount/ram:IBANID, '([ \n\r\t\s])', '')),5),upper-case(substring(normalize-space(replace(ram:PayerPartyDebtorFinancialAccount/ram:IBANID, '([ \n\r\t\s])', '')),1,2)),substring(normalize-space(replace(ram:PayerPartyDebtorFinancialAccount/ram:IBANID, '([ \n\r\t\s])', '')),3,2))) return (if($cp &gt; 64) then $cp - 55 else $cp - 48),'')) mod 97 = 1">
                <xsl:attribute name="id">BR-DE-20</xsl:attribute>
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">

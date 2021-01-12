@@ -91,7 +91,7 @@ module Sch
         %w(PEPPOLBIS-T16.sch)
 
       # XRechnung UBL
-      when 'urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_1.2', 'urn:cen.eu:en16931#compliant#factur-x.eu:1p0:basic'
+      when 'urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_2.0', 'urn:cen.eu:en16931#compliant#factur-x.eu:1p0:basic'
         if doc_nokogiri.root.name == 'Invoice'
           %w(CEN-EN16931-UBL.sch XRechnung-UBL-validation-Invoice.sch)
         elsif doc_nokogiri.root.name == 'CreditNote'
