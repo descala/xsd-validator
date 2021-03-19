@@ -189,22 +189,39 @@
             <xsl:attribute name="document">
                <xsl:value-of select="document-uri(/)"/>
             </xsl:attribute>
+            <xsl:attribute name="id">variable-pattern</xsl:attribute>
+            <xsl:attribute name="name">variable-pattern</xsl:attribute>
+            <xsl:apply-templates/>
+         </svrl:active-pattern>
+         <xsl:apply-templates select="/" mode="M7"/>
+         <svrl:active-pattern>
+            <xsl:attribute name="document">
+               <xsl:value-of select="document-uri(/)"/>
+            </xsl:attribute>
             <xsl:attribute name="id">UBL-model</xsl:attribute>
             <xsl:attribute name="name">UBL-model</xsl:attribute>
             <xsl:apply-templates/>
          </svrl:active-pattern>
-         <xsl:apply-templates select="/" mode="M7"/>
+         <xsl:apply-templates select="/" mode="M8"/>
       </svrl:schematron-output>
    </xsl:template>
 
    <!--SCHEMATRON PATTERNS-->
    <svrl:text xmlns:svrl="http://purl.oclc.org/dsdl/svrl">Schematron Version 1.4.0 - XRechnung 2.0.0 compatible - UBL - CreditNote</svrl:text>
 
+   <!--PATTERN variable-pattern-->
+   <xsl:variable name="XR-SKONTO-REGEX"
+                 select="'#(SKONTO|VERZUG)#TAGE=([0-9]+#PROZENT=[0-9]+\.[0-9]{2})(#BASISBETRAG=-?[0-9]+\.[0-9]{2})?#$'"/>
+   <xsl:template match="text()" priority="-1" mode="M7"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M7">
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M7"/>
+   </xsl:template>
+
    <!--PATTERN UBL-model-->
 
 
 	  <!--RULE -->
-   <xsl:template match="//ubl:CreditNote" priority="1007" mode="M7">
+   <xsl:template match="//ubl:CreditNote" priority="1007" mode="M8">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="//ubl:CreditNote"/>
 
 		    <!--ASSERT -->
@@ -297,7 +314,11 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[BR-DE-18] Die Informationen zur Gewährung von Skonto oder zur Berechnung von Verzugszinsen müssen wie folgt im Element "Payment terms" (BT-20) übermittelt werden: Anzugeben ist im ersten Segment "SKONTO" oder "VERZUG", im zweiten "TAGE=n", im dritten "PROZENT=n". Prozentzahlen sind ohne Vorzeichen sowie mit Punkt getrennt von zwei Nachkommastellen anzugeben. Liegt dem zu berechnenden Betrag nicht BT-115, "fälliger Betrag" zugrunde, sondern nur ein Teil des fälligen Betrags der Rechnung, ist der Grundwert zur Berechnung von Skonto oder Verzugszins als viertes Segment "BASISBETRAG=n" gemäß dem semantischen Datentypen Amount anzugeben. Jeder Eintrag beginnt mit einer #, die Segmente sind mit einer # getrennt und eine Zeile schließt mit einer # ab. Am Ende einer vollständigen Skonto oder Verzugsangabe muss ein XML-konformer Zeilenumbruch folgen. Alle Angaben zur Gewährung von Skonto oder zur Berechnung von Verzugszinsen müssen in Großbuchstaben gemacht werden. Zusätzliches Whitespace (Leerzeichen, Tabulatoren oder Zeilenumbrüche) ist nicht zulässig. Andere Zeichen oder Texte als in den oberen Vorgaben genannt sind nicht zulässig.</svrl:text>
+               <svrl:text>[BR-DE-18] Skonto/Verzug Zeilen in <xsl:text/>
+                  <xsl:value-of select="name(.)"/>
+                  <xsl:text/> muessen diesem regulaerem Ausdruck entsprechen: <xsl:text/>
+                  <xsl:value-of select="$XR-SKONTO-REGEX"/>
+                  <xsl:text/>.Die Informationen zur Gewährung von Skonto oder zur Berechnung von Verzugszinsen müssen wie folgt im Element "Payment terms" (BT-20) übermittelt werden: Anzugeben ist im ersten Segment "SKONTO" oder "VERZUG", im zweiten "TAGE=n", im dritten "PROZENT=n". Prozentzahlen sind ohne Vorzeichen sowie mit Punkt getrennt von zwei Nachkommastellen anzugeben. Liegt dem zu berechnenden Betrag nicht BT-115, "fälliger Betrag" zugrunde, sondern nur ein Teil des fälligen Betrags der Rechnung, ist der Grundwert zur Berechnung von Skonto oder Verzugszins als viertes Segment "BASISBETRAG=n" gemäß dem semantischen Datentypen Amount anzugeben. Jeder Eintrag beginnt mit einer #, die Segmente sind mit einer # getrennt und eine Zeile schließt mit einer # ab. Am Ende einer vollständigen Skonto oder Verzugsangabe muss ein XML-konformer Zeilenumbruch folgen. Alle Angaben zur Gewährung von Skonto oder zur Berechnung von Verzugszinsen müssen in Großbuchstaben gemacht werden. Zusätzliches Whitespace (Leerzeichen, Tabulatoren oder Zeilenumbrüche) ist nicht zulässig. Andere Zeichen oder Texte als in den oberen Vorgaben genannt sind nicht zulässig.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -334,13 +355,13 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M7"/>
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M8"/>
    </xsl:template>
 
 	  <!--RULE -->
    <xsl:template match="//ubl:CreditNote/cac:AccountingSupplierParty"
                  priority="1006"
-                 mode="M7">
+                 mode="M8">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="//ubl:CreditNote/cac:AccountingSupplierParty"/>
 
@@ -358,13 +379,13 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M7"/>
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M8"/>
    </xsl:template>
 
 	  <!--RULE -->
    <xsl:template match="//ubl:CreditNote/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress"
                  priority="1005"
-                 mode="M7">
+                 mode="M8">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="//ubl:CreditNote/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress"/>
 
@@ -399,13 +420,13 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M7"/>
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M8"/>
    </xsl:template>
 
 	  <!--RULE -->
    <xsl:template match="//ubl:CreditNote/cac:AccountingSupplierParty/cac:Party/cac:Contact"
                  priority="1004"
-                 mode="M7">
+                 mode="M8">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="//ubl:CreditNote/cac:AccountingSupplierParty/cac:Party/cac:Contact"/>
 
@@ -456,13 +477,13 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M7"/>
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M8"/>
    </xsl:template>
 
 	  <!--RULE -->
    <xsl:template match="//ubl:CreditNote/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress"
                  priority="1003"
-                 mode="M7">
+                 mode="M8">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="//ubl:CreditNote/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress"/>
 
@@ -497,13 +518,13 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M7"/>
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M8"/>
    </xsl:template>
 
 	  <!--RULE -->
    <xsl:template match="//ubl:CreditNote/cac:Delivery/cac:DeliveryLocation/cac:Address"
                  priority="1002"
-                 mode="M7">
+                 mode="M8">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="//ubl:CreditNote/cac:Delivery/cac:DeliveryLocation/cac:Address"/>
 
@@ -538,11 +559,11 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M7"/>
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M8"/>
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="//ubl:CreditNote/cac:PaymentMeans" priority="1001" mode="M7">
+   <xsl:template match="//ubl:CreditNote/cac:PaymentMeans" priority="1001" mode="M8">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="//ubl:CreditNote/cac:PaymentMeans"/>
 
@@ -577,13 +598,13 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M7"/>
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M8"/>
    </xsl:template>
 
 	  <!--RULE -->
    <xsl:template match="//ubl:CreditNote/cac:TaxTotal/cac:TaxSubtotal"
                  priority="1000"
-                 mode="M7">
+                 mode="M8">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="//ubl:CreditNote/cac:TaxTotal/cac:TaxSubtotal"/>
 
@@ -602,10 +623,10 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M7"/>
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M8"/>
    </xsl:template>
-   <xsl:template match="text()" priority="-1" mode="M7"/>
-   <xsl:template match="@*|node()" priority="-2" mode="M7">
-      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M7"/>
+   <xsl:template match="text()" priority="-1" mode="M8"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M8">
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M8"/>
    </xsl:template>
 </xsl:stylesheet>
