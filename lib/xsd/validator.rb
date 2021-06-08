@@ -11,6 +11,7 @@ module Xsd
     BIZKAIA_SII_INFORMACION = "http://www.bizkaia.eus/ogasuna/sii/documentos/SuministroInformacion.xsd"
 
     UBL_DOCUMENT = /urn:oasis:names:specification:ubl:schema:xsd:/
+    TICKETBAI = /urn:ticketbai:/
 
     class ValidationError < RuntimeError
     end
@@ -82,7 +83,8 @@ module Xsd
             standard_path("#{namespace}_ubl#{ubl_version}")
           end
         end
-
+      when TICKETBAI
+        schema_path('ticketbai/ticketBai V1-1.xsd')
       else
         ubl_version = doc.xpath('//cbc:UBLVersionID', cbc: "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2").text
         if ubl_version.nil? or ubl_version == ''
