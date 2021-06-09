@@ -84,7 +84,8 @@ module Xsd
           end
         end
       when TICKETBAI
-        schema_path('ticketbai/ticketBai V1-1.xsd')
+        # TODO diferencar Anul·lació.
+        schema_path('ticketbai/ticketBai V1-2.xsd')
       else
         ubl_version = doc.xpath('//cbc:UBLVersionID', cbc: "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2").text
         if ubl_version.nil? or ubl_version == ''

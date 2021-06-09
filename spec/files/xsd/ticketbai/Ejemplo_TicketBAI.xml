@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<T:TicketBai xmlns:T="http://ticketbai.eus">
+<T:TicketBai xmlns:T="urn:ticketbai:emision">
 	<Cabecera>
 		<IDVersionTBAI>1.2</IDVersionTBAI>
 	</Cabecera>

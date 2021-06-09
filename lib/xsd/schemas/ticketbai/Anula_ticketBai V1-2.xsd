@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:T="http://ticketbai.eus/anulacion" targetNamespace="http://ticketbai.eus/anulacion">
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:T="urn:ticketbai:anulacion" targetNamespace="urn:ticketbai:anulacion">
 
-	<import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="http://www.w3.org/TR/xmldsig-core/xmldsig-core-schema.xsd"/>		
+	<import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="../xmldsig-core-schema.xsd"/>		
 
 	<element  name="AnulaTicketBai">
 		<complexType>
@@ -15,7 +15,7 @@
 	</element>
 	<complexType name="Cabecera">
 		<sequence>
-			<element name="IDVersionTBAI" type="T:TextMax5Type"/>
+			<element name="IDVersionTBAI" type="T:IDVersionTicketBaiType"/>
 		</sequence>
 	</complexType>
 	<complexType name="Emisor">
@@ -66,6 +66,50 @@
 			<element name="ID" type="T:TextMax20Type"/>			
 		</sequence>
 	</complexType>
+		<simpleType name="NIFType">
+		<annotation>
+			<documentation >NIF: Secuencia de 9 dígitos o
+				letras mayúsculas
+			</documentation>
+		</annotation>
+		<restriction base="string">
+			<length value="9" />
+			<pattern
+				value="(([a-z|A-Z]{1}\d{7}[a-z|A-Z]{1})|(\d{8}[a-z|A-Z]{1})|([a-z|A-Z]{1}\d{8}))" />
+		</restriction>
+		<!-- ([A-Z]|\d){9} -->
+	</simpleType>
+	<simpleType name="FechaType">
+		<restriction base="string">
+			<length value="10" />
+			<pattern value="\d{2,2}-\d{2,2}-\d{4,4}"/>
+		</restriction>
+	</simpleType>	
+	<!-- Cadena de 20 caracteres -->
+	<simpleType name="TextMax20Type">
+		<restriction base="string">
+			<maxLength value="20"/>
+		</restriction>
+	</simpleType>
+	<!-- Cadena de 30 caracteres -->
+	<simpleType name="TextMax30Type">
+		<restriction base="string">
+			<maxLength value="30"/>
+		</restriction>
+	</simpleType>
+	<!-- Cadena de 120 caracteres -->
+	<simpleType name="TextMax120Type">
+		<restriction base="string">
+			<maxLength value="120"/>
+		</restriction>
+	</simpleType>
+	<!--  IDTicketBaiBertsioa - IDVersionTicketBai -->
+	<simpleType name="IDVersionTicketBaiType">
+		<restriction base="string">
+			<enumeration value="1.2"/>
+		</restriction>
+	</simpleType>
+	<!-- Herrialdearen kodea - Código de país -->
 	<simpleType name="CountryType2">
 		<restriction base="string">
 			<enumeration value="AF"/>
@@ -315,103 +359,34 @@
 			<enumeration value="XN"/>
 		</restriction>
 	</simpleType>	
+	<!--  Egoitza herrialdeko identifikazio motak - Tipos de identificación en el país de residencia -->
 	<simpleType name="IDTypeType">
 		<restriction base="string">
 			<enumeration value="02">
 				<annotation>
-					<documentation >NIF-IVA</documentation>
+					<documentation >IFZ BEZ - NIF IVA</documentation>
 				</annotation>
 			</enumeration>
 			<enumeration value="03">
 				<annotation>
-					<documentation >Pasaporte</documentation>
+					<documentation >Pasaportea - Pasaporte</documentation>
 				</annotation>
 			</enumeration>
 			<enumeration value="04">
 				<annotation>
-					<documentation >IDEnPaisResidencia
-					</documentation>
+					<documentation >Egoitza dagoen herrialdeak edo lurraldeak emandako nortasun agiri ofiziala - Documento oficial de identificación expedido por el país o territorio de residencia</documentation>
 				</annotation>
 			</enumeration>
 			<enumeration value="05">
 				<annotation>
-					<documentation >Certificado Residencia
-					</documentation>
+					<documentation >Egoitza ziurtagiria - Certificado de residencia</documentation>
 				</annotation>
 			</enumeration>
 			<enumeration value="06">
 				<annotation>
-					<documentation >Otro documento Probatorio
-					</documentation>
+					<documentation >Beste frogagiri bat - Otro documento probatorio</documentation>
 				</annotation>
 			</enumeration>
-		</restriction>
-	</simpleType>	
-	<simpleType name="NIFType">
-		<annotation>
-			<documentation >NIF: Secuencia de 9 dígitos o
-				letras mayúsculas
-			</documentation>
-		</annotation>
-		<restriction base="string">
-			<length value="9" />
-			<pattern
-				value="(([a-z|A-Z]{1}\d{7}[a-z|A-Z]{1})|(\d{8}[a-z|A-Z]{1})|([a-z|A-Z]{1}\d{8}))" />
-		</restriction>
-		<!-- ([A-Z]|\d){9} -->
-	</simpleType>
-	<simpleType name="FechaType">
-		<restriction base="string">
-			<length value="10" />
-			<pattern value="\d{2,2}-\d{2,2}-\d{4,4}"/>
-		</restriction>
-	</simpleType>	
-    <!-- Cadena de 5 caracteres -->
-	<simpleType name="TextMax5Type">
-		<restriction base="string">
-			<maxLength value="5"/>
-		</restriction>
-	</simpleType>
-	<!-- Cadena de 10 caracteres -->
-	<simpleType name="TextMax10Type">
-		<restriction base="string">
-			<maxLength value="10"/>
-		</restriction>
-	</simpleType>
-	<!-- Cadena de 20 caracteres -->
-	<simpleType name="TextMax20Type">
-		<restriction base="string">
-			<maxLength value="20"/>
-		</restriction>
-	</simpleType>
-	<!-- Cadena de 30 caracteres -->
-	<simpleType name="TextMax30Type">
-		<restriction base="string">
-			<maxLength value="30"/>
-		</restriction>
-	</simpleType>
-	<!-- Cadena de 100 caracteres -->
-	<simpleType name="TextMax100Type">
-		<restriction base="string">
-			<maxLength value="100"/>
-		</restriction>
-	</simpleType>
-	<!-- Cadena de 120 caracteres -->
-	<simpleType name="TextMax120Type">
-		<restriction base="string">
-			<maxLength value="120"/>
-		</restriction>
-	</simpleType>
-	<!-- Cadena de 250 caracteres -->
-	<simpleType name="TextMax250Type">
-		<restriction base="string">
-			<maxLength value="250"/>
-		</restriction>
-	</simpleType>
-	<!-- Cadena de 500 caracteres -->
-	<simpleType name="TextMax500Type">
-		<restriction base="string">
-			<maxLength value="500"/>
 		</restriction>
 	</simpleType>		
 </schema>
