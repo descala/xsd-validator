@@ -33,7 +33,7 @@ RSpec.describe Xsd::Validator do
   end
 
   it 'validates spec files' do
-    Dir["spec/files/xsd/**/*"].each do |filename|
+    Dir["spec/files/xsd/**/*.xml"].each do |filename|
       next if filename =~ /wrong/
       doc=File.read(filename) rescue next
       expect(xsd_validate(doc)).to eq([]), "Error validating fixture #{filename}"
