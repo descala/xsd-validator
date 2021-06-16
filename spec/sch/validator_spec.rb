@@ -5,7 +5,7 @@ RSpec.describe Sch::Validator do
   include Sch::Validator
 
   it 'validates spec files' do
-    Dir["spec/files/sch/**/*"].each do |filename|
+    Dir["spec/files/sch/**/*.xml"].each do |filename|
       next if filename =~ /wrong/
       doc=File.read(filename) rescue next
       result = sch_validate(doc)
