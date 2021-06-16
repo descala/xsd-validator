@@ -104,8 +104,12 @@ module Sch
       when 'urn:cen.eu:en16931:2017#compliant#urn:fdc:nen.nl:nlcius:v1.0'
         %w(si-ubl-2.0.sch)
 
+      # PEPPOL Order Response transaction 3.0
+      when 'urn:fdc:peppol.eu:poacc:trns:order_response:3'
+        %w(PEPPOLBIS-T76.sch)
+
       else
-        raise StandardError.new("Unkown CustomizationID '#{customization_id}'")
+        raise StandardError.new("Unknown CustomizationID '#{customization_id}'")
       end
     end
 
