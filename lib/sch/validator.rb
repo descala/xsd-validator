@@ -108,6 +108,10 @@ module Sch
       when 'urn:fdc:peppol.eu:poacc:trns:order_response:3'
         %w(PEPPOLBIS-T76.sch)
 
+      # CIUS-PT portugal
+      when 'urn:cen.eu:en16931:2017#compliant#urn:feap.gov.pt:CIUS-PT::v1.0'
+        %w(urn_feap.gov.pt_CIUS-PT_2.0.0.sch)
+
       else
         raise StandardError.new("Unknown CustomizationID '#{customization_id}'")
       end
