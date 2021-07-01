@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- xsd validation OK! -->
+<!-- sch validation OK! -->
+<Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:ccts="urn:un:unece:uncefact:documentation:2" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:qdt="urn:oasis:names:specification:ubl:schema:xsd:QualifiedDatatypes-2" xmlns:udt="urn:un:unece:uncefact:data:specification:UnqualifiedDataTypesSchemaModule:2">
+  <cbc:UBLVersionID>2.1</cbc:UBLVersionID>
+  <cbc:CustomizationID>urn:cen.eu:en16931:2017#compliant#urn:feap.gov.pt:CIUS-PT::v1.0</cbc:CustomizationID>
+  <cbc:ProfileID>urn:fdc:peppol.eu:2017:poacc:billing:01:1.0</cbc:ProfileID>
+  <cbc:ID>FV21/06536 FV21</cbc:ID>
+  <cbc:IssueDate>2021-06-22</cbc:IssueDate>
+  <cbc:DueDate>2021-07-22</cbc:DueDate>
+  <cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode>
+  <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+  <cac:OrderReference>
+    <cbc:ID>PV21/06379</cbc:ID>
+    <cbc:SalesOrderID>A2/6512/21</cbc:SalesOrderID>
+  </cac:OrderReference>
+  <cac:DespatchDocumentReference>
+    <cbc:ID>AV21/06814</cbc:ID>
+  </cac:DespatchDocumentReference>
+  <cac:AccountingSupplierParty>
+    <cac:Party>
+      <cbc:EndpointID schemeID="9920">ES47640948J</cbc:EndpointID>
+      <cac:PartyName>
+        <cbc:Name>Test Alex</cbc:Name>
+      </cac:PartyName>
+      <cac:PostalAddress>
+        <cbc:StreetName>Blasco de Garay, 30b</cbc:StreetName>
+        <cbc:CityName>Sabadell</cbc:CityName>
+        <cbc:PostalZone>08202</cbc:PostalZone>
+        <cbc:CountrySubentity>Barcelona</cbc:CountrySubentity>
+        <cac:Country>
+          <cbc:IdentificationCode>ES</cbc:IdentificationCode>
+        </cac:Country>
+      </cac:PostalAddress>
+      <cac:PartyTaxScheme>
+        <cbc:CompanyID>ES47640948J</cbc:CompanyID>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:PartyTaxScheme>
+      <cac:PartyLegalEntity>
+        <cbc:RegistrationName>Test Alex</cbc:RegistrationName>
+        <cbc:CompanyID>ES47640948J</cbc:CompanyID>
+      </cac:PartyLegalEntity>
+      <cac:Contact>
+        <cbc:Name>Àlex Cuesta</cbc:Name>
+        <cbc:Telephone>635488868</cbc:Telephone>
+        <cbc:ElectronicMail>rcastano@leleman.es</cbc:ElectronicMail>
+      </cac:Contact>
+    </cac:Party>
+  </cac:AccountingSupplierParty>
+  <cac:AccountingCustomerParty>
+    <cac:Party>
+      <cac:PartyName>
+        <cbc:Name>INSTITUTO PORTUGUES DE ONCOLOGIA DE COIMBRA FRANCISCO GENTIL, E.P.E</cbc:Name>
+      </cac:PartyName>
+      <cac:PostalAddress>
+        <cbc:StreetName>AV. BISSAYA BARRETO, 98</cbc:StreetName>
+        <cbc:CityName>COIMBRA</cbc:CityName>
+        <cbc:PostalZone>3000-075</cbc:PostalZone>
+        <cac:Country>
+          <cbc:IdentificationCode>PT</cbc:IdentificationCode>
+        </cac:Country>
+      </cac:PostalAddress>
+      <cac:PartyTaxScheme>
+        <cbc:CompanyID>PT506361438</cbc:CompanyID>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:PartyTaxScheme>
+      <cac:PartyLegalEntity>
+        <cbc:RegistrationName>INSTITUTO PORTUGUES DE ONCOLOGIA DE COIMBRA FRANCISCO GENTIL, E.P.E</cbc:RegistrationName>
+      </cac:PartyLegalEntity>
+    </cac:Party>
+  </cac:AccountingCustomerParty>
+  <cac:Delivery>
+    <cbc:ActualDeliveryDate>2021-07-06</cbc:ActualDeliveryDate>
+    <cac:DeliveryLocation>
+      <cac:Address>
+        <cbc:StreetName>AV. FRANCESC RIBAS, S/N</cbc:StreetName>
+        <cbc:CityName>Granollers</cbc:CityName>
+        <cbc:PostalZone>08402</cbc:PostalZone>
+        <cbc:CountrySubentity>Barcelona</cbc:CountrySubentity>
+        <cac:Country>
+          <cbc:IdentificationCode>ES</cbc:IdentificationCode>
+        </cac:Country>
+      </cac:Address>
+    </cac:DeliveryLocation>
+  </cac:Delivery>
+  <cac:PaymentMeans>
+    <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+    <cac:PayeeFinancialAccount>
+      <cbc:ID>ES6500495690742010411472</cbc:ID>
+    </cac:PayeeFinancialAccount>
+  </cac:PaymentMeans>
+  <cac:TaxTotal>
+    <cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
+    <cac:TaxSubtotal>
+      <cbc:TaxableAmount currencyID="EUR">7600.00</cbc:TaxableAmount>
+      <cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
+      <cac:TaxCategory>
+        <cbc:ID>E</cbc:ID>
+        <cbc:Percent>0.00</cbc:Percent>
+        <cbc:TaxExemptionReason>operació intracomunitaria</cbc:TaxExemptionReason>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:TaxCategory>
+    </cac:TaxSubtotal>
+  </cac:TaxTotal>
+  <cac:LegalMonetaryTotal>
+    <cbc:LineExtensionAmount currencyID="EUR">7600.00</cbc:LineExtensionAmount>
+    <cbc:TaxExclusiveAmount currencyID="EUR">7600.00</cbc:TaxExclusiveAmount>
+    <cbc:TaxInclusiveAmount currencyID="EUR">7600.00</cbc:TaxInclusiveAmount>
+    <cbc:PayableAmount currencyID="EUR">7600.00</cbc:PayableAmount>
+  </cac:LegalMonetaryTotal>
+  <cac:InvoiceLine>
+    <cbc:ID>1</cbc:ID>
+    <cbc:Note>; Dispatch advice no: AV21/06814; Purchase Order: A2/6512/21; Purchase Order: PV21/06379</cbc:Note>
+    <cbc:InvoicedQuantity unitCode="EA">80.000</cbc:InvoicedQuantity>
+    <cbc:LineExtensionAmount currencyID="EUR">7600.00</cbc:LineExtensionAmount>
+    <cac:Item>
+      <cbc:Name>4010-02-15-T3 SET MARCAJE LESIONES MAMARIAS "HYDROMARK" PUNCION DIRECTA 15G TITANIO - F12119317D</cbc:Name>
+      <cac:ClassifiedTaxCategory>
+        <cbc:ID>E</cbc:ID>
+        <cbc:Percent>0.00</cbc:Percent>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:ClassifiedTaxCategory>
+    </cac:Item>
+    <cac:Price>
+      <cbc:PriceAmount currencyID="EUR">95.00000000</cbc:PriceAmount>
+    </cac:Price>
+  </cac:InvoiceLine>
+</Invoice>
