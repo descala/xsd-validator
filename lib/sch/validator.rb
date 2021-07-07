@@ -110,7 +110,7 @@ module Sch
 
       # CIUS-PT portugal
       when 'urn:cen.eu:en16931:2017#compliant#urn:feap.gov.pt:CIUS-PT::v1.0'
-        %w(CEN-EN16931-UBL.sch urn_feap.gov.pt_CIUS-PT_2.1.1.sch)
+        %w(CEN-EN16931-UBL.sch urn_feap.gov.pt_CIUS-PT_2.1.2.sch)
 
       else
         raise StandardError.new("Unknown CustomizationID '#{customization_id}'")

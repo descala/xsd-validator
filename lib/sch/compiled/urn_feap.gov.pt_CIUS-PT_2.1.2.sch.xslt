@@ -171,7 +171,7 @@
    <!--SCHEMA SETUP-->
    <xsl:template match="/">
       <svrl:schematron-output xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                              title="urn_feap.gov.pt_CIUS-PT_2.1.1"
+                              title="urn_feap.gov.pt_CIUS-PT_2.1.2"
                               schemaVersion="">
          <xsl:comment>
             <xsl:value-of select="$archiveDirParameter"/>   
@@ -234,7 +234,7 @@
    </xsl:template>
 
    <!--SCHEMATRON PATTERNS-->
-   <svrl:text xmlns:svrl="http://purl.oclc.org/dsdl/svrl">urn_feap.gov.pt_CIUS-PT_2.1.1</svrl:text>
+   <svrl:text xmlns:svrl="http://purl.oclc.org/dsdl/svrl">urn_feap.gov.pt_CIUS-PT_2.1.2</svrl:text>
 
    <!--PATTERN UBL-syntax-->
 
@@ -17044,9 +17044,9 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="not(starts-with(normalize-space(.),'#ENTITY@ATMPAYMENT#')) and (contains(normalize-space(.),' ') or not(contains( ' 30 48 49 57 58 59 CC CD CH CI CO CS DE LC MB NU OU PR TB TR ',concat(' ',normalize-space(.),' '))))">
+      <xsl:if test="not(starts-with(normalize-space(.),'#ENTITY@ATMPAYMENT#')) and (contains(normalize-space(.),' ') or not(contains( ' 5 10 20 23 54 30 42 48 49 57 58 59 CC CD CH CI CO CS DE LC MB NU OU PR TB TR ',concat(' ',normalize-space(.),' '))))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="not(starts-with(normalize-space(.),'#ENTITY@ATMPAYMENT#')) and (contains(normalize-space(.),' ') or not(contains( ' 30 48 49 57 58 59 CC CD CH CI CO CS DE LC MB NU OU PR TB TR ',concat(' ',normalize-space(.),' '))))">
+                                 test="not(starts-with(normalize-space(.),'#ENTITY@ATMPAYMENT#')) and (contains(normalize-space(.),' ') or not(contains( ' 5 10 20 23 54 30 42 48 49 57 58 59 CC CD CH CI CO CS DE LC MB NU OU PR TB TR ',concat(' ',normalize-space(.),' '))))">
             <xsl:attribute name="id">DT-CIUS-PT-079.2</xsl:attribute>
             <xsl:attribute name="flag">fatal</xsl:attribute>
             <xsl:attribute name="location">
@@ -18255,32 +18255,16 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="matches(.,'^(.{1,6826666})$')"/>
+         <xsl:when test="((string-length(.)*0.75) div 1024) &lt; 15000"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="matches(.,'^(.{1,6826666})$')">
-               <xsl:attribute name="id">DT-CIUS-PT-111.1</xsl:attribute>
-               <xsl:attribute name="flag">fatal</xsl:attribute>
-               <xsl:attribute name="location">
-                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-               </xsl:attribute>
-               <svrl:text>[DT-CIUS-PT-111.1]-The BT-125 does not meet the defined format: alphanumeric with size between 1 and 6826666.</svrl:text>
-            </svrl:failed-assert>
-         </xsl:otherwise>
-      </xsl:choose>
-
-		    <!--ASSERT -->
-      <xsl:choose>
-         <xsl:when test="((string-length(.)*0.75) div 1024) &lt; 5000"/>
-         <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="((string-length(.)*0.75) div 1024) &lt; 5000">
+                                test="((string-length(.)*0.75) div 1024) &lt; 15000">
                <xsl:attribute name="id">DT-CIUS-PT-111.2</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[DT-CIUS-PT-111.2]-The BT-125 does not meet the defined format: the maximum size per file is 5 Mb.</svrl:text>
+               <svrl:text>[DT-CIUS-PT-111.2]-The BT-125 does not meet the defined format: the maximum size per file is 15 Mb.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -19484,8 +19468,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[DT-CIUS-PT-176]-An Invoice that contains Invoice lines (BG-25) with diferent VAT exemption reason codes, where the VAT category code (BT-151) is “Exempt from
-	VAT”, shall contain exactly one VATBReakdown (BG-23) with the VAT category code (BT-118) equal to "Exempt from VAT", for each VAT exemption reason code (BT-121).</svrl:text>
+               <svrl:text>[DT-CIUS-PT-176]-An Invoice that contains Invoice lines (BG-25) with diferent VAT exemption reason codes, where the VAT category code (BT-151) is “Exempt from VAT”, shall contain exactly one VATBReakdown (BG-23) with the VAT category code (BT-118) equal to "Exempt from VAT", for each VAT exemption reason code (BT-121).</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
