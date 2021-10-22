@@ -1884,7 +1884,6 @@
 			<enumeration value="IS"/>
 			<enumeration value="IL"/>
 			<enumeration value="IT"/>
-			<enumeration value="IX"/>
 			<enumeration value="JM"/>
 			<enumeration value="JP"/>
 			<enumeration value="JE"/>
@@ -2021,6 +2020,7 @@
 			<enumeration value="ZW"/>
 			<enumeration value="QU"/>
 			<enumeration value="XB"/>
+			<enumeration value="XI"/>
 			<enumeration value="XU"/>
 			<enumeration value="XN"/>
 		</restriction>
