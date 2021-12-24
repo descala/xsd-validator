@@ -64,7 +64,11 @@ module Sch
     end
 
     def schematrons(doc)
-      doc_nokogiri =Nokogiri::XML(doc) unless doc.is_a? Nokogiri::XML::Document
+      if doc.is_a? Nokogiri::XML::Document
+        doc_nokogiri = doc
+      else
+        doc_nokogiri = Nokogiri::XML(doc)
+      end
       # Assume UBL or CII
       customization_id = doc_nokogiri.xpath('//cbc:CustomizationID', cbc: CBC).text
       if customization_id.empty?
