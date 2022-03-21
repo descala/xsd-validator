@@ -10,7 +10,7 @@
 				<element name="Sujetos" type="T:Sujetos"/>
 				<element name="Factura" type="T:Factura"/>
 				<element name="HuellaTBAI" type="T:HuellaTBAI"/>
-				<element ref="ds:Signature"/>
+				<element ref="ds:Signature" minOccurs="0"/>
 			</sequence>
 		</complexType>
 	</element>
