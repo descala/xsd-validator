@@ -31,7 +31,7 @@
         targetNamespace="http://www.w3.org/2000/09/xmldsig#"
         version="0.1" elementFormDefault="qualified"> 
 
-<import namespace="http://uri.etsi.org/01903/v1.3.2#" schemaLocation="XAdES.xsd"/>
+<import namespace="http://uri.etsi.org/01903/v1.3.2#" schemaLocation="XAdES01903v132-201601.xsd"/>
 
 <!-- Basic Types Defined for Signatures -->
 
