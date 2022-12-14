@@ -7,8 +7,8 @@
   <!-- A few definitions to make later statements more readable -->
   <!-- These rules are generally only for SI-UBL 2.0 / NLCIUS -->
   <let name="customizationID" value="normalize-space(/*/cbc:CustomizationID)" />
-  <let name="is_SI-UBL-2.0" value="$customizationID = 'urn:cen.eu:en16931:2017#compliant#urn:fdc:nen.nl:nlcius:v1.0'" />
-  <let name="is_SI-UBL-2.0-ext-gaccount" value="$customizationID = 'urn:cen.eu:en16931:2017#compliant#urn:fdc:nen.nl:nlcius:v1.0#conformant#urn:fdc:nen.nl:gaccount:v1.0'" />
+  <let name="is_SI-UBL-2.0" value="contains($customizationID, '#compliant#urn:fdc:nen.nl:nlcius:v1.0')" />
+  <let name="is_SI-UBL-2.0-ext-gaccount" value="contains($customizationID, '#conformant#urn:fdc:nen.nl:gaccount:v1.0')" />
   <!-- A number of rules only apply when the supplier is in the Netherlands -->
   <let name="supplierCountry" value="if (/*/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode) then upper-case(normalize-space(/*/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode)) else 'XX'" />
   <let name="supplierIsNL" value="$supplierCountry = 'NL'" />
@@ -47,16 +47,16 @@
                      cbc:PostalZone)" flag="fatal">[BR-NL-5] For suppliers in the Netherlands, if the fiscal representative is in the Netherlands, the representative's address (cac:TaxRepresentativeParty/cac:PostalAddress) MUST contain street name (cbc:StreetName), city (cbc:CityName) and postal zone (cbc:PostalZone)</assert>
   </rule>
   <!-- BR-NL-6 is not specified; BR-NL-7 and BR-NL-8 are specified below -->
-  <rule context="cbc:InvoiceTypeCode[$s]">
-    <assert id="BR-NL-7" test=". = 380 or
-                    . = 381 or
-                    . = 384 or
-                    . = 389" flag="fatal">[BR-NL-7] The invoice type code (cbc:InvoiceTypeCode) MUST have one of the following values: 380, 381, 384, 389</assert>
-    <assert id="BR-NL-8" test=". != 381 or
-                    /ubl:CreditNote" flag="fatal">[BR-NL-8] If the invoice type code (cbc:InvoiceTypeCode) is 381, the document MUST use the CreditNote scheme</assert>
-    <assert id="BR-NL-8" test=". != 381 or
-                    /ubl:Invoice" flag="fatal">[BR-NL-8] If the invoice type code (cbc:InvoiceTypeCode) is 380, 384 or 389, the document MUST use the Invoice scheme</assert>
-    <assert id="BR-NL-9" test="(. != 384) or
+  <rule context="cbc:InvoiceTypeCode[$s]|cbc:CreditNoteTypeCode[$s]">
+    <assert id="BR-NL-7" test=". = '380' or
+                    . = '381' or
+                    . = '384' or
+                    . = '389'" flag="fatal">[BR-NL-7] The invoice or credit note type code (cbc:InvoiceTypeCode/cbc:CreditNoteTypeCode) MUST have one of the following values: 380, 381, 384, 389</assert>
+    <assert id="BR-NL-8" test="(. != '381') or /cn:CreditNote"
+                    flag="fatal">[BR-NL-8] If the invoice type code (cbc:InvoiceTypeCode) is 381, the document MUST use the CreditNote scheme</assert>
+    <assert id="BR-NL-8" test="(. = '381') or /ubl:Invoice"
+                    flag="fatal">[BR-NL-8] If the credit note type code (cbc:CreditNoteTypeCode) is 380, 384 or 389, the document MUST use the Invoice scheme</assert>
+    <assert id="BR-NL-9" test="(. != '384') or
                     /*/cac:BillingReference/cac:InvoiceDocumentReference/cbc:ID" flag="fatal">[BR-NL-9] For suppliers in the Netherlands, if the document is a corrective invoice (cbc:InvoiceTypeCode = 384), the document MUST contain an invoice reference (cac:BillingReference/cac:InvoiceDocumentReference/cbc:ID)</assert>
   </rule>
   <rule context="cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity[$s]">
@@ -73,16 +73,15 @@
     <assert id="BR-NL-11" test="xs:decimal(cbc:PayableAmount) &lt;= 0.0 or (//cac:PaymentMeans)" flag="fatal">[BR-NL-11] For suppliers in the Netherlands, the supplier MUST provide a means of payment (cac:PaymentMeans) if the payment is from customer to supplier</assert>
   </rule>
   <rule context="cac:PaymentMeans[$s]">
-    <assert id="BR-NL-12" test="cbc:PaymentMeansCode = 30 or
-              cbc:PaymentMeansCode = 48 or
-              cbc:PaymentMeansCode = 49 or
-              cbc:PaymentMeansCode = 57 or
-              cbc:PaymentMeansCode = 58 or
-              cbc:PaymentMeansCode = 59" flag="fatal">[BR-NL-12] For suppliers in the Netherlands, the payment means code (cac:PaymentMeans/cbc:PaymentMeansCode) MUST be one of 30, 48, 49, 57, 58 or 59</assert>
+    <assert id="BR-NL-12" test="normalize-space(cbc:PaymentMeansCode) = '30' or
+              normalize-space(cbc:PaymentMeansCode) = '48' or
+              normalize-space(cbc:PaymentMeansCode) = '49' or
+              normalize-space(cbc:PaymentMeansCode) = '57' or
+              normalize-space(cbc:PaymentMeansCode) = '58' or
+              normalize-space(cbc:PaymentMeansCode) = '59'" flag="fatal">[BR-NL-12] For suppliers in the Netherlands, the payment means code (cac:PaymentMeans/cbc:PaymentMeansCode) MUST be one of 30, 48, 49, 57, 58 or 59</assert>
 
     <!-- check if payment means code is 58 or 59 -->
-    <!-- NOTE: this should be tested well... -->
-    <assert id="BR-NL-31" test="not((cbc:PaymentMeansCode = 58 or cbc:PaymentMeansCode = 59)) or not(cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cbc:ID)" flag="warning">[BR-NL-31] The use of a payment service provider identifier (cac:PaymentMeans/cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cbc:ID) is not recommended for SEPA payments (cac:PaymentMeans/cbc:PaymentMeansCode = 58 or 59)</assert>
+    <assert id="BR-NL-31" test="not((normalize-space(cbc:PaymentMeansCode) = '58' or normalize-space(cbc:PaymentMeansCode) = '59')) or not(cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cbc:ID)" flag="warning">[BR-NL-31] The use of a payment service provider identifier (cac:PaymentMeans/cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cbc:ID) is not recommended for SEPA payments (cac:PaymentMeans/cbc:PaymentMeansCode = 58 or 59)</assert>
     <!-- should move BR-NL-32 to its own context too, then add BR-NL-34 there -->
 
   </rule>

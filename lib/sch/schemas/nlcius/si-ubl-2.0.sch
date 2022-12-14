@@ -7,12 +7,11 @@
     xmlns="http://purl.oclc.org/dsdl/schematron"
     queryBinding="xslt2">
     <!--
-        Release 2.0.3
-        Author: Jelte Jansen (SIDN)
-        Email: support@simplerinvoicing.org
+        Release 2.0.3.4
+        Author: Jelte Jansen
         For changes, see Changelog file in repository root
     -->
-    <title>PC434-NL-specific Validation</title>
+    <title>SI-UBL 2.0 validation, version 2.0.3.4</title>
     <ns prefix="cbc" uri="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"/>
     <ns prefix="cac" uri="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"/>
     <ns prefix="ubl" uri="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2"/>
@@ -35,7 +34,7 @@
         </rule>
         <!-- must be si 2.0 -->
         <rule context="cbc:CustomizationID">
-            <assert test="contains(normalize-space(.), 'urn:cen.eu:en16931:2017#compliant#urn:fdc:nen.nl:nlcius:v1.0')" flag="fatal">[SI-V20-INV-R000]-This XML instance is NOT tagged as an SI-UBL 2.0 invoice or credit note; please check the CustomizationID value</assert>
+            <assert test="starts-with(normalize-space(.), 'urn:cen.eu:en16931:2017#compliant#urn:fdc:nen.nl:nlcius:v1.0')" flag="fatal">[SI-V20-INV-R000]-This XML instance is NOT tagged as an SI-UBL 2.0 invoice or credit note; please check the CustomizationID value</assert>
         </rule>
         <rule context="/" flag="fatal">
             <assert test="ubl:Invoice or cn:CreditNote" flag="fatal">[SI-INV-R000]-This is not an SI-UBL 2.0 Invoice or CreditNote, validation cannot continue</assert>
