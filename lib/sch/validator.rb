@@ -116,7 +116,7 @@ module Sch
 
       # CIUS-PT portugal
       when 'urn:cen.eu:en16931:2017#compliant#urn:feap.gov.pt:CIUS-PT::v1.0'
-        %w(CEN-EN16931-UBL.sch urn_feap.gov.pt_CIUS-PT_2.1.2.sch)
+        %w(urn_feap.gov.pt_CIUS-PT_2.1.2.sch)
 
       # Andorra
       when 'urn:cen.eu:en16931:2017#compliant#urn:fdc:andorra'
