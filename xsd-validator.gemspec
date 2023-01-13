@@ -1,6 +1,8 @@
 
 lib = File.expand_path("../lib", __FILE__)
+vendor = File.expand_path("../vendor", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+$LOAD_PATH.unshift(vendor) unless $LOAD_PATH.include?(vendor)
 require "xsd/validator/version"
 
 Gem::Specification.new do |spec|
@@ -37,5 +39,4 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "guard-rspec"
 
   spec.add_dependency "nokogiri"
-  spec.add_dependency "schematron-wrapper"
 end

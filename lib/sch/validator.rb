@@ -1,5 +1,5 @@
 require 'nokogiri'
-require 'schematron'
+require 'schematron-wrapper-saxon11/lib/schematron'
 
 module Sch
   module Validator
