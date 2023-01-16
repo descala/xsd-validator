@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<xsl:stylesheet xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-                xmlns:saxon="http://saxon.sf.net/"
-                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:schold="http://www.ascc.net/xml/schematron"
-                xmlns:iso="http://purl.oclc.org/dsdl/schematron"
-                xmlns:xhtml="http://www.w3.org/1999/xhtml"
-                xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
-                xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-                xmlns:ubl="urn:oasis:names:specification:ubl:schema:xsd:ApplicationResponse-2"
-                xmlns:u="utils"
-                version="2.0"><!--Implementers: please note that overriding process-prolog or process-root is 
+<xsl:stylesheet xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+                 xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+                 xmlns:iso="http://purl.oclc.org/dsdl/schematron"
+                 xmlns:saxon="http://saxon.sf.net/"
+                 xmlns:schold="http://www.ascc.net/xml/schematron"
+                 xmlns:u="utils"
+                 xmlns:ubl="urn:oasis:names:specification:ubl:schema:xsd:ApplicationResponse-2"
+                 xmlns:xhtml="http://www.w3.org/1999/xhtml"
+                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                 xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                 version="2.0"><!--Implementers: please note that overriding process-prolog or process-root is 
     the preferred method for meta-stylesheets to use where possible. -->
    <xsl:param name="archiveDirParameter"/>
    <xsl:param name="archiveNameParameter"/>
@@ -19,55 +19,45 @@
    <xsl:variable name="document-uri">
       <xsl:value-of select="document-uri(/)"/>
    </xsl:variable>
-
    <!--PHASES-->
-
-
    <!--PROLOG-->
    <xsl:output xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-               method="xml"
-               omit-xml-declaration="no"
-               standalone="yes"
-               indent="yes"/>
-
+                method="xml"
+                omit-xml-declaration="no"
+                standalone="yes"
+                indent="yes"/>
    <!--XSD TYPES FOR XSLT2-->
-
-
    <!--KEYS AND FUNCTIONS-->
    <function xmlns="http://www.w3.org/1999/XSL/Transform"
-             xmlns:xi="http://www.w3.org/2001/XInclude"
-             name="u:gln"
-             as="xs:boolean">
+              xmlns:xi="http://www.w3.org/2001/XInclude"
+              name="u:gln"
+              as="xs:boolean">
       <param name="val"/>
       <variable name="length" select="string-length($val) - 1"/>
       <variable name="digits"
-                select="reverse(for $i in string-to-codepoints(substring($val, 0, $length + 1)) return $i - 48)"/>
+                 select="reverse(for $i in string-to-codepoints(substring($val, 0, $length + 1)) return $i - 48)"/>
       <variable name="weightedSum"
-                select="sum(for $i in (0 to $length - 1) return $digits[$i + 1] * (1 + ((($i + 1) mod 2) * 2)))"/>
+                 select="sum(for $i in (0 to $length - 1) return $digits[$i + 1] * (1 + ((($i + 1) mod 2) * 2)))"/>
       <value-of select="(10 - ($weightedSum mod 10)) mod 10 = number(substring($val, $length + 1, 1))"/>
    </function>
    <function xmlns="http://www.w3.org/1999/XSL/Transform"
-             xmlns:xi="http://www.w3.org/2001/XInclude"
-             name="u:mod11"
-             as="xs:boolean">
+              xmlns:xi="http://www.w3.org/2001/XInclude"
+              name="u:mod11"
+              as="xs:boolean">
       <param name="val"/>
       <variable name="length" select="string-length($val) - 1"/>
       <variable name="digits"
-                select="reverse(for $i in string-to-codepoints(substring($val, 0, $length + 1)) return $i - 48)"/>
+                 select="reverse(for $i in string-to-codepoints(substring($val, 0, $length + 1)) return $i - 48)"/>
       <variable name="weightedSum"
-                select="sum(for $i in (0 to $length - 1) return $digits[$i + 1] * (($i mod 6) + 2))"/>
+                 select="sum(for $i in (0 to $length - 1) return $digits[$i + 1] * (($i mod 6) + 2))"/>
       <value-of select="number($val) &gt; 0 and (11 - ($weightedSum mod 11)) mod 11 = number(substring($val, $length + 1, 1))"/>
    </function>
-
    <!--DEFAULT RULES-->
-
-
    <!--MODE: SCHEMATRON-SELECT-FULL-PATH-->
    <!--This mode can be used to generate an ugly though full XPath for locators-->
    <xsl:template match="*" mode="schematron-select-full-path">
       <xsl:apply-templates select="." mode="schematron-get-full-path"/>
    </xsl:template>
-
    <!--MODE: SCHEMATRON-FULL-PATH-->
    <!--This mode can be used to generate an ugly though full XPath for locators-->
    <xsl:template match="*" mode="schematron-get-full-path">
@@ -86,7 +76,7 @@
          </xsl:otherwise>
       </xsl:choose>
       <xsl:variable name="preceding"
-                    select="count(preceding-sibling::*[local-name()=local-name(current())                                   and namespace-uri() = namespace-uri(current())])"/>
+                     select="count(preceding-sibling::*[local-name()=local-name(current())                                   and namespace-uri() = namespace-uri(current())])"/>
       <xsl:text>[</xsl:text>
       <xsl:value-of select="1+ $preceding"/>
       <xsl:text>]</xsl:text>
@@ -106,7 +96,6 @@
          </xsl:otherwise>
       </xsl:choose>
    </xsl:template>
-
    <!--MODE: SCHEMATRON-FULL-PATH-2-->
    <!--This mode can be used to generate prefixed XPath for humans-->
    <xsl:template match="node() | @*" mode="schematron-get-full-path-2">
@@ -140,7 +129,6 @@
          <xsl:text/>/@<xsl:value-of select="name(.)"/>
       </xsl:if>
    </xsl:template>
-
    <!--MODE: GENERATE-ID-FROM-PATH -->
    <xsl:template match="/" mode="generate-id-from-path"/>
    <xsl:template match="text()" mode="generate-id-from-path">
@@ -164,7 +152,6 @@
       <xsl:text>.</xsl:text>
       <xsl:value-of select="concat('.',name(),'-',1+count(preceding-sibling::*[name()=name(current())]),'-')"/>
    </xsl:template>
-
    <!--MODE: GENERATE-ID-2 -->
    <xsl:template match="/" mode="generate-id-2">U</xsl:template>
    <xsl:template match="*" mode="generate-id-2" priority="2">
@@ -187,12 +174,11 @@
    </xsl:template>
    <!--Strip characters-->
    <xsl:template match="text()" priority="-1"/>
-
    <!--SCHEMA SETUP-->
    <xsl:template match="/">
       <svrl:schematron-output xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                              title="Rules for PEPPOL Invoice Response transaction 3.0"
-                              schemaVersion="iso">
+                               title="Rules for PEPPOL Invoice Response transaction 3.0"
+                               schemaVersion="iso">
          <xsl:comment>
             <xsl:value-of select="$archiveDirParameter"/>   
 		 <xsl:value-of select="$archiveNameParameter"/>  
@@ -200,11 +186,11 @@
 		 <xsl:value-of select="$fileDirParameter"/>
          </xsl:comment>
          <svrl:ns-prefix-in-attribute-values uri="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
-                                             prefix="cbc"/>
+                                              prefix="cbc"/>
          <svrl:ns-prefix-in-attribute-values uri="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-                                             prefix="cac"/>
+                                              prefix="cac"/>
          <svrl:ns-prefix-in-attribute-values uri="urn:oasis:names:specification:ubl:schema:xsd:ApplicationResponse-2"
-                                             prefix="ubl"/>
+                                              prefix="ubl"/>
          <svrl:ns-prefix-in-attribute-values uri="http://www.w3.org/2001/XMLSchema" prefix="xs"/>
          <svrl:ns-prefix-in-attribute-values uri="utils" prefix="u"/>
          <svrl:active-pattern>
@@ -244,21 +230,16 @@
          <xsl:apply-templates select="/" mode="M12"/>
       </svrl:schematron-output>
    </xsl:template>
-
    <!--SCHEMATRON PATTERNS-->
    <svrl:text xmlns:svrl="http://purl.oclc.org/dsdl/svrl">Rules for PEPPOL Invoice Response transaction 3.0</svrl:text>
-
    <!--PATTERN -->
-
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="//*[not(*) and not(normalize-space())]"
-                 priority="1000"
-                 mode="M8">
+                  priority="1000"
+                  mode="M8">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="//*[not(*) and not(normalize-space())]"/>
-
-		    <!--ASSERT -->
+                        context="//*[not(*) and not(normalize-space())]"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="false()"/>
          <xsl:otherwise>
@@ -278,15 +259,11 @@
    <xsl:template match="@*|node()" priority="-2" mode="M8">
       <xsl:apply-templates select="*" mode="M8"/>
    </xsl:template>
-
    <!--PATTERN -->
-
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/*" priority="1003" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="/*"/>
-
-		    <!--ASSERT -->
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="not(@*:schemaLocation)"/>
          <xsl:otherwise>
@@ -302,20 +279,18 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M9"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="cbc:IssueDate | cbc:DueDate | cbc:TaxPointDate | cbc:StartDate | cbc:EndDate | cbc:ActualDeliveryDate"
-                 priority="1002"
-                 mode="M9">
+                  priority="1002"
+                  mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="cbc:IssueDate | cbc:DueDate | cbc:TaxPointDate | cbc:StartDate | cbc:EndDate | cbc:ActualDeliveryDate"/>
-
-		    <!--ASSERT -->
+                        context="cbc:IssueDate | cbc:DueDate | cbc:TaxPointDate | cbc:StartDate | cbc:EndDate | cbc:ActualDeliveryDate"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="(string(.) castable as xs:date) and (string-length(.) = 10)"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="(string(.) castable as xs:date) and (string-length(.) = 10)">
+                                 test="(string(.) castable as xs:date) and (string-length(.) = 10)">
                <xsl:attribute name="id">PEPPOL-COMMON-R030</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -327,20 +302,18 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M9"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="cbc:EndpointID[@schemeID = '0088'] | cac:PartyIdentification/cbc:ID[@schemeID = '0088'] | cbc:CompanyID[@schemeID = '0088']"
-                 priority="1001"
-                 mode="M9">
+                  priority="1001"
+                  mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="cbc:EndpointID[@schemeID = '0088'] | cac:PartyIdentification/cbc:ID[@schemeID = '0088'] | cbc:CompanyID[@schemeID = '0088']"/>
-
-		    <!--ASSERT -->
+                        context="cbc:EndpointID[@schemeID = '0088'] | cac:PartyIdentification/cbc:ID[@schemeID = '0088'] | cbc:CompanyID[@schemeID = '0088']"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="matches(normalize-space(), '^[0-9]+$') and u:gln(normalize-space())"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="matches(normalize-space(), '^[0-9]+$') and u:gln(normalize-space())">
+                                 test="matches(normalize-space(), '^[0-9]+$') and u:gln(normalize-space())">
                <xsl:attribute name="id">PEPPOL-COMMON-R040</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -352,20 +325,18 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M9"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="cbc:EndpointID[@schemeID = '0192'] | cac:PartyIdentification/cbc:ID[@schemeID = '0192'] | cbc:CompanyID[@schemeID = '0192']"
-                 priority="1000"
-                 mode="M9">
+                  priority="1000"
+                  mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="cbc:EndpointID[@schemeID = '0192'] | cac:PartyIdentification/cbc:ID[@schemeID = '0192'] | cbc:CompanyID[@schemeID = '0192']"/>
-
-		    <!--ASSERT -->
+                        context="cbc:EndpointID[@schemeID = '0192'] | cac:PartyIdentification/cbc:ID[@schemeID = '0192'] | cbc:CompanyID[@schemeID = '0192']"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="matches(normalize-space(), '^[0-9]{9}$') and u:mod11(normalize-space())"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="matches(normalize-space(), '^[0-9]{9}$') and u:mod11(normalize-space())">
+                                 test="matches(normalize-space(), '^[0-9]{9}$') and u:mod11(normalize-space())">
                <xsl:attribute name="id">PEPPOL-COMMON-R041</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -381,28 +352,25 @@
    <xsl:template match="@*|node()" priority="-2" mode="M9">
       <xsl:apply-templates select="*" mode="M9"/>
    </xsl:template>
-
    <!--PATTERN -->
    <xsl:variable name="cleas"
-                 select="tokenize('0002 0007 0009 0037 0060 0088 0096 0097 0106 0130 0135 0142 0151 0183 0184 0190 0191 0192 0193 0195 0196 0198 0199 0200 0201 0202 0204 0208 0209 0210 0211 0212 0213 9901 9906 9907 9910 9913 9914 9915 9918 9919 9920 9922 9923 9924 9925 9926 9927 9928 9929 9930 9931 9932 9933 9934 9935 9936 9937 9938 9939 9940 9941 9942 9943 9944 9945 9946 9947 9948 9949 9950 9951 9952 9953 9955 9957', '\s')"/>
+                  select="tokenize('0002 0007 0009 0037 0060 0088 0096 0097 0106 0130 0135 0142 0151 0183 0184 0190 0191 0192 0193 0195 0196 0198 0199 0200 0201 0202 0204 0208 0209 0210 0211 0212 0213 9901 9906 9907 9910 9913 9914 9915 9918 9919 9920 9922 9923 9924 9925 9926 9927 9928 9929 9930 9931 9932 9933 9934 9935 9936 9937 9938 9939 9940 9941 9942 9943 9944 9945 9946 9947 9948 9949 9950 9951 9952 9953 9955 9957', '\s')"/>
    <xsl:variable name="clClarificationListID"
-                 select="tokenize('OPStatusAction OPStatusReason', '\s')"/>
+                  select="tokenize('OPStatusAction OPStatusReason', '\s')"/>
    <xsl:variable name="clUNCL1001"
-                 select="tokenize('1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 256 257 258 259 260 261 262 263 264 265 266 267 268 269 270 271 272 273 274 275 276 277 278 279 280 281 282 283 284 285 286 287 288 289 290 291 292 293 294 295 296 297 298 299 300 301 302 303 304 305 306 307 308 309 310 311 312 313 314 315 316 317 318 319 320 321 322 323 324 325 326 327 328 329 330 331 332 333 334 335 336 337 338 339 340 341 342 343 344 345 346 347 348 349 350 351 352 353 354 355 356 357 358 359 360 361 362 363 364 365 366 367 368 369 370 371 372 373 374 375 376 377 378 379 380 381 382 383 384 385 386 387 388 389 390 391 392 393 394 395 396 397 398 399 400 401 402 403 404 405 406 407 408 409 410 411 412 413 414 415 416 417 418 419 420 421 422 423 1999 424 425 426 427 428 429 430 431 432 433 434 435 436 437 438 439 440 441 442 443 444 445 446 447 448 449 450 451 452 453 454 455 456 457 458 459 460 461 462 463 464 465 466 467 468 469 470 481 482 483 484 485 486 487 488 489 490 491 493 494 495 496 497 498 499 520 521 522 523 524 525 526 527 528 529 530 531 532 533 534 535 536 537 538 539 550 551 552 553 554 575 576 577 578 579 580 581 582 583 584 585 586 587 588 589 610 621 622 623 624 625 626 627 628 629 630 631 632 633 634 635 636 637 638 639 640 641 642 643 644 645 646 647 648 649 650 651 652 653 654 655 656 657 658 659 700 701 702 703 704 705 706 707 708 709 710 711 712 713 714 715 716 717 718 719 720 721 722 723 724 725 726 727 728 729 730 731 732 733 734 735 736 737 738 739 740 741 742 743 744 745 746 747 748 749 750 751 760 761 763 764 765 766 770 775 780 781 782 783 784 785 786 787 788 789 790 791 792 793 794 795 796 797 798 799 810 811 812 820 821 822 823 824 825 830 833 840 841 850 851 852 853 855 856 860 861 862 863 864 865 870 890 895 896 901 910 911 913 914 915 916 917 925 926 927 929 930 931 932 933 934 935 936 937 938 940 941 950 951 952 953 954 955 960 961 962 963 964 965 966 970 971 972 974 975 976 977 978 979 990 991 995 996 998', '\s')"/>
+                  select="tokenize('1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 256 257 258 259 260 261 262 263 264 265 266 267 268 269 270 271 272 273 274 275 276 277 278 279 280 281 282 283 284 285 286 287 288 289 290 291 292 293 294 295 296 297 298 299 300 301 302 303 304 305 306 307 308 309 310 311 312 313 314 315 316 317 318 319 320 321 322 323 324 325 326 327 328 329 330 331 332 333 334 335 336 337 338 339 340 341 342 343 344 345 346 347 348 349 350 351 352 353 354 355 356 357 358 359 360 361 362 363 364 365 366 367 368 369 370 371 372 373 374 375 376 377 378 379 380 381 382 383 384 385 386 387 388 389 390 391 392 393 394 395 396 397 398 399 400 401 402 403 404 405 406 407 408 409 410 411 412 413 414 415 416 417 418 419 420 421 422 423 1999 424 425 426 427 428 429 430 431 432 433 434 435 436 437 438 439 440 441 442 443 444 445 446 447 448 449 450 451 452 453 454 455 456 457 458 459 460 461 462 463 464 465 466 467 468 469 470 481 482 483 484 485 486 487 488 489 490 491 493 494 495 496 497 498 499 520 521 522 523 524 525 526 527 528 529 530 531 532 533 534 535 536 537 538 539 550 551 552 553 554 575 576 577 578 579 580 581 582 583 584 585 586 587 588 589 610 621 622 623 624 625 626 627 628 629 630 631 632 633 634 635 636 637 638 639 640 641 642 643 644 645 646 647 648 649 650 651 652 653 654 655 656 657 658 659 700 701 702 703 704 705 706 707 708 709 710 711 712 713 714 715 716 717 718 719 720 721 722 723 724 725 726 727 728 729 730 731 732 733 734 735 736 737 738 739 740 741 742 743 744 745 746 747 748 749 750 751 760 761 763 764 765 766 770 775 780 781 782 783 784 785 786 787 788 789 790 791 792 793 794 795 796 797 798 799 810 811 812 820 821 822 823 824 825 830 833 840 841 850 851 852 853 855 856 860 861 862 863 864 865 870 890 895 896 901 910 911 913 914 915 916 917 925 926 927 929 930 931 932 933 934 935 936 937 938 940 941 950 951 952 953 954 955 960 961 962 963 964 965 966 970 971 972 974 975 976 977 978 979 990 991 995 996 998', '\s')"/>
    <xsl:variable name="clUNCL4343-T111" select="tokenize('AB AP RE IP UQ CA PD', '\s')"/>
    <xsl:variable name="clOPStatusAction"
-                 select="tokenize('NOA PIN NIN CNF CNP CNA OTH', '\s')"/>
+                  select="tokenize('NOA PIN NIN CNF CNP CNA OTH', '\s')"/>
    <xsl:variable name="clOPStatusReason"
-                 select="tokenize('NON REF LEG REC QUA DEL PRI QTY ITM PAY UNR FIN PPD OTH', '\s')"/>
+                  select="tokenize('NON REF LEG REC QUA DEL PRI QTY ITM PAY UNR FIN PPD OTH', '\s')"/>
    <xsl:variable name="clICD"
-                 select="tokenize('0002 0003 0004 0005 0006 0007 0008 0009 0010 0011 0012 0013 0014 0015 0016 0017 0018 0019 0020 0021 0022 0023 0024 0025 0026 0027 0028 0029 0030 0031 0032 0033 0034 0035 0036 0037 0038 0039 0040 0041 0042 0043 0044 0045 0046 0047 0048 0049 0050 0051 0052 0053 0054 0055 0056 0057 0058 0059 0060 0061 0062 0063 0064 0065 0066 0067 0068 0069 0070 0071 0072 0073 0074 0075 0076 0077 0078 0079 0080 0081 0082 0083 0084 0085 0086 0087 0088 0089 0090 0091 0093 0094 0095 0096 0097 0098 0099 0100 0101 0102 0104 0105 0106 0107 0108 0109 0110 0111 0112 0113 0114 0115 0116 0117 0118 0119 0120 0121 0122 0123 0124 0125 0126 0127 0128 0129 0130 0131 0132 0133 0134 0135 0136 0137 0138 0139 0140 0141 0142 0143 0144 0145 0146 0147 0148 0149 0150 0151 0152 0153 0154 0155 0156 0157 0158 0159 0160 0161 0162 0163 0164 0165 0166 0167 0168 0169 0170 0171 0172 0173 0174 0175 0176 0177 0178 0179 0180 0183 0184 0185 0186 0187 0188 0189 0190 0191 0192 0193 0194 0195 0196 0197 0198 0199 0200 0201 0202 0203 0204 0205 0206 0207 0208 0209 0210 0211 0212 0213', '\s')"/>
-
-	  <!--RULE -->
+                  select="tokenize('0002 0003 0004 0005 0006 0007 0008 0009 0010 0011 0012 0013 0014 0015 0016 0017 0018 0019 0020 0021 0022 0023 0024 0025 0026 0027 0028 0029 0030 0031 0032 0033 0034 0035 0036 0037 0038 0039 0040 0041 0042 0043 0044 0045 0046 0047 0048 0049 0050 0051 0052 0053 0054 0055 0056 0057 0058 0059 0060 0061 0062 0063 0064 0065 0066 0067 0068 0069 0070 0071 0072 0073 0074 0075 0076 0077 0078 0079 0080 0081 0082 0083 0084 0085 0086 0087 0088 0089 0090 0091 0093 0094 0095 0096 0097 0098 0099 0100 0101 0102 0104 0105 0106 0107 0108 0109 0110 0111 0112 0113 0114 0115 0116 0117 0118 0119 0120 0121 0122 0123 0124 0125 0126 0127 0128 0129 0130 0131 0132 0133 0134 0135 0136 0137 0138 0139 0140 0141 0142 0143 0144 0145 0146 0147 0148 0149 0150 0151 0152 0153 0154 0155 0156 0157 0158 0159 0160 0161 0162 0163 0164 0165 0166 0167 0168 0169 0170 0171 0172 0173 0174 0175 0176 0177 0178 0179 0180 0183 0184 0185 0186 0187 0188 0189 0190 0191 0192 0193 0194 0195 0196 0197 0198 0199 0200 0201 0202 0203 0204 0205 0206 0207 0208 0209 0210 0211 0212 0213', '\s')"/>
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse" priority="1059" mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse"/>
-
-		    <!--ASSERT -->
+                        context="/ubl:ApplicationResponse"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="cbc:CustomizationID"/>
          <xsl:otherwise>
@@ -416,8 +384,7 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-
-		    <!--ASSERT -->
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="cbc:ProfileID"/>
          <xsl:otherwise>
@@ -431,8 +398,7 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-
-		    <!--ASSERT -->
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="cbc:ID"/>
          <xsl:otherwise>
@@ -446,8 +412,7 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-
-		    <!--ASSERT -->
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="cbc:IssueDate"/>
          <xsl:otherwise>
@@ -461,8 +426,7 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-
-		    <!--ASSERT -->
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="cac:SenderParty"/>
          <xsl:otherwise>
@@ -476,8 +440,7 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-
-		    <!--ASSERT -->
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="cac:ReceiverParty"/>
          <xsl:otherwise>
@@ -491,8 +454,7 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-
-		    <!--ASSERT -->
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="cac:DocumentResponse"/>
          <xsl:otherwise>
@@ -506,8 +468,7 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-
-		    <!--ASSERT -->
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="not(@*:schemaLocation)"/>
          <xsl:otherwise>
@@ -523,29 +484,26 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cbc:CustomizationID"
-                 priority="1058"
-                 mode="M10">
+                  priority="1058"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cbc:CustomizationID"/>
+                        context="/ubl:ApplicationResponse/cbc:CustomizationID"/>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cbc:ProfileID"
-                 priority="1057"
-                 mode="M10">
+                  priority="1057"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cbc:ProfileID"/>
-
-		    <!--ASSERT -->
+                        context="/ubl:ApplicationResponse/cbc:ProfileID"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="normalize-space(text()) = 'urn:fdc:peppol.eu:poacc:bis:invoice_response:3'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="normalize-space(text()) = 'urn:fdc:peppol.eu:poacc:bis:invoice_response:3'">
+                                 test="normalize-space(text()) = 'urn:fdc:peppol.eu:poacc:bis:invoice_response:3'">
                <xsl:attribute name="id">PEPPOL-T111-B00301</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -557,49 +515,43 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cbc:ID" priority="1056" mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cbc:ID"/>
+                        context="/ubl:ApplicationResponse/cbc:ID"/>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cbc:IssueDate"
-                 priority="1055"
-                 mode="M10">
+                  priority="1055"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cbc:IssueDate"/>
+                        context="/ubl:ApplicationResponse/cbc:IssueDate"/>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cbc:IssueTime"
-                 priority="1054"
-                 mode="M10">
+                  priority="1054"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cbc:IssueTime"/>
+                        context="/ubl:ApplicationResponse/cbc:IssueTime"/>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cbc:Note"
-                 priority="1053"
-                 mode="M10">
+                  priority="1053"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cbc:Note"/>
+                        context="/ubl:ApplicationResponse/cbc:Note"/>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:SenderParty"
-                 priority="1052"
-                 mode="M10">
+                  priority="1052"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:SenderParty"/>
-
-		    <!--ASSERT -->
+                        context="/ubl:ApplicationResponse/cac:SenderParty"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="cbc:EndpointID"/>
          <xsl:otherwise>
@@ -613,8 +565,7 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-
-		    <!--ASSERT -->
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="cac:PartyLegalEntity"/>
          <xsl:otherwise>
@@ -630,15 +581,13 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:SenderParty/cbc:EndpointID"
-                 priority="1051"
-                 mode="M10">
+                  priority="1051"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:SenderParty/cbc:EndpointID"/>
-
-		    <!--ASSERT -->
+                        context="/ubl:ApplicationResponse/cac:SenderParty/cbc:EndpointID"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="@schemeID"/>
          <xsl:otherwise>
@@ -652,13 +601,12 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-
-		    <!--ASSERT -->
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="not(@schemeID) or (some $code in $cleas satisfies $code = @schemeID)"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="not(@schemeID) or (some $code in $cleas satisfies $code = @schemeID)">
+                                 test="not(@schemeID) or (some $code in $cleas satisfies $code = @schemeID)">
                <xsl:attribute name="id">PEPPOL-T111-B00902</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -670,15 +618,13 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:SenderParty/cac:PartyIdentification"
-                 priority="1050"
-                 mode="M10">
+                  priority="1050"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:SenderParty/cac:PartyIdentification"/>
-
-		    <!--ASSERT -->
+                        context="/ubl:ApplicationResponse/cac:SenderParty/cac:PartyIdentification"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="cbc:ID"/>
          <xsl:otherwise>
@@ -694,20 +640,18 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:SenderParty/cac:PartyIdentification/cbc:ID"
-                 priority="1049"
-                 mode="M10">
+                  priority="1049"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:SenderParty/cac:PartyIdentification/cbc:ID"/>
-
-		    <!--ASSERT -->
+                        context="/ubl:ApplicationResponse/cac:SenderParty/cac:PartyIdentification/cbc:ID"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="not(@schemeID) or (some $code in $clICD satisfies $code = @schemeID)"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="not(@schemeID) or (some $code in $clICD satisfies $code = @schemeID)">
+                                 test="not(@schemeID) or (some $code in $clICD satisfies $code = @schemeID)">
                <xsl:attribute name="id">PEPPOL-T111-B01201</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -719,15 +663,13 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:SenderParty/cac:PartyLegalEntity"
-                 priority="1048"
-                 mode="M10">
+                  priority="1048"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:SenderParty/cac:PartyLegalEntity"/>
-
-		    <!--ASSERT -->
+                        context="/ubl:ApplicationResponse/cac:SenderParty/cac:PartyLegalEntity"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="cbc:RegistrationName"/>
          <xsl:otherwise>
@@ -743,24 +685,21 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:SenderParty/cac:PartyLegalEntity/cbc:RegistrationName"
-                 priority="1047"
-                 mode="M10">
+                  priority="1047"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:SenderParty/cac:PartyLegalEntity/cbc:RegistrationName"/>
+                        context="/ubl:ApplicationResponse/cac:SenderParty/cac:PartyLegalEntity/cbc:RegistrationName"/>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:SenderParty/cac:PartyLegalEntity/*"
-                 priority="1046"
-                 mode="M10">
+                  priority="1046"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:SenderParty/cac:PartyLegalEntity/*"/>
-
-		    <!--ASSERT -->
+                        context="/ubl:ApplicationResponse/cac:SenderParty/cac:PartyLegalEntity/*"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="false()"/>
          <xsl:otherwise>
@@ -776,51 +715,45 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:SenderParty/cac:Contact"
-                 priority="1045"
-                 mode="M10">
+                  priority="1045"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:SenderParty/cac:Contact"/>
+                        context="/ubl:ApplicationResponse/cac:SenderParty/cac:Contact"/>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:SenderParty/cac:Contact/cbc:Name"
-                 priority="1044"
-                 mode="M10">
+                  priority="1044"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:SenderParty/cac:Contact/cbc:Name"/>
+                        context="/ubl:ApplicationResponse/cac:SenderParty/cac:Contact/cbc:Name"/>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:SenderParty/cac:Contact/cbc:Telephone"
-                 priority="1043"
-                 mode="M10">
+                  priority="1043"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:SenderParty/cac:Contact/cbc:Telephone"/>
+                        context="/ubl:ApplicationResponse/cac:SenderParty/cac:Contact/cbc:Telephone"/>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:SenderParty/cac:Contact/cbc:ElectronicMail"
-                 priority="1042"
-                 mode="M10">
+                  priority="1042"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:SenderParty/cac:Contact/cbc:ElectronicMail"/>
+                        context="/ubl:ApplicationResponse/cac:SenderParty/cac:Contact/cbc:ElectronicMail"/>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:SenderParty/cac:Contact/*"
-                 priority="1041"
-                 mode="M10">
+                  priority="1041"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:SenderParty/cac:Contact/*"/>
-
-		    <!--ASSERT -->
+                        context="/ubl:ApplicationResponse/cac:SenderParty/cac:Contact/*"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="false()"/>
          <xsl:otherwise>
@@ -836,15 +769,13 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:SenderParty/*"
-                 priority="1040"
-                 mode="M10">
+                  priority="1040"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:SenderParty/*"/>
-
-		    <!--ASSERT -->
+                        context="/ubl:ApplicationResponse/cac:SenderParty/*"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="false()"/>
          <xsl:otherwise>
@@ -860,15 +791,13 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:ReceiverParty"
-                 priority="1039"
-                 mode="M10">
+                  priority="1039"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:ReceiverParty"/>
-
-		    <!--ASSERT -->
+                        context="/ubl:ApplicationResponse/cac:ReceiverParty"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="cbc:EndpointID"/>
          <xsl:otherwise>
@@ -882,8 +811,7 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-
-		    <!--ASSERT -->
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="cac:PartyLegalEntity"/>
          <xsl:otherwise>
@@ -899,15 +827,13 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:ReceiverParty/cbc:EndpointID"
-                 priority="1038"
-                 mode="M10">
+                  priority="1038"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:ReceiverParty/cbc:EndpointID"/>
-
-		    <!--ASSERT -->
+                        context="/ubl:ApplicationResponse/cac:ReceiverParty/cbc:EndpointID"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="@schemeID"/>
          <xsl:otherwise>
@@ -921,13 +847,12 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-
-		    <!--ASSERT -->
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="not(@schemeID) or (some $code in $cleas satisfies $code = @schemeID)"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="not(@schemeID) or (some $code in $cleas satisfies $code = @schemeID)">
+                                 test="not(@schemeID) or (some $code in $cleas satisfies $code = @schemeID)">
                <xsl:attribute name="id">PEPPOL-T111-B02102</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -939,15 +864,13 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:ReceiverParty/cac:PartyIdentification"
-                 priority="1037"
-                 mode="M10">
+                  priority="1037"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:ReceiverParty/cac:PartyIdentification"/>
-
-		    <!--ASSERT -->
+                        context="/ubl:ApplicationResponse/cac:ReceiverParty/cac:PartyIdentification"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="cbc:ID"/>
          <xsl:otherwise>
@@ -963,20 +886,18 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:ReceiverParty/cac:PartyIdentification/cbc:ID"
-                 priority="1036"
-                 mode="M10">
+                  priority="1036"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:ReceiverParty/cac:PartyIdentification/cbc:ID"/>
-
-		    <!--ASSERT -->
+                        context="/ubl:ApplicationResponse/cac:ReceiverParty/cac:PartyIdentification/cbc:ID"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="not(@schemeID) or (some $code in $clICD satisfies $code = @schemeID)"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="not(@schemeID) or (some $code in $clICD satisfies $code = @schemeID)">
+                                 test="not(@schemeID) or (some $code in $clICD satisfies $code = @schemeID)">
                <xsl:attribute name="id">PEPPOL-T111-B02401</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -988,15 +909,13 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:ReceiverParty/cac:PartyLegalEntity"
-                 priority="1035"
-                 mode="M10">
+                  priority="1035"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:ReceiverParty/cac:PartyLegalEntity"/>
-
-		    <!--ASSERT -->
+                        context="/ubl:ApplicationResponse/cac:ReceiverParty/cac:PartyLegalEntity"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="cbc:RegistrationName"/>
          <xsl:otherwise>
@@ -1012,24 +931,21 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:ReceiverParty/cac:PartyLegalEntity/cbc:RegistrationName"
-                 priority="1034"
-                 mode="M10">
+                  priority="1034"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:ReceiverParty/cac:PartyLegalEntity/cbc:RegistrationName"/>
+                        context="/ubl:ApplicationResponse/cac:ReceiverParty/cac:PartyLegalEntity/cbc:RegistrationName"/>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:ReceiverParty/cac:PartyLegalEntity/*"
-                 priority="1033"
-                 mode="M10">
+                  priority="1033"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:ReceiverParty/cac:PartyLegalEntity/*"/>
-
-		    <!--ASSERT -->
+                        context="/ubl:ApplicationResponse/cac:ReceiverParty/cac:PartyLegalEntity/*"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="false()"/>
          <xsl:otherwise>
@@ -1045,15 +961,13 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:ReceiverParty/*"
-                 priority="1032"
-                 mode="M10">
+                  priority="1032"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:ReceiverParty/*"/>
-
-		    <!--ASSERT -->
+                        context="/ubl:ApplicationResponse/cac:ReceiverParty/*"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="false()"/>
          <xsl:otherwise>
@@ -1069,15 +983,13 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:DocumentResponse"
-                 priority="1031"
-                 mode="M10">
+                  priority="1031"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:DocumentResponse"/>
-
-		    <!--ASSERT -->
+                        context="/ubl:ApplicationResponse/cac:DocumentResponse"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="cac:Response"/>
          <xsl:otherwise>
@@ -1091,8 +1003,7 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-
-		    <!--ASSERT -->
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="cac:DocumentReference"/>
          <xsl:otherwise>
@@ -1108,15 +1019,13 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:DocumentResponse/cac:Response"
-                 priority="1030"
-                 mode="M10">
+                  priority="1030"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:Response"/>
-
-		    <!--ASSERT -->
+                        context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:Response"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="cbc:ResponseCode"/>
          <xsl:otherwise>
@@ -1132,20 +1041,18 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:DocumentResponse/cac:Response/cbc:ResponseCode"
-                 priority="1029"
-                 mode="M10">
+                  priority="1029"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:Response/cbc:ResponseCode"/>
-
-		    <!--ASSERT -->
+                        context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:Response/cbc:ResponseCode"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="(some $code in $clUNCL4343-T111 satisfies $code = normalize-space(text()))"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="(some $code in $clUNCL4343-T111 satisfies $code = normalize-space(text()))">
+                                 test="(some $code in $clUNCL4343-T111 satisfies $code = normalize-space(text()))">
                <xsl:attribute name="id">PEPPOL-T111-B03001</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -1157,38 +1064,34 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:DocumentResponse/cac:Response/cbc:EffectiveDate"
-                 priority="1028"
-                 mode="M10">
+                  priority="1028"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:Response/cbc:EffectiveDate"/>
+                        context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:Response/cbc:EffectiveDate"/>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:DocumentResponse/cac:Response/cac:Status"
-                 priority="1027"
-                 mode="M10">
+                  priority="1027"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:Response/cac:Status"/>
+                        context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:Response/cac:Status"/>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:DocumentResponse/cac:Response/cac:Status/cbc:StatusReasonCode"
-                 priority="1026"
-                 mode="M10">
+                  priority="1026"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:Response/cac:Status/cbc:StatusReasonCode"/>
-
-		    <!--ASSERT -->
+                        context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:Response/cac:Status/cbc:StatusReasonCode"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="(some $code in $clOPStatusReason satisfies $code = normalize-space(text())) or (some $code in $clOPStatusAction satisfies $code = normalize-space(text()))"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="(some $code in $clOPStatusReason satisfies $code = normalize-space(text())) or (some $code in $clOPStatusAction satisfies $code = normalize-space(text()))">
+                                 test="(some $code in $clOPStatusReason satisfies $code = normalize-space(text())) or (some $code in $clOPStatusAction satisfies $code = normalize-space(text()))">
                <xsl:attribute name="id">PEPPOL-T111-B03301</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -1198,8 +1101,7 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-
-		    <!--ASSERT -->
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="@listID"/>
          <xsl:otherwise>
@@ -1213,13 +1115,12 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-
-		    <!--ASSERT -->
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="not(@listID) or (some $code in $clClarificationListID satisfies $code = @listID)"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="not(@listID) or (some $code in $clClarificationListID satisfies $code = @listID)">
+                                 test="not(@listID) or (some $code in $clClarificationListID satisfies $code = @listID)">
                <xsl:attribute name="id">PEPPOL-T111-B03303</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -1231,24 +1132,21 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:DocumentResponse/cac:Response/cac:Status/cbc:StatusReason"
-                 priority="1025"
-                 mode="M10">
+                  priority="1025"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:Response/cac:Status/cbc:StatusReason"/>
+                        context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:Response/cac:Status/cbc:StatusReason"/>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:DocumentResponse/cac:Response/cac:Status/cac:Condition"
-                 priority="1024"
-                 mode="M10">
+                  priority="1024"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:Response/cac:Status/cac:Condition"/>
-
-		    <!--ASSERT -->
+                        context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:Response/cac:Status/cac:Condition"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="cbc:AttributeID"/>
          <xsl:otherwise>
@@ -1264,33 +1162,29 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:DocumentResponse/cac:Response/cac:Status/cac:Condition/cbc:AttributeID"
-                 priority="1023"
-                 mode="M10">
+                  priority="1023"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:Response/cac:Status/cac:Condition/cbc:AttributeID"/>
+                        context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:Response/cac:Status/cac:Condition/cbc:AttributeID"/>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:DocumentResponse/cac:Response/cac:Status/cac:Condition/cbc:Description"
-                 priority="1022"
-                 mode="M10">
+                  priority="1022"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:Response/cac:Status/cac:Condition/cbc:Description"/>
+                        context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:Response/cac:Status/cac:Condition/cbc:Description"/>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:DocumentResponse/cac:Response/cac:Status/cac:Condition/*"
-                 priority="1021"
-                 mode="M10">
+                  priority="1021"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:Response/cac:Status/cac:Condition/*"/>
-
-		    <!--ASSERT -->
+                        context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:Response/cac:Status/cac:Condition/*"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="false()"/>
          <xsl:otherwise>
@@ -1306,15 +1200,13 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:DocumentResponse/cac:Response/cac:Status/*"
-                 priority="1020"
-                 mode="M10">
+                  priority="1020"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:Response/cac:Status/*"/>
-
-		    <!--ASSERT -->
+                        context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:Response/cac:Status/*"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="false()"/>
          <xsl:otherwise>
@@ -1330,15 +1222,13 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:DocumentResponse/cac:Response/*"
-                 priority="1019"
-                 mode="M10">
+                  priority="1019"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:Response/*"/>
-
-		    <!--ASSERT -->
+                        context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:Response/*"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="false()"/>
          <xsl:otherwise>
@@ -1354,15 +1244,13 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:DocumentResponse/cac:DocumentReference"
-                 priority="1018"
-                 mode="M10">
+                  priority="1018"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:DocumentReference"/>
-
-		    <!--ASSERT -->
+                        context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:DocumentReference"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="cbc:ID"/>
          <xsl:otherwise>
@@ -1376,8 +1264,7 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-
-		    <!--ASSERT -->
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="cbc:DocumentTypeCode"/>
          <xsl:otherwise>
@@ -1393,38 +1280,34 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:DocumentResponse/cac:DocumentReference/cbc:ID"
-                 priority="1017"
-                 mode="M10">
+                  priority="1017"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:DocumentReference/cbc:ID"/>
+                        context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:DocumentReference/cbc:ID"/>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:DocumentResponse/cac:DocumentReference/cbc:IssueDate"
-                 priority="1016"
-                 mode="M10">
+                  priority="1016"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:DocumentReference/cbc:IssueDate"/>
+                        context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:DocumentReference/cbc:IssueDate"/>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:DocumentResponse/cac:DocumentReference/cbc:DocumentTypeCode"
-                 priority="1015"
-                 mode="M10">
+                  priority="1015"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:DocumentReference/cbc:DocumentTypeCode"/>
-
-		    <!--ASSERT -->
+                        context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:DocumentReference/cbc:DocumentTypeCode"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="(some $code in $clUNCL1001 satisfies $code = normalize-space(text()))"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="(some $code in $clUNCL1001 satisfies $code = normalize-space(text()))">
+                                 test="(some $code in $clUNCL1001 satisfies $code = normalize-space(text()))">
                <xsl:attribute name="id">PEPPOL-T111-B04201</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -1436,15 +1319,13 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:DocumentResponse/cac:DocumentReference/*"
-                 priority="1014"
-                 mode="M10">
+                  priority="1014"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:DocumentReference/*"/>
-
-		    <!--ASSERT -->
+                        context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:DocumentReference/*"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="false()"/>
          <xsl:otherwise>
@@ -1460,15 +1341,13 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:DocumentResponse/cac:IssuerParty"
-                 priority="1013"
-                 mode="M10">
+                  priority="1013"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:IssuerParty"/>
-
-		    <!--ASSERT -->
+                        context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:IssuerParty"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="cac:PartyName"/>
          <xsl:otherwise>
@@ -1484,15 +1363,13 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:DocumentResponse/cac:IssuerParty/cac:PartyIdentification"
-                 priority="1012"
-                 mode="M10">
+                  priority="1012"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:IssuerParty/cac:PartyIdentification"/>
-
-		    <!--ASSERT -->
+                        context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:IssuerParty/cac:PartyIdentification"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="cbc:ID"/>
          <xsl:otherwise>
@@ -1508,20 +1385,18 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:DocumentResponse/cac:IssuerParty/cac:PartyIdentification/cbc:ID"
-                 priority="1011"
-                 mode="M10">
+                  priority="1011"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:IssuerParty/cac:PartyIdentification/cbc:ID"/>
-
-		    <!--ASSERT -->
+                        context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:IssuerParty/cac:PartyIdentification/cbc:ID"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="not(@schemeID) or (some $code in $clICD satisfies $code = @schemeID)"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="not(@schemeID) or (some $code in $clICD satisfies $code = @schemeID)">
+                                 test="not(@schemeID) or (some $code in $clICD satisfies $code = @schemeID)">
                <xsl:attribute name="id">PEPPOL-T111-B04501</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -1533,15 +1408,13 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:DocumentResponse/cac:IssuerParty/cac:PartyName"
-                 priority="1010"
-                 mode="M10">
+                  priority="1010"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:IssuerParty/cac:PartyName"/>
-
-		    <!--ASSERT -->
+                        context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:IssuerParty/cac:PartyName"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="cbc:Name"/>
          <xsl:otherwise>
@@ -1557,24 +1430,21 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:DocumentResponse/cac:IssuerParty/cac:PartyName/cbc:Name"
-                 priority="1009"
-                 mode="M10">
+                  priority="1009"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:IssuerParty/cac:PartyName/cbc:Name"/>
+                        context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:IssuerParty/cac:PartyName/cbc:Name"/>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:DocumentResponse/cac:IssuerParty/*"
-                 priority="1008"
-                 mode="M10">
+                  priority="1008"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:IssuerParty/*"/>
-
-		    <!--ASSERT -->
+                        context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:IssuerParty/*"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="false()"/>
          <xsl:otherwise>
@@ -1590,15 +1460,13 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:DocumentResponse/cac:RecipientParty"
-                 priority="1007"
-                 mode="M10">
+                  priority="1007"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:RecipientParty"/>
-
-		    <!--ASSERT -->
+                        context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:RecipientParty"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="cac:PartyName"/>
          <xsl:otherwise>
@@ -1614,15 +1482,13 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:DocumentResponse/cac:RecipientParty/cac:PartyIdentification"
-                 priority="1006"
-                 mode="M10">
+                  priority="1006"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:RecipientParty/cac:PartyIdentification"/>
-
-		    <!--ASSERT -->
+                        context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:RecipientParty/cac:PartyIdentification"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="cbc:ID"/>
          <xsl:otherwise>
@@ -1638,20 +1504,18 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:DocumentResponse/cac:RecipientParty/cac:PartyIdentification/cbc:ID"
-                 priority="1005"
-                 mode="M10">
+                  priority="1005"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:RecipientParty/cac:PartyIdentification/cbc:ID"/>
-
-		    <!--ASSERT -->
+                        context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:RecipientParty/cac:PartyIdentification/cbc:ID"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="not(@schemeID) or (some $code in $clICD satisfies $code = @schemeID)"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="not(@schemeID) or (some $code in $clICD satisfies $code = @schemeID)">
+                                 test="not(@schemeID) or (some $code in $clICD satisfies $code = @schemeID)">
                <xsl:attribute name="id">PEPPOL-T111-B05101</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -1663,15 +1527,13 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:DocumentResponse/cac:RecipientParty/cac:PartyName"
-                 priority="1004"
-                 mode="M10">
+                  priority="1004"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:RecipientParty/cac:PartyName"/>
-
-		    <!--ASSERT -->
+                        context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:RecipientParty/cac:PartyName"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="cbc:Name"/>
          <xsl:otherwise>
@@ -1687,24 +1549,21 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:DocumentResponse/cac:RecipientParty/cac:PartyName/cbc:Name"
-                 priority="1003"
-                 mode="M10">
+                  priority="1003"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:RecipientParty/cac:PartyName/cbc:Name"/>
+                        context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:RecipientParty/cac:PartyName/cbc:Name"/>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:DocumentResponse/cac:RecipientParty/*"
-                 priority="1002"
-                 mode="M10">
+                  priority="1002"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:RecipientParty/*"/>
-
-		    <!--ASSERT -->
+                        context="/ubl:ApplicationResponse/cac:DocumentResponse/cac:RecipientParty/*"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="false()"/>
          <xsl:otherwise>
@@ -1720,15 +1579,13 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/cac:DocumentResponse/*"
-                 priority="1001"
-                 mode="M10">
+                  priority="1001"
+                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/cac:DocumentResponse/*"/>
-
-		    <!--ASSERT -->
+                        context="/ubl:ApplicationResponse/cac:DocumentResponse/*"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="false()"/>
          <xsl:otherwise>
@@ -1744,13 +1601,11 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="/ubl:ApplicationResponse/*" priority="1000" mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/ubl:ApplicationResponse/*"/>
-
-		    <!--ASSERT -->
+                        context="/ubl:ApplicationResponse/*"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="false()"/>
          <xsl:otherwise>
@@ -1770,23 +1625,19 @@
    <xsl:template match="@*|node()" priority="-2" mode="M10">
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-
    <!--PATTERN -->
-
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="cac:Response[contains( ' CA UQ RE ',concat(' ',normalize-space(cbc:ResponseCode),' '))]"
-                 priority="1003"
-                 mode="M11">
+                  priority="1003"
+                  mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="cac:Response[contains( ' CA UQ RE ',concat(' ',normalize-space(cbc:ResponseCode),' '))]"/>
-
-		    <!--ASSERT -->
+                        context="cac:Response[contains( ' CA UQ RE ',concat(' ',normalize-space(cbc:ResponseCode),' '))]"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="exists(cac:Status/cbc:StatusReasonCode)"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="exists(cac:Status/cbc:StatusReasonCode)">
+                                 test="exists(cac:Status/cbc:StatusReasonCode)">
                <xsl:attribute name="id">PEPPOL-T111-R001</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -1798,15 +1649,13 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M11"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="cac:Status[cbc:StatusReasonCode='OTH']"
-                 priority="1002"
-                 mode="M11">
+                  priority="1002"
+                  mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="cac:Status[cbc:StatusReasonCode='OTH']"/>
-
-		    <!--ASSERT -->
+                        context="cac:Status[cbc:StatusReasonCode='OTH']"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="exists(cbc:StatusReason)"/>
          <xsl:otherwise>
@@ -1822,17 +1671,15 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M11"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="cbc:CustomizationID" priority="1001" mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="cbc:CustomizationID"/>
-
-		    <!--ASSERT -->
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="starts-with(normalize-space(.), 'urn:fdc:peppol.eu:poacc:trns:invoice_response:3')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="starts-with(normalize-space(.), 'urn:fdc:peppol.eu:poacc:trns:invoice_response:3')">
+                                 test="starts-with(normalize-space(.), 'urn:fdc:peppol.eu:poacc:trns:invoice_response:3')">
                <xsl:attribute name="id">PEPPOL-T111-R003</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -1844,15 +1691,13 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M11"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="cac:Status[cbc:StatusReasonCode='PPD']"
-                 priority="1000"
-                 mode="M11">
+                  priority="1000"
+                  mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="cac:Status[cbc:StatusReasonCode='PPD']"/>
-
-		    <!--ASSERT -->
+                        context="cac:Status[cbc:StatusReasonCode='PPD']"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="exists(cbc:StatusReason)"/>
          <xsl:otherwise>
@@ -1866,13 +1711,12 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-
-		    <!--ASSERT -->
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="exists(/cbc:ResponseCode='PD')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="exists(/cbc:ResponseCode='PD')">
+                                 test="exists(/cbc:ResponseCode='PD')">
                <xsl:attribute name="id">PEPPOL-T111-R005</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -1888,23 +1732,19 @@
    <xsl:template match="@*|node()" priority="-2" mode="M11">
       <xsl:apply-templates select="*" mode="M11"/>
    </xsl:template>
-
    <!--PATTERN -->
-
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="cac:Status[cbc:StatusReasonCode/@listID='OPStatusAction']"
-                 priority="1001"
-                 mode="M12">
+                  priority="1001"
+                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="cac:Status[cbc:StatusReasonCode/@listID='OPStatusAction']"/>
-
-		    <!--ASSERT -->
+                        context="cac:Status[cbc:StatusReasonCode/@listID='OPStatusAction']"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="((not(contains(normalize-space(cbc:StatusReasonCode), ' ')) and contains(' NOA PIN NIN CNF CNP CNA OTH ', concat(' ', normalize-space(cbc:StatusReasonCode), ' '))))"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="((not(contains(normalize-space(cbc:StatusReasonCode), ' ')) and contains(' NOA PIN NIN CNF CNP CNA OTH ', concat(' ', normalize-space(cbc:StatusReasonCode), ' '))))">
+                                 test="((not(contains(normalize-space(cbc:StatusReasonCode), ' ')) and contains(' NOA PIN NIN CNF CNP CNA OTH ', concat(' ', normalize-space(cbc:StatusReasonCode), ' '))))">
                <xsl:attribute name="id">PEPPOL-T111-R006</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -1916,20 +1756,18 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M12"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="cac:Status[cbc:StatusReasonCode/@listID='OPStatusReason']"
-                 priority="1000"
-                 mode="M12">
+                  priority="1000"
+                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="cac:Status[cbc:StatusReasonCode/@listID='OPStatusReason']"/>
-
-		    <!--ASSERT -->
+                        context="cac:Status[cbc:StatusReasonCode/@listID='OPStatusReason']"/>
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="((not(contains(normalize-space(cbc:StatusReasonCode), ' ')) and contains(' NON REF LEG REC QUA DEL PRI QTY ITM PAY PPD UNR FIN OTH ', concat(' ', normalize-space(cbc:StatusReasonCode), ' '))))"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="((not(contains(normalize-space(cbc:StatusReasonCode), ' ')) and contains(' NON REF LEG REC QUA DEL PRI QTY ITM PAY PPD UNR FIN OTH ', concat(' ', normalize-space(cbc:StatusReasonCode), ' '))))">
+                                 test="((not(contains(normalize-space(cbc:StatusReasonCode), ' ')) and contains(' NON REF LEG REC QUA DEL PRI QTY ITM PAY PPD UNR FIN OTH ', concat(' ', normalize-space(cbc:StatusReasonCode), ' '))))">
                <xsl:attribute name="id">PEPPOL-T111-R007</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
