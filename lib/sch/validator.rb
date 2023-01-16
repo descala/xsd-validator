@@ -1,5 +1,5 @@
 require 'nokogiri'
-require 'schematron'
+require_relative '../../vendor/schematron-wrapper-saxon11/lib/schematron'
 
 module Sch
   module Validator
@@ -96,12 +96,32 @@ module Sch
       when 'urn:fdc:peppol.eu:poacc:trns:despatch_advice:3'
         %w(PEPPOLBIS-T16.sch)
 
-      # XRechnung UBL
+      # XRechnung UBL / CII
       when 'urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_2.0', 'urn:cen.eu:en16931#compliant#factur-x.eu:1p0:basic'
         if doc_nokogiri.root.name == 'Invoice'
-          %w(CEN-EN16931-UBL.sch XRechnung-UBL-validation-Invoice.sch)
+          %w(CEN-EN16931-UBL.sch XRechnung-UBL-validation-Invoice_2.0.sch)
         elsif doc_nokogiri.root.name == 'CreditNote'
-          %w(CEN-EN16931-UBL.sch XRechnung-UBL-validation-CreditNote.sch)
+          %w(CEN-EN16931-UBL.sch XRechnung-UBL-validation-CreditNote_2.0.sch)
+        else # CII
+          %w(CEN-EN16931-UBL.sch EN16931-CII-validation.sch)
+        end
+
+      # XRechnung UBL
+      when 'urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_2.1'
+        if doc_nokogiri.root.name == 'Invoice'
+          %w(CEN-EN16931-UBL.sch XRechnung-UBL-validation-Invoice_2.1.sch)
+        elsif doc_nokogiri.root.name == 'CreditNote'
+          %w(CEN-EN16931-UBL.sch XRechnung-UBL-validation-CreditNote_2.1.sch)
+        else
+          %w(CEN-EN16931-UBL.sch EN16931-CII-validation.sch)
+        end
+
+      # XRechnung UBL
+      when 'urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_2.2'
+        if doc_nokogiri.root.name == 'Invoice'
+          %w(CEN-EN16931-UBL.sch XRechnung-UBL-validation-Invoice_2.2.sch)
+        elsif doc_nokogiri.root.name == 'CreditNote'
+          %w(CEN-EN16931-UBL.sch XRechnung-UBL-validation-CreditNote_2.2.sch)
         else
           %w(CEN-EN16931-UBL.sch EN16931-CII-validation.sch)
         end
