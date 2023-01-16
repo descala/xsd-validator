@@ -150,7 +150,7 @@ module Sch
     # Creates compiled xslt
     def self.compile
       Dir.chdir('lib/sch/schemas/') do
-        Dir["*.sch","*/*.sch","xrechnung/*/*.sch"].each do |schematron_file|
+        Dir["*.sch","*/*.sch","xrechnung/*/*/*.sch"].each do |schematron_file|
           cache_xslt = "../compiled/#{File.basename(schematron_file)}.xslt"
           compiled_schematron = schematron_compile(schematron_file)
           File.write(cache_xslt, compiled_schematron)
