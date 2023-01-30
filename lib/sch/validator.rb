@@ -30,7 +30,7 @@ module Sch
 
       def build_result(flag)
         result = []
-        @document.xpath("//svrl:failed-assert[@flag='#{flag}']").each do |element|
+        @document.xpath("//svrl:failed-assert[@flag='#{flag}']|//svrl:successful-report[@flag='#{flag}']").each do |element|
           h = element.attributes.map{|k,v| [k, v.to_s]}.to_h
           h.delete('test')
           description = element.xpath('./svrl:text').text.strip
@@ -50,7 +50,7 @@ module Sch
         compiled_schematron = File.read(xslt_path(schematron_file))
         validation_result = Schematron::XSLT2.validate(compiled_schematron, doc)
         result_handler = ResultHandler.new(validation_result)
-        errors = errors + result_handler.errors
+        errors += result_handler.errors
         warnings = warnings + result_handler.warnings
       end
       return errors, warnings
