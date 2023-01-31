@@ -106,7 +106,7 @@ module Sch
           %w(CEN-EN16931-UBL.sch EN16931-CII-validation.sch)
         end
 
-      # XRechnung UBL
+      # XRechnung UBL 2.1
       when 'urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_2.1'
         if doc_nokogiri.root.name == 'Invoice'
           %w(CEN-EN16931-UBL.sch XRechnung-UBL-validation-Invoice_2.1.sch)
@@ -116,7 +116,7 @@ module Sch
           %w(CEN-EN16931-UBL.sch EN16931-CII-validation.sch)
         end
 
-      # XRechnung UBL
+      # XRechnung UBL 2.2
       when 'urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_2.2'
         if doc_nokogiri.root.name == 'Invoice'
           %w(CEN-EN16931-UBL.sch XRechnung-UBL-validation-Invoice_2.2.sch)
