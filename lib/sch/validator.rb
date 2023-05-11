@@ -143,7 +143,14 @@ module Sch
         %w(CEN-EN16931-UBL.sch)
 
       else
-        raise StandardError.new("Unknown CustomizationID '#{customization_id}'")
+        profile_id = doc_nokogiri.xpath('//cbc:ProfileID', cbc: CBC).text
+
+        if profile_id == 'reporting:1.0'
+          # we dont have the sch, only the compiled file
+          %w(ZATCA_E-invoice_20210819)
+        else
+          raise StandardError.new("Unknown CustomizationID '#{customization_id}' and ProfileID '#{profile_id}'")
+        end
       end
     end
 
