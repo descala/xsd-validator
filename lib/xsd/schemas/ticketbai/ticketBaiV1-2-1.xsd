@@ -111,10 +111,10 @@
 	<complexType name="IDDetalleFacturaType">
 		<sequence>	
 			<element  name="DescripcionDetalle" type="T:TextMax250Type"/>
-			<element  name="Cantidad" type="T:ImporteSgn12.2Type"/>
+			<element  name="Cantidad" type="T:ImporteSgn12.8Type"/>
 			<element  name="ImporteUnitario" type="T:ImporteSgn12.8Type"/>
-			<element  name="Descuento" type="T:ImporteSgn12.2Type" minOccurs="0"/>
-			<element  name="ImporteTotal" type="T:ImporteSgn12.2Type"/>
+			<element  name="Descuento" type="T:ImporteSgn12.8Type" minOccurs="0"/>
+			<element  name="ImporteTotal" type="T:ImporteSgn12.8Type"/>
 		</sequence>
 	</complexType>
 	<complexType name="ClavesType">
@@ -504,6 +504,16 @@
                     <documentation>Segidako traktuko eragiketetan ordaintzeke dagoen BEZdun faktura - Factura con IVA pendiente de devengo en operaciones de tracto sucesivo</documentation>
                 </annotation>
             </enumeration>			
+			 <enumeration value="17" >
+                <annotation>
+                    <documentation>IX. tituluko XI. kapituluan aurreikusitako araubideren bati atxikitako eragiketa (OSS eta IOSS) - Operación acogida a alguno de los regímenes previstos en el Capítulo XI del Título IX (OSS e IOSS)</documentation>
+                </annotation>	
+            </enumeration>
+			 <enumeration value="19" >
+                <annotation>
+                    <documentation>Nekazaritza, abeltzaintza eta arrantzaren araubide berezian dauden jardueren eragiketak (NAAAB) - Operaciones de actividades incluidas en el Régimen Especial de Agricultura, Ganadería y Pesca (REAGYP)</documentation>
+                </annotation>
+            </enumeration>			
 			 <enumeration value="51" >
                 <annotation>
                     <documentation>Baliokidetasun errekarguko eragiketak - Operaciones en recargo de equivalencia</documentation>
@@ -860,6 +870,15 @@
 			<enumeration value="XB"/>
 			<enumeration value="XU"/>
 			<enumeration value="XN"/>
+			<enumeration value="AX"/>
+			<enumeration value="BL"/>
+			<enumeration value="EH"/>
+			<enumeration value="GF"/>
+			<enumeration value="GP"/>
+			<enumeration value="MF"/>
+			<enumeration value="MQ"/>
+			<enumeration value="RE"/>
+			<enumeration value="SJ"/>
 		</restriction>
 	</simpleType>
 </schema>

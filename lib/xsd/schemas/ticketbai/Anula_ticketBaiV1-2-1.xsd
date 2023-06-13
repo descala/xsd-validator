@@ -357,6 +357,15 @@
 			<enumeration value="XB"/>
 			<enumeration value="XU"/>
 			<enumeration value="XN"/>
+			<enumeration value="AX"/>
+			<enumeration value="BL"/>
+			<enumeration value="EH"/>
+			<enumeration value="GF"/>
+			<enumeration value="GP"/>
+			<enumeration value="MF"/>
+			<enumeration value="MQ"/>
+			<enumeration value="RE"/>
+			<enumeration value="SJ"/>
 		</restriction>
 	</simpleType>	
 	<!--  Egoitza herrialdeko identifikazio motak - Tipos de identificación en el país de residencia -->
