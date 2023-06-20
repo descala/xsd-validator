@@ -146,8 +146,8 @@ module Sch
         profile_id = doc_nokogiri.xpath('//cbc:ProfileID', cbc: CBC).text
 
         if profile_id == 'reporting:1.0'
-          # we dont have the sch, only the compiled file
-          %w(ZATCA_E-invoice_20210819)
+          # we dont have the sch, only the compiled files
+          %w(ZATCA_E-invoice_20210819 CEN-EN16931-UBL-ZATCA)
         else
           raise StandardError.new("Unknown CustomizationID '#{customization_id}' and ProfileID '#{profile_id}'")
         end
