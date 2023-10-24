@@ -27,4 +27,15 @@ RSpec.describe Sch::Validator do
     doc=File.read('spec/files/sch/invoice-se-wrong-warn.xml')
     expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationWarning, /WARNING: \[SE-R-003\] Swedish organisation numbers should be numeric/)
   end
+
+  it 'raises ValidationError for an invalid JP Standard Invoice' do
+    doc=File.read('spec/files/sch/jp-pint-invoice-ubl-wrong.xml')
+    expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationError, /FATAL: .*aligned-ibr-jp-05/)
+  end
+
+  it 'raises ValidationError for an invalid JP NTR Invoice' do
+    doc=File.read('spec/files/sch/jp-pint-ntr-invoice-ubl-wrong.xml')
+    expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationError, /FATAL: .*aligned-ibr-jp-04-ntr/)
+  end
+
 end
