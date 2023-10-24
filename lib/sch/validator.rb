@@ -142,6 +142,18 @@ module Sch
       when 'urn:cen.eu:en16931:2017#compliant#urn:fdc:andorra'
         %w(CEN-EN16931-UBL.sch)
 
+      # JP Standard Invoice
+      when 'urn:peppol:pint:billing-1@jp-1'
+        %w()
+
+      # JP Non-tax Registered
+      when 'urn:peppol:pint:nontaxinvoice-1@jp-1'
+        %w()
+
+      # JP Self-Billing
+      when 'urn:peppol:pint:selfbilling-1@jp-1'
+        %w()
+
       else
         profile_id = doc_nokogiri.xpath('//cbc:ProfileID', cbc: CBC).text
 
