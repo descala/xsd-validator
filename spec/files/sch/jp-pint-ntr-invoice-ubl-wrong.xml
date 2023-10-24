@@ -82,6 +82,9 @@
 			<cac:PartyName>
 				<cbc:Name>株式会社 〇〇商事</cbc:Name> <!-- IBT-028 - Seller trading name -->
 			</cac:PartyName>
+			<cac:PartyTaxScheme>
+				<cbc:CompanyID>Shouldn't exist</cbc:CompanyID>
+			</cac:PartyTaxScheme>
 			<cac:PostalAddress> <!-- IBG-05 - SELLER POSTAL ADDRESS -->
 				<cbc:StreetName>四谷4-29-X</cbc:StreetName> <!-- IBT-035 - Seller address line 1 -->
 				<cbc:AdditionalStreetName>〇〇商事ビル</cbc:AdditionalStreetName> <!-- IBT-036 - Seller address line 2 -->

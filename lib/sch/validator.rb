@@ -144,15 +144,15 @@ module Sch
 
       # JP Standard Invoice
       when 'urn:peppol:pint:billing-1@jp-1'
-        %w()
+        %w(PINT-JP-Standard-Invoice.sch PINT-UBL-JP-Standard-Invoice.sch)
 
       # JP Non-tax Registered
       when 'urn:peppol:pint:nontaxinvoice-1@jp-1'
-        %w()
+        %w(PINT-JP-Non-tax-Registered.sch PINT-UBL-JP-Non-tax-Registered.sch)
 
       # JP Self-Billing
       when 'urn:peppol:pint:selfbilling-1@jp-1'
-        %w()
+        %w(PINT-JP-Self-Billing.sch PINT-UBL-JP-Self-Billing.sch)
 
       else
         profile_id = doc_nokogiri.xpath('//cbc:ProfileID', cbc: CBC).text

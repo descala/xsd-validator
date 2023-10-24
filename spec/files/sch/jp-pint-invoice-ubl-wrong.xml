@@ -13,7 +13,7 @@ Japan common commercial invoice, example2-Foreign Currency
 	<cbc:DueDate>2023-11-20</cbc:DueDate> <!-- IBT-009 - Payment due date -->
 	<cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode> <!-- IBT-003 - Invoice type code -->
 	<cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode> <!-- IBT-005 - Invoice currency code -->
-	<cbc:TaxCurrencyCode>JPY</cbc:TaxCurrencyCode> <!-- IBT-006 - Tax accounting currency -->
+	<cbc:TaxCurrencyCode>JPYthisiswrong</cbc:TaxCurrencyCode> <!-- IBT-006 - Tax accounting currency -->
 	<cac:InvoicePeriod> <!-- IBG-14 - INVOICING PERIOD -->
 		<cbc:StartDate>2023-10-18</cbc:StartDate> <!-- IBT-073 - Invoicing period start date -->
 		<cbc:EndDate>2023-10-18</cbc:EndDate> <!-- IBT-074 - Invoicing period end date -->
