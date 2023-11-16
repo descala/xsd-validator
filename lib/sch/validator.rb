@@ -74,6 +74,9 @@ module Sch
       if customization_id.empty?
         customization_id = doc_nokogiri.xpath('//ram:GuidelineSpecifiedDocumentContextParameter/ram:ID', ram: RAM).text
       end
+      if customization_id.empty?
+        customization_id = doc_nokogiri.xpath('//xmlns:CustomizationID').text
+      end
       case customization_id
       when 'urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0'
         %w(CEN-EN16931-UBL.sch PEPPOL-EN16931-UBL.sch)
@@ -153,6 +156,14 @@ module Sch
       # JP Self-Billing
       when 'urn:peppol:pint:selfbilling-1@jp-1'
         %w(PINT-JP-Self-Billing.sch PINT-UBL-JP-Self-Billing.sch)
+
+      # Statistics Reporting End Users
+      when 'urn:fdc:peppol.eu:edec:trns:end-user-statistics-report:1.1'
+        %w(peppol-end-user-statistics-reporting-1.1.0.sch)
+
+      # Statistics Reporting Transactions
+      when 'urn:fdc:peppol.eu:edec:trns:transaction-statistics-reporting:1.0'
+        %w(peppol-transaction-statistics-reporting-1.0.sch)
 
       else
         profile_id = doc_nokogiri.xpath('//cbc:ProfileID', cbc: CBC).text
