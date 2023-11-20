@@ -129,6 +129,14 @@ module Sch
           %w(CEN-EN16931-UBL.sch EN16931-CII-validation.sch)
         end
 
+        # XRechnung UBL 2.3
+      when 'urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_2.3'
+        if doc_nokogiri.root.name == 'Invoice' || doc_nokogiri.root.name == 'CreditNote'
+          %w(CEN-EN16931-UBL.sch XRechnung-UBL-validation_2.3.sch)
+        else
+          %w(CEN-EN16931-UBL.sch EN16931-CII-validation.sch)
+        end
+
       # NL CIUS / SimplerInvoicing
       when 'urn:cen.eu:en16931:2017#compliant#urn:fdc:nen.nl:nlcius:v1.0'
         %w(si-ubl-2.0.sch)
