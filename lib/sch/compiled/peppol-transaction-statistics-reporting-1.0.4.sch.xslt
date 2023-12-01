@@ -165,8 +165,16 @@
 
     Author:
       Philip Helger
+      Muhammet Yildiz
 
     History:
+      v1.0.4
+        2023-11-02, Philip Helger - add country code `ZZ` as an allowed one
+      v1.0.3
+        2023-10-12, Muhammet Yildiz - replaced $xyz values with `value-of select ="$xyz"` in the messages
+      v1.0.2
+        2023-09-18, Philip Helger - re-enabled SCH-TSR-11
+                                    fixed test and level of SCH-TSR-12
       v1.0.1
         2023-03-14, Philip Helger - removed rule SCH-TSR-13; added rule SCH-TSR-43 
       v1.0.0
@@ -189,7 +197,7 @@
    <svrl:text xmlns:svrl="http://purl.oclc.org/dsdl/svrl">OpenPeppol Transaction Statistics Reporting</svrl:text>
    <!--PATTERN default-->
    <xsl:variable name="cl_iso3166"
-                  select="' 1A AD AE AF AG AI AL AM AO AQ AR AS AT AU AW AX AZ BA BB BD BE BF BG BH BI BJ BL BM BN BO BQ BR BS BT BV BW BY BZ CA CC CD CF CG CH CI CK CL CM CN CO CR CU CV CW CX CY CZ DE DJ DK DM DO DZ EC EE EG EH EL ER ES ET FI FJ FK FM FO FR GA GB GD GE GF GG GH GI GL GM GN GP GQ GR GS GT GU GW GY HK HM HN HR HT HU ID IE IL IM IN IO IQ IR IS IT JE JM JO JP KE KG KH KI KM KN KP KR KW KY KZ LA LB LC LI LK LR LS LT LU LV LY MA MC MD ME MF MG MH MK ML MM MN MO MP MQ MR MS MT MU MV MW MX MY MZ NA NC NE NF NG NI NL NO NP NR NU NZ OM PA PE PF PG PH PK PL PM PN PR PS PT PW PY QA RE RO RS RU RW SA SB SC SD SE SG SH SI SJ SK SL SM SN SO SR SS ST SV SX SY SZ TC TD TF TG TH TJ TK TL TM TN TO TR TT TV TW TZ UA UG UM US UY UZ VA VC VE VG VI VN VU WF WS XI XK YE YT ZA ZM ZW '"/>
+                  select="' 1A AD AE AF AG AI AL AM AO AQ AR AS AT AU AW AX AZ BA BB BD BE BF BG BH BI BJ BL BM BN BO BQ BR BS BT BV BW BY BZ CA CC CD CF CG CH CI CK CL CM CN CO CR CU CV CW CX CY CZ DE DJ DK DM DO DZ EC EE EG EH EL ER ES ET FI FJ FK FM FO FR GA GB GD GE GF GG GH GI GL GM GN GP GQ GR GS GT GU GW GY HK HM HN HR HT HU ID IE IL IM IN IO IQ IR IS IT JE JM JO JP KE KG KH KI KM KN KP KR KW KY KZ LA LB LC LI LK LR LS LT LU LV LY MA MC MD ME MF MG MH MK ML MM MN MO MP MQ MR MS MT MU MV MW MX MY MZ NA NC NE NF NG NI NL NO NP NR NU NZ OM PA PE PF PG PH PK PL PM PN PR PS PT PW PY QA RE RO RS RU RW SA SB SC SD SE SG SH SI SJ SK SL SM SN SO SR SS ST SV SX SY SZ TC TD TF TG TH TJ TK TL TM TN TO TR TT TV TW TZ UA UG UM US UY UZ VA VC VE VG VI VN VU WF WS XI XK YE YT ZA ZM ZW ZZ '"/>
    <xsl:variable name="cl_spidtype" select="' CertSubjectCN '"/>
    <xsl:variable name="cl_subtotalType" select="' PerTP PerSP-DT-PR PerSP-DT-PR-CC '"/>
    <xsl:variable name="re_seatid" select="'^P[A-Z]{2}[0-9]{6}$'"/>
@@ -241,7 +249,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-TSR-03] The subtotals per $name_tp MUST exist</svrl:text>
+               <svrl:text>[SCH-TSR-03] The subtotals per <xsl:text/>
+                  <xsl:value-of select="$name_tp"/>
+                  <xsl:text/> MUST exist</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -256,7 +266,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-TSR-04] The sum of all subtotals per $name_tp incoming MUST match the total incoming count</svrl:text>
+               <svrl:text>[SCH-TSR-04] The sum of all subtotals per <xsl:text/>
+                  <xsl:value-of select="$name_tp"/>
+                  <xsl:text/> incoming MUST match the total incoming count</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -271,7 +283,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-TSR-05] The sum of all subtotals per $name_tp outgoing MUST match the total outgoing count</svrl:text>
+               <svrl:text>[SCH-TSR-05] The sum of all subtotals per <xsl:text/>
+                  <xsl:value-of select="$name_tp"/>
+                  <xsl:text/> outgoing MUST match the total outgoing count</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -286,7 +300,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-TSR-06] Each $name_tp MUST occur only once.</svrl:text>
+               <svrl:text>[SCH-TSR-06] Each <xsl:text/>
+                  <xsl:value-of select="$name_tp"/>
+                  <xsl:text/> MUST occur only once.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -303,7 +319,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-TSR-07] The subtotals per $name_spdtpr MUST exist</svrl:text>
+               <svrl:text>[SCH-TSR-07] The subtotals per <xsl:text/>
+                  <xsl:value-of select="$name_spdtpr"/>
+                  <xsl:text/> MUST exist</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -318,7 +336,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-TSR-08] The sum of all subtotals per $name_spdtpr incoming MUST match the total incoming count</svrl:text>
+               <svrl:text>[SCH-TSR-08] The sum of all subtotals per <xsl:text/>
+                  <xsl:value-of select="$name_spdtpr"/>
+                  <xsl:text/> incoming MUST match the total incoming count</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -333,7 +353,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-TSR-09] The sum of all subtotals per $name_spdtpr outgoing MUST match the total outgoing count</svrl:text>
+               <svrl:text>[SCH-TSR-09] The sum of all subtotals per <xsl:text/>
+                  <xsl:value-of select="$name_spdtpr"/>
+                  <xsl:text/> outgoing MUST match the total outgoing count</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -348,26 +370,46 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-TSR-10] Each combination of $name_spdtpr MUST occur only once.</svrl:text>
+               <svrl:text>[SCH-TSR-10] Each combination of <xsl:text/>
+                  <xsl:value-of select="$name_spdtpr"/>
+                  <xsl:text/> MUST occur only once.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
       <xsl:variable name="name_spdtprcc"
                      select="'Service Provider ID, Dataset Type ID, Process ID, Sender Country and Receiver Country'"/>
-      <xsl:variable name="cc_exists"
-                     select="tsr:Subtotal[normalize-space(@type) = 'PerSP-DT-PR-CC']"/>
+      <xsl:variable name="cc_empty" select="$empty or tsr:Total/tsr:Incoming = 0"/>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="not($cc_exists) or sum(tsr:Subtotal[normalize-space(@type) = 'PerSP-DT-PR-CC']/tsr:Incoming) = tsr:Total/tsr:Incoming"/>
+         <xsl:when test="$cc_empty or tsr:Subtotal[normalize-space(@type) = 'PerSP-DT-PR-CC']"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="not($cc_exists) or sum(tsr:Subtotal[normalize-space(@type) = 'PerSP-DT-PR-CC']/tsr:Incoming) = tsr:Total/tsr:Incoming">
-               <xsl:attribute name="id">SCH-TSR-12</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+                                 test="$cc_empty or tsr:Subtotal[normalize-space(@type) = 'PerSP-DT-PR-CC']">
+               <xsl:attribute name="id">SCH-TSR-11</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-TSR-12] The sum of all subtotals per $name_spdtprcc incoming MUST match the total incoming count</svrl:text>
+               <svrl:text>[SCH-TSR-11] The subtotals per <xsl:text/>
+                  <xsl:value-of select="$name_spdtprcc"/>
+                  <xsl:text/> MUST exist</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="$cc_empty or sum(tsr:Subtotal[normalize-space(@type) = 'PerSP-DT-PR-CC']/tsr:Incoming) = tsr:Total/tsr:Incoming"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="$cc_empty or sum(tsr:Subtotal[normalize-space(@type) = 'PerSP-DT-PR-CC']/tsr:Incoming) = tsr:Total/tsr:Incoming">
+               <xsl:attribute name="id">SCH-TSR-12</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>[SCH-TSR-12] The sum of all subtotals per <xsl:text/>
+                  <xsl:value-of select="$name_spdtprcc"/>
+                  <xsl:text/> incoming MUST match the total incoming count</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -382,7 +424,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-TSR-14] Each combination of $name_spdtprcc MUST occur only once.</svrl:text>
+               <svrl:text>[SCH-TSR-14] Each combination of <xsl:text/>
+                  <xsl:value-of select="$name_spdtprcc"/>
+                  <xsl:text/> MUST occur only once.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -583,7 +627,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-TSR-21] $name MUST have one Key element</svrl:text>
+               <svrl:text>[SCH-TSR-21] <xsl:text/>
+                  <xsl:value-of select="$name"/>
+                  <xsl:text/> MUST have one Key element</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -598,7 +644,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-TSR-22] $name MUST have one Key element with the meta scheme ID 'TP'</svrl:text>
+               <svrl:text>[SCH-TSR-22] <xsl:text/>
+                  <xsl:value-of select="$name"/>
+                  <xsl:text/> MUST have one Key element with the meta scheme ID 'TP'</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -613,7 +661,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-TSR-23] $name MUST have one Key element with the scheme ID 'Peppol'</svrl:text>
+               <svrl:text>[SCH-TSR-23] <xsl:text/>
+                  <xsl:value-of select="$name"/>
+                  <xsl:text/> MUST have one Key element with the scheme ID 'Peppol'</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -637,7 +687,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-TSR-24] $name MUST have three Key elements</svrl:text>
+               <svrl:text>[SCH-TSR-24] <xsl:text/>
+                  <xsl:value-of select="$name"/>
+                  <xsl:text/> MUST have three Key elements</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -652,7 +704,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-TSR-25] $name MUST have one Key element with the meta scheme ID 'SP'</svrl:text>
+               <svrl:text>[SCH-TSR-25] <xsl:text/>
+                  <xsl:value-of select="$name"/>
+                  <xsl:text/> MUST have one Key element with the meta scheme ID 'SP'</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -667,7 +721,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-TSR-26] $name MUST have one Key element with the meta scheme ID 'DT'</svrl:text>
+               <svrl:text>[SCH-TSR-26] <xsl:text/>
+                  <xsl:value-of select="$name"/>
+                  <xsl:text/> MUST have one Key element with the meta scheme ID 'DT'</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -682,7 +738,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-TSR-27] $name MUST have one Key element with the meta scheme ID 'PR'</svrl:text>
+               <svrl:text>[SCH-TSR-27] <xsl:text/>
+                  <xsl:value-of select="$name"/>
+                  <xsl:text/> MUST have one Key element with the meta scheme ID 'PR'</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -697,7 +755,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-TSR-28] $name MUST have one SP Key element with the scheme ID coded according to the code list</svrl:text>
+               <svrl:text>[SCH-TSR-28] <xsl:text/>
+                  <xsl:value-of select="$name"/>
+                  <xsl:text/> MUST have one SP Key element with the scheme ID coded according to the code list</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -721,7 +781,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-TSR-29] $name MUST have five Key elements</svrl:text>
+               <svrl:text>[SCH-TSR-29] <xsl:text/>
+                  <xsl:value-of select="$name"/>
+                  <xsl:text/> MUST have five Key elements</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -736,7 +798,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-TSR-30] $name MUST have one Key element with the meta scheme ID 'SP'</svrl:text>
+               <svrl:text>[SCH-TSR-30] <xsl:text/>
+                  <xsl:value-of select="$name"/>
+                  <xsl:text/> MUST have one Key element with the meta scheme ID 'SP'</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -751,7 +815,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-TSR-31] $name MUST have one Key element with the meta scheme ID 'DT'</svrl:text>
+               <svrl:text>[SCH-TSR-31] <xsl:text/>
+                  <xsl:value-of select="$name"/>
+                  <xsl:text/> MUST have one Key element with the meta scheme ID 'DT'</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -766,7 +832,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-TSR-32] $name MUST have one Key element with the meta scheme ID 'PR'</svrl:text>
+               <svrl:text>[SCH-TSR-32] <xsl:text/>
+                  <xsl:value-of select="$name"/>
+                  <xsl:text/> MUST have one Key element with the meta scheme ID 'PR'</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -781,7 +849,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-TSR-33] $name MUST have two Key elements with the meta scheme ID 'CC'</svrl:text>
+               <svrl:text>[SCH-TSR-33] <xsl:text/>
+                  <xsl:value-of select="$name"/>
+                  <xsl:text/> MUST have two Key elements with the meta scheme ID 'CC'</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -796,7 +866,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-TSR-34] $name MUST have one SP Key element with the scheme ID coded according to the code list</svrl:text>
+               <svrl:text>[SCH-TSR-34] <xsl:text/>
+                  <xsl:value-of select="$name"/>
+                  <xsl:text/> MUST have one SP Key element with the scheme ID coded according to the code list</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -811,7 +883,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-TSR-35] $name MUST have one CC Key element with the scheme ID 'SenderCountry'</svrl:text>
+               <svrl:text>[SCH-TSR-35] <xsl:text/>
+                  <xsl:value-of select="$name"/>
+                  <xsl:text/> MUST have one CC Key element with the scheme ID 'SenderCountry'</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -826,7 +900,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-TSR-36] $name MUST have one CC Key element with the scheme ID 'ReceiverCountry'</svrl:text>
+               <svrl:text>[SCH-TSR-36] <xsl:text/>
+                  <xsl:value-of select="$name"/>
+                  <xsl:text/> MUST have one CC Key element with the scheme ID 'ReceiverCountry'</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -840,7 +916,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-TSR-43] $name MUST have a 'Outgoing' value of '0' because that data cannot be gathered</svrl:text>
+               <svrl:text>[SCH-TSR-43] <xsl:text/>
+                  <xsl:value-of select="$name"/>
+                  <xsl:text/> MUST have a 'Outgoing' value of '0' because that data cannot be gathered</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>

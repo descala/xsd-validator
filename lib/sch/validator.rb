@@ -167,11 +167,11 @@ module Sch
 
       # Statistics Reporting End Users
       when 'urn:fdc:peppol.eu:edec:trns:end-user-statistics-report:1.1'
-        %w(peppol-end-user-statistics-reporting-1.1.0.sch)
+        %w(peppol-end-user-statistics-reporting-1.1.4.sch)
 
       # Statistics Reporting Transactions
       when 'urn:fdc:peppol.eu:edec:trns:transaction-statistics-reporting:1.0'
-        %w(peppol-transaction-statistics-reporting-1.0.sch)
+        %w(peppol-transaction-statistics-reporting-1.0.4.sch)
 
       else
         profile_id = doc_nokogiri.xpath('//cbc:ProfileID', cbc: CBC).text

@@ -165,18 +165,27 @@
 
     Author:
       Philip Helger
+      Muhammet Yildiz
 
-    History:
+    History
+      EUSR 1.1.4
+        2023-11-10, Philip Helger - reverted the changes from 1.1.3 - the country code `ZZ` is only allowed in TSR
+      EUSR 1.1.3
+        2023-11-02, Philip Helger - add country code `ZZ` as an allowed one
+      EUSR 1.1.2
+        2023-10-12, Muhammet Yildiz - replaced $xyz values with `value-of select ="$xyz"` in the messages
       EUSR 1.1.0
-      * 2023-06-29, Muhammet Yildiz - Updates related to changing "PerDTPRCC" to "PerDTPREUC". Rules 28,31,32 removed. Rules 14, 23, 26, 27, 29, 30 modified
+        2023-09-18, Philip Helger - using function "max" in rules 03, 04, 22 to fix an issue if the same value appears more then once
+                                    explicitly added "xs:integer" casts where necessary
+        2023-06-29, Muhammet Yildiz - updates related to changing "PerDTPRCC" to "PerDTPREUC". Rules 28,31,32 removed. Rules 14, 23, 26, 27, 29, 30 modified
       EUSR 1.0.1
-      * 2023-06-23, Philip Helger - hotfix for new subsets "PerEUC" and "PerDT-EUC". Added new rules SCH-EUSR-37 to SCH-EUSR-47
+        2023-06-23, Philip Helger - hotfix for new subsets "PerEUC" and "PerDT-EUC". Added new rules SCH-EUSR-37 to SCH-EUSR-47
       EUSR 1.0.0
-      * 2023-03-06, Philip Helger - updates after second review
+        2023-03-06, Philip Helger - updates after second review
       EUSR RC2
-      * 2022-11-14, Muhammet Yildiz, Philip Helger - updates after the first review
+        2022-11-14, Muhammet Yildiz, Philip Helger - updates after the first review
       EUR RC1
-      * 2022-04-15, Philip Helger - initial version
+        2022-04-15, Philip Helger - initial version
   </svrl:text>
          <svrl:ns-prefix-in-attribute-values uri="urn:fdc:peppol:end-user-statistics-report:1.1" prefix="eusr"/>
          <svrl:active-pattern>
@@ -201,7 +210,7 @@
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                         context="/eusr:EndUserStatisticsReport"/>
       <xsl:variable name="total"
-                     select="eusr:FullSet/eusr:SendingEndUsers + eusr:FullSet/eusr:ReceivingEndUsers"/>
+                     select="xs:integer(eusr:FullSet/eusr:SendingEndUsers) + xs:integer(eusr:FullSet/eusr:ReceivingEndUsers)"/>
       <xsl:variable name="empty" select="$total = 0"/>
       <!--ASSERT -->
       <xsl:choose>
@@ -235,55 +244,67 @@
       </xsl:choose>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="$empty or eusr:Subset/eusr:SendingEndUsers[not(. &lt; ../../eusr:Subset/eusr:SendingEndUsers)][1] &lt;= eusr:FullSet/eusr:SendingEndUsers"/>
+         <xsl:when test="$empty or max(eusr:Subset/eusr:SendingEndUsers) le xs:integer(eusr:FullSet/eusr:SendingEndUsers)"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="$empty or eusr:Subset/eusr:SendingEndUsers[not(. &lt; ../../eusr:Subset/eusr:SendingEndUsers)][1] &lt;= eusr:FullSet/eusr:SendingEndUsers">
+                                 test="$empty or max(eusr:Subset/eusr:SendingEndUsers) le xs:integer(eusr:FullSet/eusr:SendingEndUsers)">
                <xsl:attribute name="id">SCH-EUSR-03</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-EUSR-03] The maximum of all subsets of SendingEndUsers MUST be lower or equal to FullSet/SendingEndUsers</svrl:text>
+               <svrl:text>[SCH-EUSR-03] The maximum of all subsets of SendingEndUsers (<xsl:text/>
+                  <xsl:value-of select="max(eusr:Subset/eusr:SendingEndUsers)"/>
+                  <xsl:text/>) MUST be lower or equal to FullSet/SendingEndUsers (<xsl:text/>
+                  <xsl:value-of select="xs:integer(eusr:FullSet/eusr:SendingEndUsers)"/>
+                  <xsl:text/>)</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="$empty or eusr:Subset/eusr:ReceivingEndUsers[not(. &lt; ../../eusr:Subset/eusr:ReceivingEndUsers)][1] &lt;= eusr:FullSet/eusr:ReceivingEndUsers"/>
+         <xsl:when test="$empty or max(eusr:Subset/eusr:ReceivingEndUsers) le xs:integer(eusr:FullSet/eusr:ReceivingEndUsers)"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="$empty or eusr:Subset/eusr:ReceivingEndUsers[not(. &lt; ../../eusr:Subset/eusr:ReceivingEndUsers)][1] &lt;= eusr:FullSet/eusr:ReceivingEndUsers">
+                                 test="$empty or max(eusr:Subset/eusr:ReceivingEndUsers) le xs:integer(eusr:FullSet/eusr:ReceivingEndUsers)">
                <xsl:attribute name="id">SCH-EUSR-04</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-EUSR-04] The maximum of all subsets of ReceivingEndUsers MUST be lower or equal to FullSet/ReceivingEndUsers</svrl:text>
+               <svrl:text>[SCH-EUSR-04] The maximum of all subsets of ReceivingEndUsers (<xsl:text/>
+                  <xsl:value-of select="max(eusr:Subset/eusr:ReceivingEndUsers)"/>
+                  <xsl:text/>) MUST be lower or equal to FullSet/ReceivingEndUsers (<xsl:text/>
+                  <xsl:value-of select="xs:integer(eusr:FullSet/eusr:ReceivingEndUsers)"/>
+                  <xsl:text/>)</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="$empty or eusr:Subset/eusr:SendingOrReceivingEndUsers[not(. &lt; ../../eusr:Subset/eusr:SendingOrReceivingEndUsers)][1] &lt;= eusr:FullSet/eusr:SendingOrReceivingEndUsers"/>
+         <xsl:when test="$empty or max(eusr:Subset/eusr:SendingOrReceivingEndUsers) le xs:integer(eusr:FullSet/eusr:SendingOrReceivingEndUsers)"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="$empty or eusr:Subset/eusr:SendingOrReceivingEndUsers[not(. &lt; ../../eusr:Subset/eusr:SendingOrReceivingEndUsers)][1] &lt;= eusr:FullSet/eusr:SendingOrReceivingEndUsers">
+                                 test="$empty or max(eusr:Subset/eusr:SendingOrReceivingEndUsers) le xs:integer(eusr:FullSet/eusr:SendingOrReceivingEndUsers)">
                <xsl:attribute name="id">SCH-EUSR-22</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-EUSR-22] The maximum of all subsets of SendingOrReceivingEndUsers MUST be lower or equal to FullSet/SendingOrReceivingEndUsers</svrl:text>
+               <svrl:text>[SCH-EUSR-22] The maximum of all subsets of SendingOrReceivingEndUsers (<xsl:text/>
+                  <xsl:value-of select="max(eusr:Subset/eusr:SendingOrReceivingEndUsers)"/>
+                  <xsl:text/>) MUST be lower or equal to FullSet/SendingOrReceivingEndUsers (<xsl:text/>
+                  <xsl:value-of select="xs:integer(eusr:FullSet/eusr:SendingOrReceivingEndUsers)"/>
+                  <xsl:text/>)</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="eusr:FullSet/eusr:SendingOrReceivingEndUsers &lt;= $total"/>
+         <xsl:when test="xs:integer(eusr:FullSet/eusr:SendingOrReceivingEndUsers) &lt;= $total"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="eusr:FullSet/eusr:SendingOrReceivingEndUsers &lt;= $total">
+                                 test="xs:integer(eusr:FullSet/eusr:SendingOrReceivingEndUsers) &lt;= $total">
                <xsl:attribute name="id">SCH-EUSR-19</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -299,10 +320,10 @@
       </xsl:choose>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="eusr:FullSet/eusr:SendingOrReceivingEndUsers &gt;= eusr:FullSet/eusr:SendingEndUsers"/>
+         <xsl:when test="xs:integer(eusr:FullSet/eusr:SendingOrReceivingEndUsers) &gt;= xs:integer(eusr:FullSet/eusr:SendingEndUsers)"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="eusr:FullSet/eusr:SendingOrReceivingEndUsers &gt;= eusr:FullSet/eusr:SendingEndUsers">
+                                 test="xs:integer(eusr:FullSet/eusr:SendingOrReceivingEndUsers) &gt;= xs:integer(eusr:FullSet/eusr:SendingEndUsers)">
                <xsl:attribute name="id">SCH-EUSR-20</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -318,10 +339,10 @@
       </xsl:choose>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="eusr:FullSet/eusr:SendingOrReceivingEndUsers &gt;= eusr:FullSet/eusr:ReceivingEndUsers"/>
+         <xsl:when test="xs:integer(eusr:FullSet/eusr:SendingOrReceivingEndUsers) &gt;= xs:integer(eusr:FullSet/eusr:ReceivingEndUsers)"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="eusr:FullSet/eusr:SendingOrReceivingEndUsers &gt;= eusr:FullSet/eusr:ReceivingEndUsers">
+                                 test="xs:integer(eusr:FullSet/eusr:SendingOrReceivingEndUsers) &gt;= xs:integer(eusr:FullSet/eusr:ReceivingEndUsers)">
                <xsl:attribute name="id">SCH-EUSR-21</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -457,10 +478,10 @@
       </xsl:choose>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="every $st in (eusr:Subset) satisfies                                                         $st/eusr:SendingOrReceivingEndUsers &lt;= ($st/eusr:SendingEndUsers + $st/eusr:ReceivingEndUsers)"/>
+         <xsl:when test="every $st in (eusr:Subset) satisfies                                                         xs:integer($st/eusr:SendingOrReceivingEndUsers) &lt;= xs:integer($st/eusr:SendingEndUsers + $st/eusr:ReceivingEndUsers)"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="every $st in (eusr:Subset) satisfies $st/eusr:SendingOrReceivingEndUsers &lt;= ($st/eusr:SendingEndUsers + $st/eusr:ReceivingEndUsers)">
+                                 test="every $st in (eusr:Subset) satisfies xs:integer($st/eusr:SendingOrReceivingEndUsers) &lt;= xs:integer($st/eusr:SendingEndUsers + $st/eusr:ReceivingEndUsers)">
                <xsl:attribute name="id">SCH-EUSR-33</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -472,40 +493,44 @@
       </xsl:choose>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="every $st in (eusr:Subset) satisfies                                                         $st/eusr:SendingOrReceivingEndUsers &gt;= $st/eusr:SendingEndUsers"/>
+         <xsl:when test="every $st in (eusr:Subset) satisfies                                                         xs:integer($st/eusr:SendingOrReceivingEndUsers) &gt;= xs:integer($st/eusr:SendingEndUsers)"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="every $st in (eusr:Subset) satisfies $st/eusr:SendingOrReceivingEndUsers &gt;= $st/eusr:SendingEndUsers">
+                                 test="every $st in (eusr:Subset) satisfies xs:integer($st/eusr:SendingOrReceivingEndUsers) &gt;= xs:integer($st/eusr:SendingEndUsers)">
                <xsl:attribute name="id">SCH-EUSR-34</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-EUSR-34] The number of each Subset/SendingOrReceivingEndUsers MUST be greater or equal to the number of Subset/SendingEndUsers</svrl:text>
+               <svrl:text>[SCH-EUSR-34] The number of each Subset/SendingOrReceivingEndUsers MUST be greater or equal to the number of Subset/SendingEndUsers (<xsl:text/>
+                  <xsl:value-of select="eusr:Subset/eusr:SendingEndUsers"/>
+                  <xsl:text/>)</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="every $st in (eusr:Subset) satisfies                                                         $st/eusr:SendingOrReceivingEndUsers &gt;= $st/eusr:ReceivingEndUsers"/>
+         <xsl:when test="every $st in (eusr:Subset) satisfies                                                         xs:integer($st/eusr:SendingOrReceivingEndUsers) &gt;= xs:integer($st/eusr:ReceivingEndUsers)"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="every $st in (eusr:Subset) satisfies $st/eusr:SendingOrReceivingEndUsers &gt;= $st/eusr:ReceivingEndUsers">
+                                 test="every $st in (eusr:Subset) satisfies xs:integer($st/eusr:SendingOrReceivingEndUsers) &gt;= xs:integer($st/eusr:ReceivingEndUsers)">
                <xsl:attribute name="id">SCH-EUSR-35</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-EUSR-35] The number of each Subset/SendingOrReceivingEndUsers MUST be greater or equal to the number of Subset/ReceivingEndUsers</svrl:text>
+               <svrl:text>[SCH-EUSR-35] The number of each Subset/SendingOrReceivingEndUsers MUST be greater or equal to the number of Subset/ReceivingEndUsers (<xsl:text/>
+                  <xsl:value-of select="eusr:Subset/eusr:ReceivingEndUsers"/>
+                  <xsl:text/>)</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="every $st in (eusr:Subset) satisfies                                                         $st/eusr:SendingOrReceivingEndUsers &gt; 0"/>
+         <xsl:when test="every $st in (eusr:Subset) satisfies                                                         xs:integer($st/eusr:SendingOrReceivingEndUsers) &gt; 0"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="every $st in (eusr:Subset) satisfies $st/eusr:SendingOrReceivingEndUsers &gt; 0">
+                                 test="every $st in (eusr:Subset) satisfies xs:integer($st/eusr:SendingOrReceivingEndUsers) &gt; 0">
                <xsl:attribute name="id">SCH-EUSR-36</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -674,7 +699,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-EUSR-09] $name MUST have two Key elements</svrl:text>
+               <svrl:text>[SCH-EUSR-09] <xsl:text/>
+                  <xsl:value-of select="$name"/>
+                  <xsl:text/> MUST have two Key elements</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -689,7 +716,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-EUSR-10] $name MUST have one Key element with the meta scheme ID 'DT'</svrl:text>
+               <svrl:text>[SCH-EUSR-10] <xsl:text/>
+                  <xsl:value-of select="$name"/>
+                  <xsl:text/> MUST have one Key element with the meta scheme ID 'DT'</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -704,7 +733,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-EUSR-11] $name MUST have one Key element with the meta scheme ID 'PR'</svrl:text>
+               <svrl:text>[SCH-EUSR-11] <xsl:text/>
+                  <xsl:value-of select="$name"/>
+                  <xsl:text/> MUST have one Key element with the meta scheme ID 'PR'</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -728,7 +759,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-EUSR-23] $name MUST have three Key elements</svrl:text>
+               <svrl:text>[SCH-EUSR-23] <xsl:text/>
+                  <xsl:value-of select="$name"/>
+                  <xsl:text/> MUST have three Key elements</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -743,7 +776,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-EUSR-24] $name MUST have one Key element with the meta scheme ID 'DT'</svrl:text>
+               <svrl:text>[SCH-EUSR-24] <xsl:text/>
+                  <xsl:value-of select="$name"/>
+                  <xsl:text/> MUST have one Key element with the meta scheme ID 'DT'</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -758,7 +793,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-EUSR-25] $name MUST have one Key element with the meta scheme ID 'PR'</svrl:text>
+               <svrl:text>[SCH-EUSR-25] <xsl:text/>
+                  <xsl:value-of select="$name"/>
+                  <xsl:text/> MUST have one Key element with the meta scheme ID 'PR'</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -773,7 +810,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-EUSR-26] $name MUST have one Key element with the meta scheme ID 'CC'</svrl:text>
+               <svrl:text>[SCH-EUSR-26] <xsl:text/>
+                  <xsl:value-of select="$name"/>
+                  <xsl:text/> MUST have one Key element with the meta scheme ID 'CC'</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -788,7 +827,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-EUSR-27] $name MUST have one CC Key element with the scheme ID 'EndUserCountry'</svrl:text>
+               <svrl:text>[SCH-EUSR-27] <xsl:text/>
+                  <xsl:value-of select="$name"/>
+                  <xsl:text/> MUST have one CC Key element with the scheme ID 'EndUserCountry'</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -812,7 +853,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-EUSR-41] $name MUST have two Key elements</svrl:text>
+               <svrl:text>[SCH-EUSR-41] <xsl:text/>
+                  <xsl:value-of select="$name"/>
+                  <xsl:text/> MUST have two Key elements</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -827,7 +870,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-EUSR-42] $name MUST have one Key element with the meta scheme ID 'DT'</svrl:text>
+               <svrl:text>[SCH-EUSR-42] <xsl:text/>
+                  <xsl:value-of select="$name"/>
+                  <xsl:text/> MUST have one Key element with the meta scheme ID 'DT'</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -842,7 +887,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-EUSR-43] $name MUST have one Key element with the meta scheme ID 'CC'</svrl:text>
+               <svrl:text>[SCH-EUSR-43] <xsl:text/>
+                  <xsl:value-of select="$name"/>
+                  <xsl:text/> MUST have one Key element with the meta scheme ID 'CC'</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -857,7 +904,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-EUSR-44] $name MUST have one CC Key element with the scheme ID 'EndUserCountry'</svrl:text>
+               <svrl:text>[SCH-EUSR-44] <xsl:text/>
+                  <xsl:value-of select="$name"/>
+                  <xsl:text/> MUST have one CC Key element with the scheme ID 'EndUserCountry'</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -880,7 +929,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-EUSR-45] $name MUST have one Key element</svrl:text>
+               <svrl:text>[SCH-EUSR-45] <xsl:text/>
+                  <xsl:value-of select="$name"/>
+                  <xsl:text/> MUST have one Key element</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -895,7 +946,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-EUSR-46] $name MUST have one Key element with the meta scheme ID 'CC'</svrl:text>
+               <svrl:text>[SCH-EUSR-46] <xsl:text/>
+                  <xsl:value-of select="$name"/>
+                  <xsl:text/> MUST have one Key element with the meta scheme ID 'CC'</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -910,7 +963,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[SCH-EUSR-47] $name MUST have one CC Key element with the scheme ID 'EndUserCountry'</svrl:text>
+               <svrl:text>[SCH-EUSR-47] <xsl:text/>
+                  <xsl:value-of select="$name"/>
+                  <xsl:text/> MUST have one CC Key element with the scheme ID 'EndUserCountry'</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
