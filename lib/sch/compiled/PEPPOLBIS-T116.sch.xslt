@@ -246,7 +246,7 @@
    <!--SCHEMA SETUP-->
    <xsl:template match="/">
       <svrl:schematron-output xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                               title="Rules for PEPPOL Order Response transaction 3.2"
+                               title="Rules for PEPPOL Order Response Advanced transaction 3.0"
                                schemaVersion="iso">
          <xsl:comment>
             <xsl:value-of select="$archiveDirParameter"/>   
@@ -293,7 +293,7 @@
       </svrl:schematron-output>
    </xsl:template>
    <!--SCHEMATRON PATTERNS-->
-   <svrl:text xmlns:svrl="http://purl.oclc.org/dsdl/svrl">Rules for PEPPOL Order Response transaction 3.2</svrl:text>
+   <svrl:text xmlns:svrl="http://purl.oclc.org/dsdl/svrl">Rules for PEPPOL Order Response Advanced transaction 3.0</svrl:text>
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="//*[not(*) and not(normalize-space())]"
@@ -603,6 +603,7 @@
                   select="tokenize('0002 0007 0009 0037 0060 0088 0096 0097 0106 0130 0135 0142 0151 0183 0184 0188 0190 0191 0192 0193 0195 0196 0198 0199 0200 0201 0202 0204 0208 0209 0210 0211 0212 0213 0215 0216 0221 0230 9901 9910 9913 9914 9915 9918 9919 9920 9922 9923 9924 9925 9926 9927 9928 9929 9930 9931 9932 9933 9934 9935 9936 9937 9938 9939 9940 9941 9942 9943 9944 9945 9946 9947 9948 9949 9950 9951 9952 9953 9957 9959', '\s')"/>
    <xsl:variable name="clISO4217"
                   select="tokenize('AED AFN ALL AMD ANG AOA ARS AUD AWG AZN BAM BBD BDT BGN BHD BIF BMD BND BOB BOV BRL BSD BTN BWP BYN BZD CAD CDF CHE CHF CHW CLF CLP CNY COP COU CRC CUC CUP CVE CZK DJF DKK DOP DZD EGP ERN ETB EUR FJD FKP GBP GEL GHS GIP GMD GNF GTQ GYD HKD HNL HRK HTG HUF IDR ILS INR IQD IRR ISK JMD JOD JPY KES KGS KHR KMF KPW KRW KWD KYD KZT LAK LBP LKR LRD LSL LYD MAD MDL MGA MKD MMK MNT MOP MRU MUR MVR MWK MXN MXV MYR MZN NAD NGN NIO NOK NPR NZD OMR PAB PEN PGK PHP PKR PLN PYG QAR RON RSD RUB RWF SAR SBD SCR SDG SEK SGD SHP SLL SOS SRD SSP STN SVC SYP SZL THB TJS TMT TND TOP TRY TTD TWD TZS UAH UGX USD USN UYI UYU UZS VEF VND VUV WST XAF XAG XAU XBA XBB XBC XBD XCD XDR XOF XPD XPF XPT XSU XTS XUA YER ZAR ZMW ZWL', '\s')"/>
+   <xsl:variable name="clUNCL5305" select="tokenize('AE E S Z G O K L M', '\s')"/>
    <xsl:variable name="clUNCL1229" select="tokenize('1 3 5 7 42', '\s')"/>
    <xsl:variable name="clUNCL7143"
                   select="tokenize('AA AB AC AD AE AF AG AH AI AJ AK AL AM AN AO AP AQ AR AS AT AU AV AW AX AY AZ BA BB BC BD BE BF BG BH BI BJ BK BL BM BN BO BP BQ BR BS BT BU BV BW BX BY BZ CC CG CL CR CV DR DW EC EF EMD EN FS GB GN GS HS IB IN IS IT IZ MA MF MN MP NB ON PD PL PO PV QS RC RN RU RY SA SG SK SN SRS SRT SRU SRV SRW SRX SRY SRZ SS SSA SSB SSC SSD SSE SSF SSG SSH SSI SSJ SSK SSL SSM SSN SSO SSP SSQ SSR SSS SST SSU SSV SSW SSX SSY SSZ ST STA STB STC STD STE STF STG STH STI STJ STK STL STM STN STO STP STQ STR STS STT STU STV STW STX STY STZ SUA SUB SUC SUD SUE SUF SUG SUH SUI SUJ SUK SUL SUM TG TSN TSO TSP TSQ TSR TSS TST TSU UA UP VN VP VS VX ZZZ', '\s')"/>
@@ -612,14 +613,14 @@
    <xsl:variable name="clICD"
                   select="tokenize('0002 0003 0004 0005 0006 0007 0008 0009 0010 0011 0012 0013 0014 0015 0016 0017 0018 0019 0020 0021 0022 0023 0024 0025 0026 0027 0028 0029 0030 0031 0032 0033 0034 0035 0036 0037 0038 0039 0040 0041 0042 0043 0044 0045 0046 0047 0048 0049 0050 0051 0052 0053 0054 0055 0056 0057 0058 0059 0060 0061 0062 0063 0064 0065 0066 0067 0068 0069 0070 0071 0072 0073 0074 0075 0076 0077 0078 0079 0080 0081 0082 0083 0084 0085 0086 0087 0088 0089 0090 0091 0093 0094 0095 0096 0097 0098 0099 0100 0101 0102 0104 0105 0106 0107 0108 0109 0110 0111 0112 0113 0114 0115 0116 0117 0118 0119 0120 0121 0122 0123 0124 0125 0126 0127 0128 0129 0130 0131 0132 0133 0134 0135 0136 0137 0138 0139 0140 0141 0142 0143 0144 0145 0146 0147 0148 0149 0150 0151 0152 0153 0154 0155 0156 0157 0158 0159 0160 0161 0162 0163 0164 0165 0166 0167 0168 0169 0170 0171 0172 0173 0174 0175 0176 0177 0178 0179 0180 0183 0184 0185 0186 0187 0188 0189 0190 0191 0192 0193 0194 0195 0196 0197 0198 0199 0200 0201 0202 0203 0204 0205 0206 0207 0208 0209 0210 0211 0212 0213 0214 0215 0216 0217 0218 0219 0220 0221 0222 0223 0224 0225 0226 0227 0228 0229 0230', '\s')"/>
    <!--RULE -->
-   <xsl:template match="/ubl:OrderResponse" priority="1107" mode="M19">
+   <xsl:template match="/ubl:OrderResponse" priority="1110" mode="M19">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="/ubl:OrderResponse"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="cbc:CustomizationID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:CustomizationID">
-               <xsl:attribute name="id">PEPPOL-T76-B00101</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B00101</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -633,7 +634,7 @@
          <xsl:when test="cbc:ProfileID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:ProfileID">
-               <xsl:attribute name="id">PEPPOL-T76-B00102</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B00102</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -647,7 +648,7 @@
          <xsl:when test="cbc:ID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:ID">
-               <xsl:attribute name="id">PEPPOL-T76-B00103</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B00103</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -661,7 +662,7 @@
          <xsl:when test="cbc:IssueDate"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:IssueDate">
-               <xsl:attribute name="id">PEPPOL-T76-B00104</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B00104</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -675,7 +676,7 @@
          <xsl:when test="cbc:OrderResponseCode"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:OrderResponseCode">
-               <xsl:attribute name="id">PEPPOL-T76-B00105</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B00105</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -689,7 +690,7 @@
          <xsl:when test="cbc:DocumentCurrencyCode"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:DocumentCurrencyCode">
-               <xsl:attribute name="id">PEPPOL-T76-B00106</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B00106</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -703,7 +704,7 @@
          <xsl:when test="cac:OrderReference"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cac:OrderReference">
-               <xsl:attribute name="id">PEPPOL-T76-B00107</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B00107</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -717,7 +718,7 @@
          <xsl:when test="cac:SellerSupplierParty"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cac:SellerSupplierParty">
-               <xsl:attribute name="id">PEPPOL-T76-B00108</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B00108</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -731,7 +732,7 @@
          <xsl:when test="cac:BuyerCustomerParty"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cac:BuyerCustomerParty">
-               <xsl:attribute name="id">PEPPOL-T76-B00109</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B00109</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -745,7 +746,7 @@
          <xsl:when test="not(@*:schemaLocation)"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="not(@*:schemaLocation)">
-               <xsl:attribute name="id">PEPPOL-T76-B00110</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B00110</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -758,62 +759,62 @@
    </xsl:template>
    <!--RULE -->
    <xsl:template match="/ubl:OrderResponse/cbc:CustomizationID"
-                  priority="1106"
+                  priority="1109"
                   mode="M19">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                         context="/ubl:OrderResponse/cbc:CustomizationID"/>
       <xsl:apply-templates select="*" mode="M19"/>
    </xsl:template>
    <!--RULE -->
-   <xsl:template match="/ubl:OrderResponse/cbc:ProfileID" priority="1105" mode="M19">
+   <xsl:template match="/ubl:OrderResponse/cbc:ProfileID" priority="1108" mode="M19">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                         context="/ubl:OrderResponse/cbc:ProfileID"/>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="normalize-space(text()) = 'urn:fdc:peppol.eu:poacc:bis:ordering:3'"/>
+         <xsl:when test="normalize-space(text()) = 'urn:fdc:peppol.eu:poacc:bis:advanced_ordering:3'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="normalize-space(text()) = 'urn:fdc:peppol.eu:poacc:bis:ordering:3'">
-               <xsl:attribute name="id">PEPPOL-T76-B00301</xsl:attribute>
+                                 test="normalize-space(text()) = 'urn:fdc:peppol.eu:poacc:bis:advanced_ordering:3'">
+               <xsl:attribute name="id">PEPPOL-T116-B00301</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>Element 'cbc:ProfileID' MUST contain value 'urn:fdc:peppol.eu:poacc:bis:ordering:3'.</svrl:text>
+               <svrl:text>Element 'cbc:ProfileID' MUST contain value 'urn:fdc:peppol.eu:poacc:bis:advanced_ordering:3'.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M19"/>
    </xsl:template>
    <!--RULE -->
-   <xsl:template match="/ubl:OrderResponse/cbc:ID" priority="1104" mode="M19">
+   <xsl:template match="/ubl:OrderResponse/cbc:ID" priority="1107" mode="M19">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                         context="/ubl:OrderResponse/cbc:ID"/>
       <xsl:apply-templates select="*" mode="M19"/>
    </xsl:template>
    <!--RULE -->
    <xsl:template match="/ubl:OrderResponse/cbc:SalesOrderID"
-                  priority="1103"
+                  priority="1106"
                   mode="M19">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                         context="/ubl:OrderResponse/cbc:SalesOrderID"/>
       <xsl:apply-templates select="*" mode="M19"/>
    </xsl:template>
    <!--RULE -->
-   <xsl:template match="/ubl:OrderResponse/cbc:IssueDate" priority="1102" mode="M19">
+   <xsl:template match="/ubl:OrderResponse/cbc:IssueDate" priority="1105" mode="M19">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                         context="/ubl:OrderResponse/cbc:IssueDate"/>
       <xsl:apply-templates select="*" mode="M19"/>
    </xsl:template>
    <!--RULE -->
-   <xsl:template match="/ubl:OrderResponse/cbc:IssueTime" priority="1101" mode="M19">
+   <xsl:template match="/ubl:OrderResponse/cbc:IssueTime" priority="1104" mode="M19">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                         context="/ubl:OrderResponse/cbc:IssueTime"/>
       <xsl:apply-templates select="*" mode="M19"/>
    </xsl:template>
    <!--RULE -->
    <xsl:template match="/ubl:OrderResponse/cbc:OrderResponseCode"
-                  priority="1100"
+                  priority="1103"
                   mode="M19">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                         context="/ubl:OrderResponse/cbc:OrderResponseCode"/>
@@ -823,7 +824,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="(some $code in $clUNCL4343-T76 satisfies $code = normalize-space(text()))">
-               <xsl:attribute name="id">PEPPOL-T76-B00801</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B00801</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -835,14 +836,14 @@
       <xsl:apply-templates select="*" mode="M19"/>
    </xsl:template>
    <!--RULE -->
-   <xsl:template match="/ubl:OrderResponse/cbc:Note" priority="1099" mode="M19">
+   <xsl:template match="/ubl:OrderResponse/cbc:Note" priority="1102" mode="M19">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                         context="/ubl:OrderResponse/cbc:Note"/>
       <xsl:apply-templates select="*" mode="M19"/>
    </xsl:template>
    <!--RULE -->
    <xsl:template match="/ubl:OrderResponse/cbc:DocumentCurrencyCode"
-                  priority="1098"
+                  priority="1101"
                   mode="M19">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                         context="/ubl:OrderResponse/cbc:DocumentCurrencyCode"/>
@@ -852,7 +853,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="(some $code in $clISO4217 satisfies $code = normalize-space(text()))">
-               <xsl:attribute name="id">PEPPOL-T76-B01001</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B01001</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -865,7 +866,7 @@
    </xsl:template>
    <!--RULE -->
    <xsl:template match="/ubl:OrderResponse/cbc:CustomerReference"
-                  priority="1097"
+                  priority="1100"
                   mode="M19">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                         context="/ubl:OrderResponse/cbc:CustomerReference"/>
@@ -873,7 +874,7 @@
    </xsl:template>
    <!--RULE -->
    <xsl:template match="/ubl:OrderResponse/cac:OrderReference"
-                  priority="1096"
+                  priority="1099"
                   mode="M19">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                         context="/ubl:OrderResponse/cac:OrderReference"/>
@@ -882,7 +883,7 @@
          <xsl:when test="cbc:ID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:ID">
-               <xsl:attribute name="id">PEPPOL-T76-B01201</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B01201</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -895,7 +896,7 @@
    </xsl:template>
    <!--RULE -->
    <xsl:template match="/ubl:OrderResponse/cac:OrderReference/cbc:ID"
-                  priority="1095"
+                  priority="1098"
                   mode="M19">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                         context="/ubl:OrderResponse/cac:OrderReference/cbc:ID"/>
@@ -903,7 +904,7 @@
    </xsl:template>
    <!--RULE -->
    <xsl:template match="/ubl:OrderResponse/cac:OrderReference/*"
-                  priority="1094"
+                  priority="1097"
                   mode="M19">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                         context="/ubl:OrderResponse/cac:OrderReference/*"/>
@@ -912,7 +913,59 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T76-B01202</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B01202</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>Document MUST NOT contain elements not part of the data model.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <xsl:apply-templates select="*" mode="M19"/>
+   </xsl:template>
+   <!--RULE -->
+   <xsl:template match="/ubl:OrderResponse/cac:OrderChangeDocumentReference"
+                  priority="1096"
+                  mode="M19">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                        context="/ubl:OrderResponse/cac:OrderChangeDocumentReference"/>
+      <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="cbc:ID"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:ID">
+               <xsl:attribute name="id">PEPPOL-T116-B01401</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>Element 'cbc:ID' MUST be provided.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <xsl:apply-templates select="*" mode="M19"/>
+   </xsl:template>
+   <!--RULE -->
+   <xsl:template match="/ubl:OrderResponse/cac:OrderChangeDocumentReference/cbc:ID"
+                  priority="1095"
+                  mode="M19">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                        context="/ubl:OrderResponse/cac:OrderChangeDocumentReference/cbc:ID"/>
+      <xsl:apply-templates select="*" mode="M19"/>
+   </xsl:template>
+   <!--RULE -->
+   <xsl:template match="/ubl:OrderResponse/cac:OrderChangeDocumentReference/*"
+                  priority="1094"
+                  mode="M19">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                        context="/ubl:OrderResponse/cac:OrderChangeDocumentReference/*"/>
+      <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="false()"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
+               <xsl:attribute name="id">PEPPOL-T116-B01402</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -934,7 +987,7 @@
          <xsl:when test="cac:Party"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cac:Party">
-               <xsl:attribute name="id">PEPPOL-T76-B01401</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B01601</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -956,7 +1009,7 @@
          <xsl:when test="cbc:EndpointID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:EndpointID">
-               <xsl:attribute name="id">PEPPOL-T76-B01501</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B01701</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -978,7 +1031,7 @@
          <xsl:when test="@schemeID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
-               <xsl:attribute name="id">PEPPOL-T76-B01601</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B01801</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -993,7 +1046,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="not(@schemeID) or (some $code in $cleas satisfies $code = @schemeID)">
-               <xsl:attribute name="id">PEPPOL-T76-B01602</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B01802</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1015,7 +1068,7 @@
          <xsl:when test="cbc:ID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:ID">
-               <xsl:attribute name="id">PEPPOL-T76-B01801</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B02001</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1038,7 +1091,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="not(@schemeID) or (some $code in $clICD satisfies $code = @schemeID)">
-               <xsl:attribute name="id">PEPPOL-T76-B01901</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B02101</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1060,7 +1113,7 @@
          <xsl:when test="cbc:RegistrationName"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:RegistrationName">
-               <xsl:attribute name="id">PEPPOL-T76-B02101</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B02301</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1090,7 +1143,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T76-B02102</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B02302</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1112,7 +1165,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T76-B01502</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B01702</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1134,7 +1187,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T76-B01402</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B01602</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1156,7 +1209,7 @@
          <xsl:when test="cac:Party"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cac:Party">
-               <xsl:attribute name="id">PEPPOL-T76-B02301</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B02501</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1178,7 +1231,7 @@
          <xsl:when test="cbc:EndpointID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:EndpointID">
-               <xsl:attribute name="id">PEPPOL-T76-B02401</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B02601</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1200,7 +1253,7 @@
          <xsl:when test="@schemeID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
-               <xsl:attribute name="id">PEPPOL-T76-B02501</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B02701</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1215,7 +1268,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="not(@schemeID) or (some $code in $cleas satisfies $code = @schemeID)">
-               <xsl:attribute name="id">PEPPOL-T76-B02502</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B02702</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1237,7 +1290,7 @@
          <xsl:when test="cbc:ID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:ID">
-               <xsl:attribute name="id">PEPPOL-T76-B02701</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B02901</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1260,7 +1313,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="not(@schemeID) or (some $code in $clICD satisfies $code = @schemeID)">
-               <xsl:attribute name="id">PEPPOL-T76-B02801</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B03001</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1282,7 +1335,7 @@
          <xsl:when test="cbc:RegistrationName"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:RegistrationName">
-               <xsl:attribute name="id">PEPPOL-T76-B03001</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B03201</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1312,7 +1365,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T76-B03002</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B03202</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1334,7 +1387,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T76-B02402</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B02602</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1356,7 +1409,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T76-B02302</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B02502</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1377,7 +1430,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="cac:PromisedDeliveryPeriod">
-               <xsl:attribute name="id">PEPPOL-T76-B03201</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B03401</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1439,7 +1492,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T76-B03301</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B03501</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1461,7 +1514,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T76-B03202</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B03402</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1481,7 +1534,7 @@
          <xsl:when test="cac:LineItem"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cac:LineItem">
-               <xsl:attribute name="id">PEPPOL-T76-B03801</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B04001</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1495,7 +1548,7 @@
          <xsl:when test="cac:OrderLineReference"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cac:OrderLineReference">
-               <xsl:attribute name="id">PEPPOL-T76-B03802</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B04002</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1517,7 +1570,7 @@
          <xsl:when test="cbc:ID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:ID">
-               <xsl:attribute name="id">PEPPOL-T76-B03901</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B04101</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1531,7 +1584,7 @@
          <xsl:when test="cbc:LineStatusCode"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:LineStatusCode">
-               <xsl:attribute name="id">PEPPOL-T76-B03902</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B04102</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1545,7 +1598,7 @@
          <xsl:when test="cac:Item"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cac:Item">
-               <xsl:attribute name="id">PEPPOL-T76-B03903</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B04103</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1584,7 +1637,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="(some $code in $clUNCL1229 satisfies $code = normalize-space(text()))">
-               <xsl:attribute name="id">PEPPOL-T76-B04201</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B04401</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1606,7 +1659,7 @@
          <xsl:when test="@unitCode"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@unitCode">
-               <xsl:attribute name="id">PEPPOL-T76-B04301</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B04501</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1621,7 +1674,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="not(@unitCode) or (some $code in $clUNECERec20 satisfies $code = @unitCode)">
-               <xsl:attribute name="id">PEPPOL-T76-B04302</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B04502</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1646,21 +1699,6 @@
                   mode="M19">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                         context="/ubl:OrderResponse/cac:OrderLine/cac:LineItem/cac:Delivery"/>
-      <!--ASSERT -->
-      <xsl:choose>
-         <xsl:when test="cac:PromisedDeliveryPeriod"/>
-         <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="cac:PromisedDeliveryPeriod">
-               <xsl:attribute name="id">PEPPOL-T76-B04601</xsl:attribute>
-               <xsl:attribute name="flag">fatal</xsl:attribute>
-               <xsl:attribute name="location">
-                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-               </xsl:attribute>
-               <svrl:text>Element 'cac:PromisedDeliveryPeriod' MUST be provided.</svrl:text>
-            </svrl:failed-assert>
-         </xsl:otherwise>
-      </xsl:choose>
       <xsl:apply-templates select="*" mode="M19"/>
    </xsl:template>
    <!--RULE -->
@@ -1714,7 +1752,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T76-B04701</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B04901</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1736,7 +1774,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T76-B04602</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B04801</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1758,7 +1796,7 @@
          <xsl:when test="cbc:PriceAmount"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:PriceAmount">
-               <xsl:attribute name="id">PEPPOL-T76-B05201</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B05401</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1780,7 +1818,7 @@
          <xsl:when test="@currencyID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@currencyID">
-               <xsl:attribute name="id">PEPPOL-T76-B05301</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B05501</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1795,7 +1833,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="not(@currencyID) or (some $code in $clISO4217 satisfies $code = @currencyID)">
-               <xsl:attribute name="id">PEPPOL-T76-B05302</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B05502</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1817,7 +1855,7 @@
          <xsl:when test="@unitCode"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@unitCode">
-               <xsl:attribute name="id">PEPPOL-T76-B05501</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B05701</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1832,7 +1870,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="not(@unitCode) or (some $code in $clUNECERec20 satisfies $code = @unitCode)">
-               <xsl:attribute name="id">PEPPOL-T76-B05502</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B05702</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1854,7 +1892,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T76-B05202</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B05402</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1876,7 +1914,7 @@
          <xsl:when test="cbc:Name"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:Name">
-               <xsl:attribute name="id">PEPPOL-T76-B05701</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B05901</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1906,7 +1944,7 @@
          <xsl:when test="cbc:ID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:ID">
-               <xsl:attribute name="id">PEPPOL-T76-B05901</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B06101</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1936,7 +1974,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T76-B05902</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B06102</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1958,7 +1996,7 @@
          <xsl:when test="cbc:ID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:ID">
-               <xsl:attribute name="id">PEPPOL-T76-B06101</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B06301</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1988,7 +2026,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T76-B06102</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B06302</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -2010,7 +2048,7 @@
          <xsl:when test="cbc:ID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:ID">
-               <xsl:attribute name="id">PEPPOL-T76-B06301</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B06501</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -2032,7 +2070,7 @@
          <xsl:when test="@schemeID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
-               <xsl:attribute name="id">PEPPOL-T76-B06401</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B06601</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -2047,7 +2085,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="not(@schemeID) or (some $code in $clICD satisfies $code = @schemeID)">
-               <xsl:attribute name="id">PEPPOL-T76-B06402</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B06602</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -2069,7 +2107,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T76-B06302</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B06502</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -2091,7 +2129,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T76-B05702</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B05902</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -2113,7 +2151,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T76-B03904</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B04104</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -2135,7 +2173,7 @@
          <xsl:when test="cbc:ID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:ID">
-               <xsl:attribute name="id">PEPPOL-T76-B06601</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B06801</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -2149,7 +2187,7 @@
          <xsl:when test="cac:Item"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cac:Item">
-               <xsl:attribute name="id">PEPPOL-T76-B06602</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B06802</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -2195,7 +2233,7 @@
          <xsl:when test="cbc:ID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:ID">
-               <xsl:attribute name="id">PEPPOL-T76-B07001</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B07201</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -2225,7 +2263,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T76-B07002</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B07202</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -2247,7 +2285,7 @@
          <xsl:when test="cbc:ID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:ID">
-               <xsl:attribute name="id">PEPPOL-T76-B07201</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B07401</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -2269,7 +2307,7 @@
          <xsl:when test="@schemeID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
-               <xsl:attribute name="id">PEPPOL-T76-B07301</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B07501</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -2284,7 +2322,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="not(@schemeID) or (some $code in $clICD satisfies $code = @schemeID)">
-               <xsl:attribute name="id">PEPPOL-T76-B07302</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B07502</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -2306,7 +2344,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T76-B07202</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B07402</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -2336,7 +2374,7 @@
          <xsl:when test="@listID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@listID">
-               <xsl:attribute name="id">PEPPOL-T76-B07601</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B07801</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -2351,7 +2389,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="not(@listID) or (some $code in $clUNCL7143 satisfies $code = @listID)">
-               <xsl:attribute name="id">PEPPOL-T76-B07602</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B07802</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -2373,7 +2411,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T76-B07501</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B07701</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -2395,7 +2433,7 @@
          <xsl:when test="cbc:ID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:ID">
-               <xsl:attribute name="id">PEPPOL-T76-B08001</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B08201</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -2409,7 +2447,7 @@
          <xsl:when test="cac:TaxScheme"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cac:TaxScheme">
-               <xsl:attribute name="id">PEPPOL-T76-B08002</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B08202</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -2426,6 +2464,21 @@
                   mode="M19">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                         context="/ubl:OrderResponse/cac:OrderLine/cac:SellerSubstitutedLineItem/cac:Item/cac:ClassifiedTaxCategory/cbc:ID"/>
+      <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="(some $code in $clUNCL5305 satisfies $code = normalize-space(text()))"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="(some $code in $clUNCL5305 satisfies $code = normalize-space(text()))">
+               <xsl:attribute name="id">PEPPOL-T116-B08301</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>Value MUST be part of code list 'Duty or tax or fee category code (UNCL5305)'.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
       <xsl:apply-templates select="*" mode="M19"/>
    </xsl:template>
    <!--RULE -->
@@ -2447,7 +2500,7 @@
          <xsl:when test="cbc:ID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:ID">
-               <xsl:attribute name="id">PEPPOL-T76-B08301</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B08501</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -2477,7 +2530,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T76-B08302</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B08502</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -2499,7 +2552,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T76-B08003</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B08203</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -2521,7 +2574,7 @@
          <xsl:when test="cbc:Name"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:Name">
-               <xsl:attribute name="id">PEPPOL-T76-B08501</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B08701</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -2535,7 +2588,7 @@
          <xsl:when test="cbc:Value"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:Value">
-               <xsl:attribute name="id">PEPPOL-T76-B08502</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B08702</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -2565,7 +2618,7 @@
          <xsl:when test="@listID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@listID">
-               <xsl:attribute name="id">PEPPOL-T76-B08701</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B08901</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -2595,7 +2648,7 @@
          <xsl:when test="@unitCode"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@unitCode">
-               <xsl:attribute name="id">PEPPOL-T76-B09001</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B09201</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -2610,7 +2663,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="not(@unitCode) or (some $code in $clUNECERec20 satisfies $code = @unitCode)">
-               <xsl:attribute name="id">PEPPOL-T76-B09002</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B09202</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -2640,7 +2693,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T76-B08503</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B08703</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -2662,7 +2715,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T76-B06801</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B07001</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -2684,7 +2737,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T76-B06603</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B06803</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -2706,7 +2759,7 @@
          <xsl:when test="cbc:LineID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="cbc:LineID">
-               <xsl:attribute name="id">PEPPOL-T76-B09301</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B09501</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -2736,7 +2789,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T76-B09302</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B09502</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -2758,7 +2811,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T76-B03803</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B04003</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -2777,7 +2830,7 @@
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
-               <xsl:attribute name="id">PEPPOL-T76-B00111</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-B00111</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -2795,21 +2848,25 @@
    <!--PATTERN -->
    <xsl:variable name="documentCurrencyCode"
                   select="/ubl:OrderResponse/cbc:DocumentCurrencyCode"/>
+   <xsl:variable name="promisedStartDateDocumentlevel"
+                  select="/ubl:OrderResponse/cac:Delivery/cac:PromisedDeliveryPeriod/cbc:StartDate"/>
+   <xsl:variable name="promisedStartDateLinelevel"
+                  select="/ubl:OrderResponse/cac:OrderLine/cac:LineItem/cac:Delivery/cac:PromisedDeliveryPeriod/cbc:StartDate"/>
    <!--RULE -->
    <xsl:template match="cbc:CustomizationID" priority="1005" mode="M20">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="cbc:CustomizationID"/>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="starts-with(normalize-space(.), 'urn:fdc:peppol.eu:poacc:trns:order_response:3')"/>
+         <xsl:when test="starts-with(normalize-space(.), 'urn:fdc:peppol.eu:poacc:trns:order_response_advanced:3')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="starts-with(normalize-space(.), 'urn:fdc:peppol.eu:poacc:trns:order_response:3')">
-               <xsl:attribute name="id">PEPPOL-T76-R006</xsl:attribute>
+                                 test="starts-with(normalize-space(.), 'urn:fdc:peppol.eu:poacc:trns:order_response_advanced:3')">
+               <xsl:attribute name="id">PEPPOL-T116-R006</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>Specification identifier SHALL start with the value 'urn:fdc:peppol.eu:poacc:trns:order_response:3'.</svrl:text>
+               <svrl:text>Specification identifier MUST start with the value 'urn:fdc:peppol.eu:poacc:trns:order_response_advanced:3'.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -2824,12 +2881,12 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="@currencyID = $documentCurrencyCode">
-               <xsl:attribute name="id">PEPPOL-T76-R005</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-R005</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>An order response SHALL be stated in a single currency</svrl:text>
+               <svrl:text>An order response MUST be stated in a single currency</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -2845,12 +2902,12 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="cac:PartyLegalEntity/cbc:RegistrationName or cac:PartyIdentification/cbc:ID">
-               <xsl:attribute name="id">PEPPOL-T76-R001</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-R001</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>An order response SHALL have the buyer party official name or a buyer party identifier</svrl:text>
+               <svrl:text>An order response MUST have the buyer party official name or a buyer party identifier</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -2868,12 +2925,12 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="cac:PartyLegalEntity/cbc:RegistrationName or cac:PartyIdentification/cbc:ID">
-               <xsl:attribute name="id">PEPPOL-T76-R002</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-R002</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>An order response SHALL have the seller party official name or a seller party identifier</svrl:text>
+               <svrl:text>An order response MUST have the seller party official name or a seller party identifier</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -2891,12 +2948,12 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="(exists(cbc:EndDate) and exists(cbc:StartDate) and (cbc:EndDate) &gt;= (cbc:StartDate)) or not(exists(cbc:StartDate)) or not(exists(cbc:EndDate))">
-               <xsl:attribute name="id">PEPPOL-T76-R004</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-R004</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>If both delivery period start date and delivery period end date are given then the end date SHALL be later or equal to the start date.</svrl:text>
+               <svrl:text>If both delivery period start date and delivery period end date are given then the end date MUST be later or equal to the start date.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -2912,12 +2969,12 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="count(key('k_lineId',cbc:ID)) = 1">
-               <xsl:attribute name="id">PEPPOL-T76-R003</xsl:attribute>
+               <xsl:attribute name="id">PEPPOL-T116-R003</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>Each order response line SHALL have a document line identifier that is unique within the order.</svrl:text>
+               <svrl:text>Each order response line MUST have a document line identifier that is unique within the order.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>

@@ -141,9 +141,29 @@ module Sch
       when 'urn:cen.eu:en16931:2017#compliant#urn:fdc:nen.nl:nlcius:v1.0'
         %w(si-ubl-2.0.sch)
 
+      # PEPPOL Order transaction
+      when 'urn:fdc:peppol.eu:poacc:trns:order:3'
+        %w(PEPPOLBIS-T01.sch)
+
       # PEPPOL Order Response transaction 3.0
       when 'urn:fdc:peppol.eu:poacc:trns:order_response:3'
         %w(PEPPOLBIS-T76.sch)
+
+      # PEPPOL Order Agreement transaction 3.1
+      when 'urn:fdc:peppol.eu:poacc:trns:order_agreement:3'
+        %w(PEPPOLBIS-T110.sch)
+
+      # PEPPOL Order Change transaction 3.0
+      when 'urn:fdc:peppol.eu:poacc:trns:order_change:3'
+        %w(PEPPOLBIS-T114.sch)
+
+      # PEPPOL Order Cancellation transaction 3.0
+      when 'urn:fdc:peppol.eu:poacc:trns:order_cancellation:3'
+        %w(PEPPOLBIS-T115.sch)
+
+      # PEPPOL Order Response Advanced transaction 3.0
+      when 'urn:fdc:peppol.eu:poacc:trns:order_response_advanced:3'
+        %w(PEPPOLBIS-T116.sch)
 
       # CIUS-PT portugal
       when 'urn:cen.eu:en16931:2017#compliant#urn:feap.gov.pt:CIUS-PT::v1.0'
@@ -172,6 +192,18 @@ module Sch
       # Statistics Reporting Transactions
       when 'urn:fdc:peppol.eu:edec:trns:transaction-statistics-reporting:1.0'
         %w(peppol-transaction-statistics-reporting-1.0.4.sch)
+
+      # Catalogue
+      when 'urn:fdc:peppol.eu:poacc:trns:catalogue:3'
+        %w(PEPPOLBIS-T19.sch)
+
+      # Catalogue Response
+      when 'urn:fdc:peppol.eu:poacc:trns:catalogue_response:3'
+        %w(PEPPOLBIS-T58.sch)
+
+      # Punch Out transaction 3.2
+      when 'urn:fdc:peppol.eu:poacc:trns:punch_out:3'
+        %w(PEPPOLBIS-T77.sch)
 
       else
         profile_id = doc_nokogiri.xpath('//cbc:ProfileID', cbc: CBC).text
