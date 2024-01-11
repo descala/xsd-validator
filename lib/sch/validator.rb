@@ -82,6 +82,8 @@ module Sch
         %w(CEN-EN16931-UBL.sch PEPPOL-EN16931-UBL.sch)
       when 'urn:cen.eu:en16931:2017#conformant#urn:fdc:peppol.eu:2017:poacc:billing:international:aunz:3.0'
         %w(AUNZ-UBL-validation.sch AUNZ-PEPPOL-validation.sch)
+      when 'urn:cen.eu:en16931:2017#conformant#urn:fdc:peppol.eu:2017:poacc:selfbilling:international:aunz:3.0'
+        %w(AUNZ-UBL-validation.sch AUNZ-PEPPOL-SB-validation.sch)
       when 'urn:www.cenbii.eu:transaction:biitrns010:ver2.0:extended:urn:www.peppol.eu:bis:peppol5a:ver2.0'
         %w(BIICORE-UBL-T10.sch BIIRULES-UBL-T10.sch OPENPEPPOLCORE-UBL-T10.sch OPENPEPPOL-UBL-T10.sch)
       when 'urn:cen.eu:en16931:2017#conformant#urn:fdc:peppol.eu:2017:poacc:billing:international:sg:3.0'
