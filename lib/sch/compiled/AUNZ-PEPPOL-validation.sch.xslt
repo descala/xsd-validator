@@ -85,14 +85,14 @@
               name="u:checkCF"
               as="xs:boolean">
       <param name="arg" as="xs:string?"/>
-      <sequence select="    if ( (string-length($arg) = 16) or (string-length($arg) = 11) )       then     (    if ((string-length($arg) = 16))     then    (    if (u:checkCF16($arg))     then    (    true()    )    else    (    false()    )    )    else    (    if(($arg castable as xsd:integer)) then true() else false()        )    )    else    (    false()    )    "/>
+      <sequence select="    if ( (string-length($arg) = 16) or (string-length($arg) = 11) )    then    (    if ((string-length($arg) = 16))    then    (    if (u:checkCF16($arg))    then    (    true()    )    else    (    false()    )    )    else    (    if(($arg castable as xsd:integer)) then true() else false()     )    )    else    (    false()    )    "/>
    </function>
    <function xmlns="http://www.w3.org/1999/XSL/Transform"
               name="u:checkCF16"
               as="xs:boolean">
       <param name="arg" as="xs:string?"/>
       <variable name="allowed-characters">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</variable>
-      <sequence select="    if (  (string-length(translate(substring($arg,1,6), $allowed-characters, '')) = 0) and      (substring($arg,7,2) castable as xsd:integer) and     (string-length(translate(substring($arg,9,1), $allowed-characters, '')) = 0) and     (substring($arg,10,2) castable as xsd:integer) and      (substring($arg,12,3) castable as xsd:string) and     (substring($arg,15,1) castable as xsd:integer) and      (string-length(translate(substring($arg,16,1), $allowed-characters, '')) = 0)    )     then true()    else false()    "/>
+      <sequence select="    if (  (string-length(translate(substring($arg,1,6), $allowed-characters, '')) = 0) and    (substring($arg,7,2) castable as xsd:integer) and    (string-length(translate(substring($arg,9,1), $allowed-characters, '')) = 0) and    (substring($arg,10,2) castable as xsd:integer) and    (substring($arg,12,3) castable as xsd:string) and    (substring($arg,15,1) castable as xsd:integer) and    (string-length(translate(substring($arg,16,1), $allowed-characters, '')) = 0)    )    then true()    else false()    "/>
    </function>
    <function xmlns="http://www.w3.org/1999/XSL/Transform"
               name="u:checkPIVAseIT"
@@ -100,13 +100,13 @@
       <param name="arg" as="xs:string"/>
       <variable name="paese" select="substring($arg,1,2)"/>
       <variable name="codice" select="substring($arg,3)"/>
-      <sequence select="        if ( $paese = 'IT' or $paese = 'it' )    then    (    if ( ( string-length($codice) = 11 ) and ( if (u:checkPIVA($codice)!=0) then false() else true() ))    then     (    true()    )    else    (    false()    )    )    else    (    true()    )        "/>
+      <sequence select="     if ( $paese = 'IT' or $paese = 'it' )    then    (    if ( ( string-length($codice) = 11 ) and ( if (u:checkPIVA($codice)!=0) then false() else true() ))    then    (    true()    )    else    (    false()    )    )    else    (    true()    )     "/>
    </function>
    <function xmlns="http://www.w3.org/1999/XSL/Transform"
               name="u:checkPIVA"
               as="xs:integer">
       <param name="arg" as="xs:string?"/>
-      <sequence select="    if (not($arg castable as xsd:integer))     then 1    else ( u:addPIVA($arg,xs:integer(0)) mod 10 )"/>
+      <sequence select="    if (not($arg castable as xsd:integer))    then 1    else ( u:addPIVA($arg,xs:integer(0)) mod 10 )"/>
    </function>
    <function xmlns="http://www.w3.org/1999/XSL/Transform"
               name="u:addPIVA"
@@ -116,7 +116,7 @@
       <variable name="tappo"
                  select="if (not($arg castable as xsd:integer)) then 0 else 1"/>
       <variable name="mapper"
-                 select="if ($tappo = 0) then 0 else     ( if ($pari = 1)     then ( xs:integer(substring('0246813579', ( xs:integer(substring($arg,1,1)) +1 ) ,1)) )     else ( xs:integer(substring($arg,1,1) ) )    )"/>
+                 select="if ($tappo = 0) then 0 else    ( if ($pari = 1)    then ( xs:integer(substring('0246813579', ( xs:integer(substring($arg,1,1)) +1 ) ,1)) )    else ( xs:integer(substring($arg,1,1) ) )    )"/>
       <sequence select="if ($tappo = 0) then $mapper else ( xs:integer($mapper) + u:addPIVA(substring(xs:string($arg),2), (if($pari=0) then 1 else 0) ) )"/>
    </function>
    <!--DEFAULT RULES-->
@@ -304,7 +304,7 @@
    <xsl:param name="profile"
                select="       if (/*/cbc:ProfileID and matches(normalize-space(/*/cbc:ProfileID), 'urn:fdc:peppol.eu:2017:poacc:billing:([0-9]{2}):1.0')) then         tokenize(normalize-space(/*/cbc:ProfileID), ':')[7]       else         'Unknown'"/>
    <xsl:param name="supplierCountry"
-               select="       if (/*/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode) then             upper-case(normalize-space(/*/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode))           else             'XX'"/>
+               select="       if  (/*/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode) then             upper-case(normalize-space(/*/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode))           else             'XX'"/>
    <xsl:param name="buyerCountry"
                select="   if (/*/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode) then   upper-case(normalize-space(/*/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode))   else   'XX'"/>
    <xsl:param name="documentCurrencyCode" select="/*/cbc:DocumentCurrencyCode"/>
@@ -456,6 +456,21 @@
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>Invoice total tax amount and Invoice total tax amount in accounting currency MUST have the same operational sign</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="(count(cac:AdditionalDocumentReference[cbc:DocumentTypeCode='130']) &lt;= 1)"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="(count(cac:AdditionalDocumentReference[cbc:DocumentTypeCode='130']) &lt;= 1)">
+               <xsl:attribute name="id">PEPPOL-EN16931-R006</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>Only one invoiced object is allowed on document level</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1180,7 +1195,7 @@
    <xsl:variable name="ISO3166"
                   select="tokenize('AD AE AF AG AI AL AM AO AQ AR AS AT AU AW AX AZ BA BB BD BE BF BG BH BI BJ BL BM BN BO BQ BR BS BT BV BW BY BZ CA CC CD CF CG CH CI CK CL CM CN CO CR CU CV CW CX CY CZ DE DJ DK DM DO DZ EC EE EG EH ER ES ET FI FJ FK FM FO FR GA GB GD GE GF GG GH GI GL GM GN GP GQ GR GS GT GU GW GY HK HM HN HR HT HU ID IE IL IM IN IO IQ IR IS IT JE JM JO JP KE KG KH KI KM KN KP KR KW KY KZ LA LB LC LI LK LR LS LT LU LV LY MA MC MD ME MF MG MH MK ML MM MN MO MP MQ MR MS MT MU MV MW MX MY MZ NA NC NE NF NG NI NL NO NP NR NU NZ OM PA PE PF PG PH PK PL PM PN PR PS PT PW PY QA RE RO RS RU RW SA SB SC SD SE SG SH SI SJ SK SL SM SN SO SR SS ST SV SX SY SZ TC TD TF TG TH TJ TK TL TM TN TO TR TT TV TW TZ UA UG UM US UY UZ VA VC VE VG VI VN VU WF WS YE YT ZA ZM ZW 1A XI', '\s')"/>
    <xsl:variable name="ISO4217"
-                  select="tokenize('AED AFN ALL AMD ANG AOA ARS AUD AWG AZN BAM BBD BDT BGN BHD BIF BMD BND BOB BOV BRL BSD BTN BWP BYN BZD CAD CDF CHE CHF CHW CLF CLP CNY COP COU CRC CUC CUP CVE CZK DJF DKK DOP DZD EGP ERN ETB EUR FJD FKP GBP GEL GHS GIP GMD GNF GTQ GYD HKD HNL HRK HTG HUF IDR ILS INR IQD IRR ISK JMD JOD JPY KES KGS KHR KMF KPW KRW KWD KYD KZT LAK LBP LKR LRD LSL LYD MAD MDL MGA MKD MMK MNT MOP MRU MUR MVR MWK MXN MXV MYR MZN NAD NGN NIO NOK NPR NZD OMR PAB PEN PGK PHP PKR PLN PYG QAR RON RSD RUB RWF SAR SBD SCR SDG SEK SGD SHP SLE SLL SOS SRD SSP STN SVC SYP SZL THB TJS TMT TND TOP TRY TTD TWD TZS UAH UGX USD USN UYI UYU UYW UZS VES VND VUV WST XAF XAG XAU XBA XBB XBC XBD XCD XDR XOF XPD XPF XPT XSU XTS XUA XXX YER ZAR ZMW ZWL', '\s')"/>
+                  select="tokenize('AED AFN ALL AMD ANG AOA ARS AUD AWG AZN BAM BBD BDT BGN BHD BIF BMD BND BOB BOV BRL BSD BTN BWP BYN BZD CAD CDF CHE CHF CHW CLF CLP CNY COP COU CRC CUC CUP CVE CZK DJF DKK DOP DZD EGP ERN ETB EUR FJD FKP GBP GEL GHS GIP GMD GNF GTQ GYD HKD HNL HRK HTG HUF IDR ILS INR IQD IRR ISK JMD JOD JPY KES KGS KHR KMF KPW KRW KWD KYD KZT LAK LBP LKR LRD LSL LYD MAD MDL MGA MKD MMK MNT MOP MRO MUR MVR MWK MXN MXV MYR MZN NAD NGN NIO NOK NPR NZD OMR PAB PEN PGK PHP PKR PLN PYG QAR RON RSD RUB RWF SAR SBD SCR SDG SEK SGD SHP SLE SLL SOS SRD SSP STN SVC SYP SZL THB TJS TMT TND TOP TRY TTD TWD TZS UAH UGX USD USN UYI UYU UZS VEF VND VUV WST XAF XAG XAU XBA XBB XBC XBD XCD XDR XOF XPD XPF XPT XSU XTS XUA XXX YER ZAR ZMW ZWL', '\s')"/>
    <xsl:variable name="MIMECODE"
                   select="tokenize('application/pdf image/png image/jpeg text/csv application/vnd.openxmlformats-officedocument.spreadsheetml.sheet application/vnd.oasis.opendocument.spreadsheet', '\s')"/>
    <xsl:variable name="UNCL2005" select="tokenize('3 35 432', '\s')"/>
@@ -1190,7 +1205,7 @@
                   select="tokenize('AA AAA AAC AAD AAE AAF AAH AAI AAS AAT AAV AAY AAZ ABA ABB ABC ABD ABF ABK ABL ABN ABR ABS ABT ABU ACF ACG ACH ACI ACJ ACK ACL ACM ACS ADC ADE ADJ ADK ADL ADM ADN ADO ADP ADQ ADR ADT ADW ADY ADZ AEA AEB AEC AED AEF AEH AEI AEJ AEK AEL AEM AEN AEO AEP AES AET AEU AEV AEW AEX AEY AEZ AJ AU CA CAB CAD CAE CAF CAI CAJ CAK CAL CAM CAN CAO CAP CAQ CAR CAS CAT CAU CAV CAW CAX CAY CAZ CD CG CS CT DAB DAC DAD DAF DAG DAH DAI DAJ DAK DAL DAM DAN DAO DAP DAQ DL EG EP ER FAA FAB FAC FC FH FI GAA HAA HD HH IAA IAB ID IF IR IS KO L1 LA LAA LAB LF MAE MI ML NAA OA PA PAA PC PL RAB RAC RAD RAF RE RF RH RV SA SAA SAD SAE SAI SG SH SM SU TAB TAC TT TV V1 V2 WH XAA YY ZZZ', '\s')"/>
    <xsl:variable name="UNCL5305" select="tokenize('AE E S Z G O K L M', '\s')"/>
    <xsl:variable name="eaid"
-                  select="tokenize('0002 0007 0009 0037 0060 0088 0096 0097 0106 0130 0135 0142 0151 0183 0184 0188 0190 0191 0192 0193 0195 0196 0198 0199 0200 0201 0202 0204 0208 0209 0210 0211 0212 0213 0215 0216 0218 0221 0230 9901 9910 9913 9914 9915 9918 9919 9920 9922 9923 9924 9925 9926 9927 9928 9929 9930 9931 9932 9933 9934 9935 9936 9937 9938 9939 9940 9941 9942 9943 9944 9945 9946 9947 9948 9949 9950 9951 9952 9953 9957 9959', '\s')"/>
+                  select="tokenize('0002 0007 0009 0037 0060 0088 0096 0097 0106 0130 0135 0142 0151 0183 0184 0188 0190 0191 0192 0193 0195 0196 0198 0199 0200 0201 0202 0204 0208 0209 0210 0211 0212 0213 0215 0216 0221 0230 9901 9910 9913 9914 9915 9918 9919 9920 9922 9923 9924 9925 9926 9927 9928 9929 9930 9931 9932 9933 9934 9935 9936 9937 9938 9939 9940 9941 9942 9943 9944 9945 9946 9947 9948 9949 9950 9951 9952 9953 9957 9959', '\s')"/>
    <!--RULE -->
    <xsl:template match="cbc:EmbeddedDocumentBinaryObject[@mimeCode]"
                   priority="1008"
