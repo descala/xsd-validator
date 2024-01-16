@@ -74,6 +74,10 @@ module Sch
       if customization_id.empty?
         customization_id = doc_nokogiri.xpath('//ram:GuidelineSpecifiedDocumentContextParameter/ram:ID', ram: RAM).text
       end
+      # None of before is used (Peppol Reports End-User and Transaction)
+      if customization_id.empty?
+        customization_id = doc_nokogiri.xpath('//xmlns:CustomizationID').text
+      end
       case customization_id
       when 'urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0'
         %w(CEN-EN16931-UBL.sch PEPPOL-EN16931-UBL.sch)
@@ -141,6 +145,14 @@ module Sch
       # Andorra
       when 'urn:cen.eu:en16931:2017#compliant#urn:fdc:andorra'
         %w(CEN-EN16931-UBL.sch)
+
+      # Peppol Reports End-User Statistics Reporting
+      when 'urn:fdc:peppol.eu:edec:trns:end-user-statistics-report:1.1'
+        %w(peppol-end-user-statistics-reporting-1.1.4.sch)
+
+      # Peppol Reports Transaction Statistics Reporting
+      when 'urn:fdc:peppol.eu:edec:trns:transaction-statistics-reporting:1.0'
+        %w(peppol-transaction-statistics-reporting-1.0.4.sch)
 
       else
         profile_id = doc_nokogiri.xpath('//cbc:ProfileID', cbc: CBC).text
