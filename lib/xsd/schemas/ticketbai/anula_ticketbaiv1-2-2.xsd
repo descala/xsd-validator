@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:T="urn:ticketbai:anulacion" targetNamespace="urn:ticketbai:anulacion">
 
 	<import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="../xmldsig-core-schema.xsd"/>		
@@ -21,7 +21,7 @@
 	<complexType name="Emisor">
 		<sequence>		
 			<element name="NIF" type="T:NIFType"/>			
-			<element name="ApellidosNombreRazonSocial" type="T:TextMax120Type"/>			
+			<element name="ApellidosNombreRazonSocial" type="T:TextMax120ObligatorioType"/>			
 		</sequence>
 	</complexType>
 	<complexType name="IDFactura">
@@ -33,7 +33,7 @@
 	<complexType name="CabeceraFacturaType">
 		<sequence>
 			<element name="SerieFactura" type="T:TextMax20Type" minOccurs="0"/>			
-			<element name="NumFactura" type="T:TextMax20Type"/>
+			<element name="NumFactura" type="T:TextMax20ObligatorioType"/>
 			<element name="FechaExpedicionFactura" type="T:FechaType"/>
 		</sequence>
 	</complexType>	  
@@ -45,10 +45,10 @@
 	</complexType>	
      <complexType name="SoftwareFacturacionType">
 		<sequence>
-			<element name="LicenciaTBAI" type="T:TextMax20Type"/>		
+			<element name="LicenciaTBAI" type="T:TextMax20ObligatorioType"/>		
             <element name="EntidadDesarrolladora" type="T:EntidadDesarrolladoraType"/>			
-			<element name="Nombre" type="T:TextMax120Type"/>
-			<element name="Version" type="T:TextMax20Type"/>
+			<element name="Nombre" type="T:TextMax120ObligatorioType"/>
+			<element name="Version" type="T:TextMax20ObligatorioType"/>
 		</sequence>
 	</complexType>	
      <complexType name="EntidadDesarrolladoraType">
@@ -68,9 +68,7 @@
 	</complexType>
 		<simpleType name="NIFType">
 		<annotation>
-			<documentation >NIF: Secuencia de 9 dígitos o
-				letras mayúsculas
-			</documentation>
+			<documentation>IFZ: 9 zifrako edo letrako segida - NIF: Secuencia de 9 dígitos o letras</documentation>
 		</annotation>
 		<restriction base="string">
 			<length value="9" />
@@ -91,18 +89,28 @@
 			<maxLength value="20"/>
 		</restriction>
 	</simpleType>
+	<!-- Cadena de 20 caracteres obligatorio-->
+    <simpleType name="TextMax20ObligatorioType">
+        <restriction base="string">
+            <pattern value="(\s*[^\s]\s*)+"></pattern>
+            <minLength value="1"/>
+            <maxLength value="20"/>
+        </restriction>
+    </simpleType>
 	<!-- Cadena de 30 caracteres -->
 	<simpleType name="TextMax30Type">
 		<restriction base="string">
 			<maxLength value="30"/>
 		</restriction>
 	</simpleType>
-	<!-- Cadena de 120 caracteres -->
-	<simpleType name="TextMax120Type">
-		<restriction base="string">
-			<maxLength value="120"/>
-		</restriction>
-	</simpleType>
+	<!-- Cadena de 120 caracteres obligatorio-->
+    <simpleType name="TextMax120ObligatorioType">
+        <restriction base="string">
+            <pattern value="(\s*[^\s]\s*)+"></pattern>
+            <minLength value="1"/>
+            <maxLength value="120"/>
+        </restriction>
+    </simpleType>
 	<!--  IDTicketBaiBertsioa - IDVersionTicketBai -->
 	<simpleType name="IDVersionTicketBaiType">
 		<restriction base="string">

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:T="urn:ticketbai:emision" targetNamespace="urn:ticketbai:emision">
 
 	<import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="../xmldsig-core-schema.xsd"/>
@@ -31,12 +31,12 @@
 	<complexType name="Emisor">
 		<sequence>		
 			<element name="NIF" type="T:NIFType"/>
-			<element name="ApellidosNombreRazonSocial" type="T:TextMax120Type"/>
+			<element name="ApellidosNombreRazonSocial" type="T:TextMax120ObligatorioType"/>
 		</sequence>
 	</complexType>
 	<complexType name="Destinatarios">
 		<sequence>
-			<element name="IDDestinatario" type="T:IDDestinatario" maxOccurs="100"/>
+			<element name="IDDestinatario" type="T:IDDestinatario" minOccurs="1" maxOccurs="100"/>
 		</sequence>
 	</complexType>
 	<complexType name="IDDestinatario">
@@ -69,7 +69,7 @@
 	<complexType name="CabeceraFacturaType">
 		<sequence>
 			<element name="SerieFactura" type="T:TextMax20Type" minOccurs="0"/>
-			<element name="NumFactura" type="T:TextMax20Type"/>
+			<element name="NumFactura" type="T:TextMax20ObligatorioType"/>
 			<element name="FechaExpedicionFactura" type="T:FechaType"/>            
 			<element name="HoraExpedicionFactura" type="T:HoraType"/>
 			<element name="FacturaSimplificada" type="T:SiNoType" minOccurs="0"/>
@@ -95,7 +95,7 @@
 	<complexType name="DatosFacturaType">
 		<sequence>
 			<element name="FechaOperacion" type="T:FechaType" minOccurs="0"/>
-			<element name="DescripcionFactura" type="T:TextMax250Type"/>
+			<element name="DescripcionFactura" type="T:TextMax250ObligatorioType"/>
 			<element name="DetallesFactura" type="T:DetallesFacturaType" minOccurs="0"/>
 			<element name="ImporteTotalFactura" type="T:ImporteSgn12.2Type"/>
 			<element name="RetencionSoportada" type="T:ImporteSgn12.2Type" minOccurs="0"/>
@@ -105,12 +105,12 @@
 	</complexType>
 	<complexType name="DetallesFacturaType">
 			<sequence>
-				<element name="IDDetalleFactura" type="T:IDDetalleFacturaType" maxOccurs="1000"/>
+				<element name="IDDetalleFactura" type="T:IDDetalleFacturaType" minOccurs="1" maxOccurs="1000"/>
 			</sequence>
 	</complexType>	
 	<complexType name="IDDetalleFacturaType">
 		<sequence>	
-			<element  name="DescripcionDetalle" type="T:TextMax250Type"/>
+			<element  name="DescripcionDetalle" type="T:TextMax250ObligatorioType"/>
 			<element  name="Cantidad" type="T:ImporteSgn12.8Type"/>
 			<element  name="ImporteUnitario" type="T:ImporteSgn12.8Type"/>
 			<element  name="Descuento" type="T:ImporteSgn12.8Type" minOccurs="0"/>
@@ -119,7 +119,7 @@
 	</complexType>
 	<complexType name="ClavesType">
 		<sequence>
-			<element name="IDClave" type="T:IDClaveType" maxOccurs="3"/>
+			<element name="IDClave" type="T:IDClaveType" minOccurs="1" maxOccurs="3"/>
 		</sequence>
 	</complexType>	
 	<complexType name="IDClaveType">
@@ -129,13 +129,13 @@
 	</complexType>
 	<complexType name="FacturasRectificadasSustituidasType">
 		<sequence>
-			<element name="IDFacturaRectificadaSustituida" type="T:IDFacturaRectificadaSustituidaType" maxOccurs="100" />
+			<element name="IDFacturaRectificadaSustituida" type="T:IDFacturaRectificadaSustituidaType" minOccurs="1" maxOccurs="100" />
 		</sequence>
 	</complexType>
 	<complexType name="IDFacturaRectificadaSustituidaType">
 		<sequence>
 			<element name="SerieFactura" type="T:TextMax20Type" minOccurs="0"/>
-			<element name="NumFactura" type="T:TextMax20Type"/>
+			<element name="NumFactura" type="T:TextMax20ObligatorioType"/>
 			<element name="FechaExpedicionFactura" type="T:FechaType"/>
 		</sequence>
 	</complexType>
@@ -179,8 +179,7 @@
 	</complexType>
 	<complexType name="NoSujetaType">
 		<sequence>
-			<element name="DetalleNoSujeta" type="T:DetalleNoSujeta"
-				minOccurs="1" maxOccurs="2" />
+			<element name="DetalleNoSujeta" type="T:DetalleNoSujeta" minOccurs="1" maxOccurs="4" />
 		</sequence>
 	</complexType>	
 	<complexType name="DetalleNoSujeta">
@@ -213,7 +212,7 @@
 	</complexType>
 	<complexType name="DesgloseIVAType">
 		<sequence>
-			<element name="DetalleIVA" type="T:DetalleIVAType" maxOccurs="6" />
+			<element name="DetalleIVA" type="T:DetalleIVAType" minOccurs="1" maxOccurs="12" />
 		</sequence>
 	</complexType>
 	<complexType name="DetalleIVAType">
@@ -229,9 +228,9 @@
 	<complexType name="EncadenamientoFacturaAnteriorType">
 		<sequence>
 			<element name="SerieFacturaAnterior" type="T:TextMax20Type" minOccurs="0"/>
-			<element name="NumFacturaAnterior" type="T:TextMax20Type"/>
+			<element name="NumFacturaAnterior" type="T:TextMax20ObligatorioType"/>
 			<element name="FechaExpedicionFacturaAnterior" type="T:FechaType"/>
-			<element name="SignatureValueFirmaFacturaAnterior" type="T:TextMax100Type"/>
+			<element name="SignatureValueFirmaFacturaAnterior" type="T:TextMax100ObligatorioType"/>
 		</sequence>
 	</complexType>   
     <complexType name="HuellaTBAI">
@@ -243,10 +242,10 @@
 	</complexType>     
      <complexType name="SoftwareFacturacionType">
 		<sequence>
-			<element name="LicenciaTBAI" type="T:TextMax20Type"/>
+			<element name="LicenciaTBAI" type="T:TextMax20ObligatorioType"/>
             <element name="EntidadDesarrolladora" type="T:EntidadDesarrolladoraType"/>
-			<element name="Nombre" type="T:TextMax120Type"/>
-			<element name="Version" type="T:TextMax20Type"/>
+			<element name="Nombre" type="T:TextMax120ObligatorioType"/>
+			<element name="Version" type="T:TextMax20ObligatorioType"/>
 		</sequence>
 	</complexType>
      <complexType name="EntidadDesarrolladoraType">
@@ -259,7 +258,7 @@
 	</complexType>
 	<simpleType name="NIFType">
 		<annotation>
-			<documentation >NIF: Secuencia de 9 dígitos o letras mayúsculas</documentation>
+			<documentation>IFZ: 9 zifrako edo letrako segida - NIF: Secuencia de 9 dígitos o letras</documentation>
 		</annotation>
 		<restriction base="string">
 			<length value="9" />
@@ -297,21 +296,17 @@
 			<pattern value="(\+|-)?\d{1,12}(\.\d{0,8})?"/>
 		</restriction>
 	</simpleType>
-    <!-- Cadena de 5 caracteres -->
-	<simpleType name="TextMax5Type">
-		<restriction base="string">
-			<maxLength value="5"/>
-		</restriction>
-	</simpleType>
-	<!-- Cadena de 10 caracteres -->
-	<simpleType name="TextMax10Type">
-		<restriction base="string">
-			<maxLength value="10"/>
-		</restriction>
-	</simpleType>
 	<!-- Cadena de 20 caracteres -->
 	<simpleType name="TextMax20Type">
 		<restriction base="string">
+			<maxLength value="20"/>
+		</restriction>
+	</simpleType>
+	<!-- Cadena de 20 caracteres obligatorio-->
+	<simpleType name="TextMax20ObligatorioType">
+		<restriction base="string">
+			<pattern value="(\s*[^\s]\s*)+"></pattern>
+			<minLength value="1"/>
 			<maxLength value="20"/>
 		</restriction>
 	</simpleType>
@@ -321,9 +316,11 @@
 			<maxLength value="30"/>
 		</restriction>
 	</simpleType>
-	<!-- Cadena de 100 caracteres -->
-	<simpleType name="TextMax100Type">
+	<!-- Cadena de 100 caracteres obligatorio-->
+	<simpleType name="TextMax100ObligatorioType">
 		<restriction base="string">
+			<pattern value="(\s*[^\s]\s*)+"></pattern>
+			<minLength value="1"/>
 			<maxLength value="100"/>
 		</restriction>
 	</simpleType>
@@ -332,19 +329,29 @@
 		<restriction base="string">
 			<maxLength value="120"/>
 		</restriction>
-	</simpleType>
+	</simpleType>	
+	<!-- Cadena de 120 caracteres obligatorio-->
+	<simpleType name="TextMax120ObligatorioType">
+		<restriction base="string">
+			<pattern value="(\s*[^\s]\s*)+"></pattern>
+			<minLength value="1"/>
+			<maxLength value="120"/>
+		</restriction>
+	</simpleType>	
 	<!-- Cadena de 250 caracteres -->
 	<simpleType name="TextMax250Type">
 		<restriction base="string">
 			<maxLength value="250"/>
 		</restriction>
 	</simpleType>
-	<!-- Cadena de 500 caracteres -->
-	<simpleType name="TextMax500Type">
+	<!-- Cadena de 250 caracteres obligatorio-->
+	<simpleType name="TextMax250ObligatorioType">
 		<restriction base="string">
-			<maxLength value="500"/>
+			<pattern value="(\s*[^\s]\s*)+"></pattern>
+			<minLength value="1"/>
+			<maxLength value="250"/>
 		</restriction>
-	</simpleType>
+	</simpleType>	
 	<!--  IDTicketBaiBertsioa - IDVersionTicketBai -->
 	<simpleType name="IDVersionTicketBaiType">
 		<restriction base="string">
@@ -529,6 +536,11 @@
                     <documentation>BEZaren ondorioetarako enpresari edo profesionaltzat jotzen ez diren pertsona edo erakundeek egindako eragiketak - Operaciones realizadas por personas o entidades que no tengan la consideración de empresarios, empresarias o profesionales a efectos del IVA</documentation>
                 </annotation>
             </enumeration>
+			<enumeration value="54" >
+                <annotation>
+                    <documentation>Kanarietan, Ceutan eta Melillan kokatutako establezimendu iraunkorretatik egindako eragiketak - Operaciones realizadas desde Establecimientos Permanentes situados en Canarias, Ceuta y Melilla</documentation>
+                </annotation>
+            </enumeration>			
 		</restriction>
 	</simpleType>
 	<!--  Lotutako eta salbuetsitako eragiketen salbuesteko kausa - Causa de exención de operaciones sujetas y exentas  -->
@@ -618,6 +630,16 @@
 			<enumeration value="RL">
                 <annotation>
                   <documentation>Lokalizazio arauengatik lotu gabe - No sujeto por reglas de localización</documentation>
+                </annotation>
+            </enumeration>
+			<enumeration value="VT">
+                <annotation>
+                  <documentation>Ez subjektua, hirugarrenen kontura egindako salmentak (BEZaren eta PFEZaren ondorioetarako konputagarria ez den zenbatekoa) - No sujeto, ventas realizadas por cuenta de terceros (importe no computable a efectos de IVA ni de IRPF)</documentation>
+                </annotation>
+            </enumeration>
+			<enumeration value="IE">
+                <annotation>
+                  <documentation>Lokalizazio-arauak direla-eta ZALen subjektua ez dena, baina atzerriko zerga, IPS/IGIC edo EBko beste estatu kide bateko BEZa eragiten duena - No sujeto en el TAI por reglas de localización, pero repercute impuesto extranjero, IPS/IGIC o IVA de otro estado miembro UE</documentation>
                 </annotation>
             </enumeration>
 		</restriction>
