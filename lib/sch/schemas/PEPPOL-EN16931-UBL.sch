@@ -2,7 +2,7 @@
 <!--
 This schematron uses business terms defined the CEN/EN16931-1 and is reproduced with permission from CEN. CEN bears no liability from the use of the content and implementation of this schematron and gives no warranties expressed or implied for any purpose.
 
-Last update: 2023 May release 3.0.15.
+Last update: 2022 November release 3.0.14.
  -->
 <schema xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:u="utils" schemaVersion="iso" queryBinding="xslt2">
   <title>Rules for Peppol BIS 3.0 Billing</title>
@@ -178,24 +178,6 @@ Last update: 2023 May release 3.0.15.
 ((string-to-codepoints(substring($val,11,1)) - 48) * 19)) mod 89 = 0
 "/>
   </function>
-
-  <!-- Functions and variable for Greek Rules -->
-  <function xmlns="http://www.w3.org/1999/XSL/Transform" name="u:TinVerification" as="xs:boolean">
-    <param name="val" as="xs:string"/>
-    <variable name="digits" select="
-			for $ch in string-to-codepoints($val)
-			return codepoints-to-string($ch)"/>
-    <variable name="checksum" select="
-			(number($digits[8])*2) +
-			(number($digits[7])*4) +
-			(number($digits[6])*8) +
-			(number($digits[5])*16) +
-			(number($digits[4])*32) +
-			(number($digits[3])*64) +
-			(number($digits[2])*128) +
-			(number($digits[1])*256) "/>
-    <value-of select="($checksum  mod 11) mod 10 = number($digits[9])"/>
-  </function>  
   <!-- Empty elements -->
   <pattern>
     <rule context="//*[not(*) and not(normalize-space())]">
@@ -231,6 +213,7 @@ Last update: 2023 May release 3.0.15.
       <assert id="PEPPOL-EN16931-R053" test="count(cac:TaxTotal[cac:TaxSubtotal]) = 1" flag="fatal">Only one tax total with tax subtotals MUST be provided.</assert>
       <assert id="PEPPOL-EN16931-R054" test="count(cac:TaxTotal[not(cac:TaxSubtotal)]) = (if (cbc:TaxCurrencyCode) then 1 else 0)" flag="fatal">Only one tax total without tax subtotals MUST be provided when tax currency code is provided.</assert>
       <assert id="PEPPOL-EN16931-R055" test="not(cbc:TaxCurrencyCode) or (cac:TaxTotal/cbc:TaxAmount[@currencyID=normalize-space(../../cbc:TaxCurrencyCode)] &lt;= 0 and cac:TaxTotal/cbc:TaxAmount[@currencyID=normalize-space(../../cbc:DocumentCurrencyCode)] &lt;= 0) or (cac:TaxTotal/cbc:TaxAmount[@currencyID=normalize-space(../../cbc:TaxCurrencyCode)] &gt;= 0 and cac:TaxTotal/cbc:TaxAmount[@currencyID=normalize-space(../../cbc:DocumentCurrencyCode)] &gt;= 0) " flag="fatal">Invoice total VAT amount and Invoice total VAT amount in accounting currency MUST have the same operational sign</assert>
+      <assert id="PEPPOL-EN16931-R006" test="(count(cac:AdditionalDocumentReference[cbc:DocumentTypeCode='130']) &lt;= 1)" flag="fatal">Only one invoiced object is allowed on document level</assert>
     </rule>
     <rule context="cbc:TaxCurrencyCode">
       <assert id="PEPPOL-EN16931-R005" test="not(normalize-space(text()) = normalize-space(../cbc:DocumentCurrencyCode/text()))" flag="fatal">VAT accounting currency code MUST be different from invoice currency code when provided.</assert>
@@ -365,7 +348,7 @@ Last update: 2023 May release 3.0.15.
       <assert id="PEPPOL-COMMON-R049" test="string-length(normalize-space()) = 10 and string(number(normalize-space())) != 'NaN'" flag="fatal">Swedish organization number MUST be stated in the correct format.</assert>
     </rule>    
     <rule context="cbc:EndpointID[@schemeID = '0151'] | cac:PartyIdentification/cbc:ID[@schemeID = '0151'] | cbc:CompanyID[@schemeID = '0151']">
-      <assert id="PEPPOL-COMMON-R050" test="matches(normalize-space(), '^[0-9]{11}$') and u:abn(normalize-space())" flag="fatal">Australian Business Number (ABN) MUST be stated in the correct format.</assert>
+      <assert id="PEPPOL-COMMON-R050" test="matches(normalize-space(), '^[0-9]{11}$') and u:abn(normalize-space())" flag="warning">Australian Business Number (ABN) MUST be stated in the correct format.</assert>
     </rule>   	
   </pattern>
   <!-- National rules -->
@@ -494,7 +477,23 @@ Last update: 2023 May release 3.0.15.
     </rule>
   </pattern>
   <!-- GREECE -->
-  <!-- General variable for Greek Rules -->
+  <!-- General functions and variable for Greek Rules -->
+  <function xmlns="http://www.w3.org/1999/XSL/Transform" name="u:TinVerification" as="xs:boolean">
+    <param name="val" as="xs:string"/>
+    <variable name="digits" select="
+			for $ch in string-to-codepoints($val)
+			return codepoints-to-string($ch)"/>
+    <variable name="checksum" select="
+			(number($digits[8])*2) +
+			(number($digits[7])*4) +
+			(number($digits[6])*8) +
+			(number($digits[5])*16) +
+			(number($digits[4])*32) +
+			(number($digits[3])*64) +
+			(number($digits[2])*128) +
+			(number($digits[1])*256) "/>
+    <value-of select="($checksum  mod 11) mod 10 = number($digits[9])"/>
+  </function>
   <let name="isGreekSender" value="($supplierCountry ='GR') or ($supplierCountry ='EL')"/>
   <let name="isGreekReceiver" value="($customerCountry ='GR') or ($customerCountry ='EL')"/>
   <let name="isGreekSenderandReceiver" value="$isGreekSender and $isGreekReceiver"/>
@@ -510,7 +509,7 @@ Last update: 2023 May release 3.0.15.
   <!-- Sender Rules -->
   <pattern>
     <let name="dateRegExp" value="'^(0?[1-9]|[12][0-9]|3[01])[-\\/ ]?(0?[1-9]|1[0-2])[-\\/ ]?(19|20)[0-9]{2}'"/>
-    <let name="greekDocumentType" value="tokenize('1.1 1.6 2.1 2.4 5.1 5.2 ','\s')"/>
+    <let name="greekDocumentType" value="tokenize('1.1 1.2 1.3 1.4 1.5 1.6 2.1 2.2 2.3 2.4 3.1 3.2 4 5.1 5.2 6.1 6.2 7.1 8.1 8.2 11.1 11.2 11.3 11.4 11.5','\s')"/>
     <let name="tokenizedUblIssueDate" value="tokenize(/*/cbc:IssueDate,'-')"/>
     <!-- Invoice ID -->
     <rule context="/ubl-invoice:Invoice/cbc:ID[$isGreekSender] | /ubl-creditnote:CreditNote/cbc:ID[$isGreekSender]">
@@ -534,27 +533,33 @@ Last update: 2023 May release 3.0.15.
     <rule context="cac:AccountingSupplierParty[$isGreekSender]/cac:Party">
       <!-- Supplier Name Mandatory -->
       <assert id="GR-R-002" test="string-length(./cac:PartyName/cbc:Name)>0" flag="fatal">Greek Suppliers must provide their full name as they are registered in the  Greek Business Registry (G.E.MH.) as a legal entity or in the Tax Registry as a natural person </assert>
-      <!-- Supplier VAT Mandatory -->
-      <assert id="GR-S-011" test="count(cac:PartyTaxScheme[normalize-space(cac:TaxScheme/cbc:ID) = 'VAT']/cbc:CompanyID)=1 and
-				                        substring(cac:PartyTaxScheme[normalize-space(cac:TaxScheme/cbc:ID) = 'VAT']/cbc:CompanyID,1,2) = 'EL' and
-				                        u:TinVerification(substring(cac:PartyTaxScheme[normalize-space(cac:TaxScheme/cbc:ID) = 'VAT']/cbc:CompanyID,3))" flag="warning">Greek suppliers must provide their Seller Tax Registration Number, prefixed by the country code</assert>
+      <!-- Tax Representative Mandatory -->
+      <assert id="GR-R-007-1" test="
+				count(cac:PartyTaxScheme[normalize-space(cac:TaxScheme/cbc:ID) = 'VAT']/cbc:CompanyID) = 1 or
+				count(/ubl-invoice:Invoice/cac:TaxRepresentativeParty) = 1" flag="fatal">When greek supplier does not have a VAT number, the tax representative must be present</assert>
+    </rule>
+    <!-- Tax Representative Rules -->
+    <rule context="cac:TaxRepresentativeParty[$isGreekSender]">
+      <assert id="GR-R-007-2" test="string-length(normalize-space(cac:PartyName/cbc:Name))>0" flag="fatal">If the Greek Suppliers do not have Greek VAT they must provide the full name of their tax representative in Greece</assert>
+      <assert id="GR-R-007-3" test="count(cac:PartyTaxScheme[normalize-space(cac:TaxScheme/cbc:ID) = 'VAT']/cbc:CompanyID)=1 and
+				substring(cac:PartyTaxScheme[normalize-space(cac:TaxScheme/cbc:ID) = 'VAT']/cbc:CompanyID,1,2) = 'EL' and
+				u:TinVerification(substring(cac:PartyTaxScheme[normalize-space(cac:TaxScheme/cbc:ID) = 'VAT']/cbc:CompanyID,3))" flag="fatal">If the Greek Suppliers do not have Greek VAT, they must provide the VAT number of their tax representative</assert>
     </rule>
     <!-- VAT Number Rules -->
     <rule context="cac:AccountingSupplierParty[$isGreekSender]/cac:Party/cac:PartyTaxScheme[normalize-space(cac:TaxScheme/cbc:ID) = 'VAT']/cbc:CompanyID">
       <assert id="GR-R-003" test="substring(.,1,2) = 'EL' and u:TinVerification(substring(.,3))" flag="fatal">For the Greek Suppliers, the VAT must start with 'EL' and must be a valid TIN number</assert>
     </rule>
     <!-- Document Reference Rules (existence of MARK and Invoice Verification URL) -->
-    <rule context="/ubl-invoice:Invoice[$isGreekSender and ( /*/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode = 'GR')] | /ubl-creditnote:CreditNote[$isGreekSender and ( /*/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode = 'GR')]">
+    <rule context="/ubl-invoice:Invoice[$isGreekSender] | /ubl-creditnote:CreditNote[$isGreekSender]">
       <!-- ΜARK Rules -->
       <assert id="GR-R-004-1" test="count(cac:AdditionalDocumentReference[cbc:DocumentDescription = '##M.AR.K##'])=1" flag="fatal"> When Supplier is Greek, there must be one MARK Number</assert>
       <assert id="GR-S-008-1" flag="warning" test="count(cac:AdditionalDocumentReference[cbc:DocumentDescription = '##INVOICE|URL##'])=1"> When Supplier is Greek, there should be one invoice url</assert>
       <assert id="GR-R-008-2" test="(count(cac:AdditionalDocumentReference[cbc:DocumentDescription = '##INVOICE|URL##']) = 0 ) or (count(cac:AdditionalDocumentReference[cbc:DocumentDescription = '##INVOICE|URL##']) = 1 )" flag="fatal"> When Supplier is Greek, there should be no more than one invoice url</assert>
     </rule>
     <!-- MARK Rules -->
-    <rule context="cac:AdditionalDocumentReference[$isGreekSender and ( /*/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode = 'GR') and cbc:DocumentDescription = '##M.AR.K##']/cbc:ID">
+    <rule context="cac:AdditionalDocumentReference[$isGreekSender and cbc:DocumentDescription = '##M.AR.K##']/cbc:ID">
       <assert id="GR-R-004-2" test="matches(.,'^[1-9]([0-9]*)')" flag="fatal"> When Supplier is Greek, the MARK Number must be a positive integer</assert>
     </rule>
-
     <!-- Invoice Verification URL Rules -->
     <rule context="cac:AdditionalDocumentReference[$isGreekSender and cbc:DocumentDescription = '##INVOICE|URL##']">
       <assert id="GR-R-008-3" test="string-length(normalize-space(cac:Attachment/cac:ExternalReference/cbc:URI))>0" flag="fatal">When Supplier is Greek and the INVOICE URL Document reference exists, the External Reference URI should be present</assert>
@@ -571,7 +576,7 @@ Last update: 2023 May release 3.0.15.
   <!-- Greek Sender and Greek Receiver rules -->
   <pattern>
     <!-- VAT Number Rules -->
-      <rule context="cac:AccountingCustomerParty[$isGreekSenderandReceiver]/cac:Party">
+    <rule context="cac:AccountingCustomerParty[$isGreekSenderandReceiver]/cac:Party">
       <assert id="GR-R-006" test="count(cac:PartyTaxScheme[normalize-space(cac:TaxScheme/cbc:ID) = 'VAT']/cbc:CompanyID)=1 and
 				                        substring(cac:PartyTaxScheme[normalize-space(cac:TaxScheme/cbc:ID) = 'VAT']/cbc:CompanyID,1,2) = 'EL' and
 				                        u:TinVerification(substring(cac:PartyTaxScheme[normalize-space(cac:TaxScheme/cbc:ID) = 'VAT']/cbc:CompanyID,3))" flag="fatal">Greek Suppliers must provide the VAT number of the buyer, if the buyer is Greek </assert>
@@ -663,7 +668,7 @@ Last update: 2023 May release 3.0.15.
     <let name="UNCL5189" value="tokenize('41 42 60 62 63 64 65 66 67 68 70 71 88 95 100 102 103 104 105', '\s')"/>
     <let name="UNCL7161" value="tokenize('AA AAA AAC AAD AAE AAF AAH AAI AAS AAT AAV AAY AAZ ABA ABB ABC ABD ABF ABK ABL ABN ABR ABS ABT ABU ACF ACG ACH ACI ACJ ACK ACL ACM ACS ADC ADE ADJ ADK ADL ADM ADN ADO ADP ADQ ADR ADT ADW ADY ADZ AEA AEB AEC AED AEF AEH AEI AEJ AEK AEL AEM AEN AEO AEP AES AET AEU AEV AEW AEX AEY AEZ AJ AU CA CAB CAD CAE CAF CAI CAJ CAK CAL CAM CAN CAO CAP CAQ CAR CAS CAT CAU CAV CAW CAX CAY CAZ CD CG CS CT DAB DAC DAD DAF DAG DAH DAI DAJ DAK DAL DAM DAN DAO DAP DAQ DL EG EP ER FAA FAB FAC FC FH FI GAA HAA HD HH IAA IAB ID IF IR IS KO L1 LA LAA LAB LF MAE MI ML NAA OA PA PAA PC PL RAB RAC RAD RAF RE RF RH RV SA SAA SAD SAE SAI SG SH SM SU TAB TAC TT TV V1 V2 WH XAA YY ZZZ', '\s')"/>
     <let name="UNCL5305" value="tokenize('AE E S Z G O K L M', '\s')"/>
-    <let name="eaid" value="tokenize('0002 0007 0009 0037 0060 0088 0096 0097 0106 0130 0135 0142 0151 0183 0184 0188 0190 0191 0192 0193 0195 0196 0198 0199 0200 0201 0202 0204 0208 0209 0210 0211 0212 0213 0215 0216 0218 0221 0230 9901 9910 9913 9914 9915 9918 9919 9920 9922 9923 9924 9925 9926 9927 9928 9929 9930 9931 9932 9933 9934 9935 9936 9937 9938 9939 9940 9941 9942 9943 9944 9945 9946 9947 9948 9949 9950 9951 9952 9953 9957 9959', '\s')"/>
+    <let name="eaid" value="tokenize('0002 0007 0009 0037 0060 0088 0096 0097 0106 0130 0135 0142 0151 0183 0184 0188 0190 0191 0192 0193 0195 0196 0198 0199 0200 0201 0202 0204 0208 0209 0210 0211 0212 0213 0215 0216 9901 9910 9913 9914 9915 9918 9919 9920 9922 9923 9924 9925 9926 9927 9928 9929 9930 9931 9932 9933 9934 9935 9936 9937 9938 9939 9940 9941 9942 9943 9944 9945 9946 9947 9948 9949 9950 9951 9952 9953 9955 9957 9959', '\s')"/>
     <rule context="cbc:EmbeddedDocumentBinaryObject[@mimeCode]">
       <assert id="PEPPOL-EN16931-CL001" test="
           some $code in $MIMECODE
