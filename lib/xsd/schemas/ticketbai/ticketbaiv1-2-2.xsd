@@ -242,10 +242,10 @@
 	</complexType>     
      <complexType name="SoftwareFacturacionType">
 		<sequence>
-			<element name="LicenciaTBAI" type="T:TextMax20ObligatorioType"/>
+			<element name="LicenciaTBAI" type="T:TextMax20Type"/>
             <element name="EntidadDesarrolladora" type="T:EntidadDesarrolladoraType"/>
-			<element name="Nombre" type="T:TextMax120ObligatorioType"/>
-			<element name="Version" type="T:TextMax20ObligatorioType"/>
+			<element name="Nombre" type="T:TextMax20Type"/>
+			<element name="Version" type="T:TextMax20Type"/>
 		</sequence>
 	</complexType>
      <complexType name="EntidadDesarrolladoraType">

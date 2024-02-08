@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<T:TicketBai xmlns:T="urn:ticketbai:emision">
+  <Cabecera>
+    <IDVersionTBAI>1.2</IDVersionTBAI>
+  </Cabecera>
+  <Sujetos>
+    <Emisor>
+      <NIF>B00000034</NIF>
+      <ApellidosNombreRazonSocial>HOTEL ADIBIDEZ</ApellidosNombreRazonSocial>
+    </Emisor>
+    <Destinatarios>
+      <IDDestinatario>
+        <NIF>12345678Z</NIF>
+        <ApellidosNombreRazonSocial>DE EJEMPLO DE EJEMPLO ANA</ApellidosNombreRazonSocial>
+      </IDDestinatario>
+    </Destinatarios>
+  </Sujetos>
+  <Factura>
+    <CabeceraFactura>
+      <SerieFactura>B2022</SerieFactura>
+      <NumFactura>0101</NumFactura>
+      <FechaExpedicionFactura>05-02-2022</FechaExpedicionFactura>
+      <HoraExpedicionFactura>11:10:13</HoraExpedicionFactura>
+    </CabeceraFactura>
+    <DatosFactura>
+      <DescripcionFactura>Servicios Hotel</DescripcionFactura>
+      <ImporteTotalFactura>121.00</ImporteTotalFactura>
+      <Claves>
+        <IDClave>
+          <ClaveRegimenIvaOpTrascendencia>01</ClaveRegimenIvaOpTrascendencia>
+        </IDClave>
+      </Claves>
+    </DatosFactura>
+    <TipoDesglose>
+      <DesgloseFactura>
+        <Sujeta>
+          <NoExenta>
+            <DetalleNoExenta>
+              <TipoNoExenta>S1</TipoNoExenta>
+              <DesgloseIVA>
+                <DetalleIVA>
+                  <BaseImponible>110.00</BaseImponible>
+                  <TipoImpositivo>10.00</TipoImpositivo>
+                  <CuotaImpuesto>11.00</CuotaImpuesto>
+                </DetalleIVA>
+              </DesgloseIVA>
+            </DetalleNoExenta>
+          </NoExenta>
+        </Sujeta>
+      </DesgloseFactura>
+    </TipoDesglose>
+  </Factura>
+  <HuellaTBAI>
+    <Software>
+      <LicenciaTBAI>LicenciaTBai</LicenciaTBAI>
+      <EntidadDesarrolladora>
+        <NIF>B63276174</NIF>
+      </EntidadDesarrolladora>
+      <Nombre/>
+      <Version/>
+    </Software>
+  </HuellaTBAI>
+</T:TicketBai>
