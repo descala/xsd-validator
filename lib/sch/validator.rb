@@ -43,10 +43,13 @@ module Sch
       end
     end
 
-    def sch_validate(doc)
+    # - parts: how many parts of the wildcard should be validated (PINT)
+    #    0 - only shared
+    #    1..n - for each @
+    def sch_validate(doc, parts = nil)
       errors = []
       warnings = []
-      schematrons(doc).each do |schematron_file|
+      schematrons(doc, parts).each do |schematron_file|
         compiled_schematron = File.read(xslt_path(schematron_file))
         validation_result = Schematron::XSLT2.validate(compiled_schematron, doc)
         result_handler = ResultHandler.new(validation_result)
@@ -56,14 +59,14 @@ module Sch
       return errors, warnings
     end
 
-    def sch_validate!(doc)
-      errors, warnings = sch_validate(doc)
+    def sch_validate!(doc, parts = nil)
+      errors, warnings = sch_validate(doc, parts)
       raise ValidationError.new((errors+warnings).join("\n")) if errors.any?
       raise ValidationWarning.new(warnings.join("\n")) if warnings.any?
       return true
     end
 
-    def schematrons(doc)
+    def schematrons(doc, parts)
       if doc.is_a? Nokogiri::XML::Document
         doc_nokogiri = doc
       else
@@ -181,17 +184,20 @@ module Sch
       when 'urn:cen.eu:en16931:2017#compliant#urn:fdc:andorra'
         %w(CEN-EN16931-UBL.sch)
 
-      # JP Standard Invoice
+      # JP PINT Invoice v1.0
       when 'urn:peppol:pint:billing-1@jp-1'
-        %w(PINT-JP-Standard-Invoice.sch PINT-UBL-JP-Standard-Invoice.sch)
+        schemas = %w(PINT-billing-1-shared.sch PINT-JP-billing-1-aligned.sch)
+        pint_schemas_to_validate(schemas, parts)
 
-      # JP Non-tax Registered
+      # JP BIS Invoice for Non-tax Registered Businesses
       when 'urn:peppol:pint:nontaxinvoice-1@jp-1'
-        %w(PINT-JP-Non-tax-Registered.sch PINT-UBL-JP-Non-tax-Registered.sch)
+        schemas = %w(PINT-JP-nontaxinvoice-1-shared.sch PINT-JP-nontaxinvoice-1-aligned.sch)
+        pint_schemas_to_validate(schemas, parts)
 
-      # JP Self-Billing
+      # JP BIS Self-Billing Invoice
       when 'urn:peppol:pint:selfbilling-1@jp-1'
-        %w(PINT-JP-Self-Billing.sch PINT-UBL-JP-Self-Billing.sch)
+        schemas = %w(PINT-JP-selfbilling-1-shared.sch PINT-JP-selfbilling-1-aligned.sch)
+        pint_schemas_to_validate(schemas, parts)
 
       # Statistics Reporting End Users
       when 'urn:fdc:peppol.eu:edec:trns:end-user-statistics-report:1.1'
@@ -213,6 +219,21 @@ module Sch
       when 'urn:fdc:peppol.eu:poacc:trns:punch_out:3'
         %w(PEPPOLBIS-T77.sch)
 
+      # A-NZ PINT Invoice v1.0, A-NZ PINT CreditNote v1.0
+      when 'urn:peppol:pint:billing-1@aunz-1'
+        schemas = %w(PINT-billing-1-shared.sch PINT-AUNZ-billing-1-aligned.sch)
+        pint_schemas_to_validate(schemas, parts)
+
+      # A-NZ PINT Self-Billing Invoice v1.0, A-NZ PINT Self-Billing CreditNote v1.0
+      when 'urn:peppol:pint:selfbilling-1@aunz-1'
+        schemas = %w(PINT-AUNZ-selfbilling-1-shared.sch PINT-AUNZ-selfbilling-1-aligned.sch)
+        pint_schemas_to_validate(schemas, parts)
+
+      # SG PINT Invoice v1.0, SG PINT CreditNote v1.0
+      when 'urn:peppol:pint:billing-1@sg-1'
+        schemas = %w(PINT-billing-1-shared.sch PINT-SG-billing-1-aligned.sch)
+        pint_schemas_to_validate(schemas, parts)
+
       else
         profile_id = doc_nokogiri.xpath('//cbc:ProfileID', cbc: CBC).text
 
@@ -225,10 +246,12 @@ module Sch
       end
     end
 
+
+
     # Creates compiled xslt
     def self.compile
       Dir.chdir('lib/sch/schemas/') do
-        Dir["*.sch","*/*.sch","xrechnung/*/*/*.sch"].each do |schematron_file|
+        Dir["*.sch","*/*.sch","xrechnung/*/*/*.sch","PINT/*/*.sch"].each do |schematron_file|
           cache_xslt = "../compiled/#{File.basename(schematron_file)}.xslt"
           compiled_schematron = schematron_compile(schematron_file)
           File.write(cache_xslt, compiled_schematron)
@@ -248,6 +271,23 @@ module Sch
 
     def xslt_path(name)
       File.expand_path("../compiled/#{name}.xslt", __FILE__)
+    end
+
+    # schemas should be in order of the customization_id wildcard
+    # e.g urn:peppol:pint:billing-1@jp-1
+    #   billing-1 - PINT-billing-1-shared.sch
+    #   @jp-1 - PINT-JP-billing-1-aligned.sch
+    #   [PINT-billing-1-shared.sch PINT-JP-billing-1-aligned.sch]
+    def pint_schemas_to_validate(schemas, parts)
+      # if parts is not given all parts will be validated
+      parts ||= schemas.length - 1
+      to_validate = []
+      schemas.each_with_index do |sch, i|
+        if i <= parts
+          to_validate << sch
+        end
+      end
+      to_validate
     end
   end
 end

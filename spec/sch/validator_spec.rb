@@ -30,12 +30,17 @@ RSpec.describe Sch::Validator do
 
   it 'raises ValidationError for an invalid JP Standard Invoice' do
     doc=File.read('spec/files/sch/jp-pint-invoice-ubl-wrong.xml')
-    expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationError, /FATAL: .*aligned-ibr-jp-05/)
+    expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationError, /FATAL: .*aligned-ibrp-cl-01-jp/)
   end
 
   it 'raises ValidationError for an invalid JP NTR Invoice' do
     doc=File.read('spec/files/sch/jp-pint-ntr-invoice-ubl-wrong.xml')
     expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationError, /FATAL: .*aligned-ibr-jp-04-ntr/)
+  end
+
+  it 'does not raises ValidationError for an invalid JP Standard Invoice with only_shared validation' do
+    doc=File.read('spec/files/sch/jp-pint-invoice-ubl-wrong.xml')
+    expect { sch_validate!(doc, 0) }.to_not raise_error
   end
 
 end
