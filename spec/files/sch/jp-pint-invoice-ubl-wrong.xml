@@ -13,7 +13,7 @@ Japan common commercial invoice, example2-Foreign Currency
 	<cbc:DueDate>2023-11-20</cbc:DueDate> <!-- IBT-009 - Payment due date -->
 	<cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode> <!-- IBT-003 - Invoice type code -->
 	<cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode> <!-- IBT-005 - Invoice currency code -->
-	<cbc:TaxCurrencyCode>JPYthisiswrong</cbc:TaxCurrencyCode> <!-- IBT-006 - Tax accounting currency -->
+	<cbc:TaxCurrencyCode>JPY</cbc:TaxCurrencyCode> <!-- IBT-006 - Tax accounting currency -->
 	<cac:InvoicePeriod> <!-- IBG-14 - INVOICING PERIOD -->
 		<cbc:StartDate>2023-10-18</cbc:StartDate> <!-- IBT-073 - Invoicing period start date -->
 		<cbc:EndDate>2023-10-18</cbc:EndDate> <!-- IBT-074 - Invoicing period end date -->
@@ -81,7 +81,7 @@ Japan common commercial invoice, example2-Foreign Currency
 			<cbc:TaxableAmount currencyID="EUR">2500</cbc:TaxableAmount> <!-- IBT-116 - TAX category taxable amount -->
 			<cbc:TaxAmount currencyID="EUR">250</cbc:TaxAmount> <!-- IBT-117 - TAX category tax amount -->
 			<cac:TaxCategory>
-				<cbc:ID>S</cbc:ID> <!-- IBT-118 - TAX category code -->
+				<cbc:ID>F this is wrong</cbc:ID> <!-- IBT-118 - TAX category code -->
 				<cbc:Percent>10</cbc:Percent> <!-- IBT-119 - TAX category rate -->
 				<cac:TaxScheme>
 					<cbc:ID>VAT</cbc:ID> <!-- IBT-118, qualifier -->
