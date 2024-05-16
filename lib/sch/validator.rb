@@ -236,6 +236,11 @@ module Sch
         schemas = %w(PINT-billing-1-shared.sch PINT-SG-billing-1-aligned.sch)
         pint_schemas_to_validate(schemas, parts)
 
+      # MY PINT Invoice v1.0
+      when 'urn:peppol:pint:billing-1@my-1'
+        schemas = %w(PINT-billing-1-shared.sch PINT-MY-billing-1-aligned.sch)
+        pint_schemas_to_validate(schemas, parts)
+
       else
         profile_id = doc_nokogiri.xpath('//cbc:ProfileID', cbc: CBC).text
 
