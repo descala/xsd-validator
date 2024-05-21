@@ -1,0 +1,8 @@
+<configuration xmlns="http://saxon.sf.net/ns/configuration" edition="HE">
+        
+    <xsltPackages>
+        <package version="1.0" sourceLocation="package-019.xsl"/>
+        <package name="urn:use-me" version="0.1" sourceLocation="package-019-used.xsl" />
+        <package sourceLocation="package-019-include.xsl" />       
+    </xsltPackages> 
+</configuration>

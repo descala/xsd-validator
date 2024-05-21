@@ -1,0 +1,5 @@
+ARG_ENABLE("saxon", "enable saxon extension","no");
+if(PHP_SAXON == "no") {
+    EXTENSION("saxon", "php8_saxon.cpp SaxonProcessor.cpp DocumentBuilder.cpp XQueryProcessor.cpp XsltExecutable.cpp Xslt30Processor.cpp XPathProcessor.cpp SchemaValidator.cpp XdmValue.cpp XdmItem.cpp XdmNode.cpp XdmAtomicValue.cpp  XdmFunctionItem.cpp XdmMap.cpp XdmArray.cpp SaxonApiException.cpp SaxonCGlue.c SaxonCProcessor.c SaxonCXPath.c")
+PHP_INSTALL_HEADERS("", "ext/xml");
+}
