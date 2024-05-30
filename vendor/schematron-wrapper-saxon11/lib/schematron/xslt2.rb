@@ -58,17 +58,20 @@ module Schematron
 
     def self.execute_transform(stylesheet, schema, allow_foreign = false)
       sep, null = Gem.win_platform? ? [';', 'nul'] : [':', '/dev/null']
-      cmd = "java "
 
-      # https://stackoverflow.com/questions/1491325/how-to-speed-up-java-vm-jvm-startup-time
-      # Should run `java -Xshare:dump` on the machine 
-      cmd << " -XX:TieredStopAtLevel=1"
-      cmd << " -XX:CICompilerCount=1"
-      cmd << " -XX:+UseSerialGC"
-      cmd << " -XX:-UsePerfData"
-      cmd << " -Xshare:auto"
-
-      cmd << " -cp #{EXE_PATH + sep + LIB_PATH + sep}. net.sf.saxon.Transform"
+      if ENV['XSD_VALIDATOR_C']
+        cmd = "cd #{File.expand_path(File.dirname(__FILE__))}/../../../saxonC_v12.4.2/command && ./transform"
+      else
+        cmd = "java "
+        # https://stackoverflow.com/questions/1491325/how-to-speed-up-java-vm-jvm-startup-time
+        # Should run `java -Xshare:dump` on the machine
+        cmd << " -XX:TieredStopAtLevel=1"
+        cmd << " -XX:CICompilerCount=1"
+        cmd << " -XX:+UseSerialGC"
+        cmd << " -XX:-UsePerfData"
+        cmd << " -Xshare:auto"
+        cmd << " -cp #{EXE_PATH + sep + LIB_PATH + sep}. net.sf.saxon.Transform"
+      end
 
       cmd << " -xsl:#{stylesheet}"
       cmd << " -s:#{schema}"

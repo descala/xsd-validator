@@ -1,0 +1,2 @@
+<!ELEMENT article (foo)>
+<!ELEMENT foo (#PCDATA)>
