@@ -11,6 +11,8 @@ module Xsd
     BIZKAIA_SII_INFORMACION = "http://www.bizkaia.eus/ogasuna/sii/documentos/SuministroInformacion.xsd"
 
     UBL_DOCUMENT = /urn:oasis:names:specification:ubl:schema:xsd:/
+    CII_DOCUMENT = /urn:un:unece:uncefact:data:standard:CrossIndustryInvoice/
+    RAM = "urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100"
 
     class ValidationError < RuntimeError
     end
@@ -18,6 +20,7 @@ module Xsd
     def xsd_validate(doc)
       doc=Nokogiri::XML(doc) unless doc.is_a? Nokogiri::XML::Document
       xsd_path=root_namespace_xsd(doc)
+      puts doc if xsd_path.nil?
       xsd_file = File.open(xsd_path,'rb')
       xsd = Nokogiri::XML::Schema(xsd_file)
       xsd.validate(doc)
@@ -81,6 +84,22 @@ module Xsd
           else
             standard_path("#{namespace}_ubl#{ubl_version}")
           end
+        end
+      when CII_DOCUMENT
+        customization_id = doc.xpath('//ram:GuidelineSpecifiedDocumentContextParameter/ram:ID', ram: RAM).text
+        case customization_id
+        when 'urn:factur-x.eu:1p0:minimum'
+          schema_path('factur-x/minimum/FACTUR-X_MINIMUM.xsd')
+        when 'urn:cen.eu:en16931:2017'
+          schema_path('factur-x/en16931/FACTUR-X_EN16931.xsd')
+        when 'urn:cen.eu:en16931:2017#compliant#urn:factur-x.eu:1p0:basic'
+          schema_path('factur-x/basic/FACTUR-X_BASIC.xsd')
+        when 'urn:factur-x.eu:1p0:basicwl'
+          schema_path('factur-x/basic_wl/FACTUR-X_BASIC-WL.xsd')
+        when 'urn:cen.eu:en16931:2017#conformant#urn:factur-x.eu:1p0:extended'
+          schema_path('factur-x/extended/FACTUR-X_EXTENDED.xsd')
+        else
+          standard_path(namespace)
         end
       else
         ubl_version = doc.xpath('//cbc:UBLVersionID', cbc: "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2").text

@@ -39,4 +39,20 @@ RSpec.describe Xsd::Validator do
       expect(xsd_validate(doc)).to eq([]), "Error validating fixture #{filename}"
     end
   end
+
+  context 'check choose correct validator xsd path' do
+    files = {
+      'spec/files/xsd/factur-x/factur-x-minimum.xml' => /FACTUR-X_MINIMUM.xsd/,
+      'spec/files/xsd/factur-x/factur-x-basic.xml' => /FACTUR-X_BASIC.xsd/,
+      'spec/files/xsd/factur-x/factur-x-basic-wl.xml' => /FACTUR-X_BASIC-WL.xsd/,
+      'spec/files/xsd/factur-x/factur-x-en16931.xml' => /FACTUR-X_EN16931.xsd/,
+      'spec/files/xsd/factur-x/factur-x-extended.xml' => /FACTUR-X_EXTENDED.xsd/,
+      'spec/files/xsd/cii/zugferd_1.xml' => /FACTUR-X_EN16931.xsd/
+    }
+    files.each do |file_path, rgex_xsd_path|
+      it "#{file_path} checks with #{rgex_xsd_path}" do
+        expect(root_namespace_xsd(File.read(file_path))).to match(rgex_xsd_path)
+      end
+    end
+  end
 end

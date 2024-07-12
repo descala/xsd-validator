@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <xsl:stylesheet xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-                 xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
-                 xmlns:ccts="urn:un:unece:uncefact:documentation:2"
-                 xmlns:ccts-cct="urn:un:unece:uncefact:data:specification:CoreComponentTypeSchemaModule:2"
-                 xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
-                 xmlns:iso="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:p1="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2"
-                 xmlns:qdt="urn:oasis:names:specification:ubl:schema:xsd:QualifiedDataTypes-2"
-                 xmlns:schold="http://www.ascc.net/xml/schematron"
-                 xmlns:udt="urn:oasis:names:specification:ubl:schema:xsd:UnqualifiedDataTypes-2"
-                 xmlns:xhtml="http://www.w3.org/1999/xhtml"
-                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                 version="1.0"><!--Implementers: please note that overriding process-prolog or process-root is 
+                xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+                xmlns:ccts="urn:un:unece:uncefact:documentation:2"
+                xmlns:ccts-cct="urn:un:unece:uncefact:data:specification:CoreComponentTypeSchemaModule:2"
+                xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+                xmlns:iso="http://purl.oclc.org/dsdl/schematron"
+                xmlns:p1="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2"
+                xmlns:qdt="urn:oasis:names:specification:ubl:schema:xsd:QualifiedDataTypes-2"
+                xmlns:schold="http://www.ascc.net/xml/schematron"
+                xmlns:udt="urn:oasis:names:specification:ubl:schema:xsd:UnqualifiedDataTypes-2"
+                xmlns:xhtml="http://www.w3.org/1999/xhtml"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                version="1.0"><!--Implementers: please note that overriding process-prolog or process-root is 
     the preferred method for meta-stylesheets to use where possible. -->
    <xsl:param name="archiveDirParameter"/>
    <xsl:param name="archiveNameParameter"/>
@@ -24,10 +24,10 @@
    <!--PHASES-->
    <!--PROLOG-->
    <xsl:output xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                method="xml"
-                omit-xml-declaration="no"
-                standalone="yes"
-                indent="yes"/>
+               method="xml"
+               omit-xml-declaration="no"
+               standalone="yes"
+               indent="yes"/>
    <!--XSD TYPES FOR XSLT2-->
    <!--KEYS AND FUNCTIONS-->
    <!--DEFAULT RULES-->
@@ -45,7 +45,7 @@
          <xsl:when test="namespace-uri()=''">
             <xsl:value-of select="name()"/>
             <xsl:variable name="p_1"
-                           select="1+    count(preceding-sibling::*[name()=name(current())])"/>
+                          select="1+    count(preceding-sibling::*[name()=name(current())])"/>
             <xsl:if test="$p_1&gt;1 or following-sibling::*[name()=name(current())]">[<xsl:value-of select="$p_1"/>]</xsl:if>
          </xsl:when>
          <xsl:otherwise>
@@ -53,7 +53,7 @@
             <xsl:value-of select="local-name()"/>
             <xsl:text>']</xsl:text>
             <xsl:variable name="p_2"
-                           select="1+   count(preceding-sibling::*[local-name()=local-name(current())])"/>
+                          select="1+   count(preceding-sibling::*[local-name()=local-name(current())])"/>
             <xsl:if test="$p_2&gt;1 or following-sibling::*[local-name()=local-name(current())]">[<xsl:value-of select="$p_2"/>]</xsl:if>
          </xsl:otherwise>
       </xsl:choose>
@@ -153,8 +153,8 @@
    <!--SCHEMA SETUP-->
    <xsl:template match="/">
       <svrl:schematron-output xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                               title="BII2 CORE restrictions for Invoice Transaction (T10)  UBL-Invoice-2.1"
-                               schemaVersion="iso">
+                              title="BII2 CORE restrictions for Invoice Transaction (T10)  UBL-Invoice-2.1"
+                              schemaVersion="iso">
          <xsl:comment>
             <xsl:value-of select="$archiveDirParameter"/>   
 		 <xsl:value-of select="$archiveNameParameter"/>  
@@ -162,19 +162,19 @@
 		 <xsl:value-of select="$fileDirParameter"/>
          </xsl:comment>
          <svrl:ns-prefix-in-attribute-values uri="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-                                              prefix="cac"/>
+                                             prefix="cac"/>
          <svrl:ns-prefix-in-attribute-values uri="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
-                                              prefix="cbc"/>
+                                             prefix="cbc"/>
          <svrl:ns-prefix-in-attribute-values uri="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
-                                              prefix="ext"/>
+                                             prefix="ext"/>
          <svrl:ns-prefix-in-attribute-values uri="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2"
-                                              prefix="p1"/>
+                                             prefix="p1"/>
          <svrl:ns-prefix-in-attribute-values uri="urn:oasis:names:specification:ubl:schema:xsd:QualifiedDataTypes-2"
-                                              prefix="qdt"/>
+                                             prefix="qdt"/>
          <svrl:ns-prefix-in-attribute-values uri="urn:oasis:names:specification:ubl:schema:xsd:UnqualifiedDataTypes-2"
-                                              prefix="udt"/>
+                                             prefix="udt"/>
          <svrl:ns-prefix-in-attribute-values uri="urn:un:unece:uncefact:data:specification:CoreComponentTypeSchemaModule:2"
-                                              prefix="ccts-cct"/>
+                                             prefix="ccts-cct"/>
          <svrl:ns-prefix-in-attribute-values uri="urn:un:unece:uncefact:documentation:2" prefix="ccts"/>
          <svrl:active-pattern>
             <xsl:attribute name="document">
@@ -6944,7 +6944,7 @@
          <xsl:when test="count(cbc:CustomizationID)=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(cbc:CustomizationID)=1">
+                                test="count(cbc:CustomizationID)=1">
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -6987,7 +6987,7 @@
          <xsl:when test="count(cbc:DocumentCurrencyCode)=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(cbc:DocumentCurrencyCode)=1">
+                                test="count(cbc:DocumentCurrencyCode)=1">
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -7002,7 +7002,7 @@
          <xsl:when test="count(cac:InvoicePeriod)&lt;=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(cac:InvoicePeriod)&lt;=1">
+                                test="count(cac:InvoicePeriod)&lt;=1">
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -7017,7 +7017,7 @@
          <xsl:when test="count(cac:ContractDocumentReference)&lt;=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(cac:ContractDocumentReference)&lt;=1">
+                                test="count(cac:ContractDocumentReference)&lt;=1">
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -7046,7 +7046,7 @@
          <xsl:when test="count(cac:PaymentTerms)&lt;=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(cac:PaymentTerms)&lt;=1">
+                                test="count(cac:PaymentTerms)&lt;=1">
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -7065,10 +7065,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty"
-                  priority="1000"
-                  mode="M10">
+                 priority="1000"
+                 mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(cac:Party)=1"/>
@@ -7092,10 +7092,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:AccountingContact"
-                  priority="1000"
-                  mode="M11">
+                 priority="1000"
+                 mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:AccountingContact"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:AccountingContact"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -7116,10 +7116,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:BuyerContact"
-                  priority="1000"
-                  mode="M12">
+                 priority="1000"
+                 mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:BuyerContact"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:BuyerContact"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -7140,10 +7140,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:DeliveryContact"
-                  priority="1000"
-                  mode="M13">
+                 priority="1000"
+                 mode="M13">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:DeliveryContact"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:DeliveryContact"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -7164,16 +7164,16 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party"
-                  priority="1000"
-                  mode="M14">
+                 priority="1000"
+                 mode="M14">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(cac:PartyIdentification)&lt;=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(cac:PartyIdentification)&lt;=1">
+                                test="count(cac:PartyIdentification)&lt;=1">
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -7202,7 +7202,7 @@
          <xsl:when test="count(cac:PartyTaxScheme)&lt;=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(cac:PartyTaxScheme)&lt;=1">
+                                test="count(cac:PartyTaxScheme)&lt;=1">
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -7217,7 +7217,7 @@
          <xsl:when test="count(cac:PartyLegalEntity)&lt;=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(cac:PartyLegalEntity)&lt;=1">
+                                test="count(cac:PartyLegalEntity)&lt;=1">
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -7236,10 +7236,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:AgentParty"
-                  priority="1000"
-                  mode="M15">
+                 priority="1000"
+                 mode="M15">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:AgentParty"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:AgentParty"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -7260,10 +7260,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:Contact/cac:OtherCommunication"
-                  priority="1000"
-                  mode="M16">
+                 priority="1000"
+                 mode="M16">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:Contact/cac:OtherCommunication"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:Contact/cac:OtherCommunication"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -7284,10 +7284,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:Contact/cbc:ElectronicMail"
-                  priority="1000"
-                  mode="M17">
+                 priority="1000"
+                 mode="M17">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:Contact/cbc:ElectronicMail"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:Contact/cbc:ElectronicMail"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -7319,10 +7319,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:Contact/cbc:ID"
-                  priority="1000"
-                  mode="M18">
+                 priority="1000"
+                 mode="M18">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:Contact/cbc:ID"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:Contact/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test="@schemeID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
@@ -7409,10 +7409,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:Contact/cbc:Name"
-                  priority="1000"
-                  mode="M19">
+                 priority="1000"
+                 mode="M19">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:Contact/cbc:Name"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:Contact/cbc:Name"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -7444,10 +7444,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:Contact/cbc:Note"
-                  priority="1000"
-                  mode="M20">
+                 priority="1000"
+                 mode="M20">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:Contact/cbc:Note"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:Contact/cbc:Note"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -7468,10 +7468,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:Contact/cbc:Telefax"
-                  priority="1000"
-                  mode="M21">
+                 priority="1000"
+                 mode="M21">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:Contact/cbc:Telefax"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:Contact/cbc:Telefax"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -7503,10 +7503,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:Contact/cbc:Telephone"
-                  priority="1000"
-                  mode="M22">
+                 priority="1000"
+                 mode="M22">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:Contact/cbc:Telephone"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:Contact/cbc:Telephone"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -7538,10 +7538,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:FinancialAccount"
-                  priority="1000"
-                  mode="M23">
+                 priority="1000"
+                 mode="M23">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:FinancialAccount"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:FinancialAccount"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -7562,10 +7562,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:Language"
-                  priority="1000"
-                  mode="M24">
+                 priority="1000"
+                 mode="M24">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:Language"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:Language"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -7586,10 +7586,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyIdentification/cbc:ID"
-                  priority="1000"
-                  mode="M25">
+                 priority="1000"
+                 mode="M25">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyIdentification/cbc:ID"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyIdentification/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test="@schemeName">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeName">
@@ -7643,10 +7643,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cac:CorporateRegistrationScheme"
-                  priority="1000"
-                  mode="M26">
+                 priority="1000"
+                 mode="M26">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cac:CorporateRegistrationScheme"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cac:CorporateRegistrationScheme"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -7667,10 +7667,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cac:HeadParty"
-                  priority="1000"
-                  mode="M27">
+                 priority="1000"
+                 mode="M27">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cac:HeadParty"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cac:HeadParty"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -7691,10 +7691,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress"
-                  priority="1000"
-                  mode="M28">
+                 priority="1000"
+                 mode="M28">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -7715,10 +7715,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cac:ShareholderParty"
-                  priority="1000"
-                  mode="M29">
+                 priority="1000"
+                 mode="M29">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cac:ShareholderParty"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cac:ShareholderParty"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -7739,10 +7739,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyID"
-                  priority="1000"
-                  mode="M30">
+                 priority="1000"
+                 mode="M30">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyID"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyID"/>
       <!--REPORT -->
       <xsl:if test="@schemeID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
@@ -7829,10 +7829,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyLegalFormCode"
-                  priority="1000"
-                  mode="M31">
+                 priority="1000"
+                 mode="M31">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyLegalFormCode"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyLegalFormCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -7853,10 +7853,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyLiquidationStatusCode"
-                  priority="1000"
-                  mode="M32">
+                 priority="1000"
+                 mode="M32">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyLiquidationStatusCode"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyLiquidationStatusCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -7877,10 +7877,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:CorporateStockAmount"
-                  priority="1000"
-                  mode="M33">
+                 priority="1000"
+                 mode="M33">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:CorporateStockAmount"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:CorporateStockAmount"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -7901,10 +7901,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:FullyPaidSharesIndicator"
-                  priority="1000"
-                  mode="M34">
+                 priority="1000"
+                 mode="M34">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:FullyPaidSharesIndicator"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:FullyPaidSharesIndicator"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -7925,10 +7925,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationDate"
-                  priority="1000"
-                  mode="M35">
+                 priority="1000"
+                 mode="M35">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationDate"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationDate"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -7949,10 +7949,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationExpirationDate"
-                  priority="1000"
-                  mode="M36">
+                 priority="1000"
+                 mode="M36">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationExpirationDate"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationExpirationDate"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -7973,10 +7973,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationName"
-                  priority="1000"
-                  mode="M37">
+                 priority="1000"
+                 mode="M37">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationName"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -7997,10 +7997,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:SoleProprietorshipIndicator"
-                  priority="1000"
-                  mode="M38">
+                 priority="1000"
+                 mode="M38">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:SoleProprietorshipIndicator"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:SoleProprietorshipIndicator"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -8021,10 +8021,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyName/cbc:Name"
-                  priority="1000"
-                  mode="M39">
+                 priority="1000"
+                 mode="M39">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyName/cbc:Name"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyName/cbc:Name"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -8056,10 +8056,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cac:RegistrationAddress"
-                  priority="1000"
-                  mode="M40">
+                 priority="1000"
+                 mode="M40">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cac:RegistrationAddress"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cac:RegistrationAddress"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -8080,10 +8080,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme"
-                  priority="1000"
-                  mode="M41">
+                 priority="1000"
+                 mode="M41">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(cbc:ID)=1"/>
@@ -8107,10 +8107,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cac:JurisdictionRegionAddress"
-                  priority="1000"
-                  mode="M42">
+                 priority="1000"
+                 mode="M42">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cac:JurisdictionRegionAddress"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cac:JurisdictionRegionAddress"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -8131,10 +8131,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:CurrencyCode"
-                  priority="1000"
-                  mode="M43">
+                 priority="1000"
+                 mode="M43">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:CurrencyCode"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:CurrencyCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -8155,10 +8155,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:ID"
-                  priority="1000"
-                  mode="M44">
+                 priority="1000"
+                 mode="M44">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:ID"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:ID"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="normalize-space(.)='VAT'"/>
@@ -8259,10 +8259,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:Name"
-                  priority="1000"
-                  mode="M45">
+                 priority="1000"
+                 mode="M45">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:Name"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:Name"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -8283,10 +8283,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:TaxTypeCode"
-                  priority="1000"
-                  mode="M46">
+                 priority="1000"
+                 mode="M46">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:TaxTypeCode"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:TaxTypeCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -8307,10 +8307,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cbc:CompanyID"
-                  priority="1000"
-                  mode="M47">
+                 priority="1000"
+                 mode="M47">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cbc:CompanyID"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cbc:CompanyID"/>
       <!--REPORT -->
       <xsl:if test="@schemeID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
@@ -8397,10 +8397,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cbc:ExemptionReason"
-                  priority="1000"
-                  mode="M48">
+                 priority="1000"
+                 mode="M48">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cbc:ExemptionReason"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cbc:ExemptionReason"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -8421,10 +8421,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cbc:ExemptionReasonCode"
-                  priority="1000"
-                  mode="M49">
+                 priority="1000"
+                 mode="M49">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cbc:ExemptionReasonCode"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cbc:ExemptionReasonCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -8445,10 +8445,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cbc:RegistrationName"
-                  priority="1000"
-                  mode="M50">
+                 priority="1000"
+                 mode="M50">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cbc:RegistrationName"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cbc:RegistrationName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -8469,10 +8469,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cbc:TaxLevelCode"
-                  priority="1000"
-                  mode="M51">
+                 priority="1000"
+                 mode="M51">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cbc:TaxLevelCode"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cbc:TaxLevelCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -8493,10 +8493,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:Person"
-                  priority="1000"
-                  mode="M52">
+                 priority="1000"
+                 mode="M52">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:Person"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:Person"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -8517,10 +8517,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PhysicalLocation"
-                  priority="1000"
-                  mode="M53">
+                 priority="1000"
+                 mode="M53">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PhysicalLocation"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PhysicalLocation"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -8541,10 +8541,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:AddressLine"
-                  priority="1000"
-                  mode="M54">
+                 priority="1000"
+                 mode="M54">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:AddressLine"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:AddressLine"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -8565,16 +8565,16 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:Country"
-                  priority="1000"
-                  mode="M55">
+                 priority="1000"
+                 mode="M55">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:Country"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:Country"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(cbc:IdentificationCode)=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(cbc:IdentificationCode)=1">
+                                test="count(cbc:IdentificationCode)=1">
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -8593,10 +8593,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode"
-                  priority="1000"
-                  mode="M56">
+                 priority="1000"
+                 mode="M56">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode"/>
       <!--REPORT -->
       <xsl:if test="@listID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@listID">
@@ -8705,10 +8705,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:Country/cbc:Name"
-                  priority="1000"
-                  mode="M57">
+                 priority="1000"
+                 mode="M57">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:Country/cbc:Name"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:Country/cbc:Name"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -8729,10 +8729,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:LocationCoordinate"
-                  priority="1000"
-                  mode="M58">
+                 priority="1000"
+                 mode="M58">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:LocationCoordinate"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:LocationCoordinate"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -8753,10 +8753,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:AdditionalStreetName"
-                  priority="1000"
-                  mode="M59">
+                 priority="1000"
+                 mode="M59">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:AdditionalStreetName"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:AdditionalStreetName"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -8788,10 +8788,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:AddressFormatCode"
-                  priority="1000"
-                  mode="M60">
+                 priority="1000"
+                 mode="M60">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:AddressFormatCode"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:AddressFormatCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -8812,10 +8812,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:AddressTypeCode"
-                  priority="1000"
-                  mode="M61">
+                 priority="1000"
+                 mode="M61">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:AddressTypeCode"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:AddressTypeCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -8836,10 +8836,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:BlockName"
-                  priority="1000"
-                  mode="M62">
+                 priority="1000"
+                 mode="M62">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:BlockName"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:BlockName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -8860,10 +8860,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:BuildingName"
-                  priority="1000"
-                  mode="M63">
+                 priority="1000"
+                 mode="M63">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:BuildingName"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:BuildingName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -8884,10 +8884,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:BuildingNumber"
-                  priority="1000"
-                  mode="M64">
+                 priority="1000"
+                 mode="M64">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:BuildingNumber"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:BuildingNumber"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -8908,10 +8908,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:CityName"
-                  priority="1000"
-                  mode="M65">
+                 priority="1000"
+                 mode="M65">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:CityName"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:CityName"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -8943,10 +8943,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:CitySubdivisionName"
-                  priority="1000"
-                  mode="M66">
+                 priority="1000"
+                 mode="M66">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:CitySubdivisionName"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:CitySubdivisionName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -8967,10 +8967,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:CountrySubentity"
-                  priority="1000"
-                  mode="M67">
+                 priority="1000"
+                 mode="M67">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:CountrySubentity"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:CountrySubentity"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -9002,10 +9002,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:CountrySubentityCode"
-                  priority="1000"
-                  mode="M68">
+                 priority="1000"
+                 mode="M68">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:CountrySubentityCode"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:CountrySubentityCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -9026,10 +9026,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:Department"
-                  priority="1000"
-                  mode="M69">
+                 priority="1000"
+                 mode="M69">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:Department"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:Department"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -9050,10 +9050,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:District"
-                  priority="1000"
-                  mode="M70">
+                 priority="1000"
+                 mode="M70">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:District"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:District"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -9074,10 +9074,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:Floor"
-                  priority="1000"
-                  mode="M71">
+                 priority="1000"
+                 mode="M71">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:Floor"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:Floor"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -9098,10 +9098,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:ID"
-                  priority="1000"
-                  mode="M72">
+                 priority="1000"
+                 mode="M72">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:ID"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -9122,10 +9122,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:InhouseMail"
-                  priority="1000"
-                  mode="M73">
+                 priority="1000"
+                 mode="M73">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:InhouseMail"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:InhouseMail"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -9146,10 +9146,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:MarkAttention"
-                  priority="1000"
-                  mode="M74">
+                 priority="1000"
+                 mode="M74">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:MarkAttention"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:MarkAttention"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -9170,10 +9170,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:MarkCare"
-                  priority="1000"
-                  mode="M75">
+                 priority="1000"
+                 mode="M75">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:MarkCare"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:MarkCare"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -9194,10 +9194,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:PlotIdentification"
-                  priority="1000"
-                  mode="M76">
+                 priority="1000"
+                 mode="M76">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:PlotIdentification"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:PlotIdentification"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -9218,10 +9218,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:PostalZone"
-                  priority="1000"
-                  mode="M77">
+                 priority="1000"
+                 mode="M77">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:PostalZone"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:PostalZone"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -9253,10 +9253,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:Postbox"
-                  priority="1000"
-                  mode="M78">
+                 priority="1000"
+                 mode="M78">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:Postbox"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:Postbox"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -9277,10 +9277,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:Region"
-                  priority="1000"
-                  mode="M79">
+                 priority="1000"
+                 mode="M79">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:Region"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:Region"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -9301,10 +9301,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:Room"
-                  priority="1000"
-                  mode="M80">
+                 priority="1000"
+                 mode="M80">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:Room"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:Room"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -9325,10 +9325,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:StreetName"
-                  priority="1000"
-                  mode="M81">
+                 priority="1000"
+                 mode="M81">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:StreetName"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:StreetName"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -9360,10 +9360,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:TimezoneOffset"
-                  priority="1000"
-                  mode="M82">
+                 priority="1000"
+                 mode="M82">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:TimezoneOffset"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:TimezoneOffset"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -9384,10 +9384,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PowerOfAttorney"
-                  priority="1000"
-                  mode="M83">
+                 priority="1000"
+                 mode="M83">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PowerOfAttorney"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:PowerOfAttorney"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -9408,10 +9408,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:ServiceProviderParty"
-                  priority="1000"
-                  mode="M84">
+                 priority="1000"
+                 mode="M84">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:ServiceProviderParty"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cac:ServiceProviderParty"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -9432,10 +9432,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cbc:EndpointID"
-                  priority="1000"
-                  mode="M85">
+                 priority="1000"
+                 mode="M85">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cbc:EndpointID"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cbc:EndpointID"/>
       <!--REPORT -->
       <xsl:if test="@schemeName">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeName">
@@ -9489,10 +9489,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cbc:IndustryClassificationCode"
-                  priority="1000"
-                  mode="M86">
+                 priority="1000"
+                 mode="M86">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cbc:IndustryClassificationCode"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cbc:IndustryClassificationCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -9513,10 +9513,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cbc:LogoReferenceID"
-                  priority="1000"
-                  mode="M87">
+                 priority="1000"
+                 mode="M87">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cbc:LogoReferenceID"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cbc:LogoReferenceID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -9537,10 +9537,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cbc:MarkAttentionIndicator"
-                  priority="1000"
-                  mode="M88">
+                 priority="1000"
+                 mode="M88">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cbc:MarkAttentionIndicator"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cbc:MarkAttentionIndicator"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -9561,10 +9561,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cbc:MarkCareIndicator"
-                  priority="1000"
-                  mode="M89">
+                 priority="1000"
+                 mode="M89">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cbc:MarkCareIndicator"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cbc:MarkCareIndicator"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -9585,10 +9585,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cbc:WebsiteURI"
-                  priority="1000"
-                  mode="M90">
+                 priority="1000"
+                 mode="M90">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cbc:WebsiteURI"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cac:Party/cbc:WebsiteURI"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -9609,10 +9609,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cbc:AdditionalAccountID"
-                  priority="1000"
-                  mode="M91">
+                 priority="1000"
+                 mode="M91">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cbc:AdditionalAccountID"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cbc:AdditionalAccountID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -9633,10 +9633,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cbc:CustomerAssignedAccountID"
-                  priority="1000"
-                  mode="M92">
+                 priority="1000"
+                 mode="M92">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cbc:CustomerAssignedAccountID"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cbc:CustomerAssignedAccountID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -9657,10 +9657,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingCustomerParty/cbc:SupplierAssignedAccountID"
-                  priority="1000"
-                  mode="M93">
+                 priority="1000"
+                 mode="M93">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingCustomerParty/cbc:SupplierAssignedAccountID"/>
+                       context="/p1:Invoice/cac:AccountingCustomerParty/cbc:SupplierAssignedAccountID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -9681,10 +9681,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty"
-                  priority="1000"
-                  mode="M94">
+                 priority="1000"
+                 mode="M94">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(cac:Party)=1"/>
@@ -9708,10 +9708,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:AccountingContact"
-                  priority="1000"
-                  mode="M95">
+                 priority="1000"
+                 mode="M95">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:AccountingContact"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:AccountingContact"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -9732,10 +9732,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:DespatchContact"
-                  priority="1000"
-                  mode="M96">
+                 priority="1000"
+                 mode="M96">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:DespatchContact"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:DespatchContact"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -9756,16 +9756,16 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party"
-                  priority="1000"
-                  mode="M97">
+                 priority="1000"
+                 mode="M97">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(cac:PartyIdentification)&lt;=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(cac:PartyIdentification)&lt;=1">
+                                test="count(cac:PartyIdentification)&lt;=1">
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -9794,7 +9794,7 @@
          <xsl:when test="count(cac:PartyLegalEntity)&lt;=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(cac:PartyLegalEntity)&lt;=1">
+                                test="count(cac:PartyLegalEntity)&lt;=1">
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -9813,10 +9813,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:AgentParty"
-                  priority="1000"
-                  mode="M98">
+                 priority="1000"
+                 mode="M98">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:AgentParty"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:AgentParty"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -9837,10 +9837,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:Contact/cac:OtherCommunication"
-                  priority="1000"
-                  mode="M99">
+                 priority="1000"
+                 mode="M99">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:Contact/cac:OtherCommunication"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:Contact/cac:OtherCommunication"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -9861,10 +9861,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:Contact/cbc:ElectronicMail"
-                  priority="1000"
-                  mode="M100">
+                 priority="1000"
+                 mode="M100">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:Contact/cbc:ElectronicMail"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:Contact/cbc:ElectronicMail"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -9896,10 +9896,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:Contact/cbc:ID"
-                  priority="1000"
-                  mode="M101">
+                 priority="1000"
+                 mode="M101">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:Contact/cbc:ID"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:Contact/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -9920,10 +9920,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:Contact/cbc:Name"
-                  priority="1000"
-                  mode="M102">
+                 priority="1000"
+                 mode="M102">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:Contact/cbc:Name"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:Contact/cbc:Name"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -9955,10 +9955,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:Contact/cbc:Note"
-                  priority="1000"
-                  mode="M103">
+                 priority="1000"
+                 mode="M103">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:Contact/cbc:Note"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:Contact/cbc:Note"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -9979,10 +9979,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:Contact/cbc:Telefax"
-                  priority="1000"
-                  mode="M104">
+                 priority="1000"
+                 mode="M104">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:Contact/cbc:Telefax"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:Contact/cbc:Telefax"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -10014,10 +10014,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:Contact/cbc:Telephone"
-                  priority="1000"
-                  mode="M105">
+                 priority="1000"
+                 mode="M105">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:Contact/cbc:Telephone"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:Contact/cbc:Telephone"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -10049,10 +10049,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:FinancialAccount"
-                  priority="1000"
-                  mode="M106">
+                 priority="1000"
+                 mode="M106">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:FinancialAccount"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:FinancialAccount"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -10073,10 +10073,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:Language"
-                  priority="1000"
-                  mode="M107">
+                 priority="1000"
+                 mode="M107">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:Language"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:Language"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -10097,10 +10097,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyIdentification/cbc:ID"
-                  priority="1000"
-                  mode="M108">
+                 priority="1000"
+                 mode="M108">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyIdentification/cbc:ID"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyIdentification/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test="@schemeName">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeName">
@@ -10154,10 +10154,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:CorporateRegistrationScheme"
-                  priority="1000"
-                  mode="M109">
+                 priority="1000"
+                 mode="M109">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:CorporateRegistrationScheme"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:CorporateRegistrationScheme"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -10178,10 +10178,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:HeadParty"
-                  priority="1000"
-                  mode="M110">
+                 priority="1000"
+                 mode="M110">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:HeadParty"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:HeadParty"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -10202,10 +10202,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:AddressLine"
-                  priority="1000"
-                  mode="M111">
+                 priority="1000"
+                 mode="M111">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:AddressLine"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:AddressLine"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -10226,16 +10226,16 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:Country"
-                  priority="1000"
-                  mode="M112">
+                 priority="1000"
+                 mode="M112">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:Country"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:Country"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(cbc:IdentificationCode)=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(cbc:IdentificationCode)=1">
+                                test="count(cbc:IdentificationCode)=1">
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -10254,10 +10254,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:Country/cbc:IdentificationCode"
-                  priority="1000"
-                  mode="M113">
+                 priority="1000"
+                 mode="M113">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:Country/cbc:IdentificationCode"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:Country/cbc:IdentificationCode"/>
       <!--REPORT -->
       <xsl:if test="@listID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@listID">
@@ -10366,10 +10366,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:Country/cbc:Name"
-                  priority="1000"
-                  mode="M114">
+                 priority="1000"
+                 mode="M114">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:Country/cbc:Name"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:Country/cbc:Name"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -10390,10 +10390,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:LocationCoordinate"
-                  priority="1000"
-                  mode="M115">
+                 priority="1000"
+                 mode="M115">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:LocationCoordinate"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:LocationCoordinate"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -10414,10 +10414,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:AdditionalStreetName"
-                  priority="1000"
-                  mode="M116">
+                 priority="1000"
+                 mode="M116">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:AdditionalStreetName"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:AdditionalStreetName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -10438,10 +10438,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:AddressFormatCode"
-                  priority="1000"
-                  mode="M117">
+                 priority="1000"
+                 mode="M117">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:AddressFormatCode"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:AddressFormatCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -10462,10 +10462,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:AddressTypeCode"
-                  priority="1000"
-                  mode="M118">
+                 priority="1000"
+                 mode="M118">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:AddressTypeCode"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:AddressTypeCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -10486,10 +10486,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:BlockName"
-                  priority="1000"
-                  mode="M119">
+                 priority="1000"
+                 mode="M119">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:BlockName"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:BlockName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -10510,10 +10510,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:BuildingName"
-                  priority="1000"
-                  mode="M120">
+                 priority="1000"
+                 mode="M120">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:BuildingName"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:BuildingName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -10534,10 +10534,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:BuildingNumber"
-                  priority="1000"
-                  mode="M121">
+                 priority="1000"
+                 mode="M121">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:BuildingNumber"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:BuildingNumber"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -10558,10 +10558,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CityName"
-                  priority="1000"
-                  mode="M122">
+                 priority="1000"
+                 mode="M122">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CityName"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CityName"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -10593,10 +10593,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CitySubdivisionName"
-                  priority="1000"
-                  mode="M123">
+                 priority="1000"
+                 mode="M123">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CitySubdivisionName"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CitySubdivisionName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -10617,10 +10617,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CountrySubentity"
-                  priority="1000"
-                  mode="M124">
+                 priority="1000"
+                 mode="M124">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CountrySubentity"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CountrySubentity"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -10641,10 +10641,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CountrySubentityCode"
-                  priority="1000"
-                  mode="M125">
+                 priority="1000"
+                 mode="M125">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CountrySubentityCode"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CountrySubentityCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -10665,10 +10665,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:Department"
-                  priority="1000"
-                  mode="M126">
+                 priority="1000"
+                 mode="M126">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:Department"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:Department"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -10689,10 +10689,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:District"
-                  priority="1000"
-                  mode="M127">
+                 priority="1000"
+                 mode="M127">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:District"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:District"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -10713,10 +10713,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:Floor"
-                  priority="1000"
-                  mode="M128">
+                 priority="1000"
+                 mode="M128">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:Floor"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:Floor"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -10737,10 +10737,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:ID"
-                  priority="1000"
-                  mode="M129">
+                 priority="1000"
+                 mode="M129">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:ID"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -10761,10 +10761,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:InhouseMail"
-                  priority="1000"
-                  mode="M130">
+                 priority="1000"
+                 mode="M130">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:InhouseMail"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:InhouseMail"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -10785,10 +10785,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:MarkAttention"
-                  priority="1000"
-                  mode="M131">
+                 priority="1000"
+                 mode="M131">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:MarkAttention"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:MarkAttention"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -10809,10 +10809,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:MarkCare"
-                  priority="1000"
-                  mode="M132">
+                 priority="1000"
+                 mode="M132">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:MarkCare"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:MarkCare"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -10833,10 +10833,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:PlotIdentification"
-                  priority="1000"
-                  mode="M133">
+                 priority="1000"
+                 mode="M133">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:PlotIdentification"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:PlotIdentification"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -10857,10 +10857,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:PostalZone"
-                  priority="1000"
-                  mode="M134">
+                 priority="1000"
+                 mode="M134">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:PostalZone"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:PostalZone"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -10881,10 +10881,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:Postbox"
-                  priority="1000"
-                  mode="M135">
+                 priority="1000"
+                 mode="M135">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:Postbox"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:Postbox"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -10905,10 +10905,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:Region"
-                  priority="1000"
-                  mode="M136">
+                 priority="1000"
+                 mode="M136">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:Region"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:Region"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -10929,10 +10929,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:Room"
-                  priority="1000"
-                  mode="M137">
+                 priority="1000"
+                 mode="M137">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:Room"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:Room"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -10953,10 +10953,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:StreetName"
-                  priority="1000"
-                  mode="M138">
+                 priority="1000"
+                 mode="M138">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:StreetName"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:StreetName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -10977,10 +10977,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:TimezoneOffset"
-                  priority="1000"
-                  mode="M139">
+                 priority="1000"
+                 mode="M139">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:TimezoneOffset"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:TimezoneOffset"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -11001,10 +11001,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:ShareholderParty"
-                  priority="1000"
-                  mode="M140">
+                 priority="1000"
+                 mode="M140">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:ShareholderParty"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cac:ShareholderParty"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -11025,10 +11025,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyID"
-                  priority="1000"
-                  mode="M141">
+                 priority="1000"
+                 mode="M141">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyID"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyID"/>
       <!--REPORT -->
       <xsl:if test="@schemeID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
@@ -11115,10 +11115,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyLegalFormCode"
-                  priority="1000"
-                  mode="M142">
+                 priority="1000"
+                 mode="M142">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyLegalFormCode"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyLegalFormCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -11139,10 +11139,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyLiquidationStatusCode"
-                  priority="1000"
-                  mode="M143">
+                 priority="1000"
+                 mode="M143">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyLiquidationStatusCode"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyLiquidationStatusCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -11163,10 +11163,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:CorporateStockAmount"
-                  priority="1000"
-                  mode="M144">
+                 priority="1000"
+                 mode="M144">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:CorporateStockAmount"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:CorporateStockAmount"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -11187,10 +11187,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:FullyPaidSharesIndicator"
-                  priority="1000"
-                  mode="M145">
+                 priority="1000"
+                 mode="M145">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:FullyPaidSharesIndicator"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:FullyPaidSharesIndicator"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -11211,10 +11211,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationDate"
-                  priority="1000"
-                  mode="M146">
+                 priority="1000"
+                 mode="M146">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationDate"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationDate"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -11235,10 +11235,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationExpirationDate"
-                  priority="1000"
-                  mode="M147">
+                 priority="1000"
+                 mode="M147">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationExpirationDate"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationExpirationDate"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -11259,10 +11259,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationName"
-                  priority="1000"
-                  mode="M148">
+                 priority="1000"
+                 mode="M148">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationName"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationName"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -11294,10 +11294,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:SoleProprietorshipIndicator"
-                  priority="1000"
-                  mode="M149">
+                 priority="1000"
+                 mode="M149">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:SoleProprietorshipIndicator"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:SoleProprietorshipIndicator"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -11318,10 +11318,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyName/cbc:Name"
-                  priority="1000"
-                  mode="M150">
+                 priority="1000"
+                 mode="M150">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyName/cbc:Name"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyName/cbc:Name"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -11353,10 +11353,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cac:RegistrationAddress"
-                  priority="1000"
-                  mode="M151">
+                 priority="1000"
+                 mode="M151">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cac:RegistrationAddress"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cac:RegistrationAddress"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -11377,10 +11377,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme"
-                  priority="1000"
-                  mode="M152">
+                 priority="1000"
+                 mode="M152">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(cbc:ID)=1"/>
@@ -11404,10 +11404,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cac:JurisdictionRegionAddress"
-                  priority="1000"
-                  mode="M153">
+                 priority="1000"
+                 mode="M153">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cac:JurisdictionRegionAddress"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cac:JurisdictionRegionAddress"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -11428,10 +11428,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:CurrencyCode"
-                  priority="1000"
-                  mode="M154">
+                 priority="1000"
+                 mode="M154">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:CurrencyCode"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:CurrencyCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -11452,10 +11452,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:ID"
-                  priority="1000"
-                  mode="M155">
+                 priority="1000"
+                 mode="M155">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:ID"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test="@schemeID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
@@ -11542,10 +11542,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:Name"
-                  priority="1000"
-                  mode="M156">
+                 priority="1000"
+                 mode="M156">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:Name"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:Name"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -11566,10 +11566,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:TaxTypeCode"
-                  priority="1000"
-                  mode="M157">
+                 priority="1000"
+                 mode="M157">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:TaxTypeCode"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:TaxTypeCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -11590,10 +11590,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:CompanyID"
-                  priority="1000"
-                  mode="M158">
+                 priority="1000"
+                 mode="M158">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:CompanyID"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:CompanyID"/>
       <!--REPORT -->
       <xsl:if test="@schemeID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
@@ -11680,10 +11680,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:ExemptionReason"
-                  priority="1000"
-                  mode="M159">
+                 priority="1000"
+                 mode="M159">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:ExemptionReason"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:ExemptionReason"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -11715,10 +11715,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:ExemptionReasonCode"
-                  priority="1000"
-                  mode="M160">
+                 priority="1000"
+                 mode="M160">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:ExemptionReasonCode"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:ExemptionReasonCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -11739,10 +11739,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:RegistrationName"
-                  priority="1000"
-                  mode="M161">
+                 priority="1000"
+                 mode="M161">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:RegistrationName"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:RegistrationName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -11763,10 +11763,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:TaxLevelCode"
-                  priority="1000"
-                  mode="M162">
+                 priority="1000"
+                 mode="M162">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:TaxLevelCode"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:TaxLevelCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -11787,10 +11787,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:Person"
-                  priority="1000"
-                  mode="M163">
+                 priority="1000"
+                 mode="M163">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:Person"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:Person"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -11811,10 +11811,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PhysicalLocation"
-                  priority="1000"
-                  mode="M164">
+                 priority="1000"
+                 mode="M164">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PhysicalLocation"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PhysicalLocation"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -11835,10 +11835,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:AddressLine"
-                  priority="1000"
-                  mode="M165">
+                 priority="1000"
+                 mode="M165">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:AddressLine"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:AddressLine"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -11859,16 +11859,16 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:Country"
-                  priority="1000"
-                  mode="M166">
+                 priority="1000"
+                 mode="M166">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:Country"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:Country"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(cbc:IdentificationCode)=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(cbc:IdentificationCode)=1">
+                                test="count(cbc:IdentificationCode)=1">
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -11887,10 +11887,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode"
-                  priority="1000"
-                  mode="M167">
+                 priority="1000"
+                 mode="M167">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode"/>
       <!--REPORT -->
       <xsl:if test="@listID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@listID">
@@ -11999,10 +11999,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:Name"
-                  priority="1000"
-                  mode="M168">
+                 priority="1000"
+                 mode="M168">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:Name"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:Name"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -12023,10 +12023,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:LocationCoordinate"
-                  priority="1000"
-                  mode="M169">
+                 priority="1000"
+                 mode="M169">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:LocationCoordinate"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:LocationCoordinate"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -12047,10 +12047,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:AdditionalStreetName"
-                  priority="1000"
-                  mode="M170">
+                 priority="1000"
+                 mode="M170">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:AdditionalStreetName"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:AdditionalStreetName"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -12082,10 +12082,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:AddressFormatCode"
-                  priority="1000"
-                  mode="M171">
+                 priority="1000"
+                 mode="M171">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:AddressFormatCode"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:AddressFormatCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -12106,10 +12106,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:AddressTypeCode"
-                  priority="1000"
-                  mode="M172">
+                 priority="1000"
+                 mode="M172">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:AddressTypeCode"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:AddressTypeCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -12130,10 +12130,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:BlockName"
-                  priority="1000"
-                  mode="M173">
+                 priority="1000"
+                 mode="M173">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:BlockName"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:BlockName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -12154,10 +12154,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:BuildingName"
-                  priority="1000"
-                  mode="M174">
+                 priority="1000"
+                 mode="M174">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:BuildingName"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:BuildingName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -12178,10 +12178,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:BuildingNumber"
-                  priority="1000"
-                  mode="M175">
+                 priority="1000"
+                 mode="M175">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:BuildingNumber"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:BuildingNumber"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -12202,10 +12202,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:CityName"
-                  priority="1000"
-                  mode="M176">
+                 priority="1000"
+                 mode="M176">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:CityName"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:CityName"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -12237,10 +12237,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:CitySubdivisionName"
-                  priority="1000"
-                  mode="M177">
+                 priority="1000"
+                 mode="M177">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:CitySubdivisionName"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:CitySubdivisionName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -12261,10 +12261,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:CountrySubentity"
-                  priority="1000"
-                  mode="M178">
+                 priority="1000"
+                 mode="M178">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:CountrySubentity"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:CountrySubentity"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -12296,10 +12296,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:CountrySubentityCode"
-                  priority="1000"
-                  mode="M179">
+                 priority="1000"
+                 mode="M179">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:CountrySubentityCode"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:CountrySubentityCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -12320,10 +12320,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:Department"
-                  priority="1000"
-                  mode="M180">
+                 priority="1000"
+                 mode="M180">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:Department"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:Department"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -12344,10 +12344,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:District"
-                  priority="1000"
-                  mode="M181">
+                 priority="1000"
+                 mode="M181">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:District"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:District"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -12368,10 +12368,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:Floor"
-                  priority="1000"
-                  mode="M182">
+                 priority="1000"
+                 mode="M182">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:Floor"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:Floor"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -12392,10 +12392,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:ID"
-                  priority="1000"
-                  mode="M183">
+                 priority="1000"
+                 mode="M183">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:ID"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -12416,10 +12416,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:InhouseMail"
-                  priority="1000"
-                  mode="M184">
+                 priority="1000"
+                 mode="M184">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:InhouseMail"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:InhouseMail"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -12440,10 +12440,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:MarkAttention"
-                  priority="1000"
-                  mode="M185">
+                 priority="1000"
+                 mode="M185">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:MarkAttention"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:MarkAttention"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -12464,10 +12464,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:MarkCare"
-                  priority="1000"
-                  mode="M186">
+                 priority="1000"
+                 mode="M186">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:MarkCare"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:MarkCare"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -12488,10 +12488,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:PlotIdentification"
-                  priority="1000"
-                  mode="M187">
+                 priority="1000"
+                 mode="M187">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:PlotIdentification"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:PlotIdentification"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -12512,10 +12512,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:PostalZone"
-                  priority="1000"
-                  mode="M188">
+                 priority="1000"
+                 mode="M188">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:PostalZone"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:PostalZone"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -12547,10 +12547,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:Postbox"
-                  priority="1000"
-                  mode="M189">
+                 priority="1000"
+                 mode="M189">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:Postbox"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:Postbox"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -12571,10 +12571,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:Region"
-                  priority="1000"
-                  mode="M190">
+                 priority="1000"
+                 mode="M190">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:Region"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:Region"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -12595,10 +12595,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:Room"
-                  priority="1000"
-                  mode="M191">
+                 priority="1000"
+                 mode="M191">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:Room"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:Room"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -12619,10 +12619,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:StreetName"
-                  priority="1000"
-                  mode="M192">
+                 priority="1000"
+                 mode="M192">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:StreetName"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:StreetName"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -12654,10 +12654,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:TimezoneOffset"
-                  priority="1000"
-                  mode="M193">
+                 priority="1000"
+                 mode="M193">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:TimezoneOffset"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:TimezoneOffset"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -12678,10 +12678,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PowerOfAttorney"
-                  priority="1000"
-                  mode="M194">
+                 priority="1000"
+                 mode="M194">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PowerOfAttorney"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:PowerOfAttorney"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -12702,10 +12702,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:ServiceProviderParty"
-                  priority="1000"
-                  mode="M195">
+                 priority="1000"
+                 mode="M195">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:ServiceProviderParty"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cac:ServiceProviderParty"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -12726,10 +12726,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cbc:EndpointID"
-                  priority="1000"
-                  mode="M196">
+                 priority="1000"
+                 mode="M196">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cbc:EndpointID"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cbc:EndpointID"/>
       <!--REPORT -->
       <xsl:if test="@schemeName">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeName">
@@ -12783,10 +12783,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cbc:IndustryClassificationCode"
-                  priority="1000"
-                  mode="M197">
+                 priority="1000"
+                 mode="M197">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cbc:IndustryClassificationCode"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cbc:IndustryClassificationCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -12807,10 +12807,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cbc:LogoReferenceID"
-                  priority="1000"
-                  mode="M198">
+                 priority="1000"
+                 mode="M198">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cbc:LogoReferenceID"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cbc:LogoReferenceID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -12831,10 +12831,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cbc:MarkAttentionIndicator"
-                  priority="1000"
-                  mode="M199">
+                 priority="1000"
+                 mode="M199">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cbc:MarkAttentionIndicator"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cbc:MarkAttentionIndicator"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -12855,10 +12855,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cbc:MarkCareIndicator"
-                  priority="1000"
-                  mode="M200">
+                 priority="1000"
+                 mode="M200">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cbc:MarkCareIndicator"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cbc:MarkCareIndicator"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -12879,10 +12879,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cbc:WebsiteURI"
-                  priority="1000"
-                  mode="M201">
+                 priority="1000"
+                 mode="M201">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cbc:WebsiteURI"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:Party/cbc:WebsiteURI"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -12903,10 +12903,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cac:SellerContact"
-                  priority="1000"
-                  mode="M202">
+                 priority="1000"
+                 mode="M202">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cac:SellerContact"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cac:SellerContact"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -12927,10 +12927,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cbc:AdditionalAccountID"
-                  priority="1000"
-                  mode="M203">
+                 priority="1000"
+                 mode="M203">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cbc:AdditionalAccountID"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cbc:AdditionalAccountID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -12951,10 +12951,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cbc:CustomerAssignedAccountID"
-                  priority="1000"
-                  mode="M204">
+                 priority="1000"
+                 mode="M204">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cbc:CustomerAssignedAccountID"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cbc:CustomerAssignedAccountID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -12975,10 +12975,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AccountingSupplierParty/cbc:DataSendingCapability"
-                  priority="1000"
-                  mode="M205">
+                 priority="1000"
+                 mode="M205">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AccountingSupplierParty/cbc:DataSendingCapability"/>
+                       context="/p1:Invoice/cac:AccountingSupplierParty/cbc:DataSendingCapability"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -12999,10 +12999,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:CharacterSetCode"
-                  priority="1000"
-                  mode="M206">
+                 priority="1000"
+                 mode="M206">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:CharacterSetCode"/>
+                       context="/p1:Invoice/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:CharacterSetCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -13023,10 +13023,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:Description"
-                  priority="1000"
-                  mode="M207">
+                 priority="1000"
+                 mode="M207">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:Description"/>
+                       context="/p1:Invoice/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:Description"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -13047,10 +13047,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:DocumentHash"
-                  priority="1000"
-                  mode="M208">
+                 priority="1000"
+                 mode="M208">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:DocumentHash"/>
+                       context="/p1:Invoice/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:DocumentHash"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -13071,10 +13071,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:EncodingCode"
-                  priority="1000"
-                  mode="M209">
+                 priority="1000"
+                 mode="M209">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:EncodingCode"/>
+                       context="/p1:Invoice/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:EncodingCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -13095,10 +13095,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:ExpiryDate"
-                  priority="1000"
-                  mode="M210">
+                 priority="1000"
+                 mode="M210">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:ExpiryDate"/>
+                       context="/p1:Invoice/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:ExpiryDate"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -13119,10 +13119,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:ExpiryTime"
-                  priority="1000"
-                  mode="M211">
+                 priority="1000"
+                 mode="M211">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:ExpiryTime"/>
+                       context="/p1:Invoice/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:ExpiryTime"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -13143,10 +13143,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:FileName"
-                  priority="1000"
-                  mode="M212">
+                 priority="1000"
+                 mode="M212">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:FileName"/>
+                       context="/p1:Invoice/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:FileName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -13167,10 +13167,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:FormatCode"
-                  priority="1000"
-                  mode="M213">
+                 priority="1000"
+                 mode="M213">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:FormatCode"/>
+                       context="/p1:Invoice/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:FormatCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -13191,10 +13191,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:HashAlgorithmMethod"
-                  priority="1000"
-                  mode="M214">
+                 priority="1000"
+                 mode="M214">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:HashAlgorithmMethod"/>
+                       context="/p1:Invoice/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:HashAlgorithmMethod"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -13215,10 +13215,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:MimeCode"
-                  priority="1000"
-                  mode="M215">
+                 priority="1000"
+                 mode="M215">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:MimeCode"/>
+                       context="/p1:Invoice/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:MimeCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -13239,10 +13239,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:URI"
-                  priority="1000"
-                  mode="M216">
+                 priority="1000"
+                 mode="M216">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:URI"/>
+                       context="/p1:Invoice/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:URI"/>
       <!--REPORT -->
       <xsl:if test="@schemeID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
@@ -13329,10 +13329,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AdditionalDocumentReference/cac:IssuerParty"
-                  priority="1000"
-                  mode="M217">
+                 priority="1000"
+                 mode="M217">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AdditionalDocumentReference/cac:IssuerParty"/>
+                       context="/p1:Invoice/cac:AdditionalDocumentReference/cac:IssuerParty"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -13353,10 +13353,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AdditionalDocumentReference/cac:ResultOfVerification"
-                  priority="1000"
-                  mode="M218">
+                 priority="1000"
+                 mode="M218">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AdditionalDocumentReference/cac:ResultOfVerification"/>
+                       context="/p1:Invoice/cac:AdditionalDocumentReference/cac:ResultOfVerification"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -13377,10 +13377,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AdditionalDocumentReference/cac:ValidityPeriod"
-                  priority="1000"
-                  mode="M219">
+                 priority="1000"
+                 mode="M219">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AdditionalDocumentReference/cac:ValidityPeriod"/>
+                       context="/p1:Invoice/cac:AdditionalDocumentReference/cac:ValidityPeriod"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -13401,10 +13401,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AdditionalDocumentReference/cbc:CopyIndicator"
-                  priority="1000"
-                  mode="M220">
+                 priority="1000"
+                 mode="M220">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AdditionalDocumentReference/cbc:CopyIndicator"/>
+                       context="/p1:Invoice/cac:AdditionalDocumentReference/cbc:CopyIndicator"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -13425,10 +13425,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AdditionalDocumentReference/cbc:DocumentDescription"
-                  priority="1000"
-                  mode="M221">
+                 priority="1000"
+                 mode="M221">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AdditionalDocumentReference/cbc:DocumentDescription"/>
+                       context="/p1:Invoice/cac:AdditionalDocumentReference/cbc:DocumentDescription"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -13460,10 +13460,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AdditionalDocumentReference/cbc:DocumentStatusCode"
-                  priority="1000"
-                  mode="M222">
+                 priority="1000"
+                 mode="M222">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AdditionalDocumentReference/cbc:DocumentStatusCode"/>
+                       context="/p1:Invoice/cac:AdditionalDocumentReference/cbc:DocumentStatusCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -13484,10 +13484,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AdditionalDocumentReference/cbc:DocumentType"
-                  priority="1000"
-                  mode="M223">
+                 priority="1000"
+                 mode="M223">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AdditionalDocumentReference/cbc:DocumentType"/>
+                       context="/p1:Invoice/cac:AdditionalDocumentReference/cbc:DocumentType"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -13519,10 +13519,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AdditionalDocumentReference/cbc:DocumentTypeCode"
-                  priority="1000"
-                  mode="M224">
+                 priority="1000"
+                 mode="M224">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AdditionalDocumentReference/cbc:DocumentTypeCode"/>
+                       context="/p1:Invoice/cac:AdditionalDocumentReference/cbc:DocumentTypeCode"/>
       <!--REPORT -->
       <xsl:if test="@listID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@listID">
@@ -13631,10 +13631,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AdditionalDocumentReference/cbc:ID"
-                  priority="1000"
-                  mode="M225">
+                 priority="1000"
+                 mode="M225">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AdditionalDocumentReference/cbc:ID"/>
+                       context="/p1:Invoice/cac:AdditionalDocumentReference/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test="@schemeID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
@@ -13721,10 +13721,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AdditionalDocumentReference/cbc:IssueTime"
-                  priority="1000"
-                  mode="M226">
+                 priority="1000"
+                 mode="M226">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AdditionalDocumentReference/cbc:IssueTime"/>
+                       context="/p1:Invoice/cac:AdditionalDocumentReference/cbc:IssueTime"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -13745,10 +13745,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AdditionalDocumentReference/cbc:LanguageID"
-                  priority="1000"
-                  mode="M227">
+                 priority="1000"
+                 mode="M227">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AdditionalDocumentReference/cbc:LanguageID"/>
+                       context="/p1:Invoice/cac:AdditionalDocumentReference/cbc:LanguageID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -13769,10 +13769,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AdditionalDocumentReference/cbc:LocaleCode"
-                  priority="1000"
-                  mode="M228">
+                 priority="1000"
+                 mode="M228">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AdditionalDocumentReference/cbc:LocaleCode"/>
+                       context="/p1:Invoice/cac:AdditionalDocumentReference/cbc:LocaleCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -13793,10 +13793,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AdditionalDocumentReference/cbc:UUID"
-                  priority="1000"
-                  mode="M229">
+                 priority="1000"
+                 mode="M229">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AdditionalDocumentReference/cbc:UUID"/>
+                       context="/p1:Invoice/cac:AdditionalDocumentReference/cbc:UUID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -13817,10 +13817,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AdditionalDocumentReference/cbc:VersionID"
-                  priority="1000"
-                  mode="M230">
+                 priority="1000"
+                 mode="M230">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AdditionalDocumentReference/cbc:VersionID"/>
+                       context="/p1:Invoice/cac:AdditionalDocumentReference/cbc:VersionID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -13841,10 +13841,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AdditionalDocumentReference/cbc:XPath"
-                  priority="1000"
-                  mode="M231">
+                 priority="1000"
+                 mode="M231">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AdditionalDocumentReference/cbc:XPath"/>
+                       context="/p1:Invoice/cac:AdditionalDocumentReference/cbc:XPath"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -13866,13 +13866,13 @@
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AllowanceCharge" priority="1000" mode="M232">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AllowanceCharge"/>
+                       context="/p1:Invoice/cac:AllowanceCharge"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(cbc:AllowanceChargeReason)=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(cbc:AllowanceChargeReason)=1">
+                                test="count(cbc:AllowanceChargeReason)=1">
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -13887,7 +13887,7 @@
          <xsl:when test="count(cac:TaxCategory)&lt;=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(cac:TaxCategory)&lt;=1">
+                                test="count(cac:TaxCategory)&lt;=1">
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -13906,10 +13906,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AllowanceCharge/cac:PaymentMeans"
-                  priority="1000"
-                  mode="M233">
+                 priority="1000"
+                 mode="M233">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AllowanceCharge/cac:PaymentMeans"/>
+                       context="/p1:Invoice/cac:AllowanceCharge/cac:PaymentMeans"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -13930,10 +13930,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory"
-                  priority="1000"
-                  mode="M234">
+                 priority="1000"
+                 mode="M234">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory"/>
+                       context="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(cbc:ID)=1"/>
@@ -13957,10 +13957,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cac:TaxScheme"
-                  priority="1000"
-                  mode="M235">
+                 priority="1000"
+                 mode="M235">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cac:TaxScheme"/>
+                       context="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cac:TaxScheme"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(cbc:ID)=1"/>
@@ -13984,10 +13984,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cac:TaxScheme/cac:JurisdictionRegionAddress"
-                  priority="1000"
-                  mode="M236">
+                 priority="1000"
+                 mode="M236">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cac:TaxScheme/cac:JurisdictionRegionAddress"/>
+                       context="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cac:TaxScheme/cac:JurisdictionRegionAddress"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -14008,10 +14008,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cac:TaxScheme/cbc:CurrencyCode"
-                  priority="1000"
-                  mode="M237">
+                 priority="1000"
+                 mode="M237">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cac:TaxScheme/cbc:CurrencyCode"/>
+                       context="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cac:TaxScheme/cbc:CurrencyCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -14032,10 +14032,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cac:TaxScheme/cbc:ID"
-                  priority="1000"
-                  mode="M238">
+                 priority="1000"
+                 mode="M238">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cac:TaxScheme/cbc:ID"/>
+                       context="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cac:TaxScheme/cbc:ID"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="normalize-space(.)='VAT'"/>
@@ -14136,10 +14136,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cac:TaxScheme/cbc:Name"
-                  priority="1000"
-                  mode="M239">
+                 priority="1000"
+                 mode="M239">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cac:TaxScheme/cbc:Name"/>
+                       context="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cac:TaxScheme/cbc:Name"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -14160,10 +14160,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cac:TaxScheme/cbc:TaxTypeCode"
-                  priority="1000"
-                  mode="M240">
+                 priority="1000"
+                 mode="M240">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cac:TaxScheme/cbc:TaxTypeCode"/>
+                       context="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cac:TaxScheme/cbc:TaxTypeCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -14184,10 +14184,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cbc:BaseUnitMeasure"
-                  priority="1000"
-                  mode="M241">
+                 priority="1000"
+                 mode="M241">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cbc:BaseUnitMeasure"/>
+                       context="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cbc:BaseUnitMeasure"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -14208,10 +14208,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cbc:ID"
-                  priority="1000"
-                  mode="M242">
+                 priority="1000"
+                 mode="M242">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cbc:ID"/>
+                       context="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test="@schemeID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
@@ -14298,10 +14298,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cbc:Name"
-                  priority="1000"
-                  mode="M243">
+                 priority="1000"
+                 mode="M243">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cbc:Name"/>
+                       context="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cbc:Name"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -14322,10 +14322,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cbc:PerUnitAmount"
-                  priority="1000"
-                  mode="M244">
+                 priority="1000"
+                 mode="M244">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cbc:PerUnitAmount"/>
+                       context="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cbc:PerUnitAmount"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -14346,10 +14346,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cbc:Percent"
-                  priority="1000"
-                  mode="M245">
+                 priority="1000"
+                 mode="M245">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cbc:Percent"/>
+                       context="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cbc:Percent"/>
       <!--REPORT -->
       <xsl:if test="@format">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@format">
@@ -14370,10 +14370,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cbc:TaxExemptionReason"
-                  priority="1000"
-                  mode="M246">
+                 priority="1000"
+                 mode="M246">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cbc:TaxExemptionReason"/>
+                       context="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cbc:TaxExemptionReason"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -14394,10 +14394,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cbc:TaxExemptionReasonCode"
-                  priority="1000"
-                  mode="M247">
+                 priority="1000"
+                 mode="M247">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cbc:TaxExemptionReasonCode"/>
+                       context="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cbc:TaxExemptionReasonCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -14418,10 +14418,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cbc:TierRange"
-                  priority="1000"
-                  mode="M248">
+                 priority="1000"
+                 mode="M248">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cbc:TierRange"/>
+                       context="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cbc:TierRange"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -14442,10 +14442,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cbc:TierRatePercent"
-                  priority="1000"
-                  mode="M249">
+                 priority="1000"
+                 mode="M249">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cbc:TierRatePercent"/>
+                       context="/p1:Invoice/cac:AllowanceCharge/cac:TaxCategory/cbc:TierRatePercent"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -14466,10 +14466,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AllowanceCharge/cac:TaxTotal"
-                  priority="1000"
-                  mode="M250">
+                 priority="1000"
+                 mode="M250">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AllowanceCharge/cac:TaxTotal"/>
+                       context="/p1:Invoice/cac:AllowanceCharge/cac:TaxTotal"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -14490,10 +14490,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AllowanceCharge/cbc:AccountingCost"
-                  priority="1000"
-                  mode="M251">
+                 priority="1000"
+                 mode="M251">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AllowanceCharge/cbc:AccountingCost"/>
+                       context="/p1:Invoice/cac:AllowanceCharge/cbc:AccountingCost"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -14514,10 +14514,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AllowanceCharge/cbc:AccountingCostCode"
-                  priority="1000"
-                  mode="M252">
+                 priority="1000"
+                 mode="M252">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AllowanceCharge/cbc:AccountingCostCode"/>
+                       context="/p1:Invoice/cac:AllowanceCharge/cbc:AccountingCostCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -14538,10 +14538,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AllowanceCharge/cbc:AllowanceChargeReason"
-                  priority="1000"
-                  mode="M253">
+                 priority="1000"
+                 mode="M253">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AllowanceCharge/cbc:AllowanceChargeReason"/>
+                       context="/p1:Invoice/cac:AllowanceCharge/cbc:AllowanceChargeReason"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -14573,10 +14573,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AllowanceCharge/cbc:AllowanceChargeReasonCode"
-                  priority="1000"
-                  mode="M254">
+                 priority="1000"
+                 mode="M254">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AllowanceCharge/cbc:AllowanceChargeReasonCode"/>
+                       context="/p1:Invoice/cac:AllowanceCharge/cbc:AllowanceChargeReasonCode"/>
       <!--REPORT -->
       <xsl:if test="@listName">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@listName">
@@ -14652,10 +14652,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AllowanceCharge/cbc:BaseAmount"
-                  priority="1000"
-                  mode="M255">
+                 priority="1000"
+                 mode="M255">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AllowanceCharge/cbc:BaseAmount"/>
+                       context="/p1:Invoice/cac:AllowanceCharge/cbc:BaseAmount"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -14676,10 +14676,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AllowanceCharge/cbc:ID"
-                  priority="1000"
-                  mode="M256">
+                 priority="1000"
+                 mode="M256">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AllowanceCharge/cbc:ID"/>
+                       context="/p1:Invoice/cac:AllowanceCharge/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -14700,10 +14700,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AllowanceCharge/cbc:MultiplierFactorNumeric"
-                  priority="1000"
-                  mode="M257">
+                 priority="1000"
+                 mode="M257">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AllowanceCharge/cbc:MultiplierFactorNumeric"/>
+                       context="/p1:Invoice/cac:AllowanceCharge/cbc:MultiplierFactorNumeric"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -14724,10 +14724,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AllowanceCharge/cbc:PerUnitAmount"
-                  priority="1000"
-                  mode="M258">
+                 priority="1000"
+                 mode="M258">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AllowanceCharge/cbc:PerUnitAmount"/>
+                       context="/p1:Invoice/cac:AllowanceCharge/cbc:PerUnitAmount"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -14748,10 +14748,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AllowanceCharge/cbc:PrepaidIndicator"
-                  priority="1000"
-                  mode="M259">
+                 priority="1000"
+                 mode="M259">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AllowanceCharge/cbc:PrepaidIndicator"/>
+                       context="/p1:Invoice/cac:AllowanceCharge/cbc:PrepaidIndicator"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -14772,10 +14772,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:AllowanceCharge/cbc:SequenceNumeric"
-                  priority="1000"
-                  mode="M260">
+                 priority="1000"
+                 mode="M260">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:AllowanceCharge/cbc:SequenceNumeric"/>
+                       context="/p1:Invoice/cac:AllowanceCharge/cbc:SequenceNumeric"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -14796,10 +14796,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BillingReference/cac:AdditionalDocumentReference"
-                  priority="1000"
-                  mode="M261">
+                 priority="1000"
+                 mode="M261">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BillingReference/cac:AdditionalDocumentReference"/>
+                       context="/p1:Invoice/cac:BillingReference/cac:AdditionalDocumentReference"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -14820,10 +14820,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BillingReference/cac:BillingReferenceLine"
-                  priority="1000"
-                  mode="M262">
+                 priority="1000"
+                 mode="M262">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BillingReference/cac:BillingReferenceLine"/>
+                       context="/p1:Invoice/cac:BillingReference/cac:BillingReferenceLine"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -14844,10 +14844,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BillingReference/cac:CreditNoteDocumentReference"
-                  priority="1000"
-                  mode="M263">
+                 priority="1000"
+                 mode="M263">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BillingReference/cac:CreditNoteDocumentReference"/>
+                       context="/p1:Invoice/cac:BillingReference/cac:CreditNoteDocumentReference"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -14868,10 +14868,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BillingReference/cac:DebitNoteDocumentReference"
-                  priority="1000"
-                  mode="M264">
+                 priority="1000"
+                 mode="M264">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BillingReference/cac:DebitNoteDocumentReference"/>
+                       context="/p1:Invoice/cac:BillingReference/cac:DebitNoteDocumentReference"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -14892,10 +14892,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cac:Attachment"
-                  priority="1000"
-                  mode="M265">
+                 priority="1000"
+                 mode="M265">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cac:Attachment"/>
+                       context="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cac:Attachment"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -14916,10 +14916,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cac:IssuerParty"
-                  priority="1000"
-                  mode="M266">
+                 priority="1000"
+                 mode="M266">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cac:IssuerParty"/>
+                       context="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cac:IssuerParty"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -14940,10 +14940,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cac:ResultOfVerification"
-                  priority="1000"
-                  mode="M267">
+                 priority="1000"
+                 mode="M267">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cac:ResultOfVerification"/>
+                       context="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cac:ResultOfVerification"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -14964,10 +14964,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cac:ValidityPeriod"
-                  priority="1000"
-                  mode="M268">
+                 priority="1000"
+                 mode="M268">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cac:ValidityPeriod"/>
+                       context="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cac:ValidityPeriod"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -14988,10 +14988,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:CopyIndicator"
-                  priority="1000"
-                  mode="M269">
+                 priority="1000"
+                 mode="M269">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:CopyIndicator"/>
+                       context="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:CopyIndicator"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -15012,10 +15012,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:DocumentDescription"
-                  priority="1000"
-                  mode="M270">
+                 priority="1000"
+                 mode="M270">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:DocumentDescription"/>
+                       context="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:DocumentDescription"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -15036,10 +15036,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:DocumentStatusCode"
-                  priority="1000"
-                  mode="M271">
+                 priority="1000"
+                 mode="M271">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:DocumentStatusCode"/>
+                       context="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:DocumentStatusCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -15060,10 +15060,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:DocumentType"
-                  priority="1000"
-                  mode="M272">
+                 priority="1000"
+                 mode="M272">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:DocumentType"/>
+                       context="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:DocumentType"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -15084,10 +15084,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:DocumentTypeCode"
-                  priority="1000"
-                  mode="M273">
+                 priority="1000"
+                 mode="M273">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:DocumentTypeCode"/>
+                       context="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:DocumentTypeCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -15108,10 +15108,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:ID"
-                  priority="1000"
-                  mode="M274">
+                 priority="1000"
+                 mode="M274">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:ID"/>
+                       context="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test="@schemeID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
@@ -15198,10 +15198,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:IssueDate"
-                  priority="1000"
-                  mode="M275">
+                 priority="1000"
+                 mode="M275">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:IssueDate"/>
+                       context="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:IssueDate"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -15222,10 +15222,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:IssueTime"
-                  priority="1000"
-                  mode="M276">
+                 priority="1000"
+                 mode="M276">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:IssueTime"/>
+                       context="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:IssueTime"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -15246,10 +15246,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:LanguageID"
-                  priority="1000"
-                  mode="M277">
+                 priority="1000"
+                 mode="M277">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:LanguageID"/>
+                       context="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:LanguageID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -15270,10 +15270,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:LocaleCode"
-                  priority="1000"
-                  mode="M278">
+                 priority="1000"
+                 mode="M278">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:LocaleCode"/>
+                       context="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:LocaleCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -15294,10 +15294,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:UUID"
-                  priority="1000"
-                  mode="M279">
+                 priority="1000"
+                 mode="M279">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:UUID"/>
+                       context="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:UUID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -15318,10 +15318,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:VersionID"
-                  priority="1000"
-                  mode="M280">
+                 priority="1000"
+                 mode="M280">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:VersionID"/>
+                       context="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:VersionID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -15342,10 +15342,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:XPath"
-                  priority="1000"
-                  mode="M281">
+                 priority="1000"
+                 mode="M281">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:XPath"/>
+                       context="/p1:Invoice/cac:BillingReference/cac:InvoiceDocumentReference/cbc:XPath"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -15366,10 +15366,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BillingReference/cac:ReminderDocumentReference"
-                  priority="1000"
-                  mode="M282">
+                 priority="1000"
+                 mode="M282">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BillingReference/cac:ReminderDocumentReference"/>
+                       context="/p1:Invoice/cac:BillingReference/cac:ReminderDocumentReference"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -15390,10 +15390,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BillingReference/cac:SelfBilledCreditNoteDocumentReference"
-                  priority="1000"
-                  mode="M283">
+                 priority="1000"
+                 mode="M283">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BillingReference/cac:SelfBilledCreditNoteDocumentReference"/>
+                       context="/p1:Invoice/cac:BillingReference/cac:SelfBilledCreditNoteDocumentReference"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -15414,10 +15414,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BillingReference/cac:SelfBilledInvoiceDocumentReference"
-                  priority="1000"
-                  mode="M284">
+                 priority="1000"
+                 mode="M284">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BillingReference/cac:SelfBilledInvoiceDocumentReference"/>
+                       context="/p1:Invoice/cac:BillingReference/cac:SelfBilledInvoiceDocumentReference"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -15438,10 +15438,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:AccountingContact"
-                  priority="1000"
-                  mode="M285">
+                 priority="1000"
+                 mode="M285">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:AccountingContact"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:AccountingContact"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -15462,10 +15462,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:BuyerContact"
-                  priority="1000"
-                  mode="M286">
+                 priority="1000"
+                 mode="M286">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:BuyerContact"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:BuyerContact"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -15486,10 +15486,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:DeliveryContact"
-                  priority="1000"
-                  mode="M287">
+                 priority="1000"
+                 mode="M287">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:DeliveryContact"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:DeliveryContact"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -15510,16 +15510,16 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party"
-                  priority="1000"
-                  mode="M288">
+                 priority="1000"
+                 mode="M288">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(cac:PartyIdentification)&lt;=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(cac:PartyIdentification)&lt;=1">
+                                test="count(cac:PartyIdentification)&lt;=1">
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -15552,10 +15552,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:AgentParty"
-                  priority="1000"
-                  mode="M289">
+                 priority="1000"
+                 mode="M289">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:AgentParty"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:AgentParty"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -15576,10 +15576,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:Contact/cac:OtherCommunication/cbc:Channel"
-                  priority="1000"
-                  mode="M290">
+                 priority="1000"
+                 mode="M290">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:Contact/cac:OtherCommunication/cbc:Channel"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:Contact/cac:OtherCommunication/cbc:Channel"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -15600,10 +15600,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:Contact/cac:OtherCommunication/cbc:ChannelCode"
-                  priority="1000"
-                  mode="M291">
+                 priority="1000"
+                 mode="M291">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:Contact/cac:OtherCommunication/cbc:ChannelCode"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:Contact/cac:OtherCommunication/cbc:ChannelCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -15624,10 +15624,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:Contact/cac:OtherCommunication/cbc:Value"
-                  priority="1000"
-                  mode="M292">
+                 priority="1000"
+                 mode="M292">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:Contact/cac:OtherCommunication/cbc:Value"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:Contact/cac:OtherCommunication/cbc:Value"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -15659,10 +15659,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:Contact/cbc:ElectronicMail"
-                  priority="1000"
-                  mode="M293">
+                 priority="1000"
+                 mode="M293">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:Contact/cbc:ElectronicMail"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:Contact/cbc:ElectronicMail"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -15694,10 +15694,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:Contact/cbc:ID"
-                  priority="1000"
-                  mode="M294">
+                 priority="1000"
+                 mode="M294">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:Contact/cbc:ID"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:Contact/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -15718,10 +15718,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:Contact/cbc:Name"
-                  priority="1000"
-                  mode="M295">
+                 priority="1000"
+                 mode="M295">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:Contact/cbc:Name"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:Contact/cbc:Name"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -15753,10 +15753,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:Contact/cbc:Note"
-                  priority="1000"
-                  mode="M296">
+                 priority="1000"
+                 mode="M296">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:Contact/cbc:Note"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:Contact/cbc:Note"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -15777,10 +15777,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:Contact/cbc:Telefax"
-                  priority="1000"
-                  mode="M297">
+                 priority="1000"
+                 mode="M297">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:Contact/cbc:Telefax"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:Contact/cbc:Telefax"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -15812,10 +15812,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:Contact/cbc:Telephone"
-                  priority="1000"
-                  mode="M298">
+                 priority="1000"
+                 mode="M298">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:Contact/cbc:Telephone"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:Contact/cbc:Telephone"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -15847,10 +15847,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:FinancialAccount"
-                  priority="1000"
-                  mode="M299">
+                 priority="1000"
+                 mode="M299">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:FinancialAccount"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:FinancialAccount"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -15871,10 +15871,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:Language"
-                  priority="1000"
-                  mode="M300">
+                 priority="1000"
+                 mode="M300">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:Language"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:Language"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -15895,10 +15895,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyIdentification/cbc:ID"
-                  priority="1000"
-                  mode="M301">
+                 priority="1000"
+                 mode="M301">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyIdentification/cbc:ID"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyIdentification/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test="@schemeName">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeName">
@@ -15952,10 +15952,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cac:CorporateRegistrationScheme"
-                  priority="1000"
-                  mode="M302">
+                 priority="1000"
+                 mode="M302">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cac:CorporateRegistrationScheme"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cac:CorporateRegistrationScheme"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -15976,10 +15976,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cac:HeadParty"
-                  priority="1000"
-                  mode="M303">
+                 priority="1000"
+                 mode="M303">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cac:HeadParty"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cac:HeadParty"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -16000,10 +16000,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress"
-                  priority="1000"
-                  mode="M304">
+                 priority="1000"
+                 mode="M304">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -16024,10 +16024,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cac:ShareholderParty"
-                  priority="1000"
-                  mode="M305">
+                 priority="1000"
+                 mode="M305">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cac:ShareholderParty"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cac:ShareholderParty"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -16048,10 +16048,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyID"
-                  priority="1000"
-                  mode="M306">
+                 priority="1000"
+                 mode="M306">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyID"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyID"/>
       <!--REPORT -->
       <xsl:if test="@schemeID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
@@ -16138,10 +16138,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyLegalFormCode"
-                  priority="1000"
-                  mode="M307">
+                 priority="1000"
+                 mode="M307">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyLegalFormCode"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyLegalFormCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -16162,10 +16162,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyLiquidationStatusCode"
-                  priority="1000"
-                  mode="M308">
+                 priority="1000"
+                 mode="M308">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyLiquidationStatusCode"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyLiquidationStatusCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -16186,10 +16186,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:CorporateStockAmount"
-                  priority="1000"
-                  mode="M309">
+                 priority="1000"
+                 mode="M309">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:CorporateStockAmount"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:CorporateStockAmount"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -16210,10 +16210,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:FullyPaidSharesIndicator"
-                  priority="1000"
-                  mode="M310">
+                 priority="1000"
+                 mode="M310">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:FullyPaidSharesIndicator"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:FullyPaidSharesIndicator"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -16234,10 +16234,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationDate"
-                  priority="1000"
-                  mode="M311">
+                 priority="1000"
+                 mode="M311">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationDate"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationDate"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -16258,10 +16258,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationExpirationDate"
-                  priority="1000"
-                  mode="M312">
+                 priority="1000"
+                 mode="M312">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationExpirationDate"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationExpirationDate"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -16282,10 +16282,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationName"
-                  priority="1000"
-                  mode="M313">
+                 priority="1000"
+                 mode="M313">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationName"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -16306,10 +16306,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:SoleProprietorshipIndicator"
-                  priority="1000"
-                  mode="M314">
+                 priority="1000"
+                 mode="M314">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:SoleProprietorshipIndicator"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:SoleProprietorshipIndicator"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -16330,10 +16330,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyName/cbc:Name"
-                  priority="1000"
-                  mode="M315">
+                 priority="1000"
+                 mode="M315">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyName/cbc:Name"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyName/cbc:Name"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -16365,10 +16365,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cac:RegistrationAddress"
-                  priority="1000"
-                  mode="M316">
+                 priority="1000"
+                 mode="M316">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cac:RegistrationAddress"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cac:RegistrationAddress"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -16389,10 +16389,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme"
-                  priority="1000"
-                  mode="M317">
+                 priority="1000"
+                 mode="M317">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(cbc:ID)=1"/>
@@ -16416,10 +16416,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cac:JurisdictionRegionAddress"
-                  priority="1000"
-                  mode="M318">
+                 priority="1000"
+                 mode="M318">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cac:JurisdictionRegionAddress"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cac:JurisdictionRegionAddress"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -16440,10 +16440,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:CurrencyCode"
-                  priority="1000"
-                  mode="M319">
+                 priority="1000"
+                 mode="M319">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:CurrencyCode"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:CurrencyCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -16464,10 +16464,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:ID"
-                  priority="1000"
-                  mode="M320">
+                 priority="1000"
+                 mode="M320">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:ID"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:ID"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="normalize-space(.)='VAT'"/>
@@ -16568,10 +16568,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:Name"
-                  priority="1000"
-                  mode="M321">
+                 priority="1000"
+                 mode="M321">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:Name"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:Name"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -16592,10 +16592,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:TaxTypeCode"
-                  priority="1000"
-                  mode="M322">
+                 priority="1000"
+                 mode="M322">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:TaxTypeCode"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:TaxTypeCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -16616,10 +16616,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cbc:CompanyID"
-                  priority="1000"
-                  mode="M323">
+                 priority="1000"
+                 mode="M323">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cbc:CompanyID"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cbc:CompanyID"/>
       <!--REPORT -->
       <xsl:if test="@schemeID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
@@ -16706,10 +16706,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cbc:ExemptionReason"
-                  priority="1000"
-                  mode="M324">
+                 priority="1000"
+                 mode="M324">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cbc:ExemptionReason"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cbc:ExemptionReason"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -16730,10 +16730,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cbc:ExemptionReasonCode"
-                  priority="1000"
-                  mode="M325">
+                 priority="1000"
+                 mode="M325">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cbc:ExemptionReasonCode"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cbc:ExemptionReasonCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -16754,10 +16754,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cbc:RegistrationName"
-                  priority="1000"
-                  mode="M326">
+                 priority="1000"
+                 mode="M326">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cbc:RegistrationName"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cbc:RegistrationName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -16778,10 +16778,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cbc:TaxLevelCode"
-                  priority="1000"
-                  mode="M327">
+                 priority="1000"
+                 mode="M327">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cbc:TaxLevelCode"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PartyTaxScheme/cbc:TaxLevelCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -16802,10 +16802,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:Person"
-                  priority="1000"
-                  mode="M328">
+                 priority="1000"
+                 mode="M328">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:Person"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:Person"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -16826,10 +16826,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PhysicalLocation"
-                  priority="1000"
-                  mode="M329">
+                 priority="1000"
+                 mode="M329">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PhysicalLocation"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PhysicalLocation"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -16850,10 +16850,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cac:AddressLine"
-                  priority="1000"
-                  mode="M330">
+                 priority="1000"
+                 mode="M330">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cac:AddressLine"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cac:AddressLine"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -16874,16 +16874,16 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cac:Country"
-                  priority="1000"
-                  mode="M331">
+                 priority="1000"
+                 mode="M331">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cac:Country"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cac:Country"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(cbc:IdentificationCode)=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(cbc:IdentificationCode)=1">
+                                test="count(cbc:IdentificationCode)=1">
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -16902,10 +16902,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode"
-                  priority="1000"
-                  mode="M332">
+                 priority="1000"
+                 mode="M332">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode"/>
       <!--REPORT -->
       <xsl:if test="@listID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@listID">
@@ -17014,10 +17014,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cac:Country/cbc:Name"
-                  priority="1000"
-                  mode="M333">
+                 priority="1000"
+                 mode="M333">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cac:Country/cbc:Name"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cac:Country/cbc:Name"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -17038,10 +17038,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cac:LocationCoordinate"
-                  priority="1000"
-                  mode="M334">
+                 priority="1000"
+                 mode="M334">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cac:LocationCoordinate"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cac:LocationCoordinate"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -17062,10 +17062,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:AdditionalStreetName"
-                  priority="1000"
-                  mode="M335">
+                 priority="1000"
+                 mode="M335">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:AdditionalStreetName"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:AdditionalStreetName"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -17097,10 +17097,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:AddressFormatCode"
-                  priority="1000"
-                  mode="M336">
+                 priority="1000"
+                 mode="M336">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:AddressFormatCode"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:AddressFormatCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -17121,10 +17121,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:AddressTypeCode"
-                  priority="1000"
-                  mode="M337">
+                 priority="1000"
+                 mode="M337">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:AddressTypeCode"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:AddressTypeCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -17145,10 +17145,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:BlockName"
-                  priority="1000"
-                  mode="M338">
+                 priority="1000"
+                 mode="M338">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:BlockName"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:BlockName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -17169,10 +17169,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:BuildingName"
-                  priority="1000"
-                  mode="M339">
+                 priority="1000"
+                 mode="M339">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:BuildingName"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:BuildingName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -17193,10 +17193,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:BuildingNumber"
-                  priority="1000"
-                  mode="M340">
+                 priority="1000"
+                 mode="M340">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:BuildingNumber"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:BuildingNumber"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -17217,10 +17217,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:CityName"
-                  priority="1000"
-                  mode="M341">
+                 priority="1000"
+                 mode="M341">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:CityName"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:CityName"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -17252,10 +17252,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:CitySubdivisionName"
-                  priority="1000"
-                  mode="M342">
+                 priority="1000"
+                 mode="M342">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:CitySubdivisionName"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:CitySubdivisionName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -17276,10 +17276,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:CountrySubentity"
-                  priority="1000"
-                  mode="M343">
+                 priority="1000"
+                 mode="M343">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:CountrySubentity"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:CountrySubentity"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -17311,10 +17311,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:CountrySubentityCode"
-                  priority="1000"
-                  mode="M344">
+                 priority="1000"
+                 mode="M344">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:CountrySubentityCode"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:CountrySubentityCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -17335,10 +17335,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:Department"
-                  priority="1000"
-                  mode="M345">
+                 priority="1000"
+                 mode="M345">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:Department"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:Department"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -17359,10 +17359,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:District"
-                  priority="1000"
-                  mode="M346">
+                 priority="1000"
+                 mode="M346">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:District"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:District"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -17383,10 +17383,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:Floor"
-                  priority="1000"
-                  mode="M347">
+                 priority="1000"
+                 mode="M347">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:Floor"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:Floor"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -17407,10 +17407,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:ID"
-                  priority="1000"
-                  mode="M348">
+                 priority="1000"
+                 mode="M348">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:ID"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -17431,10 +17431,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:InhouseMail"
-                  priority="1000"
-                  mode="M349">
+                 priority="1000"
+                 mode="M349">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:InhouseMail"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:InhouseMail"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -17455,10 +17455,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:MarkAttention"
-                  priority="1000"
-                  mode="M350">
+                 priority="1000"
+                 mode="M350">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:MarkAttention"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:MarkAttention"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -17479,10 +17479,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:MarkCare"
-                  priority="1000"
-                  mode="M351">
+                 priority="1000"
+                 mode="M351">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:MarkCare"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:MarkCare"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -17503,10 +17503,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:PlotIdentification"
-                  priority="1000"
-                  mode="M352">
+                 priority="1000"
+                 mode="M352">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:PlotIdentification"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:PlotIdentification"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -17527,10 +17527,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:PostalZone"
-                  priority="1000"
-                  mode="M353">
+                 priority="1000"
+                 mode="M353">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:PostalZone"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:PostalZone"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -17562,10 +17562,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:Postbox"
-                  priority="1000"
-                  mode="M354">
+                 priority="1000"
+                 mode="M354">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:Postbox"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:Postbox"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -17586,10 +17586,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:Region"
-                  priority="1000"
-                  mode="M355">
+                 priority="1000"
+                 mode="M355">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:Region"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:Region"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -17610,10 +17610,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:Room"
-                  priority="1000"
-                  mode="M356">
+                 priority="1000"
+                 mode="M356">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:Room"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:Room"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -17634,10 +17634,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:StreetName"
-                  priority="1000"
-                  mode="M357">
+                 priority="1000"
+                 mode="M357">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:StreetName"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:StreetName"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -17669,10 +17669,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:TimezoneOffset"
-                  priority="1000"
-                  mode="M358">
+                 priority="1000"
+                 mode="M358">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:TimezoneOffset"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PostalAddress/cbc:TimezoneOffset"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -17693,10 +17693,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PowerOfAttorney"
-                  priority="1000"
-                  mode="M359">
+                 priority="1000"
+                 mode="M359">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PowerOfAttorney"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:PowerOfAttorney"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -17717,10 +17717,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:ServiceProviderParty"
-                  priority="1000"
-                  mode="M360">
+                 priority="1000"
+                 mode="M360">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:ServiceProviderParty"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cac:ServiceProviderParty"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -17741,10 +17741,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cbc:EndpointID"
-                  priority="1000"
-                  mode="M361">
+                 priority="1000"
+                 mode="M361">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cbc:EndpointID"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cbc:EndpointID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -17765,10 +17765,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cbc:IndustryClassificationCode"
-                  priority="1000"
-                  mode="M362">
+                 priority="1000"
+                 mode="M362">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cbc:IndustryClassificationCode"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cbc:IndustryClassificationCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -17789,10 +17789,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cbc:LogoReferenceID"
-                  priority="1000"
-                  mode="M363">
+                 priority="1000"
+                 mode="M363">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cbc:LogoReferenceID"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cbc:LogoReferenceID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -17813,10 +17813,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cbc:MarkAttentionIndicator"
-                  priority="1000"
-                  mode="M364">
+                 priority="1000"
+                 mode="M364">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cbc:MarkAttentionIndicator"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cbc:MarkAttentionIndicator"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -17837,10 +17837,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cbc:MarkCareIndicator"
-                  priority="1000"
-                  mode="M365">
+                 priority="1000"
+                 mode="M365">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cbc:MarkCareIndicator"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cbc:MarkCareIndicator"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -17861,10 +17861,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cbc:WebsiteURI"
-                  priority="1000"
-                  mode="M366">
+                 priority="1000"
+                 mode="M366">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cbc:WebsiteURI"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cac:Party/cbc:WebsiteURI"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -17885,10 +17885,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cbc:AdditionalAccountID"
-                  priority="1000"
-                  mode="M367">
+                 priority="1000"
+                 mode="M367">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cbc:AdditionalAccountID"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cbc:AdditionalAccountID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -17909,10 +17909,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cbc:CustomerAssignedAccountID"
-                  priority="1000"
-                  mode="M368">
+                 priority="1000"
+                 mode="M368">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cbc:CustomerAssignedAccountID"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cbc:CustomerAssignedAccountID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -17933,10 +17933,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:BuyerCustomerParty/cbc:SupplierAssignedAccountID"
-                  priority="1000"
-                  mode="M369">
+                 priority="1000"
+                 mode="M369">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:BuyerCustomerParty/cbc:SupplierAssignedAccountID"/>
+                       context="/p1:Invoice/cac:BuyerCustomerParty/cbc:SupplierAssignedAccountID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -17957,10 +17957,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:ContractDocumentReference/cac:Attachment"
-                  priority="1000"
-                  mode="M370">
+                 priority="1000"
+                 mode="M370">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:ContractDocumentReference/cac:Attachment"/>
+                       context="/p1:Invoice/cac:ContractDocumentReference/cac:Attachment"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -17981,10 +17981,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:ContractDocumentReference/cac:IssuerParty"
-                  priority="1000"
-                  mode="M371">
+                 priority="1000"
+                 mode="M371">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:ContractDocumentReference/cac:IssuerParty"/>
+                       context="/p1:Invoice/cac:ContractDocumentReference/cac:IssuerParty"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -18005,10 +18005,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:ContractDocumentReference/cac:ResultOfVerification"
-                  priority="1000"
-                  mode="M372">
+                 priority="1000"
+                 mode="M372">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:ContractDocumentReference/cac:ResultOfVerification"/>
+                       context="/p1:Invoice/cac:ContractDocumentReference/cac:ResultOfVerification"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -18029,10 +18029,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:ContractDocumentReference/cac:ValidityPeriod"
-                  priority="1000"
-                  mode="M373">
+                 priority="1000"
+                 mode="M373">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:ContractDocumentReference/cac:ValidityPeriod"/>
+                       context="/p1:Invoice/cac:ContractDocumentReference/cac:ValidityPeriod"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -18053,10 +18053,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:ContractDocumentReference/cbc:CopyIndicator"
-                  priority="1000"
-                  mode="M374">
+                 priority="1000"
+                 mode="M374">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:ContractDocumentReference/cbc:CopyIndicator"/>
+                       context="/p1:Invoice/cac:ContractDocumentReference/cbc:CopyIndicator"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -18077,10 +18077,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:ContractDocumentReference/cbc:DocumentDescription"
-                  priority="1000"
-                  mode="M375">
+                 priority="1000"
+                 mode="M375">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:ContractDocumentReference/cbc:DocumentDescription"/>
+                       context="/p1:Invoice/cac:ContractDocumentReference/cbc:DocumentDescription"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -18101,10 +18101,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:ContractDocumentReference/cbc:DocumentStatusCode"
-                  priority="1000"
-                  mode="M376">
+                 priority="1000"
+                 mode="M376">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:ContractDocumentReference/cbc:DocumentStatusCode"/>
+                       context="/p1:Invoice/cac:ContractDocumentReference/cbc:DocumentStatusCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -18125,10 +18125,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:ContractDocumentReference/cbc:DocumentType"
-                  priority="1000"
-                  mode="M377">
+                 priority="1000"
+                 mode="M377">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:ContractDocumentReference/cbc:DocumentType"/>
+                       context="/p1:Invoice/cac:ContractDocumentReference/cbc:DocumentType"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -18160,10 +18160,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:ContractDocumentReference/cbc:DocumentTypeCode"
-                  priority="1000"
-                  mode="M378">
+                 priority="1000"
+                 mode="M378">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:ContractDocumentReference/cbc:DocumentTypeCode"/>
+                       context="/p1:Invoice/cac:ContractDocumentReference/cbc:DocumentTypeCode"/>
       <!--REPORT -->
       <xsl:if test="@listName">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@listName">
@@ -18239,10 +18239,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:ContractDocumentReference/cbc:ID"
-                  priority="1000"
-                  mode="M379">
+                 priority="1000"
+                 mode="M379">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:ContractDocumentReference/cbc:ID"/>
+                       context="/p1:Invoice/cac:ContractDocumentReference/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test="@schemeID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
@@ -18329,10 +18329,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:ContractDocumentReference/cbc:IssueDate"
-                  priority="1000"
-                  mode="M380">
+                 priority="1000"
+                 mode="M380">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:ContractDocumentReference/cbc:IssueDate"/>
+                       context="/p1:Invoice/cac:ContractDocumentReference/cbc:IssueDate"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -18353,10 +18353,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:ContractDocumentReference/cbc:IssueTime"
-                  priority="1000"
-                  mode="M381">
+                 priority="1000"
+                 mode="M381">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:ContractDocumentReference/cbc:IssueTime"/>
+                       context="/p1:Invoice/cac:ContractDocumentReference/cbc:IssueTime"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -18377,10 +18377,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:ContractDocumentReference/cbc:LanguageID"
-                  priority="1000"
-                  mode="M382">
+                 priority="1000"
+                 mode="M382">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:ContractDocumentReference/cbc:LanguageID"/>
+                       context="/p1:Invoice/cac:ContractDocumentReference/cbc:LanguageID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -18401,10 +18401,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:ContractDocumentReference/cbc:LocaleCode"
-                  priority="1000"
-                  mode="M383">
+                 priority="1000"
+                 mode="M383">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:ContractDocumentReference/cbc:LocaleCode"/>
+                       context="/p1:Invoice/cac:ContractDocumentReference/cbc:LocaleCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -18425,10 +18425,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:ContractDocumentReference/cbc:UUID"
-                  priority="1000"
-                  mode="M384">
+                 priority="1000"
+                 mode="M384">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:ContractDocumentReference/cbc:UUID"/>
+                       context="/p1:Invoice/cac:ContractDocumentReference/cbc:UUID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -18449,10 +18449,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:ContractDocumentReference/cbc:VersionID"
-                  priority="1000"
-                  mode="M385">
+                 priority="1000"
+                 mode="M385">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:ContractDocumentReference/cbc:VersionID"/>
+                       context="/p1:Invoice/cac:ContractDocumentReference/cbc:VersionID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -18473,10 +18473,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:ContractDocumentReference/cbc:XPath"
-                  priority="1000"
-                  mode="M386">
+                 priority="1000"
+                 mode="M386">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:ContractDocumentReference/cbc:XPath"/>
+                       context="/p1:Invoice/cac:ContractDocumentReference/cbc:XPath"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -18497,10 +18497,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:AlternativeDeliveryLocation"
-                  priority="1000"
-                  mode="M387">
+                 priority="1000"
+                 mode="M387">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:AlternativeDeliveryLocation"/>
+                       context="/p1:Invoice/cac:Delivery/cac:AlternativeDeliveryLocation"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -18521,10 +18521,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:CarrierParty"
-                  priority="1000"
-                  mode="M388">
+                 priority="1000"
+                 mode="M388">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:CarrierParty"/>
+                       context="/p1:Invoice/cac:Delivery/cac:CarrierParty"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -18545,10 +18545,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cac:AddressLine"
-                  priority="1000"
-                  mode="M389">
+                 priority="1000"
+                 mode="M389">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cac:AddressLine"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cac:AddressLine"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -18569,10 +18569,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cac:Country/cbc:IdentificationCode"
-                  priority="1000"
-                  mode="M390">
+                 priority="1000"
+                 mode="M390">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cac:Country/cbc:IdentificationCode"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cac:Country/cbc:IdentificationCode"/>
       <!--REPORT -->
       <xsl:if test="@listID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@listID">
@@ -18681,10 +18681,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cac:Country/cbc:Name"
-                  priority="1000"
-                  mode="M391">
+                 priority="1000"
+                 mode="M391">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cac:Country/cbc:Name"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cac:Country/cbc:Name"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -18705,10 +18705,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cac:LocationCoordinate"
-                  priority="1000"
-                  mode="M392">
+                 priority="1000"
+                 mode="M392">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cac:LocationCoordinate"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cac:LocationCoordinate"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -18729,10 +18729,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:AdditionalStreetName"
-                  priority="1000"
-                  mode="M393">
+                 priority="1000"
+                 mode="M393">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:AdditionalStreetName"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:AdditionalStreetName"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -18764,10 +18764,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:AddressFormatCode"
-                  priority="1000"
-                  mode="M394">
+                 priority="1000"
+                 mode="M394">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:AddressFormatCode"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:AddressFormatCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -18788,10 +18788,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:AddressTypeCode"
-                  priority="1000"
-                  mode="M395">
+                 priority="1000"
+                 mode="M395">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:AddressTypeCode"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:AddressTypeCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -18812,10 +18812,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:BlockName"
-                  priority="1000"
-                  mode="M396">
+                 priority="1000"
+                 mode="M396">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:BlockName"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:BlockName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -18836,10 +18836,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:BuildingName"
-                  priority="1000"
-                  mode="M397">
+                 priority="1000"
+                 mode="M397">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:BuildingName"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:BuildingName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -18860,10 +18860,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:BuildingNumber"
-                  priority="1000"
-                  mode="M398">
+                 priority="1000"
+                 mode="M398">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:BuildingNumber"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:BuildingNumber"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -18884,10 +18884,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:CityName"
-                  priority="1000"
-                  mode="M399">
+                 priority="1000"
+                 mode="M399">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:CityName"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:CityName"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -18919,10 +18919,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:CitySubdivisionName"
-                  priority="1000"
-                  mode="M400">
+                 priority="1000"
+                 mode="M400">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:CitySubdivisionName"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:CitySubdivisionName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -18943,10 +18943,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:CountrySubentity"
-                  priority="1000"
-                  mode="M401">
+                 priority="1000"
+                 mode="M401">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:CountrySubentity"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:CountrySubentity"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -18978,10 +18978,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:CountrySubentityCode"
-                  priority="1000"
-                  mode="M402">
+                 priority="1000"
+                 mode="M402">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:CountrySubentityCode"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:CountrySubentityCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -19002,10 +19002,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:Department"
-                  priority="1000"
-                  mode="M403">
+                 priority="1000"
+                 mode="M403">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:Department"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:Department"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -19026,10 +19026,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:District"
-                  priority="1000"
-                  mode="M404">
+                 priority="1000"
+                 mode="M404">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:District"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:District"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -19050,10 +19050,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:Floor"
-                  priority="1000"
-                  mode="M405">
+                 priority="1000"
+                 mode="M405">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:Floor"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:Floor"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -19074,10 +19074,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:ID"
-                  priority="1000"
-                  mode="M406">
+                 priority="1000"
+                 mode="M406">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:ID"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -19098,10 +19098,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:InhouseMail"
-                  priority="1000"
-                  mode="M407">
+                 priority="1000"
+                 mode="M407">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:InhouseMail"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:InhouseMail"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -19122,10 +19122,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:MarkAttention"
-                  priority="1000"
-                  mode="M408">
+                 priority="1000"
+                 mode="M408">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:MarkAttention"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:MarkAttention"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -19146,10 +19146,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:MarkCare"
-                  priority="1000"
-                  mode="M409">
+                 priority="1000"
+                 mode="M409">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:MarkCare"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:MarkCare"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -19170,10 +19170,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:PlotIdentification"
-                  priority="1000"
-                  mode="M410">
+                 priority="1000"
+                 mode="M410">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:PlotIdentification"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:PlotIdentification"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -19194,10 +19194,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:PostalZone"
-                  priority="1000"
-                  mode="M411">
+                 priority="1000"
+                 mode="M411">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:PostalZone"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:PostalZone"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -19229,10 +19229,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:Postbox"
-                  priority="1000"
-                  mode="M412">
+                 priority="1000"
+                 mode="M412">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:Postbox"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:Postbox"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -19253,10 +19253,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:Region"
-                  priority="1000"
-                  mode="M413">
+                 priority="1000"
+                 mode="M413">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:Region"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:Region"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -19277,10 +19277,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:Room"
-                  priority="1000"
-                  mode="M414">
+                 priority="1000"
+                 mode="M414">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:Room"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:Room"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -19301,10 +19301,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:StreetName"
-                  priority="1000"
-                  mode="M415">
+                 priority="1000"
+                 mode="M415">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:StreetName"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:StreetName"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -19336,10 +19336,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:TimezoneOffset"
-                  priority="1000"
-                  mode="M416">
+                 priority="1000"
+                 mode="M416">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:TimezoneOffset"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryAddress/cbc:TimezoneOffset"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -19360,10 +19360,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cac:AddressLine"
-                  priority="1000"
-                  mode="M417">
+                 priority="1000"
+                 mode="M417">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cac:AddressLine"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cac:AddressLine"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -19384,16 +19384,16 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cac:Country"
-                  priority="1000"
-                  mode="M418">
+                 priority="1000"
+                 mode="M418">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cac:Country"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cac:Country"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(cbc:IdentificationCode)=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(cbc:IdentificationCode)=1">
+                                test="count(cbc:IdentificationCode)=1">
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -19412,10 +19412,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cac:Country/cbc:IdentificationCode"
-                  priority="1000"
-                  mode="M419">
+                 priority="1000"
+                 mode="M419">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cac:Country/cbc:IdentificationCode"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cac:Country/cbc:IdentificationCode"/>
       <!--REPORT -->
       <xsl:if test="@listID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@listID">
@@ -19524,10 +19524,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cac:Country/cbc:Name"
-                  priority="1000"
-                  mode="M420">
+                 priority="1000"
+                 mode="M420">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cac:Country/cbc:Name"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cac:Country/cbc:Name"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -19548,10 +19548,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cac:LocationCoordinate"
-                  priority="1000"
-                  mode="M421">
+                 priority="1000"
+                 mode="M421">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cac:LocationCoordinate"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cac:LocationCoordinate"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -19572,10 +19572,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:AdditionalStreetName"
-                  priority="1000"
-                  mode="M422">
+                 priority="1000"
+                 mode="M422">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:AdditionalStreetName"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:AdditionalStreetName"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -19607,10 +19607,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:AddressFormatCode"
-                  priority="1000"
-                  mode="M423">
+                 priority="1000"
+                 mode="M423">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:AddressFormatCode"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:AddressFormatCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -19631,10 +19631,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:AddressTypeCode"
-                  priority="1000"
-                  mode="M424">
+                 priority="1000"
+                 mode="M424">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:AddressTypeCode"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:AddressTypeCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -19655,10 +19655,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:BlockName"
-                  priority="1000"
-                  mode="M425">
+                 priority="1000"
+                 mode="M425">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:BlockName"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:BlockName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -19679,10 +19679,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:BuildingName"
-                  priority="1000"
-                  mode="M426">
+                 priority="1000"
+                 mode="M426">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:BuildingName"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:BuildingName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -19703,10 +19703,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:BuildingNumber"
-                  priority="1000"
-                  mode="M427">
+                 priority="1000"
+                 mode="M427">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:BuildingNumber"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:BuildingNumber"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -19727,10 +19727,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:CityName"
-                  priority="1000"
-                  mode="M428">
+                 priority="1000"
+                 mode="M428">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:CityName"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:CityName"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -19762,10 +19762,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:CitySubdivisionName"
-                  priority="1000"
-                  mode="M429">
+                 priority="1000"
+                 mode="M429">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:CitySubdivisionName"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:CitySubdivisionName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -19786,10 +19786,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:CountrySubentity"
-                  priority="1000"
-                  mode="M430">
+                 priority="1000"
+                 mode="M430">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:CountrySubentity"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:CountrySubentity"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -19821,10 +19821,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:CountrySubentityCode"
-                  priority="1000"
-                  mode="M431">
+                 priority="1000"
+                 mode="M431">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:CountrySubentityCode"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:CountrySubentityCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -19845,10 +19845,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:Department"
-                  priority="1000"
-                  mode="M432">
+                 priority="1000"
+                 mode="M432">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:Department"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:Department"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -19869,10 +19869,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:District"
-                  priority="1000"
-                  mode="M433">
+                 priority="1000"
+                 mode="M433">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:District"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:District"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -19893,10 +19893,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:Floor"
-                  priority="1000"
-                  mode="M434">
+                 priority="1000"
+                 mode="M434">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:Floor"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:Floor"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -19917,10 +19917,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:ID"
-                  priority="1000"
-                  mode="M435">
+                 priority="1000"
+                 mode="M435">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:ID"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -19941,10 +19941,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:InhouseMail"
-                  priority="1000"
-                  mode="M436">
+                 priority="1000"
+                 mode="M436">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:InhouseMail"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:InhouseMail"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -19965,10 +19965,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:MarkAttention"
-                  priority="1000"
-                  mode="M437">
+                 priority="1000"
+                 mode="M437">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:MarkAttention"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:MarkAttention"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -19989,10 +19989,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:MarkCare"
-                  priority="1000"
-                  mode="M438">
+                 priority="1000"
+                 mode="M438">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:MarkCare"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:MarkCare"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -20013,10 +20013,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:PlotIdentification"
-                  priority="1000"
-                  mode="M439">
+                 priority="1000"
+                 mode="M439">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:PlotIdentification"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:PlotIdentification"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -20037,10 +20037,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:PostalZone"
-                  priority="1000"
-                  mode="M440">
+                 priority="1000"
+                 mode="M440">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:PostalZone"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:PostalZone"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -20072,10 +20072,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:Postbox"
-                  priority="1000"
-                  mode="M441">
+                 priority="1000"
+                 mode="M441">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:Postbox"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:Postbox"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -20096,10 +20096,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:Region"
-                  priority="1000"
-                  mode="M442">
+                 priority="1000"
+                 mode="M442">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:Region"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:Region"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -20120,10 +20120,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:Room"
-                  priority="1000"
-                  mode="M443">
+                 priority="1000"
+                 mode="M443">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:Room"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:Room"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -20144,10 +20144,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:StreetName"
-                  priority="1000"
-                  mode="M444">
+                 priority="1000"
+                 mode="M444">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:StreetName"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:StreetName"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -20179,10 +20179,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:TimezoneOffset"
-                  priority="1000"
-                  mode="M445">
+                 priority="1000"
+                 mode="M445">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:TimezoneOffset"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:TimezoneOffset"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -20203,10 +20203,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:LocationCoordinate"
-                  priority="1000"
-                  mode="M446">
+                 priority="1000"
+                 mode="M446">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:LocationCoordinate"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:LocationCoordinate"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -20227,10 +20227,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:SubsidiaryLocation"
-                  priority="1000"
-                  mode="M447">
+                 priority="1000"
+                 mode="M447">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:SubsidiaryLocation"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:SubsidiaryLocation"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -20251,10 +20251,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:ValidityPeriod"
-                  priority="1000"
-                  mode="M448">
+                 priority="1000"
+                 mode="M448">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:ValidityPeriod"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cac:ValidityPeriod"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -20275,10 +20275,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cbc:Conditions"
-                  priority="1000"
-                  mode="M449">
+                 priority="1000"
+                 mode="M449">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cbc:Conditions"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cbc:Conditions"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -20299,10 +20299,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cbc:CountrySubentity"
-                  priority="1000"
-                  mode="M450">
+                 priority="1000"
+                 mode="M450">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cbc:CountrySubentity"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cbc:CountrySubentity"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -20323,10 +20323,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cbc:CountrySubentityCode"
-                  priority="1000"
-                  mode="M451">
+                 priority="1000"
+                 mode="M451">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cbc:CountrySubentityCode"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cbc:CountrySubentityCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -20347,10 +20347,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cbc:Description"
-                  priority="1000"
-                  mode="M452">
+                 priority="1000"
+                 mode="M452">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cbc:Description"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cbc:Description"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -20371,10 +20371,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cbc:ID"
-                  priority="1000"
-                  mode="M453">
+                 priority="1000"
+                 mode="M453">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cbc:ID"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test="@schemeID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
@@ -20461,10 +20461,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cbc:InformationURI"
-                  priority="1000"
-                  mode="M454">
+                 priority="1000"
+                 mode="M454">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cbc:InformationURI"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cbc:InformationURI"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -20485,10 +20485,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cbc:LocationTypeCode"
-                  priority="1000"
-                  mode="M455">
+                 priority="1000"
+                 mode="M455">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cbc:LocationTypeCode"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cbc:LocationTypeCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -20509,10 +20509,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cbc:Name"
-                  priority="1000"
-                  mode="M456">
+                 priority="1000"
+                 mode="M456">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cbc:Name"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryLocation/cbc:Name"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -20533,10 +20533,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryParty"
-                  priority="1000"
-                  mode="M457">
+                 priority="1000"
+                 mode="M457">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryParty"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryParty"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -20557,10 +20557,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:DeliveryTerms"
-                  priority="1000"
-                  mode="M458">
+                 priority="1000"
+                 mode="M458">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:DeliveryTerms"/>
+                       context="/p1:Invoice/cac:Delivery/cac:DeliveryTerms"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -20581,10 +20581,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:Despatch"
-                  priority="1000"
-                  mode="M459">
+                 priority="1000"
+                 mode="M459">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:Despatch"/>
+                       context="/p1:Invoice/cac:Delivery/cac:Despatch"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -20605,10 +20605,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:EstimatedDeliveryPeriod"
-                  priority="1000"
-                  mode="M460">
+                 priority="1000"
+                 mode="M460">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:EstimatedDeliveryPeriod"/>
+                       context="/p1:Invoice/cac:Delivery/cac:EstimatedDeliveryPeriod"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -20629,10 +20629,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:MaximumDeliveryUnit"
-                  priority="1000"
-                  mode="M461">
+                 priority="1000"
+                 mode="M461">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:MaximumDeliveryUnit"/>
+                       context="/p1:Invoice/cac:Delivery/cac:MaximumDeliveryUnit"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -20653,10 +20653,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:MinimumDeliveryUnit"
-                  priority="1000"
-                  mode="M462">
+                 priority="1000"
+                 mode="M462">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:MinimumDeliveryUnit"/>
+                       context="/p1:Invoice/cac:Delivery/cac:MinimumDeliveryUnit"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -20677,10 +20677,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:NotifyParty"
-                  priority="1000"
-                  mode="M463">
+                 priority="1000"
+                 mode="M463">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:NotifyParty"/>
+                       context="/p1:Invoice/cac:Delivery/cac:NotifyParty"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -20701,10 +20701,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:PromisedDeliveryPeriod"
-                  priority="1000"
-                  mode="M464">
+                 priority="1000"
+                 mode="M464">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:PromisedDeliveryPeriod"/>
+                       context="/p1:Invoice/cac:Delivery/cac:PromisedDeliveryPeriod"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -20725,10 +20725,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:RequestedDeliveryPeriod"
-                  priority="1000"
-                  mode="M465">
+                 priority="1000"
+                 mode="M465">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:RequestedDeliveryPeriod"/>
+                       context="/p1:Invoice/cac:Delivery/cac:RequestedDeliveryPeriod"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -20749,10 +20749,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cac:Shipment"
-                  priority="1000"
-                  mode="M466">
+                 priority="1000"
+                 mode="M466">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cac:Shipment"/>
+                       context="/p1:Invoice/cac:Delivery/cac:Shipment"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -20773,10 +20773,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cbc:ActualDeliveryTime"
-                  priority="1000"
-                  mode="M467">
+                 priority="1000"
+                 mode="M467">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cbc:ActualDeliveryTime"/>
+                       context="/p1:Invoice/cac:Delivery/cbc:ActualDeliveryTime"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -20798,7 +20798,7 @@
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cbc:ID" priority="1000" mode="M468">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cbc:ID"/>
+                       context="/p1:Invoice/cac:Delivery/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -20819,10 +20819,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cbc:LatestDeliveryDate"
-                  priority="1000"
-                  mode="M469">
+                 priority="1000"
+                 mode="M469">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cbc:LatestDeliveryDate"/>
+                       context="/p1:Invoice/cac:Delivery/cbc:LatestDeliveryDate"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -20843,10 +20843,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cbc:LatestDeliveryTime"
-                  priority="1000"
-                  mode="M470">
+                 priority="1000"
+                 mode="M470">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cbc:LatestDeliveryTime"/>
+                       context="/p1:Invoice/cac:Delivery/cbc:LatestDeliveryTime"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -20867,10 +20867,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cbc:MaximumQuantity"
-                  priority="1000"
-                  mode="M471">
+                 priority="1000"
+                 mode="M471">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cbc:MaximumQuantity"/>
+                       context="/p1:Invoice/cac:Delivery/cbc:MaximumQuantity"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -20891,10 +20891,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cbc:MinimumQuantity"
-                  priority="1000"
-                  mode="M472">
+                 priority="1000"
+                 mode="M472">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cbc:MinimumQuantity"/>
+                       context="/p1:Invoice/cac:Delivery/cbc:MinimumQuantity"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -20915,10 +20915,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cbc:Quantity"
-                  priority="1000"
-                  mode="M473">
+                 priority="1000"
+                 mode="M473">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cbc:Quantity"/>
+                       context="/p1:Invoice/cac:Delivery/cbc:Quantity"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -20939,10 +20939,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cbc:ReleaseID"
-                  priority="1000"
-                  mode="M474">
+                 priority="1000"
+                 mode="M474">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cbc:ReleaseID"/>
+                       context="/p1:Invoice/cac:Delivery/cbc:ReleaseID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -20963,10 +20963,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Delivery/cbc:TrackingID"
-                  priority="1000"
-                  mode="M475">
+                 priority="1000"
+                 mode="M475">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Delivery/cbc:TrackingID"/>
+                       context="/p1:Invoice/cac:Delivery/cbc:TrackingID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -20988,7 +20988,7 @@
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:DeliveryTerms" priority="1000" mode="M476">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:DeliveryTerms"/>
+                       context="/p1:Invoice/cac:DeliveryTerms"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -21009,10 +21009,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:DespatchDocumentReference"
-                  priority="1000"
-                  mode="M477">
+                 priority="1000"
+                 mode="M477">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:DespatchDocumentReference"/>
+                       context="/p1:Invoice/cac:DespatchDocumentReference"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -21034,7 +21034,7 @@
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine" priority="1000" mode="M478">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine"/>
+                       context="/p1:Invoice/cac:InvoiceLine"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(cbc:Note)&lt;=1"/>
@@ -21054,7 +21054,7 @@
          <xsl:when test="count(cbc:InvoicedQuantity)=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(cbc:InvoicedQuantity)=1">
+                                test="count(cbc:InvoicedQuantity)=1">
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -21069,7 +21069,7 @@
          <xsl:when test="count(cac:OrderLineReference)&lt;=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(cac:OrderLineReference)&lt;=1">
+                                test="count(cac:OrderLineReference)&lt;=1">
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -21084,7 +21084,7 @@
          <xsl:when test="count(cac:AllowanceCharge)&lt;=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(cac:AllowanceCharge)&lt;=1">
+                                test="count(cac:AllowanceCharge)&lt;=1">
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -21117,16 +21117,16 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge"
-                  priority="1000"
-                  mode="M479">
+                 priority="1000"
+                 mode="M479">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(cbc:AllowanceChargeReason)=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(cbc:AllowanceChargeReason)=1">
+                                test="count(cbc:AllowanceChargeReason)=1">
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -21145,10 +21145,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge/cac:PaymentMeans"
-                  priority="1000"
-                  mode="M480">
+                 priority="1000"
+                 mode="M480">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge/cac:PaymentMeans"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge/cac:PaymentMeans"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -21169,10 +21169,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge/cac:TaxCategory"
-                  priority="1000"
-                  mode="M481">
+                 priority="1000"
+                 mode="M481">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge/cac:TaxCategory"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge/cac:TaxCategory"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -21193,10 +21193,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge/cac:TaxTotal"
-                  priority="1000"
-                  mode="M482">
+                 priority="1000"
+                 mode="M482">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge/cac:TaxTotal"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge/cac:TaxTotal"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -21217,10 +21217,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge/cbc:AccountingCost"
-                  priority="1000"
-                  mode="M483">
+                 priority="1000"
+                 mode="M483">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge/cbc:AccountingCost"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge/cbc:AccountingCost"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -21241,10 +21241,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge/cbc:AccountingCostCode"
-                  priority="1000"
-                  mode="M484">
+                 priority="1000"
+                 mode="M484">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge/cbc:AccountingCostCode"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge/cbc:AccountingCostCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -21265,10 +21265,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge/cbc:AllowanceChargeReason"
-                  priority="1000"
-                  mode="M485">
+                 priority="1000"
+                 mode="M485">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge/cbc:AllowanceChargeReason"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge/cbc:AllowanceChargeReason"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -21300,10 +21300,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge/cbc:AllowanceChargeReasonCode"
-                  priority="1000"
-                  mode="M486">
+                 priority="1000"
+                 mode="M486">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge/cbc:AllowanceChargeReasonCode"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge/cbc:AllowanceChargeReasonCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -21324,10 +21324,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge/cbc:BaseAmount"
-                  priority="1000"
-                  mode="M487">
+                 priority="1000"
+                 mode="M487">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge/cbc:BaseAmount"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge/cbc:BaseAmount"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -21348,10 +21348,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge/cbc:ID"
-                  priority="1000"
-                  mode="M488">
+                 priority="1000"
+                 mode="M488">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge/cbc:ID"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -21372,10 +21372,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge/cbc:MultiplierFactorNumeric"
-                  priority="1000"
-                  mode="M489">
+                 priority="1000"
+                 mode="M489">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge/cbc:MultiplierFactorNumeric"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge/cbc:MultiplierFactorNumeric"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -21396,10 +21396,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge/cbc:PerUnitAmount"
-                  priority="1000"
-                  mode="M490">
+                 priority="1000"
+                 mode="M490">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge/cbc:PerUnitAmount"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge/cbc:PerUnitAmount"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -21420,10 +21420,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge/cbc:PrepaidIndicator"
-                  priority="1000"
-                  mode="M491">
+                 priority="1000"
+                 mode="M491">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge/cbc:PrepaidIndicator"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge/cbc:PrepaidIndicator"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -21444,10 +21444,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge/cbc:SequenceNumeric"
-                  priority="1000"
-                  mode="M492">
+                 priority="1000"
+                 mode="M492">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge/cbc:SequenceNumeric"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:AllowanceCharge/cbc:SequenceNumeric"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -21468,10 +21468,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:BillingReference"
-                  priority="1000"
-                  mode="M493">
+                 priority="1000"
+                 mode="M493">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:BillingReference"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:BillingReference"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -21492,10 +21492,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Delivery"
-                  priority="1000"
-                  mode="M494">
+                 priority="1000"
+                 mode="M494">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Delivery"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Delivery"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -21516,10 +21516,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:DeliveryTerms"
-                  priority="1000"
-                  mode="M495">
+                 priority="1000"
+                 mode="M495">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:DeliveryTerms"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:DeliveryTerms"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -21540,10 +21540,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:DespatchLineReference"
-                  priority="1000"
-                  mode="M496">
+                 priority="1000"
+                 mode="M496">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:DespatchLineReference"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:DespatchLineReference"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -21564,10 +21564,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:DocumentReference"
-                  priority="1000"
-                  mode="M497">
+                 priority="1000"
+                 mode="M497">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:DocumentReference"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:DocumentReference"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -21588,10 +21588,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:InvoicePeriod/cbc:Description"
-                  priority="1000"
-                  mode="M498">
+                 priority="1000"
+                 mode="M498">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:InvoicePeriod/cbc:Description"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:InvoicePeriod/cbc:Description"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -21612,10 +21612,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:InvoicePeriod/cbc:DescriptionCode"
-                  priority="1000"
-                  mode="M499">
+                 priority="1000"
+                 mode="M499">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:InvoicePeriod/cbc:DescriptionCode"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:InvoicePeriod/cbc:DescriptionCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -21636,10 +21636,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:InvoicePeriod/cbc:DurationMeasure"
-                  priority="1000"
-                  mode="M500">
+                 priority="1000"
+                 mode="M500">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:InvoicePeriod/cbc:DurationMeasure"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:InvoicePeriod/cbc:DurationMeasure"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -21660,10 +21660,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:InvoicePeriod/cbc:EndTime"
-                  priority="1000"
-                  mode="M501">
+                 priority="1000"
+                 mode="M501">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:InvoicePeriod/cbc:EndTime"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:InvoicePeriod/cbc:EndTime"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -21684,10 +21684,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:InvoicePeriod/cbc:StartTime"
-                  priority="1000"
-                  mode="M502">
+                 priority="1000"
+                 mode="M502">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:InvoicePeriod/cbc:StartTime"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:InvoicePeriod/cbc:StartTime"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -21708,16 +21708,16 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item"
-                  priority="1000"
-                  mode="M503">
+                 priority="1000"
+                 mode="M503">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(cac:ClassifiedTaxCategory)&lt;=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(cac:ClassifiedTaxCategory)&lt;=1">
+                                test="count(cac:ClassifiedTaxCategory)&lt;=1">
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -21736,10 +21736,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:AdditionalItemIdentification"
-                  priority="1000"
-                  mode="M504">
+                 priority="1000"
+                 mode="M504">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:AdditionalItemIdentification"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:AdditionalItemIdentification"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -21760,10 +21760,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty"
-                  priority="1000"
-                  mode="M505">
+                 priority="1000"
+                 mode="M505">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:AdditionalItemProperty"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -21784,10 +21784,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:BuyersItemIdentification"
-                  priority="1000"
-                  mode="M506">
+                 priority="1000"
+                 mode="M506">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:BuyersItemIdentification"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:BuyersItemIdentification"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -21808,10 +21808,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:CatalogueDocumentReference"
-                  priority="1000"
-                  mode="M507">
+                 priority="1000"
+                 mode="M507">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:CatalogueDocumentReference"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:CatalogueDocumentReference"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -21832,10 +21832,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:CatalogueItemIdentification/cac:IssuerParty"
-                  priority="1000"
-                  mode="M508">
+                 priority="1000"
+                 mode="M508">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:CatalogueItemIdentification/cac:IssuerParty"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:CatalogueItemIdentification/cac:IssuerParty"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -21856,10 +21856,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:CatalogueItemIdentification/cac:MeasurementDimension"
-                  priority="1000"
-                  mode="M509">
+                 priority="1000"
+                 mode="M509">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:CatalogueItemIdentification/cac:MeasurementDimension"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:CatalogueItemIdentification/cac:MeasurementDimension"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -21880,10 +21880,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:CatalogueItemIdentification/cac:PhysicalAttribute"
-                  priority="1000"
-                  mode="M510">
+                 priority="1000"
+                 mode="M510">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:CatalogueItemIdentification/cac:PhysicalAttribute"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:CatalogueItemIdentification/cac:PhysicalAttribute"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -21904,10 +21904,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:CatalogueItemIdentification/cbc:BarcodeSymbologyID"
-                  priority="1000"
-                  mode="M511">
+                 priority="1000"
+                 mode="M511">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:CatalogueItemIdentification/cbc:BarcodeSymbologyID"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:CatalogueItemIdentification/cbc:BarcodeSymbologyID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -21928,10 +21928,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:CatalogueItemIdentification/cbc:ExtendedID"
-                  priority="1000"
-                  mode="M512">
+                 priority="1000"
+                 mode="M512">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:CatalogueItemIdentification/cbc:ExtendedID"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:CatalogueItemIdentification/cbc:ExtendedID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -21952,10 +21952,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:CatalogueItemIdentification/cbc:ID"
-                  priority="1000"
-                  mode="M513">
+                 priority="1000"
+                 mode="M513">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:CatalogueItemIdentification/cbc:ID"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:CatalogueItemIdentification/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test="@schemeID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
@@ -22042,10 +22042,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:Certificate"
-                  priority="1000"
-                  mode="M514">
+                 priority="1000"
+                 mode="M514">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:Certificate"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:Certificate"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -22066,10 +22066,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory"
-                  priority="1000"
-                  mode="M515">
+                 priority="1000"
+                 mode="M515">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(cbc:ID)=1"/>
@@ -22093,10 +22093,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cac:TaxScheme"
-                  priority="1000"
-                  mode="M516">
+                 priority="1000"
+                 mode="M516">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cac:TaxScheme"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cac:TaxScheme"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(cbc:ID)=1"/>
@@ -22120,10 +22120,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cac:TaxScheme/cac:JurisdictionRegionAddress"
-                  priority="1000"
-                  mode="M517">
+                 priority="1000"
+                 mode="M517">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cac:TaxScheme/cac:JurisdictionRegionAddress"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cac:TaxScheme/cac:JurisdictionRegionAddress"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -22144,10 +22144,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cac:TaxScheme/cbc:CurrencyCode"
-                  priority="1000"
-                  mode="M518">
+                 priority="1000"
+                 mode="M518">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cac:TaxScheme/cbc:CurrencyCode"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cac:TaxScheme/cbc:CurrencyCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -22168,10 +22168,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cac:TaxScheme/cbc:ID"
-                  priority="1000"
-                  mode="M519">
+                 priority="1000"
+                 mode="M519">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cac:TaxScheme/cbc:ID"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cac:TaxScheme/cbc:ID"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="normalize-space(.)='VAT'"/>
@@ -22272,10 +22272,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cac:TaxScheme/cbc:Name"
-                  priority="1000"
-                  mode="M520">
+                 priority="1000"
+                 mode="M520">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cac:TaxScheme/cbc:Name"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cac:TaxScheme/cbc:Name"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -22296,10 +22296,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cac:TaxScheme/cbc:TaxTypeCode"
-                  priority="1000"
-                  mode="M521">
+                 priority="1000"
+                 mode="M521">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cac:TaxScheme/cbc:TaxTypeCode"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cac:TaxScheme/cbc:TaxTypeCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -22320,10 +22320,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cbc:BaseUnitMeasure"
-                  priority="1000"
-                  mode="M522">
+                 priority="1000"
+                 mode="M522">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cbc:BaseUnitMeasure"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cbc:BaseUnitMeasure"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -22344,10 +22344,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cbc:ID"
-                  priority="1000"
-                  mode="M523">
+                 priority="1000"
+                 mode="M523">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cbc:ID"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test="@schemeID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
@@ -22434,10 +22434,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cbc:Name"
-                  priority="1000"
-                  mode="M524">
+                 priority="1000"
+                 mode="M524">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cbc:Name"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cbc:Name"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -22458,10 +22458,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cbc:PerUnitAmount"
-                  priority="1000"
-                  mode="M525">
+                 priority="1000"
+                 mode="M525">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cbc:PerUnitAmount"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cbc:PerUnitAmount"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -22482,10 +22482,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cbc:Percent"
-                  priority="1000"
-                  mode="M526">
+                 priority="1000"
+                 mode="M526">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cbc:Percent"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cbc:Percent"/>
       <!--REPORT -->
       <xsl:if test="@format">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@format">
@@ -22506,10 +22506,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReason"
-                  priority="1000"
-                  mode="M527">
+                 priority="1000"
+                 mode="M527">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReason"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReason"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -22530,10 +22530,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReasonCode"
-                  priority="1000"
-                  mode="M528">
+                 priority="1000"
+                 mode="M528">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReasonCode"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReasonCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -22554,10 +22554,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cbc:TierRange"
-                  priority="1000"
-                  mode="M529">
+                 priority="1000"
+                 mode="M529">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cbc:TierRange"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cbc:TierRange"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -22578,10 +22578,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cbc:TierRatePercent"
-                  priority="1000"
-                  mode="M530">
+                 priority="1000"
+                 mode="M530">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cbc:TierRatePercent"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ClassifiedTaxCategory/cbc:TierRatePercent"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -22602,16 +22602,16 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:CommodityClassification"
-                  priority="1000"
-                  mode="M531">
+                 priority="1000"
+                 mode="M531">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:CommodityClassification"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:CommodityClassification"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(cbc:ItemClassificationCode)=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(cbc:ItemClassificationCode)=1">
+                                test="count(cbc:ItemClassificationCode)=1">
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -22630,10 +22630,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:CommodityClassification/cbc:CargoTypeCode"
-                  priority="1000"
-                  mode="M532">
+                 priority="1000"
+                 mode="M532">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:CommodityClassification/cbc:CargoTypeCode"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:CommodityClassification/cbc:CargoTypeCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -22654,10 +22654,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:CommodityClassification/cbc:CommodityCode"
-                  priority="1000"
-                  mode="M533">
+                 priority="1000"
+                 mode="M533">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:CommodityClassification/cbc:CommodityCode"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:CommodityClassification/cbc:CommodityCode"/>
       <!--REPORT -->
       <xsl:if test="@listID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@listID">
@@ -22766,10 +22766,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode"
-                  priority="1000"
-                  mode="M534">
+                 priority="1000"
+                 mode="M534">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode"/>
       <!--REPORT -->
       <xsl:if test="@listName">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@listName">
@@ -22823,10 +22823,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:CommodityClassification/cbc:NatureCode"
-                  priority="1000"
-                  mode="M535">
+                 priority="1000"
+                 mode="M535">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:CommodityClassification/cbc:NatureCode"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:CommodityClassification/cbc:NatureCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -22847,10 +22847,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:Dimension"
-                  priority="1000"
-                  mode="M536">
+                 priority="1000"
+                 mode="M536">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:Dimension"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:Dimension"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -22871,10 +22871,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:HazardousItem"
-                  priority="1000"
-                  mode="M537">
+                 priority="1000"
+                 mode="M537">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:HazardousItem"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:HazardousItem"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -22895,10 +22895,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:InformationContentProviderParty"
-                  priority="1000"
-                  mode="M538">
+                 priority="1000"
+                 mode="M538">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:InformationContentProviderParty"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:InformationContentProviderParty"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -22919,10 +22919,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ItemInstance"
-                  priority="1000"
-                  mode="M539">
+                 priority="1000"
+                 mode="M539">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ItemInstance"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ItemInstance"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -22943,10 +22943,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ItemSpecificationDocumentReference"
-                  priority="1000"
-                  mode="M540">
+                 priority="1000"
+                 mode="M540">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ItemSpecificationDocumentReference"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ItemSpecificationDocumentReference"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -22967,10 +22967,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ManufacturerParty"
-                  priority="1000"
-                  mode="M541">
+                 priority="1000"
+                 mode="M541">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ManufacturerParty"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ManufacturerParty"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -22991,10 +22991,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ManufacturersItemIdentification"
-                  priority="1000"
-                  mode="M542">
+                 priority="1000"
+                 mode="M542">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ManufacturersItemIdentification"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:ManufacturersItemIdentification"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -23015,10 +23015,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:OriginAddress"
-                  priority="1000"
-                  mode="M543">
+                 priority="1000"
+                 mode="M543">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:OriginAddress"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:OriginAddress"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -23039,16 +23039,16 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:OriginCountry"
-                  priority="1000"
-                  mode="M544">
+                 priority="1000"
+                 mode="M544">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:OriginCountry"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:OriginCountry"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(cbc:IdentificationCode)=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(cbc:IdentificationCode)=1">
+                                test="count(cbc:IdentificationCode)=1">
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -23067,10 +23067,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:OriginCountry/cbc:IdentificationCode"
-                  priority="1000"
-                  mode="M545">
+                 priority="1000"
+                 mode="M545">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:OriginCountry/cbc:IdentificationCode"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:OriginCountry/cbc:IdentificationCode"/>
       <!--REPORT -->
       <xsl:if test="@listID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@listID">
@@ -23179,10 +23179,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:OriginCountry/cbc:Name"
-                  priority="1000"
-                  mode="M546">
+                 priority="1000"
+                 mode="M546">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:OriginCountry/cbc:Name"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:OriginCountry/cbc:Name"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -23203,10 +23203,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:SellersItemIdentification/cac:IssuerParty"
-                  priority="1000"
-                  mode="M547">
+                 priority="1000"
+                 mode="M547">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:SellersItemIdentification/cac:IssuerParty"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:SellersItemIdentification/cac:IssuerParty"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -23227,10 +23227,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:SellersItemIdentification/cac:MeasurementDimension"
-                  priority="1000"
-                  mode="M548">
+                 priority="1000"
+                 mode="M548">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:SellersItemIdentification/cac:MeasurementDimension"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:SellersItemIdentification/cac:MeasurementDimension"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -23251,10 +23251,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:SellersItemIdentification/cac:PhysicalAttribute"
-                  priority="1000"
-                  mode="M549">
+                 priority="1000"
+                 mode="M549">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:SellersItemIdentification/cac:PhysicalAttribute"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:SellersItemIdentification/cac:PhysicalAttribute"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -23275,10 +23275,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:SellersItemIdentification/cbc:BarcodeSymbologyID"
-                  priority="1000"
-                  mode="M550">
+                 priority="1000"
+                 mode="M550">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:SellersItemIdentification/cbc:BarcodeSymbologyID"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:SellersItemIdentification/cbc:BarcodeSymbologyID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -23299,10 +23299,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:SellersItemIdentification/cbc:ExtendedID"
-                  priority="1000"
-                  mode="M551">
+                 priority="1000"
+                 mode="M551">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:SellersItemIdentification/cbc:ExtendedID"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:SellersItemIdentification/cbc:ExtendedID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -23323,10 +23323,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:SellersItemIdentification/cbc:ID"
-                  priority="1000"
-                  mode="M552">
+                 priority="1000"
+                 mode="M552">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:SellersItemIdentification/cbc:ID"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:SellersItemIdentification/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test="@schemeID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
@@ -23413,10 +23413,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:StandardItemIdentification/cac:IssuerParty"
-                  priority="1000"
-                  mode="M553">
+                 priority="1000"
+                 mode="M553">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:StandardItemIdentification/cac:IssuerParty"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:StandardItemIdentification/cac:IssuerParty"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -23437,10 +23437,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:StandardItemIdentification/cac:MeasurementDimension"
-                  priority="1000"
-                  mode="M554">
+                 priority="1000"
+                 mode="M554">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:StandardItemIdentification/cac:MeasurementDimension"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:StandardItemIdentification/cac:MeasurementDimension"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -23461,10 +23461,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:StandardItemIdentification/cac:PhysicalAttribute"
-                  priority="1000"
-                  mode="M555">
+                 priority="1000"
+                 mode="M555">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:StandardItemIdentification/cac:PhysicalAttribute"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:StandardItemIdentification/cac:PhysicalAttribute"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -23485,10 +23485,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:StandardItemIdentification/cbc:BarcodeSymbologyID"
-                  priority="1000"
-                  mode="M556">
+                 priority="1000"
+                 mode="M556">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:StandardItemIdentification/cbc:BarcodeSymbologyID"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:StandardItemIdentification/cbc:BarcodeSymbologyID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -23509,10 +23509,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:StandardItemIdentification/cbc:ExtendedID"
-                  priority="1000"
-                  mode="M557">
+                 priority="1000"
+                 mode="M557">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:StandardItemIdentification/cbc:ExtendedID"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:StandardItemIdentification/cbc:ExtendedID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -23533,10 +23533,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:StandardItemIdentification/cbc:ID"
-                  priority="1000"
-                  mode="M558">
+                 priority="1000"
+                 mode="M558">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:StandardItemIdentification/cbc:ID"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:StandardItemIdentification/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test="@schemeName">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeName">
@@ -23590,10 +23590,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:TransactionConditions"
-                  priority="1000"
-                  mode="M559">
+                 priority="1000"
+                 mode="M559">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:TransactionConditions"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cac:TransactionConditions"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -23614,10 +23614,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cbc:AdditionalInformation"
-                  priority="1000"
-                  mode="M560">
+                 priority="1000"
+                 mode="M560">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cbc:AdditionalInformation"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cbc:AdditionalInformation"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -23649,10 +23649,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cbc:BrandName"
-                  priority="1000"
-                  mode="M561">
+                 priority="1000"
+                 mode="M561">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cbc:BrandName"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cbc:BrandName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -23673,10 +23673,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cbc:CatalogueIndicator"
-                  priority="1000"
-                  mode="M562">
+                 priority="1000"
+                 mode="M562">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cbc:CatalogueIndicator"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cbc:CatalogueIndicator"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -23697,10 +23697,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cbc:Description"
-                  priority="1000"
-                  mode="M563">
+                 priority="1000"
+                 mode="M563">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cbc:Description"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cbc:Description"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -23732,10 +23732,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cbc:HazardousRiskIndicator"
-                  priority="1000"
-                  mode="M564">
+                 priority="1000"
+                 mode="M564">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cbc:HazardousRiskIndicator"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cbc:HazardousRiskIndicator"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -23756,10 +23756,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cbc:Keyword"
-                  priority="1000"
-                  mode="M565">
+                 priority="1000"
+                 mode="M565">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cbc:Keyword"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cbc:Keyword"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -23780,10 +23780,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cbc:ModelName"
-                  priority="1000"
-                  mode="M566">
+                 priority="1000"
+                 mode="M566">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cbc:ModelName"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cbc:ModelName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -23804,10 +23804,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cbc:Name"
-                  priority="1000"
-                  mode="M567">
+                 priority="1000"
+                 mode="M567">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cbc:Name"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cbc:Name"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -23839,10 +23839,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cbc:PackQuantity"
-                  priority="1000"
-                  mode="M568">
+                 priority="1000"
+                 mode="M568">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cbc:PackQuantity"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cbc:PackQuantity"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -23863,10 +23863,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Item/cbc:PackSizeNumeric"
-                  priority="1000"
-                  mode="M569">
+                 priority="1000"
+                 mode="M569">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Item/cbc:PackSizeNumeric"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Item/cbc:PackSizeNumeric"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -23887,10 +23887,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:OrderLineReference/cac:OrderReference"
-                  priority="1000"
-                  mode="M570">
+                 priority="1000"
+                 mode="M570">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:OrderLineReference/cac:OrderReference"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:OrderLineReference/cac:OrderReference"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -23911,10 +23911,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:OrderLineReference/cbc:LineID"
-                  priority="1000"
-                  mode="M571">
+                 priority="1000"
+                 mode="M571">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:OrderLineReference/cbc:LineID"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:OrderLineReference/cbc:LineID"/>
       <!--REPORT -->
       <xsl:if test="@schemeID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
@@ -24001,10 +24001,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:OrderLineReference/cbc:LineStatusCode"
-                  priority="1000"
-                  mode="M572">
+                 priority="1000"
+                 mode="M572">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:OrderLineReference/cbc:LineStatusCode"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:OrderLineReference/cbc:LineStatusCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -24025,10 +24025,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:OrderLineReference/cbc:SalesOrderLineID"
-                  priority="1000"
-                  mode="M573">
+                 priority="1000"
+                 mode="M573">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:OrderLineReference/cbc:SalesOrderLineID"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:OrderLineReference/cbc:SalesOrderLineID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -24049,10 +24049,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:OrderLineReference/cbc:UUID"
-                  priority="1000"
-                  mode="M574">
+                 priority="1000"
+                 mode="M574">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:OrderLineReference/cbc:UUID"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:OrderLineReference/cbc:UUID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -24073,10 +24073,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:AgentParty"
-                  priority="1000"
-                  mode="M575">
+                 priority="1000"
+                 mode="M575">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:AgentParty"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:AgentParty"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -24097,10 +24097,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:Contact"
-                  priority="1000"
-                  mode="M576">
+                 priority="1000"
+                 mode="M576">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:Contact"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:Contact"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -24121,10 +24121,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:FinancialAccount"
-                  priority="1000"
-                  mode="M577">
+                 priority="1000"
+                 mode="M577">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:FinancialAccount"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:FinancialAccount"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -24145,10 +24145,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:Language"
-                  priority="1000"
-                  mode="M578">
+                 priority="1000"
+                 mode="M578">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:Language"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:Language"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -24169,10 +24169,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PartyIdentification"
-                  priority="1000"
-                  mode="M579">
+                 priority="1000"
+                 mode="M579">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PartyIdentification"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PartyIdentification"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -24193,10 +24193,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PartyLegalEntity"
-                  priority="1000"
-                  mode="M580">
+                 priority="1000"
+                 mode="M580">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PartyLegalEntity"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PartyLegalEntity"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -24217,10 +24217,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PartyName"
-                  priority="1000"
-                  mode="M581">
+                 priority="1000"
+                 mode="M581">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PartyName"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PartyName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -24241,10 +24241,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PartyTaxScheme"
-                  priority="1000"
-                  mode="M582">
+                 priority="1000"
+                 mode="M582">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PartyTaxScheme"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PartyTaxScheme"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -24265,10 +24265,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:Person"
-                  priority="1000"
-                  mode="M583">
+                 priority="1000"
+                 mode="M583">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:Person"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:Person"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -24289,10 +24289,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PhysicalLocation/cac:Address"
-                  priority="1000"
-                  mode="M584">
+                 priority="1000"
+                 mode="M584">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PhysicalLocation/cac:Address"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PhysicalLocation/cac:Address"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -24313,10 +24313,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PhysicalLocation/cac:LocationCoordinate"
-                  priority="1000"
-                  mode="M585">
+                 priority="1000"
+                 mode="M585">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PhysicalLocation/cac:LocationCoordinate"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PhysicalLocation/cac:LocationCoordinate"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -24337,10 +24337,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PhysicalLocation/cac:SubsidiaryLocation"
-                  priority="1000"
-                  mode="M586">
+                 priority="1000"
+                 mode="M586">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PhysicalLocation/cac:SubsidiaryLocation"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PhysicalLocation/cac:SubsidiaryLocation"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -24361,10 +24361,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PhysicalLocation/cac:ValidityPeriod"
-                  priority="1000"
-                  mode="M587">
+                 priority="1000"
+                 mode="M587">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PhysicalLocation/cac:ValidityPeriod"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PhysicalLocation/cac:ValidityPeriod"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -24385,10 +24385,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PhysicalLocation/cbc:Conditions"
-                  priority="1000"
-                  mode="M588">
+                 priority="1000"
+                 mode="M588">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PhysicalLocation/cbc:Conditions"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PhysicalLocation/cbc:Conditions"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -24409,10 +24409,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PhysicalLocation/cbc:CountrySubentity"
-                  priority="1000"
-                  mode="M589">
+                 priority="1000"
+                 mode="M589">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PhysicalLocation/cbc:CountrySubentity"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PhysicalLocation/cbc:CountrySubentity"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -24433,10 +24433,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PhysicalLocation/cbc:CountrySubentityCode"
-                  priority="1000"
-                  mode="M590">
+                 priority="1000"
+                 mode="M590">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PhysicalLocation/cbc:CountrySubentityCode"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PhysicalLocation/cbc:CountrySubentityCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -24457,10 +24457,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PhysicalLocation/cbc:Description"
-                  priority="1000"
-                  mode="M591">
+                 priority="1000"
+                 mode="M591">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PhysicalLocation/cbc:Description"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PhysicalLocation/cbc:Description"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -24481,10 +24481,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PhysicalLocation/cbc:ID"
-                  priority="1000"
-                  mode="M592">
+                 priority="1000"
+                 mode="M592">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PhysicalLocation/cbc:ID"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PhysicalLocation/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test="@schemeID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
@@ -24571,10 +24571,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PhysicalLocation/cbc:InformationURI"
-                  priority="1000"
-                  mode="M593">
+                 priority="1000"
+                 mode="M593">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PhysicalLocation/cbc:InformationURI"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PhysicalLocation/cbc:InformationURI"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -24595,10 +24595,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PhysicalLocation/cbc:LocationTypeCode"
-                  priority="1000"
-                  mode="M594">
+                 priority="1000"
+                 mode="M594">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PhysicalLocation/cbc:LocationTypeCode"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PhysicalLocation/cbc:LocationTypeCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -24619,10 +24619,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PhysicalLocation/cbc:Name"
-                  priority="1000"
-                  mode="M595">
+                 priority="1000"
+                 mode="M595">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PhysicalLocation/cbc:Name"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PhysicalLocation/cbc:Name"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -24643,10 +24643,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PostalAddress"
-                  priority="1000"
-                  mode="M596">
+                 priority="1000"
+                 mode="M596">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PostalAddress"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PostalAddress"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -24667,10 +24667,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PowerOfAttorney"
-                  priority="1000"
-                  mode="M597">
+                 priority="1000"
+                 mode="M597">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PowerOfAttorney"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:PowerOfAttorney"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -24691,10 +24691,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:ServiceProviderParty"
-                  priority="1000"
-                  mode="M598">
+                 priority="1000"
+                 mode="M598">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:ServiceProviderParty"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cac:ServiceProviderParty"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -24715,10 +24715,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cbc:EndpointID"
-                  priority="1000"
-                  mode="M599">
+                 priority="1000"
+                 mode="M599">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cbc:EndpointID"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cbc:EndpointID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -24739,10 +24739,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cbc:IndustryClassificationCode"
-                  priority="1000"
-                  mode="M600">
+                 priority="1000"
+                 mode="M600">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cbc:IndustryClassificationCode"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cbc:IndustryClassificationCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -24763,10 +24763,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cbc:LogoReferenceID"
-                  priority="1000"
-                  mode="M601">
+                 priority="1000"
+                 mode="M601">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cbc:LogoReferenceID"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cbc:LogoReferenceID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -24787,10 +24787,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cbc:MarkAttentionIndicator"
-                  priority="1000"
-                  mode="M602">
+                 priority="1000"
+                 mode="M602">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cbc:MarkAttentionIndicator"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cbc:MarkAttentionIndicator"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -24811,10 +24811,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cbc:MarkCareIndicator"
-                  priority="1000"
-                  mode="M603">
+                 priority="1000"
+                 mode="M603">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cbc:MarkCareIndicator"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cbc:MarkCareIndicator"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -24835,10 +24835,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cbc:WebsiteURI"
-                  priority="1000"
-                  mode="M604">
+                 priority="1000"
+                 mode="M604">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cbc:WebsiteURI"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:OriginatorParty/cbc:WebsiteURI"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -24859,10 +24859,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:PaymentTerms"
-                  priority="1000"
-                  mode="M605">
+                 priority="1000"
+                 mode="M605">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:PaymentTerms"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:PaymentTerms"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -24883,10 +24883,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:AllowanceCharge/cac:PaymentMeans"
-                  priority="1000"
-                  mode="M606">
+                 priority="1000"
+                 mode="M606">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:AllowanceCharge/cac:PaymentMeans"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:AllowanceCharge/cac:PaymentMeans"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -24907,10 +24907,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:AllowanceCharge/cac:TaxCategory"
-                  priority="1000"
-                  mode="M607">
+                 priority="1000"
+                 mode="M607">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:AllowanceCharge/cac:TaxCategory"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:AllowanceCharge/cac:TaxCategory"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -24931,10 +24931,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:AllowanceCharge/cac:TaxTotal"
-                  priority="1000"
-                  mode="M608">
+                 priority="1000"
+                 mode="M608">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:AllowanceCharge/cac:TaxTotal"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:AllowanceCharge/cac:TaxTotal"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -24955,10 +24955,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:AllowanceCharge/cbc:AccountingCost"
-                  priority="1000"
-                  mode="M609">
+                 priority="1000"
+                 mode="M609">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:AllowanceCharge/cbc:AccountingCost"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:AllowanceCharge/cbc:AccountingCost"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -24979,10 +24979,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:AllowanceCharge/cbc:AccountingCostCode"
-                  priority="1000"
-                  mode="M610">
+                 priority="1000"
+                 mode="M610">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:AllowanceCharge/cbc:AccountingCostCode"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:AllowanceCharge/cbc:AccountingCostCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -25003,10 +25003,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:AllowanceCharge/cbc:AllowanceChargeReason"
-                  priority="1000"
-                  mode="M611">
+                 priority="1000"
+                 mode="M611">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:AllowanceCharge/cbc:AllowanceChargeReason"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:AllowanceCharge/cbc:AllowanceChargeReason"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -25027,10 +25027,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:AllowanceCharge/cbc:AllowanceChargeReasonCode"
-                  priority="1000"
-                  mode="M612">
+                 priority="1000"
+                 mode="M612">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:AllowanceCharge/cbc:AllowanceChargeReasonCode"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:AllowanceCharge/cbc:AllowanceChargeReasonCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -25051,10 +25051,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:AllowanceCharge/cbc:ID"
-                  priority="1000"
-                  mode="M613">
+                 priority="1000"
+                 mode="M613">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:AllowanceCharge/cbc:ID"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:AllowanceCharge/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -25075,10 +25075,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:AllowanceCharge/cbc:MultiplierFactorNumeric"
-                  priority="1000"
-                  mode="M614">
+                 priority="1000"
+                 mode="M614">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:AllowanceCharge/cbc:MultiplierFactorNumeric"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:AllowanceCharge/cbc:MultiplierFactorNumeric"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -25099,10 +25099,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:AllowanceCharge/cbc:PerUnitAmount"
-                  priority="1000"
-                  mode="M615">
+                 priority="1000"
+                 mode="M615">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:AllowanceCharge/cbc:PerUnitAmount"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:AllowanceCharge/cbc:PerUnitAmount"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -25123,10 +25123,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:AllowanceCharge/cbc:PrepaidIndicator"
-                  priority="1000"
-                  mode="M616">
+                 priority="1000"
+                 mode="M616">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:AllowanceCharge/cbc:PrepaidIndicator"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:AllowanceCharge/cbc:PrepaidIndicator"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -25147,10 +25147,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:AllowanceCharge/cbc:SequenceNumeric"
-                  priority="1000"
-                  mode="M617">
+                 priority="1000"
+                 mode="M617">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:AllowanceCharge/cbc:SequenceNumeric"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:AllowanceCharge/cbc:SequenceNumeric"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -25171,10 +25171,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:PriceList"
-                  priority="1000"
-                  mode="M618">
+                 priority="1000"
+                 mode="M618">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:PriceList"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:PriceList"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -25195,10 +25195,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:PricingExchangeRate"
-                  priority="1000"
-                  mode="M619">
+                 priority="1000"
+                 mode="M619">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:PricingExchangeRate"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:PricingExchangeRate"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -25219,10 +25219,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:ValidityPeriod"
-                  priority="1000"
-                  mode="M620">
+                 priority="1000"
+                 mode="M620">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:ValidityPeriod"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Price/cac:ValidityPeriod"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -25243,10 +25243,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Price/cbc:BaseQuantity"
-                  priority="1000"
-                  mode="M621">
+                 priority="1000"
+                 mode="M621">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Price/cbc:BaseQuantity"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Price/cbc:BaseQuantity"/>
       <!--REPORT -->
       <xsl:if test="@unitCode">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@unitCode">
@@ -25300,10 +25300,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Price/cbc:OrderableUnitFactorRate"
-                  priority="1000"
-                  mode="M622">
+                 priority="1000"
+                 mode="M622">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Price/cbc:OrderableUnitFactorRate"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Price/cbc:OrderableUnitFactorRate"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -25324,10 +25324,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Price/cbc:PriceChangeReason"
-                  priority="1000"
-                  mode="M623">
+                 priority="1000"
+                 mode="M623">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Price/cbc:PriceChangeReason"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Price/cbc:PriceChangeReason"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -25348,10 +25348,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Price/cbc:PriceType"
-                  priority="1000"
-                  mode="M624">
+                 priority="1000"
+                 mode="M624">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Price/cbc:PriceType"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Price/cbc:PriceType"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -25372,10 +25372,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:Price/cbc:PriceTypeCode"
-                  priority="1000"
-                  mode="M625">
+                 priority="1000"
+                 mode="M625">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:Price/cbc:PriceTypeCode"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:Price/cbc:PriceTypeCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -25396,10 +25396,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:PricingReference"
-                  priority="1000"
-                  mode="M626">
+                 priority="1000"
+                 mode="M626">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:PricingReference"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:PricingReference"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -25420,10 +25420,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:ReceiptLineReference"
-                  priority="1000"
-                  mode="M627">
+                 priority="1000"
+                 mode="M627">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:ReceiptLineReference"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:ReceiptLineReference"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -25444,10 +25444,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:SubInvoiceLine"
-                  priority="1000"
-                  mode="M628">
+                 priority="1000"
+                 mode="M628">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:SubInvoiceLine"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:SubInvoiceLine"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -25468,10 +25468,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cac:JurisdictionRegionAddress"
-                  priority="1000"
-                  mode="M629">
+                 priority="1000"
+                 mode="M629">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cac:JurisdictionRegionAddress"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cac:JurisdictionRegionAddress"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -25492,10 +25492,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:CurrencyCode"
-                  priority="1000"
-                  mode="M630">
+                 priority="1000"
+                 mode="M630">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:CurrencyCode"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:CurrencyCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -25516,10 +25516,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:ID"
-                  priority="1000"
-                  mode="M631">
+                 priority="1000"
+                 mode="M631">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:ID"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -25540,10 +25540,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:Name"
-                  priority="1000"
-                  mode="M632">
+                 priority="1000"
+                 mode="M632">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:Name"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:Name"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -25564,10 +25564,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:TaxTypeCode"
-                  priority="1000"
-                  mode="M633">
+                 priority="1000"
+                 mode="M633">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:TaxTypeCode"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:TaxTypeCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -25588,10 +25588,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:BaseUnitMeasure"
-                  priority="1000"
-                  mode="M634">
+                 priority="1000"
+                 mode="M634">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:BaseUnitMeasure"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:BaseUnitMeasure"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -25612,10 +25612,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:ID"
-                  priority="1000"
-                  mode="M635">
+                 priority="1000"
+                 mode="M635">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:ID"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test="@schemeID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
@@ -25702,10 +25702,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:Name"
-                  priority="1000"
-                  mode="M636">
+                 priority="1000"
+                 mode="M636">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:Name"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:Name"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -25726,10 +25726,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:PerUnitAmount"
-                  priority="1000"
-                  mode="M637">
+                 priority="1000"
+                 mode="M637">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:PerUnitAmount"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:PerUnitAmount"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -25750,10 +25750,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:Percent"
-                  priority="1000"
-                  mode="M638">
+                 priority="1000"
+                 mode="M638">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:Percent"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:Percent"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -25774,10 +25774,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:TaxExemptionReason"
-                  priority="1000"
-                  mode="M639">
+                 priority="1000"
+                 mode="M639">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:TaxExemptionReason"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:TaxExemptionReason"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -25798,10 +25798,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:TaxExemptionReasonCode"
-                  priority="1000"
-                  mode="M640">
+                 priority="1000"
+                 mode="M640">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:TaxExemptionReasonCode"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:TaxExemptionReasonCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -25822,10 +25822,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:TierRange"
-                  priority="1000"
-                  mode="M641">
+                 priority="1000"
+                 mode="M641">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:TierRange"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:TierRange"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -25846,10 +25846,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:TierRatePercent"
-                  priority="1000"
-                  mode="M642">
+                 priority="1000"
+                 mode="M642">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:TierRatePercent"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:TierRatePercent"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -25870,10 +25870,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cbc:BaseUnitMeasure"
-                  priority="1000"
-                  mode="M643">
+                 priority="1000"
+                 mode="M643">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cbc:BaseUnitMeasure"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cbc:BaseUnitMeasure"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -25894,10 +25894,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cbc:CalculationSequenceNumeric"
-                  priority="1000"
-                  mode="M644">
+                 priority="1000"
+                 mode="M644">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cbc:CalculationSequenceNumeric"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cbc:CalculationSequenceNumeric"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -25918,10 +25918,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cbc:PerUnitAmount"
-                  priority="1000"
-                  mode="M645">
+                 priority="1000"
+                 mode="M645">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cbc:PerUnitAmount"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cbc:PerUnitAmount"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -25942,10 +25942,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cbc:Percent"
-                  priority="1000"
-                  mode="M646">
+                 priority="1000"
+                 mode="M646">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cbc:Percent"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cbc:Percent"/>
       <!--REPORT -->
       <xsl:if test="@format">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@format">
@@ -25966,10 +25966,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cbc:TaxableAmount"
-                  priority="1000"
-                  mode="M647">
+                 priority="1000"
+                 mode="M647">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cbc:TaxableAmount"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cbc:TaxableAmount"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -25990,10 +25990,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cbc:TierRange"
-                  priority="1000"
-                  mode="M648">
+                 priority="1000"
+                 mode="M648">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cbc:TierRange"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cbc:TierRange"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -26014,10 +26014,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cbc:TierRatePercent"
-                  priority="1000"
-                  mode="M649">
+                 priority="1000"
+                 mode="M649">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cbc:TierRatePercent"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cbc:TierRatePercent"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -26038,10 +26038,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cbc:TransactionCurrencyTaxAmount"
-                  priority="1000"
-                  mode="M650">
+                 priority="1000"
+                 mode="M650">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cbc:TransactionCurrencyTaxAmount"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cbc:TransactionCurrencyTaxAmount"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -26062,10 +26062,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cbc:RoundingAmount"
-                  priority="1000"
-                  mode="M651">
+                 priority="1000"
+                 mode="M651">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cbc:RoundingAmount"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cbc:RoundingAmount"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -26086,10 +26086,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cbc:TaxEvidenceIndicator"
-                  priority="1000"
-                  mode="M652">
+                 priority="1000"
+                 mode="M652">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cbc:TaxEvidenceIndicator"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cbc:TaxEvidenceIndicator"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -26110,10 +26110,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cbc:TaxIncludedIndicator"
-                  priority="1000"
-                  mode="M653">
+                 priority="1000"
+                 mode="M653">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cbc:TaxIncludedIndicator"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:TaxTotal/cbc:TaxIncludedIndicator"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -26134,10 +26134,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cac:WithholdingTaxTotal"
-                  priority="1000"
-                  mode="M654">
+                 priority="1000"
+                 mode="M654">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cac:WithholdingTaxTotal"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cac:WithholdingTaxTotal"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -26158,10 +26158,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cbc:AccountingCost"
-                  priority="1000"
-                  mode="M655">
+                 priority="1000"
+                 mode="M655">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cbc:AccountingCost"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cbc:AccountingCost"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -26193,10 +26193,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cbc:AccountingCostCode"
-                  priority="1000"
-                  mode="M656">
+                 priority="1000"
+                 mode="M656">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cbc:AccountingCostCode"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cbc:AccountingCostCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -26217,10 +26217,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cbc:FreeOfChargeIndicator"
-                  priority="1000"
-                  mode="M657">
+                 priority="1000"
+                 mode="M657">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cbc:FreeOfChargeIndicator"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cbc:FreeOfChargeIndicator"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -26241,10 +26241,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cbc:ID"
-                  priority="1000"
-                  mode="M658">
+                 priority="1000"
+                 mode="M658">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cbc:ID"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test="@schemeID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
@@ -26331,10 +26331,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cbc:InvoicedQuantity"
-                  priority="1000"
-                  mode="M659">
+                 priority="1000"
+                 mode="M659">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cbc:InvoicedQuantity"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cbc:InvoicedQuantity"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="@unitCode"/>
@@ -26358,10 +26358,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cbc:Note"
-                  priority="1000"
-                  mode="M660">
+                 priority="1000"
+                 mode="M660">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cbc:Note"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cbc:Note"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -26393,10 +26393,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cbc:PaymentPurposeCode"
-                  priority="1000"
-                  mode="M661">
+                 priority="1000"
+                 mode="M661">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cbc:PaymentPurposeCode"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cbc:PaymentPurposeCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -26417,10 +26417,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cbc:TaxPointDate"
-                  priority="1000"
-                  mode="M662">
+                 priority="1000"
+                 mode="M662">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cbc:TaxPointDate"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cbc:TaxPointDate"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -26441,10 +26441,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoiceLine/cbc:UUID"
-                  priority="1000"
-                  mode="M663">
+                 priority="1000"
+                 mode="M663">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoiceLine/cbc:UUID"/>
+                       context="/p1:Invoice/cac:InvoiceLine/cbc:UUID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -26465,10 +26465,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoicePeriod/cbc:Description"
-                  priority="1000"
-                  mode="M664">
+                 priority="1000"
+                 mode="M664">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoicePeriod/cbc:Description"/>
+                       context="/p1:Invoice/cac:InvoicePeriod/cbc:Description"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -26489,10 +26489,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoicePeriod/cbc:DescriptionCode"
-                  priority="1000"
-                  mode="M665">
+                 priority="1000"
+                 mode="M665">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoicePeriod/cbc:DescriptionCode"/>
+                       context="/p1:Invoice/cac:InvoicePeriod/cbc:DescriptionCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -26513,10 +26513,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoicePeriod/cbc:DurationMeasure"
-                  priority="1000"
-                  mode="M666">
+                 priority="1000"
+                 mode="M666">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoicePeriod/cbc:DurationMeasure"/>
+                       context="/p1:Invoice/cac:InvoicePeriod/cbc:DurationMeasure"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -26537,10 +26537,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoicePeriod/cbc:EndTime"
-                  priority="1000"
-                  mode="M667">
+                 priority="1000"
+                 mode="M667">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoicePeriod/cbc:EndTime"/>
+                       context="/p1:Invoice/cac:InvoicePeriod/cbc:EndTime"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -26561,10 +26561,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:InvoicePeriod/cbc:StartTime"
-                  priority="1000"
-                  mode="M668">
+                 priority="1000"
+                 mode="M668">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:InvoicePeriod/cbc:StartTime"/>
+                       context="/p1:Invoice/cac:InvoicePeriod/cbc:StartTime"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -26585,16 +26585,16 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:LegalMonetaryTotal"
-                  priority="1000"
-                  mode="M669">
+                 priority="1000"
+                 mode="M669">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:LegalMonetaryTotal"/>
+                       context="/p1:Invoice/cac:LegalMonetaryTotal"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(cbc:LineExtensionAmount)=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(cbc:LineExtensionAmount)=1">
+                                test="count(cbc:LineExtensionAmount)=1">
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -26609,7 +26609,7 @@
          <xsl:when test="count(cbc:TaxExclusiveAmount)=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(cbc:TaxExclusiveAmount)=1">
+                                test="count(cbc:TaxExclusiveAmount)=1">
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -26624,7 +26624,7 @@
          <xsl:when test="count(cbc:TaxInclusiveAmount)=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(cbc:TaxInclusiveAmount)=1">
+                                test="count(cbc:TaxInclusiveAmount)=1">
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -26643,10 +26643,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:LegalMonetaryTotal/cbc:PayableAlternativeAmount"
-                  priority="1000"
-                  mode="M670">
+                 priority="1000"
+                 mode="M670">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:LegalMonetaryTotal/cbc:PayableAlternativeAmount"/>
+                       context="/p1:Invoice/cac:LegalMonetaryTotal/cbc:PayableAlternativeAmount"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -26667,10 +26667,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:OrderReference/cac:DocumentReference"
-                  priority="1000"
-                  mode="M671">
+                 priority="1000"
+                 mode="M671">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:OrderReference/cac:DocumentReference"/>
+                       context="/p1:Invoice/cac:OrderReference/cac:DocumentReference"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -26691,10 +26691,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:OrderReference/cbc:CopyIndicator"
-                  priority="1000"
-                  mode="M672">
+                 priority="1000"
+                 mode="M672">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:OrderReference/cbc:CopyIndicator"/>
+                       context="/p1:Invoice/cac:OrderReference/cbc:CopyIndicator"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -26715,10 +26715,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:OrderReference/cbc:CustomerReference"
-                  priority="1000"
-                  mode="M673">
+                 priority="1000"
+                 mode="M673">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:OrderReference/cbc:CustomerReference"/>
+                       context="/p1:Invoice/cac:OrderReference/cbc:CustomerReference"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -26739,10 +26739,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:OrderReference/cbc:ID"
-                  priority="1000"
-                  mode="M674">
+                 priority="1000"
+                 mode="M674">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:OrderReference/cbc:ID"/>
+                       context="/p1:Invoice/cac:OrderReference/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test="@schemeID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
@@ -26829,10 +26829,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:OrderReference/cbc:IssueDate"
-                  priority="1000"
-                  mode="M675">
+                 priority="1000"
+                 mode="M675">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:OrderReference/cbc:IssueDate"/>
+                       context="/p1:Invoice/cac:OrderReference/cbc:IssueDate"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -26853,10 +26853,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:OrderReference/cbc:IssueTime"
-                  priority="1000"
-                  mode="M676">
+                 priority="1000"
+                 mode="M676">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:OrderReference/cbc:IssueTime"/>
+                       context="/p1:Invoice/cac:OrderReference/cbc:IssueTime"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -26877,10 +26877,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:OrderReference/cbc:OrderTypeCode"
-                  priority="1000"
-                  mode="M677">
+                 priority="1000"
+                 mode="M677">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:OrderReference/cbc:OrderTypeCode"/>
+                       context="/p1:Invoice/cac:OrderReference/cbc:OrderTypeCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -26901,10 +26901,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:OrderReference/cbc:SalesOrderID"
-                  priority="1000"
-                  mode="M678">
+                 priority="1000"
+                 mode="M678">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:OrderReference/cbc:SalesOrderID"/>
+                       context="/p1:Invoice/cac:OrderReference/cbc:SalesOrderID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -26925,10 +26925,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:OrderReference/cbc:UUID"
-                  priority="1000"
-                  mode="M679">
+                 priority="1000"
+                 mode="M679">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:OrderReference/cbc:UUID"/>
+                       context="/p1:Invoice/cac:OrderReference/cbc:UUID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -26949,10 +26949,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:OriginatorDocumentReference"
-                  priority="1000"
-                  mode="M680">
+                 priority="1000"
+                 mode="M680">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:OriginatorDocumentReference"/>
+                       context="/p1:Invoice/cac:OriginatorDocumentReference"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -26974,13 +26974,13 @@
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PayeeParty" priority="1000" mode="M681">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PayeeParty"/>
+                       context="/p1:Invoice/cac:PayeeParty"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(cac:PartyIdentification)&lt;=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(cac:PartyIdentification)&lt;=1">
+                                test="count(cac:PartyIdentification)&lt;=1">
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -27009,7 +27009,7 @@
          <xsl:when test="count(cac:PartyLegalEntity)&lt;=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(cac:PartyLegalEntity)&lt;=1">
+                                test="count(cac:PartyLegalEntity)&lt;=1">
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -27028,10 +27028,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PayeeParty/cac:AgentParty"
-                  priority="1000"
-                  mode="M682">
+                 priority="1000"
+                 mode="M682">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PayeeParty/cac:AgentParty"/>
+                       context="/p1:Invoice/cac:PayeeParty/cac:AgentParty"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -27052,10 +27052,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PayeeParty/cac:Contact"
-                  priority="1000"
-                  mode="M683">
+                 priority="1000"
+                 mode="M683">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PayeeParty/cac:Contact"/>
+                       context="/p1:Invoice/cac:PayeeParty/cac:Contact"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -27076,10 +27076,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PayeeParty/cac:FinancialAccount"
-                  priority="1000"
-                  mode="M684">
+                 priority="1000"
+                 mode="M684">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PayeeParty/cac:FinancialAccount"/>
+                       context="/p1:Invoice/cac:PayeeParty/cac:FinancialAccount"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -27100,10 +27100,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PayeeParty/cac:Language"
-                  priority="1000"
-                  mode="M685">
+                 priority="1000"
+                 mode="M685">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PayeeParty/cac:Language"/>
+                       context="/p1:Invoice/cac:PayeeParty/cac:Language"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -27124,10 +27124,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PayeeParty/cac:PartyIdentification/cbc:ID"
-                  priority="1000"
-                  mode="M686">
+                 priority="1000"
+                 mode="M686">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PayeeParty/cac:PartyIdentification/cbc:ID"/>
+                       context="/p1:Invoice/cac:PayeeParty/cac:PartyIdentification/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test="@schemeName">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeName">
@@ -27181,10 +27181,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity"
-                  priority="1000"
-                  mode="M687">
+                 priority="1000"
+                 mode="M687">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity"/>
+                       context="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(cbc:CompanyID)=1"/>
@@ -27208,10 +27208,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity/cac:CorporateRegistrationScheme"
-                  priority="1000"
-                  mode="M688">
+                 priority="1000"
+                 mode="M688">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity/cac:CorporateRegistrationScheme"/>
+                       context="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity/cac:CorporateRegistrationScheme"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -27232,10 +27232,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity/cac:HeadParty"
-                  priority="1000"
-                  mode="M689">
+                 priority="1000"
+                 mode="M689">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity/cac:HeadParty"/>
+                       context="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity/cac:HeadParty"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -27256,10 +27256,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity/cac:RegistrationAddress"
-                  priority="1000"
-                  mode="M690">
+                 priority="1000"
+                 mode="M690">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity/cac:RegistrationAddress"/>
+                       context="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity/cac:RegistrationAddress"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -27280,10 +27280,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity/cac:ShareholderParty"
-                  priority="1000"
-                  mode="M691">
+                 priority="1000"
+                 mode="M691">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity/cac:ShareholderParty"/>
+                       context="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity/cac:ShareholderParty"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -27304,10 +27304,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity/cbc:CompanyID"
-                  priority="1000"
-                  mode="M692">
+                 priority="1000"
+                 mode="M692">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity/cbc:CompanyID"/>
+                       context="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity/cbc:CompanyID"/>
       <!--REPORT -->
       <xsl:if test="@schemeID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
@@ -27394,10 +27394,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity/cbc:CompanyLegalFormCode"
-                  priority="1000"
-                  mode="M693">
+                 priority="1000"
+                 mode="M693">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity/cbc:CompanyLegalFormCode"/>
+                       context="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity/cbc:CompanyLegalFormCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -27418,10 +27418,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity/cbc:CompanyLiquidationStatusCode"
-                  priority="1000"
-                  mode="M694">
+                 priority="1000"
+                 mode="M694">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity/cbc:CompanyLiquidationStatusCode"/>
+                       context="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity/cbc:CompanyLiquidationStatusCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -27442,10 +27442,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity/cbc:CorporateStockAmount"
-                  priority="1000"
-                  mode="M695">
+                 priority="1000"
+                 mode="M695">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity/cbc:CorporateStockAmount"/>
+                       context="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity/cbc:CorporateStockAmount"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -27466,10 +27466,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity/cbc:FullyPaidSharesIndicator"
-                  priority="1000"
-                  mode="M696">
+                 priority="1000"
+                 mode="M696">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity/cbc:FullyPaidSharesIndicator"/>
+                       context="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity/cbc:FullyPaidSharesIndicator"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -27490,10 +27490,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity/cbc:RegistrationDate"
-                  priority="1000"
-                  mode="M697">
+                 priority="1000"
+                 mode="M697">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity/cbc:RegistrationDate"/>
+                       context="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity/cbc:RegistrationDate"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -27514,10 +27514,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity/cbc:RegistrationExpirationDate"
-                  priority="1000"
-                  mode="M698">
+                 priority="1000"
+                 mode="M698">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity/cbc:RegistrationExpirationDate"/>
+                       context="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity/cbc:RegistrationExpirationDate"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -27538,10 +27538,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity/cbc:RegistrationName"
-                  priority="1000"
-                  mode="M699">
+                 priority="1000"
+                 mode="M699">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity/cbc:RegistrationName"/>
+                       context="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity/cbc:RegistrationName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -27562,10 +27562,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity/cbc:SoleProprietorshipIndicator"
-                  priority="1000"
-                  mode="M700">
+                 priority="1000"
+                 mode="M700">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity/cbc:SoleProprietorshipIndicator"/>
+                       context="/p1:Invoice/cac:PayeeParty/cac:PartyLegalEntity/cbc:SoleProprietorshipIndicator"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -27586,10 +27586,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PayeeParty/cac:PartyName/cbc:Name"
-                  priority="1000"
-                  mode="M701">
+                 priority="1000"
+                 mode="M701">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PayeeParty/cac:PartyName/cbc:Name"/>
+                       context="/p1:Invoice/cac:PayeeParty/cac:PartyName/cbc:Name"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -27621,10 +27621,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PayeeParty/cac:PartyTaxScheme"
-                  priority="1000"
-                  mode="M702">
+                 priority="1000"
+                 mode="M702">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PayeeParty/cac:PartyTaxScheme"/>
+                       context="/p1:Invoice/cac:PayeeParty/cac:PartyTaxScheme"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -27645,10 +27645,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PayeeParty/cac:Person"
-                  priority="1000"
-                  mode="M703">
+                 priority="1000"
+                 mode="M703">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PayeeParty/cac:Person"/>
+                       context="/p1:Invoice/cac:PayeeParty/cac:Person"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -27669,10 +27669,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PayeeParty/cac:PhysicalLocation"
-                  priority="1000"
-                  mode="M704">
+                 priority="1000"
+                 mode="M704">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PayeeParty/cac:PhysicalLocation"/>
+                       context="/p1:Invoice/cac:PayeeParty/cac:PhysicalLocation"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -27693,10 +27693,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PayeeParty/cac:PostalAddress"
-                  priority="1000"
-                  mode="M705">
+                 priority="1000"
+                 mode="M705">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PayeeParty/cac:PostalAddress"/>
+                       context="/p1:Invoice/cac:PayeeParty/cac:PostalAddress"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -27717,10 +27717,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PayeeParty/cac:PowerOfAttorney"
-                  priority="1000"
-                  mode="M706">
+                 priority="1000"
+                 mode="M706">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PayeeParty/cac:PowerOfAttorney"/>
+                       context="/p1:Invoice/cac:PayeeParty/cac:PowerOfAttorney"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -27741,10 +27741,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PayeeParty/cac:ServiceProviderParty"
-                  priority="1000"
-                  mode="M707">
+                 priority="1000"
+                 mode="M707">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PayeeParty/cac:ServiceProviderParty"/>
+                       context="/p1:Invoice/cac:PayeeParty/cac:ServiceProviderParty"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -27765,10 +27765,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PayeeParty/cbc:EndpointID"
-                  priority="1000"
-                  mode="M708">
+                 priority="1000"
+                 mode="M708">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PayeeParty/cbc:EndpointID"/>
+                       context="/p1:Invoice/cac:PayeeParty/cbc:EndpointID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -27789,10 +27789,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PayeeParty/cbc:IndustryClassificationCode"
-                  priority="1000"
-                  mode="M709">
+                 priority="1000"
+                 mode="M709">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PayeeParty/cbc:IndustryClassificationCode"/>
+                       context="/p1:Invoice/cac:PayeeParty/cbc:IndustryClassificationCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -27813,10 +27813,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PayeeParty/cbc:LogoReferenceID"
-                  priority="1000"
-                  mode="M710">
+                 priority="1000"
+                 mode="M710">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PayeeParty/cbc:LogoReferenceID"/>
+                       context="/p1:Invoice/cac:PayeeParty/cbc:LogoReferenceID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -27837,10 +27837,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PayeeParty/cbc:MarkAttentionIndicator"
-                  priority="1000"
-                  mode="M711">
+                 priority="1000"
+                 mode="M711">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PayeeParty/cbc:MarkAttentionIndicator"/>
+                       context="/p1:Invoice/cac:PayeeParty/cbc:MarkAttentionIndicator"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -27861,10 +27861,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PayeeParty/cbc:MarkCareIndicator"
-                  priority="1000"
-                  mode="M712">
+                 priority="1000"
+                 mode="M712">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PayeeParty/cbc:MarkCareIndicator"/>
+                       context="/p1:Invoice/cac:PayeeParty/cbc:MarkCareIndicator"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -27885,10 +27885,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PayeeParty/cbc:WebsiteURI"
-                  priority="1000"
-                  mode="M713">
+                 priority="1000"
+                 mode="M713">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PayeeParty/cbc:WebsiteURI"/>
+                       context="/p1:Invoice/cac:PayeeParty/cbc:WebsiteURI"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -27909,10 +27909,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentAlternativeExchangeRate"
-                  priority="1000"
-                  mode="M714">
+                 priority="1000"
+                 mode="M714">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentAlternativeExchangeRate"/>
+                       context="/p1:Invoice/cac:PaymentAlternativeExchangeRate"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -27933,10 +27933,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentExchangeRate"
-                  priority="1000"
-                  mode="M715">
+                 priority="1000"
+                 mode="M715">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentExchangeRate"/>
+                       context="/p1:Invoice/cac:PaymentExchangeRate"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -27958,7 +27958,7 @@
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentMeans" priority="1000" mode="M716">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentMeans"/>
+                       context="/p1:Invoice/cac:PaymentMeans"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(cbc:PaymentID)&lt;=1"/>
@@ -27982,10 +27982,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentMeans/cac:CardAccount/cbc:CV2ID"
-                  priority="1000"
-                  mode="M717">
+                 priority="1000"
+                 mode="M717">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentMeans/cac:CardAccount/cbc:CV2ID"/>
+                       context="/p1:Invoice/cac:PaymentMeans/cac:CardAccount/cbc:CV2ID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -28006,10 +28006,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentMeans/cac:CardAccount/cbc:CardChipCode"
-                  priority="1000"
-                  mode="M718">
+                 priority="1000"
+                 mode="M718">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentMeans/cac:CardAccount/cbc:CardChipCode"/>
+                       context="/p1:Invoice/cac:PaymentMeans/cac:CardAccount/cbc:CardChipCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -28030,10 +28030,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentMeans/cac:CardAccount/cbc:CardTypeCode"
-                  priority="1000"
-                  mode="M719">
+                 priority="1000"
+                 mode="M719">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentMeans/cac:CardAccount/cbc:CardTypeCode"/>
+                       context="/p1:Invoice/cac:PaymentMeans/cac:CardAccount/cbc:CardTypeCode"/>
       <!--REPORT -->
       <xsl:if test="@listID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@listID">
@@ -28142,10 +28142,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentMeans/cac:CardAccount/cbc:ChipApplicationID"
-                  priority="1000"
-                  mode="M720">
+                 priority="1000"
+                 mode="M720">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentMeans/cac:CardAccount/cbc:ChipApplicationID"/>
+                       context="/p1:Invoice/cac:PaymentMeans/cac:CardAccount/cbc:ChipApplicationID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -28166,10 +28166,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentMeans/cac:CardAccount/cbc:ExpiryDate"
-                  priority="1000"
-                  mode="M721">
+                 priority="1000"
+                 mode="M721">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentMeans/cac:CardAccount/cbc:ExpiryDate"/>
+                       context="/p1:Invoice/cac:PaymentMeans/cac:CardAccount/cbc:ExpiryDate"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -28190,10 +28190,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentMeans/cac:CardAccount/cbc:HolderName"
-                  priority="1000"
-                  mode="M722">
+                 priority="1000"
+                 mode="M722">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentMeans/cac:CardAccount/cbc:HolderName"/>
+                       context="/p1:Invoice/cac:PaymentMeans/cac:CardAccount/cbc:HolderName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -28214,10 +28214,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentMeans/cac:CardAccount/cbc:IssueNumberID"
-                  priority="1000"
-                  mode="M723">
+                 priority="1000"
+                 mode="M723">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentMeans/cac:CardAccount/cbc:IssueNumberID"/>
+                       context="/p1:Invoice/cac:PaymentMeans/cac:CardAccount/cbc:IssueNumberID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -28238,10 +28238,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentMeans/cac:CardAccount/cbc:IssuerID"
-                  priority="1000"
-                  mode="M724">
+                 priority="1000"
+                 mode="M724">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentMeans/cac:CardAccount/cbc:IssuerID"/>
+                       context="/p1:Invoice/cac:PaymentMeans/cac:CardAccount/cbc:IssuerID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -28262,10 +28262,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentMeans/cac:CardAccount/cbc:NetworkID"
-                  priority="1000"
-                  mode="M725">
+                 priority="1000"
+                 mode="M725">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentMeans/cac:CardAccount/cbc:NetworkID"/>
+                       context="/p1:Invoice/cac:PaymentMeans/cac:CardAccount/cbc:NetworkID"/>
       <!--REPORT -->
       <xsl:if test="@schemeID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
@@ -28352,10 +28352,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentMeans/cac:CardAccount/cbc:PrimaryAccountNumberID"
-                  priority="1000"
-                  mode="M726">
+                 priority="1000"
+                 mode="M726">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentMeans/cac:CardAccount/cbc:PrimaryAccountNumberID"/>
+                       context="/p1:Invoice/cac:PaymentMeans/cac:CardAccount/cbc:PrimaryAccountNumberID"/>
       <!--REPORT -->
       <xsl:if test="@schemeID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
@@ -28442,10 +28442,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentMeans/cac:CardAccount/cbc:ValidityStartDate"
-                  priority="1000"
-                  mode="M727">
+                 priority="1000"
+                 mode="M727">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentMeans/cac:CardAccount/cbc:ValidityStartDate"/>
+                       context="/p1:Invoice/cac:PaymentMeans/cac:CardAccount/cbc:ValidityStartDate"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -28466,10 +28466,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentMeans/cac:CreditAccount/cbc:AccountID"
-                  priority="1000"
-                  mode="M728">
+                 priority="1000"
+                 mode="M728">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentMeans/cac:CreditAccount/cbc:AccountID"/>
+                       context="/p1:Invoice/cac:PaymentMeans/cac:CreditAccount/cbc:AccountID"/>
       <!--REPORT -->
       <xsl:if test="@schemeID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
@@ -28556,10 +28556,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cac:Country"
-                  priority="1000"
-                  mode="M729">
+                 priority="1000"
+                 mode="M729">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cac:Country"/>
+                       context="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cac:Country"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -28580,10 +28580,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cac:Address"
-                  priority="1000"
-                  mode="M730">
+                 priority="1000"
+                 mode="M730">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cac:Address"/>
+                       context="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cac:Address"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -28604,10 +28604,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cac:FinancialInstitution"
-                  priority="1000"
-                  mode="M731">
+                 priority="1000"
+                 mode="M731">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cac:FinancialInstitution"/>
+                       context="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cac:FinancialInstitution"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(cbc:ID)=1"/>
@@ -28631,10 +28631,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cac:FinancialInstitution/cac:Address"
-                  priority="1000"
-                  mode="M732">
+                 priority="1000"
+                 mode="M732">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cac:FinancialInstitution/cac:Address"/>
+                       context="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cac:FinancialInstitution/cac:Address"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -28655,10 +28655,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cac:FinancialInstitution/cbc:ID"
-                  priority="1000"
-                  mode="M733">
+                 priority="1000"
+                 mode="M733">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cac:FinancialInstitution/cbc:ID"/>
+                       context="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cac:FinancialInstitution/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test="@schemeID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
@@ -28745,10 +28745,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cac:FinancialInstitution/cbc:Name"
-                  priority="1000"
-                  mode="M734">
+                 priority="1000"
+                 mode="M734">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cac:FinancialInstitution/cbc:Name"/>
+                       context="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cac:FinancialInstitution/cbc:Name"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -28769,10 +28769,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cbc:ID"
-                  priority="1000"
-                  mode="M735">
+                 priority="1000"
+                 mode="M735">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cbc:ID"/>
+                       context="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test="@schemeID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
@@ -28859,10 +28859,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cbc:Name"
-                  priority="1000"
-                  mode="M736">
+                 priority="1000"
+                 mode="M736">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cbc:Name"/>
+                       context="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cbc:Name"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -28883,10 +28883,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cbc:AccountFormatCode"
-                  priority="1000"
-                  mode="M737">
+                 priority="1000"
+                 mode="M737">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cbc:AccountFormatCode"/>
+                       context="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cbc:AccountFormatCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -28907,10 +28907,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cbc:AccountTypeCode"
-                  priority="1000"
-                  mode="M738">
+                 priority="1000"
+                 mode="M738">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cbc:AccountTypeCode"/>
+                       context="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cbc:AccountTypeCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -28931,10 +28931,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cbc:AliasName"
-                  priority="1000"
-                  mode="M739">
+                 priority="1000"
+                 mode="M739">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cbc:AliasName"/>
+                       context="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cbc:AliasName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -28955,10 +28955,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cbc:CurrencyCode"
-                  priority="1000"
-                  mode="M740">
+                 priority="1000"
+                 mode="M740">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cbc:CurrencyCode"/>
+                       context="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cbc:CurrencyCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -28979,10 +28979,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cbc:ID"
-                  priority="1000"
-                  mode="M741">
+                 priority="1000"
+                 mode="M741">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cbc:ID"/>
+                       context="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test="@schemeName">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeName">
@@ -29058,10 +29058,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cbc:Name"
-                  priority="1000"
-                  mode="M742">
+                 priority="1000"
+                 mode="M742">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cbc:Name"/>
+                       context="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cbc:Name"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -29082,10 +29082,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cbc:PaymentNote"
-                  priority="1000"
-                  mode="M743">
+                 priority="1000"
+                 mode="M743">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cbc:PaymentNote"/>
+                       context="/p1:Invoice/cac:PaymentMeans/cac:PayeeFinancialAccount/cbc:PaymentNote"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -29106,10 +29106,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentMeans/cac:PayerFinancialAccount"
-                  priority="1000"
-                  mode="M744">
+                 priority="1000"
+                 mode="M744">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentMeans/cac:PayerFinancialAccount"/>
+                       context="/p1:Invoice/cac:PaymentMeans/cac:PayerFinancialAccount"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -29130,10 +29130,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentMeans/cac:PaymentMandate"
-                  priority="1000"
-                  mode="M745">
+                 priority="1000"
+                 mode="M745">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentMeans/cac:PaymentMandate"/>
+                       context="/p1:Invoice/cac:PaymentMeans/cac:PaymentMandate"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -29154,10 +29154,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentMeans/cac:TradeFinancing"
-                  priority="1000"
-                  mode="M746">
+                 priority="1000"
+                 mode="M746">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentMeans/cac:TradeFinancing"/>
+                       context="/p1:Invoice/cac:PaymentMeans/cac:TradeFinancing"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -29178,10 +29178,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentMeans/cbc:ID"
-                  priority="1000"
-                  mode="M747">
+                 priority="1000"
+                 mode="M747">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentMeans/cbc:ID"/>
+                       context="/p1:Invoice/cac:PaymentMeans/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -29202,10 +29202,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentMeans/cbc:InstructionID"
-                  priority="1000"
-                  mode="M748">
+                 priority="1000"
+                 mode="M748">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentMeans/cbc:InstructionID"/>
+                       context="/p1:Invoice/cac:PaymentMeans/cbc:InstructionID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -29226,10 +29226,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentMeans/cbc:InstructionNote"
-                  priority="1000"
-                  mode="M749">
+                 priority="1000"
+                 mode="M749">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentMeans/cbc:InstructionNote"/>
+                       context="/p1:Invoice/cac:PaymentMeans/cbc:InstructionNote"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -29250,10 +29250,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentMeans/cbc:PaymentChannelCode"
-                  priority="1000"
-                  mode="M750">
+                 priority="1000"
+                 mode="M750">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentMeans/cbc:PaymentChannelCode"/>
+                       context="/p1:Invoice/cac:PaymentMeans/cbc:PaymentChannelCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -29274,10 +29274,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentMeans/cbc:PaymentID"
-                  priority="1000"
-                  mode="M751">
+                 priority="1000"
+                 mode="M751">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentMeans/cbc:PaymentID"/>
+                       context="/p1:Invoice/cac:PaymentMeans/cbc:PaymentID"/>
       <!--REPORT -->
       <xsl:if test="@schemeID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
@@ -29364,10 +29364,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentMeans/cbc:PaymentMeansCode"
-                  priority="1000"
-                  mode="M752">
+                 priority="1000"
+                 mode="M752">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentMeans/cbc:PaymentMeansCode"/>
+                       context="/p1:Invoice/cac:PaymentMeans/cbc:PaymentMeansCode"/>
       <!--REPORT -->
       <xsl:if test="@listName">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@listName">
@@ -29444,7 +29444,7 @@
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentTerms" priority="1000" mode="M753">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentTerms"/>
+                       context="/p1:Invoice/cac:PaymentTerms"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(cbc:Note)=1"/>
@@ -29468,10 +29468,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentTerms/cac:ExchangeRate"
-                  priority="1000"
-                  mode="M754">
+                 priority="1000"
+                 mode="M754">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentTerms/cac:ExchangeRate"/>
+                       context="/p1:Invoice/cac:PaymentTerms/cac:ExchangeRate"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -29492,10 +29492,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentTerms/cac:PenaltyPeriod"
-                  priority="1000"
-                  mode="M755">
+                 priority="1000"
+                 mode="M755">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentTerms/cac:PenaltyPeriod"/>
+                       context="/p1:Invoice/cac:PaymentTerms/cac:PenaltyPeriod"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -29516,10 +29516,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentTerms/cac:SettlementPeriod"
-                  priority="1000"
-                  mode="M756">
+                 priority="1000"
+                 mode="M756">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentTerms/cac:SettlementPeriod"/>
+                       context="/p1:Invoice/cac:PaymentTerms/cac:SettlementPeriod"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -29540,10 +29540,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentTerms/cac:ValidityPeriod"
-                  priority="1000"
-                  mode="M757">
+                 priority="1000"
+                 mode="M757">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentTerms/cac:ValidityPeriod"/>
+                       context="/p1:Invoice/cac:PaymentTerms/cac:ValidityPeriod"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -29564,10 +29564,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentTerms/cbc:Amount"
-                  priority="1000"
-                  mode="M758">
+                 priority="1000"
+                 mode="M758">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentTerms/cbc:Amount"/>
+                       context="/p1:Invoice/cac:PaymentTerms/cbc:Amount"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -29588,10 +29588,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentTerms/cbc:ID"
-                  priority="1000"
-                  mode="M759">
+                 priority="1000"
+                 mode="M759">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentTerms/cbc:ID"/>
+                       context="/p1:Invoice/cac:PaymentTerms/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -29612,10 +29612,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentTerms/cbc:InstallmentDueDate"
-                  priority="1000"
-                  mode="M760">
+                 priority="1000"
+                 mode="M760">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentTerms/cbc:InstallmentDueDate"/>
+                       context="/p1:Invoice/cac:PaymentTerms/cbc:InstallmentDueDate"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -29636,10 +29636,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentTerms/cbc:InvoicingPartyReference"
-                  priority="1000"
-                  mode="M761">
+                 priority="1000"
+                 mode="M761">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentTerms/cbc:InvoicingPartyReference"/>
+                       context="/p1:Invoice/cac:PaymentTerms/cbc:InvoicingPartyReference"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -29660,10 +29660,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentTerms/cbc:Note"
-                  priority="1000"
-                  mode="M762">
+                 priority="1000"
+                 mode="M762">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentTerms/cbc:Note"/>
+                       context="/p1:Invoice/cac:PaymentTerms/cbc:Note"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -29695,10 +29695,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentTerms/cbc:PaymentDueDate"
-                  priority="1000"
-                  mode="M763">
+                 priority="1000"
+                 mode="M763">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentTerms/cbc:PaymentDueDate"/>
+                       context="/p1:Invoice/cac:PaymentTerms/cbc:PaymentDueDate"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -29719,10 +29719,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentTerms/cbc:PaymentMeansID"
-                  priority="1000"
-                  mode="M764">
+                 priority="1000"
+                 mode="M764">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentTerms/cbc:PaymentMeansID"/>
+                       context="/p1:Invoice/cac:PaymentTerms/cbc:PaymentMeansID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -29743,10 +29743,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentTerms/cbc:PaymentPercent"
-                  priority="1000"
-                  mode="M765">
+                 priority="1000"
+                 mode="M765">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentTerms/cbc:PaymentPercent"/>
+                       context="/p1:Invoice/cac:PaymentTerms/cbc:PaymentPercent"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -29767,10 +29767,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentTerms/cbc:PaymentTermsDetailsURI"
-                  priority="1000"
-                  mode="M766">
+                 priority="1000"
+                 mode="M766">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentTerms/cbc:PaymentTermsDetailsURI"/>
+                       context="/p1:Invoice/cac:PaymentTerms/cbc:PaymentTermsDetailsURI"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -29791,10 +29791,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentTerms/cbc:PenaltyAmount"
-                  priority="1000"
-                  mode="M767">
+                 priority="1000"
+                 mode="M767">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentTerms/cbc:PenaltyAmount"/>
+                       context="/p1:Invoice/cac:PaymentTerms/cbc:PenaltyAmount"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -29815,10 +29815,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentTerms/cbc:PenaltySurchargePercent"
-                  priority="1000"
-                  mode="M768">
+                 priority="1000"
+                 mode="M768">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentTerms/cbc:PenaltySurchargePercent"/>
+                       context="/p1:Invoice/cac:PaymentTerms/cbc:PenaltySurchargePercent"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -29839,10 +29839,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentTerms/cbc:PrepaidPaymentReferenceID"
-                  priority="1000"
-                  mode="M769">
+                 priority="1000"
+                 mode="M769">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentTerms/cbc:PrepaidPaymentReferenceID"/>
+                       context="/p1:Invoice/cac:PaymentTerms/cbc:PrepaidPaymentReferenceID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -29863,10 +29863,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentTerms/cbc:ReferenceEventCode"
-                  priority="1000"
-                  mode="M770">
+                 priority="1000"
+                 mode="M770">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentTerms/cbc:ReferenceEventCode"/>
+                       context="/p1:Invoice/cac:PaymentTerms/cbc:ReferenceEventCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -29887,10 +29887,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentTerms/cbc:SettlementDiscountAmount"
-                  priority="1000"
-                  mode="M771">
+                 priority="1000"
+                 mode="M771">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentTerms/cbc:SettlementDiscountAmount"/>
+                       context="/p1:Invoice/cac:PaymentTerms/cbc:SettlementDiscountAmount"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -29911,10 +29911,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PaymentTerms/cbc:SettlementDiscountPercent"
-                  priority="1000"
-                  mode="M772">
+                 priority="1000"
+                 mode="M772">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PaymentTerms/cbc:SettlementDiscountPercent"/>
+                       context="/p1:Invoice/cac:PaymentTerms/cbc:SettlementDiscountPercent"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -29936,7 +29936,7 @@
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PrepaidPayment" priority="1000" mode="M773">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PrepaidPayment"/>
+                       context="/p1:Invoice/cac:PrepaidPayment"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -29957,10 +29957,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:PricingExchangeRate"
-                  priority="1000"
-                  mode="M774">
+                 priority="1000"
+                 mode="M774">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:PricingExchangeRate"/>
+                       context="/p1:Invoice/cac:PricingExchangeRate"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -29981,10 +29981,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:ProjectReference"
-                  priority="1000"
-                  mode="M775">
+                 priority="1000"
+                 mode="M775">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:ProjectReference"/>
+                       context="/p1:Invoice/cac:ProjectReference"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -30005,10 +30005,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:ReceiptDocumentReference"
-                  priority="1000"
-                  mode="M776">
+                 priority="1000"
+                 mode="M776">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:ReceiptDocumentReference"/>
+                       context="/p1:Invoice/cac:ReceiptDocumentReference"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -30029,10 +30029,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:AccountingContact"
-                  priority="1000"
-                  mode="M777">
+                 priority="1000"
+                 mode="M777">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:AccountingContact"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:AccountingContact"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -30053,10 +30053,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:DespatchContact"
-                  priority="1000"
-                  mode="M778">
+                 priority="1000"
+                 mode="M778">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:DespatchContact"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:DespatchContact"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -30077,10 +30077,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party"
-                  priority="1000"
-                  mode="M779">
+                 priority="1000"
+                 mode="M779">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(cac:PartyName)&lt;=1"/>
@@ -30104,10 +30104,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:AgentParty"
-                  priority="1000"
-                  mode="M780">
+                 priority="1000"
+                 mode="M780">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:AgentParty"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:AgentParty"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -30128,10 +30128,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:Contact/cac:OtherCommunication"
-                  priority="1000"
-                  mode="M781">
+                 priority="1000"
+                 mode="M781">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:Contact/cac:OtherCommunication"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:Contact/cac:OtherCommunication"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -30152,10 +30152,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:Contact/cbc:ElectronicMail"
-                  priority="1000"
-                  mode="M782">
+                 priority="1000"
+                 mode="M782">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:Contact/cbc:ElectronicMail"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:Contact/cbc:ElectronicMail"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -30187,10 +30187,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:Contact/cbc:ID"
-                  priority="1000"
-                  mode="M783">
+                 priority="1000"
+                 mode="M783">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:Contact/cbc:ID"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:Contact/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -30211,10 +30211,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:Contact/cbc:Name"
-                  priority="1000"
-                  mode="M784">
+                 priority="1000"
+                 mode="M784">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:Contact/cbc:Name"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:Contact/cbc:Name"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -30246,10 +30246,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:Contact/cbc:Note"
-                  priority="1000"
-                  mode="M785">
+                 priority="1000"
+                 mode="M785">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:Contact/cbc:Note"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:Contact/cbc:Note"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -30270,10 +30270,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:Contact/cbc:Telefax"
-                  priority="1000"
-                  mode="M786">
+                 priority="1000"
+                 mode="M786">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:Contact/cbc:Telefax"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:Contact/cbc:Telefax"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -30305,10 +30305,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:Contact/cbc:Telephone"
-                  priority="1000"
-                  mode="M787">
+                 priority="1000"
+                 mode="M787">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:Contact/cbc:Telephone"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:Contact/cbc:Telephone"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -30340,10 +30340,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:FinancialAccount"
-                  priority="1000"
-                  mode="M788">
+                 priority="1000"
+                 mode="M788">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:FinancialAccount"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:FinancialAccount"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -30364,10 +30364,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:Language"
-                  priority="1000"
-                  mode="M789">
+                 priority="1000"
+                 mode="M789">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:Language"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:Language"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -30388,10 +30388,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyIdentification/cbc:ID"
-                  priority="1000"
-                  mode="M790">
+                 priority="1000"
+                 mode="M790">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyIdentification/cbc:ID"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyIdentification/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test="@schemeID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
@@ -30478,10 +30478,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:CorporateRegistrationScheme"
-                  priority="1000"
-                  mode="M791">
+                 priority="1000"
+                 mode="M791">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:CorporateRegistrationScheme"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:CorporateRegistrationScheme"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -30502,10 +30502,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:HeadParty"
-                  priority="1000"
-                  mode="M792">
+                 priority="1000"
+                 mode="M792">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:HeadParty"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:HeadParty"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -30526,10 +30526,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:AddressLine"
-                  priority="1000"
-                  mode="M793">
+                 priority="1000"
+                 mode="M793">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:AddressLine"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:AddressLine"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -30550,16 +30550,16 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:Country"
-                  priority="1000"
-                  mode="M794">
+                 priority="1000"
+                 mode="M794">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:Country"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:Country"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(cbc:IdentificationCode)=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(cbc:IdentificationCode)=1">
+                                test="count(cbc:IdentificationCode)=1">
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -30578,10 +30578,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:Country/cbc:IdentificationCode"
-                  priority="1000"
-                  mode="M795">
+                 priority="1000"
+                 mode="M795">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:Country/cbc:IdentificationCode"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:Country/cbc:IdentificationCode"/>
       <!--REPORT -->
       <xsl:if test="@listID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@listID">
@@ -30690,10 +30690,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:Country/cbc:Name"
-                  priority="1000"
-                  mode="M796">
+                 priority="1000"
+                 mode="M796">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:Country/cbc:Name"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:Country/cbc:Name"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -30714,10 +30714,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:LocationCoordinate"
-                  priority="1000"
-                  mode="M797">
+                 priority="1000"
+                 mode="M797">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:LocationCoordinate"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cac:LocationCoordinate"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -30738,10 +30738,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:AdditionalStreetName"
-                  priority="1000"
-                  mode="M798">
+                 priority="1000"
+                 mode="M798">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:AdditionalStreetName"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:AdditionalStreetName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -30762,10 +30762,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:AddressFormatCode"
-                  priority="1000"
-                  mode="M799">
+                 priority="1000"
+                 mode="M799">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:AddressFormatCode"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:AddressFormatCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -30786,10 +30786,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:AddressTypeCode"
-                  priority="1000"
-                  mode="M800">
+                 priority="1000"
+                 mode="M800">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:AddressTypeCode"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:AddressTypeCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -30810,10 +30810,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:BlockName"
-                  priority="1000"
-                  mode="M801">
+                 priority="1000"
+                 mode="M801">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:BlockName"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:BlockName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -30834,10 +30834,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:BuildingName"
-                  priority="1000"
-                  mode="M802">
+                 priority="1000"
+                 mode="M802">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:BuildingName"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:BuildingName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -30858,10 +30858,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:BuildingNumber"
-                  priority="1000"
-                  mode="M803">
+                 priority="1000"
+                 mode="M803">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:BuildingNumber"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:BuildingNumber"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -30882,10 +30882,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CityName"
-                  priority="1000"
-                  mode="M804">
+                 priority="1000"
+                 mode="M804">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CityName"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CityName"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -30917,10 +30917,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CitySubdivisionName"
-                  priority="1000"
-                  mode="M805">
+                 priority="1000"
+                 mode="M805">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CitySubdivisionName"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CitySubdivisionName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -30941,10 +30941,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CountrySubentity"
-                  priority="1000"
-                  mode="M806">
+                 priority="1000"
+                 mode="M806">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CountrySubentity"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CountrySubentity"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -30965,10 +30965,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CountrySubentityCode"
-                  priority="1000"
-                  mode="M807">
+                 priority="1000"
+                 mode="M807">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CountrySubentityCode"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CountrySubentityCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -30989,10 +30989,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:Department"
-                  priority="1000"
-                  mode="M808">
+                 priority="1000"
+                 mode="M808">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:Department"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:Department"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -31013,10 +31013,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:District"
-                  priority="1000"
-                  mode="M809">
+                 priority="1000"
+                 mode="M809">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:District"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:District"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -31037,10 +31037,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:Floor"
-                  priority="1000"
-                  mode="M810">
+                 priority="1000"
+                 mode="M810">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:Floor"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:Floor"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -31061,10 +31061,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:ID"
-                  priority="1000"
-                  mode="M811">
+                 priority="1000"
+                 mode="M811">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:ID"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -31085,10 +31085,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:InhouseMail"
-                  priority="1000"
-                  mode="M812">
+                 priority="1000"
+                 mode="M812">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:InhouseMail"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:InhouseMail"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -31109,10 +31109,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:MarkAttention"
-                  priority="1000"
-                  mode="M813">
+                 priority="1000"
+                 mode="M813">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:MarkAttention"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:MarkAttention"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -31133,10 +31133,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:MarkCare"
-                  priority="1000"
-                  mode="M814">
+                 priority="1000"
+                 mode="M814">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:MarkCare"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:MarkCare"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -31157,10 +31157,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:PlotIdentification"
-                  priority="1000"
-                  mode="M815">
+                 priority="1000"
+                 mode="M815">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:PlotIdentification"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:PlotIdentification"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -31181,10 +31181,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:PostalZone"
-                  priority="1000"
-                  mode="M816">
+                 priority="1000"
+                 mode="M816">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:PostalZone"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:PostalZone"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -31205,10 +31205,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:Postbox"
-                  priority="1000"
-                  mode="M817">
+                 priority="1000"
+                 mode="M817">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:Postbox"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:Postbox"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -31229,10 +31229,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:Region"
-                  priority="1000"
-                  mode="M818">
+                 priority="1000"
+                 mode="M818">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:Region"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:Region"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -31253,10 +31253,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:Room"
-                  priority="1000"
-                  mode="M819">
+                 priority="1000"
+                 mode="M819">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:Room"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:Room"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -31277,10 +31277,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:StreetName"
-                  priority="1000"
-                  mode="M820">
+                 priority="1000"
+                 mode="M820">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:StreetName"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:StreetName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -31301,10 +31301,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:TimezoneOffset"
-                  priority="1000"
-                  mode="M821">
+                 priority="1000"
+                 mode="M821">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:TimezoneOffset"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:TimezoneOffset"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -31325,10 +31325,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:ShareholderParty"
-                  priority="1000"
-                  mode="M822">
+                 priority="1000"
+                 mode="M822">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:ShareholderParty"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cac:ShareholderParty"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -31349,10 +31349,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyID"
-                  priority="1000"
-                  mode="M823">
+                 priority="1000"
+                 mode="M823">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyID"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyID"/>
       <!--REPORT -->
       <xsl:if test="@schemeID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
@@ -31439,10 +31439,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyLegalFormCode"
-                  priority="1000"
-                  mode="M824">
+                 priority="1000"
+                 mode="M824">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyLegalFormCode"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyLegalFormCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -31463,10 +31463,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyLiquidationStatusCode"
-                  priority="1000"
-                  mode="M825">
+                 priority="1000"
+                 mode="M825">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyLiquidationStatusCode"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyLiquidationStatusCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -31487,10 +31487,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:CorporateStockAmount"
-                  priority="1000"
-                  mode="M826">
+                 priority="1000"
+                 mode="M826">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:CorporateStockAmount"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:CorporateStockAmount"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -31511,10 +31511,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:FullyPaidSharesIndicator"
-                  priority="1000"
-                  mode="M827">
+                 priority="1000"
+                 mode="M827">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:FullyPaidSharesIndicator"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:FullyPaidSharesIndicator"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -31535,10 +31535,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationDate"
-                  priority="1000"
-                  mode="M828">
+                 priority="1000"
+                 mode="M828">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationDate"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationDate"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -31559,10 +31559,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationExpirationDate"
-                  priority="1000"
-                  mode="M829">
+                 priority="1000"
+                 mode="M829">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationExpirationDate"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationExpirationDate"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -31583,10 +31583,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationName"
-                  priority="1000"
-                  mode="M830">
+                 priority="1000"
+                 mode="M830">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationName"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationName"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -31618,10 +31618,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:SoleProprietorshipIndicator"
-                  priority="1000"
-                  mode="M831">
+                 priority="1000"
+                 mode="M831">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:SoleProprietorshipIndicator"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:SoleProprietorshipIndicator"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -31642,10 +31642,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyName/cbc:Name"
-                  priority="1000"
-                  mode="M832">
+                 priority="1000"
+                 mode="M832">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyName/cbc:Name"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyName/cbc:Name"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -31677,10 +31677,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyTaxScheme/cac:RegistrationAddress"
-                  priority="1000"
-                  mode="M833">
+                 priority="1000"
+                 mode="M833">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyTaxScheme/cac:RegistrationAddress"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyTaxScheme/cac:RegistrationAddress"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -31701,10 +31701,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme"
-                  priority="1000"
-                  mode="M834">
+                 priority="1000"
+                 mode="M834">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(cbc:ID)=1"/>
@@ -31728,10 +31728,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cac:JurisdictionRegionAddress"
-                  priority="1000"
-                  mode="M835">
+                 priority="1000"
+                 mode="M835">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cac:JurisdictionRegionAddress"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cac:JurisdictionRegionAddress"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -31752,10 +31752,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:CurrencyCode"
-                  priority="1000"
-                  mode="M836">
+                 priority="1000"
+                 mode="M836">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:CurrencyCode"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:CurrencyCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -31776,10 +31776,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:ID"
-                  priority="1000"
-                  mode="M837">
+                 priority="1000"
+                 mode="M837">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:ID"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test="@schemeID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
@@ -31866,10 +31866,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:Name"
-                  priority="1000"
-                  mode="M838">
+                 priority="1000"
+                 mode="M838">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:Name"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:Name"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -31890,10 +31890,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:TaxTypeCode"
-                  priority="1000"
-                  mode="M839">
+                 priority="1000"
+                 mode="M839">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:TaxTypeCode"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:TaxTypeCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -31914,10 +31914,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:CompanyID"
-                  priority="1000"
-                  mode="M840">
+                 priority="1000"
+                 mode="M840">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:CompanyID"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:CompanyID"/>
       <!--REPORT -->
       <xsl:if test="@schemeID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
@@ -32004,10 +32004,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:ExemptionReason"
-                  priority="1000"
-                  mode="M841">
+                 priority="1000"
+                 mode="M841">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:ExemptionReason"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:ExemptionReason"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -32039,10 +32039,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:ExemptionReasonCode"
-                  priority="1000"
-                  mode="M842">
+                 priority="1000"
+                 mode="M842">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:ExemptionReasonCode"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:ExemptionReasonCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -32063,10 +32063,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:RegistrationName"
-                  priority="1000"
-                  mode="M843">
+                 priority="1000"
+                 mode="M843">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:RegistrationName"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:RegistrationName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -32087,10 +32087,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:TaxLevelCode"
-                  priority="1000"
-                  mode="M844">
+                 priority="1000"
+                 mode="M844">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:TaxLevelCode"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:TaxLevelCode"/>
       <!--REPORT -->
       <xsl:if test="@listID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@listID">
@@ -32199,10 +32199,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:Person"
-                  priority="1000"
-                  mode="M845">
+                 priority="1000"
+                 mode="M845">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:Person"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:Person"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -32223,10 +32223,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PhysicalLocation"
-                  priority="1000"
-                  mode="M846">
+                 priority="1000"
+                 mode="M846">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PhysicalLocation"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PhysicalLocation"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -32247,10 +32247,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cac:AddressLine"
-                  priority="1000"
-                  mode="M847">
+                 priority="1000"
+                 mode="M847">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cac:AddressLine"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cac:AddressLine"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -32271,16 +32271,16 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cac:Country"
-                  priority="1000"
-                  mode="M848">
+                 priority="1000"
+                 mode="M848">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cac:Country"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cac:Country"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(cbc:IdentificationCode)=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(cbc:IdentificationCode)=1">
+                                test="count(cbc:IdentificationCode)=1">
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -32299,10 +32299,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode"
-                  priority="1000"
-                  mode="M849">
+                 priority="1000"
+                 mode="M849">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode"/>
       <!--REPORT -->
       <xsl:if test="@listID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@listID">
@@ -32411,10 +32411,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:Name"
-                  priority="1000"
-                  mode="M850">
+                 priority="1000"
+                 mode="M850">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:Name"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:Name"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -32435,10 +32435,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cac:LocationCoordinate"
-                  priority="1000"
-                  mode="M851">
+                 priority="1000"
+                 mode="M851">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cac:LocationCoordinate"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cac:LocationCoordinate"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -32459,10 +32459,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:AdditionalStreetName"
-                  priority="1000"
-                  mode="M852">
+                 priority="1000"
+                 mode="M852">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:AdditionalStreetName"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:AdditionalStreetName"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -32494,10 +32494,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:AddressFormatCode"
-                  priority="1000"
-                  mode="M853">
+                 priority="1000"
+                 mode="M853">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:AddressFormatCode"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:AddressFormatCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -32518,10 +32518,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:AddressTypeCode"
-                  priority="1000"
-                  mode="M854">
+                 priority="1000"
+                 mode="M854">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:AddressTypeCode"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:AddressTypeCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -32542,10 +32542,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:BlockName"
-                  priority="1000"
-                  mode="M855">
+                 priority="1000"
+                 mode="M855">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:BlockName"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:BlockName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -32566,10 +32566,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:BuildingName"
-                  priority="1000"
-                  mode="M856">
+                 priority="1000"
+                 mode="M856">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:BuildingName"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:BuildingName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -32590,10 +32590,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:BuildingNumber"
-                  priority="1000"
-                  mode="M857">
+                 priority="1000"
+                 mode="M857">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:BuildingNumber"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:BuildingNumber"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -32614,10 +32614,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:CityName"
-                  priority="1000"
-                  mode="M858">
+                 priority="1000"
+                 mode="M858">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:CityName"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:CityName"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -32649,10 +32649,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:CitySubdivisionName"
-                  priority="1000"
-                  mode="M859">
+                 priority="1000"
+                 mode="M859">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:CitySubdivisionName"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:CitySubdivisionName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -32673,10 +32673,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:CountrySubentity"
-                  priority="1000"
-                  mode="M860">
+                 priority="1000"
+                 mode="M860">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:CountrySubentity"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:CountrySubentity"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -32708,10 +32708,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:CountrySubentityCode"
-                  priority="1000"
-                  mode="M861">
+                 priority="1000"
+                 mode="M861">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:CountrySubentityCode"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:CountrySubentityCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -32732,10 +32732,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:Department"
-                  priority="1000"
-                  mode="M862">
+                 priority="1000"
+                 mode="M862">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:Department"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:Department"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -32756,10 +32756,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:District"
-                  priority="1000"
-                  mode="M863">
+                 priority="1000"
+                 mode="M863">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:District"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:District"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -32780,10 +32780,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:Floor"
-                  priority="1000"
-                  mode="M864">
+                 priority="1000"
+                 mode="M864">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:Floor"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:Floor"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -32804,10 +32804,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:ID"
-                  priority="1000"
-                  mode="M865">
+                 priority="1000"
+                 mode="M865">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:ID"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -32828,10 +32828,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:InhouseMail"
-                  priority="1000"
-                  mode="M866">
+                 priority="1000"
+                 mode="M866">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:InhouseMail"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:InhouseMail"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -32852,10 +32852,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:MarkAttention"
-                  priority="1000"
-                  mode="M867">
+                 priority="1000"
+                 mode="M867">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:MarkAttention"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:MarkAttention"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -32876,10 +32876,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:MarkCare"
-                  priority="1000"
-                  mode="M868">
+                 priority="1000"
+                 mode="M868">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:MarkCare"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:MarkCare"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -32900,10 +32900,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:PlotIdentification"
-                  priority="1000"
-                  mode="M869">
+                 priority="1000"
+                 mode="M869">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:PlotIdentification"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:PlotIdentification"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -32924,10 +32924,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:PostalZone"
-                  priority="1000"
-                  mode="M870">
+                 priority="1000"
+                 mode="M870">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:PostalZone"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:PostalZone"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -32959,10 +32959,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:Postbox"
-                  priority="1000"
-                  mode="M871">
+                 priority="1000"
+                 mode="M871">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:Postbox"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:Postbox"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -32983,10 +32983,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:Region"
-                  priority="1000"
-                  mode="M872">
+                 priority="1000"
+                 mode="M872">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:Region"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:Region"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -33007,10 +33007,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:Room"
-                  priority="1000"
-                  mode="M873">
+                 priority="1000"
+                 mode="M873">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:Room"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:Room"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -33031,10 +33031,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:StreetName"
-                  priority="1000"
-                  mode="M874">
+                 priority="1000"
+                 mode="M874">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:StreetName"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:StreetName"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -33066,10 +33066,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:TimezoneOffset"
-                  priority="1000"
-                  mode="M875">
+                 priority="1000"
+                 mode="M875">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:TimezoneOffset"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PostalAddress/cbc:TimezoneOffset"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -33090,10 +33090,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PowerOfAttorney"
-                  priority="1000"
-                  mode="M876">
+                 priority="1000"
+                 mode="M876">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PowerOfAttorney"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:PowerOfAttorney"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -33114,10 +33114,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:ServiceProviderParty"
-                  priority="1000"
-                  mode="M877">
+                 priority="1000"
+                 mode="M877">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:ServiceProviderParty"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cac:ServiceProviderParty"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -33138,10 +33138,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cbc:EndpointID"
-                  priority="1000"
-                  mode="M878">
+                 priority="1000"
+                 mode="M878">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cbc:EndpointID"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cbc:EndpointID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -33162,10 +33162,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cbc:IndustryClassificationCode"
-                  priority="1000"
-                  mode="M879">
+                 priority="1000"
+                 mode="M879">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cbc:IndustryClassificationCode"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cbc:IndustryClassificationCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -33186,10 +33186,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cbc:LogoReferenceID"
-                  priority="1000"
-                  mode="M880">
+                 priority="1000"
+                 mode="M880">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cbc:LogoReferenceID"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cbc:LogoReferenceID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -33210,10 +33210,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cbc:MarkAttentionIndicator"
-                  priority="1000"
-                  mode="M881">
+                 priority="1000"
+                 mode="M881">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cbc:MarkAttentionIndicator"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cbc:MarkAttentionIndicator"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -33234,10 +33234,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cbc:MarkCareIndicator"
-                  priority="1000"
-                  mode="M882">
+                 priority="1000"
+                 mode="M882">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cbc:MarkCareIndicator"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cbc:MarkCareIndicator"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -33258,10 +33258,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cbc:WebsiteURI"
-                  priority="1000"
-                  mode="M883">
+                 priority="1000"
+                 mode="M883">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cbc:WebsiteURI"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:Party/cbc:WebsiteURI"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -33282,10 +33282,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:SellerContact/cac:OtherCommunication/cbc:Channel"
-                  priority="1000"
-                  mode="M884">
+                 priority="1000"
+                 mode="M884">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:SellerContact/cac:OtherCommunication/cbc:Channel"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:SellerContact/cac:OtherCommunication/cbc:Channel"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -33306,10 +33306,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:SellerContact/cac:OtherCommunication/cbc:ChannelCode"
-                  priority="1000"
-                  mode="M885">
+                 priority="1000"
+                 mode="M885">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:SellerContact/cac:OtherCommunication/cbc:ChannelCode"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:SellerContact/cac:OtherCommunication/cbc:ChannelCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -33330,10 +33330,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:SellerContact/cac:OtherCommunication/cbc:Value"
-                  priority="1000"
-                  mode="M886">
+                 priority="1000"
+                 mode="M886">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:SellerContact/cac:OtherCommunication/cbc:Value"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:SellerContact/cac:OtherCommunication/cbc:Value"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -33365,10 +33365,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:SellerContact/cbc:ElectronicMail"
-                  priority="1000"
-                  mode="M887">
+                 priority="1000"
+                 mode="M887">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:SellerContact/cbc:ElectronicMail"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:SellerContact/cbc:ElectronicMail"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -33389,10 +33389,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:SellerContact/cbc:ID"
-                  priority="1000"
-                  mode="M888">
+                 priority="1000"
+                 mode="M888">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:SellerContact/cbc:ID"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:SellerContact/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -33413,10 +33413,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:SellerContact/cbc:Name"
-                  priority="1000"
-                  mode="M889">
+                 priority="1000"
+                 mode="M889">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:SellerContact/cbc:Name"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:SellerContact/cbc:Name"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -33437,10 +33437,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:SellerContact/cbc:Note"
-                  priority="1000"
-                  mode="M890">
+                 priority="1000"
+                 mode="M890">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:SellerContact/cbc:Note"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:SellerContact/cbc:Note"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -33461,10 +33461,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:SellerContact/cbc:Telefax"
-                  priority="1000"
-                  mode="M891">
+                 priority="1000"
+                 mode="M891">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:SellerContact/cbc:Telefax"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:SellerContact/cbc:Telefax"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -33485,10 +33485,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cac:SellerContact/cbc:Telephone"
-                  priority="1000"
-                  mode="M892">
+                 priority="1000"
+                 mode="M892">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cac:SellerContact/cbc:Telephone"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cac:SellerContact/cbc:Telephone"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -33509,10 +33509,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cbc:AdditionalAccountID"
-                  priority="1000"
-                  mode="M893">
+                 priority="1000"
+                 mode="M893">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cbc:AdditionalAccountID"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cbc:AdditionalAccountID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -33533,10 +33533,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cbc:CustomerAssignedAccountID"
-                  priority="1000"
-                  mode="M894">
+                 priority="1000"
+                 mode="M894">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cbc:CustomerAssignedAccountID"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cbc:CustomerAssignedAccountID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -33557,10 +33557,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:SellerSupplierParty/cbc:DataSendingCapability"
-                  priority="1000"
-                  mode="M895">
+                 priority="1000"
+                 mode="M895">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:SellerSupplierParty/cbc:DataSendingCapability"/>
+                       context="/p1:Invoice/cac:SellerSupplierParty/cbc:DataSendingCapability"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -33582,7 +33582,7 @@
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:Signature" priority="1000" mode="M896">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:Signature"/>
+                       context="/p1:Invoice/cac:Signature"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -33603,10 +33603,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:StatementDocumentReference"
-                  priority="1000"
-                  mode="M897">
+                 priority="1000"
+                 mode="M897">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:StatementDocumentReference"/>
+                       context="/p1:Invoice/cac:StatementDocumentReference"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -33628,7 +33628,7 @@
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxExchangeRate" priority="1000" mode="M898">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxExchangeRate"/>
+                       context="/p1:Invoice/cac:TaxExchangeRate"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -33649,10 +33649,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxRepresentativeParty/cac:AgentParty"
-                  priority="1000"
-                  mode="M899">
+                 priority="1000"
+                 mode="M899">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxRepresentativeParty/cac:AgentParty"/>
+                       context="/p1:Invoice/cac:TaxRepresentativeParty/cac:AgentParty"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -33673,10 +33673,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxRepresentativeParty/cac:Contact"
-                  priority="1000"
-                  mode="M900">
+                 priority="1000"
+                 mode="M900">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxRepresentativeParty/cac:Contact"/>
+                       context="/p1:Invoice/cac:TaxRepresentativeParty/cac:Contact"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -33697,10 +33697,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxRepresentativeParty/cac:FinancialAccount"
-                  priority="1000"
-                  mode="M901">
+                 priority="1000"
+                 mode="M901">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxRepresentativeParty/cac:FinancialAccount"/>
+                       context="/p1:Invoice/cac:TaxRepresentativeParty/cac:FinancialAccount"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -33721,10 +33721,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxRepresentativeParty/cac:Language"
-                  priority="1000"
-                  mode="M902">
+                 priority="1000"
+                 mode="M902">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxRepresentativeParty/cac:Language"/>
+                       context="/p1:Invoice/cac:TaxRepresentativeParty/cac:Language"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -33745,10 +33745,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyIdentification"
-                  priority="1000"
-                  mode="M903">
+                 priority="1000"
+                 mode="M903">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyIdentification"/>
+                       context="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyIdentification"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -33769,10 +33769,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyLegalEntity"
-                  priority="1000"
-                  mode="M904">
+                 priority="1000"
+                 mode="M904">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyLegalEntity"/>
+                       context="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyLegalEntity"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -33793,10 +33793,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyName/cbc:Name"
-                  priority="1000"
-                  mode="M905">
+                 priority="1000"
+                 mode="M905">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyName/cbc:Name"/>
+                       context="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyName/cbc:Name"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -33828,10 +33828,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyTaxScheme/cac:RegistrationAddress"
-                  priority="1000"
-                  mode="M906">
+                 priority="1000"
+                 mode="M906">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyTaxScheme/cac:RegistrationAddress"/>
+                       context="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyTaxScheme/cac:RegistrationAddress"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -33852,10 +33852,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyTaxScheme/cac:TaxScheme/cac:JurisdictionRegionAddress"
-                  priority="1000"
-                  mode="M907">
+                 priority="1000"
+                 mode="M907">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyTaxScheme/cac:TaxScheme/cac:JurisdictionRegionAddress"/>
+                       context="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyTaxScheme/cac:TaxScheme/cac:JurisdictionRegionAddress"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -33876,10 +33876,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyTaxScheme/cac:TaxScheme/cbc:CurrencyCode"
-                  priority="1000"
-                  mode="M908">
+                 priority="1000"
+                 mode="M908">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyTaxScheme/cac:TaxScheme/cbc:CurrencyCode"/>
+                       context="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyTaxScheme/cac:TaxScheme/cbc:CurrencyCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -33900,10 +33900,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyTaxScheme/cac:TaxScheme/cbc:ID"
-                  priority="1000"
-                  mode="M909">
+                 priority="1000"
+                 mode="M909">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyTaxScheme/cac:TaxScheme/cbc:ID"/>
+                       context="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyTaxScheme/cac:TaxScheme/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -33924,10 +33924,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyTaxScheme/cac:TaxScheme/cbc:Name"
-                  priority="1000"
-                  mode="M910">
+                 priority="1000"
+                 mode="M910">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyTaxScheme/cac:TaxScheme/cbc:Name"/>
+                       context="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyTaxScheme/cac:TaxScheme/cbc:Name"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -33948,10 +33948,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyTaxScheme/cac:TaxScheme/cbc:TaxTypeCode"
-                  priority="1000"
-                  mode="M911">
+                 priority="1000"
+                 mode="M911">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyTaxScheme/cac:TaxScheme/cbc:TaxTypeCode"/>
+                       context="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyTaxScheme/cac:TaxScheme/cbc:TaxTypeCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -33972,10 +33972,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyTaxScheme/cbc:CompanyID"
-                  priority="1000"
-                  mode="M912">
+                 priority="1000"
+                 mode="M912">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyTaxScheme/cbc:CompanyID"/>
+                       context="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyTaxScheme/cbc:CompanyID"/>
       <!--REPORT -->
       <xsl:if test="@schemeID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
@@ -34062,10 +34062,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyTaxScheme/cbc:ExemptionReason"
-                  priority="1000"
-                  mode="M913">
+                 priority="1000"
+                 mode="M913">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyTaxScheme/cbc:ExemptionReason"/>
+                       context="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyTaxScheme/cbc:ExemptionReason"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -34086,10 +34086,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyTaxScheme/cbc:ExemptionReasonCode"
-                  priority="1000"
-                  mode="M914">
+                 priority="1000"
+                 mode="M914">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyTaxScheme/cbc:ExemptionReasonCode"/>
+                       context="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyTaxScheme/cbc:ExemptionReasonCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -34110,10 +34110,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyTaxScheme/cbc:RegistrationName"
-                  priority="1000"
-                  mode="M915">
+                 priority="1000"
+                 mode="M915">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyTaxScheme/cbc:RegistrationName"/>
+                       context="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyTaxScheme/cbc:RegistrationName"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -34134,10 +34134,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyTaxScheme/cbc:TaxLevelCode"
-                  priority="1000"
-                  mode="M916">
+                 priority="1000"
+                 mode="M916">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyTaxScheme/cbc:TaxLevelCode"/>
+                       context="/p1:Invoice/cac:TaxRepresentativeParty/cac:PartyTaxScheme/cbc:TaxLevelCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -34158,10 +34158,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxRepresentativeParty/cac:Person"
-                  priority="1000"
-                  mode="M917">
+                 priority="1000"
+                 mode="M917">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxRepresentativeParty/cac:Person"/>
+                       context="/p1:Invoice/cac:TaxRepresentativeParty/cac:Person"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -34182,10 +34182,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxRepresentativeParty/cac:PhysicalLocation"
-                  priority="1000"
-                  mode="M918">
+                 priority="1000"
+                 mode="M918">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxRepresentativeParty/cac:PhysicalLocation"/>
+                       context="/p1:Invoice/cac:TaxRepresentativeParty/cac:PhysicalLocation"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -34206,10 +34206,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxRepresentativeParty/cac:PostalAddress"
-                  priority="1000"
-                  mode="M919">
+                 priority="1000"
+                 mode="M919">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxRepresentativeParty/cac:PostalAddress"/>
+                       context="/p1:Invoice/cac:TaxRepresentativeParty/cac:PostalAddress"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -34230,10 +34230,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxRepresentativeParty/cac:PowerOfAttorney"
-                  priority="1000"
-                  mode="M920">
+                 priority="1000"
+                 mode="M920">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxRepresentativeParty/cac:PowerOfAttorney"/>
+                       context="/p1:Invoice/cac:TaxRepresentativeParty/cac:PowerOfAttorney"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -34254,10 +34254,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxRepresentativeParty/cac:ServiceProviderParty"
-                  priority="1000"
-                  mode="M921">
+                 priority="1000"
+                 mode="M921">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxRepresentativeParty/cac:ServiceProviderParty"/>
+                       context="/p1:Invoice/cac:TaxRepresentativeParty/cac:ServiceProviderParty"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -34278,10 +34278,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxRepresentativeParty/cbc:EndpointID"
-                  priority="1000"
-                  mode="M922">
+                 priority="1000"
+                 mode="M922">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxRepresentativeParty/cbc:EndpointID"/>
+                       context="/p1:Invoice/cac:TaxRepresentativeParty/cbc:EndpointID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -34302,10 +34302,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxRepresentativeParty/cbc:IndustryClassificationCode"
-                  priority="1000"
-                  mode="M923">
+                 priority="1000"
+                 mode="M923">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxRepresentativeParty/cbc:IndustryClassificationCode"/>
+                       context="/p1:Invoice/cac:TaxRepresentativeParty/cbc:IndustryClassificationCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -34326,10 +34326,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxRepresentativeParty/cbc:LogoReferenceID"
-                  priority="1000"
-                  mode="M924">
+                 priority="1000"
+                 mode="M924">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxRepresentativeParty/cbc:LogoReferenceID"/>
+                       context="/p1:Invoice/cac:TaxRepresentativeParty/cbc:LogoReferenceID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -34350,10 +34350,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxRepresentativeParty/cbc:MarkAttentionIndicator"
-                  priority="1000"
-                  mode="M925">
+                 priority="1000"
+                 mode="M925">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxRepresentativeParty/cbc:MarkAttentionIndicator"/>
+                       context="/p1:Invoice/cac:TaxRepresentativeParty/cbc:MarkAttentionIndicator"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -34374,10 +34374,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxRepresentativeParty/cbc:MarkCareIndicator"
-                  priority="1000"
-                  mode="M926">
+                 priority="1000"
+                 mode="M926">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxRepresentativeParty/cbc:MarkCareIndicator"/>
+                       context="/p1:Invoice/cac:TaxRepresentativeParty/cbc:MarkCareIndicator"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -34398,10 +34398,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxRepresentativeParty/cbc:WebsiteURI"
-                  priority="1000"
-                  mode="M927">
+                 priority="1000"
+                 mode="M927">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxRepresentativeParty/cbc:WebsiteURI"/>
+                       context="/p1:Invoice/cac:TaxRepresentativeParty/cbc:WebsiteURI"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -34422,16 +34422,16 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal"
-                  priority="1000"
-                  mode="M928">
+                 priority="1000"
+                 mode="M928">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal"/>
+                       context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(cbc:TaxableAmount)=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(cbc:TaxableAmount)=1">
+                                test="count(cbc:TaxableAmount)=1">
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -34450,10 +34450,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory"
-                  priority="1000"
-                  mode="M929">
+                 priority="1000"
+                 mode="M929">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory"/>
+                       context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(cbc:ID)=1"/>
@@ -34477,10 +34477,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme"
-                  priority="1000"
-                  mode="M930">
+                 priority="1000"
+                 mode="M930">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme"/>
+                       context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(cbc:ID)=1"/>
@@ -34504,10 +34504,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cac:JurisdictionRegionAddress"
-                  priority="1000"
-                  mode="M931">
+                 priority="1000"
+                 mode="M931">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cac:JurisdictionRegionAddress"/>
+                       context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cac:JurisdictionRegionAddress"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -34528,10 +34528,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:CurrencyCode"
-                  priority="1000"
-                  mode="M932">
+                 priority="1000"
+                 mode="M932">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:CurrencyCode"/>
+                       context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:CurrencyCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -34552,10 +34552,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:ID"
-                  priority="1000"
-                  mode="M933">
+                 priority="1000"
+                 mode="M933">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:ID"/>
+                       context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:ID"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="normalize-space(.)='VAT'"/>
@@ -34656,10 +34656,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:Name"
-                  priority="1000"
-                  mode="M934">
+                 priority="1000"
+                 mode="M934">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:Name"/>
+                       context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:Name"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -34680,10 +34680,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:TaxTypeCode"
-                  priority="1000"
-                  mode="M935">
+                 priority="1000"
+                 mode="M935">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:TaxTypeCode"/>
+                       context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:TaxTypeCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -34704,10 +34704,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:ID"
-                  priority="1000"
-                  mode="M936">
+                 priority="1000"
+                 mode="M936">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:ID"/>
+                       context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:ID"/>
       <!--REPORT -->
       <xsl:if test="@schemeID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
@@ -34794,10 +34794,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:Name"
-                  priority="1000"
-                  mode="M937">
+                 priority="1000"
+                 mode="M937">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:Name"/>
+                       context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:Name"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -34818,10 +34818,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:PerUnitAmount"
-                  priority="1000"
-                  mode="M938">
+                 priority="1000"
+                 mode="M938">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:PerUnitAmount"/>
+                       context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:PerUnitAmount"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -34842,10 +34842,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:Percent"
-                  priority="1000"
-                  mode="M939">
+                 priority="1000"
+                 mode="M939">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:Percent"/>
+                       context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:Percent"/>
       <!--REPORT -->
       <xsl:if test="@format">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@format">
@@ -34866,10 +34866,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:TaxExemptionReason"
-                  priority="1000"
-                  mode="M940">
+                 priority="1000"
+                 mode="M940">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:TaxExemptionReason"/>
+                       context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:TaxExemptionReason"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -34901,10 +34901,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:TaxExemptionReasonCode"
-                  priority="1000"
-                  mode="M941">
+                 priority="1000"
+                 mode="M941">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:TaxExemptionReasonCode"/>
+                       context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:TaxExemptionReasonCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -34925,10 +34925,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:TierRange"
-                  priority="1000"
-                  mode="M942">
+                 priority="1000"
+                 mode="M942">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:TierRange"/>
+                       context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:TierRange"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -34949,10 +34949,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:TierRatePercent"
-                  priority="1000"
-                  mode="M943">
+                 priority="1000"
+                 mode="M943">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:TierRatePercent"/>
+                       context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:TierRatePercent"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -34973,10 +34973,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cbc:BaseUnitMeasure"
-                  priority="1000"
-                  mode="M944">
+                 priority="1000"
+                 mode="M944">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cbc:BaseUnitMeasure"/>
+                       context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cbc:BaseUnitMeasure"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -34997,10 +34997,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cbc:CalculationSequenceNumeric"
-                  priority="1000"
-                  mode="M945">
+                 priority="1000"
+                 mode="M945">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cbc:CalculationSequenceNumeric"/>
+                       context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cbc:CalculationSequenceNumeric"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -35021,10 +35021,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cbc:PerUnitAmount"
-                  priority="1000"
-                  mode="M946">
+                 priority="1000"
+                 mode="M946">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cbc:PerUnitAmount"/>
+                       context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cbc:PerUnitAmount"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -35045,10 +35045,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cbc:Percent"
-                  priority="1000"
-                  mode="M947">
+                 priority="1000"
+                 mode="M947">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cbc:Percent"/>
+                       context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cbc:Percent"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -35069,10 +35069,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cbc:TierRange"
-                  priority="1000"
-                  mode="M948">
+                 priority="1000"
+                 mode="M948">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cbc:TierRange"/>
+                       context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cbc:TierRange"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -35093,10 +35093,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cbc:TierRatePercent"
-                  priority="1000"
-                  mode="M949">
+                 priority="1000"
+                 mode="M949">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cbc:TierRatePercent"/>
+                       context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cbc:TierRatePercent"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -35117,10 +35117,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cbc:TransactionCurrencyTaxAmount"
-                  priority="1000"
-                  mode="M950">
+                 priority="1000"
+                 mode="M950">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cbc:TransactionCurrencyTaxAmount"/>
+                       context="/p1:Invoice/cac:TaxTotal/cac:TaxSubtotal/cbc:TransactionCurrencyTaxAmount"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -35141,10 +35141,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxTotal/cbc:RoundingAmount"
-                  priority="1000"
-                  mode="M951">
+                 priority="1000"
+                 mode="M951">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxTotal/cbc:RoundingAmount"/>
+                       context="/p1:Invoice/cac:TaxTotal/cbc:RoundingAmount"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -35165,10 +35165,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxTotal/cbc:TaxEvidenceIndicator"
-                  priority="1000"
-                  mode="M952">
+                 priority="1000"
+                 mode="M952">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxTotal/cbc:TaxEvidenceIndicator"/>
+                       context="/p1:Invoice/cac:TaxTotal/cbc:TaxEvidenceIndicator"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -35189,10 +35189,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:TaxTotal/cbc:TaxIncludedIndicator"
-                  priority="1000"
-                  mode="M953">
+                 priority="1000"
+                 mode="M953">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:TaxTotal/cbc:TaxIncludedIndicator"/>
+                       context="/p1:Invoice/cac:TaxTotal/cbc:TaxIncludedIndicator"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -35213,10 +35213,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cac:WithholdingTaxTotal"
-                  priority="1000"
-                  mode="M954">
+                 priority="1000"
+                 mode="M954">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cac:WithholdingTaxTotal"/>
+                       context="/p1:Invoice/cac:WithholdingTaxTotal"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -35238,7 +35238,7 @@
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cbc:AccountingCost" priority="1000" mode="M955">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cbc:AccountingCost"/>
+                       context="/p1:Invoice/cbc:AccountingCost"/>
       <!--REPORT -->
       <xsl:if test="@languageID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@languageID">
@@ -35270,10 +35270,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cbc:AccountingCostCode"
-                  priority="1000"
-                  mode="M956">
+                 priority="1000"
+                 mode="M956">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cbc:AccountingCostCode"/>
+                       context="/p1:Invoice/cbc:AccountingCostCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -35295,7 +35295,7 @@
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cbc:CopyIndicator" priority="1000" mode="M957">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cbc:CopyIndicator"/>
+                       context="/p1:Invoice/cbc:CopyIndicator"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -35317,7 +35317,7 @@
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cbc:CustomizationID" priority="1000" mode="M958">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cbc:CustomizationID"/>
+                       context="/p1:Invoice/cbc:CustomizationID"/>
       <!--REPORT -->
       <xsl:if test="@schemeName">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeName">
@@ -35393,10 +35393,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cbc:DocumentCurrencyCode"
-                  priority="1000"
-                  mode="M959">
+                 priority="1000"
+                 mode="M959">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cbc:DocumentCurrencyCode"/>
+                       context="/p1:Invoice/cbc:DocumentCurrencyCode"/>
       <!--REPORT -->
       <xsl:if test="@listID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@listID">
@@ -35593,7 +35593,7 @@
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cbc:InvoiceTypeCode" priority="1000" mode="M961">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cbc:InvoiceTypeCode"/>
+                       context="/p1:Invoice/cbc:InvoiceTypeCode"/>
       <!--REPORT -->
       <xsl:if test="@listID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@listID">
@@ -35703,7 +35703,7 @@
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cbc:IssueTime" priority="1000" mode="M962">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cbc:IssueTime"/>
+                       context="/p1:Invoice/cbc:IssueTime"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -35724,10 +35724,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cbc:LineCountNumeric"
-                  priority="1000"
-                  mode="M963">
+                 priority="1000"
+                 mode="M963">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cbc:LineCountNumeric"/>
+                       context="/p1:Invoice/cbc:LineCountNumeric"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -35780,10 +35780,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cbc:PaymentAlternativeCurrencyCode"
-                  priority="1000"
-                  mode="M965">
+                 priority="1000"
+                 mode="M965">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cbc:PaymentAlternativeCurrencyCode"/>
+                       context="/p1:Invoice/cbc:PaymentAlternativeCurrencyCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -35804,10 +35804,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cbc:PaymentCurrencyCode"
-                  priority="1000"
-                  mode="M966">
+                 priority="1000"
+                 mode="M966">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cbc:PaymentCurrencyCode"/>
+                       context="/p1:Invoice/cbc:PaymentCurrencyCode"/>
       <!--REPORT -->
       <xsl:if test="@listID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@listID">
@@ -35916,10 +35916,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cbc:PricingCurrencyCode"
-                  priority="1000"
-                  mode="M967">
+                 priority="1000"
+                 mode="M967">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cbc:PricingCurrencyCode"/>
+                       context="/p1:Invoice/cbc:PricingCurrencyCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -35940,10 +35940,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cbc:ProfileExecutionID"
-                  priority="1000"
-                  mode="M968">
+                 priority="1000"
+                 mode="M968">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cbc:ProfileExecutionID"/>
+                       context="/p1:Invoice/cbc:ProfileExecutionID"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -35965,7 +35965,7 @@
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cbc:ProfileID" priority="1000" mode="M969">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cbc:ProfileID"/>
+                       context="/p1:Invoice/cbc:ProfileID"/>
       <!--REPORT -->
       <xsl:if test="@schemeName">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeName">
@@ -36042,7 +36042,7 @@
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cbc:TaxCurrencyCode" priority="1000" mode="M970">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cbc:TaxCurrencyCode"/>
+                       context="/p1:Invoice/cbc:TaxCurrencyCode"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
@@ -36064,7 +36064,7 @@
    <!--RULE -->
    <xsl:template match="/p1:Invoice/cbc:UBLVersionID" priority="1000" mode="M971">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/cbc:UBLVersionID"/>
+                       context="/p1:Invoice/cbc:UBLVersionID"/>
       <!--REPORT -->
       <xsl:if test="@schemeID">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="@schemeID">
@@ -36173,7 +36173,7 @@
    <!--RULE -->
    <xsl:template match="/p1:Invoice/ext:UBLExtensions" priority="1000" mode="M973">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/p1:Invoice/ext:UBLExtensions"/>
+                       context="/p1:Invoice/ext:UBLExtensions"/>
       <!--REPORT -->
       <xsl:if test=".">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
