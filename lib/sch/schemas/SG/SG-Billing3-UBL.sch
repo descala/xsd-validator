@@ -29,7 +29,7 @@
   
   
   
-  <pattern id="Peppol derived">
+  <pattern id="Peppol_derived">
     
       <rule context="/ubl:Invoice | /cn:CreditNote">
          <assert id="PEPPOL-EN16931-R004-SG"
@@ -38,6 +38,12 @@
       </rule>
   </pattern>
   <pattern id="UBL-model">
+	     <rule context="/*/cbc:UUID">
+		       <assert id="BR-109-GST-SG"
+                 test="matches(normalize-space(.), '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$')"
+                 flag="warning">[BR-109-GST-SG] An Universally unique Invoice Identifier shall be formatted according to the UUID standard </assert>				 
+      </rule>
+
       <rule context="cac:LegalMonetaryTotal">
          <assert test="exists(cbc:TaxExclusiveAmount)"
                  flag="fatal"
@@ -71,9 +77,9 @@
 
       </rule>
       <rule context="/ubl:Invoice | /cn:CreditNote">
-         <assert test="every $taxcurrency in cbc:TaxCurrencyCode satisfies exists(//cac:TaxTotal/cbc:TaxAmount[@currencyID=$taxcurrency])"
+         <assert test="every $taxcurrency in cbc:TaxCurrencyCode satisfies exists(//cac:TaxTotal/cbc:TaxAmount[@currencyID=$taxcurrency]) and exists(cac:AdditionalDocumentReference[cbc:DocumentTypeCode='sgdtotal-incl-gst']) and exists(cac:AdditionalDocumentReference[cbc:DocumentTypeCode='sgdtotal-excl-gst'])"
                  flag="fatal"
-                 id="BR-53-GST-SG">[BR-53-GST-SG]-If the GST accounting currency code (BT-6-GST) is present, then the Invoice total GST amount in accounting currency (BT-111-GST) shall be provided.</assert>
+                 id="BR-53-GST-SG">[BR-53-GST-SG]-If the GST accounting currency code (BT-6-GST) is present, then the Invoice total GST amount (BT-111-GST), Invoice total including GST amount and Invoice Total excluding GST amount in accounting currency shall be provided.</assert>
          <assert test="every $Currency in cbc:DocumentCurrencyCode satisfies (count(//cac:TaxTotal/xs:decimal(cbc:TaxAmount[@currencyID=$Currency])) eq 1) and (cac:LegalMonetaryTotal/xs:decimal(cbc:TaxInclusiveAmount) = round( (cac:LegalMonetaryTotal/xs:decimal(cbc:TaxExclusiveAmount) + cac:TaxTotal/xs:decimal(cbc:TaxAmount[@currencyID=$Currency])) * 10 * 10) div 100)"
                  flag="fatal"
                  id="BR-CO-15-GST-SG">[BR-CO-15-GST-SG]-Invoice total amount with GST (BT-112-GST) = Invoice total amount without GST (BT-109-GST) + Invoice total GST amount (BT-110-GST).</assert>
@@ -137,13 +143,27 @@
          <assert test="exists(cac:TaxCategory[cac:TaxScheme/cbc:ID='GST']/cbc:ID)"
                  flag="fatal"
                  id="BR-47-GST-SG">[BR-47-GST-SG]-Each GST Breakdown (BG-23-GST) shall be defined through a GST category code (BT-118-GST).</assert>
-         <assert test="exists(cac:TaxCategory[cac:TaxScheme/cbc:ID='GST']/cbc:Percent) or (normalize-space(cac:TaxCategory[cac:TaxScheme/cbc:ID='GST']/cbc:ID)='')"
+         <assert test="exists(cac:TaxCategory[cac:TaxScheme/cbc:ID='GST']/cbc:Percent) or exists(normalize-space(cac:TaxCategory[cac:TaxScheme/cbc:ID='GST']/cbc:ID)='NG')"
                  flag="fatal"
                  id="BR-48-GST-SG">[BR-48-GST-SG]-Each GST breakdown (BG-23-GST) shall have a GST category rate (BT-119-GST), except if the Invoice is not subject to GST.</assert>
-         <assert test="(round(cac:TaxCategory[cac:TaxScheme/normalize-space(upper-case(cbc:ID))='GST']/xs:decimal(cbc:Percent)) = 0 and (round(xs:decimal(cbc:TaxAmount)) = 0)) or (round(cac:TaxCategory[cac:TaxScheme/normalize-space(upper-case(cbc:ID))='GST']/xs:decimal(cbc:Percent)) != 0 and ((abs(xs:decimal(cbc:TaxAmount)) - 1 &lt; round(abs(xs:decimal(cbc:TaxableAmount)) * (cac:TaxCategory[cac:TaxScheme/normalize-space(upper-case(cbc:ID))='GST']/xs:decimal(cbc:Percent) div 100) * 10 * 10) div 100 ) and (abs(xs:decimal(cbc:TaxAmount)) + 1 &gt; round(abs(xs:decimal(cbc:TaxableAmount)) * (cac:TaxCategory[cac:TaxScheme/normalize-space(upper-case(cbc:ID))='GST']/xs:decimal(cbc:Percent) div 100) * 10 * 10) div 100 )))  or (not(exists(cac:TaxCategory[cac:TaxScheme/normalize-space(upper-case(cbc:ID))='GST']/xs:decimal(cbc:Percent))) and (round(xs:decimal(cbc:TaxAmount)) = 0))"
+         <assert test="(round(cac:TaxCategory[cac:TaxScheme/normalize-space(upper-case(cbc:ID))='GST']/xs:decimal(cbc:Percent)) = 0 and (round(xs:decimal(cbc:TaxAmount)) = 0)) or (round(cac:TaxCategory[cac:TaxScheme/normalize-space(upper-case(cbc:ID))='GST']/xs:decimal(cbc:Percent)) != 0 and ((abs(xs:decimal(cbc:TaxAmount)) - 2 &lt; round(abs(xs:decimal(cbc:TaxableAmount)) * (cac:TaxCategory[cac:TaxScheme/normalize-space(upper-case(cbc:ID))='GST']/xs:decimal(cbc:Percent) div 100) * 10 * 10) div 100 ) and (abs(xs:decimal(cbc:TaxAmount)) + 2 &gt; round(abs(xs:decimal(cbc:TaxableAmount)) * (cac:TaxCategory[cac:TaxScheme/normalize-space(upper-case(cbc:ID))='GST']/xs:decimal(cbc:Percent) div 100) * 10 * 10) div 100 )))  or (not(exists(cac:TaxCategory[cac:TaxScheme/normalize-space(upper-case(cbc:ID))='GST']/xs:decimal(cbc:Percent))) and (round(xs:decimal(cbc:TaxAmount)) = 0))"
                  flag="fatal"
                  id="BR-CO-17-GST-SG">[BR-CO-17-GST-SG]-GST category tax amount (BT-117-GST) = GST category taxable amount (BT-116-GST) x (GST category rate (BT-119-GST) / 100).</assert>
       </rule>
+  </pattern>
+  <pattern>
+	     <rule context="cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory[contains( ' SR SRCA-S SRCA-C ZR SRRC SROVR-RS SROVR-LVG SRLVG NA ',concat(' ',normalize-space(cbc:ID),' ') ) ] ">
+	        <assert test="((//cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme[cac:TaxScheme/(normalize-space(upper-case(cbc:ID)) = 'GST')]/cbc:CompanyID) or (//cac:TaxRepresentativeParty/cac:PartyTaxScheme[cac:TaxScheme/(normalize-space(upper-case(cbc:ID)) = 'GST')]/cbc:CompanyID))"
+                 flag="fatal"
+                 id="BR-105-GST-SG">[BR-105-GST-SG]-An Invoice that contains an GST Category code of value SR, SRCA-S, SRCA-C, ZR, SRRC, SROVR-RS, SROVR-LVG, SRLVG or NA shall contain the Seller GST identifier (BT-31-GST) or the Seller tax representative GST identifier (BT-63-GST) </assert>
+	        <assert test="exists(/*/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:StreetName) and exists(/*/cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:PostalZone)"
+                 flag="warning"
+                 id="BR-106-GST-SG">[BR-106-GST-SG]-An Invoice that contains an GST Category code of value SR, SRCA-S, SRCA-C, ZR, SRRC, SROVR-RS, SROVR-LVG, SRLVG or NA shall contain the Seller address line 1 (BT-35) and Seller post code (BT-38)</assert>	
+	        <assert test="exists(/*/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:StreetName) and exists(/*/cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:PostalZone)"
+                 flag="warning"
+                 id="BR-107-GST-SG">[BR-107-GST-SG]-An Invoice that contains an GST Category code of value SR, SRCA-S, SRCA-C, ZR, SRRC, SROVR-RS, SROVR-LVG, SRLVG or NA shall contain the Buyer address line 1 (BT-50) and Buyer post code (BT-53)</assert>	
+	        <assert test="exists(/*/cbc:UUID)" flag="warning" id="BR-108-GST-SG">[BR-108-GST-SG]-An Invoice that contains an GST Category code of value SR, SRCA-S, SRCA-C, ZR, SRRC, SROVR-RS, SROVR-LVG, SRLVG or NA shall contain an Universally unique Invoice identifier (UUID) (BT-SG-003) </assert>	
+	     </rule>
   </pattern>
   
   <pattern id="UBL-syntax">
@@ -190,7 +210,27 @@
                  flag="fatal"
                  test="string-length(substring-after(cbc:TaxAmount,'.'))&lt;=2">[BR-DEC-20-GST-SG]-The allowed maximum number of decimals for the GST category tax amount (BT-117-GST) is 2.    </assert>
       </rule>
-
+      <rule context="cac:AdditionalDocumentReference[cbc:DocumentTypeCode]">
+         <assert id="UBL-SR-43-GST-SG"
+                 flag="fatal"
+                 test="((cbc:DocumentTypeCode='130' or cbc:DocumentTypeCode='sgdtotal-incl-gst' or cbc:DocumentTypeCode='sgdtotal-excl-gst') or ((local-name(/*) = 'CreditNote') and (cbc:DocumentTypeCode='50')))">[UBL-SR-43-GST-SG]-AdditionalDocumentReference/DocumentTypeCode shall only be used for invoiced object (code 130), project reference in CreditNote (code 50) or total amounts including or excluding GST in SGD (code sgdtotal-incl-gst or sgdtotal-excl-gst)</assert>
+         <assert id="BR-100-GST-SG"
+                 flag="fatal"
+                 test="(cbc:DocumentTypeCode='sgdtotal-incl-gst' and cbc:DocumentDescription castable as xs:decimal and string-length(substring-after(cbc:DocumentDescription,'.'))&lt;=2) or cbc:DocumentTypeCode != 'sgdtotal-incl-gst' ">[BR-100-GST-SG]- Total Amount including GST in SGD must be numeric and have maximum of 2 decimals</assert>
+         <assert id="BR-101-GST-SG"
+                 flag="fatal"
+                 test="(cbc:DocumentTypeCode='sgdtotal-excl-gst' and cbc:DocumentDescription castable as xs:decimal and string-length(substring-after(cbc:DocumentDescription,'.'))&lt;=2) or cbc:DocumentTypeCode != 'sgdtotal-excl-gst' ">[BR-101-GST-SG]- Total Amount excluding GST in SGD must be numeric and have maximum of 2 decimals</assert>
+		       <assert id="BR-102-GST-SG"
+                 flag="fatal"
+                 test="((cbc:DocumentTypeCode='130' or cbc:DocumentTypeCode='sgdtotal-incl-gst' or cbc:DocumentTypeCode='sgdtotal-excl-gst') or ((local-name(/*) = 'CreditNote') and (cbc:DocumentTypeCode='50'))) and not(cac:Attachment)">[BR-102-GST-SG]- Attachment must not be used when providing reference to Total Amount incl or excl GST in SGD, Invoiced Object Reference or Project Reference</assert>
+         <assert id="BR-103-GST-SG"
+                 flag="fatal"
+                 test="(cbc:DocumentTypeCode='sgdtotal-incl-gst' and cbc:ID='SGD')  or cbc:DocumentTypeCode != 'sgdtotal-incl-gst' ">[BR-103-GST-SG]- When providing Total Amount including GST in SGD, element ID must be set to the code value SGD</assert>
+         <assert id="BR-104-GST-SG"
+                 flag="fatal"
+                 test="(cbc:DocumentTypeCode='sgdtotal-excl-gst' and cbc:ID='SGD')  or cbc:DocumentTypeCode != 'sgdtotal-excl-gst' ">[BR-104-GST-SG]- When providing Total Amount excluding GST in SGD, element ID must be set to the code value SGD</assert>
+  
+      </rule>
   </pattern>
   <pattern id="Codesmodel">
       <rule context="cac:PaymentMeans/cbc:PaymentMeansCode" flag="fatal">
@@ -199,14 +239,16 @@
                  flag="fatal">[BR-CL-16-SG]-Payment means in an invoice MUST be coded using UNCL4461 code list, or code Z01 or Z02</assert>
       </rule>
       <rule context="cac:TaxCategory/cbc:ID" flag="fatal">
-         <assert test="( ( not(contains(normalize-space(.),' ')) and contains( ' SR SRCA-S SRCA-C ZR ES33 ESN33 DS OS NG SRRC SROVR ',concat(' ',normalize-space(.),' ') ) ) )"
+         <assert test="( ( not(contains(normalize-space(.),' ')) and contains( ' SR SRCA-S SRCA-C ZR ES33 ESN33 DS OS NA NG SRRC SROVR-RS SROVR-LVG SRLVG ',concat(' ',normalize-space(.),' ') ) ) )"
                  id="BR-CL-17-GST-SG"
                  flag="fatal">[BR-CL-17-GST-SG]-Invoice tax categories MUST be coded using valid Singapore code values</assert>
       </rule>
       <rule context="cac:ClassifiedTaxCategory/cbc:ID" flag="fatal">
-         <assert test="( ( not(contains(normalize-space(.),' ')) and contains( ' SR SRCA-S SRCA-C ZR ES33 ESN33 DS OS NG SRRC SROVR ',concat(' ',normalize-space(.),' ') ) ) )"
+         <assert test="( ( not(contains(normalize-space(.),' ')) and contains( ' SR SRCA-S SRCA-C ZR ES33 ESN33 DS OS NA NG SRRC SROVR-RS SROVR-LVG SRLVG ',concat(' ',normalize-space(.),' ') ) ) )"
                  id="BR-CL-18-GST-SG"
                  flag="fatal">[BR-CL-18-GST-SG]-Invoice tax categories MUST be coded using valid Singapore code values</assert>
       </rule>
   </pattern>
+
+  
 </schema>

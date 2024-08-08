@@ -3,6 +3,7 @@
   <cbc:CustomizationID>urn:cen.eu:en16931:2017#conformant#urn:fdc:peppol.eu:2017:poacc:billing:international:sg:3.0</cbc:CustomizationID>
   <cbc:ProfileID>urn:fdc:peppol.eu:2017:poacc:billing:01:1.0</cbc:ProfileID>
   <cbc:ID>1</cbc:ID>
+  <cbc:UUID>2523149b-cb40-4b32-9004-debca57b80ee</cbc:UUID>
   <cbc:IssueDate>2021-12-17</cbc:IssueDate>
   <cbc:DueDate>2022-01-01</cbc:DueDate>
   <cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode>
@@ -23,6 +24,12 @@
           <cbc:IdentificationCode>SG</cbc:IdentificationCode>
         </cac:Country>
       </cac:PostalAddress>
+      <cac:PartyTaxScheme>
+        <cbc:CompanyID>SGTSTIMDADEMO09</cbc:CompanyID>
+        <cac:TaxScheme>
+          <cbc:ID>GST</cbc:ID>
+        </cac:TaxScheme>
+      </cac:PartyTaxScheme>
       <cac:PartyLegalEntity>
         <cbc:RegistrationName>testtest</cbc:RegistrationName>
         <cbc:CompanyID>SGTSTIMDADEMO09</cbc:CompanyID>
@@ -40,10 +47,19 @@
         <cbc:Name>test</cbc:Name>
       </cac:PartyName>
       <cac:PostalAddress>
+        <cbc:StreetName>test</cbc:StreetName>
+        <cbc:CityName>asd</cbc:CityName>
+        <cbc:PostalZone>1234</cbc:PostalZone>
         <cac:Country>
           <cbc:IdentificationCode>SG</cbc:IdentificationCode>
         </cac:Country>
       </cac:PostalAddress>
+      <cac:PartyTaxScheme>
+        <cbc:CompanyID>SGUENT08GA0028A</cbc:CompanyID>
+        <cac:TaxScheme>
+          <cbc:ID>GST</cbc:ID>
+        </cac:TaxScheme>
+      </cac:PartyTaxScheme>
       <cac:PartyLegalEntity>
         <cbc:RegistrationName>test</cbc:RegistrationName>
         <cbc:CompanyID>SGUENT08GA0028A</cbc:CompanyID>
