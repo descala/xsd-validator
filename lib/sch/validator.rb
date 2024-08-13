@@ -1,5 +1,5 @@
 require 'nokogiri'
-require_relative '../../vendor/schematron-wrapper-saxon11/lib/schematron'
+require_relative '../../vendor/schematron-wrapper-saxon/lib/schematron'
 
 module Sch
   module Validator
@@ -105,7 +105,7 @@ module Sch
         %w(PEPPOLBIS-T16.sch)
 
       # XRechnung UBL / CII
-      when 'urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_2.0', 'urn:cen.eu:en16931#compliant#factur-x.eu:1p0:basic'
+      when 'urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_2.0'
         if doc_nokogiri.root.name == 'Invoice'
           %w(CEN-EN16931-UBL.sch XRechnung-UBL-validation-Invoice_2.0.sch)
         elsif doc_nokogiri.root.name == 'CreditNote'
@@ -149,6 +149,23 @@ module Sch
         else
           %w(CEN-EN16931-UBL.sch EN16931-CII-validation.sch)
         end
+
+      # Factur-X Profil MINIMUM
+      when 'urn:factur-x.eu:1p0:minimum'
+        %w(FACTUR-X_MINIMUM.sch)
+
+      # Factur-X Profil BASIC WL
+      when 'urn:factur-x.eu:1p0:basicwl'
+        %w(FACTUR-X_BASIC-WL.sch)
+
+      # Factur-X Profil EN 16931 (COMFORT)
+      # Factur-X Profil BASIC
+      when 'urn:cen.eu:en16931:2017', 'urn:cen.eu:en16931:2017#compliant#urn:factur-x.eu:1p0:basic'
+        %w(EN16931-CII-validation-preprocessed.sch)
+
+      # Factur-X Profil EXTENDED
+      when 'urn:cen.eu:en16931:2017#conformant#urn:factur-x.eu:1p0:extended'
+        %w(FACTUR-X_EXTENDED.sch)
 
       # NL CIUS / SimplerInvoicing
       when 'urn:cen.eu:en16931:2017#compliant#urn:fdc:nen.nl:nlcius:v1.0'
@@ -258,7 +275,7 @@ module Sch
     # Creates compiled xslt
     def self.compile
       Dir.chdir('lib/sch/schemas/') do
-        Dir["*.sch","*/*.sch","xrechnung/*/*/*.sch","PINT/*/*.sch"].each do |schematron_file|
+        Dir["*.sch","*/*.sch","*/*/*.sch","xrechnung/*/*/*.sch","PINT/*/*.sch"].each do |schematron_file|
           cache_xslt = "../compiled/#{File.basename(schematron_file)}.xslt"
           compiled_schematron = schematron_compile(schematron_file)
           File.write(cache_xslt, compiled_schematron)

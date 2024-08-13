@@ -43,4 +43,19 @@ RSpec.describe Sch::Validator do
     expect { sch_validate!(doc, 0) }.to_not raise_error
   end
 
+  context 'check choose correct schematrons' do
+    files = {
+      'spec/files/sch/factur-x/factur-x-minimum.xml' => ['FACTUR-X_MINIMUM.sch'],
+      'spec/files/sch/factur-x/factur-x-basic.xml' => ['EN16931-CII-validation-preprocessed.sch'],
+      'spec/files/sch/factur-x/factur-x-basic-wl.xml' => ['FACTUR-X_BASIC-WL.sch'],
+      'spec/files/sch/factur-x/factur-x-en16931.xml' => ['EN16931-CII-validation-preprocessed.sch'],
+      'spec/files/sch/factur-x/factur-x-extended.xml' => ['FACTUR-X_EXTENDED.sch'],
+      'spec/files/sch/zugferd_1.xml' => ['CEN-EN16931-UBL.sch', 'EN16931-CII-validation.sch']
+    }
+    files.each do |file_path, schematrons|
+      it "#{file_path} checks with #{schematrons}" do
+        expect(schematrons(File.read(file_path), nil)).to eq(schematrons)
+      end
+    end
+  end
 end
