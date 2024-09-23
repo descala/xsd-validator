@@ -50,7 +50,8 @@ RSpec.describe Sch::Validator do
       'spec/files/sch/factur-x/factur-x-basic-wl.xml' => ['FACTUR-X_BASIC-WL.sch'],
       'spec/files/sch/factur-x/factur-x-en16931.xml' => ['EN16931-CII-validation-preprocessed.sch'],
       'spec/files/sch/factur-x/factur-x-extended.xml' => ['FACTUR-X_EXTENDED.sch'],
-      'spec/files/sch/zugferd_1.xml' => ['CEN-EN16931-UBL.sch', 'EN16931-CII-validation.sch']
+      'spec/files/sch/zugferd_1.xml' => ['CEN-EN16931-UBL.sch', 'EN16931-CII-validation.sch'],
+      'spec/files/sch/xrechnung-cii_3.0-wrong.xml' => ['CEN-EN16931-UBL.sch', 'XRechnung-CII-validation_3.0.sch']
     }
     files.each do |file_path, schematrons|
       it "#{file_path} checks with #{schematrons}" do
