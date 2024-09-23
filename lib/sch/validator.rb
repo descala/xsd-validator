@@ -146,6 +146,8 @@ module Sch
       when 'urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_3.0'
         if %w(Invoice CreditNote).include?(doc_nokogiri.root.name)
           %w(CEN-EN16931-UBL.sch XRechnung-UBL-validation_3.0.sch)
+        elsif doc_nokogiri.root.name == 'CrossIndustryInvoice'
+          %w(CEN-EN16931-UBL.sch XRechnung-CII-validation_3.0.sch)
         else
           %w(CEN-EN16931-UBL.sch EN16931-CII-validation.sch)
         end
