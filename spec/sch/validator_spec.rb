@@ -76,4 +76,9 @@ RSpec.describe Sch::Validator do
       end
     end
   end
+
+  it 'does not raises ValidationError when languageID' do
+    doc=File.read('spec/files/sch/invoice-languageid.xml')
+    expect { sch_validate!(doc) }.to_not raise_error(Sch::Validator::ValidationWarning, /WARNING: \[UBL-DT-19\]/)
+  end
 end
