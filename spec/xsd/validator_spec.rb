@@ -47,7 +47,12 @@ RSpec.describe Xsd::Validator do
       'spec/files/xsd/factur-x/factur-x-basic-wl.xml' => /FACTUR-X_BASIC-WL.xsd/,
       'spec/files/xsd/factur-x/factur-x-en16931.xml' => /FACTUR-X_EN16931.xsd/,
       'spec/files/xsd/factur-x/factur-x-extended.xml' => /FACTUR-X_EXTENDED.xsd/,
-      'spec/files/xsd/cii/zugferd_1.xml' => /FACTUR-X_EN16931.xsd/
+      'spec/files/xsd/cii/zugferd_1.xml' => /FACTUR-X_EN16931.xsd/,
+      'spec/files/sch/cii/xrechnung-cii_3.0-wrong.xml' => 'FACTUR-X_EN16931.xsd',
+      'spec/files/sch/cii/xrechnung-cii_2.3-wrong.xml' => 'FACTUR-X_EN16931.xsd',
+      'spec/files/sch/cii/xrechnung-cii_2.2-wrong.xml' => 'FACTUR-X_EN16931.xsd',
+      'spec/files/sch/cii/xrechnung-cii_2.1.xml' => 'FACTUR-X_EN16931.xsd',
+      'spec/files/sch/cii/xrechnung-cii_2.0.xml' => 'FACTUR-X_EN16931.xsd',
     }
     files.each do |file_path, rgex_xsd_path|
       it "#{file_path} checks with #{rgex_xsd_path}" do

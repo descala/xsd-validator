@@ -105,51 +105,54 @@ module Sch
         %w(PEPPOLBIS-T16.sch)
 
       # XRechnung UBL / CII
-      when 'urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_2.0'
+      when /^urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_2.0/,
+          /^urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_2.0/
         if doc_nokogiri.root.name == 'Invoice'
           %w(CEN-EN16931-UBL.sch XRechnung-UBL-validation-Invoice_2.0.sch)
         elsif doc_nokogiri.root.name == 'CreditNote'
           %w(CEN-EN16931-UBL.sch XRechnung-UBL-validation-CreditNote_2.0.sch)
         else # CII
-          %w(CEN-EN16931-UBL.sch EN16931-CII-validation.sch)
+          %w(XRechnung-CII-validation_2.0.sch)
         end
 
       # XRechnung UBL 2.1
-      when 'urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_2.1'
+      when /^urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_2.1/,
+           /^urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_2.1/
         if doc_nokogiri.root.name == 'Invoice'
           %w(CEN-EN16931-UBL.sch XRechnung-UBL-validation-Invoice_2.1.sch)
         elsif doc_nokogiri.root.name == 'CreditNote'
           %w(CEN-EN16931-UBL.sch XRechnung-UBL-validation-CreditNote_2.1.sch)
         else
-          %w(CEN-EN16931-UBL.sch EN16931-CII-validation.sch)
+          %w(XRechnung-CII-validation_2.1.sch)
         end
 
       # XRechnung UBL 2.2
-      when 'urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_2.2'
+      when /^urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_2.2/,
+           /^urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_2.2/
         if doc_nokogiri.root.name == 'Invoice'
           %w(CEN-EN16931-UBL.sch XRechnung-UBL-validation-Invoice_2.2.sch)
         elsif doc_nokogiri.root.name == 'CreditNote'
           %w(CEN-EN16931-UBL.sch XRechnung-UBL-validation-CreditNote_2.2.sch)
         else
-          %w(CEN-EN16931-UBL.sch EN16931-CII-validation.sch)
+          %w(XRechnung-CII-validation_2.2.sch)
         end
 
         # XRechnung UBL 2.3
-      when 'urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_2.3'
+      when /^urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_2.3/,
+           /^urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_2.3/
         if doc_nokogiri.root.name == 'Invoice' || doc_nokogiri.root.name == 'CreditNote'
           %w(CEN-EN16931-UBL.sch XRechnung-UBL-validation_2.3.sch)
-        else
-          %w(CEN-EN16931-UBL.sch EN16931-CII-validation.sch)
+        else #'CrossIndustryInvoice'
+          %w(XRechnung-CII-validation_2.3.sch)
         end
 
       # XRechnung UBL 3.0
-      when 'urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_3.0'
+      when /^urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_3.0/,
+           /^urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_3.0/
         if %w(Invoice CreditNote).include?(doc_nokogiri.root.name)
           %w(CEN-EN16931-UBL.sch XRechnung-UBL-validation_3.0.sch)
-        elsif doc_nokogiri.root.name == 'CrossIndustryInvoice'
-          %w(CEN-EN16931-UBL.sch XRechnung-CII-validation_3.0.sch)
-        else
-          %w(CEN-EN16931-UBL.sch EN16931-CII-validation.sch)
+        else #'CrossIndustryInvoice'
+          %w(XRechnung-CII-validation_3.0.sch)
         end
 
       # Factur-X Profil MINIMUM
@@ -188,6 +191,7 @@ module Sch
       # PEPPOL Order Change transaction 3.0
       when 'urn:fdc:peppol.eu:poacc:trns:order_change:3'
         %w(PEPPOLBIS-T114.sch)
+
 
       # PEPPOL Order Cancellation transaction 3.0
       when 'urn:fdc:peppol.eu:poacc:trns:order_cancellation:3'
@@ -277,7 +281,7 @@ module Sch
     # Creates compiled xslt
     def self.compile
       Dir.chdir('lib/sch/schemas/') do
-        Dir["*.sch","*/*.sch","*/*/*.sch","xrechnung/*/*/*.sch","PINT/*/*.sch"].each do |schematron_file|
+        Dir["*.sch","*/*.sch","xrechnung/*/*/*.sch","PINT/*/*.sch"].each do |schematron_file|
           cache_xslt = "../compiled/#{File.basename(schematron_file)}.xslt"
           compiled_schematron = schematron_compile(schematron_file)
           File.write(cache_xslt, compiled_schematron)

@@ -13,6 +13,14 @@ RSpec.describe Sch::Validator do
     end
   end
 
+  it 'validates wrong spec files' do
+    Dir["spec/files/sch/**/*-wrong.xml"].each do |filename|
+      doc=File.read(filename) rescue next
+      result = sch_validate(doc)
+      expect(result).to_not eq([[],[]]), "Didn't found errors in fixture #{filename}: #{result}"
+    end
+  end
+
   it 'raises ValidationError for an invalid CIUS pt' do
     doc=File.read('spec/files/sch/invoice-cius-pt-wrong.xml')
     expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationError, /FATAL: .*BR-CIUS-PT-18/)
@@ -50,8 +58,17 @@ RSpec.describe Sch::Validator do
       'spec/files/sch/factur-x/factur-x-basic-wl.xml' => ['FACTUR-X_BASIC-WL.sch'],
       'spec/files/sch/factur-x/factur-x-en16931.xml' => ['EN16931-CII-validation-preprocessed.sch'],
       'spec/files/sch/factur-x/factur-x-extended.xml' => ['FACTUR-X_EXTENDED.sch'],
-      'spec/files/sch/zugferd_1.xml' => ['CEN-EN16931-UBL.sch', 'EN16931-CII-validation.sch'],
-      'spec/files/sch/xrechnung-cii_3.0-wrong.xml' => ['CEN-EN16931-UBL.sch', 'XRechnung-CII-validation_3.0.sch']
+      'spec/files/sch/cii/xrechnung-cii_3.0-wrong.xml' => ['XRechnung-CII-validation_3.0.sch'],
+      'spec/files/sch/cii/xrechnung-cii_2.3-wrong.xml' => ['XRechnung-CII-validation_2.3.sch'],
+      'spec/files/sch/cii/xrechnung-cii_2.2.xml' => ['XRechnung-CII-validation_2.2.sch'],
+      'spec/files/sch/cii/xrechnung-cii_2.1.xml' => ['XRechnung-CII-validation_2.1.sch'],
+      'spec/files/sch/cii/xrechnung-cii_2.0.xml' => ['XRechnung-CII-validation_2.0.sch'],
+      'spec/files/sch/xrechnung-ubl_3.0-credit-note.xml' => ['CEN-EN16931-UBL.sch','XRechnung-UBL-validation_3.0.sch'],
+      'spec/files/sch/xrechnung-ubl_3.0.xml' => ['CEN-EN16931-UBL.sch','XRechnung-UBL-validation_3.0.sch'],
+      'spec/files/sch/xrechnung-ubl_2.3.xml' => ['CEN-EN16931-UBL.sch','XRechnung-UBL-validation_2.3.sch'],
+      'spec/files/sch/xrechnung-ubl_2.3-credit-note.xml' => ['CEN-EN16931-UBL.sch','XRechnung-UBL-validation_2.3.sch'],
+      'spec/files/sch/xrechnung-ubl_2.2.xml' => ['CEN-EN16931-UBL.sch','XRechnung-UBL-validation-Invoice_2.2.sch'],
+      'spec/files/sch/xrechnung-ubl_2.2-credit-note.xml' => ['CEN-EN16931-UBL.sch','XRechnung-UBL-validation-CreditNote_2.2.sch'],
     }
     files.each do |file_path, schematrons|
       it "#{file_path} checks with #{schematrons}" do
