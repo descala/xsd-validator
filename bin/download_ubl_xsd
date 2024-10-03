@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [ "$#" -lt 2 ]; then
+  echo "Uso: $0 <versión> <carpeta>"
+  exit 1
+fi
+
+version=$1
+carpeta=$2
+
+mkdir -p "$carpeta"
+
+wget -r -np -nH --cut-dirs=4 -R "index.html*,robots.txt" -P "$carpeta" "http://docs.oasis-open.org/ubl/os-UBL-$version/xsd/$carpeta/"
+
+
