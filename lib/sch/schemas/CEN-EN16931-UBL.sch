@@ -1077,6 +1077,7 @@
       <assert id="UBL-DT-16" flag="warning" test="not(//@listAgencyName)">[UBL-DT-16]-List agency name attribute should not be present</assert>
       <assert id="UBL-DT-17" flag="warning" test="not(//@listName)">[UBL-DT-17]-List name attribute should not be present</assert>
       <assert id="UBL-DT-18" flag="warning" test="count(//@name) - count(//cbc:PaymentMeansCode/@name) &lt;= 0">[UBL-DT-18]-Name attribute should not be present</assert>
+      <assert id="UBL-DT-19" flag="warning" test="not(//@languageID)">[UBL-DT-19]-Language identifier attribute should not be present</assert>
       <assert id="UBL-DT-20" flag="warning" test="not(//@listURI)">[UBL-DT-20]-List uri attribute should not be present</assert>
       <assert id="UBL-DT-21" flag="warning" test="not(//@listSchemeURI)">[UBL-DT-21]-List scheme uri attribute should not be present</assert>
       <assert id="UBL-DT-22" flag="warning" test="not(//@languageLocaleID)">[UBL-DT-22]-Language local identifier attribute should not be present</assert>
