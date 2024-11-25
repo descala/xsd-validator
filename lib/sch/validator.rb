@@ -112,7 +112,7 @@ module Sch
         elsif doc_nokogiri.root.name == 'CreditNote'
           %w(CEN-EN16931-UBL.sch XRechnung-UBL-validation-CreditNote_2.0.sch)
         else # CII
-          %w(XRechnung-CII-validation_2.0.sch)
+          %w(EN16931-CII-validation.sch XRechnung-CII-validation_2.0.sch)
         end
 
       # XRechnung UBL 2.1
@@ -123,7 +123,7 @@ module Sch
         elsif doc_nokogiri.root.name == 'CreditNote'
           %w(CEN-EN16931-UBL.sch XRechnung-UBL-validation-CreditNote_2.1.sch)
         else
-          %w(XRechnung-CII-validation_2.1.sch)
+          %w(EN16931-CII-validation.sch XRechnung-CII-validation_2.1.sch)
         end
 
       # XRechnung UBL 2.2
@@ -134,7 +134,7 @@ module Sch
         elsif doc_nokogiri.root.name == 'CreditNote'
           %w(CEN-EN16931-UBL.sch XRechnung-UBL-validation-CreditNote_2.2.sch)
         else
-          %w(XRechnung-CII-validation_2.2.sch)
+          %w(EN16931-CII-validation.sch XRechnung-CII-validation_2.2.sch)
         end
 
         # XRechnung UBL 2.3
@@ -143,7 +143,7 @@ module Sch
         if doc_nokogiri.root.name == 'Invoice' || doc_nokogiri.root.name == 'CreditNote'
           %w(CEN-EN16931-UBL.sch XRechnung-UBL-validation_2.3.sch)
         else #'CrossIndustryInvoice'
-          %w(XRechnung-CII-validation_2.3.sch)
+          %w(EN16931-CII-validation.sch XRechnung-CII-validation_2.3.sch)
         end
 
       # XRechnung UBL 3.0
@@ -152,7 +152,7 @@ module Sch
         if %w(Invoice CreditNote).include?(doc_nokogiri.root.name)
           %w(CEN-EN16931-UBL.sch XRechnung-UBL-validation_3.0.sch)
         else #'CrossIndustryInvoice'
-          %w(XRechnung-CII-validation_3.0.sch)
+          %w(EN16931-CII-validation.sch XRechnung-CII-validation_3.0.sch)
         end
 
       # Factur-X Profil MINIMUM

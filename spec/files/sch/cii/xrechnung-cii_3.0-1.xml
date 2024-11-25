@@ -119,9 +119,7 @@
           <ram:CountryID>DE</ram:CountryID>
         </ram:PostalTradeAddress>
         <ram:URIUniversalCommunication>
-          <!--This is the active mutation configuration: cii-br-dex-07-schemeid-test-2-1119-identity -->
-          <?xmute mutator="identity" schematron-valid="xrcii:BR-DEX-07" id="cii-br-dex-07-test-scheme-id-2" description="BR-DEX-07 schemeID must be valid"?>
-          <ram:URIID schemeID="XR01">rechnungsausgang@test.com</ram:URIID>
+         <ram:URIID schemeID="EM">rechnungsausgang@test.com</ram:URIID>
         </ram:URIUniversalCommunication>
         <ram:SpecifiedTaxRegistration>
           <ram:ID schemeID="VA">DE 123456789</ram:ID>
