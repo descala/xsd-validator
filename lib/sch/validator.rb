@@ -66,6 +66,24 @@ module Sch
       return true
     end
 
+    def sch_validate_with_schematron_linked(doc, parts = nil, schematrons = nil)
+      errors = {}
+      warnings = {}
+      schematrons ||= schematrons(doc, parts)
+      schematrons.each do |schematron_file|
+        compiled_schematron = File.read(xslt_path(schematron_file))
+        validation_result = Schematron::XSLT2.validate(compiled_schematron, doc)
+        result_handler = ResultHandler.new(validation_result)
+        result_handler.errors.each do |error|
+          errors.merge!(schematron_file => error)
+        end
+        result_handler.warnings.each do |warning|
+          warnings.merge!(schematron_file => warning)
+        end
+      end
+      [errors, warnings]
+    end
+
     def schematrons(doc, parts)
       if doc.is_a? Nokogiri::XML::Document
         doc_nokogiri = doc
