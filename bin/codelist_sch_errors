@@ -19,7 +19,7 @@ while IFS= read -r file; do
   specifics=0
   while IFS= read -r match; do
     result=$(echo "$match" | sed "s/'/\"/g")
-    result=$(echo "$result" | sed -n "s/.*>\[\(.*\)\][[:space:]-]*\(.*\)<\/assert>/\1: '\2'/p")
+    result=$(echo "$result" | sed -n "s/.*>\[\(.*\)\][[:space:]-]*\(.*\)<\/assert>/\1: '\2'/p" | awk '{gsub(/\xC2\xA0/, ""); print}')
 
     code=$(echo "$result" | cut -d: -f1)
     if [[ " ${seen_codes_in_file[@]} " =~ " ${code} " ]]; then
@@ -42,7 +42,6 @@ while IFS= read -r file; do
         echo -e "    BR-NL-32: 'The use of an allowance reason code is not recommended'" >> "$output_file"
       elif [[ $file_name = 'si-ubl-2.0-nlcius' && $code = 'BR-NL-34' ]]; then
         echo -e "    BR-NL-34: 'The use of a charge reason code is not recommended'" >> "$output_file"
- 
       else
         echo -e "    $result" >> "$output_file"
       fi
@@ -50,7 +49,29 @@ while IFS= read -r file; do
       seen_codes+=("$code")
       generics+=("$result")
     fi
-  done < <(grep -oP '>\[[A-Z0-9-]*\](.*?)<\/assert>' "$file")
+  done < <(grep -oP '>\[.*?\](.*?)<\/assert>' "$file")
+  while IFS= read -r match; do
+if [[ $(echo "$match" | grep -oP '>\[.*?\](.*?)<\/assert>') ]]; then
+      continue
+    fi
+    code=$(echo $match | grep -oP 'id="\K[^"]+')
+    if [[ " ${seen_codes_in_file[@]} " =~ " ${code} " ]]; then
+      continue
+    fi
+    seen_codes_in_file+=("$code")
+    message=$(echo $match | sed -n 's/.*>\(.*\)<\/assert>.*/\1/p' | sed "s/'/\"/g" | awk '{gsub(/\xC2\xA0/, ""); print}' | xargs echo 2>/dev/null)
+    result="$code: '$message'"
+    if [[ " ${seen_codes[@]} " =~ " ${code} " ]]; then
+      if [[ $specifics -eq 0 ]]; then
+        specifics=1
+        echo -e "  $file_name:" >> "$output_file"
+      fi
+      echo -e "    $result" >> "$output_file"
+    else
+      seen_codes+=("$code")
+      generics+=("$result")
+    fi
+  done < <(grep -oP '<assert(.*?)<\/assert>' "$file")
 done < <(find "$base_dir" -type f -name "*.sch")
 
 echo -e "  generic:" >> "$output_file"
