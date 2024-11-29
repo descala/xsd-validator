@@ -1,0 +1,61 @@
+#!/bin/bash
+
+base_dir="../lib/sch/schemas"
+output_file="en.yml"
+file_names=()
+seen_codes=()
+generics=()
+
+echo "---" > "$output_file"
+echo "en:" >> "$output_file"
+
+while IFS= read -r file; do
+  file_name=$(basename "$file" .sch)
+  if [[ " ${file_names[@]} " =~ " ${file_name} " ]]; then
+    continue
+  fi
+  file_names+=("$file_name")
+  seen_codes_in_file=()
+  specifics=0
+  while IFS= read -r match; do
+    result=$(echo "$match" | sed "s/'/\"/g")
+    result=$(echo "$result" | sed -n "s/.*>\[\(.*\)\][[:space:]-]*\(.*\)<\/assert>/\1: '\2'/p")
+
+    code=$(echo "$result" | cut -d: -f1)
+    if [[ " ${seen_codes_in_file[@]} " =~ " ${code} " ]]; then
+      continue
+    fi
+    seen_codes_in_file+=("$code")
+
+    if [[ " ${seen_codes[@]} " =~ " ${code} " ]]; then
+      if [[ $specifics -eq 0 ]]; then
+        specifics=1
+        echo -e "  $file_name:" >> "$output_file"
+      fi
+      if [[ $file_name = 'si-ubl-2.0' && $code = 'BII2-T10-R001' ]]; then
+        echo -e "    BII2-T10-R001: 'An invoice/credit note MUST have a customization identifier'" >> "$output_file"
+      elif [[ $file_name = 'si-ubl-2.0-nlcius' && $code = 'BR-NL-27' ]]; then
+        echo -e "    BR-NL-27: 'The use of address line 3 is not recommended'" >> "$output_file"
+      elif [[ $file_name = 'si-ubl-2.0-nlcius' && $code = 'BR-NL-28' ]]; then
+        echo -e "    BR-NL-28: 'The use of a country subdivision is not recommended'" >> "$output_file"
+      elif [[ $file_name = 'si-ubl-2.0-nlcius' && $code = 'BR-NL-32' ]]; then
+        echo -e "    BR-NL-32: 'The use of an allowance reason code is not recommended'" >> "$output_file"
+      elif [[ $file_name = 'si-ubl-2.0-nlcius' && $code = 'BR-NL-34' ]]; then
+        echo -e "    BR-NL-34: 'The use of a charge reason code is not recommended'" >> "$output_file"
+ 
+      else
+        echo -e "    $result" >> "$output_file"
+      fi
+    else
+      seen_codes+=("$code")
+      generics+=("$result")
+    fi
+  done < <(grep -oP '>\[[A-Z0-9-]*\](.*?)<\/assert>' "$file")
+done < <(find "$base_dir" -type f -name "*.sch")
+
+echo -e "  generic:" >> "$output_file"
+echo -e "    B2B-DOC-1: 'Unknown customizationID'" >> "$output_file"
+
+for value in "${generics[@]}"; do
+  echo -e "    $value" >> "$output_file"
+done
