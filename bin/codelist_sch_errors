@@ -1,17 +1,54 @@
 #!/bin/bash
 
 base_dir="../lib/sch/schemas"
-output_file="en.yml"
+en_output_file="en.yml"
+de_output_file="de.yml"
 file_names=()
-seen_codes=()
-generics=()
+en_seen_codes=()
+de_seen_codes=()
+en_results=()
+de_results=()
 
-echo "---" > "$output_file"
-echo "en:" >> "$output_file"
+is_de_code() {
+    local code="$1"
+    if [[ ($code == BR-DE-* || $code == BR-DEX-*) && ! "$code" =~ ^BR-DE-22$|^BR-DEX-(04|05|06|07|08|09)$ ]]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+string_in_array() {
+  local string="$1"
+  for element in "${@:2}"; do
+    if [[ "$element" == "$string" ]]; then
+      return 0
+    fi
+  done
+  return 1
+}
+
+jumpable() {
+  local code="$1"
+  local file_name="$2"
+  if [[ "$code" == "BR-DE-22" || "$code" == "BR-DE-26" || "$code" == "BR-DEX-13" ]]; then
+    return 0
+  elif [[ "$code" == "BR-DE-18" && ! ("$file_name" == "XRechnung-CII-validation_3.0" || "$file_name" == "XRechnung-UBL-validation_3.0") ]]; then
+    return 0
+  else
+    return 1
+  fi
+}
+
+echo "---" > "$en_output_file"
+echo "en:" >> "$en_output_file"
+echo "---" > "$de_output_file"
+echo "de:" >> "$de_output_file"
 
 while IFS= read -r file; do
+  output_file=$en_output_file
   file_name=$(basename "$file" .sch)
-  if [[ " ${file_names[@]} " =~ " ${file_name} " ]]; then
+  if string_in_array "$file_name" "${file_names[@]}"; then
     continue
   fi
   file_names+=("$file_name")
@@ -19,64 +56,111 @@ while IFS= read -r file; do
   specifics=0
   while IFS= read -r match; do
     result=$(echo "$match" | sed "s/'/\"/g")
-    result=$(echo "$result" | sed -n "s/.*>\[\(.*\)\][[:space:]-]*\(.*\)<\/assert>/\1: '\2'/p" | awk '{gsub(/\xC2\xA0/, ""); print}')
-
+    result=$(echo "$result" | sed -n "s/.*>\[\([^]]*\)\][[:space:]-]*\(.*\)<\/assert>/\1###\2/p")
+    result=$(echo "$result" | awk -F '###' '{gsub(/\./, "_", $1); print $1": \047"$2"\047"}' | awk '{gsub(/\xC2\xA0/, ""); print}')
     code=$(echo "$result" | cut -d: -f1)
-    if [[ " ${seen_codes_in_file[@]} " =~ " ${code} " ]]; then
+
+    if [[ "$file_name" == 'si-ubl-2.0' && "$code" == 'BII2-T10-R001' ]]; then
+      result="BII2-T10-R001: 'An invoice/credit note MUST have a customization identifier'"
+    elif [[ "$file_name" == 'si-ubl-2.0-nlcius' && "$code" == 'BR-NL-27' ]]; then
+      result="BR-NL-27: 'The use of address line 3 is not recommended'"
+    elif [[ "$file_name" == 'si-ubl-2.0-nlcius' && "$code" == 'BR-NL-28' ]]; then
+      result="BR-NL-28: 'The use of a country subdivision is not recommended'"
+    elif [[ "$file_name" == 'si-ubl-2.0-nlcius' && "$code" == 'BR-NL-32' ]]; then
+      result="BR-NL-32: 'The use of an allowance reason code is not recommended'"
+    elif [[ "$file_name" == 'si-ubl-2.0-nlcius' && "$code" == 'BR-NL-34' ]]; then
+      result="BR-NL-34: 'The use of a charge reason code is not recommended'"
+    fi
+
+    if string_in_array "$code" "${seen_codes_in_file[@]}"; then
       continue
     fi
+
     seen_codes_in_file+=("$code")
 
-    if [[ " ${seen_codes[@]} " =~ " ${code} " ]]; then
-      if [[ $specifics -eq 0 ]]; then
-        specifics=1
-        echo -e "  $file_name:" >> "$output_file"
-      fi
-      if [[ $file_name = 'si-ubl-2.0' && $code = 'BII2-T10-R001' ]]; then
-        echo -e "    BII2-T10-R001: 'An invoice/credit note MUST have a customization identifier'" >> "$output_file"
-      elif [[ $file_name = 'si-ubl-2.0-nlcius' && $code = 'BR-NL-27' ]]; then
-        echo -e "    BR-NL-27: 'The use of address line 3 is not recommended'" >> "$output_file"
-      elif [[ $file_name = 'si-ubl-2.0-nlcius' && $code = 'BR-NL-28' ]]; then
-        echo -e "    BR-NL-28: 'The use of a country subdivision is not recommended'" >> "$output_file"
-      elif [[ $file_name = 'si-ubl-2.0-nlcius' && $code = 'BR-NL-32' ]]; then
-        echo -e "    BR-NL-32: 'The use of an allowance reason code is not recommended'" >> "$output_file"
-      elif [[ $file_name = 'si-ubl-2.0-nlcius' && $code = 'BR-NL-34' ]]; then
-        echo -e "    BR-NL-34: 'The use of a charge reason code is not recommended'" >> "$output_file"
-      else
-        echo -e "    $result" >> "$output_file"
-      fi
-    else
-      seen_codes+=("$code")
-      generics+=("$result")
-    fi
-  done < <(grep -oP '>\[.*?\](.*?)<\/assert>' "$file")
-  while IFS= read -r match; do
-if [[ $(echo "$match" | grep -oP '>\[.*?\](.*?)<\/assert>') ]]; then
+    if string_in_array "$result" "${en_results[@]}"; then
       continue
     fi
-    code=$(echo $match | grep -oP 'id="\K[^"]+')
-    if [[ " ${seen_codes_in_file[@]} " =~ " ${code} " ]]; then
+
+    if string_in_array "$result" "${de_results[@]}"; then
       continue
     fi
-    seen_codes_in_file+=("$code")
-    message=$(echo $match | sed -n 's/.*>\(.*\)<\/assert>.*/\1/p' | sed "s/'/\"/g" | awk '{gsub(/\xC2\xA0/, ""); print}' | xargs echo 2>/dev/null)
-    result="$code: '$message'"
-    if [[ " ${seen_codes[@]} " =~ " ${code} " ]]; then
+
+    unset seen_code
+    if string_in_array "$code" "${de_seen_codes[@]}"; then
+      output_file=$de_output_file
+      seen_code=1
+    fi
+
+    if string_in_array "$code" "${en_seen_codes[@]}" || [[ $seen_code ]]; then
+      if jumpable "$code" "$file_name"; then
+        continue
+      fi
       if [[ $specifics -eq 0 ]]; then
         specifics=1
-        echo -e "  $file_name:" >> "$output_file"
+        echo -e "  ${file_name//./_}:" >> "$output_file"
       fi
       echo -e "    $result" >> "$output_file"
     else
-      seen_codes+=("$code")
-      generics+=("$result")
+      if is_de_code "$code"; then
+        de_results+=("$result")
+        de_seen_codes+=("$code")
+      else
+        en_results+=("$result")
+        en_seen_codes+=("$code")
+      fi
+    fi
+  done < <(grep -oP '>\[.*?\](.*?)<\/assert>' "$file")
+  while IFS= read -r match; do
+    if [[ $(echo "$match" | grep -oP '>\[.*?\](.*?)<\/assert>') ]]; then
+      continue
+    fi
+    code=$(echo "$match" | grep -oP 'id="\K[^"]+' | sed 's/\./_/g')
+    if string_in_array "$code" "${seen_codes_in_file[@]}"; then
+      continue
+    fi
+    seen_codes_in_file+=("$code")
+    message=$(echo "$match" | sed -n 's/.*>\(.*\)<\/assert>.*/\1/p' | sed "s/'/\"/g" | awk '{gsub(/\xC2\xA0/, ""); print}' | xargs echo 2>/dev/null)
+    result="$code: '$message'"
+
+    if string_in_array "$result" "${en_results[@]}"; then
+      continue
+    fi
+
+    if string_in_array "$result" "${de_results[@]}"; then
+      continue
+    fi
+
+    unset seen_code
+    if string_in_array "$code" "${de_seen_codes[@]}"; then
+      output_file=$de_output_file
+      seen_code=1
+    fi
+
+    if string_in_array "$code" "${en_seen_codes[@]}" || [[ $seen_code ]]; then
+      if [[ $specifics -eq 0 ]]; then
+        specifics=1
+        echo -e "  ${file_name//./_}:" >> "$output_file"
+      fi
+      echo -e "    $result" >> "$output_file"
+    else
+      if is_de_code "$code"; then
+        de_results+=("$result")
+        de_seen_codes+=("$code")
+      else
+        en_results+=("$result")
+        en_seen_codes+=("$code")
+      fi
     fi
   done < <(grep -oP '<assert(.*?)<\/assert>' "$file")
 done < <(find "$base_dir" -type f -name "*.sch")
 
-echo -e "  generic:" >> "$output_file"
-echo -e "    B2B-DOC-1: 'Unknown customizationID'" >> "$output_file"
+echo -e "  B2B-DOC-1: 'Unknown customizationID'" >> "$en_output_file"
 
-for value in "${generics[@]}"; do
-  echo -e "    $value" >> "$output_file"
+for value in "${en_results[@]}"; do
+  echo -e "  $value" >> "$en_output_file"
+done
+
+for value in "${de_results[@]}"; do
+  echo -e "  $value" >> "$de_output_file"
 done
