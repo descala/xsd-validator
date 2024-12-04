@@ -1,6 +1,6 @@
 #!/bin/bash
 
-base_dir="../lib/sch/schemas/xrechnung"
+base_dir="../lib/sch/schemas"
 en_output_file="en.yml"
 de_output_file="de.yml"
 file_names=()
@@ -56,7 +56,8 @@ while IFS= read -r file; do
   specifics=0
   while IFS= read -r match; do
     result=$(echo "$match" | sed "s/'/\"/g")
-    result=$(echo "$result" | sed -n "s/.*>\[\(.*\)\][[:space:]-]*\(.*\)<\/assert>/\1: '\2'/p" | awk '{gsub(/\xC2\xA0/, ""); print}')
+    result=$(echo "$result" | sed -n "s/.*>\[\([^]]*\)\][[:space:]-]*\(.*\)<\/assert>/\1###\2/p")
+    result=$(echo "$result" | awk -F '###' '{gsub(/\./, "_", $1); print $1": \047"$2"\047"}' | awk '{gsub(/\xC2\xA0/, ""); print}')
     code=$(echo "$result" | cut -d: -f1)
 
     if [[ "$file_name" == 'si-ubl-2.0' && "$code" == 'BII2-T10-R001' ]]; then
@@ -114,7 +115,7 @@ while IFS= read -r file; do
     if [[ $(echo "$match" | grep -oP '>\[.*?\](.*?)<\/assert>') ]]; then
       continue
     fi
-    code=$(echo "$match" | grep -oP 'id="\K[^"]+')
+    code=$(echo "$match" | grep -oP 'id="\K[^"]+' | sed 's/\./_/g')
     if string_in_array "$code" "${seen_codes_in_file[@]}"; then
       continue
     fi
