@@ -67,18 +67,18 @@ module Sch
     end
 
     def sch_validate_with_schematron_linked(doc, parts = nil, schematrons = nil)
-      errors = {}
-      warnings = {}
+      errors = []
+      warnings = []
       schematrons ||= schematrons(doc, parts)
       schematrons.each do |schematron_file|
         compiled_schematron = File.read(xslt_path(schematron_file))
         validation_result = Schematron::XSLT2.validate(compiled_schematron, doc)
         result_handler = ResultHandler.new(validation_result)
         result_handler.errors.each do |error|
-          errors.merge!(schematron_file => error)
+          errors << [schematron_file, error]
         end
         result_handler.warnings.each do |warning|
-          warnings.merge!(schematron_file => warning)
+          warnings << [schematron_file, warning]
         end
       end
       [errors, warnings]
