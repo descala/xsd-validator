@@ -21,7 +21,7 @@ module Sch
       end
 
       def errors
-        build_result('fatal')
+        build_result('fatal') + build_result('error')
       end
 
       def warnings

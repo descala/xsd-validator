@@ -46,6 +46,11 @@ RSpec.describe Sch::Validator do
     expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationError, /FATAL: .*aligned-ibr-jp-04-ntr/)
   end
 
+  it 'raises ValidationError for an invalid ZATCA Invoice' do
+    doc=File.read('spec/files/sch/zatca-ubl-tax-invoice-wrong.xml')
+    expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationError, /ERROR: .*BR-KSA-40/)
+  end
+
   it 'does not raises ValidationError for an invalid JP Standard Invoice with only_shared validation' do
     doc=File.read('spec/files/sch/jp-pint-invoice-ubl-wrong.xml')
     expect { sch_validate!(doc, 0) }.to_not raise_error
