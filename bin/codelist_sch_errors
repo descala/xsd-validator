@@ -1,4 +1,8 @@
 #!/bin/bash
+# genera els fitxers en angles i alemany
+# primer agafar alemany, es tradueix amb b2b_translate a angles
+# s'ajunta el fitxer en angles que genera l'script amb el traduit
+# es tradueix tot de l'angles
 
 base_dir="../lib/sch/schemas"
 en_output_file="en.yml"
@@ -54,11 +58,16 @@ while IFS= read -r file; do
   file_names+=("$file_name")
   seen_codes_in_file=()
   specifics=0
+  matches=$(perl -0777 -nE 'say "<%%>" . ($_ =~ s/\R//gr) for /<assert[^>]*?>\s*\[[^\]]*\].*?<\/assert>/sg' "$file")
   while IFS= read -r match; do
     result=$(echo "$match" | sed "s/'/\"/g")
     result=$(echo "$result" | sed -n "s/.*>\[\([^]]*\)\][[:space:]-]*\(.*\)<\/assert>/\1###\2/p")
     result=$(echo "$result" | awk -F '###' '{gsub(/\./, "_", $1); print $1": \047"$2"\047"}' | awk '{gsub(/\xC2\xA0/, ""); print}')
     code=$(echo "$result" | cut -d: -f1)
+
+    if [[ "$code" == '' ]]; then
+      continue
+    fi
 
     if [[ "$file_name" == 'si-ubl-2.0' && "$code" == 'BII2-T10-R001' ]]; then
       result="BII2-T10-R001: 'An invoice/credit note MUST have a customization identifier'"
@@ -110,24 +119,30 @@ while IFS= read -r file; do
         en_seen_codes+=("$code")
       fi
     fi
-  done < <(grep -oP '>\[.*?\](.*?)<\/assert>' "$file")
+  done < <(awk -v RS='<%%>' 'NR > 1' <<< "$matches")
+  matches=$(perl -0777 -nE 'say "<%%>" . ($_ =~ s/\R//gr) for /<assert.*?>.*?<\/assert>/sg' "$file")
   while IFS= read -r match; do
     if [[ $(echo "$match" | grep -oP '>\[.*?\](.*?)<\/assert>') ]]; then
       continue
     fi
+
     code=$(echo "$match" | grep -oP 'id="\K[^"]+' | sed 's/\./_/g')
+    if [[ "$code" == '' ]]; then
+      continue
+    fi
     if string_in_array "$code" "${seen_codes_in_file[@]}"; then
       continue
     fi
+
     seen_codes_in_file+=("$code")
     message=$(echo "$match" | sed -n 's/.*>\(.*\)<\/assert>.*/\1/p' | sed "s/'/\"/g" | awk '{gsub(/\xC2\xA0/, ""); print}' | xargs echo 2>/dev/null)
     result="$code: '$message'"
 
-    if string_in_array "$result" "${en_results[@]}"; then
-      continue
+    if [[ "$code" == 'BR-DEX-15' ]]; then
+      result="BR-DEX-15: 'This CII file might use the concept of Sub Invoice Lines. However XRechnung does not support this.'"
     fi
 
-    if string_in_array "$result" "${de_results[@]}"; then
+    if string_in_array "$result" "${en_results[@]}" || string_in_array "$result" "${de_results[@]}"; then
       continue
     fi
 
@@ -152,7 +167,7 @@ while IFS= read -r file; do
         en_seen_codes+=("$code")
       fi
     fi
-  done < <(grep -oP '<assert(.*?)<\/assert>' "$file")
+  done < <(awk -v RS='<%%>' 'NR > 1' <<< "$matches")
 done < <(find "$base_dir" -type f -name "*.sch")
 
 echo -e "  B2B-DOC-1: 'Unknown customizationID'" >> "$en_output_file"
