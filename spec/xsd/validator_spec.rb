@@ -53,6 +53,7 @@ RSpec.describe Xsd::Validator do
       'spec/files/sch/cii/xrechnung-cii_2.2-wrong.xml' => 'FACTUR-X_EN16931.xsd',
       'spec/files/sch/cii/xrechnung-cii_2.1.xml' => 'FACTUR-X_EN16931.xsd',
       'spec/files/sch/cii/xrechnung-cii_2.0.xml' => 'FACTUR-X_EN16931.xsd',
+      'spec/files/xsd/fatturapa/IT01234567890_FPA03.xml' => '/fatturapa/Schema_del_file_xml_FatturaPA_v1.2.3.xsd',
     }
     files.each do |file_path, rgex_xsd_path|
       it "#{file_path} checks with #{rgex_xsd_path}" do
