@@ -60,47 +60,49 @@
         <IdDocumento>66685</IdDocumento>
         <NumItem>1</NumItem>
         <CodiceCUP>123abc</CodiceCUP>
-	    <CodiceCIG>456def</CodiceCIG>
+        <CodiceCIG>456def</CodiceCIG>
       </DatiOrdineAcquisto>
       <DatiContratto>
-	    <RiferimentoNumeroLinea>1</RiferimentoNumeroLinea>
-	    <IdDocumento>123</IdDocumento>
-	    <Data>2012-09-01</Data>
-	    <NumItem>5</NumItem>
-	    <CodiceCUP>123abc</CodiceCUP>
-	    <CodiceCIG>456def</CodiceCIG>
+        <RiferimentoNumeroLinea>1</RiferimentoNumeroLinea>
+        <IdDocumento>123</IdDocumento>
+        <Data>2012-09-01</Data>
+        <NumItem>5</NumItem>
+        <CodiceCUP>123abc</CodiceCUP>
+        <CodiceCIG>456def</CodiceCIG>
       </DatiContratto>
       <DatiConvenzione>
-	    <RiferimentoNumeroLinea>1</RiferimentoNumeroLinea>
-	    <IdDocumento>456</IdDocumento>
-	    <NumItem>5</NumItem>
-	    <CodiceCUP>123abc</CodiceCUP>
-	    <CodiceCIG>456def</CodiceCIG>
+        <RiferimentoNumeroLinea>1</RiferimentoNumeroLinea>
+        <IdDocumento>456</IdDocumento>
+        <NumItem>5</NumItem>
+        <CodiceCUP>123abc</CodiceCUP>
+        <CodiceCIG>456def</CodiceCIG>
       </DatiConvenzione>
       <DatiRicezione>
-	    <RiferimentoNumeroLinea>1</RiferimentoNumeroLinea>
-	    <IdDocumento>789</IdDocumento>
-	    <NumItem>5</NumItem>
-	    <CodiceCUP>123abc</CodiceCUP>
-	    <CodiceCIG>456def</CodiceCIG>
+        <RiferimentoNumeroLinea>1</RiferimentoNumeroLinea>
+        <IdDocumento>789</IdDocumento>
+        <NumItem>5</NumItem>
+        <CodiceCUP>123abc</CodiceCUP>
+        <CodiceCIG>456def</CodiceCIG>
       </DatiRicezione>
       <DatiTrasporto>
-	    <DatiAnagraficiVettore>				
-	      <IdFiscaleIVA>
-	        <IdPaese>IT</IdPaese>
-	        <IdCodice>24681012141</IdCodice>
-	      </IdFiscaleIVA>
-    	  <Anagrafica>
-	        <Denominazione>Trasporto spa</Denominazione>
-	      </Anagrafica>
-	    </DatiAnagraficiVettore>
-	    <DataOraConsegna>2017-01-10T16:46:12.000+02:00</DataOraConsegna>
+        <DatiAnagraficiVettore>
+          <IdFiscaleIVA>
+            <IdPaese>IT</IdPaese>
+            <IdCodice>24681012141</IdCodice>
+          </IdFiscaleIVA>
+          <Anagrafica>
+            <Denominazione>Trasporto spa</Denominazione>
+          </Anagrafica>
+        </DatiAnagraficiVettore>
+        <DataOraConsegna>2017-01-10T16:46:12.000+02:00</DataOraConsegna>
       </DatiTrasporto>
     </DatiGenerali>
     <DatiBeniServizi>
       <DettaglioLinee>
         <NumeroLinea>1</NumeroLinea>
-        <Descrizione>LA DESCRIZIONE DELLA FORNITURA PUO' SUPERARE I CENTO CARATTERI CHE RAPPRESENTAVANO IL PRECEDENTE LIMITE DIMENSIONALE. TALE LIMITE NELLA NUOVA VERSIONE E' STATO PORTATO A MILLE CARATTERI</Descrizione>
+        <Descrizione>
+          LA DESCRIZIONE DELLA FORNITURA PUO' SUPERARE I CENTO CARATTERI CHE RAPPRESENTAVANO IL PRECEDENTE LIMITE DIMENSIONALE. TALE LIMITE NELLA NUOVA VERSIONE E' STATO PORTATO A MILLE CARATTERI
+        </Descrizione>
         <Quantita>5.00</Quantita>
         <PrezzoUnitario>1.00</PrezzoUnitario>
         <PrezzoTotale>5.00</PrezzoTotale>
@@ -138,42 +140,46 @@
         <Data>2017-01-20</Data>
         <Numero>456</Numero>
         <Causale>LA FATTURA FA RIFERIMENTO AD UNA OPERAZIONE AAAA BBBBBBBBBBBBBBBBBB CCC DDDDDDDDDDDDDDD E FFFFFFFFFFFFFFFFFFFF GGGGGGGGGG HHHHHHH II LLLLLLLLLLLLLLLLL MMM NNNNN OO PPPPPPPPPPP QQQQ RRRR SSSSSSSSSSSSSS</Causale>
-        <Causale>SEGUE DESCRIZIONE CAUSALE NEL CASO IN CUI NON SIANO STATI SUFFICIENTI 200 CARATTERI AAAAAAAAAAA BBBBBBBBBBBBBBBBB</Causale>
+        <Causale>
+          SEGUE DESCRIZIONE CAUSALE NEL CASO IN CUI NON SIANO STATI SUFFICIENTI 200 CARATTERI AAAAAAAAAAA BBBBBBBBBBBBBBBBB
+        </Causale>
       </DatiGeneraliDocumento>
       <DatiOrdineAcquisto>
         <RiferimentoNumeroLinea>1</RiferimentoNumeroLinea>
         <IdDocumento>85666</IdDocumento>
         <NumItem>1</NumItem>
         <CodiceCUP>123abc</CodiceCUP>
-	    <CodiceCIG>456def</CodiceCIG>
+        <CodiceCIG>456def</CodiceCIG>
       </DatiOrdineAcquisto>
       <DatiContratto>
-	    <RiferimentoNumeroLinea>1</RiferimentoNumeroLinea>
-	    <IdDocumento>321</IdDocumento>
-	    <Data>2016-09-01</Data>
-	    <NumItem>5</NumItem>
-	    <CodiceCUP>123abc</CodiceCUP>
-	    <CodiceCIG>456def</CodiceCIG>
+        <RiferimentoNumeroLinea>1</RiferimentoNumeroLinea>
+        <IdDocumento>321</IdDocumento>
+        <Data>2016-09-01</Data>
+        <NumItem>5</NumItem>
+        <CodiceCUP>123abc</CodiceCUP>
+        <CodiceCIG>456def</CodiceCIG>
       </DatiContratto>
       <DatiConvenzione>
-	    <RiferimentoNumeroLinea>1</RiferimentoNumeroLinea>
-	    <IdDocumento>654</IdDocumento>
-	    <NumItem>5</NumItem>
-	    <CodiceCUP>123abc</CodiceCUP>
-	    <CodiceCIG>456def</CodiceCIG>
+        <RiferimentoNumeroLinea>1</RiferimentoNumeroLinea>
+        <IdDocumento>654</IdDocumento>
+        <NumItem>5</NumItem>
+        <CodiceCUP>123abc</CodiceCUP>
+        <CodiceCIG>456def</CodiceCIG>
       </DatiConvenzione>
       <DatiRicezione>
-	    <RiferimentoNumeroLinea>1</RiferimentoNumeroLinea>
-	    <IdDocumento>987</IdDocumento>
-	    <NumItem>5</NumItem>
-	    <CodiceCUP>123abc</CodiceCUP>
-	    <CodiceCIG>456def</CodiceCIG>
+        <RiferimentoNumeroLinea>1</RiferimentoNumeroLinea>
+        <IdDocumento>987</IdDocumento>
+        <NumItem>5</NumItem>
+        <CodiceCUP>123abc</CodiceCUP>
+        <CodiceCIG>456def</CodiceCIG>
       </DatiRicezione>
     </DatiGenerali>
     <DatiBeniServizi>
       <DettaglioLinee>
         <NumeroLinea>1</NumeroLinea>
-        <Descrizione>PRESTAZIONE DEL SEGUENTE SERVIZIO PROFESSIONALE: LA DESCRIZIONE DELLA PRESTAZIONE PUO' SUPERARE I CENTO CARATTERI CHE RAPPRESENTAVANO IL PRECEDENTE LIMITE DIMENSIONALE. TALE LIMITE NELLA NUOVA VERSIONE E' STATO PORTATO A MILLE CARATTERI</Descrizione>
+        <Descrizione>
+          PRESTAZIONE DEL SEGUENTE SERVIZIO PROFESSIONALE: LA DESCRIZIONE DELLA PRESTAZIONE PUO' SUPERARE I CENTO CARATTERI CHE RAPPRESENTAVANO IL PRECEDENTE LIMITE DIMENSIONALE. TALE LIMITE NELLA NUOVA VERSIONE E' STATO PORTATO A MILLE CARATTERI
+        </Descrizione>
         <PrezzoUnitario>2000.00</PrezzoUnitario>
         <PrezzoTotale>2000.00</PrezzoTotale>
         <AliquotaIVA>22.00</AliquotaIVA>
