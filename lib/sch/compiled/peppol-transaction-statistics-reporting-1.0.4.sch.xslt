@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <xsl:stylesheet xmlns:iso="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:saxon="http://saxon.sf.net/"
-                 xmlns:schold="http://www.ascc.net/xml/schematron"
-                 xmlns:tsr="urn:fdc:peppol:transaction-statistics-report:1.0"
-                 xmlns:xhtml="http://www.w3.org/1999/xhtml"
-                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                 xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                 version="2.0"><!--Implementers: please note that overriding process-prolog or process-root is 
+                xmlns:saxon="http://saxon.sf.net/"
+                xmlns:schold="http://www.ascc.net/xml/schematron"
+                xmlns:tsr="urn:fdc:peppol:transaction-statistics-report:1.0"
+                xmlns:xhtml="http://www.w3.org/1999/xhtml"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                version="2.0"><!--Implementers: please note that overriding process-prolog or process-root is 
     the preferred method for meta-stylesheets to use where possible. -->
    <xsl:param name="archiveDirParameter"/>
    <xsl:param name="archiveNameParameter"/>
@@ -19,10 +19,10 @@
    <!--PHASES-->
    <!--PROLOG-->
    <xsl:output xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                method="xml"
-                omit-xml-declaration="no"
-                standalone="yes"
-                indent="yes"/>
+               method="xml"
+               omit-xml-declaration="no"
+               standalone="yes"
+               indent="yes"/>
    <!--XSD TYPES FOR XSLT2-->
    <!--KEYS AND FUNCTIONS-->
    <!--DEFAULT RULES-->
@@ -49,7 +49,7 @@
          </xsl:otherwise>
       </xsl:choose>
       <xsl:variable name="preceding"
-                     select="count(preceding-sibling::*[local-name()=local-name(current())                                   and namespace-uri() = namespace-uri(current())])"/>
+                    select="count(preceding-sibling::*[local-name()=local-name(current())                                   and namespace-uri() = namespace-uri(current())])"/>
       <xsl:text>[</xsl:text>
       <xsl:value-of select="1+ $preceding"/>
       <xsl:text>]</xsl:text>
@@ -150,8 +150,8 @@
    <!--SCHEMA SETUP-->
    <xsl:template match="/">
       <svrl:schematron-output xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                               title="OpenPeppol Transaction Statistics Reporting"
-                               schemaVersion="ISO19757-3">
+                              title="OpenPeppol Transaction Statistics Reporting"
+                              schemaVersion="ISO19757-3">
          <xsl:comment>
             <xsl:value-of select="$archiveDirParameter"/>   
 		 <xsl:value-of select="$archiveNameParameter"/>  
@@ -197,14 +197,14 @@
    <svrl:text xmlns:svrl="http://purl.oclc.org/dsdl/svrl">OpenPeppol Transaction Statistics Reporting</svrl:text>
    <!--PATTERN default-->
    <xsl:variable name="cl_iso3166"
-                  select="' 1A AD AE AF AG AI AL AM AO AQ AR AS AT AU AW AX AZ BA BB BD BE BF BG BH BI BJ BL BM BN BO BQ BR BS BT BV BW BY BZ CA CC CD CF CG CH CI CK CL CM CN CO CR CU CV CW CX CY CZ DE DJ DK DM DO DZ EC EE EG EH EL ER ES ET FI FJ FK FM FO FR GA GB GD GE GF GG GH GI GL GM GN GP GQ GR GS GT GU GW GY HK HM HN HR HT HU ID IE IL IM IN IO IQ IR IS IT JE JM JO JP KE KG KH KI KM KN KP KR KW KY KZ LA LB LC LI LK LR LS LT LU LV LY MA MC MD ME MF MG MH MK ML MM MN MO MP MQ MR MS MT MU MV MW MX MY MZ NA NC NE NF NG NI NL NO NP NR NU NZ OM PA PE PF PG PH PK PL PM PN PR PS PT PW PY QA RE RO RS RU RW SA SB SC SD SE SG SH SI SJ SK SL SM SN SO SR SS ST SV SX SY SZ TC TD TF TG TH TJ TK TL TM TN TO TR TT TV TW TZ UA UG UM US UY UZ VA VC VE VG VI VN VU WF WS XI XK YE YT ZA ZM ZW ZZ '"/>
+                 select="' 1A AD AE AF AG AI AL AM AO AQ AR AS AT AU AW AX AZ BA BB BD BE BF BG BH BI BJ BL BM BN BO BQ BR BS BT BV BW BY BZ CA CC CD CF CG CH CI CK CL CM CN CO CR CU CV CW CX CY CZ DE DJ DK DM DO DZ EC EE EG EH EL ER ES ET FI FJ FK FM FO FR GA GB GD GE GF GG GH GI GL GM GN GP GQ GR GS GT GU GW GY HK HM HN HR HT HU ID IE IL IM IN IO IQ IR IS IT JE JM JO JP KE KG KH KI KM KN KP KR KW KY KZ LA LB LC LI LK LR LS LT LU LV LY MA MC MD ME MF MG MH MK ML MM MN MO MP MQ MR MS MT MU MV MW MX MY MZ NA NC NE NF NG NI NL NO NP NR NU NZ OM PA PE PF PG PH PK PL PM PN PR PS PT PW PY QA RE RO RS RU RW SA SB SC SD SE SG SH SI SJ SK SL SM SN SO SR SS ST SV SX SY SZ TC TD TF TG TH TJ TK TL TM TN TO TR TT TV TW TZ UA UG UM US UY UZ VA VC VE VG VI VN VU WF WS XI XK YE YT ZA ZM ZW ZZ '"/>
    <xsl:variable name="cl_spidtype" select="' CertSubjectCN '"/>
    <xsl:variable name="cl_subtotalType" select="' PerTP PerSP-DT-PR PerSP-DT-PR-CC '"/>
    <xsl:variable name="re_seatid" select="'^P[A-Z]{2}[0-9]{6}$'"/>
    <!--RULE -->
    <xsl:template match="/tsr:TransactionStatisticsReport" priority="1008" mode="M3">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/tsr:TransactionStatisticsReport"/>
+                       context="/tsr:TransactionStatisticsReport"/>
       <xsl:variable name="total" select="tsr:Total/tsr:Incoming + tsr:Total/tsr:Outgoing"/>
       <xsl:variable name="empty" select="$total = 0"/>
       <!--ASSERT -->
@@ -212,7 +212,7 @@
          <xsl:when test="normalize-space(tsr:CustomizationID) = 'urn:fdc:peppol.eu:edec:trns:transaction-statistics-reporting:1.0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="normalize-space(tsr:CustomizationID) = 'urn:fdc:peppol.eu:edec:trns:transaction-statistics-reporting:1.0'">
+                                test="normalize-space(tsr:CustomizationID) = 'urn:fdc:peppol.eu:edec:trns:transaction-statistics-reporting:1.0'">
                <xsl:attribute name="id">SCH-TSR-01</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -227,7 +227,7 @@
          <xsl:when test="normalize-space(tsr:ProfileID) = 'urn:fdc:peppol.eu:edec:bis:reporting:1.0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="normalize-space(tsr:ProfileID) = 'urn:fdc:peppol.eu:edec:bis:reporting:1.0'">
+                                test="normalize-space(tsr:ProfileID) = 'urn:fdc:peppol.eu:edec:bis:reporting:1.0'">
                <xsl:attribute name="id">SCH-TSR-02</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -243,7 +243,7 @@
          <xsl:when test="$empty or tsr:Subtotal[normalize-space(@type) = 'PerTP']"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="$empty or tsr:Subtotal[normalize-space(@type) = 'PerTP']">
+                                test="$empty or tsr:Subtotal[normalize-space(@type) = 'PerTP']">
                <xsl:attribute name="id">SCH-TSR-03</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -260,7 +260,7 @@
          <xsl:when test="$empty or sum(tsr:Subtotal[normalize-space(@type) = 'PerTP']/tsr:Incoming) = tsr:Total/tsr:Incoming"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="$empty or sum(tsr:Subtotal[normalize-space(@type) = 'PerTP']/tsr:Incoming) = tsr:Total/tsr:Incoming">
+                                test="$empty or sum(tsr:Subtotal[normalize-space(@type) = 'PerTP']/tsr:Incoming) = tsr:Total/tsr:Incoming">
                <xsl:attribute name="id">SCH-TSR-04</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -277,7 +277,7 @@
          <xsl:when test="$empty or sum(tsr:Subtotal[normalize-space(@type) = 'PerTP']/tsr:Outgoing) = tsr:Total/tsr:Outgoing"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="$empty or sum(tsr:Subtotal[normalize-space(@type) = 'PerTP']/tsr:Outgoing) = tsr:Total/tsr:Outgoing">
+                                test="$empty or sum(tsr:Subtotal[normalize-space(@type) = 'PerTP']/tsr:Outgoing) = tsr:Total/tsr:Outgoing">
                <xsl:attribute name="id">SCH-TSR-05</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -294,7 +294,7 @@
          <xsl:when test="every $key in (tsr:Subtotal[normalize-space(@type) = 'PerTP']/tsr:Key) satisfies                                                     count(tsr:Subtotal[normalize-space(@type) = 'PerTP']/tsr:Key[concat(normalize-space(@schemeID),'::',normalize-space(.)) =                                                                                                                  concat(normalize-space($key/@schemeID),'::',normalize-space($key))]) = 1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="every $key in (tsr:Subtotal[normalize-space(@type) = 'PerTP']/tsr:Key) satisfies count(tsr:Subtotal[normalize-space(@type) = 'PerTP']/tsr:Key[concat(normalize-space(@schemeID),'::',normalize-space(.)) = concat(normalize-space($key/@schemeID),'::',normalize-space($key))]) = 1">
+                                test="every $key in (tsr:Subtotal[normalize-space(@type) = 'PerTP']/tsr:Key) satisfies count(tsr:Subtotal[normalize-space(@type) = 'PerTP']/tsr:Key[concat(normalize-space(@schemeID),'::',normalize-space(.)) = concat(normalize-space($key/@schemeID),'::',normalize-space($key))]) = 1">
                <xsl:attribute name="id">SCH-TSR-06</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -307,13 +307,13 @@
          </xsl:otherwise>
       </xsl:choose>
       <xsl:variable name="name_spdtpr"
-                     select="'Service Provider ID, Dataset Type ID and Process ID'"/>
+                    select="'Service Provider ID, Dataset Type ID and Process ID'"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="$empty or tsr:Subtotal[normalize-space(@type) = 'PerSP-DT-PR']"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="$empty or tsr:Subtotal[normalize-space(@type) = 'PerSP-DT-PR']">
+                                test="$empty or tsr:Subtotal[normalize-space(@type) = 'PerSP-DT-PR']">
                <xsl:attribute name="id">SCH-TSR-07</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -330,7 +330,7 @@
          <xsl:when test="$empty or sum(tsr:Subtotal[normalize-space(@type) = 'PerSP-DT-PR']/tsr:Incoming) = tsr:Total/tsr:Incoming"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="$empty or sum(tsr:Subtotal[normalize-space(@type) = 'PerSP-DT-PR']/tsr:Incoming) = tsr:Total/tsr:Incoming">
+                                test="$empty or sum(tsr:Subtotal[normalize-space(@type) = 'PerSP-DT-PR']/tsr:Incoming) = tsr:Total/tsr:Incoming">
                <xsl:attribute name="id">SCH-TSR-08</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -347,7 +347,7 @@
          <xsl:when test="$empty or sum(tsr:Subtotal[normalize-space(@type) = 'PerSP-DT-PR']/tsr:Outgoing) = tsr:Total/tsr:Outgoing"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="$empty or sum(tsr:Subtotal[normalize-space(@type) = 'PerSP-DT-PR']/tsr:Outgoing) = tsr:Total/tsr:Outgoing">
+                                test="$empty or sum(tsr:Subtotal[normalize-space(@type) = 'PerSP-DT-PR']/tsr:Outgoing) = tsr:Total/tsr:Outgoing">
                <xsl:attribute name="id">SCH-TSR-09</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -364,7 +364,7 @@
          <xsl:when test="every $st in (tsr:Subtotal[normalize-space(@type) = 'PerSP-DT-PR']),                                                        $stsp in ($st/tsr:Key[normalize-space(@metaSchemeID) = 'SP']),                                                        $stdt in ($st/tsr:Key[normalize-space(@metaSchemeID) = 'DT']),                                                        $stpr in ($st/tsr:Key[normalize-space(@metaSchemeID) = 'PR'])  satisfies                                                    count(tsr:Subtotal[normalize-space(@type) ='PerSP-DT-PR'][every $sp in (tsr:Key[normalize-space(@metaSchemeID) = 'SP']),                                                                                                                    $dt in (tsr:Key[normalize-space(@metaSchemeID) = 'DT']),                                                                                                                    $pr in (tsr:Key[normalize-space(@metaSchemeID) = 'PR']) satisfies                                                                                                              concat(normalize-space($sp/@schemeID),'::',normalize-space($sp),'::',                                                                                                                     normalize-space($dt/@schemeID),'::',normalize-space($dt),'::',                                                                                                                     normalize-space($pr/@schemeID),'::',normalize-space($pr)) =                                                                                                              concat(normalize-space($stsp/@schemeID),'::',normalize-space($stsp),'::',                                                                                                                     normalize-space($stdt/@schemeID),'::',normalize-space($stdt),'::',                                                                                                                     normalize-space($stpr/@schemeID),'::',normalize-space($stpr))]) = 1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="every $st in (tsr:Subtotal[normalize-space(@type) = 'PerSP-DT-PR']), $stsp in ($st/tsr:Key[normalize-space(@metaSchemeID) = 'SP']), $stdt in ($st/tsr:Key[normalize-space(@metaSchemeID) = 'DT']), $stpr in ($st/tsr:Key[normalize-space(@metaSchemeID) = 'PR']) satisfies count(tsr:Subtotal[normalize-space(@type) ='PerSP-DT-PR'][every $sp in (tsr:Key[normalize-space(@metaSchemeID) = 'SP']), $dt in (tsr:Key[normalize-space(@metaSchemeID) = 'DT']), $pr in (tsr:Key[normalize-space(@metaSchemeID) = 'PR']) satisfies concat(normalize-space($sp/@schemeID),'::',normalize-space($sp),'::', normalize-space($dt/@schemeID),'::',normalize-space($dt),'::', normalize-space($pr/@schemeID),'::',normalize-space($pr)) = concat(normalize-space($stsp/@schemeID),'::',normalize-space($stsp),'::', normalize-space($stdt/@schemeID),'::',normalize-space($stdt),'::', normalize-space($stpr/@schemeID),'::',normalize-space($stpr))]) = 1">
+                                test="every $st in (tsr:Subtotal[normalize-space(@type) = 'PerSP-DT-PR']), $stsp in ($st/tsr:Key[normalize-space(@metaSchemeID) = 'SP']), $stdt in ($st/tsr:Key[normalize-space(@metaSchemeID) = 'DT']), $stpr in ($st/tsr:Key[normalize-space(@metaSchemeID) = 'PR']) satisfies count(tsr:Subtotal[normalize-space(@type) ='PerSP-DT-PR'][every $sp in (tsr:Key[normalize-space(@metaSchemeID) = 'SP']), $dt in (tsr:Key[normalize-space(@metaSchemeID) = 'DT']), $pr in (tsr:Key[normalize-space(@metaSchemeID) = 'PR']) satisfies concat(normalize-space($sp/@schemeID),'::',normalize-space($sp),'::', normalize-space($dt/@schemeID),'::',normalize-space($dt),'::', normalize-space($pr/@schemeID),'::',normalize-space($pr)) = concat(normalize-space($stsp/@schemeID),'::',normalize-space($stsp),'::', normalize-space($stdt/@schemeID),'::',normalize-space($stdt),'::', normalize-space($stpr/@schemeID),'::',normalize-space($stpr))]) = 1">
                <xsl:attribute name="id">SCH-TSR-10</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -377,14 +377,14 @@
          </xsl:otherwise>
       </xsl:choose>
       <xsl:variable name="name_spdtprcc"
-                     select="'Service Provider ID, Dataset Type ID, Process ID, Sender Country and Receiver Country'"/>
+                    select="'Service Provider ID, Dataset Type ID, Process ID, Sender Country and Receiver Country'"/>
       <xsl:variable name="cc_empty" select="$empty or tsr:Total/tsr:Incoming = 0"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="$cc_empty or tsr:Subtotal[normalize-space(@type) = 'PerSP-DT-PR-CC']"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="$cc_empty or tsr:Subtotal[normalize-space(@type) = 'PerSP-DT-PR-CC']">
+                                test="$cc_empty or tsr:Subtotal[normalize-space(@type) = 'PerSP-DT-PR-CC']">
                <xsl:attribute name="id">SCH-TSR-11</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -401,7 +401,7 @@
          <xsl:when test="$cc_empty or sum(tsr:Subtotal[normalize-space(@type) = 'PerSP-DT-PR-CC']/tsr:Incoming) = tsr:Total/tsr:Incoming"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="$cc_empty or sum(tsr:Subtotal[normalize-space(@type) = 'PerSP-DT-PR-CC']/tsr:Incoming) = tsr:Total/tsr:Incoming">
+                                test="$cc_empty or sum(tsr:Subtotal[normalize-space(@type) = 'PerSP-DT-PR-CC']/tsr:Incoming) = tsr:Total/tsr:Incoming">
                <xsl:attribute name="id">SCH-TSR-12</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -418,7 +418,7 @@
          <xsl:when test="every $st in (tsr:Subtotal[normalize-space(@type) = 'PerSP-DT-PR-CC']),                                                        $stsp in ($st/tsr:Key[normalize-space(@metaSchemeID) = 'SP']),                                                        $stdt in ($st/tsr:Key[normalize-space(@metaSchemeID) = 'DT']),                                                        $stpr in ($st/tsr:Key[normalize-space(@metaSchemeID) = 'PR']),                                                        $stsc in ($st/tsr:Key[normalize-space(@schemeID) = 'SenderCountry']),                                                        $strc in ($st/tsr:Key[normalize-space(@schemeID) = 'ReceiverCountry']) satisfies                                                     count(tsr:Subtotal[normalize-space(@type) ='PerSP-DT-PR-CC'][every $sp in (tsr:Key[normalize-space(@metaSchemeID) = 'SP']),                                                                                                                       $dt in (tsr:Key[normalize-space(@metaSchemeID) = 'DT']),                                                                                                                       $pr in (tsr:Key[normalize-space(@metaSchemeID) = 'PR']),                                                                                                                       $sc in (tsr:Key[normalize-space(@schemeID) = 'SenderCountry']),                                                                                                                       $rc in (tsr:Key[normalize-space(@schemeID) = 'ReceiverCountry']) satisfies                                                                                                                 concat(normalize-space($sp/@schemeID),'::',normalize-space($sp),'::',                                                                                                                        normalize-space($dt/@schemeID),'::',normalize-space($dt),'::',                                                                                                                        normalize-space($pr/@schemeID),'::',normalize-space($pr),'::',                                                                                                                        normalize-space($sc),'::',                                                                                                                        normalize-space($rc)) =                                                                                                                  concat(normalize-space($stsp/@schemeID),'::',normalize-space($stsp),'::',                                                                                                                        normalize-space($stdt/@schemeID),'::',normalize-space($stdt),'::',                                                                                                                        normalize-space($stpr/@schemeID),'::',normalize-space($stpr),'::',                                                                                                                        normalize-space($stsc),'::',                                                                                                                        normalize-space($strc))]) = 1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="every $st in (tsr:Subtotal[normalize-space(@type) = 'PerSP-DT-PR-CC']), $stsp in ($st/tsr:Key[normalize-space(@metaSchemeID) = 'SP']), $stdt in ($st/tsr:Key[normalize-space(@metaSchemeID) = 'DT']), $stpr in ($st/tsr:Key[normalize-space(@metaSchemeID) = 'PR']), $stsc in ($st/tsr:Key[normalize-space(@schemeID) = 'SenderCountry']), $strc in ($st/tsr:Key[normalize-space(@schemeID) = 'ReceiverCountry']) satisfies count(tsr:Subtotal[normalize-space(@type) ='PerSP-DT-PR-CC'][every $sp in (tsr:Key[normalize-space(@metaSchemeID) = 'SP']), $dt in (tsr:Key[normalize-space(@metaSchemeID) = 'DT']), $pr in (tsr:Key[normalize-space(@metaSchemeID) = 'PR']), $sc in (tsr:Key[normalize-space(@schemeID) = 'SenderCountry']), $rc in (tsr:Key[normalize-space(@schemeID) = 'ReceiverCountry']) satisfies concat(normalize-space($sp/@schemeID),'::',normalize-space($sp),'::', normalize-space($dt/@schemeID),'::',normalize-space($dt),'::', normalize-space($pr/@schemeID),'::',normalize-space($pr),'::', normalize-space($sc),'::', normalize-space($rc)) = concat(normalize-space($stsp/@schemeID),'::',normalize-space($stsp),'::', normalize-space($stdt/@schemeID),'::',normalize-space($stdt),'::', normalize-space($stpr/@schemeID),'::',normalize-space($stpr),'::', normalize-space($stsc),'::', normalize-space($strc))]) = 1">
+                                test="every $st in (tsr:Subtotal[normalize-space(@type) = 'PerSP-DT-PR-CC']), $stsp in ($st/tsr:Key[normalize-space(@metaSchemeID) = 'SP']), $stdt in ($st/tsr:Key[normalize-space(@metaSchemeID) = 'DT']), $stpr in ($st/tsr:Key[normalize-space(@metaSchemeID) = 'PR']), $stsc in ($st/tsr:Key[normalize-space(@schemeID) = 'SenderCountry']), $strc in ($st/tsr:Key[normalize-space(@schemeID) = 'ReceiverCountry']) satisfies count(tsr:Subtotal[normalize-space(@type) ='PerSP-DT-PR-CC'][every $sp in (tsr:Key[normalize-space(@metaSchemeID) = 'SP']), $dt in (tsr:Key[normalize-space(@metaSchemeID) = 'DT']), $pr in (tsr:Key[normalize-space(@metaSchemeID) = 'PR']), $sc in (tsr:Key[normalize-space(@schemeID) = 'SenderCountry']), $rc in (tsr:Key[normalize-space(@schemeID) = 'ReceiverCountry']) satisfies concat(normalize-space($sp/@schemeID),'::',normalize-space($sp),'::', normalize-space($dt/@schemeID),'::',normalize-space($dt),'::', normalize-space($pr/@schemeID),'::',normalize-space($pr),'::', normalize-space($sc),'::', normalize-space($rc)) = concat(normalize-space($stsp/@schemeID),'::',normalize-space($stsp),'::', normalize-space($stdt/@schemeID),'::',normalize-space($stdt),'::', normalize-space($stpr/@schemeID),'::',normalize-space($stpr),'::', normalize-space($stsc),'::', normalize-space($strc))]) = 1">
                <xsl:attribute name="id">SCH-TSR-14</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -435,7 +435,7 @@
          <xsl:when test="count(tsr:Subtotal[normalize-space(@type) !='PerTP' and                                                                      normalize-space(@type) !='PerSP-DT-PR' and                                                                      normalize-space(@type) !='PerSP-DT-PR-CC']) = 0"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(tsr:Subtotal[normalize-space(@type) !='PerTP' and normalize-space(@type) !='PerSP-DT-PR' and normalize-space(@type) !='PerSP-DT-PR-CC']) = 0">
+                                test="count(tsr:Subtotal[normalize-space(@type) !='PerTP' and normalize-space(@type) !='PerSP-DT-PR' and normalize-space(@type) !='PerSP-DT-PR-CC']) = 0">
                <xsl:attribute name="id">SCH-TSR-39</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -449,16 +449,16 @@
    </xsl:template>
    <!--RULE -->
    <xsl:template match="/tsr:TransactionStatisticsReport/tsr:Header"
-                  priority="1007"
-                  mode="M3">
+                 priority="1007"
+                 mode="M3">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/tsr:TransactionStatisticsReport/tsr:Header"/>
+                       context="/tsr:TransactionStatisticsReport/tsr:Header"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="matches(normalize-space(tsr:ReportPeriod/tsr:StartDate), '^[0-9]{4}\-[0-9]{2}\-[0-9]{2}$')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="matches(normalize-space(tsr:ReportPeriod/tsr:StartDate), '^[0-9]{4}\-[0-9]{2}\-[0-9]{2}$')">
+                                test="matches(normalize-space(tsr:ReportPeriod/tsr:StartDate), '^[0-9]{4}\-[0-9]{2}\-[0-9]{2}$')">
                <xsl:attribute name="id">SCH-TSR-40</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -475,7 +475,7 @@
          <xsl:when test="matches(normalize-space(tsr:ReportPeriod/tsr:EndDate), '^[0-9]{4}\-[0-9]{2}\-[0-9]{2}$')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="matches(normalize-space(tsr:ReportPeriod/tsr:EndDate), '^[0-9]{4}\-[0-9]{2}\-[0-9]{2}$')">
+                                test="matches(normalize-space(tsr:ReportPeriod/tsr:EndDate), '^[0-9]{4}\-[0-9]{2}\-[0-9]{2}$')">
                <xsl:attribute name="id">SCH-TSR-41</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -492,7 +492,7 @@
          <xsl:when test="tsr:ReportPeriod/tsr:EndDate &gt;= tsr:ReportPeriod/tsr:StartDate"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="tsr:ReportPeriod/tsr:EndDate &gt;= tsr:ReportPeriod/tsr:StartDate">
+                                test="tsr:ReportPeriod/tsr:EndDate &gt;= tsr:ReportPeriod/tsr:StartDate">
                <xsl:attribute name="id">SCH-TSR-42</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -510,10 +510,10 @@
    </xsl:template>
    <!--RULE -->
    <xsl:template match="/tsr:TransactionStatisticsReport/tsr:Header/tsr:ReporterID"
-                  priority="1006"
-                  mode="M3">
+                 priority="1006"
+                 mode="M3">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/tsr:TransactionStatisticsReport/tsr:Header/tsr:ReporterID"/>
+                       context="/tsr:TransactionStatisticsReport/tsr:Header/tsr:ReporterID"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="normalize-space(.) != ''"/>
@@ -533,7 +533,7 @@
          <xsl:when test="not(contains(normalize-space(@schemeID), ' ')) and                                               contains($cl_spidtype, concat(' ', normalize-space(@schemeID), ' '))"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="not(contains(normalize-space(@schemeID), ' ')) and contains($cl_spidtype, concat(' ', normalize-space(@schemeID), ' '))">
+                                test="not(contains(normalize-space(@schemeID), ' ')) and contains($cl_spidtype, concat(' ', normalize-space(@schemeID), ' '))">
                <xsl:attribute name="id">SCH-TSR-17</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -550,7 +550,7 @@
          <xsl:when test="(@schemeID='CertSubjectCN' and                                                    matches(normalize-space(.), $re_seatid)) or                                                   not(@schemeID='CertSubjectCN')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="(@schemeID='CertSubjectCN' and matches(normalize-space(.), $re_seatid)) or not(@schemeID='CertSubjectCN')">
+                                test="(@schemeID='CertSubjectCN' and matches(normalize-space(.), $re_seatid)) or not(@schemeID='CertSubjectCN')">
                <xsl:attribute name="id">SCH-TSR-18</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -566,16 +566,16 @@
    </xsl:template>
    <!--RULE -->
    <xsl:template match="/tsr:TransactionStatisticsReport/tsr:Subtotal/tsr:Key[normalize-space(@schemeID) = 'CertSubjectCN']"
-                  priority="1005"
-                  mode="M3">
+                 priority="1005"
+                 mode="M3">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/tsr:TransactionStatisticsReport/tsr:Subtotal/tsr:Key[normalize-space(@schemeID) = 'CertSubjectCN']"/>
+                       context="/tsr:TransactionStatisticsReport/tsr:Subtotal/tsr:Key[normalize-space(@schemeID) = 'CertSubjectCN']"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="matches(normalize-space(.), $re_seatid)"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="matches(normalize-space(.), $re_seatid)">
+                                test="matches(normalize-space(.), $re_seatid)">
                <xsl:attribute name="id">SCH-TSR-19</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -589,16 +589,16 @@
    </xsl:template>
    <!--RULE -->
    <xsl:template match="/tsr:TransactionStatisticsReport/tsr:Subtotal/tsr:Key[normalize-space(@schemeID) = 'SenderCountry' or                                                                           normalize-space(@schemeID) = 'ReceiverCountry']"
-                  priority="1004"
-                  mode="M3">
+                 priority="1004"
+                 mode="M3">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/tsr:TransactionStatisticsReport/tsr:Subtotal/tsr:Key[normalize-space(@schemeID) = 'SenderCountry' or                                                                           normalize-space(@schemeID) = 'ReceiverCountry']"/>
+                       context="/tsr:TransactionStatisticsReport/tsr:Subtotal/tsr:Key[normalize-space(@schemeID) = 'SenderCountry' or                                                                           normalize-space(@schemeID) = 'ReceiverCountry']"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="not(contains(normalize-space(.), ' ')) and                                                      contains($cl_iso3166, concat(' ', normalize-space(.), ' '))"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="not(contains(normalize-space(.), ' ')) and contains($cl_iso3166, concat(' ', normalize-space(.), ' '))">
+                                test="not(contains(normalize-space(.), ' ')) and contains($cl_iso3166, concat(' ', normalize-space(.), ' '))">
                <xsl:attribute name="id">SCH-TSR-20</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -612,10 +612,10 @@
    </xsl:template>
    <!--RULE -->
    <xsl:template match="/tsr:TransactionStatisticsReport/tsr:Subtotal[normalize-space(@type) = 'PerTP']"
-                  priority="1003"
-                  mode="M3">
+                 priority="1003"
+                 mode="M3">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/tsr:TransactionStatisticsReport/tsr:Subtotal[normalize-space(@type) = 'PerTP']"/>
+                       context="/tsr:TransactionStatisticsReport/tsr:Subtotal[normalize-space(@type) = 'PerTP']"/>
       <xsl:variable name="name" select="'The subtotal per Transport Protocol ID'"/>
       <!--ASSERT -->
       <xsl:choose>
@@ -638,7 +638,7 @@
          <xsl:when test="count(tsr:Key[normalize-space(@metaSchemeID) = 'TP']) = 1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(tsr:Key[normalize-space(@metaSchemeID) = 'TP']) = 1">
+                                test="count(tsr:Key[normalize-space(@metaSchemeID) = 'TP']) = 1">
                <xsl:attribute name="id">SCH-TSR-22</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -655,7 +655,7 @@
          <xsl:when test="count(tsr:Key[normalize-space(@schemeID) = 'Peppol']) = 1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(tsr:Key[normalize-space(@schemeID) = 'Peppol']) = 1">
+                                test="count(tsr:Key[normalize-space(@schemeID) = 'Peppol']) = 1">
                <xsl:attribute name="id">SCH-TSR-23</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -671,12 +671,12 @@
    </xsl:template>
    <!--RULE -->
    <xsl:template match="/tsr:TransactionStatisticsReport/tsr:Subtotal[normalize-space(@type) = 'PerSP-DT-PR']"
-                  priority="1002"
-                  mode="M3">
+                 priority="1002"
+                 mode="M3">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/tsr:TransactionStatisticsReport/tsr:Subtotal[normalize-space(@type) = 'PerSP-DT-PR']"/>
+                       context="/tsr:TransactionStatisticsReport/tsr:Subtotal[normalize-space(@type) = 'PerSP-DT-PR']"/>
       <xsl:variable name="name"
-                     select="'The subtotal per Service Provider ID, Dataset Type ID and Process ID'"/>
+                    select="'The subtotal per Service Provider ID, Dataset Type ID and Process ID'"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(tsr:Key) = 3"/>
@@ -698,7 +698,7 @@
          <xsl:when test="count(tsr:Key[normalize-space(@metaSchemeID) = 'SP']) = 1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(tsr:Key[normalize-space(@metaSchemeID) = 'SP']) = 1">
+                                test="count(tsr:Key[normalize-space(@metaSchemeID) = 'SP']) = 1">
                <xsl:attribute name="id">SCH-TSR-25</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -715,7 +715,7 @@
          <xsl:when test="count(tsr:Key[normalize-space(@metaSchemeID) = 'DT']) = 1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(tsr:Key[normalize-space(@metaSchemeID) = 'DT']) = 1">
+                                test="count(tsr:Key[normalize-space(@metaSchemeID) = 'DT']) = 1">
                <xsl:attribute name="id">SCH-TSR-26</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -732,7 +732,7 @@
          <xsl:when test="count(tsr:Key[normalize-space(@metaSchemeID) = 'PR']) = 1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(tsr:Key[normalize-space(@metaSchemeID) = 'PR']) = 1">
+                                test="count(tsr:Key[normalize-space(@metaSchemeID) = 'PR']) = 1">
                <xsl:attribute name="id">SCH-TSR-27</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -749,7 +749,7 @@
          <xsl:when test="every $x in (tsr:Key[normalize-space(@metaSchemeID) = 'SP']) satisfies                                                    not(contains(normalize-space($x/@schemeID), ' ')) and                                                     contains($cl_spidtype, concat(' ', normalize-space($x/@schemeID), ' '))"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="every $x in (tsr:Key[normalize-space(@metaSchemeID) = 'SP']) satisfies not(contains(normalize-space($x/@schemeID), ' ')) and contains($cl_spidtype, concat(' ', normalize-space($x/@schemeID), ' '))">
+                                test="every $x in (tsr:Key[normalize-space(@metaSchemeID) = 'SP']) satisfies not(contains(normalize-space($x/@schemeID), ' ')) and contains($cl_spidtype, concat(' ', normalize-space($x/@schemeID), ' '))">
                <xsl:attribute name="id">SCH-TSR-28</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -765,12 +765,12 @@
    </xsl:template>
    <!--RULE -->
    <xsl:template match="/tsr:TransactionStatisticsReport/tsr:Subtotal[normalize-space(@type) = 'PerSP-DT-PR-CC']"
-                  priority="1001"
-                  mode="M3">
+                 priority="1001"
+                 mode="M3">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/tsr:TransactionStatisticsReport/tsr:Subtotal[normalize-space(@type) = 'PerSP-DT-PR-CC']"/>
+                       context="/tsr:TransactionStatisticsReport/tsr:Subtotal[normalize-space(@type) = 'PerSP-DT-PR-CC']"/>
       <xsl:variable name="name"
-                     select="'The subtotal per Service Provider ID, Dataset Type ID, Sender Country and Receiver Country'"/>
+                    select="'The subtotal per Service Provider ID, Dataset Type ID, Sender Country and Receiver Country'"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(tsr:Key) = 5"/>
@@ -792,7 +792,7 @@
          <xsl:when test="count(tsr:Key[normalize-space(@metaSchemeID) = 'SP']) = 1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(tsr:Key[normalize-space(@metaSchemeID) = 'SP']) = 1">
+                                test="count(tsr:Key[normalize-space(@metaSchemeID) = 'SP']) = 1">
                <xsl:attribute name="id">SCH-TSR-30</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -809,7 +809,7 @@
          <xsl:when test="count(tsr:Key[normalize-space(@metaSchemeID) = 'DT']) = 1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(tsr:Key[normalize-space(@metaSchemeID) = 'DT']) = 1">
+                                test="count(tsr:Key[normalize-space(@metaSchemeID) = 'DT']) = 1">
                <xsl:attribute name="id">SCH-TSR-31</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -826,7 +826,7 @@
          <xsl:when test="count(tsr:Key[normalize-space(@metaSchemeID) = 'PR']) = 1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(tsr:Key[normalize-space(@metaSchemeID) = 'PR']) = 1">
+                                test="count(tsr:Key[normalize-space(@metaSchemeID) = 'PR']) = 1">
                <xsl:attribute name="id">SCH-TSR-32</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -843,7 +843,7 @@
          <xsl:when test="count(tsr:Key[normalize-space(@metaSchemeID) = 'CC']) = 2"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(tsr:Key[normalize-space(@metaSchemeID) = 'CC']) = 2">
+                                test="count(tsr:Key[normalize-space(@metaSchemeID) = 'CC']) = 2">
                <xsl:attribute name="id">SCH-TSR-33</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -860,7 +860,7 @@
          <xsl:when test="every $x in (tsr:Key[normalize-space(@metaSchemeID) = 'SP']) satisfies                                                    not(contains(normalize-space($x/@schemeID), ' ')) and                                                     contains($cl_spidtype, concat(' ', normalize-space($x/@schemeID), ' '))"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="every $x in (tsr:Key[normalize-space(@metaSchemeID) = 'SP']) satisfies not(contains(normalize-space($x/@schemeID), ' ')) and contains($cl_spidtype, concat(' ', normalize-space($x/@schemeID), ' '))">
+                                test="every $x in (tsr:Key[normalize-space(@metaSchemeID) = 'SP']) satisfies not(contains(normalize-space($x/@schemeID), ' ')) and contains($cl_spidtype, concat(' ', normalize-space($x/@schemeID), ' '))">
                <xsl:attribute name="id">SCH-TSR-34</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -877,7 +877,7 @@
          <xsl:when test="count(tsr:Key[normalize-space(@metaSchemeID) = 'CC'][normalize-space(@schemeID) = 'SenderCountry']) = 1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(tsr:Key[normalize-space(@metaSchemeID) = 'CC'][normalize-space(@schemeID) = 'SenderCountry']) = 1">
+                                test="count(tsr:Key[normalize-space(@metaSchemeID) = 'CC'][normalize-space(@schemeID) = 'SenderCountry']) = 1">
                <xsl:attribute name="id">SCH-TSR-35</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -894,7 +894,7 @@
          <xsl:when test="count(tsr:Key[normalize-space(@metaSchemeID) = 'CC'][normalize-space(@schemeID) = 'ReceiverCountry']) = 1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(tsr:Key[normalize-space(@metaSchemeID) = 'CC'][normalize-space(@schemeID) = 'ReceiverCountry']) = 1">
+                                test="count(tsr:Key[normalize-space(@metaSchemeID) = 'CC'][normalize-space(@schemeID) = 'ReceiverCountry']) = 1">
                <xsl:attribute name="id">SCH-TSR-36</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -926,16 +926,16 @@
    </xsl:template>
    <!--RULE -->
    <xsl:template match="/tsr:TransactionStatisticsReport/tsr:Subtotal"
-                  priority="1000"
-                  mode="M3">
+                 priority="1000"
+                 mode="M3">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/tsr:TransactionStatisticsReport/tsr:Subtotal"/>
+                       context="/tsr:TransactionStatisticsReport/tsr:Subtotal"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="not(contains(normalize-space(@type), ' ')) and                                                  contains($cl_subtotalType, concat(' ', normalize-space(@type), ' '))"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="not(contains(normalize-space(@type), ' ')) and contains($cl_subtotalType, concat(' ', normalize-space(@type), ' '))">
+                                test="not(contains(normalize-space(@type), ' ')) and contains($cl_subtotalType, concat(' ', normalize-space(@type), ' '))">
                <xsl:attribute name="id">SCH-TSR-37</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
