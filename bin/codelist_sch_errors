@@ -1,166 +1,87 @@
-#!/bin/bash
+#!/usr/bin/env ruby
 
-base_dir="../lib/sch/schemas"
-en_output_file="en.yml"
-de_output_file="de.yml"
-file_names=()
-en_seen_codes=()
-de_seen_codes=()
-en_results=()
-de_results=()
+require 'nokogiri'
+require 'set'
 
-is_de_code() {
-    local code="$1"
-    if [[ ($code == BR-DE-* || $code == BR-DEX-*) && ! "$code" =~ ^BR-DE-22$|^BR-DEX-(04|05|06|07|08|09)$ ]]; then
-        return 0
-    else
-        return 1
-    fi
+namespaces = {
+  'xsl' => 'http://www.w3.org/1999/XSL/Transform',
+  'svrl' => 'http://purl.oclc.org/dsdl/svrl'
 }
 
-string_in_array() {
-  local string="$1"
-  for element in "${@:2}"; do
-    if [[ "$element" == "$string" ]]; then
-      return 0
-    fi
-  done
-  return 1
-}
+en_code_files = Hash.new { |h, k| h[k] = Set.new }
+en_text_codes = Hash.new
+de_code_files = Hash.new { |h, k| h[k] = Set.new }
+de_text_codes = Hash.new
 
-jumpable() {
-  local code="$1"
-  local file_name="$2"
-  if [[ "$code" == "BR-DE-22" || "$code" == "BR-DE-26" || "$code" == "BR-DEX-13" ]]; then
-    return 0
-  elif [[ "$code" == "BR-DE-18" && ! ("$file_name" == "XRechnung-CII-validation_3.0" || "$file_name" == "XRechnung-UBL-validation_3.0") ]]; then
-    return 0
-  else
-    return 1
-  fi
-}
+def is_de_code?(code, filename)
+  return false unless code.start_with?('BR-DE-', 'BR-DEX-')
+  special_filenames = %w[XRechnung-UBL-validation-CreditNote_2_1 XRechnung-UBL-validation-CreditNote_2_2 XRechnung-UBL-validation-Invoice_2_1 XRechnung-UBL-validation-Invoice_2_2 XRechnung-UBL-validation_2_3 XRechnung-UBL-validation_3_0]
+  excluded = ['BR-DE-22', *('04'..'09').map { |n| "BR-DEX-#{n}" }]
+  return true if code == 'BR-DE-22' && special_filenames.include?(filename)
+  !excluded.include?(code)
+end
 
-echo "---" > "$en_output_file"
-echo "en:" >> "$en_output_file"
-echo "---" > "$de_output_file"
-echo "de:" >> "$de_output_file"
+Dir.glob('lib/sch/compiled/*.sch.xslt').each do |file_path|
+  doc = Nokogiri::XML(File.read(file_path))
 
-while IFS= read -r file; do
-  output_file=$en_output_file
-  file_name=$(basename "$file" .sch)
-  if string_in_array "$file_name" "${file_names[@]}"; then
-    continue
-  fi
-  file_names+=("$file_name")
-  seen_codes_in_file=()
-  specifics=0
-  while IFS= read -r match; do
-    result=$(echo "$match" | sed "s/'/\"/g")
-    result=$(echo "$result" | sed -n "s/.*>\[\([^]]*\)\][[:space:]-]*\(.*\)<\/assert>/\1###\2/p")
-    result=$(echo "$result" | awk -F '###' '{gsub(/\./, "_", $1); print $1": \047"$2"\047"}' | awk '{gsub(/\xC2\xA0/, ""); print}')
-    code=$(echo "$result" | cut -d: -f1)
+  templates = doc.xpath('//xsl:stylesheet//xsl:template//xsl:choose//xsl:otherwise//svrl:failed-assert', namespaces)
 
-    if [[ "$file_name" == 'si-ubl-2.0' && "$code" == 'BII2-T10-R001' ]]; then
-      result="BII2-T10-R001: 'An invoice/credit note MUST have a customization identifier'"
-    elif [[ "$file_name" == 'si-ubl-2.0-nlcius' && "$code" == 'BR-NL-27' ]]; then
-      result="BR-NL-27: 'The use of address line 3 is not recommended'"
-    elif [[ "$file_name" == 'si-ubl-2.0-nlcius' && "$code" == 'BR-NL-28' ]]; then
-      result="BR-NL-28: 'The use of a country subdivision is not recommended'"
-    elif [[ "$file_name" == 'si-ubl-2.0-nlcius' && "$code" == 'BR-NL-32' ]]; then
-      result="BR-NL-32: 'The use of an allowance reason code is not recommended'"
-    elif [[ "$file_name" == 'si-ubl-2.0-nlcius' && "$code" == 'BR-NL-34' ]]; then
-      result="BR-NL-34: 'The use of a charge reason code is not recommended'"
-    fi
+  templates.each do |template|
+    id_node = template.at_xpath('./xsl:attribute[@name="id"]', namespaces)
+    text_node = template.at_xpath('./svrl:text', namespaces)
 
-    if string_in_array "$code" "${seen_codes_in_file[@]}"; then
-      continue
-    fi
+    id = id_node&.text || 'sin-id'
+    text = text_node&.text || 'sin-texto'
 
-    seen_codes_in_file+=("$code")
+    id.gsub!('.', "_")
 
-    if string_in_array "$result" "${en_results[@]}"; then
-      continue
-    fi
+    text.gsub!(' ', "")
+    text.gsub!('"', "'")
+    text.gsub!(/^'?\s*>?\s*\[[A-Za-z0-9.\-]+\]\s*-?/, '')
+    text.gsub!(/\s+/, ' ')
+    text.strip!
 
-    if string_in_array "$result" "${de_results[@]}"; then
-      continue
-    fi
+    if text.include?(':') or text.start_with?("'") or text.start_with?("@")
+      text = "\"#{text}\""
+    end
 
-    unset seen_code
-    if string_in_array "$code" "${de_seen_codes[@]}"; then
-      output_file=$de_output_file
-      seen_code=1
-    fi
+    filename = File.basename(file_path).sub(/\.sch\.xslt$/, '')
+    filename.gsub!('.', "_")
 
-    if string_in_array "$code" "${en_seen_codes[@]}" || [[ $seen_code ]]; then
-      if jumpable "$code" "$file_name"; then
-        continue
-      fi
-      if [[ $specifics -eq 0 ]]; then
-        specifics=1
-        echo -e "  ${file_name//./_}:" >> "$output_file"
-      fi
-      echo -e "    $result" >> "$output_file"
+    if is_de_code?(id, filename)
+      code_files = de_code_files
+      text_codes = de_text_codes
     else
-      if is_de_code "$code"; then
-        de_results+=("$result")
-        de_seen_codes+=("$code")
-      else
-        en_results+=("$result")
-        en_seen_codes+=("$code")
-      fi
-    fi
-  done < <(grep -oP '>\[.*?\](.*?)<\/assert>' "$file")
-  while IFS= read -r match; do
-    if [[ $(echo "$match" | grep -oP '>\[.*?\](.*?)<\/assert>') ]]; then
-      continue
-    fi
-    code=$(echo "$match" | grep -oP 'id="\K[^"]+' | sed 's/\./_/g')
-    if string_in_array "$code" "${seen_codes_in_file[@]}"; then
-      continue
-    fi
-    seen_codes_in_file+=("$code")
-    message=$(echo "$match" | sed -n 's/.*>\(.*\)<\/assert>.*/\1/p' | sed "s/'/\"/g" | awk '{gsub(/\xC2\xA0/, ""); print}' | xargs echo 2>/dev/null)
-    result="$code: '$message'"
+      code_files = en_code_files
+      text_codes = en_text_codes
+    end
 
-    if string_in_array "$result" "${en_results[@]}"; then
-      continue
-    fi
-
-    if string_in_array "$result" "${de_results[@]}"; then
-      continue
-    fi
-
-    unset seen_code
-    if string_in_array "$code" "${de_seen_codes[@]}"; then
-      output_file=$de_output_file
-      seen_code=1
-    fi
-
-    if string_in_array "$code" "${en_seen_codes[@]}" || [[ $seen_code ]]; then
-      if [[ $specifics -eq 0 ]]; then
-        specifics=1
-        echo -e "  ${file_name//./_}:" >> "$output_file"
-      fi
-      echo -e "    $result" >> "$output_file"
+    if code_files['default'].include?(id) && text_codes["#{id}"] != text
+      code_files[filename] << id
+      text_codes["#{filename}_#{id}"] = text
     else
-      if is_de_code "$code"; then
-        de_results+=("$result")
-        de_seen_codes+=("$code")
-      else
-        en_results+=("$result")
-        en_seen_codes+=("$code")
-      fi
-    fi
-  done < <(grep -oP '<assert(.*?)<\/assert>' "$file")
-done < <(find "$base_dir" -type f -name "*.sch")
+      code_files['default'] << id
+      text_codes[id] = text
+    end
+  end
+end
 
-echo -e "  B2B-DOC-1: 'Unknown customizationID'" >> "$en_output_file"
+[[en_code_files, en_text_codes, 'en'], [de_code_files, de_text_codes, 'de']].each do |code_files, text_codes, prefix|
+  File.open("bin/#{prefix}.yml", 'w') do |file_out|
+    file_out.puts "---"
+    file_out.puts "#{prefix}:"
+    code_files.each do |file, codes|
+      file_default = (file == 'default')
+      tabs_code = file_default ? "\t" : "\t\t"
+      file_out.puts "\t#{file}:" unless file_default
+      codes.each do |code|
+        text_key = file_default ? code : "#{file}_#{code}"
+        file_out.puts "#{tabs_code}#{code}: #{text_codes[text_key]}"
+      end
+    end
+  end
+end
 
-for value in "${en_results[@]}"; do
-  echo -e "  $value" >> "$en_output_file"
-done
-
-for value in "${de_results[@]}"; do
-  echo -e "  $value" >> "$de_output_file"
-done
+File.open("bin/en.yml", 'a') do |file_out|
+  file_out.puts "\tB2B-DOC-1: 'Unknown customizationID'"
+end
