@@ -98,7 +98,8 @@ module Xsd
           schema_path('factur-x/basic_wl/FACTUR-X_BASIC-WL.xsd')
         when 'urn:cen.eu:en16931:2017#conformant#urn:factur-x.eu:1p0:extended'
           schema_path('factur-x/extended/FACTUR-X_EXTENDED.xsd')
-        when 'urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_3.0'
+        when 'urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_3.0',
+          'urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_3.0#conformant#urn:xeinkauf.de:kosit:extension:xrechnung_3.0'
           schema_path('xrechnung/cii_30/CrossIndustryInvoice_100pD16B.xsd')
         else
           standard_path(namespace)
