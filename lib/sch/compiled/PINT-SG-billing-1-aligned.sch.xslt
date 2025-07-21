@@ -246,6 +246,21 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
+      <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="not(contains(cbc:CustomizationID, '*'))"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="not(contains(cbc:CustomizationID, '*'))">
+               <xsl:attribute name="id">BR-114-SG</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>Specification identifier MUST not contain the character '*'.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
       <xsl:apply-templates select="*" mode="M11"/>
    </xsl:template>
    <xsl:template match="text()" priority="-1" mode="M11"/>
@@ -254,7 +269,7 @@
    </xsl:template>
    <!--PATTERN UBL-model-->
    <!--RULE -->
-   <xsl:template match="/*/cbc:UUID" priority="1008" mode="M12">
+   <xsl:template match="/*/cbc:UUID" priority="1010" mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="/*/cbc:UUID"/>
       <!--ASSERT -->
       <xsl:choose>
@@ -274,7 +289,7 @@
       <xsl:apply-templates select="*" mode="M12"/>
    </xsl:template>
    <!--RULE -->
-   <xsl:template match="cac:LegalMonetaryTotal" priority="1007" mode="M12">
+   <xsl:template match="cac:LegalMonetaryTotal" priority="1009" mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="cac:LegalMonetaryTotal"/>
       <!--ASSERT -->
@@ -343,12 +358,12 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="string-length(substring-after(cbc:TaxExclusiveAmount,'.'))&lt;=2">
-               <xsl:attribute name="id">BR-DEC-12-GST-SG</xsl:attribute>
+               <xsl:attribute name="id">BR-DEC-12-SG</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[BR-DEC-12-GST-SG]-The allowed maximum number of decimals for the Invoice total amount without GST (BT-109-GST) is 2.</svrl:text>
+               <svrl:text>[BR-DEC-12-SG]-The allowed maximum number of decimals for the Invoice total amount without GST (BT-109-GST) is 2.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -358,12 +373,42 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="string-length(substring-after(cbc:TaxInclusiveAmount,'.'))&lt;=2">
-               <xsl:attribute name="id">BR-DEC-14-GST-SG</xsl:attribute>
+               <xsl:attribute name="id">BR-DEC-14-SG</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[BR-DEC-14-GST-SG]-The allowed maximum number of decimals for the Invoice total amount with GST (BT-112-GST) is 2.</svrl:text>
+               <svrl:text>[BR-DEC-14-SG]-The allowed maximum number of decimals for the Invoice total amount with GST (BT-112-GST) is 2.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="string-length(substring-after(cbc:PrepaidAmount,'.'))&lt;=2"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="string-length(substring-after(cbc:PrepaidAmount,'.'))&lt;=2">
+               <xsl:attribute name="id">BR-DEC-16-SG</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>[BR-DEC-16-SG]-The allowed maximum number of decimals for the Paid amount (IBT-113) is 2.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="string-length(substring-after(cbc:PayableRoundingAmount,'.'))&lt;=2"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="string-length(substring-after(cbc:PayableRoundingAmount,'.'))&lt;=2">
+               <xsl:attribute name="id">BR-DEC-17-SG</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>[BR-DEC-17-SG]-The allowed maximum number of decimals for the Rounding amount (IBT-114) is 2.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -423,14 +468,44 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[BR-DEC-09-SG]-The allowed maximum number of decimals for the Sum of Invoice line net amount (BT-106) is 2.</svrl:text>
+               <svrl:text>[BR-DEC-09-SG]-The allowed maximum number of decimals for the Sum of Invoice line net amount (IBT-106) is 2.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="string-length(substring-after(cbc:AllowanceTotalAmount,'.'))&lt;=2"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="string-length(substring-after(cbc:AllowanceTotalAmount,'.'))&lt;=2">
+               <xsl:attribute name="id">BR-DEC-10-SG</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>[BR-DEC-10-SG]-The allowed maximum number of decimals for the Sum of allowanced on document level (IBT-107) is 2.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="string-length(substring-after(cbc:ChargeTotalAmount,'.'))&lt;=2"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="string-length(substring-after(cbc:ChargeTotalAmount,'.'))&lt;=2">
+               <xsl:attribute name="id">BR-DEC-11-SG</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>[BR-DEC-11-SG]-The allowed maximum number of decimals for the Sum of charges on document level (IBT-108) is 2.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M12"/>
    </xsl:template>
    <!--RULE -->
-   <xsl:template match="/ubl:Invoice | /cn:CreditNote" priority="1006" mode="M12">
+   <xsl:template match="/ubl:Invoice | /cn:CreditNote" priority="1008" mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Invoice | /cn:CreditNote"/>
       <!--ASSERT -->
@@ -445,6 +520,21 @@
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>[BR-53-GST-SG]-If the GST accounting currency code (BT-6-GST) is present, then the Invoice total GST amount (BT-111-GST), Invoice total including GST amount and Invoice Total excluding GST amount in accounting currency shall be provided.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="exists(cbc:TaxCurrencyCode) or not(exists(cac:AdditionalDocumentReference[cbc:DocumentTypeCode='sgdtotal-incl-gst']) or exists(cac:AdditionalDocumentReference[cbc:DocumentTypeCode='sgdtotal-excl-gst']))"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="exists(cbc:TaxCurrencyCode) or not(exists(cac:AdditionalDocumentReference[cbc:DocumentTypeCode='sgdtotal-incl-gst']) or exists(cac:AdditionalDocumentReference[cbc:DocumentTypeCode='sgdtotal-excl-gst']))">
+               <xsl:attribute name="id">BR-110-GST-SG</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>[BR-110-GST-SG]-The GST accounting currency code (BT-6-GST) must be present when Invoice total including GST amount or Invoice Total excluding GST amount in accounting currency are provided.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -617,7 +707,7 @@
    </xsl:template>
    <!--RULE -->
    <xsl:template match="cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory[normalize-space(cbc:ID) = 'NG'][cac:TaxScheme/normalize-space(upper-case(cbc:ID))='GST']"
-                 priority="1005"
+                 priority="1007"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory[normalize-space(cbc:ID) = 'NG'][cac:TaxScheme/normalize-space(upper-case(cbc:ID))='GST']"/>
@@ -654,7 +744,7 @@
    </xsl:template>
    <!--RULE -->
    <xsl:template match="cac:InvoiceLine | cac:CreditNoteLine"
-                 priority="1004"
+                 priority="1006"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="cac:InvoiceLine | cac:CreditNoteLine"/>
@@ -676,7 +766,7 @@
       <xsl:apply-templates select="*" mode="M12"/>
    </xsl:template>
    <!--RULE -->
-   <xsl:template match="cac:AccountingSupplierParty" priority="1003" mode="M12">
+   <xsl:template match="cac:AccountingSupplierParty" priority="1005" mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="cac:AccountingSupplierParty"/>
       <!--ASSERT -->
@@ -697,7 +787,7 @@
       <xsl:apply-templates select="*" mode="M12"/>
    </xsl:template>
    <!--RULE -->
-   <xsl:template match="cac:TaxRepresentativeParty" priority="1002" mode="M12">
+   <xsl:template match="cac:TaxRepresentativeParty" priority="1004" mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="cac:TaxRepresentativeParty"/>
       <!--ASSERT -->
@@ -719,7 +809,7 @@
    </xsl:template>
    <!--RULE -->
    <xsl:template match="/ubl:Invoice/cac:TaxTotal | /cn:CreditNote/cac:TaxTotal"
-                 priority="1001"
+                 priority="1003"
                  mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/ubl:Invoice/cac:TaxTotal | /cn:CreditNote/cac:TaxTotal"/>
@@ -741,7 +831,7 @@
       <xsl:apply-templates select="*" mode="M12"/>
    </xsl:template>
    <!--RULE -->
-   <xsl:template match="cac:TaxTotal/cac:TaxSubtotal" priority="1000" mode="M12">
+   <xsl:template match="cac:TaxTotal/cac:TaxSubtotal" priority="1002" mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="cac:TaxTotal/cac:TaxSubtotal"/>
       <!--ASSERT -->
@@ -820,6 +910,82 @@
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M12"/>
    </xsl:template>
+   <!--RULE -->
+   <xsl:template match="/ubl:Invoice/cac:AllowanceCharge[cbc:ChargeIndicator = false()] | /cn:CreditNote/cac:AllowanceCharge[cbc:ChargeIndicator = false()]"
+                 priority="1001"
+                 mode="M12">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="/ubl:Invoice/cac:AllowanceCharge[cbc:ChargeIndicator = false()] | /cn:CreditNote/cac:AllowanceCharge[cbc:ChargeIndicator = false()]"/>
+      <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="string-length(substring-after(cbc:Amount,'.'))&lt;=2"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="string-length(substring-after(cbc:Amount,'.'))&lt;=2">
+               <xsl:attribute name="id">BR-DEC-01-SG</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>[BR-DEC-01-SG]-The allowed maximum number of decimals for the Document level allowance amount (IBT-092) is 2.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="string-length(substring-after(cbc:BaseAmount,'.'))&lt;=2"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="string-length(substring-after(cbc:BaseAmount,'.'))&lt;=2">
+               <xsl:attribute name="id">BR-DEC-02-SG</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>[BR-DEC-02-SG]-The allowed maximum number of decimals for the Document level allowance base amount (IBT-093) is 2.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <xsl:apply-templates select="*" mode="M12"/>
+   </xsl:template>
+   <!--RULE -->
+   <xsl:template match="/ubl:Invoice/cac:AllowanceCharge[cbc:ChargeIndicator = true()] | /cn:CreditNote/cac:AllowanceCharge[cbc:ChargeIndicator = true()]"
+                 priority="1000"
+                 mode="M12">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="/ubl:Invoice/cac:AllowanceCharge[cbc:ChargeIndicator = true()] | /cn:CreditNote/cac:AllowanceCharge[cbc:ChargeIndicator = true()]"/>
+      <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="string-length(substring-after(cbc:Amount,'.'))&lt;=2"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="string-length(substring-after(cbc:Amount,'.'))&lt;=2">
+               <xsl:attribute name="id">BR-DEC-05-SG</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>[BR-DEC-05-SG]-The allowed maximum number of decimals for the Document level charge amount (IBT-099) is 2.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="string-length(substring-after(cbc:BaseAmount,'.'))&lt;=2"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="string-length(substring-after(cbc:BaseAmount,'.'))&lt;=2">
+               <xsl:attribute name="id">BR-DEC-06-SG</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>[BR-DEC-06-SG]-The allowed maximum number of decimals for the Document level charge base amount (BT-100) is 2.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <xsl:apply-templates select="*" mode="M12"/>
+   </xsl:template>
    <xsl:template match="text()" priority="-1" mode="M12"/>
    <xsl:template match="@*|node()" priority="-2" mode="M12">
       <xsl:apply-templates select="*" mode="M12"/>
@@ -886,7 +1052,52 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[BR-108-GST-SG]-An Invoice that contains an GST Category code of value SR, SRCA-S, SRCA-C, ZR, SRRC, SROVR-RS, SROVR-LVG, SRLVG or NA shall contain an Universally unique Invoice identifier (UUID) (BT-SG-003) </svrl:text>
+               <svrl:text>[BR-108-GST-SG]-An Invoice that contains an GST Category code of value SR, SRCA-S, SRCA-C, ZR, SRRC, SROVR-RS, SROVR-LVG, SRLVG or NA shall contain an Universally unique Invoice identifier (UUID) (BT-SG-003)</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="exists(cn:CreditNote/cbc:Note) or not(exists(cn:CreditNote))"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="exists(cn:CreditNote/cbc:Note) or not(exists(cn:CreditNote))">
+               <xsl:attribute name="id">BR-111-GST-SG</xsl:attribute>
+               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>[BR-111-GST-SG]-A CreditNote that contains an GST Category code of value SR, SRCA-S, SRCA-C, ZR, SRRC, SROVR-RS, SROVR-LVG, SRLVG or NA shall contain an Invoice note with the reason for credit (IBT-022)</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="exists(/*/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyID )"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="exists(/*/cac:AccountingSupplierParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyID )">
+               <xsl:attribute name="id">BR-112-GST-SG</xsl:attribute>
+               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>[BR-112-GST-SG]-An Invoice that contains an GST Category code of value SR, SRCA-S, SRCA-C, ZR, SRRC, SROVR-RS, SROVR-LVG, SRLVG or NA shall contain the Seller legal registration identifier (IBT-030)</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="(/*/normalize-space(cbc:DocumentCurrencyCode) != 'SGD' and /*/normalize-space(cbc:TaxCurrencyCode) = 'SGD')  or  (/*/normalize-space(cbc:DocumentCurrencyCode) = 'SGD' and not(/*/cbc:TaxCurrencyCode))"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="(/*/normalize-space(cbc:DocumentCurrencyCode) != 'SGD' and /*/normalize-space(cbc:TaxCurrencyCode) = 'SGD') or (/*/normalize-space(cbc:DocumentCurrencyCode) = 'SGD' and not(/*/cbc:TaxCurrencyCode))">
+               <xsl:attribute name="id">BR-113-GST-SG</xsl:attribute>
+               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>[BR-113-GST-SG]-An Invoice that contains an GST Category code of value SR, SRCA-S, SRCA-C, ZR, SRRC, SROVR-RS, SROVR-LVG, SRLVG or NA, shall include an Accounting currency code (IBT-006) with the value 'SGD' if the Invoice currency code (IBT-005) is not 'SGD'. If the Invoice currency code is 'SGD', then the Accounting currency code shall not be provided.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -971,31 +1182,16 @@
       </xsl:choose>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="(//cac:TaxTotal/cbc:TaxAmount[@currencyID = cbc:DocumentCurrencyCode] and (string-length(substring-after(//cac:TaxTotal/cbc:TaxAmount[@currencyID = cbc:DocumentCurrencyCode],'.'))&lt;=2)) or (not(//cac:TaxTotal/cbc:TaxAmount[@currencyID = cbc:DocumentCurrencyCode]))"/>
-         <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="(//cac:TaxTotal/cbc:TaxAmount[@currencyID = cbc:DocumentCurrencyCode] and (string-length(substring-after(//cac:TaxTotal/cbc:TaxAmount[@currencyID = cbc:DocumentCurrencyCode],'.'))&lt;=2)) or (not(//cac:TaxTotal/cbc:TaxAmount[@currencyID = cbc:DocumentCurrencyCode]))">
-               <xsl:attribute name="id">BR-DEC-13-GST-SG</xsl:attribute>
-               <xsl:attribute name="flag">fatal</xsl:attribute>
-               <xsl:attribute name="location">
-                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-               </xsl:attribute>
-               <svrl:text>[BR-DEC-13-GST-SG]-The allowed maximum number of decimals for the Invoice total GST amount (BT-110-GST) is 2.</svrl:text>
-            </svrl:failed-assert>
-         </xsl:otherwise>
-      </xsl:choose>
-      <!--ASSERT -->
-      <xsl:choose>
          <xsl:when test="(//cac:TaxTotal/cbc:TaxAmount[@currencyID = cbc:TaxCurrencyCode] and (string-length(substring-after(//cac:TaxTotal/cbc:TaxAmount[@currencyID = cbc:TaxCurrencyCode],'.'))&lt;=2)) or (not(//cac:TaxTotal/cbc:TaxAmount[@currencyID = cbc:TaxCurrencyCode]))"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="(//cac:TaxTotal/cbc:TaxAmount[@currencyID = cbc:TaxCurrencyCode] and (string-length(substring-after(//cac:TaxTotal/cbc:TaxAmount[@currencyID = cbc:TaxCurrencyCode],'.'))&lt;=2)) or (not(//cac:TaxTotal/cbc:TaxAmount[@currencyID = cbc:TaxCurrencyCode]))">
-               <xsl:attribute name="id">BR-DEC-15-GST-SG</xsl:attribute>
+               <xsl:attribute name="id">BR-DEC-15-SG</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[BR-DEC-15-GST-SG]-The allowed maximum number of decimals for the Invoice total GST amount in accounting currency (BT-111-GST) is 2.</svrl:text>
+               <svrl:text>[BR-DEC-15-SG]-The allowed maximum number of decimals for the Invoice total GST amount in accounting currency (BT-111-GST) is 2.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1052,12 +1248,12 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="string-length(substring-after(cbc:TaxableAmount,'.'))&lt;=2">
-               <xsl:attribute name="id">BR-DEC-19-GST-SG</xsl:attribute>
+               <xsl:attribute name="id">BR-DEC-19-SG</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[BR-DEC-19-GST-SG]-The allowed maximum number of decimals for the GST category taxable amount (BT-116-GST) is 2.</svrl:text>
+               <svrl:text>[BR-DEC-19-SG]-The allowed maximum number of decimals for the GST category taxable amount (BT-116-GST) is 2.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1067,12 +1263,12 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="string-length(substring-after(cbc:TaxAmount,'.'))&lt;=2">
-               <xsl:attribute name="id">BR-DEC-20-GST-SG</xsl:attribute>
+               <xsl:attribute name="id">BR-DEC-20-SG</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[BR-DEC-20-GST-SG]-The allowed maximum number of decimals for the GST category tax amount (BT-117-GST) is 2.</svrl:text>
+               <svrl:text>[BR-DEC-20-SG]-The allowed maximum number of decimals for the GST category tax amount (BT-117-GST) is 2.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>

@@ -51,7 +51,7 @@
   </pattern>
   <pattern id="Codesmodelaligned">
     <rule flag="fatal" context="cac:TaxCategory/cbc:ID | cac:ClassifiedTaxCategory/cbc:ID">
-      <assert id="aligned-ibrp-cl-01-my" flag="fatal" test="( ( not(contains(normalize-space(.),' ')) and contains( ' T E O ',concat(' ',normalize-space(.),' ') ) ) )">[aligned-ibrp-cl-01-my]-Malaysian invoice tax categories MUST be coded using Malaysian codes.</assert>
+      <assert id="aligned-ibrp-cl-01-my" flag="fatal" test="( ( not(contains(normalize-space(.),' ')) and contains( ' SA SE HVG LVG T E O ',concat(' ',normalize-space(.),' ') ) ) )">[aligned-ibrp-cl-01-my]-Malaysian invoice tax categories MUST be coded using Malaysian codes.</assert>
     </rule>
     <rule flag="fatal" context="cbc:TaxCurrencyCode">
       <assert id="ibr-cl-05-my" flag="fatal" test="( ( not(contains(normalize-space(.),' ')) and contains( ' MYR ',concat(' ',normalize-space(.),' ') ) ) )">[ibr-cl-05-my]-If Tax accounting currency (ibt-006) is present, it shall be coded using MYR in ISO code list of 4217.</assert>

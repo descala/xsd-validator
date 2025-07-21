@@ -284,46 +284,31 @@
                        context="/ubl:Invoice | /cn:CreditNote"/>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="starts-with(normalize-space(cbc:CustomizationID/text()), 'urn:peppol:pint:billing-1@jp-1')"/>
+         <xsl:when test="starts-with(normalize-space(cbc:CustomizationID/text()), 'urn:fdc:peppol:jp:billing:3.0') or starts-with(normalize-space(cbc:CustomizationID/text()), 'urn:peppol:pint:billing-1@jp-1')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="starts-with(normalize-space(cbc:CustomizationID/text()), 'urn:peppol:pint:billing-1@jp-1')">
+                                test="starts-with(normalize-space(cbc:CustomizationID/text()), 'urn:fdc:peppol:jp:billing:3.0') or starts-with(normalize-space(cbc:CustomizationID/text()), 'urn:peppol:pint:billing-1@jp-1')">
                <xsl:attribute name="id">aligned-ibrp-001-jp</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[aligned-ibrp-001-jp]-Specification identifier MUST start with the value 'urn:peppol:pint:billing-1@jp-1'.</svrl:text>
+               <svrl:text>[aligned-ibrp-001-jp]-Specification identifier MUST start with the value 'urn:fdc:peppol:jp:billing:3.0' or 'urn:peppol:pint:billing-1@jp-1'.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="/*/cbc:ProfileID and matches(normalize-space(/*/cbc:ProfileID), 'urn:peppol:bis:billing')"/>
+         <xsl:when test="/*/cbc:ProfileID and (matches(normalize-space(/*/cbc:ProfileID), 'urn:fdc:peppol.eu:2017:poacc:billing:01:1.0') or matches(normalize-space(/*/cbc:ProfileID), 'urn:peppol:bis:billing'))"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="/*/cbc:ProfileID and matches(normalize-space(/*/cbc:ProfileID), 'urn:peppol:bis:billing')">
+                                test="/*/cbc:ProfileID and (matches(normalize-space(/*/cbc:ProfileID), 'urn:fdc:peppol.eu:2017:poacc:billing:01:1.0') or matches(normalize-space(/*/cbc:ProfileID), 'urn:peppol:bis:billing'))">
                <xsl:attribute name="id">aligned-ibrp-002-jp</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[aligned-ibrp-002-jp]-Business process MUST be in the format 'urn:peppol:bis:billing'.</svrl:text>
-            </svrl:failed-assert>
-         </xsl:otherwise>
-      </xsl:choose>
-      <!--ASSERT -->
-      <xsl:choose>
-         <xsl:when test="(count(cac:PaymentTerms/cbc:Note) &lt;= 1)"/>
-         <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="(count(cac:PaymentTerms/cbc:Note) &lt;= 1)">
-               <xsl:attribute name="id">aligned-ibrp-008</xsl:attribute>
-               <xsl:attribute name="flag">fatal</xsl:attribute>
-               <xsl:attribute name="location">
-                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-               </xsl:attribute>
-               <svrl:text>[aligned-ibrp-008]-Payment terms (ibt-020) MUST occur maximum once.</svrl:text>
+               <svrl:text>[aligned-ibrp-002-jp]-Business process MUST be in the format 'urn:fdc:peppol.eu:2017:poacc:billing:01:1.0' or 'urn:peppol:bis:billing'.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1014,7 +999,7 @@
    <!--PATTERN Codesmodelaligned-->
    <!--RULE -->
    <xsl:template match="cac:TaxCategory/cbc:ID | cac:ClassifiedTaxCategory/cbc:ID"
-                 priority="1000"
+                 priority="1001"
                  mode="M13">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="cac:TaxCategory/cbc:ID | cac:ClassifiedTaxCategory/cbc:ID"/>
@@ -1030,6 +1015,26 @@
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>[aligned-ibrp-cl-01-jp]-Japanese invoice tax categories MUST be coded using UNCL5305 code list.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <xsl:apply-templates select="*" mode="M13"/>
+   </xsl:template>
+   <!--RULE -->
+   <xsl:template match="cbc:InvoiceTypeCode" priority="1000" mode="M13">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="cbc:InvoiceTypeCode"/>
+      <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="self::cbc:InvoiceTypeCode and (not(contains(normalize-space(.), ' ')) and contains(' 380 ', concat(' ', normalize-space(.), ' ')))"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="self::cbc:InvoiceTypeCode and (not(contains(normalize-space(.), ' ')) and contains(' 380 ', concat(' ', normalize-space(.), ' ')))">
+               <xsl:attribute name="id">aligned-ibrp-cl-02-jp</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>[aligned-ibrp-cl-02-jp]-The document type code  (ibt-003) MUST be 380.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>

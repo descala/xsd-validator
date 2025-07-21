@@ -55,7 +55,7 @@
       <assert id="aligned-ibrp-006" flag="fatal" test="(exists(cbc:TaxPointDate) and not(cac:InvoicePeriod/cbc:DescriptionCode)) or (not(cbc:TaxPointDate) and exists(cac:InvoicePeriod/cbc:DescriptionCode)) or (not(cbc:TaxPointDate) and not(cac:InvoicePeriod/cbc:DescriptionCode))">[aligned-ibrp-006]-Tax point date (ibt-007) and tax point date code (ibt-008) are mutually exclusive.</assert>
 
 
-      <assert id="aligned-ibrp-008" flag="fatal" test="(count(cac:PaymentTerms/cbc:Note) &lt;= 1)">[aligned-ibrp-008]-Payment terms (ibt-020) MUST occur maximum once.</assert>
+      <assert id="aligned-ibrp-008" flag="fatal" test="(count(cac:PaymentTerms) &lt;= 1)">[aligned-ibrp-008]-Invoice terms (ibg-033) MUST occur maximum once.</assert>
 
       <assert id="aligned-ibrp-021" flag="fatal" test="count(cac:TaxTotal[cac:TaxSubtotal]) = 1">[aligned-ibrp-021]-Only one tax total (ibg-38) with tax subtotals (ibg-23) MUST be provided.</assert>
       <assert id="aligned-ibrp-022" flag="fatal" test="count(cac:TaxTotal[not(cac:TaxSubtotal)]) = (if (cbc:TaxCurrencyCode) then 1 else 0)">[aligned-ibrp-022]-Only one tax total without tax subtotals (ibg-37)  MUST be provided when tax currency code (ibt-006) is provided.</assert>
@@ -190,7 +190,9 @@
       <assert id="aligned-ibrp-cl-04" flag="fatal" test="((@mimeCode = 'application/pdf' or @mimeCode = 'image/png' or @mimeCode = 'image/jpeg' or @mimeCode = 'text/csv' or @mimeCode = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' or @mimeCode = 'application/vnd.oasis.opendocument.spreadsheet'))">[aligned-ibrp-cl-04]-Mime code (ibt-125-1) MUST be according to subset of IANA code list.</assert>
     </rule>
 
-	
+
+
+
 	
 		<rule context="cac:AccountingSupplierParty/cac:Party[$supplierCountry = 'AU']">
 			<assert id="aligned-ibr-001-aunz" flag="fatal" test="(string-length(cac:PartyLegalEntity/cbc:CompanyID)&gt;=1 and cac:PartyLegalEntity/cbc:CompanyID/@schemeID = '0151')">[aligned-ibr-001-aunz]-An invoice must contain the Seller's ABN (ibt-030) if Seller country (ibt-040) is Australia</assert>

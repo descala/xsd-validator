@@ -31,9 +31,8 @@
       <assert id="aligned-ibrp-050-jp" flag="fatal" test="(cac:Item/cac:ClassifiedTaxCategory[cac:TaxScheme/(normalize-space(upper-case(cbc:ID))='VAT')]/cbc:ID) and (cac:Item/cac:ClassifiedTaxCategory[cac:TaxScheme/(normalize-space(upper-case(cbc:ID))='VAT')]/cbc:Percent)">[aligned-ibrp-050-jp]-Each Invoice line (ibg-25) MUST be categorized with an Invoiced item tax category code (ibt-151) and Invoiced item tax rate (ibt-152).</assert>
     </rule>
     <rule context="/ubl:Invoice | /cn:CreditNote">
-      <assert id="aligned-ibrp-001-jp" flag="fatal" test="starts-with(normalize-space(cbc:CustomizationID/text()), 'urn:peppol:pint:billing-1@jp-1')">[aligned-ibrp-001-jp]-Specification identifier MUST start with the value 'urn:peppol:pint:billing-1@jp-1'.</assert>
-      <assert id="aligned-ibrp-002-jp" flag="fatal" test="/*/cbc:ProfileID and matches(normalize-space(/*/cbc:ProfileID), 'urn:peppol:bis:billing')">[aligned-ibrp-002-jp]-Business process MUST be in the format 'urn:peppol:bis:billing'.</assert>
-      <assert id="aligned-ibrp-008" flag="fatal" test="(count(cac:PaymentTerms/cbc:Note) &lt;= 1)">[aligned-ibrp-008]-Payment terms (ibt-020) MUST occur maximum once.</assert>
+      <assert id="aligned-ibrp-001-jp" flag="fatal" test="starts-with(normalize-space(cbc:CustomizationID/text()), 'urn:fdc:peppol:jp:billing:3.0') or starts-with(normalize-space(cbc:CustomizationID/text()), 'urn:peppol:pint:billing-1@jp-1')">[aligned-ibrp-001-jp]-Specification identifier MUST start with the value 'urn:fdc:peppol:jp:billing:3.0' or 'urn:peppol:pint:billing-1@jp-1'.</assert>
+      <assert id="aligned-ibrp-002-jp" flag="fatal" test="/*/cbc:ProfileID and (matches(normalize-space(/*/cbc:ProfileID), 'urn:fdc:peppol.eu:2017:poacc:billing:01:1.0') or matches(normalize-space(/*/cbc:ProfileID), 'urn:peppol:bis:billing'))">[aligned-ibrp-002-jp]-Business process MUST be in the format 'urn:fdc:peppol.eu:2017:poacc:billing:01:1.0' or 'urn:peppol:bis:billing'.</assert>
       <assert id="aligned-ibrp-009" flag="fatal" test="(count(cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme[cac:TaxScheme/upper-case(cbc:ID)='VAT']/cbc:CompanyID) &lt;= 1)">[aligned-ibrp-009]-Seller tax identifier (ibt-031) MUST occur maximum once.</assert>
       <assert id="aligned-ibrp-014" flag="fatal" test="count(//cbc:PaymentID[not(preceding::cbc:PaymentID/. = .)]) &lt;= 1">[aligned-ibrp-014]-Remittance information (ibt-083) MUST occur maximum once.</assert>
       <assert id="aligned-ibrp-052" flag="fatal" test="exists(//cac:InvoicePeriod)">[aligned-ibrp-052]-An Invoice MUST have an invoice period (ibg-14) or an Invoice line period (ibg-26).</assert>
@@ -116,6 +115,9 @@
   <pattern id="Codesmodelaligned">
     <rule flag="fatal" context="cac:TaxCategory/cbc:ID | cac:ClassifiedTaxCategory/cbc:ID">
       <assert id="aligned-ibrp-cl-01-jp" flag="fatal" test="( ( not(contains(normalize-space(.),' ')) and contains( ' AA E S G O ',concat(' ',normalize-space(.),' ') ) ) )">[aligned-ibrp-cl-01-jp]-Japanese invoice tax categories MUST be coded using UNCL5305 code list.</assert>
+    </rule>
+    <rule flag="fatal" context="cbc:InvoiceTypeCode">
+      <assert id="aligned-ibrp-cl-02-jp" flag="fatal" test="self::cbc:InvoiceTypeCode and (not(contains(normalize-space(.), ' ')) and contains(' 380 ', concat(' ', normalize-space(.), ' ')))">[aligned-ibrp-cl-02-jp]-The document type code  (ibt-003) MUST be 380.</assert>
     </rule>
   </pattern>
 </schema>

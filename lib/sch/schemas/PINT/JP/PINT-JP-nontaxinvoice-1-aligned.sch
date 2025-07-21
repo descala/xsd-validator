@@ -33,7 +33,6 @@
     <rule context="/ubl:Invoice | /cn:CreditNote">
       <assert id="aligned-ibrp-001-jp-ntr" flag="fatal" test="starts-with(normalize-space(cbc:CustomizationID/text()), 'urn:peppol:pint:nontaxinvoice-1@jp-1')">[aligned-ibrp-001-jp-ntr]-Specification identifier MUST start with the value 'urn:peppol:pint:nontaxinvoice-1@jp-1'.</assert>
       <assert id="aligned-ibrp-002-jp" flag="fatal" test="/*/cbc:ProfileID and matches(normalize-space(/*/cbc:ProfileID), 'urn:peppol:bis:billing')">[aligned-ibrp-002-jp]-Business process MUST be in the format 'urn:peppol:bis:billing'.</assert>
-      <assert id="aligned-ibrp-008" flag="fatal" test="(count(cac:PaymentTerms/cbc:Note) &lt;= 1)">[aligned-ibrp-008]-Payment terms (ibt-020) MUST occur maximum once.</assert>
       <assert id="aligned-ibrp-009" flag="fatal" test="(count(cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme[cac:TaxScheme/upper-case(cbc:ID)='VAT']/cbc:CompanyID) &lt;= 1)">[aligned-ibrp-009]-Seller tax identifier (ibt-031) MUST occur maximum once.</assert>
       <assert id="aligned-ibrp-014" flag="fatal" test="count(//cbc:PaymentID[not(preceding::cbc:PaymentID/. = .)]) &lt;= 1">[aligned-ibrp-014]-Remittance information (ibt-083) MUST occur maximum once.</assert>
       <assert id="aligned-ibrp-052" flag="fatal" test="exists(//cac:InvoicePeriod)">[aligned-ibrp-052]-An Invoice MUST have an invoice period (ibg-14) or an Invoice line period (ibg-26).</assert>

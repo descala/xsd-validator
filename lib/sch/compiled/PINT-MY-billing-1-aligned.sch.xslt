@@ -489,10 +489,10 @@
                        context="cac:TaxCategory/cbc:ID | cac:ClassifiedTaxCategory/cbc:ID"/>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="( ( not(contains(normalize-space(.),' ')) and contains( ' T E O ',concat(' ',normalize-space(.),' ') ) ) )"/>
+         <xsl:when test="( ( not(contains(normalize-space(.),' ')) and contains( ' SA SE HVG LVG T E O ',concat(' ',normalize-space(.),' ') ) ) )"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="( ( not(contains(normalize-space(.),' ')) and contains( ' T E O ',concat(' ',normalize-space(.),' ') ) ) )">
+                                test="( ( not(contains(normalize-space(.),' ')) and contains( ' SA SE HVG LVG T E O ',concat(' ',normalize-space(.),' ') ) ) )">
                <xsl:attribute name="id">aligned-ibrp-cl-01-my</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">

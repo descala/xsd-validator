@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CreditNote xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-    xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
-    xmlns="urn:oasis:names:specification:ubl:schema:xsd:CreditNote-2">
+			xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+			xmlns="urn:oasis:names:specification:ubl:schema:xsd:CreditNote-2">
 
-<!-- 
+	<!--
 
-A valid Singapore credit note.
+    A valid Singapore credit note.
 
--->
+    -->
 
 	<cbc:UBLVersionID>2.1</cbc:UBLVersionID>
 	<cbc:CustomizationID>urn:peppol:pint:billing-1@sg-1</cbc:CustomizationID> <!-- BT-24 -->
 	<cbc:ProfileID>urn:peppol:bis:billing</cbc:ProfileID> <!-- BT-23 -->
 	<cbc:ID>F012345</cbc:ID> <!-- BT-1 -->
-	<cbc:UUID>2523149b-cb40-4b32-9004-debca57b80ee</cbc:UUID> 
+	<cbc:UUID>2523149b-cb40-4b32-9004-debca57b80ee</cbc:UUID>
 	<cbc:IssueDate>2020-05-27</cbc:IssueDate> <!-- BT-2 -->
 	<cbc:CreditNoteTypeCode>381</cbc:CreditNoteTypeCode> <!-- BT-3 -->
-	<cbc:Note>This is a credit note example</cbc:Note> <!-- BT-22 -->
+	<cbc:Note>This is a credit note example Reason for the credit goes here</cbc:Note> <!-- BT-22 -->
 	<cbc:DocumentCurrencyCode>SGD</cbc:DocumentCurrencyCode> <!-- BT-5 -->
 	<cbc:BuyerReference>IMDA1-Infocomm Media Devt Authority</cbc:BuyerReference> <!-- BT-10 -->
-    <cac:BillingReference>
-        <cac:InvoiceDocumentReference>
-            <cbc:ID>INV0001</cbc:ID>
-        </cac:InvoiceDocumentReference>
-    </cac:BillingReference>
+	<cac:BillingReference>
+		<cac:InvoiceDocumentReference>
+			<cbc:ID>INV0001</cbc:ID>
+		</cac:InvoiceDocumentReference>
+	</cac:BillingReference>
 	<cac:AccountingSupplierParty>
 		<cac:Party>
-			<cbc:EndpointID schemeID="0195">SGUENT08GA0028A</cbc:EndpointID> <!-- BT-49, BT-49-1 -->
+			<cbc:EndpointID schemeID="0195">SGUEN200212345Z</cbc:EndpointID> <!-- BT-49, BT-49-1 -->
 			<cac:PartyIdentification>
 				<cbc:ID schemeID="0035">345KS5324</cbc:ID> <!-- BT-46, BT-46-1 -->
 			</cac:PartyIdentification>
@@ -45,9 +45,10 @@ A valid Singapore credit note.
 				<cac:TaxScheme>
 					<cbc:ID>GST</cbc:ID> <!-- BT-31, qualifier -->
 				</cac:TaxScheme>
-			</cac:PartyTaxScheme>			
+			</cac:PartyTaxScheme>
 			<cac:PartyLegalEntity>
 				<cbc:RegistrationName>IMDA</cbc:RegistrationName> <!-- BT-45 -->
+				<cbc:CompanyID>200212345Z</cbc:CompanyID> <!-- BT-30 -->
 			</cac:PartyLegalEntity>
 			<cac:Contact>
 				<cbc:Name>John Doe</cbc:Name> <!-- BT-56 -->
@@ -56,7 +57,7 @@ A valid Singapore credit note.
 	</cac:AccountingSupplierParty>
 	<cac:AccountingCustomerParty>
 		<cac:Party>
-			<cbc:EndpointID schemeID="0195">SGUEN201012456C</cbc:EndpointID> <!-- BT-34, BT-34-1 -->
+			<cbc:EndpointID schemeID="0195">SGUEN200254321Z</cbc:EndpointID> <!-- BT-34, BT-34-1 -->
 			<cac:PostalAddress>
 				<cbc:StreetName>Mainstreet 112</cbc:StreetName> <!-- BT-35 -->
 				<cbc:AdditionalStreetName>Building 3</cbc:AdditionalStreetName> <!-- BT-36 -->
@@ -89,7 +90,7 @@ A valid Singapore credit note.
 		<cbc:Amount currencyID="SGD">2300.00</cbc:Amount> <!-- BT-92, BT-99 -->
 		<cac:TaxCategory>
 			<cbc:ID>SR</cbc:ID> <!-- BT-95, BT-102 -->
-				<cbc:Percent>7</cbc:Percent> <!-- BT-96, BT-103  -->
+			<cbc:Percent>7</cbc:Percent> <!-- BT-96, BT-103  -->
 			<cac:TaxScheme>
 				<cbc:ID>GST</cbc:ID>
 			</cac:TaxScheme>
@@ -146,7 +147,7 @@ A valid Singapore credit note.
 		<cbc:LineExtensionAmount currencyID="SGD">20000.00</cbc:LineExtensionAmount> <!-- BT-131 -->
 		<cac:OrderLineReference>
 			<cbc:LineID>1</cbc:LineID> <!-- BT-132 -->
-		</cac:OrderLineReference>	
+		</cac:OrderLineReference>
 		<cac:Item>
 			<cbc:Name>Pentax Z-1 Body</cbc:Name> <!-- BT-153 -->
 			<cac:SellersItemIdentification>
@@ -159,7 +160,7 @@ A valid Singapore credit note.
 					<cbc:ID>GST</cbc:ID>
 				</cac:TaxScheme>
 			</cac:ClassifiedTaxCategory>
-			</cac:Item>
+		</cac:Item>
 		<cac:Price>
 			<cbc:PriceAmount currencyID="SGD">1000.00</cbc:PriceAmount> <!-- BT-146 -->
 		</cac:Price>
