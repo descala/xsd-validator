@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:FatturaElettronicaSemplificata xmlns:p="http://ivaservizi.agenziaentrate.gov.it/docs/xsd/fatture/v1.0" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" versione="FSM10">
+  <FatturaElettronicaHeader>
+    <DatiTrasmissione>
+      <IdTrasmittente>
+        <IdPaese>IT</IdPaese>
+        <IdCodice>01504930114</IdCodice>
+      </IdTrasmittente>
+      <ProgressivoInvio>345081939</ProgressivoInvio>
+      <FormatoTrasmissione>FSM10</FormatoTrasmissione>
+      <CodiceDestinatario>0000000</CodiceDestinatario>
+      <PECDestinatario>test@test.it</PECDestinatario>
+    </DatiTrasmissione>
+    <CedentePrestatore>
+      <IdFiscaleIVA>
+        <IdPaese>IT</IdPaese>
+        <IdCodice>01081150110</IdCodice>
+      </IdFiscaleIVA>
+      <Denominazione>Italia</Denominazione>
+      <Sede>
+        <Indirizzo>via cesare, 12</Indirizzo>
+        <CAP>12345</CAP>
+        <Comune>Roma</Comune>
+        <Nazione>IT</Nazione>
+      </Sede>
+      <RegimeFiscale>RF01</RegimeFiscale>
+    </CedentePrestatore>
+    <CessionarioCommittente>
+      <IdentificativiFiscali>
+        <IdFiscaleIVA>
+          <IdPaese>IT</IdPaese>
+          <IdCodice>01154910119</IdCodice>
+        </IdFiscaleIVA>
+      </IdentificativiFiscali>
+      <AltriDatiIdentificativi>
+        <Denominazione>client italià</Denominazione>
+        <Sede>
+          <Indirizzo>VIALE ITALIA,585</Indirizzo>
+          <CAP>19121</CAP>
+          <Comune>LA SPEZIA</Comune>
+          <Provincia>SP</Provincia>
+          <Nazione>IT</Nazione>
+        </Sede>
+      </AltriDatiIdentificativi>
+    </CessionarioCommittente>
+    <SoggettoEmittente>TZ</SoggettoEmittente>
+  </FatturaElettronicaHeader>
+  <FatturaElettronicaBody>
+    <DatiGenerali>
+      <DatiGeneraliDocumento>
+        <TipoDocumento>TD07</TipoDocumento>
+        <Divisa>EUR</Divisa>
+        <Data>2025-07-24</Data>
+        <Numero>ABC2020/1</Numero>
+      </DatiGeneraliDocumento>
+    </DatiGenerali>
+    <DatiBeniServizi>
+      <Descrizione>line 1 of invoice fatturapa</Descrizione>
+      <Importo>199.65</Importo>
+      <DatiIVA>
+        <Imposta>34.65</Imposta>
+        <Aliquota>21.00</Aliquota>
+      </DatiIVA>
+    </DatiBeniServizi>
+    <DatiBeniServizi>
+      <Descrizione>line 2 of invoice fatturapa</Descrizione>
+      <Importo>6.05</Importo>
+      <DatiIVA>
+        <Imposta>1.05</Imposta>
+        <Aliquota>21.00</Aliquota>
+      </DatiIVA>
+    </DatiBeniServizi>
+  </FatturaElettronicaBody>
+</p:FatturaElettronicaSemplificata>
