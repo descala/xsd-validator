@@ -8,10 +8,10 @@
          xmlns:udt="urn:oasis:names:specification:ubl:schema:xsd:UnqualifiedDataTypes-2">
   <cbc:UBLVersionID>2.1</cbc:UBLVersionID>
   <cbc:CustomizationID>urn:cen.eu:en16931:2017#compliant#urn:peppol:france:billing:cius:1.0::2.1</cbc:CustomizationID>
-  <cbc:ProfileID>S1</cbc:ProfileID>
+  <cbc:ProfileID>a1</cbc:ProfileID>
   <cbc:ID>F202500007</cbc:ID>
-  <cbc:IssueDate>2025-07-02</cbc:IssueDate>
-  <cbc:DueDate>2025-08-01</cbc:DueDate>
+  <cbc:IssueDate>2100-07-02</cbc:IssueDate>
+  <cbc:DueDate>2100-08-01</cbc:DueDate>
   <cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode>
   <cbc:Note>#REG#VENDEUR SARL au capital de 50 000 EUR</cbc:Note>
   <cbc:Note>#ABL#RCS MAVILLE 100 000 009</cbc:Note>

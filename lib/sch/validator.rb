@@ -282,6 +282,14 @@ module Sch
         schemas = %w(PINT-billing-1-shared.sch PINT-MY-billing-1-aligned.sch)
         pint_schemas_to_validate(schemas, parts)
 
+      when 'urn:cen.eu:en16931:2017#compliant#urn:peppol:france:billing:cius:1.0::2.1',
+        'urn:cen.eu:en16931:2017#conformant#urn:peppol:france:billing:extended:1.0::2.1'
+        %w(BR-FR-Flux2-Schematron-UBL_V0.1.sch)
+
+      when 'urn:cen.eu:en16931:2017#compliant#urn:peppol:france:billing:cius:1.0::D22B',
+        'urn:cen.eu:en16931:2017#conformant#urn:peppol:france:billing:extended:1.0::D22B',
+        'urn:cen.eu:en16931:2017#conformant#urn:peppol:france:billing:Factur-X:1.0'
+        %w(BR-FR-Flux2-Schematron-CII_V0.1.sch)
       else
         profile_id = doc_nokogiri.xpath('//cbc:ProfileID', cbc: CBC).text
 
