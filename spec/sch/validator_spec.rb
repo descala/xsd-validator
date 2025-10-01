@@ -74,6 +74,8 @@ RSpec.describe Sch::Validator do
       'spec/files/sch/xrechnung-ubl_2.3-credit-note.xml' => ['CEN-EN16931-UBL.sch','XRechnung-UBL-validation_2.3.sch'],
       'spec/files/sch/xrechnung-ubl_2.2.xml' => ['CEN-EN16931-UBL.sch','XRechnung-UBL-validation-Invoice_2.2.sch'],
       'spec/files/sch/xrechnung-ubl_2.2-credit-note.xml' => ['CEN-EN16931-UBL.sch','XRechnung-UBL-validation-CreditNote_2.2.sch'],
+      'spec/files/sch/invoice-ubl-cius-fr.xml' => ['BR-FR-Flux2-Schematron-UBL_V0.1.sch'],
+      'spec/files/sch/invoice-cii-cius-fr.xml' => ['BR-FR-Flux2-Schematron-CII_V0.1.sch'],
     }
     files.each do |file_path, schematrons|
       it "#{file_path} checks with #{schematrons}" do

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:ram="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:qdt="urn:un:unece:uncefact:data:standard:QualifiedDataType:100"
-    xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:100"
-    targetNamespace="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100"
-    elementFormDefault="qualified">
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:qdt="urn:un:unece:uncefact:data:standard:QualifiedDataType:100"
+           xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:100"
+           targetNamespace="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100"
+           elementFormDefault="qualified">
   <xs:import namespace="urn:un:unece:uncefact:data:standard:QualifiedDataType:100" schemaLocation="FACTUR-X_EN16931_urn_un_unece_uncefact_data_standard_QualifiedDataType_100.xsd"/>
   <xs:import namespace="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:100" schemaLocation="FACTUR-X_EN16931_urn_un_unece_uncefact_data_standard_UnqualifiedDataType_100.xsd"/>
   <xs:complexType name="CreditorFinancialAccountType">
@@ -77,13 +77,13 @@
       <xs:element name="TaxCurrencyCode" type="qdt:CurrencyCodeType" minOccurs="0"/>
       <xs:element name="InvoiceCurrencyCode" type="qdt:CurrencyCodeType"/>
       <xs:element name="PayeeTradeParty" type="ram:TradePartyType" minOccurs="0"/>
-      <xs:element name="SpecifiedTradeSettlementPaymentMeans" type="ram:TradeSettlementPaymentMeansType" minOccurs="0"/>
+      <xs:element name="SpecifiedTradeSettlementPaymentMeans" type="ram:TradeSettlementPaymentMeansType" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="ApplicableTradeTax" type="ram:TradeTaxType" maxOccurs="unbounded"/>
       <xs:element name="BillingSpecifiedPeriod" type="ram:SpecifiedPeriodType" minOccurs="0"/>
       <xs:element name="SpecifiedTradeAllowanceCharge" type="ram:TradeAllowanceChargeType" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="SpecifiedTradePaymentTerms" type="ram:TradePaymentTermsType" minOccurs="0"/>
       <xs:element name="SpecifiedTradeSettlementHeaderMonetarySummation" type="ram:TradeSettlementHeaderMonetarySummationType"/>
-      <xs:element name="InvoiceReferencedDocument" type="ram:ReferencedDocumentType" minOccurs="0"/>
+      <xs:element name="InvoiceReferencedDocument" type="ram:ReferencedDocumentType" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="ReceivableSpecifiedTradeAccountingAccount" type="ram:TradeAccountingAccountType" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
@@ -220,7 +220,7 @@
   </xs:complexType>
   <xs:complexType name="TradeCountryType">
     <xs:sequence>
-      <xs:element name="ID" type="qdt:CountryIDType" minOccurs="0"/>
+      <xs:element name="ID" type="qdt:CountryIDType"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="TradePartyType">
