@@ -78,6 +78,13 @@ module Xsd
         when 'UBL-2.1-eSPap'
           schema_path('espap/maindoc/UBL-eSPap-Invoice-2.1.xsd')
         else
+          # PEPPOL Self-Billing uses standard UBL 2.1 Invoice/CreditNote schemas (not UBL-SelfBilledInvoice)
+          # Supported formats:
+          #   - PEPPOL Self-Billing 3.0: urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:selfbilling:3.0
+          #   - PEPPOL Self-Billing AUNZ: urn:cen.eu:en16931:2017#conformant#urn:fdc:peppol.eu:2017:poacc:selfbilling:international:aunz:3.0
+          #   - PEPPOL PINT Self-Billing: urn:peppol:pint:selfbilling-1@aunz-1, urn:peppol:pint:selfbilling-1@jp-1
+          # Differentiation is made via CustomizationID and InvoiceTypeCode (389)
+
           ubl_version = doc.xpath('//cbc:UBLVersionID', cbc: "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2").text
           if ubl_version.nil? or ubl_version == ''
             standard_path(namespace)
