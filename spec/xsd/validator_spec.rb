@@ -57,6 +57,7 @@ RSpec.describe Xsd::Validator do
       'spec/files/xsd/fatturapa/IT01234567890_FPA03.xml' => '/fatturapa/Schema_del_file_xml_FatturaPA_v1.2.3.xsd',
       'spec/files/xsd/peppol-selfbilling-base.xml' => /UBL-Invoice-2.1.xsd/,
       'spec/files/xsd/peppol-selfbilling-creditnote.xml' => /UBL-CreditNote-2.1.xsd/,
+      'spec/files/xsd/ksef/FA_3_Przykład_1.xml' => '/ksef/fa3.xsd'
     }
     files.each do |file_path, rgex_xsd_path|
       it "#{file_path} checks with #{rgex_xsd_path}" do
