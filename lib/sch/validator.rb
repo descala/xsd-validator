@@ -101,6 +101,8 @@ module Sch
       case customization_id
       when 'urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0'
         %w(CEN-EN16931-UBL.sch PEPPOL-EN16931-UBL.sch)
+      when 'urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:selfbilling:3.0'
+        %w(CEN-EN16931-UBL.sch PEPPOL-EN16931-UBL-SB.sch)
       when 'urn:cen.eu:en16931:2017#conformant#urn:fdc:peppol.eu:2017:poacc:billing:international:aunz:3.0'
         %w(AUNZ-UBL-validation.sch AUNZ-PEPPOL-validation.sch)
       when 'urn:cen.eu:en16931:2017#conformant#urn:fdc:peppol.eu:2017:poacc:selfbilling:international:aunz:3.0'
