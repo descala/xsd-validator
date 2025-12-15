@@ -31,9 +31,9 @@ RSpec.describe Sch::Validator do
     expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationError, /FATAL: .*BR-S-08/)
   end
 
-  it 'raises ValidationWarn in no fatal cases' do
-    doc=File.read('spec/files/sch/invoice-se-wrong-warn.xml')
-    expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationWarning, /WARNING: \[SE-R-003\] Swedish organisation numbers should be numeric/)
+  it 'raises ValidationError in for SE-R-003' do
+    doc=File.read('spec/files/sch/invoice-se-wrong-identifier.xml')
+    expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationError, /FATAL: .*SE-R-003/)
   end
 
   it 'raises ValidationError for an invalid JP Standard Invoice' do
@@ -76,6 +76,7 @@ RSpec.describe Sch::Validator do
       'spec/files/sch/xrechnung-ubl_2.2-credit-note.xml' => ['CEN-EN16931-UBL.sch','XRechnung-UBL-validation-CreditNote_2.2.sch'],
       'spec/files/xsd/peppol-selfbilling-base.xml' => ['CEN-EN16931-UBL.sch', 'PEPPOL-EN16931-UBL-SB.sch'],
       'spec/files/xsd/peppol-selfbilling-creditnote.xml' => ['CEN-EN16931-UBL.sch', 'PEPPOL-EN16931-UBL-SB.sch'],
+      'spec/files/sch/invoice-se-wrong-identifier.xml' => ['CEN-EN16931-UBL.sch', 'PEPPOL-EN16931-UBL.sch'],
     }
     files.each do |file_path, schematrons|
       it "#{file_path} checks with #{schematrons}" do
