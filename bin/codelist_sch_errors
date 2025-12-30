@@ -21,7 +21,25 @@ def is_de_code?(code, filename)
   !excluded.include?(code)
 end
 
-Dir.glob('lib/sch/compiled/*.sch.xslt').each do |file_path|
+# Afegir només els que es volen actualitzar
+XSLT_FILES = %w[
+  lib/sch/compiled/PINT-AUNZ-billing-1-aligned.sch.xslt
+  lib/sch/compiled/PINT-AUNZ-selfbilling-1-aligned.sch.xslt
+  lib/sch/compiled/PINT-AUNZ-selfbilling-1-shared.sch.xslt
+  lib/sch/compiled/PINT-JP-billing-1-aligned.sch.xslt
+  lib/sch/compiled/PINT-JP-nontaxinvoice-1-aligned.sch.xslt
+  lib/sch/compiled/PINT-JP-nontaxinvoice-1-shared.sch.xslt
+  lib/sch/compiled/PINT-JP-selfbilling-1-aligned.sch.xslt
+  lib/sch/compiled/PINT-JP-selfbilling-1-shared.sch.xslt
+  lib/sch/compiled/PINT-MY-billing-1-aligned.sch.xslt
+  lib/sch/compiled/PINT-SG-billing-1-aligned.sch.xslt
+  lib/sch/compiled/CEN-EN16931-UBL.sch.xslt
+  lib/sch/compiled/PEPPOL-EN16931-UBL-SB.sch.xslt
+  lib/sch/compiled/PEPPOL-EN16931-UBL.sch.xslt
+]
+
+XSLT_FILES.each do |file_path|
+  next unless File.exist?(file_path)
   doc = Nokogiri::XML(File.read(file_path))
 
   templates = doc.xpath('//xsl:stylesheet//xsl:template//xsl:choose//xsl:otherwise//svrl:failed-assert', namespaces)
@@ -72,8 +90,8 @@ end
     file_out.puts "#{prefix}:"
     code_files.each do |file, codes|
       file_default = (file == 'default')
-      tabs_code = file_default ? "\t" : "\t\t"
-      file_out.puts "\t#{file}:" unless file_default
+      tabs_code = file_default ? "  " : "    "
+      file_out.puts "  #{file}:" unless file_default
       codes.each do |code|
         text_key = file_default ? code : "#{file}_#{code}"
         file_out.puts "#{tabs_code}#{code}: #{text_codes[text_key]}"
@@ -83,5 +101,5 @@ end
 end
 
 File.open("bin/en.yml", 'a') do |file_out|
-  file_out.puts "\tB2B-DOC-1: 'Unknown customizationID'"
+  file_out.puts "  B2B-DOC-1: 'Unknown customizationID'"
 end
