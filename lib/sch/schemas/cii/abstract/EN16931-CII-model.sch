@@ -4,10 +4,7 @@
 
 -->
 <!-- Abstract rules for EN16931 -->
-<pattern xmlns="http://purl.oclc.org/dsdl/schematron" abstract="true" id="EN16931">
-  <rule context="$SpecifiedTradeAllowanceCharge">
-    <assert test="$BR-66" flag="fatal" id="BR-66">[BR-66]-Each Specified Trade Allowance Charge (BG-20)(BG-21) shall contain a Charge Indicator.</assert>
-  </rule>  
+<pattern xmlns="http://purl.oclc.org/dsdl/schematron" abstract="true" id="EN16931"> 
   <rule context="$DesignatedProductClassification">
     <assert test="$BR-65" flag="fatal" id="BR-65">[BR-65]-The Item classification identifier (BT-158) shall have a Scheme identifier.</assert>
   </rule>  
@@ -140,9 +137,6 @@
   </rule>
   <rule context="$Payment_instructions ">
     <assert test="$BR-49" flag="fatal" id="BR-49">[BR-49]-A Payment instruction (BG-16) shall specify the Payment means type code (BT-81).</assert>
-  </rule>
-  <rule context="$Credit_Payment_instructions">
-    <assert test="$BR-CO-27" flag="fatal" id="BR-CO-27">[BR-CO-27]- Either the IBAN or a Proprietary ID (BT-84) shall be used.</assert>
   </rule>
   <rule context="$Preceding_Invoice ">
     <assert test="$BR-55" flag="fatal" id="BR-55">[BR-55]-Each Preceding Invoice reference (BG-3) shall contain a Preceding Invoice reference (BT-25).</assert>
