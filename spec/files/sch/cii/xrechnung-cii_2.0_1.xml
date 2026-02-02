@@ -241,7 +241,6 @@ Strecke: Berlin - Berlin
         <ram:Name>Lieferant GmbH</ram:Name>
 		<ram:DefinedTradeContact>
 			<ram:PersonName>Max Mustermann</ram:PersonName>
-			<ram:DepartmentName>Muster-Einkauf</ram:DepartmentName>
 			<ram:TelephoneUniversalCommunication>
 				<ram:CompleteNumber>+49891234567</ram:CompleteNumber>
 			</ram:TelephoneUniversalCommunication>
