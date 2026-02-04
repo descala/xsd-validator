@@ -77,6 +77,12 @@ module Xsd
         case doc.xpath('//cbc:CustomizationID', cbc: "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2").text
         when 'UBL-2.1-eSPap'
           schema_path('espap/maindoc/UBL-eSPap-Invoice-2.1.xsd')
+        when 'urn.cpro.gouv.fr:1p0:einvoicingextract#Base'
+          if doc.root.name == 'Invoice'
+            schema_path('dgfip/tax_report_f1_base_ubl_2_1/F1BASE_UBL-invoice-2.1.xsd')
+          else
+            schema_path('dgfip/tax_report_f1_base_ubl_2_1/F1BASE_UBL-CreditNote-2.1.xsd')
+          end
         else
           # PEPPOL Self-Billing uses standard UBL 2.1 Invoice/CreditNote schemas (not UBL-SelfBilledInvoice)
           # Supported formats:

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ccts="urn:un:unece:uncefact:documentation:2" xmlns:qdt="urn:oasis:names:specification:ubl:schema:xsd:QualifiedDatatypes-2" xmlns:udt="urn:oasis:names:specification:ubl:schema:xsd:UnqualifiedDataTypes-2">
+  <cbc:CustomizationID>urn.cpro.gouv.fr:1p0:einvoicingextract#Base</cbc:CustomizationID>
+  <!-- BT-24 : Type de profil (e-invoicing, e-reporting, facture etc..) -->
+  <cbc:ProfileID>S1</cbc:ProfileID>
+  <!-- BT-23 : Cadre de facturation -->
+  <!-- Facture de prestation de service -->
+  <cbc:ID>UC1_2023001_F</cbc:ID>
+  <!-- BT-1 : Numéro de facture -->
+  <cbc:IssueDate>2023-01-01</cbc:IssueDate>
+  <!-- BT-2 : Date d'émission -->
+  <cbc:DueDate>2023-01-30</cbc:DueDate>
+  <!-- BT-9 : Date d'échéance -->
+  <cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode>
+  <!-- BT-3 : Code de type de facture -->
+  <cbc:Note>#REG#FOURNISSEUR F SARL au capital de 50 000 EUR</cbc:Note>
+  <!-- BG-1 : Note de facture -->
+  <cbc:Note>#PMD#<!-- BT-21 : Code du sujet de la note de facture -->Tout retard de paiement engendre une pénalité exigible à compter de la date d'échéance, calculée sur la base de trois fois le taux d'intérêt légal.</cbc:Note>
+  <!-- BT-22 : Note de facture -->
+  <cbc:Note>#PMT#Indemnité forfaitaire pour frais de recouvrement en cas de retard de paiement : 40 €.</cbc:Note>
+  <cbc:Note>#AAB#Les réglements reçus avant la date d'échéance ne donneront pas lieu à escompte.</cbc:Note>
+  <cbc:Note>#ABL#RCS PARIS 987 654 324 - NAF xxxxx</cbc:Note>
+  <cbc:Note>#AAI#Mon adresse dans ma ville - contact@moifournisseur.fr - www.moifournisseur.com</cbc:Note>
+  <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+  <!-- BT-5 : Code devise facture -->
+  <cac:InvoicePeriod>
+    <!-- BG-14 - Période de facturation -->
+    <cbc:StartDate>2023-01-01</cbc:StartDate>
+    <!-- BT-73 : Date de début de la période de facturation -->
+    <cbc:EndDate>2023-01-31</cbc:EndDate>
+    <!-- BT-74 : Date de fin de la période de facturation -->
+    <cbc:DescriptionCode>432</cbc:DescriptionCode>
+    <!-- BT-8 : Code -->
+  </cac:InvoicePeriod>
+  <cac:AccountingSupplierParty>
+    <!-- BG-4 : Vendeur -->
+    <cac:Party>
+      <cac:PostalAddress>
+        <!-- BG-5 : Adresse postal du vendeur -->
+        <cac:Country>
+          <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+          <!-- BT-40 : Code de pays du vendeur -->
+        </cac:Country>
+      </cac:PostalAddress>
+      <cac:PartyTaxScheme>
+        <cbc:CompanyID>FR88100000009</cbc:CompanyID>
+        <!-- BT-31 : Identifiant à la TVA du vendeur -->
+        <cac:TaxScheme>
+          <!-- BT-31-0 : Qualifiant d'Identifiant à la TVA du Vendeur -->
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:PartyTaxScheme>
+      <cac:PartyLegalEntity>
+        <cbc:CompanyID schemeID="0002">100000009</cbc:CompanyID>
+        <!-- BT-30 : SIREN -->
+      </cac:PartyLegalEntity>
+    </cac:Party>
+  </cac:AccountingSupplierParty>
+  <cac:AccountingCustomerParty>
+    <!-- BG-7 : Acheteur -->
+    <cac:Party>
+      <cac:PostalAddress>
+        <!-- BG-8 : Adresse postale de l'acheteur  -->
+        <cac:Country>
+          <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+          <!-- BT-55 : Code de pays de l'acheteur  -->
+        </cac:Country>
+      </cac:PostalAddress>
+      <cac:PartyTaxScheme>
+        <cbc:CompanyID>FR37200000008</cbc:CompanyID>
+        <!-- BT-48 : Identifiant à la TVA de l'acheteur -->
+        <cac:TaxScheme>
+          <!-- BT-48-0 : Qualifiant d'Identifiant fiscal de l'acheteur -->
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:PartyTaxScheme>
+      <cac:PartyLegalEntity>
+        <cbc:CompanyID schemeID="0002">200000008</cbc:CompanyID>
+        <!-- BT-47 : SIREN -->
+      </cac:PartyLegalEntity>
+    </cac:Party>
+  </cac:AccountingCustomerParty>
+  <cac:Delivery>
+    <!-- BG-13 : Information de Livraison / Prestation de service -->
+    <cbc:ActualDeliveryDate>2023-01-01</cbc:ActualDeliveryDate>
+    <!-- BT-72 : Date effective de livraison / fin d'exécution de la prestation -->
+  </cac:Delivery>
+  <cac:TaxTotal>
+    <cbc:TaxAmount currencyID="EUR">36.00</cbc:TaxAmount>
+    <!-- BT-110 : Montant total de TVA de la facture / BT-111 : Montant TVA si devise différente -->
+    <cac:TaxSubtotal>
+      <!-- BG-23 : Ventilation de la TVA -->
+      <cbc:TaxableAmount>180.00</cbc:TaxableAmount>
+      <!--  BT-116 : Base d'imposition du type de TVA -->
+      <cbc:TaxAmount>36.00</cbc:TaxAmount>
+      <!--  BT-117 : Montant de la TVA pour chaque type de TVA -->
+      <cac:TaxCategory>
+        <cbc:ID>S</cbc:ID>
+        <!--  BT-118 : Code de type de TVA -->
+        <cbc:Percent>20.00</cbc:Percent>
+        <!--  BT-119 : Taux de type de TVA -->
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:TaxCategory>
+    </cac:TaxSubtotal>
+  </cac:TaxTotal>
+  <cac:LegalMonetaryTotal>
+    <!-- BG-22 : TOTAUX DU DOCUMENT -->
+    <cbc:TaxExclusiveAmount>180.00</cbc:TaxExclusiveAmount>
+    <!-- BT-109 : Montant total de la facture hors TVA -->
+  </cac:LegalMonetaryTotal>
+</Invoice>
