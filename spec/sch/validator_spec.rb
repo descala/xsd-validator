@@ -77,6 +77,8 @@ RSpec.describe Sch::Validator do
       'spec/files/xsd/peppol-selfbilling-base.xml' => ['CEN-EN16931-UBL.sch', 'PEPPOL-EN16931-UBL-SB.sch'],
       'spec/files/xsd/peppol-selfbilling-creditnote.xml' => ['CEN-EN16931-UBL.sch', 'PEPPOL-EN16931-UBL-SB.sch'],
       'spec/files/sch/invoice-se-wrong-identifier.xml' => ['CEN-EN16931-UBL.sch', 'PEPPOL-EN16931-UBL.sch'],
+      'spec/files/sch/invoice-ubl-cius-fr.xml' => ['BR-FR-Flux2-Schematron-UBL_V0.1.sch'],
+      'spec/files/sch/invoice-cii-cius-fr.xml' => ['BR-FR-Flux2-Schematron-CII_V0.1.sch'],
     }
     files.each do |file_path, schematrons|
       it "#{file_path} checks with #{schematrons}" do
