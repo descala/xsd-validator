@@ -191,8 +191,8 @@
     </rule>
 
 
-
-
+    
+  
 	
 		<rule context="cac:AccountingSupplierParty/cac:Party[$supplierCountry = 'AU']">
 			<assert id="aligned-ibr-001-aunz" flag="fatal" test="(string-length(cac:PartyLegalEntity/cbc:CompanyID)&gt;=1 and cac:PartyLegalEntity/cbc:CompanyID/@schemeID = '0151')">[aligned-ibr-001-aunz]-An invoice must contain the Seller's ABN (ibt-030) if Seller country (ibt-040) is Australia</assert>
