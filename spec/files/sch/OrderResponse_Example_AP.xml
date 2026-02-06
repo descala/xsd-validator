@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<OrderResponse xmlns="urn:oasis:names:specification:ubl:schema:xsd:OrderResponse-2"
+			   xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+			   xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+	<cbc:CustomizationID>urn:fdc:peppol.eu:poacc:trns:order_response:3</cbc:CustomizationID>
+	<cbc:ProfileID>urn:fdc:peppol.eu:poacc:bis:ordering:3</cbc:ProfileID>
+	<cbc:ID>101</cbc:ID>
+	<cbc:SalesOrderID>101-111</cbc:SalesOrderID>
+	<cbc:IssueDate>2013-07-01</cbc:IssueDate>
+	<cbc:IssueTime>06:10:10</cbc:IssueTime>
+	<cbc:OrderResponseCode>AP</cbc:OrderResponseCode>
+	<cbc:Note>Response message with amendments in the details</cbc:Note>
+	<cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+	<cbc:CustomerReference>ABC-123</cbc:CustomerReference>
+	<cac:OrderReference>
+		<cbc:ID>11233</cbc:ID>
+	</cac:OrderReference>
+	<cac:SellerSupplierParty>
+		<cac:Party>
+			<cbc:EndpointID schemeID="0088">7598000000128</cbc:EndpointID>
+			<cac:PartyIdentification>
+				<cbc:ID schemeID="0184">DK12345678</cbc:ID>
+			</cac:PartyIdentification>
+			<cac:PartyLegalEntity>
+				<cbc:RegistrationName>The Supplier AB</cbc:RegistrationName>
+			</cac:PartyLegalEntity>
+		</cac:Party>
+	</cac:SellerSupplierParty>
+	<cac:BuyerCustomerParty>
+		<cac:Party>
+			<cbc:EndpointID schemeID="0088">7590000012347</cbc:EndpointID>
+			<cac:PartyIdentification>
+				<cbc:ID schemeID="0184">DK55412777</cbc:ID>
+			</cac:PartyIdentification>
+			<cac:PartyLegalEntity>
+				<cbc:RegistrationName>City Hospital</cbc:RegistrationName>
+			</cac:PartyLegalEntity>
+		</cac:Party>
+	</cac:BuyerCustomerParty>
+	<cac:Delivery>
+		<cac:PromisedDeliveryPeriod>
+			<cbc:StartDate>2013-07-15</cbc:StartDate>
+			<cbc:EndDate>2013-07-16</cbc:EndDate>
+		</cac:PromisedDeliveryPeriod>
+	</cac:Delivery>
+</OrderResponse>
