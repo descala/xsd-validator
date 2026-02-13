@@ -177,7 +177,7 @@ module Xsd
 
     def standard_path(namespace)
       xmlns_path ||= File.expand_path("../xmlns/#{Validator.normalize_xmlns(namespace)}", __FILE__)
-      if File.exists?(xmlns_path)
+      if File.exist?(xmlns_path)
         File.realdirpath(xmlns_path)
       else
         raise StandardError.new("Unknown namespace #{namespace}")
