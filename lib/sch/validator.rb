@@ -293,6 +293,9 @@ module Sch
 
       when 'urn:cen.eu:en16931:2017#conformant#urn:peppol:france:billing:Factur-X:1.0'
         %w(BR-FR-Flux2-Schematron-CII_V0.1.sch)
+        # CDAR CrossDomainAcknowledgementAndResponse
+      when ->(v) { v.start_with?('urn.cpro.gouv.fr:1p0:CDV') }
+        %w(BR-FR-CDV-Schematron-CDAR_V1.2.0.sch)
       else
         profile_id = doc_nokogiri.xpath('//cbc:ProfileID', cbc: CBC).text
 
