@@ -13,6 +13,8 @@ module Xsd
     UBL_DOCUMENT = /urn:oasis:names:specification:ubl:schema:xsd:/
     CII_DOCUMENT = /urn:un:unece:uncefact:data:standard:CrossIndustryInvoice/
     RAM = "urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100"
+    CDAR = "urn:un:unece:uncefact:data:standard:CrossDomainAcknowledgementAndResponse:100"
+
 
     class ValidationError < RuntimeError
     end
@@ -120,6 +122,12 @@ module Xsd
           schema_path('xrechnung/cii_30/CrossIndustryInvoice_100pD22B.xsd')
         else
           standard_path(namespace)
+        end
+      when CDAR
+        customization_id = doc.xpath('//ram:GuidelineSpecifiedDocumentContextParameter/ram:ID').text
+        case customization_id
+        when 'urn.cpro.gouv.fr:1p0:CDV:einvoicingF2', 'urn.cpro.gouv.fr:1p0:CDV:invoice', 'urn.cpro.gouv.fr:1p0:CDV:flux', 'urn:peppol:france:billing:cdv:1.0'
+          schema_path('cdar/CrossDomainAcknowledgementAndResponse_100pD22B.xsd')
         end
       else
         ubl_version = doc.xpath('//cbc:UBLVersionID', cbc: "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2").text

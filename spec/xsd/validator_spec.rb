@@ -62,6 +62,7 @@ RSpec.describe Xsd::Validator do
       'spec/files/xsd/peppol-selfbilling-creditnote.xml' => /UBL-CreditNote-2.1.xsd/,
       'spec/files/xsd/ksef/FA_3_Przykład_1.xml' => '/ksef/fa3.xsd',
       'spec/files/xsd/dgfip/tax_report_f1/fr_f1_base.xml' => '/dgfip/tax_report_f1_base_ubl_2_1/F1BASE_UBL-invoice-2.1.xsd',
+      'spec/files/xsd/cdar/cdar_1_deposee.xml' => '/cdar/CrossDomainAcknowledgementAndResponse_100pD22B.xsd'
 
     }
     files.each do |file_path, rgex_xsd_path|
