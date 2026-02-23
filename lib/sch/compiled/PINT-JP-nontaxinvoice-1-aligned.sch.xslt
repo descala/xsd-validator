@@ -462,6 +462,21 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
+      <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="(count(cac:TaxTotal/cbc:TaxAmount[@currencyID=/*/cbc:DocumentCurrencyCode])) &lt;= 1"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="(count(cac:TaxTotal/cbc:TaxAmount[@currencyID=/*/cbc:DocumentCurrencyCode])) &lt;= 1">
+               <xsl:attribute name="id">aligned-ibrp-053-jp</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>[aligned-ibrp-053-jp]-Only one Invoice total tax amount may be present in the document currency (ibt-110).</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
       <xsl:apply-templates select="*" mode="M12"/>
    </xsl:template>
    <!--RULE -->
