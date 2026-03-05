@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<ReportDocument>
+		<Id>EREP/Déclarations-Ventes_Période_01-2025_Vbase</Id>
+		<Name>Déclaration Ventes de Janvier 2025</Name>
+		<IssueDateTime>
+			<DateTimeString>202502110400</DateTimeString>
+		</IssueDateTime>
+		<TypeCode>IN</TypeCode>
+		<Sender>
+			<Id schemeId="0238">1111</Id>
+			<Name>UNO</Name>
+			<RoleCode>WK</RoleCode>
+			<URIUniversalCommunication>
+				<URIID>contact-pdp@uno.fr</URIID>
+			</URIUniversalCommunication>
+		</Sender>
+		<Issuer>
+			<Id schemeId="0002">123456789</Id>
+			<Name>NOVATEST-FRANCE</Name>
+			<RoleCode>SE</RoleCode>
+			<URIUniversalCommunication>
+				<URIID>contact-vendeur@novatest.fr</URIID>
+			</URIUniversalCommunication>
+		</Issuer>
+	</ReportDocument>
+	<TransactionsReport>
+		<ReportPeriod>
+			<StartDate>20250101</StartDate>
+			<EndDate>20250131</EndDate>
+		</ReportPeriod>
+		<Invoice>
+			<ID>FAC-202501-00003</ID>
+			<IssueDate>20250101</IssueDate>
+			<TypeCode>380</TypeCode>
+			<CurrencyCode>EUR</CurrencyCode>
+			<DueDate>20250131</DueDate>
+			<TaxDueDateTypeCode>3</TaxDueDateTypeCode>
+			<IncludedNote>
+				<Subject>AAB</Subject>
+				<Content>Les factures devront être réglées en Euros (€) dès réception, et au plus tard dans un délai de 45  jours à partir de la date de leur émission</Content>
+			</IncludedNote>
+			<BusinessProcess>
+				<ID>S1</ID>
+				<TypeID>urn.cpro.gouv.fr:1p0:ereporting</TypeID>
+			</BusinessProcess>
+			<Seller>
+				<CompanyId schemeId="0002">123456789</CompanyId>
+				<TaxRegistrationId qualifyingId="VAT">FR00123456789</TaxRegistrationId>
+				<PostalAddress>
+					<CountryId>FR</CountryId>
+				</PostalAddress>
+			</Seller>
+			<Buyer>
+				<CompanyId schemeId="0223">223456789</CompanyId>
+				<TaxRegistrationId qualifyingId="VAT">IT00223456789</TaxRegistrationId>
+				<PostalAddress>
+					<CountryId>IT</CountryId>
+				</PostalAddress>
+			</Buyer>
+			<Delivery>
+				<Date>20250103</Date>
+				<Location>
+					<LineOne>AZZURROTECH-ITALIA</LineOne>
+					<LineTwo>Strada Gianfranco 897</LineTwo>
+					<CityName>Chieti</CityName>
+					<PostalZone>28753</PostalZone>
+					<CountryId>IT</CountryId>
+				</Location>
+			</Delivery>
+			<InvoicePeriod>
+				<StartDate>20250101</StartDate>
+				<EndDate>20250131</EndDate>
+			</InvoicePeriod>
+			<AllowanceCharge ChargeIndicator="false">
+				<Amount>10.50</Amount>
+				<TaxCategoryCode>S</TaxCategoryCode>
+				<TaxPercent>20.00</TaxPercent>
+			</AllowanceCharge>
+            <AllowanceCharge ChargeIndicator="true">
+				<Amount>5.00</Amount>
+				<TaxCategoryCode>S</TaxCategoryCode>
+				<TaxPercent>20.00</TaxPercent>
+			</AllowanceCharge>
+			<MonetaryTotal>
+				<TaxExclusiveAmount>250.00</TaxExclusiveAmount>
+				<TaxAmount CurrencyCode="EUR">50.00</TaxAmount>
+			</MonetaryTotal>
+			<TaxSubTotal>
+				<TaxableAmount>100.00</TaxableAmount>
+				<TaxAmount>20.00</TaxAmount>
+				<TaxCategory>
+					<Code>S</Code>
+					<Percent>20</Percent>
+				</TaxCategory>
+			</TaxSubTotal>
+            <TaxSubTotal>
+				<TaxableAmount>100.00</TaxableAmount>
+				<TaxAmount>5.5</TaxAmount>
+				<TaxCategory>
+					<Code>S</Code>
+					<Percent>5.5</Percent>
+				</TaxCategory>
+			</TaxSubTotal>
+            <TaxSubTotal>
+				<TaxableAmount>50.00</TaxableAmount>
+				<TaxAmount>0</TaxAmount>
+				<TaxCategory>
+					<Code>E</Code>
+					<Percent>0</Percent>
+					<TaxExemptionReason>DEBOURS</TaxExemptionReason>
+					<TaxExemptionReasonCode>VATEX-EU-79-C</TaxExemptionReasonCode>
+				</TaxCategory>
+			</TaxSubTotal>
+            <Line>
+				<Note>
+					<Code>PRD</Code>
+					<Comment>Abonnement 12345</Comment>
+				</Note>
+				<BilledQuantity UnitCode="NAR">100</BilledQuantity>
+				<InvoicePeriod>
+					<StartDate>20250115</StartDate>
+					<EndDate>20250116</EndDate>
+				</InvoicePeriod>
+				<AllowanceCharge ChargeIndicator="true">
+					<Amount>40</Amount>
+				</AllowanceCharge>
+				<Price>
+					<PriceAmount>120.00</PriceAmount>
+					<AllowanceChargeAmount>20</AllowanceChargeAmount>
+					<AllowanceChargeBaseAmount>140</AllowanceChargeBaseAmount>
+				</Price>
+				<Product>
+					<Name>Livraison de câbles</Name>
+				</Product>
+			</Line>
+             <Line>
+				<Note>
+					<Code>PRD</Code>
+					<Comment>Produit</Comment>
+				</Note>
+				<BilledQuantity UnitCode="NAR">100</BilledQuantity>
+				<InvoicePeriod>
+					<StartDate>20250115</StartDate>
+					<EndDate>20250116</EndDate>
+				</InvoicePeriod>
+				<AllowanceCharge ChargeIndicator="true">
+					<Amount>40</Amount>
+				</AllowanceCharge>
+				<Price>
+					<PriceAmount>130.00</PriceAmount>
+					<AllowanceChargeAmount>10</AllowanceChargeAmount>
+					<AllowanceChargeBaseAmount>140</AllowanceChargeBaseAmount>
+				</Price>
+				<Product>
+					<Name>Livraison de processeurs</Name>
+				</Product>
+			</Line>
+             <Line>
+				<Note>
+					<Code>PRD</Code>
+					<Comment>Complément</Comment>
+				</Note>
+				<BilledQuantity UnitCode="NAR">100</BilledQuantity>
+				<InvoicePeriod>
+					<StartDate>20250115</StartDate>
+					<EndDate>20250116</EndDate>
+				</InvoicePeriod>
+				<AllowanceCharge ChargeIndicator="true">
+					<Amount>20</Amount>
+				</AllowanceCharge>
+				<Price>
+					<PriceAmount>100</PriceAmount>
+					<AllowanceChargeAmount>20</AllowanceChargeAmount>
+					<AllowanceChargeBaseAmount>120</AllowanceChargeBaseAmount>
+				</Price>
+				<Product>
+					<Name>Livraison de composants</Name>
+				</Product>
+			</Line>
+        </Invoice>
+        <Invoice>
+			<ID>FAC-202501-00004</ID>
+			<IssueDate>20250101</IssueDate>
+			<TypeCode>380</TypeCode>
+			<CurrencyCode>EUR</CurrencyCode>
+			<DueDate>20250131</DueDate>
+			<TaxDueDateTypeCode>3</TaxDueDateTypeCode>
+			<IncludedNote>
+				<Subject>AAB</Subject>
+				<Content>Les factures devront être réglées en Euros (€) dès réception, et au plus tard dans un délai de 45  jours à partir de la date de leur émission</Content>
+			</IncludedNote>
+			<BusinessProcess>
+				<ID>S1</ID>
+				<TypeID>urn.cpro.gouv.fr:1p0:ereporting</TypeID>
+			</BusinessProcess>
+			<Seller>
+				<CompanyId schemeId="0002">123456789</CompanyId>
+				<TaxRegistrationId qualifyingId="VAT">FR00123456789</TaxRegistrationId>
+				<PostalAddress>
+					<CountryId>FR</CountryId>
+				</PostalAddress>
+			</Seller>
+			<Buyer>
+				<CompanyId schemeId="0223">423456789</CompanyId>
+				<TaxRegistrationId qualifyingId="VAT">DE00423456789</TaxRegistrationId>
+				<PostalAddress>
+					<CountryId>DE</CountryId>
+				</PostalAddress>
+			</Buyer>
+			<Delivery>
+				<Date>20250103</Date>
+				<Location>
+					<LineOne>LOGICWERK-DEUTSCHLAND</LineOne>
+					<LineTwo>Christel-Popp-Weg 4</LineTwo>
+					<CityName>Ahrensburg</CityName>
+					<PostalZone>70570</PostalZone>
+					<CountryId>DE</CountryId>
+				</Location>
+			</Delivery>
+			<InvoicePeriod>
+				<StartDate>20250101</StartDate>
+				<EndDate>20250131</EndDate>
+			</InvoicePeriod>
+			<MonetaryTotal>
+				<TaxExclusiveAmount>1000.00</TaxExclusiveAmount>
+				<TaxAmount CurrencyCode="EUR">200.00</TaxAmount>
+			</MonetaryTotal>
+			<TaxSubTotal>
+				<TaxableAmount>1000.00</TaxableAmount>
+				<TaxAmount>200.00</TaxAmount>
+				<TaxCategory>
+					<Code>S</Code>
+					<Percent>20</Percent>
+				</TaxCategory>
+			</TaxSubTotal>
+			<Line>
+				<Note>
+					<Code>PRD</Code>
+					<Comment>Produit</Comment>
+				</Note>
+				<BilledQuantity UnitCode="NAR">10</BilledQuantity>
+				<InvoicePeriod>
+					<StartDate>20250125</StartDate>
+					<EndDate>20250126</EndDate>
+				</InvoicePeriod>
+				<Price>
+					<PriceAmount>100.00</PriceAmount>
+				</Price>
+				<Product>
+					<Name>Cartes graphiques</Name>
+				</Product>
+			</Line>
+		</Invoice>
+        <Transactions>
+			<Date>20250131</Date>
+			<TransactionsCurrency>EUR</TransactionsCurrency>
+			<TaxDueDateTypeCode>3</TaxDueDateTypeCode>
+			<CategoryCode>TLB1</CategoryCode>
+			<TaxExclusiveAmount>10000</TaxExclusiveAmount>
+			<TaxTotal>2000</TaxTotal>
+			<TransactionsCount>200</TransactionsCount>
+			<TaxSubtotal>
+				<TaxPercent>20</TaxPercent>
+				<TaxableAmount>10000</TaxableAmount>
+				<TaxTotal>2000</TaxTotal>
+			</TaxSubtotal>
+		</Transactions>
+        <Transactions>
+			<Date>20250131</Date>
+			<TransactionsCurrency>EUR</TransactionsCurrency>
+			<TaxDueDateTypeCode>3</TaxDueDateTypeCode>
+			<CategoryCode>TPS1</CategoryCode>
+			<TaxExclusiveAmount>5000</TaxExclusiveAmount>
+			<TaxTotal>1000</TaxTotal>
+			<TransactionsCount>200</TransactionsCount>
+			<TaxSubtotal>
+				<TaxPercent>20</TaxPercent>
+				<TaxableAmount>5000</TaxableAmount>
+				<TaxTotal>1000</TaxTotal>
+			</TaxSubtotal>
+		</Transactions>
+    </TransactionsReport>    
+</Report>

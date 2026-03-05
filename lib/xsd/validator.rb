@@ -38,10 +38,8 @@ module Xsd
       doc=Nokogiri::XML(doc) unless doc.is_a? Nokogiri::XML::Document
       if doc.root.nil?
         raise StandardError.new("Is not a valid XML")
-      elsif doc.root.namespace.nil?
-        raise StandardError.new("XML does not have a root namespace")
       else
-        doc.root.namespace.href
+        doc.root.namespace&.href
       end
     end
 
@@ -128,6 +126,12 @@ module Xsd
         case customization_id
         when 'urn.cpro.gouv.fr:1p0:CDV:einvoicingF2', 'urn.cpro.gouv.fr:1p0:CDV:invoice', 'urn.cpro.gouv.fr:1p0:CDV:flux', 'urn:peppol:france:billing:cdv:1.0'
           schema_path('cdar/CrossDomainAcknowledgementAndResponse_100pD22B.xsd')
+        end
+      when nil
+        if doc.root&.name == 'Report'
+          schema_path('dgfip/tax_report_f10/ereporting.xsd')
+        else
+          raise StandardError.new("XML does not have a root namespace")
         end
       else
         ubl_version = doc.xpath('//cbc:UBLVersionID', cbc: "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2").text
