@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<ReportDocument>
+		<Id>EREP/Déclarations-Acquisitions_Période_01-2025_Vbase</Id>
+		<Name>Déclaration Acquisitions de Janvier 2025</Name>
+		<IssueDateTime>
+			<DateTimeString>202502110400</DateTimeString>
+		</IssueDateTime>
+		<TypeCode>IN</TypeCode>
+		<Sender>
+			<Id schemeId="0238">3333</Id>
+			<Name>DREI</Name>
+			<RoleCode>WK</RoleCode>
+			<URIUniversalCommunication>
+				<URIID>contact-pdp@drei.com</URIID>
+			</URIUniversalCommunication>
+		</Sender>
+		<Issuer>
+			<Id schemeId="0002">323456789</Id>
+			<Name>NEOCIRCUIT-FRANCE</Name>
+			<RoleCode>BY</RoleCode>
+			<URIUniversalCommunication>
+				<URIID>contact-achats@neocircuit.fr</URIID>
+			</URIUniversalCommunication>
+		</Issuer>
+	</ReportDocument>
+	<TransactionsReport>
+		<ReportPeriod>
+			<StartDate>20250101</StartDate>
+			<EndDate>20250131</EndDate>
+		</ReportPeriod>
+		<Invoice>
+			<ID>FAC-202501-00001</ID>
+			<IssueDate>20250101</IssueDate>
+			<TypeCode>380</TypeCode>
+			<CurrencyCode>EUR</CurrencyCode>
+			<DueDate>20250131</DueDate>
+			<TaxDueDateTypeCode>3</TaxDueDateTypeCode>
+			<IncludedNote>
+				<Subject>AAA</Subject>
+				<Content>Module électronique programmable pour applications technologiques avancées, doté de microprocesseurs haute performance, d’une mémoire embarquée de 16 Go, et d’interfaces multiples (USB, Ethernet, et GPIO). Ce composant est conçu pour le développement d’applications IoT, d’intelligence artificielle et de systèmes embarqués. Poids net : 250 g, dimensions : 12 x 8 x 2 cm. Usage : intégration dans des dispositifs électroniques industriels ou grand public. Produit non dangereux, conforme aux normes CE et RoHS.</Content>
+			</IncludedNote>
+			<BusinessProcess>
+				<ID>B1</ID>
+				<TypeID>urn.cpro.gouv.fr:1p0:ereporting</TypeID>
+			</BusinessProcess>
+			<Seller>
+				<CompanyId schemeId="0223">123123123</CompanyId>
+				<TaxRegistrationId qualifyingId="VAT">DE00123123123</TaxRegistrationId>
+				<PostalAddress>
+					<CountryId>DE</CountryId>
+				</PostalAddress>
+			</Seller>
+			<Buyer>
+				<CompanyId schemeId="0002">323456789</CompanyId>
+				<TaxRegistrationId qualifyingId="VAT">FR00323456789</TaxRegistrationId>
+				<PostalAddress>
+					<CountryId>FR</CountryId>
+				</PostalAddress>
+			</Buyer>
+			<Delivery>
+				<Date>20250108</Date>
+				<Location>
+					<LineOne>NEOCIRCUIT-FRANCE</LineOne>
+					<LineTwo>15 RUE DES LILAS</LineTwo>
+					<CityName>PARIS</CityName>
+					<PostalZone>75015</PostalZone>
+					<CountryId>FR</CountryId>
+				</Location>
+			</Delivery>
+			<InvoicePeriod>
+				<StartDate>20250101</StartDate>
+				<EndDate>20250131</EndDate>
+			</InvoicePeriod>
+			<MonetaryTotal>
+				<TaxExclusiveAmount>2000</TaxExclusiveAmount>
+				<TaxAmount CurrencyCode="EUR">400</TaxAmount>
+			</MonetaryTotal>
+			<TaxSubTotal>
+				<TaxableAmount>2000</TaxableAmount>
+				<TaxAmount>400</TaxAmount>
+				<TaxCategory>
+					<Code>S</Code>
+					<Percent>20</Percent>
+				</TaxCategory>
+			</TaxSubTotal>
+            <Line>
+				<Note>
+					<Code>PRD</Code>
+					<Comment>Livraison 00001</Comment>
+				</Note>
+				<BilledQuantity UnitCode="NAR">100</BilledQuantity>
+				<InvoicePeriod>
+					<StartDate>20250115</StartDate>
+					<EndDate>20250116</EndDate>
+				</InvoicePeriod>
+				<Product>
+					<Name>Livraison de modules</Name>
+				</Product>
+			</Line>
+        </Invoice>
+        <Invoice>
+			<ID>FAC-202501-00002</ID>
+			<IssueDate>20250101</IssueDate>
+			<TypeCode>380</TypeCode>
+			<CurrencyCode>EUR</CurrencyCode>
+			<DueDate>20250131</DueDate>
+			<TaxDueDateTypeCode>3</TaxDueDateTypeCode>
+			<IncludedNote>
+				<Subject>AAA</Subject>
+				<Content>Câbles électriques pour applications technologiques avancées. Poids net : 250 g, dimensions : 200 cm. Usage : intégration dans des dispositifs électroniques industriels ou grand public. Produit non dangereux, conforme aux normes CE et RoHS.</Content>
+			</IncludedNote>
+			<BusinessProcess>
+				<ID>B1</ID>
+				<TypeID>urn.cpro.gouv.fr:1p0:ereporting</TypeID>
+			</BusinessProcess>
+			<Seller>
+				<CompanyId schemeId="0223">123123123</CompanyId>
+				<TaxRegistrationId qualifyingId="VAT">DE00123123123</TaxRegistrationId>
+				<PostalAddress>
+					<CountryId>DE</CountryId>
+				</PostalAddress>
+			</Seller>
+			<Buyer>
+				<CompanyId schemeId="0002">323456789</CompanyId>
+				<TaxRegistrationId qualifyingId="VAT">FR00323456789</TaxRegistrationId>
+				<PostalAddress>
+					<CountryId>FR</CountryId>
+				</PostalAddress>
+			</Buyer>
+			<Delivery>
+				<Date>20250108</Date>
+				<Location>
+					<LineOne>NEOCIRCUIT-FRANCE</LineOne>
+					<LineTwo>15 RUE DES LILAS</LineTwo>
+					<CityName>PARIS</CityName>
+					<PostalZone>75015</PostalZone>
+					<CountryId>FR</CountryId>
+				</Location>
+			</Delivery>
+			<InvoicePeriod>
+				<StartDate>20250101</StartDate>
+				<EndDate>20250131</EndDate>
+			</InvoicePeriod>
+			<MonetaryTotal>
+				<TaxExclusiveAmount>2000</TaxExclusiveAmount>
+				<TaxAmount CurrencyCode="EUR">400</TaxAmount>
+			</MonetaryTotal>
+			<TaxSubTotal>
+				<TaxableAmount>2000</TaxableAmount>
+				<TaxAmount>400</TaxAmount>
+				<TaxCategory>
+					<Code>S</Code>
+					<Percent>20</Percent>
+				</TaxCategory>
+			</TaxSubTotal>
+            <Line>
+				<Note>
+					<Code>PRD</Code>
+					<Comment>Livraison 00002</Comment>
+				</Note>
+				<BilledQuantity UnitCode="NAR">100</BilledQuantity>
+				<InvoicePeriod>
+					<StartDate>20250115</StartDate>
+					<EndDate>20250116</EndDate>
+				</InvoicePeriod>
+				<Product>
+					<Name>Livraison de câbles</Name>
+				</Product>
+			</Line>
+        </Invoice>
+    </TransactionsReport>    
+</Report>
