@@ -23,9 +23,12 @@ module Xsd
       doc=Nokogiri::XML(doc) unless doc.is_a? Nokogiri::XML::Document
       xsd_path=root_namespace_xsd(doc)
       puts doc if xsd_path.nil?
-      xsd_file = File.open(xsd_path,'rb')
-      xsd = Nokogiri::XML::Schema(xsd_file)
+      xsd = Validator.schema_cache[xsd_path] ||= File.open(xsd_path, 'rb') { |f| Nokogiri::XML::Schema(f) }
       xsd.validate(doc)
+    end
+
+    def self.schema_cache
+      @schema_cache ||= {}
     end
 
     def xsd_validate!(doc)
