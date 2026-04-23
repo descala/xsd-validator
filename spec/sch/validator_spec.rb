@@ -51,6 +51,16 @@ RSpec.describe Sch::Validator do
     expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationError, /ERROR: .*BR-KSA-40/)
   end
 
+  it 'does not raise for a valid AE PINT Invoice' do
+    doc=File.read('spec/files/sch/PINT_AE_invoice.xml')
+    expect { sch_validate!(doc) }.not_to raise_error
+  end
+
+  it 'raises ValidationError for an AE PINT Invoice missing UUID' do
+    doc=File.read('spec/files/sch/PINT_AE_invoice-wrong.xml')
+    expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationError, /FATAL: .*ibr-193-ae/)
+  end
+
   it 'does not raises ValidationError for an invalid JP Standard Invoice with only_shared validation' do
     doc=File.read('spec/files/sch/jp-pint-invoice-ubl-wrong.xml')
     expect { sch_validate!(doc, 0) }.to_not raise_error
@@ -80,6 +90,7 @@ RSpec.describe Sch::Validator do
       'spec/files/sch/invoice-ubl-cius-fr.xml' => ['BR-FR-Flux2-Schematron-UBL_V0.1.sch'],
       'spec/files/sch/invoice-cii-cius-fr.xml' => ['BR-FR-Flux2-Schematron-CII_V0.1.sch'],
       'spec/files/sch/cdar/cdar_1_deposee.xml' => ['BR-FR-CDV-Schematron-CDAR_V1.2.0.sch'],
+      'spec/files/sch/PINT_AE_invoice.xml' => ['PINT-billing-1-shared.sch', 'PINT-AE-billing-1-aligned.sch'],
     }
     files.each do |file_path, schematrons|
       it "#{file_path} checks with #{schematrons}" do
