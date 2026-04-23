@@ -14,7 +14,7 @@ RSpec.describe Xsd::Validator do
     doc = "junk"
     expect { root_namespace(doc) }.to raise_error "Is not a valid XML"
     doc = "<thing>asdf</thing>"
-    expect { root_namespace(doc) }.to raise_error "XML does not have a root namespace"
+    expect(root_namespace(doc)).to be_nil
   end
 
   it 'raises error' do
@@ -50,6 +50,9 @@ RSpec.describe Xsd::Validator do
       'spec/files/xsd/cii/zugferd_1.xml' => /FACTUR-X_EN16931.xsd/,
       'spec/files/sch/cii/xrechnung-cii_3.0-wrong.xml' => 'CrossIndustryInvoice_100pD16B.xsd',
       'spec/files/sch/cii/xrechnung-cii_3.0_extension-wrong.xml' => 'CrossIndustryInvoice_100pD16B.xsd',
+      'spec/files/xsd/cii/france_billing_cius.xml' => 'CrossIndustryInvoice_100pD22B.xsd',
+      'spec/files/xsd/cii/france_billing_extended.xml' => 'CrossIndustryInvoice_100pD22B.xsd',
+      'spec/files/xsd/factur-x/factur-x-france-billing.xml' => 'CrossIndustryInvoice_100pD22B.xsd',
       'spec/files/sch/cii/xrechnung-cii_2.3-wrong.xml' => 'FACTUR-X_EN16931.xsd',
       'spec/files/sch/cii/xrechnung-cii_2.2-wrong.xml' => 'FACTUR-X_EN16931.xsd',
       'spec/files/sch/cii/xrechnung-cii_2.1.xml' => 'FACTUR-X_EN16931.xsd',
@@ -57,7 +60,13 @@ RSpec.describe Xsd::Validator do
       'spec/files/xsd/fatturapa/IT01234567890_FPA03.xml' => '/fatturapa/Schema_del_file_xml_FatturaPA_v1.2.3.xsd',
       'spec/files/xsd/peppol-selfbilling-base.xml' => /UBL-Invoice-2.1.xsd/,
       'spec/files/xsd/peppol-selfbilling-creditnote.xml' => /UBL-CreditNote-2.1.xsd/,
-      'spec/files/xsd/ksef/FA_3_Przykład_1.xml' => '/ksef/fa3.xsd'
+      'spec/files/xsd/ksef/FA_3_Przykład_1.xml' => '/ksef/fa3.xsd',
+      'spec/files/xsd/dgfip/tax_report_f1/fr_f1_base.xml' => '/dgfip/tax_report_f1_base_ubl_2_1/F1BASE_UBL-invoice-2.1.xsd',
+      'spec/files/xsd/cdar/cdar_1_deposee.xml' => '/cdar/CrossDomainAcknowledgementAndResponse_100pD22B.xsd',
+      'spec/files/xsd/dgfip/tax_report_f10/ventes.xml' => '/dgfip/tax_report_f10/ereporting.xsd',
+      'spec/files/xsd/dgfip/tax_report_f10/acquisitions.xml' => '/dgfip/tax_report_f10/ereporting.xsd',
+      'spec/files/xsd/dgfip/tax_report_f10/encaissements.xml' => '/dgfip/tax_report_f10/ereporting.xsd',
+
     }
     files.each do |file_path, rgex_xsd_path|
       it "#{file_path} checks with #{rgex_xsd_path}" do

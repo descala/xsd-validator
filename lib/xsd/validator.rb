@@ -13,6 +13,8 @@ module Xsd
     UBL_DOCUMENT = /urn:oasis:names:specification:ubl:schema:xsd:/
     CII_DOCUMENT = /urn:un:unece:uncefact:data:standard:CrossIndustryInvoice/
     RAM = "urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100"
+    CDAR = "urn:un:unece:uncefact:data:standard:CrossDomainAcknowledgementAndResponse:100"
+
 
     class ValidationError < RuntimeError
     end
@@ -21,9 +23,12 @@ module Xsd
       doc=Nokogiri::XML(doc) unless doc.is_a? Nokogiri::XML::Document
       xsd_path=root_namespace_xsd(doc)
       puts doc if xsd_path.nil?
-      xsd_file = File.open(xsd_path,'rb')
-      xsd = Nokogiri::XML::Schema(xsd_file)
+      xsd = Validator.schema_cache[xsd_path] ||= File.open(xsd_path, 'rb') { |f| Nokogiri::XML::Schema(f) }
       xsd.validate(doc)
+    end
+
+    def self.schema_cache
+      @schema_cache ||= {}
     end
 
     def xsd_validate!(doc)
@@ -36,10 +41,8 @@ module Xsd
       doc=Nokogiri::XML(doc) unless doc.is_a? Nokogiri::XML::Document
       if doc.root.nil?
         raise StandardError.new("Is not a valid XML")
-      elsif doc.root.namespace.nil?
-        raise StandardError.new("XML does not have a root namespace")
       else
-        doc.root.namespace.href
+        doc.root.namespace&.href
       end
     end
 
@@ -77,6 +80,12 @@ module Xsd
         case doc.xpath('//cbc:CustomizationID', cbc: "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2").text
         when 'UBL-2.1-eSPap'
           schema_path('espap/maindoc/UBL-eSPap-Invoice-2.1.xsd')
+        when 'urn.cpro.gouv.fr:1p0:einvoicingextract#Base'
+          if doc.root.name == 'Invoice'
+            schema_path('dgfip/tax_report_f1_base_ubl_2_1/F1BASE_UBL-invoice-2.1.xsd')
+          else
+            schema_path('dgfip/tax_report_f1_base_ubl_2_1/F1BASE_UBL-CreditNote-2.1.xsd')
+          end
         else
           # PEPPOL Self-Billing uses standard UBL 2.1 Invoice/CreditNote schemas (not UBL-SelfBilledInvoice)
           # Supported formats:
@@ -108,8 +117,24 @@ module Xsd
         when 'urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_3.0',
           'urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_3.0#conformant#urn:xeinkauf.de:kosit:extension:xrechnung_3.0'
           schema_path('xrechnung/cii_30/CrossIndustryInvoice_100pD16B.xsd')
+        when 'urn:cen.eu:en16931:2017#conformant#urn:peppol:france:billing:Factur-X:1.0',
+          'urn:cen.eu:en16931:2017#compliant#urn:peppol:france:billing:cius:1.0',
+          'urn:cen.eu:en16931:2017#conformant#urn:peppol:france:billing:extended:1.0'
+          schema_path('xrechnung/cii_30/CrossIndustryInvoice_100pD22B.xsd')
         else
           standard_path(namespace)
+        end
+      when CDAR
+        customization_id = doc.xpath('//ram:GuidelineSpecifiedDocumentContextParameter/ram:ID').text
+        case customization_id
+        when 'urn.cpro.gouv.fr:1p0:CDV:einvoicingF2', 'urn.cpro.gouv.fr:1p0:CDV:invoice', 'urn.cpro.gouv.fr:1p0:CDV:flux', 'urn:peppol:france:billing:cdv:1.0'
+          schema_path('cdar/CrossDomainAcknowledgementAndResponse_100pD22B.xsd')
+        end
+      when nil
+        if doc.root&.name == 'Report'
+          schema_path('dgfip/tax_report_f10/ereporting.xsd')
+        else
+          raise StandardError.new("XML does not have a root namespace")
         end
       else
         ubl_version = doc.xpath('//cbc:UBLVersionID', cbc: "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2").text

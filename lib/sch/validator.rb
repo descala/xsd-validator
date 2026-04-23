@@ -283,12 +283,22 @@ module Sch
       when 'urn:peppol:pint:billing-1@my-1'
         schemas = %w(PINT-billing-1-shared.sch PINT-MY-billing-1-aligned.sch)
         pint_schemas_to_validate(schemas, parts)
-
+      when 'urn:cen.eu:en16931:2017#compliant#urn:peppol:france:billing:cius:1.0',
+        'urn:cen.eu:en16931:2017#conformant#urn:peppol:france:billing:extended:1.0'
+        if doc_nokogiri.root.name == 'Invoice'
+          %w(BR-FR-Flux2-Schematron-UBL_V0.1.sch)
+        else
+          %w(BR-FR-Flux2-Schematron-CII_V0.1.sch)
+        end
+      when 'urn:cen.eu:en16931:2017#conformant#urn:peppol:france:billing:Factur-X:1.0'
+        %w(BR-FR-Flux2-Schematron-CII_V0.1.sch)
+        # CDAR CrossDomainAcknowledgementAndResponse
+      when ->(v) { v.start_with?('urn.cpro.gouv.fr:1p0:CDV') }
+        %w(BR-FR-CDV-Schematron-CDAR_V1.2.0.sch)
       # AE PINT Invoice v1.0, AE PINT CreditNote v1.0
       when 'urn:peppol:pint:billing-1@ae-1'
         schemas = %w(PINT-billing-1-shared.sch PINT-AE-billing-1-aligned.sch)
         pint_schemas_to_validate(schemas, parts)
-
       else
         profile_id = doc_nokogiri.xpath('//cbc:ProfileID', cbc: CBC).text
 

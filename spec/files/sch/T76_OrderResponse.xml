@@ -7,7 +7,7 @@
   <cbc:ID>102433</cbc:ID>
   <cbc:IssueDate>2021-06-04</cbc:IssueDate>
   <cbc:IssueTime>14:50:58</cbc:IssueTime>
-  <cbc:OrderResponseCode>AP</cbc:OrderResponseCode>
+  <cbc:OrderResponseCode>CA</cbc:OrderResponseCode>
   <cbc:DocumentCurrencyCode listID="ISO4217">GBP</cbc:DocumentCurrencyCode>
   <cac:OrderReference>
     <cbc:ID>G2039283D</cbc:ID>

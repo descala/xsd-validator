@@ -43,6 +43,7 @@
       <assert id="aligned-ibrp-sr-13" flag="fatal" test="(count(cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme[cac:TaxScheme/upper-case(cbc:ID)!='VAT']/cbc:CompanyID) &lt;= 1)">[aligned-ibrp-sr-13]-Seller tax registration (ibt-032) MUST occur maximum once</assert>
       <assert id="aligned-ibr-jp-04" flag="fatal" test="exists(cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:CompanyID)">[aligned-ibr-jp-04]-An Invoice shall have the Seller tax identifier (ibt-031).</assert>
       <assert id="aligned-ibr-jp-05" flag="fatal" test="not(exists(cbc:TaxCurrencyCode)) or cbc:TaxCurrencyCode = 'JPY'">[aligned-ibr-jp-05]-If Tax accounting currency (ibt-006) is present, it shall be coded using JPY in ISO code list of 4217 a-3.</assert>
+      <assert id="aligned-ibrp-053-jp" flag="fatal" test="(count(cac:TaxTotal/cbc:TaxAmount[@currencyID=/*/cbc:DocumentCurrencyCode])) &lt;= 1">[aligned-ibrp-053-jp]-Only one Invoice total tax amount may be present in the document currency (ibt-110).</assert>
     </rule>
     <rule context="cac:TaxSubtotal[cbc:TaxAmount/@currencyID=/ubl:Invoice/cbc:DocumentCurrencyCode/text()]">
       <assert id="aligned-ibrp-045" flag="fatal" test="exists(cbc:TaxableAmount)">[aligned-ibrp-045]-Each tax breakdown (ibg-23) MUST have a tax category taxable amount (ibt-116).</assert>

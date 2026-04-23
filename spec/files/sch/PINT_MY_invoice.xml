@@ -240,7 +240,7 @@
 		<cbc:Amount currencyID="MYR">0</cbc:Amount> 
 		<cbc:BaseAmount currencyID="MYR">0</cbc:BaseAmount> 
 		<cac:TaxCategory>
-			<cbc:ID>T</cbc:ID>
+			<cbc:ID>SA</cbc:ID>
 			<cbc:Percent>10</cbc:Percent>
 			<cac:TaxScheme>
 				<cbc:ID>VAT</cbc:ID>
@@ -254,7 +254,7 @@
 			<cbc:TaxableAmount currencyID="MYR">11000.00</cbc:TaxableAmount>
 			<cbc:TaxAmount currencyID="MYR">1100.00</cbc:TaxAmount>
 			<cac:TaxCategory>
-				<cbc:ID>T</cbc:ID>
+				<cbc:ID>SA</cbc:ID>
 				<cbc:Percent>10</cbc:Percent>
 				<cac:TaxScheme>
 					<cbc:ID>VAT</cbc:ID>
@@ -291,7 +291,7 @@
         <cac:Item>
             <cbc:Name>Marvel Chair AB18 Blue</cbc:Name> <!-- IBT-153 - Item name -->
 			<cac:ClassifiedTaxCategory> <!-- IBG-30 - LINE TAX INFORMATION -->
-				<cbc:ID>T</cbc:ID> <!-- IBT-151 - Invoiced item TAX category code -->
+				<cbc:ID>SA</cbc:ID> <!-- IBT-151 - Invoiced item TAX category code -->
 				<cbc:Percent>10</cbc:Percent> <!-- IBT-152 - Invoiced item TAX rate -->
 				<cac:TaxScheme>
 					<cbc:ID>VAT</cbc:ID> <!-- IBT-167 - Tax Scheme -->
@@ -321,7 +321,7 @@
         <cac:Item>
             <cbc:Name>Marvel Chair AB20 Red</cbc:Name> <!-- IBT-153 - Item name -->
 			<cac:ClassifiedTaxCategory> <!-- IBG-30 - LINE TAX INFORMATION -->
-				<cbc:ID>T</cbc:ID> <!-- IBT-151 - Invoiced item TAX category code -->
+				<cbc:ID>SA</cbc:ID> <!-- IBT-151 - Invoiced item TAX category code -->
 				<cbc:Percent>10</cbc:Percent> <!-- IBT-152 - Invoiced item TAX rate -->
 				<cac:TaxScheme>
 					<cbc:ID>VAT</cbc:ID> <!-- IBT-167 - Tax Scheme -->
