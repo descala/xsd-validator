@@ -17,6 +17,7 @@ module Sch
       def initialize(validation_result)
         @document = Nokogiri::XML(validation_result) do |config|
           config.options = Nokogiri::XML::ParseOptions::NOBLANKS | Nokogiri::XML::ParseOptions::NOENT
+          config.huge
         end
       end
 
@@ -88,7 +89,7 @@ module Sch
       if doc.is_a? Nokogiri::XML::Document
         doc_nokogiri = doc
       else
-        doc_nokogiri = Nokogiri::XML(doc)
+        doc_nokogiri = Nokogiri::XML(doc) { |c| c.huge }
       end
       # Assume UBL or CII
       customization_id = doc_nokogiri.xpath('//cbc:CustomizationID', cbc: CBC).text
