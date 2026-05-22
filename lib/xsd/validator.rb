@@ -20,7 +20,7 @@ module Xsd
     end
 
     def xsd_validate(doc)
-      doc=Nokogiri::XML(doc) unless doc.is_a? Nokogiri::XML::Document
+      doc=Nokogiri::XML(doc) { |c| c.huge } unless doc.is_a? Nokogiri::XML::Document
       xsd_path=root_namespace_xsd(doc)
       puts doc if xsd_path.nil?
       xsd = Validator.schema_cache[xsd_path] ||= File.open(xsd_path, 'rb') { |f| Nokogiri::XML::Schema(f) }
@@ -38,7 +38,7 @@ module Xsd
     end
 
     def root_namespace(doc)
-      doc=Nokogiri::XML(doc) unless doc.is_a? Nokogiri::XML::Document
+      doc=Nokogiri::XML(doc) { |c| c.huge } unless doc.is_a? Nokogiri::XML::Document
       if doc.root.nil?
         raise StandardError.new("Is not a valid XML")
       else
@@ -47,7 +47,7 @@ module Xsd
     end
 
     def root_namespace_xsd(doc)
-      doc=Nokogiri::XML(doc) unless doc.is_a? Nokogiri::XML::Document
+      doc=Nokogiri::XML(doc) { |c| c.huge } unless doc.is_a? Nokogiri::XML::Document
       namespace = root_namespace(doc)
       case namespace
       when SII_LR

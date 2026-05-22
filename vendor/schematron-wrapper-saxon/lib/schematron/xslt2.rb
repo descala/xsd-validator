@@ -31,6 +31,7 @@ module Schematron
 
       document = Nokogiri::XML(validation_result) do |config|
         config.options = Nokogiri::XML::ParseOptions::NOBLANKS | Nokogiri::XML::ParseOptions::NOENT
+        config.huge
       end
 
       document.xpath('//svrl:failed-assert').each do |element|
