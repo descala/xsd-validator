@@ -576,7 +576,7 @@
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        BR-FR-04/MDT-91 : Le code de type de document "<xsl:text/>
+        [BR-FR-04/MDT-91] : Le code de type de document "<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" n'est pas autorisé selon les spécifications françaises.
         Veuillez utiliser un code parmi ceux définis dans la documentation (ex. : 380, 389, 393, etc.).
@@ -609,7 +609,7 @@
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        BR-FR-CDV-01/MDG-3 : Le paramètre de contexte MDG-3 est obligatoire dans le document.
+        [BR-FR-CDV-01/MDG-3] : Le paramètre de contexte MDG-3 est obligatoire dans le document.
         Veuillez vous assurer que l'élément ram:GuidelineSpecifiedDocumentContextParameter est bien présent et correctement renseigné.
       </svrl:text>
             </svrl:failed-assert>
@@ -641,7 +641,7 @@
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        BR-FR-CDV-02/MDT-3 : La valeur de MDT-3 doit être :
+        [BR-FR-CDV-02/MDT-3] : La valeur de MDT-3 doit être :
         - "urn.cpro.gouv.fr:1p0:CDV:invoice", ou
         - "urn.cpro.gouv.fr:1p0:CDV:einvoicingF2" **uniquement si** il y a un unique Destinataire (Recipent) et que c'est le PPF : GlobalID = 9998 avec @shemeId = 0238 et CodeRole = DFH. 
         Valeurs actuelles : "<xsl:text/>
@@ -682,7 +682,7 @@
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        BR-FR-CDV-03/MDT-4 : L'identifiant du document (ram:ID) est obligatoire.
+        [BR-FR-CDV-03/MDT-4] : L'identifiant du document (ram:ID) est obligatoire.
         Veuillez vous assurer que l'élément "ram:ID" est bien présent dans "rsm:ExchangedDocument".
       </svrl:text>
             </svrl:failed-assert>
@@ -713,7 +713,7 @@
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        BR-FR-CDV-04/MDG-4 : La date d’émission du document (MDG-4) est obligatoire.
+        [BR-FR-CDV-04/MDG-4] : La date d’émission du document (MDG-4) est obligatoire.
         Veuillez vous assurer que l’élément "ram:IssueDateTime" est bien présent dans "rsm:ExchangedDocument".
       </svrl:text>
             </svrl:failed-assert>
@@ -744,7 +744,7 @@
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        BR-FR-CDV-05/MDG-9 : Le partenaire commercial émetteur (MDG-9) est obligatoire.
+        [BR-FR-CDV-05/MDG-9] : Le partenaire commercial émetteur (MDG-9) est obligatoire.
         Veuillez vous assurer que l’élément "ram:SenderTradeParty" est bien présent dans "rsm:ExchangedDocument".
       </svrl:text>
             </svrl:failed-assert>
@@ -775,7 +775,7 @@
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        BR-FR-CDV-06/MDT-21 : Le rôle du partenaire commercial émetteur (MDT-21) est obligatoire.
+        [BR-FR-CDV-06/MDT-21] : Le rôle du partenaire commercial émetteur (MDT-21) est obligatoire.
         Veuillez vous assurer que l’élément "ram:RoleCode" est bien présent dans "rsm:ExchangedDocument/ram:SenderTradeParty".
       </svrl:text>
             </svrl:failed-assert>
@@ -791,41 +791,49 @@
    <svrl:text xmlns:svrl="http://purl.oclc.org/dsdl/svrl">BR-FR-CDV-07 — Validation conditionnelle de MDT-38 selon MDT-77</svrl:text>
    <!--RULE -->
    <xsl:template match="rsm:ExchangedDocument/ram:IssuerTradeParty"
-                 priority="1000"
+                 priority="1001"
                  mode="M30">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="rsm:ExchangedDocument/ram:IssuerTradeParty"/>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="ram:RoleCode != '23' or ram:GlobalID"/>
+         <xsl:when test="../../rsm:AcknowledgementDocument/ram:TypeCode != '23' or ram:GlobalID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="ram:RoleCode != '23' or ram:GlobalID">
+                                test="../../rsm:AcknowledgementDocument/ram:TypeCode != '23' or ram:GlobalID">
                <xsl:attribute name="id">BR-FR-CDV-07_MDT-38_yes</xsl:attribute>
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        BR-FR-CDV-07/MDT-38 : Lorsque le rôle du partenaire commercial émetteur (MDT-77) est égal à "23", l'identifiant (MDT-38) doit être renseigné.
+        [BR-FR-CDV-07/MDT-38] : Lorsque le rôle du partenaire commercial émetteur (MDT-77) est égal à "23", l'identifiant (MDT-38) doit être renseigné.
         Veuillez vous assurer que l'élément "ram:GlobalID" est présent dans "ram:IssuerTradeParty".
       </svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M30"/>
+   </xsl:template>
+   <!--RULE -->
+   <xsl:template match="rsm:ExchangedDocument/ram:IssuerTradeParty"
+                 priority="1000"
+                 mode="M30">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="rsm:ExchangedDocument/ram:IssuerTradeParty"/>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="ram:RoleCode != '305' or not(ram:GlobalID)"/>
+         <xsl:when test="(../../rsm:AcknowledgementDocument/ram:TypeCode != '305' or count(../ram:RecipientTradeParty/ram:RoleCode='DFH') ge 0) or not(ram:GlobalID)"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="ram:RoleCode != '305' or not(ram:GlobalID)">
+                                test="(../../rsm:AcknowledgementDocument/ram:TypeCode != '305' or count(../ram:RecipientTradeParty/ram:RoleCode='DFH') ge 0) or not(ram:GlobalID)">
                <xsl:attribute name="id">BR-FR-CDV-07_MDT-38_no</xsl:attribute>
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        BR-FR-CDV-07/MDT-38 : Lorsque le rôle du partenaire commercial émetteur (MDT-77) est égal à "305", l'identifiant (MDT-38) ne doit pas être renseigné.
+        [BR-FR-CDV-07/MDT-38] : Lorsque le rôle du partenaire commercial émetteur (MDT-77) est égal à "305", l'identifiant (MDT-38) ne doit pas être renseigné.
         Veuillez retirer l'élément "ram:GlobalID" de "ram:IssuerTradeParty" dans ce cas.
       </svrl:text>
             </svrl:failed-assert>
@@ -857,7 +865,7 @@
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        BR-FR-CDV-08/MDT-73 : Lorsque le rôle du destinataire (MDT-59) est différent de "WK" ou "DFH", l'adresse électronique du destinataire (MDT-73) est obligatoire.
+        [BR-FR-CDV-08/MDT-73] : Lorsque le rôle du destinataire (MDT-59) est différent de "WK" ou "DFH", l'adresse électronique du destinataire (MDT-73) est obligatoire.
         Veuillez vous assurer que l’élément "ram:URIID" est bien présent dans "ram:URIUniversalCommunication".
       </svrl:text>
             </svrl:failed-assert>
@@ -888,7 +896,7 @@
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        BR-FR-CDV-09/MDT-77 : Le code de type de document (MDT-77) est obligatoire et doit être égal à "23" ou "305".
+        [BR-FR-CDV-09/MDT-77] : Le code de type de document (MDT-77) est obligatoire et doit être égal à "23" ou "305".
         Valeur actuelle : "<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>". Veuillez corriger cette valeur si nécessaire.
@@ -921,7 +929,7 @@
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        BR-FR-CDV-10/MDT-87 : L'identifiant de la facture référencée (MDT-87) est obligatoire.
+        [BR-FR-CDV-10/MDT-87] : L'identifiant de la facture référencée (MDT-87) est obligatoire.
         Veuillez vous assurer que l’élément "ram:IssuerAssignedID" est bien présent dans "rsm:ReferenceReferencedDocument".
       </svrl:text>
             </svrl:failed-assert>
@@ -943,17 +951,17 @@
                        context="rsm:AcknowledgementDocument/ram:ReferenceReferencedDocument"/>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="ram:FormattedIssueDateTime or rsm:CrossDomainAcknowledgementAndResponse/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID = '501'"/>
+         <xsl:when test="exists(ram:FormattedIssueDateTime) or rsm:CrossDomainAcknowledgementAndResponse/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID = '501'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="ram:FormattedIssueDateTime or rsm:CrossDomainAcknowledgementAndResponse/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID = '501'">
+                                test="exists(ram:FormattedIssueDateTime) or rsm:CrossDomainAcknowledgementAndResponse/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID = '501'">
                <xsl:attribute name="id">BR-FR-CDV-11_MDG-35</xsl:attribute>
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        BR-FR-CDV-11/MDG-35 : La date d’émission formatée de la facture référencée (MDG-35) est obligatoire,
+        [BR-FR-CDV-11/MDG-35] : La date d’émission formatée de la facture référencée (MDG-35) est obligatoire,
         sauf si MDT-105 (code statut) est égal à "501" (IRRECEVABLE).
       </svrl:text>
             </svrl:failed-assert>
@@ -968,23 +976,24 @@
    <!--PATTERN BR-FR-CDV-12BR-FR-CDV-12 — Présence obligatoire de MDT-105-->
    <svrl:text xmlns:svrl="http://purl.oclc.org/dsdl/svrl">BR-FR-CDV-12 — Présence obligatoire de MDT-105</svrl:text>
    <!--RULE -->
-   <xsl:template match="rsm:AcknowledgementDocument/ram:ReferenceReferencedDocument/ram:ProcessConditionCode"
+   <xsl:template match="rsm:AcknowledgementDocument/ram:ReferenceReferencedDocument"
                  priority="1000"
                  mode="M35">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="rsm:AcknowledgementDocument/ram:ReferenceReferencedDocument/ram:ProcessConditionCode"/>
+                       context="rsm:AcknowledgementDocument/ram:ReferenceReferencedDocument"/>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="."/>
+         <xsl:when test="exists(ram:ProcessConditionCode)"/>
          <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="exists(ram:ProcessConditionCode)">
                <xsl:attribute name="id">BR-FR-CDV-12_MDT-105</xsl:attribute>
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        BR-FR-CDV-12/MDT-105 : Le code de condition de traitement (MDT-105) est obligatoire.
+        [BR-FR-CDV-12/MDT-105] : Le code de condition de traitement (MDT-105) est obligatoire.
         Veuillez vous assurer que l’élément "ram:ProcessConditionCode" est bien présent dans "rsm:ReferenceReferencedDocument".
       </svrl:text>
             </svrl:failed-assert>
@@ -1006,17 +1015,17 @@
                        context="rsm:AcknowledgementDocument/ram:ReferenceReferencedDocument/ram:IssuerTradeParty"/>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="ram:GlobalID or /rsm:CrossDomainAcknowledgementAndResponse/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID = '501'"/>
+         <xsl:when test="exists(ram:GlobalID) or /rsm:CrossDomainAcknowledgementAndResponse/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID = '501'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="ram:GlobalID or /rsm:CrossDomainAcknowledgementAndResponse/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID = '501'">
+                                test="exists(ram:GlobalID) or /rsm:CrossDomainAcknowledgementAndResponse/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID = '501'">
                <xsl:attribute name="id">BR-FR-CDV-13_MDT-129</xsl:attribute>
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        BR-FR-CDV-13/MDT-129 : L'identifiant du partenaire commercial émetteur (MDT-129) est obligatoire,
+        [BR-FR-CDV-13/MDT-129] : L'identifiant du partenaire commercial émetteur (MDT-129) est obligatoire,
         sauf si MDT-105 (ram:ID dans BusinessProcessSpecifiedDocumentContextParameter) est égal à "501".
       </svrl:text>
             </svrl:failed-assert>
@@ -1038,17 +1047,17 @@
                        context="rsm:AcknowledgementDocument/ram:ReferenceReferencedDocument"/>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="not(ram:ProcessConditionCode = '212') or          ram:SpecifiedDocumentStatus/ram:SpecifiedDocumentCharacteristic[         ram:TypeCode = 'MEN' and ram:ValueAmount         ]"/>
+         <xsl:when test="not(ram:ProcessConditionCode = '212') or          ram:SpecifiedDocumentStatus/ram:SpecifiedDocumentCharacteristic[ram:TypeCode = 'MEN' and ram:ValueAmount]"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="not(ram:ProcessConditionCode = '212') or ram:SpecifiedDocumentStatus/ram:SpecifiedDocumentCharacteristic[ ram:TypeCode = 'MEN' and ram:ValueAmount ]">
+                                test="not(ram:ProcessConditionCode = '212') or ram:SpecifiedDocumentStatus/ram:SpecifiedDocumentCharacteristic[ram:TypeCode = 'MEN' and ram:ValueAmount]">
                <xsl:attribute name="id">BR-FR-CDV-14_MDT-207</xsl:attribute>
                <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        BR-FR-CDV-14/MDT-207 : Lorsque le statut de traitement (MDT-105) est "212" (encaissé), il doit exister au moins un bloc "ram:SpecifiedDocumentCharacteristic" avec :
+        [BR-FR-CDV-14/MDT-207] : Lorsque le statut de traitement (MDT-105) est "212" (encaissé), il doit exister au moins un bloc "ram:SpecifiedDocumentCharacteristic" avec :
         - un "ram:TypeCode" égal à "MEN"
         - et une valeur "ram:ValueAmount" renseignée.
         Veuillez vérifier la présence et le contenu de ces éléments.
@@ -1082,7 +1091,7 @@
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        BR-FR-CDV-15/MDT-113 : Code Statut : "<xsl:text/>
+        [BR-FR-CDV-15/MDT-113] : Code Statut : "<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" : lorsque le statut (MDT-105 ou MDT-115) est égal à 210 (Refusée), 123 (Rejetée), 501 (Irrecevable), 207 (Litige), 206 (Suspendue) pu 208 (Approuvée Partiellement), lors un MOTIF (MDT-113) DOIT être présent.
         Veuillez vérifier la présence et le contenu du MOTIF (MDT-113).
@@ -1118,7 +1127,7 @@
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        BR-FR-CDV-CL-01/MDT-2 : La valeur de MDT-2 doit être l'une des suivantes : "REGULATED", "NON_REGULATED", "B2C", "B2BINT", "OUTOFSCOPE" sauf pour un CDV pour le PPF pourlequel le nombre de caractères DOIT être inférieur à 3. 
+        [BR-FR-CDV-CL-01/MDT-2] : La valeur de MDT-2 doit être l'une des suivantes : "REGULATED", "NON_REGULATED", "B2C", "B2BINT", "OUTOFSCOPE" sauf pour un CDV pour le PPF pourlequel le nombre de caractères DOIT être inférieur à 3. 
         Valeur actuelle : CDV PPF ? (true) : "<xsl:text/>
                   <xsl:value-of select="$TestPPF"/>
                   <xsl:text/>" - Valeur MDT-2 : "<xsl:text/>
@@ -1151,7 +1160,7 @@
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        BR-FR-CDV-CL-02/MDT-21 : Lorsque le statut (MDT-77) est "305", le rôle du partenaire commercial émetteur (MDT-21) doit être "WK".
+        [BR-FR-CDV-CL-02/MDT-21] : Lorsque le statut (MDT-77) est "305", le rôle du partenaire commercial émetteur (MDT-21) doit être "WK".
         Valeur actuelle : "<xsl:text/>
                   <xsl:value-of select="ram:SenderTradeParty/ram:RoleCode"/>
                   <xsl:text/>".
@@ -1171,7 +1180,7 @@
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        BR-FR-CDV-CL-02/MDT-21 : Lorsque le statut (MDT-77) est "23", le rôle du partenaire commercial émetteur (MDT-21) doit être dans la liste suivante :
+        [BR-FR-CDV-CL-02/MDT-21] : Lorsque le statut (MDT-77) est "23", le rôle du partenaire commercial émetteur (MDT-21) doit être dans la liste suivante :
         "BY", "AB", "DL", "SE", "SR", "WK", "PE", "PR", "II", "IV".
         Valeur actuelle : "<xsl:text/>
                   <xsl:value-of select="ram:SenderTradeParty/ram:RoleCode"/>
@@ -1203,7 +1212,7 @@
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        BR-FR-CDV-CL-03/MDT-40 : Lorsque le statut (MDT-77) est "305", le rôle du partenaire commercial émetteur (MDT-40) doit être "WK".
+        [BR-FR-CDV-CL-03/MDT-40] : Lorsque le statut (MDT-77) est "305", le rôle du partenaire commercial émetteur (MDT-40) doit être "WK".
         Valeur actuelle : "<xsl:text/>
                   <xsl:value-of select="ram:IssuerTradeParty/ram:RoleCode"/>
                   <xsl:text/>".
@@ -1223,7 +1232,7 @@
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        BR-FR-CDV-CL-03/MDT-40 : Lorsque le statut (MDT-77) est "23", le rôle du partenaire commercial émetteur (MDT-40) doit être dans la liste suivante :
+        [BR-FR-CDV-CL-03/MDT-40] : Lorsque le statut (MDT-77) est "23", le rôle du partenaire commercial émetteur (MDT-40) doit être dans la liste suivante :
         "BY", "AB", "DL", "SE", "SR", "PE", "PR", "II", "IV".
         Valeur actuelle : "<xsl:text/>
                   <xsl:value-of select="ram:IssuerTradeParty/ram:RoleCode"/>
@@ -1258,7 +1267,7 @@
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        BR-FR-CDV-CL-04/MDT-59 : Le rôle du partenaire commercial destinataire (MDT-59) doit être dans la liste suivante :
+        [BR-FR-CDV-CL-04/MDT-59] : Le rôle du partenaire commercial destinataire (MDT-59) doit être dans la liste suivante :
         "BY", "AB", "DL", "SE", "SR", "PE", "PR", "II", "IV", "WK", "DFH".
         Valeur actuelle : "<xsl:text/>
                   <xsl:value-of select="."/>
@@ -1293,7 +1302,7 @@
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        BR-FR-CDV-CL-05/MDT-88 : Lorsque MDT-77 = "305" (Phase Transmission), siprésent, MDT-88 doit être l’un des codes suivants :
+        [BR-FR-CDV-CL-05/MDT-88] : Lorsque MDT-77 = "305" (Phase Transmission), siprésent, MDT-88 doit être l’un des codes suivants :
         "10", "51", "43", "8", "48".
         Valeur actuelle : "<xsl:text/>
                   <xsl:value-of select="ram:StatusCode"/>
@@ -1314,7 +1323,7 @@
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        BR-FR-CDV-CL-05/MDT-88 : Lorsque MDT-77 = "23" (Phase Traitement), si présent, MDT-88 doit être l’un des codes suivants :
+        [BR-FR-CDV-CL-05/MDT-88] : Lorsque MDT-77 = "23" (Phase Traitement), si présent, MDT-88 doit être l’un des codes suivants :
         "45", "39", "37", "50", "49", "47", "46", "1".
         Valeur actuelle : "<xsl:text/>
                   <xsl:value-of select="ram:StatusCode"/>
@@ -1349,7 +1358,7 @@
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        BR-FR-CDV-CL-06/MDT-105 : Le code de statut de facture (MDT-105) doit être dans la liste des codes autorisés :
+        [BR-FR-CDV-CL-06/MDT-105] : Le code de statut de facture (MDT-105) doit être dans la liste des codes autorisés :
         "200", "201", ..., "228".
         Valeur actuelle : "<xsl:text/>
                   <xsl:value-of select="."/>
@@ -1378,7 +1387,7 @@
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        BR-FR-CDV-CL-06/MDT-115 : Le code de statut de facture (MDT-115) doit être dans la liste des codes autorisés :
+        [BR-FR-CDV-CL-06/MDT-115] : Le code de statut de facture (MDT-115) doit être dans la liste des codes autorisés :
         "200", "201", ..., "228".
         Valeur actuelle : "<xsl:text/>
                   <xsl:value-of select="."/>
@@ -1412,7 +1421,7 @@
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        BR-FR-CDV-CL-07/MDT-132 : Le rôle du partenaire commercial émetteur (MDT-132) doit être "SE" (Vendeur).
+        [BR-FR-CDV-CL-07/MDT-132] : Le rôle du partenaire commercial émetteur (MDT-132) doit être "SE" (Vendeur).
         Valeur actuelle : "<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>". Veuillez corriger cette valeur si nécessaire.
@@ -1446,7 +1455,7 @@
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        BR-FR-CDV-CL-08/MDT-158 : Le rôle du partenaire commercial destinataire (MDT-158) doit être dans la liste suivante :
+        [BR-FR-CDV-CL-08/MDT-158] : Le rôle du partenaire commercial destinataire (MDT-158) doit être dans la liste suivante :
         "BY", "AB", "DL", "SE", "SR", "WK", "DFH", "PE", "PR", "II", "IV".
         Valeur actuelle : "<xsl:text/>
                   <xsl:value-of select="."/>
@@ -1481,7 +1490,7 @@
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        BR-FR-CDV-CL-09/MDT-113 : Le code motif de statut (MDT-113) : "<xsl:text/>
+        [BR-FR-CDV-CL-09/MDT-113] : Le code motif de statut (MDT-113) : "<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" n'est pas dans la liste des codes autorisés :
         "NON_TRANSMISE", "JUSTIF_ABS", "ROUTAGE_ERR", "AUTRE", "COORD_BANC_ERR", "TX_TVA_ERR", "MONTANTTOTAL_ERR", "CALCUL_ERR", "NON_CONFORME", "DOUBLON", "DEST_INC", "DEST_ERR", "TRANSAC_INC", "EMMET_INC", "CONTRAT_TERM", "DOUBLE_FACT", "CMD_ERR", "ADR_ERR", "SIRET_ERR", "CODE_ROUTAGE_ERR", "REF_CT_ABSENT", "REF_ERR", "PU_ERR", "REM_ERR", "QTE_ERR", "ART_ERR", "MODPAI_ERR", "QUALITE_ERR", "LIVR_INCOMP", "REJ_SEMAN", "REJ_UNI", "REJ_COH", "REJ_ADR", "REJ_CONT_B2G", "REJ_REF_PJ", "REJ_ASS_PJ", "IRR_VIDE_F", "IRR_TYPE_F", "IRR_SYNTAX", "IRR_TAILLE_PJ", "IRR_NOM_PJ", "IRR_VID_PJ", "IRR_EXT_DOC", "IRR_TAILLE_F", "IRR_ANTIVIRUS".
@@ -1502,7 +1511,7 @@
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        BR-FR-CDV-CL-09/MDT-113_200 : Le code motif de statut (MDT-113) : "<xsl:text/>
+        [BR-FR-CDV-CL-09/MDT-113_200] : Le code motif de statut (MDT-113) : "<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>", n'est pas dans la liste des codes autorisés pour le statut DÉPOSÉE (200) :
         "NON_TRANSMISE". Veuillez corriger cette valeur si nécessaire.
@@ -1522,7 +1531,7 @@
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        BR-FR-CDV-CL-09/MDT-113_213 : Le code motif de statut (MDT-113) : "<xsl:text/>
+        [BR-FR-CDV-CL-09/MDT-113_213] : Le code motif de statut (MDT-113) : "<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>", n'est pas dans la liste des codes autorisés pour le statut REJETÉE (213) :
         "MONTANTTOTAL_ERR", "CALCUL_ERR", "DOUBLON", "DEST_INC", "ADR_ERR", "REJ_SEMAN", "REJ_UNI", "REJ_COH", "REJ_ADR", "REJ_CONT_B2G", "REJ_REF_PJ", "REJ_ASS_PJ".
@@ -1543,7 +1552,7 @@
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        BR-FR-CDV-CL-09/MDT-113_210 : Le code motif de statut (MDT-113) : "<xsl:text/>
+        [BR-FR-CDV-CL-09/MDT-113_210] : Le code motif de statut (MDT-113) : "<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>", n'est pas dans la liste des codes autorisés pour le statut REFUSÉE (210) :
         "TX_TVA_ERR", "MONTANTTOTAL_ERR", "CALCUL_ERR", "NON_CONFORME", "DOUBLON", "DEST_ERR", "TRANSAC_INC", "EMMET_INC", "CONTRAT_TERM", "DOUBLE_FACT", "CMD_ERR", "ADR_ERR", "REF_CT_ABSENT".
@@ -1564,7 +1573,7 @@
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        BR-FR-CDV-CL-09/MDT-113_207 : Le code motif de statut (MDT-113) : "<xsl:text/>
+        [BR-FR-CDV-CL-09/MDT-113_207] : Le code motif de statut (MDT-113) : "<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>", n'est pas dans la liste des codes autorisés pour le statut LITIGE (207) :
        "AUTRE", "COORD_BANC_ERR", "TX_TVA_ERR", "MONTANTTOTAL_ERR", "CALCUL_ERR", "NON_CONFORME", "DOUBLON", "DEST_INC", "DEST_ERR", "TRANSAC_INC", "EMMET_INC", "CONTRAT_TERM", "DOUBLE_FACT",
@@ -1586,7 +1595,7 @@
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        BR-FR-CDV-CL-09/MDT-113_206 : Le code motif de statut (MDT-113) : "<xsl:text/>
+        [BR-FR-CDV-CL-09/MDT-113_206] : Le code motif de statut (MDT-113) : "<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>", n'est pas dans la liste des codes autorisés pour le statut APPROUVÉE PARTIELLEMENT (206) :
         "AUTRE", "CMD_ERR", "SIRET_ERR", "CODE_ROUTAGE_ERR", "REF_CT_ABSENT", "REF_ERR", "PU_ERR", "REM_ERR", "QTE_ERR", "ART_ERR", "MODPAI_ERR", "QUALITE_ERR", "LIVR_INCOMP".
@@ -1607,7 +1616,7 @@
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        BR-FR-CDV-CL-09/MDT-113_208 : Le code motif de statut (MDT-113) : "<xsl:text/>
+        [BR-FR-CDV-CL-09/MDT-113_208] : Le code motif de statut (MDT-113) : "<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>", n'est pas dans la liste des codes autorisés pour le statut SUSPENDUE (208) :
         "JUSTIF_ABS", "COORD_BANC_ERR", "CMD_ERR", "SIRET_ERR", "CODE_ROUTAGE_ERR", "REF_CT_ABSENT", "REF_ERR".
@@ -1628,7 +1637,7 @@
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        BR-FR-CDV-CL-09/MDT-113_221 : Le code motif de statut (MDT-113) : "<xsl:text/>
+        [BR-FR-CDV-CL-09/MDT-113_221] : Le code motif de statut (MDT-113) : "<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>", n'est pas dans la liste des codes autorisés pour le statut ERREUR_ROUTAGE (221) :
         "ROUTAGE_ERR". Veuillez corriger cette valeur si nécessaire.
@@ -1648,7 +1657,7 @@
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        BR-FR-CDV-CL-09/MDT-113_501 : Le code motif de statut (MDT-113) : "<xsl:text/>
+        [BR-FR-CDV-CL-09/MDT-113_501] : Le code motif de statut (MDT-113) : "<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>", n'est pas dans la liste des codes autorisés pour le statut IRRECEVABLE (501) :
         "IRR_VIDE_F", "IRR_TYPE_F", "IRR_SYNTAX", "IRR_TAILLE_PJ", "IRR_NOM_PJ", "IRR_VID_PJ", "IRR_EXT_DOC, "IRR_TAILLE_F", "IRR_ANTIVIRUS". Veuillez corriger cette valeur si nécessaire.
@@ -1682,7 +1691,7 @@
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        BR-FR-CDV-CL-10/MDT-121 : Le code d'action de facture (MDT-121) doit être dans la liste des codes autorisés :
+        [BR-FR-CDV-CL-10/MDT-121] : Le code d'action de facture (MDT-121) doit être dans la liste des codes autorisés :
         "NOA", "PIN", "NIN", "CNF", "CNP", "CNA", "OTH".
         Valeur actuelle : "<xsl:text/>
                   <xsl:value-of select="."/>
@@ -1717,7 +1726,7 @@
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        BR-FR-CDV-CL-11/MDT-207 : La valeur du TypeCode (MDT-207) doit appartenir à la liste fermée des codes autorisés :
+        [BR-FR-CDV-CL-11/MDT-207] : La valeur du TypeCode (MDT-207) doit appartenir à la liste fermée des codes autorisés :
         MEN, MPA, RAP, ESC, RAB, REM, MAP, MAPTTC, MNA, MNATTC, CBB, DIV, DVA, MAJ.
         Valeur actuelle : "<xsl:text/>
                   <xsl:value-of select="."/>
