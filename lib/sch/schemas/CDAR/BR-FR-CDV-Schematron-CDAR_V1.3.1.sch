@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Schematron Licensed under European Union Public Licence (EUPL) version 1.3.1
+    Réalisé par Quentin Houard et Cyrille Sautereau pour le compte du FNFE-MPE.
+-->
+<!-- Schematron 20260216_BR-FR-CDV-Schematron-CDAR_V1.3.1 - last update 2026 04 30 NO CHANGE -->
+
 <schema xmlns="http://purl.oclc.org/dsdl/schematron"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
@@ -191,7 +198,7 @@
       <assert test="custom:is-valid-document-type-code(.)"
         flag="warning"
         id="BR-FR-04_MDT-91">
-        BR-FR-04/MDT-91 : Le code de type de document "<value-of select='.'/>" n'est pas autorisé selon les spécifications françaises.
+        [BR-FR-04/MDT-91] : Le code de type de document "<value-of select='.'/>" n'est pas autorisé selon les spécifications françaises.
         Veuillez utiliser un code parmi ceux définis dans la documentation (ex. : 380, 389, 393, etc.).
       </assert>
     </rule>
@@ -205,7 +212,7 @@
       <assert test="." 
         flag="warning" 
         id="BR-FR-CDV-01_MDG-3">
-        BR-FR-CDV-01/MDG-3 : Le paramètre de contexte MDG-3 est obligatoire dans le document.
+        [BR-FR-CDV-01/MDG-3] : Le paramètre de contexte MDG-3 est obligatoire dans le document.
         Veuillez vous assurer que l'élément ram:GuidelineSpecifiedDocumentContextParameter est bien présent et correctement renseigné.
       </assert>
     </rule>
@@ -220,7 +227,7 @@
         or (./ram:GuidelineSpecifiedDocumentContextParameter/ram:ID = 'urn.cpro.gouv.fr:1p0:CDV:einvoicingF2' and count(../rsm:ExchangedDocument/ram:RecipientTradeParty/ram:GlobalID) = 1 and ../rsm:ExchangedDocument/ram:RecipientTradeParty/ram:GlobalID[@schemeID='0238'] = '9998' and ../rsm:ExchangedDocument/ram:RecipientTradeParty/ram:RoleCode = 'DFH')"
         flag="warning"
         id="BR-FR-CDV-02_MDT-3">
-        BR-FR-CDV-02/MDT-3 : La valeur de MDT-3 doit être :
+        [BR-FR-CDV-02/MDT-3] : La valeur de MDT-3 doit être :
         - "urn.cpro.gouv.fr:1p0:CDV:invoice", ou
         - "urn.cpro.gouv.fr:1p0:CDV:einvoicingF2" **uniquement si** il y a un unique Destinataire (Recipent) et que c'est le PPF : GlobalID = 9998 avec @shemeId = 0238 et CodeRole = DFH. 
         Valeurs actuelles : "<value-of select='./ram:GuidelineSpecifiedDocumentContextParameter/ram:ID'/>". Nombre de Recipient : "<value-of select='count(../rsm:ExchangedDocument/ram:RecipientTradeParty/ram:GlobalID)'/>" - GlobalID : "<value-of select='../rsm:ExchangedDocument/ram:RecipientTradeParty/ram:GlobalID'/>" - @shemeID : "<value-of select='../rsm:ExchangedDocument/ram:RecipientTradeParty/ram:GlobalID/@schemeID'/>" - CodeRole : "<value-of select='../rsm:ExchangedDocument/ram:RecipientTradeParty/ram:RoleCode'/>"
@@ -236,7 +243,7 @@
       <assert test="ram:ID" 
         flag="warning" 
         id="BR-FR-CDV-03_MDT-4">
-        BR-FR-CDV-03/MDT-4 : L'identifiant du document (ram:ID) est obligatoire.
+        [BR-FR-CDV-03/MDT-4] : L'identifiant du document (ram:ID) est obligatoire.
         Veuillez vous assurer que l'élément "ram:ID" est bien présent dans "rsm:ExchangedDocument".
       </assert>
     </rule>
@@ -249,7 +256,7 @@
       <assert test="." 
         flag="warning" 
         id="BR-FR-CDV-04_MDG-4">
-        BR-FR-CDV-04/MDG-4 : La date d’émission du document (MDG-4) est obligatoire.
+        [BR-FR-CDV-04/MDG-4] : La date d’émission du document (MDG-4) est obligatoire.
         Veuillez vous assurer que l’élément "ram:IssueDateTime" est bien présent dans "rsm:ExchangedDocument".
       </assert>
     </rule>
@@ -263,7 +270,7 @@
       <assert test="." 
         flag="warning" 
         id="BR-FR-CDV-05_MDG-9">
-        BR-FR-CDV-05/MDG-9 : Le partenaire commercial émetteur (MDG-9) est obligatoire.
+        [BR-FR-CDV-05/MDG-9] : Le partenaire commercial émetteur (MDG-9) est obligatoire.
         Veuillez vous assurer que l’élément "ram:SenderTradeParty" est bien présent dans "rsm:ExchangedDocument".
       </assert>
     </rule>
@@ -277,7 +284,7 @@
       <assert test="." 
         flag="warning" 
         id="BR-FR-CDV-06_MDT-21">
-        BR-FR-CDV-06/MDT-21 : Le rôle du partenaire commercial émetteur (MDT-21) est obligatoire.
+        [BR-FR-CDV-06/MDT-21] : Le rôle du partenaire commercial émetteur (MDT-21) est obligatoire.
         Veuillez vous assurer que l’élément "ram:RoleCode" est bien présent dans "rsm:ExchangedDocument/ram:SenderTradeParty".
       </assert>
     </rule>
@@ -289,19 +296,21 @@
     
     <rule context="rsm:ExchangedDocument/ram:IssuerTradeParty">
       
-      <!-- MDT-77 = 23 → MDT-38 obligatoire -->
-      <assert test="ram:RoleCode != '23' or ram:GlobalID"
+      <!-- MDT-77 = 23 → MDT-38 obligatoire VCYS Correction ram:TypeCode -->
+      <assert test="../../rsm:AcknowledgementDocument/ram:TypeCode != '23' or ram:GlobalID"
         flag="warning"
         id="BR-FR-CDV-07_MDT-38_yes">
-        BR-FR-CDV-07/MDT-38 : Lorsque le rôle du partenaire commercial émetteur (MDT-77) est égal à "23", l'identifiant (MDT-38) doit être renseigné.
+        [BR-FR-CDV-07/MDT-38] : Lorsque le rôle du partenaire commercial émetteur (MDT-77) est égal à "23", l'identifiant (MDT-38) doit être renseigné.
         Veuillez vous assurer que l'élément "ram:GlobalID" est présent dans "ram:IssuerTradeParty".
       </assert>
-      
-      <!-- MDT-77 = 305 → MDT-38 ne doit pas être renseignée -->
-      <assert test="ram:RoleCode != '305' or not(ram:GlobalID)"
+    </rule>
+    
+    <rule context="rsm:ExchangedDocument/ram:IssuerTradeParty">
+      <!-- MDT-77 = 305 → MDT-38 ne doit pas être renseignée VCYS Correction ram:TypeCode -->
+      <assert test="(../../rsm:AcknowledgementDocument/ram:TypeCode != '305' or count(../ram:RecipientTradeParty/ram:RoleCode='DFH') ge 0) or not(ram:GlobalID)"
         flag="warning"
         id="BR-FR-CDV-07_MDT-38_no">
-        BR-FR-CDV-07/MDT-38 : Lorsque le rôle du partenaire commercial émetteur (MDT-77) est égal à "305", l'identifiant (MDT-38) ne doit pas être renseigné.
+        [BR-FR-CDV-07/MDT-38] : Lorsque le rôle du partenaire commercial émetteur (MDT-77) est égal à "305", l'identifiant (MDT-38) ne doit pas être renseigné.
         Veuillez retirer l'élément "ram:GlobalID" de "ram:IssuerTradeParty" dans ce cas.
       </assert>
       
@@ -316,7 +325,7 @@
       <assert test="(ram:RoleCode = 'WK' or ram:RoleCode = 'DFH') or ram:URIUniversalCommunication/ram:URIID"
         flag="warning"
         id="BR-FR-CDV-08_MDT-73">
-        BR-FR-CDV-08/MDT-73 : Lorsque le rôle du destinataire (MDT-59) est différent de "WK" ou "DFH", l'adresse électronique du destinataire (MDT-73) est obligatoire.
+        [BR-FR-CDV-08/MDT-73] : Lorsque le rôle du destinataire (MDT-59) est différent de "WK" ou "DFH", l'adresse électronique du destinataire (MDT-73) est obligatoire.
         Veuillez vous assurer que l’élément "ram:URIID" est bien présent dans "ram:URIUniversalCommunication".
       </assert>
     </rule>
@@ -329,7 +338,7 @@
       <assert test=". = '23' or . = '305'"
         flag="warning"
         id="BR-FR-CDV-09_MDT-77">
-        BR-FR-CDV-09/MDT-77 : Le code de type de document (MDT-77) est obligatoire et doit être égal à "23" ou "305".
+        [BR-FR-CDV-09/MDT-77] : Le code de type de document (MDT-77) est obligatoire et doit être égal à "23" ou "305".
         Valeur actuelle : "<value-of select='.'/>". Veuillez corriger cette valeur si nécessaire.
       </assert>
     </rule>
@@ -343,21 +352,21 @@
       <assert test="." 
         flag="warning" 
         id="BR-FR-CDV-10_MDT-87">
-        BR-FR-CDV-10/MDT-87 : L'identifiant de la facture référencée (MDT-87) est obligatoire.
+        [BR-FR-CDV-10/MDT-87] : L'identifiant de la facture référencée (MDT-87) est obligatoire.
         Veuillez vous assurer que l’élément "ram:IssuerAssignedID" est bien présent dans "rsm:ReferenceReferencedDocument".
       </assert>
     </rule>
     
   </pattern>
   
-  <pattern id="BR-FR-CDV-11">
+  <pattern id="BR-FR-CDV-11"> <!-- VCYS ajout de exists() -->
     <title>BR-FR-CDV-11 — Présence obligatoire de MDG-35</title>
     
     <rule context="rsm:AcknowledgementDocument/ram:ReferenceReferencedDocument">
-      <assert test="ram:FormattedIssueDateTime or rsm:CrossDomainAcknowledgementAndResponse/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID = '501'" 
+      <assert test="exists(ram:FormattedIssueDateTime) or rsm:CrossDomainAcknowledgementAndResponse/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID = '501'" 
         flag="warning" 
         id="BR-FR-CDV-11_MDG-35">
-        BR-FR-CDV-11/MDG-35 : La date d’émission formatée de la facture référencée (MDG-35) est obligatoire,
+        [BR-FR-CDV-11/MDG-35] : La date d’émission formatée de la facture référencée (MDG-35) est obligatoire,
         sauf si MDT-105 (code statut) est égal à "501" (IRRECEVABLE).
       </assert>
     </rule>
@@ -366,25 +375,25 @@
   <pattern id="BR-FR-CDV-12">
     <title>BR-FR-CDV-12 — Présence obligatoire de MDT-105</title>
     
-    <rule context="rsm:AcknowledgementDocument/ram:ReferenceReferencedDocument/ram:ProcessConditionCode">
-      <assert test="." 
+    <rule context="rsm:AcknowledgementDocument/ram:ReferenceReferencedDocument"> <!-- VCYS ajout de exists() -->
+      <assert test="exists(ram:ProcessConditionCode)" 
         flag="warning" 
         id="BR-FR-CDV-12_MDT-105">
-        BR-FR-CDV-12/MDT-105 : Le code de condition de traitement (MDT-105) est obligatoire.
+        [BR-FR-CDV-12/MDT-105] : Le code de condition de traitement (MDT-105) est obligatoire.
         Veuillez vous assurer que l’élément "ram:ProcessConditionCode" est bien présent dans "rsm:ReferenceReferencedDocument".
       </assert>
     </rule>
     
   </pattern>
   
-  <pattern id="BR-FR-CDV-13">
+  <pattern id="BR-FR-CDV-13"> <!-- VCYS ajout de exists() -->
     <title>BR-FR-CDV-13 — Présence obligatoire de MDT-129</title>
     
     <rule context="rsm:AcknowledgementDocument/ram:ReferenceReferencedDocument/ram:IssuerTradeParty">
-      <assert test="ram:GlobalID or /rsm:CrossDomainAcknowledgementAndResponse/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID = '501'" 
+      <assert test="exists(ram:GlobalID) or /rsm:CrossDomainAcknowledgementAndResponse/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID = '501'" 
         flag="warning" 
         id="BR-FR-CDV-13_MDT-129">
-        BR-FR-CDV-13/MDT-129 : L'identifiant du partenaire commercial émetteur (MDT-129) est obligatoire,
+        [BR-FR-CDV-13/MDT-129] : L'identifiant du partenaire commercial émetteur (MDT-129) est obligatoire,
         sauf si MDT-105 (ram:ID dans BusinessProcessSpecifiedDocumentContextParameter) est égal à "501".
       </assert>
     </rule>
@@ -395,12 +404,10 @@
     
     <rule context="rsm:AcknowledgementDocument/ram:ReferenceReferencedDocument">
       <assert test="not(ram:ProcessConditionCode = '212') or 
-        ram:SpecifiedDocumentStatus/ram:SpecifiedDocumentCharacteristic[
-        ram:TypeCode = 'MEN' and ram:ValueAmount
-        ]"
+        ram:SpecifiedDocumentStatus/ram:SpecifiedDocumentCharacteristic[ram:TypeCode = 'MEN' and ram:ValueAmount]"
         flag="warning"
         id="BR-FR-CDV-14_MDT-207">
-        BR-FR-CDV-14/MDT-207 : Lorsque le statut de traitement (MDT-105) est "212" (encaissé), il doit exister au moins un bloc "ram:SpecifiedDocumentCharacteristic" avec :
+        [BR-FR-CDV-14/MDT-207] : Lorsque le statut de traitement (MDT-105) est "212" (encaissé), il doit exister au moins un bloc "ram:SpecifiedDocumentCharacteristic" avec :
         - un "ram:TypeCode" égal à "MEN"
         - et une valeur "ram:ValueAmount" renseignée.
         Veuillez vérifier la présence et le contenu de ces éléments.
@@ -416,7 +423,7 @@
       <assert test="not((.) = '210' or (.) = '213' or (.) = '501' or (.) = '207' or (.) = '206' or (.) = '208') or (((.) = '210' or (.) = '213' or (.) = '501' or (.) = '207' or (.) = '206' or (.) = '208') and ../ram:SpecifiedDocumentStatus/ram:ReasonCode)"
         flag="warning"
         id="BR-FR-CDV-15_MDT-113">
-        BR-FR-CDV-15/MDT-113 : Code Statut : "<value-of select='.'/>" : lorsque le statut (MDT-105 ou MDT-115) est égal à 210 (Refusée), 123 (Rejetée), 501 (Irrecevable), 207 (Litige), 206 (Suspendue) pu 208 (Approuvée Partiellement), lors un MOTIF (MDT-113) DOIT être présent.
+        [BR-FR-CDV-15/MDT-113] : Code Statut : "<value-of select='.'/>" : lorsque le statut (MDT-105 ou MDT-115) est égal à 210 (Refusée), 123 (Rejetée), 501 (Irrecevable), 207 (Litige), 206 (Suspendue) pu 208 (Approuvée Partiellement), lors un MOTIF (MDT-113) DOIT être présent.
         Veuillez vérifier la présence et le contenu du MOTIF (MDT-113).
       </assert>
     </rule>
@@ -433,7 +440,7 @@
       <assert test="(not($TestPPF) and (./ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID = 'REGULATED' or . = 'NON_REGULATED' or . = 'B2C' or . = 'B2BINT' or . = 'OUTOFSCOPE')) or ($TestPPF and (string-length(normalize-space(./ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID)) &lt;= 3))"
         flag="warning"
         id="BR-FR-CDV-CL-01_MDT-2">
-        BR-FR-CDV-CL-01/MDT-2 : La valeur de MDT-2 doit être l'une des suivantes : "REGULATED", "NON_REGULATED", "B2C", "B2BINT", "OUTOFSCOPE" sauf pour un CDV pour le PPF pourlequel le nombre de caractères DOIT être inférieur à 3. 
+        [BR-FR-CDV-CL-01/MDT-2] : La valeur de MDT-2 doit être l'une des suivantes : "REGULATED", "NON_REGULATED", "B2C", "B2BINT", "OUTOFSCOPE" sauf pour un CDV pour le PPF pourlequel le nombre de caractères DOIT être inférieur à 3. 
         Valeur actuelle : CDV PPF ? (true) : "<value-of select='$TestPPF'/>" - Valeur MDT-2 : "<value-of select='./ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID'/>". Veuillez corriger cette valeur si nécessaire.
       </assert>
     </rule>
@@ -448,7 +455,7 @@
         ram:SenderTradeParty/ram:RoleCode = 'WK'"
         flag="warning"
         id="BR-FR-CDV-CL-02_MDT-21_305">
-        BR-FR-CDV-CL-02/MDT-21 : Lorsque le statut (MDT-77) est "305", le rôle du partenaire commercial émetteur (MDT-21) doit être "WK".
+        [BR-FR-CDV-CL-02/MDT-21] : Lorsque le statut (MDT-77) est "305", le rôle du partenaire commercial émetteur (MDT-21) doit être "WK".
         Valeur actuelle : "<value-of select='ram:SenderTradeParty/ram:RoleCode'/>".
       </assert>
       
@@ -465,7 +472,7 @@
         ram:SenderTradeParty/ram:RoleCode = 'IV'"
         flag="warning"
         id="BR-FR-CDV-CL-02_MDT-21_23">
-        BR-FR-CDV-CL-02/MDT-21 : Lorsque le statut (MDT-77) est "23", le rôle du partenaire commercial émetteur (MDT-21) doit être dans la liste suivante :
+        [BR-FR-CDV-CL-02/MDT-21] : Lorsque le statut (MDT-77) est "23", le rôle du partenaire commercial émetteur (MDT-21) doit être dans la liste suivante :
         "BY", "AB", "DL", "SE", "SR", "WK", "PE", "PR", "II", "IV".
         Valeur actuelle : "<value-of select='ram:SenderTradeParty/ram:RoleCode'/>".
       </assert>
@@ -482,7 +489,7 @@
         ram:IssuerTradeParty/ram:RoleCode = 'WK'"
         flag="warning"
         id="BR-FR-CDV-CL-03_MDT-40_305">
-        BR-FR-CDV-CL-03/MDT-40 : Lorsque le statut (MDT-77) est "305", le rôle du partenaire commercial émetteur (MDT-40) doit être "WK".
+        [BR-FR-CDV-CL-03/MDT-40] : Lorsque le statut (MDT-77) est "305", le rôle du partenaire commercial émetteur (MDT-40) doit être "WK".
         Valeur actuelle : "<value-of select='ram:IssuerTradeParty/ram:RoleCode'/>".
       </assert>
       
@@ -499,7 +506,7 @@
         ram:IssuerTradeParty/ram:RoleCode = 'IV'"
         flag="warning"
         id="BR-FR-CDV-CL-03_MDT-40_23">
-        BR-FR-CDV-CL-03/MDT-40 : Lorsque le statut (MDT-77) est "23", le rôle du partenaire commercial émetteur (MDT-40) doit être dans la liste suivante :
+        [BR-FR-CDV-CL-03/MDT-40] : Lorsque le statut (MDT-77) est "23", le rôle du partenaire commercial émetteur (MDT-40) doit être dans la liste suivante :
         "BY", "AB", "DL", "SE", "SR", "PE", "PR", "II", "IV".
         Valeur actuelle : "<value-of select='ram:IssuerTradeParty/ram:RoleCode'/>".
       </assert>
@@ -515,7 +522,7 @@
         . = 'PE' or . = 'PR' or . = 'II' or . = 'IV' or . = 'WK' or . = 'DFH'"
         flag="warning"
         id="BR-FR-CDV-CL-04_MDT-59">
-        BR-FR-CDV-CL-04/MDT-59 : Le rôle du partenaire commercial destinataire (MDT-59) doit être dans la liste suivante :
+        [BR-FR-CDV-CL-04/MDT-59] : Le rôle du partenaire commercial destinataire (MDT-59) doit être dans la liste suivante :
         "BY", "AB", "DL", "SE", "SR", "PE", "PR", "II", "IV", "WK", "DFH".
         Valeur actuelle : "<value-of select='.'/>". Veuillez corriger cette valeur si nécessaire.
       </assert>
@@ -538,7 +545,7 @@
         not(ram:StatusCode)"
         flag="warning"
         id="BR-FR-CDV-CL-05_MDT-88_305">
-        BR-FR-CDV-CL-05/MDT-88 : Lorsque MDT-77 = "305" (Phase Transmission), siprésent, MDT-88 doit être l’un des codes suivants :
+        [BR-FR-CDV-CL-05/MDT-88] : Lorsque MDT-77 = "305" (Phase Transmission), siprésent, MDT-88 doit être l’un des codes suivants :
         "10", "51", "43", "8", "48".
         Valeur actuelle : "<value-of select='ram:StatusCode'/>".
       </assert>
@@ -556,7 +563,7 @@
         not(ram:StatusCode)"
         flag="warning"
         id="BR-FR-CDV-CL-05_MDT-88_23">
-        BR-FR-CDV-CL-05/MDT-88 : Lorsque MDT-77 = "23" (Phase Traitement), si présent, MDT-88 doit être l’un des codes suivants :
+        [BR-FR-CDV-CL-05/MDT-88] : Lorsque MDT-77 = "23" (Phase Traitement), si présent, MDT-88 doit être l’un des codes suivants :
         "45", "39", "37", "50", "49", "47", "46", "1".
         Valeur actuelle : "<value-of select='ram:StatusCode'/>".
       </assert>
@@ -573,7 +580,7 @@
       <assert test="custom:is-valid-invoice-status-code(.)"
         flag="warning"
         id="BR-FR-CDV-CL-06_MDT-105">
-        BR-FR-CDV-CL-06/MDT-105 : Le code de statut de facture (MDT-105) doit être dans la liste des codes autorisés :
+        [BR-FR-CDV-CL-06/MDT-105] : Le code de statut de facture (MDT-105) doit être dans la liste des codes autorisés :
         "200", "201", ..., "228".
         Valeur actuelle : "<value-of select='.'/>".
       </assert>
@@ -584,7 +591,7 @@
       <assert test="custom:is-valid-invoice-status-code(.)"
         flag="warning"
         id="BR-FR-CDV-CL-06_MDT-115">
-        BR-FR-CDV-CL-06/MDT-115 : Le code de statut de facture (MDT-115) doit être dans la liste des codes autorisés :
+        [BR-FR-CDV-CL-06/MDT-115] : Le code de statut de facture (MDT-115) doit être dans la liste des codes autorisés :
         "200", "201", ..., "228".
         Valeur actuelle : "<value-of select='.'/>".
       </assert>
@@ -598,7 +605,7 @@
       <assert test=". = 'SE'" 
         flag="warning" 
         id="BR-FR-CDV-CL-07_MDT-132">
-        BR-FR-CDV-CL-07/MDT-132 : Le rôle du partenaire commercial émetteur (MDT-132) doit être "SE" (Vendeur).
+        [BR-FR-CDV-CL-07/MDT-132] : Le rôle du partenaire commercial émetteur (MDT-132) doit être "SE" (Vendeur).
         Valeur actuelle : "<value-of select='.'/>". Veuillez corriger cette valeur si nécessaire.
       </assert>
     </rule>
@@ -614,7 +621,7 @@
         . = 'II' or . = 'IV'"
         flag="warning"
         id="BR-FR-CDV-CL-08_MDT-158">
-        BR-FR-CDV-CL-08/MDT-158 : Le rôle du partenaire commercial destinataire (MDT-158) doit être dans la liste suivante :
+        [BR-FR-CDV-CL-08/MDT-158] : Le rôle du partenaire commercial destinataire (MDT-158) doit être dans la liste suivante :
         "BY", "AB", "DL", "SE", "SR", "WK", "DFH", "PE", "PR", "II", "IV".
         Valeur actuelle : "<value-of select='.'/>". Veuillez corriger cette valeur si nécessaire.
       </assert>
@@ -629,7 +636,7 @@
       <assert test="custom:is-valid-status-reason-code(.)"
         flag="warning"
         id="BR-FR-CDV-CL-09_MDT-113">
-        BR-FR-CDV-CL-09/MDT-113 : Le code motif de statut (MDT-113) : "<value-of select='.'/>" n'est pas dans la liste des codes autorisés :
+        [BR-FR-CDV-CL-09/MDT-113] : Le code motif de statut (MDT-113) : "<value-of select='.'/>" n'est pas dans la liste des codes autorisés :
         "NON_TRANSMISE", "JUSTIF_ABS", "ROUTAGE_ERR", "AUTRE", "COORD_BANC_ERR", "TX_TVA_ERR", "MONTANTTOTAL_ERR", "CALCUL_ERR", "NON_CONFORME", "DOUBLON", "DEST_INC", "DEST_ERR", "TRANSAC_INC", "EMMET_INC", "CONTRAT_TERM", "DOUBLE_FACT", "CMD_ERR", "ADR_ERR", "SIRET_ERR", "CODE_ROUTAGE_ERR", "REF_CT_ABSENT", "REF_ERR", "PU_ERR", "REM_ERR", "QTE_ERR", "ART_ERR", "MODPAI_ERR", "QUALITE_ERR", "LIVR_INCOMP", "REJ_SEMAN", "REJ_UNI", "REJ_COH", "REJ_ADR", "REJ_CONT_B2G", "REJ_REF_PJ", "REJ_ASS_PJ", "IRR_VIDE_F", "IRR_TYPE_F", "IRR_SYNTAX", "IRR_TAILLE_PJ", "IRR_NOM_PJ", "IRR_VID_PJ", "IRR_EXT_DOC", "IRR_TAILLE_F", "IRR_ANTIVIRUS".
         Veuillez corriger cette valeur si nécessaire.
       </assert>
@@ -638,7 +645,7 @@
         or (.) = 'NON_TRANSMISE'"
         flag="warning"
         id="BR-FR-CDV-CL-09_MDT-113_200">
-        BR-FR-CDV-CL-09/MDT-113_200 : Le code motif de statut (MDT-113) : "<value-of select='.'/>", n'est pas dans la liste des codes autorisés pour le statut DÉPOSÉE (200) :
+        [BR-FR-CDV-CL-09/MDT-113_200] : Le code motif de statut (MDT-113) : "<value-of select='.'/>", n'est pas dans la liste des codes autorisés pour le statut DÉPOSÉE (200) :
         "NON_TRANSMISE". Veuillez corriger cette valeur si nécessaire.
       </assert>
       
@@ -647,7 +654,7 @@
         or (.) = 'REJ_SEMAN' or (.) = 'REJ_UNI' or (.) = 'REJ_COH' or (.) = 'REJ_ADR' or (.) = 'REJ_CONT_B2G' or (.) = 'REJ_REF_PJ' or (.) = 'REJ_ASS_PJ'"
         flag="warning"
         id="BR-FR-CDV-CL-09_MDT-113_213">
-        BR-FR-CDV-CL-09/MDT-113_213 : Le code motif de statut (MDT-113) : "<value-of select='.'/>", n'est pas dans la liste des codes autorisés pour le statut REJETÉE (213) :
+        [BR-FR-CDV-CL-09/MDT-113_213] : Le code motif de statut (MDT-113) : "<value-of select='.'/>", n'est pas dans la liste des codes autorisés pour le statut REJETÉE (213) :
         "MONTANTTOTAL_ERR", "CALCUL_ERR", "DOUBLON", "DEST_INC", "ADR_ERR", "REJ_SEMAN", "REJ_UNI", "REJ_COH", "REJ_ADR", "REJ_CONT_B2G", "REJ_REF_PJ", "REJ_ASS_PJ".
         Veuillez corriger cette valeur si nécessaire.
       </assert>
@@ -657,7 +664,7 @@
         or (.) = 'TRANSAC_INC' or (.) = 'EMMET_INC' or (.) = 'CONTRAT_TERM' or (.) = 'DOUBLE_FACT' or (.) = 'CMD_ERR' or (.) = 'ADR_ERR' or (.) = 'REF_CT_ABSENT'"
         flag="warning"
         id="BR-FR-CDV-CL-09_MDT-113_210">
-        BR-FR-CDV-CL-09/MDT-113_210 : Le code motif de statut (MDT-113) : "<value-of select='.'/>", n'est pas dans la liste des codes autorisés pour le statut REFUSÉE (210) :
+        [BR-FR-CDV-CL-09/MDT-113_210] : Le code motif de statut (MDT-113) : "<value-of select='.'/>", n'est pas dans la liste des codes autorisés pour le statut REFUSÉE (210) :
         "TX_TVA_ERR", "MONTANTTOTAL_ERR", "CALCUL_ERR", "NON_CONFORME", "DOUBLON", "DEST_ERR", "TRANSAC_INC", "EMMET_INC", "CONTRAT_TERM", "DOUBLE_FACT", "CMD_ERR", "ADR_ERR", "REF_CT_ABSENT".
         Veuillez corriger cette valeur si nécessaire.
       </assert>
@@ -669,7 +676,7 @@
         or (.) = 'QTE_ERR' or (.) = 'ART_ERR' or (.) = 'MODPAI_ERR' or (.) = 'QUALITE_ERR' or (.) = 'LIVR_INCOMP'"
         flag="warning"
         id="BR-FR-CDV-CL-09_MDT-113_207">
-        BR-FR-CDV-CL-09/MDT-113_207 : Le code motif de statut (MDT-113) : "<value-of select='.'/>", n'est pas dans la liste des codes autorisés pour le statut LITIGE (207) :
+        [BR-FR-CDV-CL-09/MDT-113_207] : Le code motif de statut (MDT-113) : "<value-of select='.'/>", n'est pas dans la liste des codes autorisés pour le statut LITIGE (207) :
        "AUTRE", "COORD_BANC_ERR", "TX_TVA_ERR", "MONTANTTOTAL_ERR", "CALCUL_ERR", "NON_CONFORME", "DOUBLON", "DEST_INC", "DEST_ERR", "TRANSAC_INC", "EMMET_INC", "CONTRAT_TERM", "DOUBLE_FACT",
         "CMD_ERR", "ADR_ERR", "SIRET_ERR", "CODE_ROUTAGE_ERR", "REF_CT_ABSENT", "REF_ERR", "PU_ERR", "REM_ERR", "QTE_ERR", "ART_ERR", "MODPAI_ERR", "QUALITE_ERR", "LIVR_INCOMP".
         Veuillez corriger cette valeur si nécessaire.
@@ -680,7 +687,7 @@
         or (.) = 'QTE_ERR' or (.) = 'ART_ERR' or (.) = 'MODPAI_ERR' or (.) = 'QUALITE_ERR' or (.) = 'LIVR_INCOMP'"
         flag="warning"
         id="BR-FR-CDV-CL-09_MDT-113_206">
-        BR-FR-CDV-CL-09/MDT-113_206 : Le code motif de statut (MDT-113) : "<value-of select='.'/>", n'est pas dans la liste des codes autorisés pour le statut APPROUVÉE PARTIELLEMENT (206) :
+        [BR-FR-CDV-CL-09/MDT-113_206] : Le code motif de statut (MDT-113) : "<value-of select='.'/>", n'est pas dans la liste des codes autorisés pour le statut APPROUVÉE PARTIELLEMENT (206) :
         "AUTRE", "CMD_ERR", "SIRET_ERR", "CODE_ROUTAGE_ERR", "REF_CT_ABSENT", "REF_ERR", "PU_ERR", "REM_ERR", "QTE_ERR", "ART_ERR", "MODPAI_ERR", "QUALITE_ERR", "LIVR_INCOMP".
         Veuillez corriger cette valeur si nécessaire.
       </assert>
@@ -689,7 +696,7 @@
         or (.) = 'JUSTIF_ABS' or (.) = 'COORD_BANC_ERR' or (.) = 'CMD_ERR' or (.) = 'SIRET_ERR' or (.) = 'CODE_ROUTAGE_ERR' or (.) = 'REF_CT_ABSENT' or (.) = 'REF_ERR'"
         flag="warning"
         id="BR-FR-CDV-CL-09_MDT-113_208">
-        BR-FR-CDV-CL-09/MDT-113_208 : Le code motif de statut (MDT-113) : "<value-of select='.'/>", n'est pas dans la liste des codes autorisés pour le statut SUSPENDUE (208) :
+        [BR-FR-CDV-CL-09/MDT-113_208] : Le code motif de statut (MDT-113) : "<value-of select='.'/>", n'est pas dans la liste des codes autorisés pour le statut SUSPENDUE (208) :
         "JUSTIF_ABS", "COORD_BANC_ERR", "CMD_ERR", "SIRET_ERR", "CODE_ROUTAGE_ERR", "REF_CT_ABSENT", "REF_ERR".
         Veuillez corriger cette valeur si nécessaire.
       </assert>
@@ -698,7 +705,7 @@
         or (.) = 'ROUTAGE_ERR'"
         flag="warning"
         id="BR-FR-CDV-CL-09_MDT-113_221">
-        BR-FR-CDV-CL-09/MDT-113_221 : Le code motif de statut (MDT-113) : "<value-of select='.'/>", n'est pas dans la liste des codes autorisés pour le statut ERREUR_ROUTAGE (221) :
+        [BR-FR-CDV-CL-09/MDT-113_221] : Le code motif de statut (MDT-113) : "<value-of select='.'/>", n'est pas dans la liste des codes autorisés pour le statut ERREUR_ROUTAGE (221) :
         "ROUTAGE_ERR". Veuillez corriger cette valeur si nécessaire.
       </assert>
       
@@ -706,7 +713,7 @@
         or (.) = 'IRR_VIDE_F'  or (.) = 'IRR_TYPE_F'  or (.) = 'IRR_SYNTAX'  or (.) = 'IRR_TAILLE_PJ'  or (.) = 'IRR_NOM_PJ'  or (.) = 'IRR_VID_PJ'  or (.) = 'IRR_EXT_DOC'  or (.) = 'IRR_TAILLE_F'  or (.) = 'IRR_ANTIVIRUS'"
         flag="warning"
         id="BR-FR-CDV-CL-09_MDT-113_501">
-        BR-FR-CDV-CL-09/MDT-113_501 : Le code motif de statut (MDT-113) : "<value-of select='.'/>", n'est pas dans la liste des codes autorisés pour le statut IRRECEVABLE (501) :
+        [BR-FR-CDV-CL-09/MDT-113_501] : Le code motif de statut (MDT-113) : "<value-of select='.'/>", n'est pas dans la liste des codes autorisés pour le statut IRRECEVABLE (501) :
         "IRR_VIDE_F", "IRR_TYPE_F", "IRR_SYNTAX", "IRR_TAILLE_PJ", "IRR_NOM_PJ", "IRR_VID_PJ", "IRR_EXT_DOC, "IRR_TAILLE_F", "IRR_ANTIVIRUS". Veuillez corriger cette valeur si nécessaire.
       </assert>
       
@@ -721,7 +728,7 @@
       <assert test="custom:is-valid-invoice-action-code(.)"
         flag="warning"
         id="BR-FR-CDV-CL-10_MDT-121">
-        BR-FR-CDV-CL-10/MDT-121 : Le code d'action de facture (MDT-121) doit être dans la liste des codes autorisés :
+        [BR-FR-CDV-CL-10/MDT-121] : Le code d'action de facture (MDT-121) doit être dans la liste des codes autorisés :
         "NOA", "PIN", "NIN", "CNF", "CNP", "CNA", "OTH".
         Valeur actuelle : "<value-of select='.'/>". Veuillez corriger cette valeur si nécessaire.
       </assert>
@@ -735,13 +742,11 @@
       <assert test=". = 'MEN' or . = 'MPA' or . = 'RAP' or . = 'ESC' or . = 'RAB' or . = 'REM' or . = 'MAP' or . = 'MAPTTC' or . = 'MNA' or . = 'MNATTC' or . = 'CBB' or . = 'DIV' or . = 'DVA' or . = 'MAJ'"
         flag="warning"
         id="BR-FR-CDV-CL-11_MDT-207">
-        BR-FR-CDV-CL-11/MDT-207 : La valeur du TypeCode (MDT-207) doit appartenir à la liste fermée des codes autorisés :
+        [BR-FR-CDV-CL-11/MDT-207] : La valeur du TypeCode (MDT-207) doit appartenir à la liste fermée des codes autorisés :
         MEN, MPA, RAP, ESC, RAB, REM, MAP, MAPTTC, MNA, MNATTC, CBB, DIV, DVA, MAJ.
         Valeur actuelle : "<value-of select='.'/>". Veuillez corriger cette valeur si elle ne correspond pas à un code valide.
       </assert>
     </rule>
-  </pattern>
-  
-  
+  </pattern> 
   
 </schema>
