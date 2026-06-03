@@ -425,10 +425,10 @@
       </xsl:choose>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="not(matches((ancestor::*[local-name()='Invoice' or local-name()='CreditNote'][1]/cbc:ProfileExecutionID)[1], '^[01]51[01]2$')) or exists(cac:PartyTaxScheme/cbc:CompanyID) or exists(cac:PartyIdentification/cbc:ID)"/>
+         <xsl:when test="not(matches((ancestor::*[local-name()='Invoice' or local-name()='CreditNote'][1]/cbc:ProfileExecutionID)[1], '^[01]{5}1[01]{2}$')) or exists(cac:PartyTaxScheme/cbc:CompanyID)"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="not(matches((ancestor::*[local-name()='Invoice' or local-name()='CreditNote'][1]/cbc:ProfileExecutionID)[1], '^[01]51[01]2$')) or exists(cac:PartyTaxScheme/cbc:CompanyID) or exists(cac:PartyIdentification/cbc:ID)">
+                                test="not(matches((ancestor::*[local-name()='Invoice' or local-name()='CreditNote'][1]/cbc:ProfileExecutionID)[1], '^[01]{5}1[01]{2}$')) or exists(cac:PartyTaxScheme/cbc:CompanyID)">
                <xsl:attribute name="id">ibr-177-ae</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -546,10 +546,10 @@
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="cac:PaymentMeans"/>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="not(cbc:PaymentMeansTypeCode = &#34;30&#34;) or cac:PayeeFinancialAccount/cbc:ID"/>
+         <xsl:when test="not(cbc:PaymentMeansCode = &#34;30&#34;) or cac:PayeeFinancialAccount/cbc:ID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="not(cbc:PaymentMeansTypeCode = &#34;30&#34;) or cac:PayeeFinancialAccount/cbc:ID">
+                                test="not(cbc:PaymentMeansCode = &#34;30&#34;) or cac:PayeeFinancialAccount/cbc:ID">
                <xsl:attribute name="id">ibr-192-ae</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -1171,10 +1171,10 @@
       </xsl:choose>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="((cbc:InvoiceTypeCode | cbc:CreditNoteTypeCode) = &#34;381&#34; or (cbc:InvoiceTypeCode | cbc:CreditNoteTypeCode) = &#34;81&#34; or (cbc:CreditNoteTypeCode) = &#34;261&#34;) or (matches(cbc:ProfileExecutionID, &#34;^[01]1[01]{6}$&#34;)) or (cac:LegalMonetaryTotal/cbc:PayableAmount &gt; 0 and (cbc:DueDate))"/>
+         <xsl:when test="((cbc:InvoiceTypeCode | cbc:CreditNoteTypeCode) = &#34;381&#34; or (cbc:InvoiceTypeCode | cbc:CreditNoteTypeCode) = &#34;81&#34; or cbc:CreditNoteTypeCode = &#34;261&#34; or matches(cbc:ProfileExecutionID, &#34;^[01]1[01]{6}$&#34;)) or not(cac:LegalMonetaryTotal/cbc:PayableAmount &gt; 0) or exists(cbc:DueDate)"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="((cbc:InvoiceTypeCode | cbc:CreditNoteTypeCode) = &#34;381&#34; or (cbc:InvoiceTypeCode | cbc:CreditNoteTypeCode) = &#34;81&#34; or (cbc:CreditNoteTypeCode) = &#34;261&#34;) or (matches(cbc:ProfileExecutionID, &#34;^[01]1[01]{6}$&#34;)) or (cac:LegalMonetaryTotal/cbc:PayableAmount &gt; 0 and (cbc:DueDate))">
+                                test="((cbc:InvoiceTypeCode | cbc:CreditNoteTypeCode) = &#34;381&#34; or (cbc:InvoiceTypeCode | cbc:CreditNoteTypeCode) = &#34;81&#34; or cbc:CreditNoteTypeCode = &#34;261&#34; or matches(cbc:ProfileExecutionID, &#34;^[01]1[01]{6}$&#34;)) or not(cac:LegalMonetaryTotal/cbc:PayableAmount &gt; 0) or exists(cbc:DueDate)">
                <xsl:attribute name="id">ibr-127-ae</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -1186,10 +1186,10 @@
       </xsl:choose>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="not(matches(cbc:ProfileExecutionID, &#34;^[01]{2}1[01]{5}$&#34;)) or not(//cac:TaxCategory/cbc:ID[normalize-space(.) != &#34;N&#34;])"/>
+         <xsl:when test="not(matches(cbc:ProfileExecutionID, &#34;^[01]{2}1[01]{5}$&#34;)) or not((//cac:TaxCategory/cbc:ID | //cac:ClassifiedTaxCategory/cbc:ID)[normalize-space(.) != &#34;N&#34;])"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="not(matches(cbc:ProfileExecutionID, &#34;^[01]{2}1[01]{5}$&#34;)) or not(//cac:TaxCategory/cbc:ID[normalize-space(.) != &#34;N&#34;])">
+                                test="not(matches(cbc:ProfileExecutionID, &#34;^[01]{2}1[01]{5}$&#34;)) or not((//cac:TaxCategory/cbc:ID | //cac:ClassifiedTaxCategory/cbc:ID)[normalize-space(.) != &#34;N&#34;])">
                <xsl:attribute name="id">ibr-116-ae</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -1216,10 +1216,10 @@
       </xsl:choose>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="not(matches(cbc:ProfileExecutionID, &#34;^[01]{7}1$&#34;)) or (cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:StreetName and cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:CityName and  cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:CountrySubentity)"/>
+         <xsl:when test="not(matches(cbc:ProfileExecutionID, &#34;^[01]{7}1$&#34;)) or cac:Delivery/cac:DeliveryLocation/cac:Address/cac:Country/cbc:IdentificationCode = &#34;AE&#34; or (cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:StreetName and cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:CityName and cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:CountrySubentity)"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="not(matches(cbc:ProfileExecutionID, &#34;^[01]{7}1$&#34;)) or (cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:StreetName and cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:CityName and cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:CountrySubentity)">
+                                test="not(matches(cbc:ProfileExecutionID, &#34;^[01]{7}1$&#34;)) or cac:Delivery/cac:DeliveryLocation/cac:Address/cac:Country/cbc:IdentificationCode = &#34;AE&#34; or (cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:StreetName and cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:CityName and cac:Delivery/cac:DeliveryLocation/cac:Address/cbc:CountrySubentity)">
                <xsl:attribute name="id">ibr-152-ae</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -1351,10 +1351,10 @@
       </xsl:choose>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="exists(cac:PaymentMeans/cbc:PaymentMeansCode) = not((cbc:InvoiceTypeCode|cbc:CreditNoteTypeCode) = &#34;81&#34; or (cbc:InvoiceTypeCode|cbc:CreditNoteTypeCode) = &#34;381&#34; or  (cbc:InvoiceTypeCode|cbc:CreditNoteTypeCode) = &#34;261&#34;or matches(cbc:ProfileExecutionID, &#34;^[01]1[01]{7}$&#34;))"/>
+         <xsl:when test="((cbc:InvoiceTypeCode|cbc:CreditNoteTypeCode) = &#34;81&#34; or (cbc:InvoiceTypeCode|cbc:CreditNoteTypeCode) = &#34;381&#34; or (cbc:InvoiceTypeCode|cbc:CreditNoteTypeCode) = &#34;261&#34; or matches(cbc:ProfileExecutionID, &#34;^[01]1[01]{6}$&#34;)) or exists(cac:PaymentMeans/cbc:PaymentMeansCode)"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="exists(cac:PaymentMeans/cbc:PaymentMeansCode) = not((cbc:InvoiceTypeCode|cbc:CreditNoteTypeCode) = &#34;81&#34; or (cbc:InvoiceTypeCode|cbc:CreditNoteTypeCode) = &#34;381&#34; or (cbc:InvoiceTypeCode|cbc:CreditNoteTypeCode) = &#34;261&#34;or matches(cbc:ProfileExecutionID, &#34;^[01]1[01]{7}$&#34;))">
+                                test="((cbc:InvoiceTypeCode|cbc:CreditNoteTypeCode) = &#34;81&#34; or (cbc:InvoiceTypeCode|cbc:CreditNoteTypeCode) = &#34;381&#34; or (cbc:InvoiceTypeCode|cbc:CreditNoteTypeCode) = &#34;261&#34; or matches(cbc:ProfileExecutionID, &#34;^[01]1[01]{6}$&#34;)) or exists(cac:PaymentMeans/cbc:PaymentMeansCode)">
                <xsl:attribute name="id">ibr-191-ae</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -2328,7 +2328,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-132-ae]-VAT identifier [IBT-031, IBT-048, IBT-063, BTAE-14] should be TRN [VAT registration number] and must be 15 alphanumeric digits, starting with 1, ending with 03 .</svrl:text>
+               <svrl:text>[ibr-132-ae]-VAT identifier [IBT-031, IBT-048, IBT-063, BTAE-14] should be TRN [VAT registration number] and must be 15 digits, starting with 1, ending with 03.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -2351,7 +2351,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-148-ae]-The Seller VAT registration identifier (IBT-032) should be TIN (tax identification number) and must be 10 numeric digits and should be of the format 1XXXXXXXXXX.</svrl:text>
+               <svrl:text>[ibr-148-ae]-The Seller VAT registration identifier (IBT-032) should be TIN (tax identification number) and must be 10 numeric digits and should be of the format 1XXXXXXXXX.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
