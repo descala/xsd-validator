@@ -663,7 +663,7 @@ xmlns:param="parametre">
                                     <xs:documentation>TT-83 : Montant total TVA</xs:documentation>
                                 </xs:annotation>
                             </xs:element>
-                            <xs:element name="TransactionsCount" type="xs:integer" minOccurs="1" maxOccurs="1">
+                            <xs:element name="TransactionsCount" type="xs:integer" minOccurs="0" maxOccurs="1">
                                 <xs:annotation>
                                     <xs:documentation>TT-85 : Nombre de transactions</xs:documentation>
                                 </xs:annotation>

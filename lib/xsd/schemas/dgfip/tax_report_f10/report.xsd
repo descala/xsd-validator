@@ -36,31 +36,6 @@ xmlns:param="parametre">
                     <xs:documentation>TT-4 : Type de transmission</xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element name="References" minOccurs="0" maxOccurs="1">
-                <xs:annotation>
-                    <xs:documentation>TG-2</xs:documentation>
-                </xs:annotation>
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="ReportId" minOccurs="1" maxOccurs="1">
-                            <xs:annotation>
-                                <xs:documentation>TT-5 : Identifiant de transmission précédente à corriger</xs:documentation>
-                            </xs:annotation>
-                            <xs:complexType>
-                                <xs:simpleContent>
-                                    <xs:extension base="param:ReportIdType">
-                                        <xs:attribute name="schemeId" use="required" type="xs:string">
-                                            <xs:annotation>
-                                                <xs:documentation>TT-6 : Type transmission précédente</xs:documentation>
-                                            </xs:annotation>
-                                        </xs:attribute>
-                                    </xs:extension>
-                                </xs:simpleContent>
-                            </xs:complexType>
-                        </xs:element>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
             <xs:element name="Sender" minOccurs="1" maxOccurs="1">
                 <xs:annotation>
                     <xs:documentation>TG-3 : Identification de l'émetteur du document de transmission (le déclarant ou son OD) ou Identification de l'émetteur du document de transmission agrégée (PPFou PDP)</xs:documentation>
