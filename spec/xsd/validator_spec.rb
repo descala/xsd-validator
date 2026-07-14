@@ -32,6 +32,11 @@ RSpec.describe Xsd::Validator do
     expect { xsd_validate!(doc) }.to raise_error(Xsd::Validator::ValidationError)
   end
 
+  it 'raises ValidationError for an invalid SK TDD (missing mandatory UUID)' do
+    doc=File.read('spec/files/xsd/sk-tdd-wrong.xml')
+    expect { xsd_validate!(doc) }.to raise_error(Xsd::Validator::ValidationError, /UUID/)
+  end
+
   it 'validates spec files' do
     Dir["spec/files/xsd/**/*.xml"].each do |filename|
       next if filename =~ /wrong/
@@ -66,6 +71,7 @@ RSpec.describe Xsd::Validator do
       'spec/files/xsd/dgfip/tax_report_f10/ventes.xml' => '/dgfip/tax_report_f10/ereporting.xsd',
       'spec/files/xsd/dgfip/tax_report_f10/acquisitions.xml' => '/dgfip/tax_report_f10/ereporting.xsd',
       'spec/files/xsd/dgfip/tax_report_f10/encaissements.xml' => '/dgfip/tax_report_f10/ereporting.xsd',
+      'spec/files/xsd/sk-tdd.xml' => /sk_tdd\/Peppol-Slovak-Republic-TDD.xsd/,
 
     }
     files.each do |file_path, rgex_xsd_path|

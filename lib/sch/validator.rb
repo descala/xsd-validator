@@ -92,7 +92,11 @@ module Sch
         doc_nokogiri = Nokogiri::XML(doc) { |c| c.huge }
       end
       # Assume UBL or CII
-      customization_id = doc_nokogiri.xpath('//cbc:CustomizationID', cbc: CBC).text
+      # Read the document-level CustomizationID (direct child of the root element). Using the
+      # descendant axis (//) would also match a CustomizationID inside an embedded document - e.g.
+      # the UBL invoice carried in a SK TDD's pxs:ReportedDocument - and .text would concatenate
+      # both into a string that matches no branch.
+      customization_id = doc_nokogiri.xpath('/*/cbc:CustomizationID', cbc: CBC).text
       if customization_id.empty?
         customization_id = doc_nokogiri.xpath('//ram:GuidelineSpecifiedDocumentContextParameter/ram:ID', ram: RAM).text
       end
@@ -300,6 +304,13 @@ module Sch
       when 'urn:peppol:pint:billing-1@ae-1'
         schemas = %w(PINT-billing-1-shared.sch PINT-AE-billing-1-aligned.sch)
         pint_schemas_to_validate(schemas, parts)
+
+      # SK Tax Data Document (TDD) - pxs:TaxData
+      # The EN16931 (CEN/PEPPOL-EN16931-UBL) schematrons validate a UBL Invoice/CreditNote and do
+      # not apply to the pxs:TaxData wrapper (confirmed against the OpenPeppol TDD testbed SVRL,
+      # which runs only the TDD schematron).
+      when 'urn:peppol:taxdata:sk-1'
+        %w(Peppol-Slovak-Republic-TDD.sch)
       else
         profile_id = doc_nokogiri.xpath('//cbc:ProfileID', cbc: CBC).text
 
