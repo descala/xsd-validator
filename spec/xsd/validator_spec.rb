@@ -32,6 +32,11 @@ RSpec.describe Xsd::Validator do
     expect { xsd_validate!(doc) }.to raise_error(Xsd::Validator::ValidationError)
   end
 
+  it 'raises ValidationError for an invalid SK TDD (missing mandatory UUID)' do
+    doc=File.read('spec/files/xsd/sk-tdd-wrong.xml')
+    expect { xsd_validate!(doc) }.to raise_error(Xsd::Validator::ValidationError, /UUID/)
+  end
+
   it 'rejects an F10 Report carrying the References block removed in PPF v3.1' do
     doc = File.read('spec/files/xsd/dgfip/tax_report_f10/ventes_references_wrong.xml')
     expect { xsd_validate!(doc) }.to raise_error(Xsd::Validator::ValidationError, /References/)
@@ -71,6 +76,7 @@ RSpec.describe Xsd::Validator do
       'spec/files/xsd/dgfip/tax_report_f10/ventes.xml' => '/dgfip/tax_report_f10/ereporting.xsd',
       'spec/files/xsd/dgfip/tax_report_f10/acquisitions.xml' => '/dgfip/tax_report_f10/ereporting.xsd',
       'spec/files/xsd/dgfip/tax_report_f10/encaissements.xml' => '/dgfip/tax_report_f10/ereporting.xsd',
+      'spec/files/xsd/sk-tdd.xml' => /sk_tdd\/Peppol-Slovak-Republic-TDD.xsd/,
       'spec/files/xsd/dgfip/tax_report_f10/ventes_sans_transactions_count.xml' => '/dgfip/tax_report_f10/ereporting.xsd',
       'spec/files/xsd/dgfip/tax_report_f10/ventes_references_wrong.xml' => '/dgfip/tax_report_f10/ereporting.xsd',
 
