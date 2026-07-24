@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<ReportDocument>
+		<Id>EREP/Déclarations-Ventes_Période_02-2025_AvecReferences</Id>
+		<Name>Déclaration Ventes de Février 2025 avec References v3.0</Name>
+		<IssueDateTime>
+			<DateTimeString>202503110400</DateTimeString>
+		</IssueDateTime>
+		<TypeCode>IN</TypeCode>
+		<References>
+			<ReportId schemeId="IN">EREP/Déclarations-Ventes_Période_01-2025_Vbase</ReportId>
+		</References>
+		<Sender>
+			<Id schemeId="0238">1111</Id>
+			<Name>UNO</Name>
+			<RoleCode>WK</RoleCode>
+			<URIUniversalCommunication>
+				<URIID>contact-pdp@uno.fr</URIID>
+			</URIUniversalCommunication>
+		</Sender>
+		<Issuer>
+			<Id schemeId="0002">123456789</Id>
+			<Name>NOVATEST-FRANCE</Name>
+			<RoleCode>SE</RoleCode>
+			<URIUniversalCommunication>
+				<URIID>contact-vendeur@novatest.fr</URIID>
+			</URIUniversalCommunication>
+		</Issuer>
+	</ReportDocument>
+	<TransactionsReport>
+		<ReportPeriod>
+			<StartDate>20250201</StartDate>
+			<EndDate>20250228</EndDate>
+		</ReportPeriod>
+		<Transactions>
+			<Date>20250228</Date>
+			<TransactionsCurrency>EUR</TransactionsCurrency>
+			<TaxDueDateTypeCode>3</TaxDueDateTypeCode>
+			<CategoryCode>TLB1</CategoryCode>
+			<TaxExclusiveAmount>10000</TaxExclusiveAmount>
+			<TaxTotal>2000</TaxTotal>
+			<TransactionsCount>200</TransactionsCount>
+			<TaxSubtotal>
+				<TaxPercent>20</TaxPercent>
+				<TaxableAmount>10000</TaxableAmount>
+				<TaxTotal>2000</TaxTotal>
+			</TaxSubtotal>
+		</Transactions>
+	</TransactionsReport>
+</Report>

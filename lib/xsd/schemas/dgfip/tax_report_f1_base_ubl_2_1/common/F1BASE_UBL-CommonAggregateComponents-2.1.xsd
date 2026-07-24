@@ -12046,7 +12046,6 @@
                </xsd:documentation>
             </xsd:annotation>
          </xsd:element>
-         -->
          <xsd:element ref="cbc:IssueDate" minOccurs="0" maxOccurs="1">
             <xsd:annotation>
                <xsd:documentation>
@@ -12063,7 +12062,6 @@
                </xsd:documentation>
             </xsd:annotation>
          </xsd:element>
-         <!--
 		 <xsd:element ref="cbc:IssueTime" minOccurs="0" maxOccurs="1">
             <xsd:annotation>
                <xsd:documentation>
