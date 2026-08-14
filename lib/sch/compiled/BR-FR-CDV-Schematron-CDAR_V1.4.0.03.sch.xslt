@@ -65,7 +65,7 @@
       <xsl:param name="code" as="xs:string"/>
       <xsl:variable name="custom:billing-modes"
                     as="xs:string"
-                    select="'B1 S1 M1 B2 S2 M2 B4 S4 M4 S5 S6 B7 S7'"/>
+                    select="'B1 S1 M1 B2 S2 S3 M2 B4 S4 M4 S5 S6 B7 S7 B8 S8 M8 B9 S9 M9'"/>
       <xsl:sequence select="$code = tokenize($custom:billing-modes, '\s+')"/>
    </xsl:function>
    <xsl:function xmlns="http://purl.oclc.org/dsdl/schematron"
@@ -87,7 +87,7 @@
       <xsl:param name="code" as="xs:string?"/>
       <xsl:variable name="custom:eas-codes"
                     as="xs:string"
-                    select="'AN AQ AS AU EM 0002 0007 0009 0037 0060 0088 0096 0097 0106        0130 0135 0142 0147 0151 0154 0158 0170 0177 0183 0184 0188 0190        0191 0192 0193 0194 0195 0196 0198 0199 0200 0201 0202 0203 0204        0205 0208 0209 0210 0211 0212 0213 0215 0216 0217 0218 0221 0225        0230 0235 0240 9910 9913 9914 9915 9918 9919 9920 9922 9923 9924        9925 9926 9927 9928 9929 9930 9931 9932 9933 9934 9935 9936 9937        9938 9939 9940 9941 9942 9943 9944 9945 9946 9947 9948 9949 9950        9951 9952 9953 9957 9959'"/>
+                    select="'AN AQ AS AU EM 0002 0007 0009 0037 0060 0088 0096 0097 0106        0130 0135 0142 0147 0151 0154 0158 0170 0177 0183 0184 0188 0190        0191 0192 0193 0194 0195 0196 0198 0199 0200 0201 0202 0203 0204        0205 0208 0209 0210 0211 0212 0213 0215 0216 0217 0218 0221 0225        0230 0235 0240 0242 0244 0245 0246 0248        9910 9913 9914 9915 9918 9919 9920 9922 9923 9924        9925 9926 9927 9928 9929 9930 9931 9932 9933 9934 9935 9936 9937        9938 9939 9940 9941 9942 9943 9944 9945 9946 9947 9948 9949 9950        9951 9952 9953 9957 9959'"/>
       <xsl:sequence select="$code = tokenize($custom:eas-codes, '\s+')"/>
    </xsl:function>
    <xsl:function xmlns="http://purl.oclc.org/dsdl/schematron"
@@ -158,7 +158,7 @@
       <xsl:param name="code" as="xs:string"/>
       <xsl:variable name="custom:status-reason-codes"
                     as="xs:string"
-                    select="'NON_TRANSMISE JUSTIF_ABS ROUTAGE_ERR AUTRE COORD_BANC_ERR TX_TVA_ERR MONTANTTOTAL_ERR CALCUL_ERR NON_CONFORME DOUBLON DEST_INC DEST_ERR TRANSAC_INC EMMET_INC CONTRAT_TERM DOUBLE_FACT CMD_ERR ADR_ERR SIRET_ERR CODE_ROUTAGE_ERR REF_CT_ABSENT REF_ERR PU_ERR REM_ERR QTE_ERR ART_ERR MODPAI_ERR QUALITE_ERR LIVR_INCOMP REJ_SEMAN REJ_UNI REJ_COH REJ_ADR REJ_CONT_B2G REJ_REF_PJ REJ_ASS_PJ IRR_VIDE_F IRR_TYPE_F IRR_SYNTAX IRR_TAILLE_PJ IRR_NOM_PJ IRR_VID_PJ IRR_EXT_DOC IRR_TAILLE_F IRR_ANTIVIRUS'"/>
+                    select="'RETRAIT_MAN_SERV ST_CT_NON_DECLAR SUPPR_COMP_AVOIR TRANSF_PMNT_REGIE CONTACT_ACHTR NON_TRANSMISE JUSTIF_ABS ROUTAGE_ERR AUTRE COORD_BANC_ERR TX_TVA_ERR MONTANTTOTAL_ERR CALCUL_ERR NON_CONFORME DOUBLON DEST_INC DEST_ERR TRANSAC_INC EMMET_INC CONTRAT_TERM DOUBLE_FACT CMD_ERR ADR_ERR SIRET_ERR CODE_ROUTAGE_ERR REF_CT_ABSENT REF_ERR PU_ERR REM_ERR QTE_ERR ART_ERR MODPAI_ERR QUALITE_ERR LIVR_INCOMP REJ_SEMAN REJ_UNI REJ_COH REJ_ADR REJ_CONT_B2G REJ_REF_PJ REJ_ASS_PJ IRR_VIDE_F IRR_TYPE_F IRR_SYNTAX IRR_TAILLE_PJ IRR_NOM_PJ IRR_VID_PJ IRR_EXT_DOC IRR_TAILLE_F IRR_ANTIVIRUS IRR_NOM_F'"/>
       <xsl:sequence select="$code = tokenize($custom:status-reason-codes, '\s+')"/>
    </xsl:function>
    <xsl:function xmlns="http://purl.oclc.org/dsdl/schematron"
@@ -450,10 +450,19 @@
                <xsl:value-of select="document-uri(/)"/>
             </xsl:attribute>
             <xsl:attribute name="id">BR-FR-CDV-15</xsl:attribute>
-            <xsl:attribute name="name">BR-FR-CDV-14 — Vérification des caractéristiques en cas de statut "Encaissé"</xsl:attribute>
+            <xsl:attribute name="name">BR-FR-CDV-15 — Vérification de la présence d'un Motif quand nécessaire. </xsl:attribute>
             <xsl:apply-templates/>
          </svrl:active-pattern>
          <xsl:apply-templates select="/" mode="M38"/>
+         <svrl:active-pattern>
+            <xsl:attribute name="document">
+               <xsl:value-of select="document-uri(/)"/>
+            </xsl:attribute>
+            <xsl:attribute name="id">BR-FR-CDV-16</xsl:attribute>
+            <xsl:attribute name="name">BR-FR-CDV-16 — Présence obligatoire de MDT-124-2</xsl:attribute>
+            <xsl:apply-templates/>
+         </svrl:active-pattern>
+         <xsl:apply-templates select="/" mode="M39"/>
          <svrl:active-pattern>
             <xsl:attribute name="document">
                <xsl:value-of select="document-uri(/)"/>
@@ -462,7 +471,7 @@
             <xsl:attribute name="name">BR-FR-CDV-CL-01 — Liste fermée de valeurs pour MDT-2</xsl:attribute>
             <xsl:apply-templates/>
          </svrl:active-pattern>
-         <xsl:apply-templates select="/" mode="M39"/>
+         <xsl:apply-templates select="/" mode="M40"/>
          <svrl:active-pattern>
             <xsl:attribute name="document">
                <xsl:value-of select="document-uri(/)"/>
@@ -471,7 +480,7 @@
             <xsl:attribute name="name">BR-FR-CDV-CL-02 — Contrôle de cohérence entre MDT-77 et MDT-21</xsl:attribute>
             <xsl:apply-templates/>
          </svrl:active-pattern>
-         <xsl:apply-templates select="/" mode="M40"/>
+         <xsl:apply-templates select="/" mode="M41"/>
          <svrl:active-pattern>
             <xsl:attribute name="document">
                <xsl:value-of select="document-uri(/)"/>
@@ -480,7 +489,7 @@
             <xsl:attribute name="name">BR-FR-CDV-CL-03 — Contrôle de cohérence entre MDT-77 et MDT-40</xsl:attribute>
             <xsl:apply-templates/>
          </svrl:active-pattern>
-         <xsl:apply-templates select="/" mode="M41"/>
+         <xsl:apply-templates select="/" mode="M42"/>
          <svrl:active-pattern>
             <xsl:attribute name="document">
                <xsl:value-of select="document-uri(/)"/>
@@ -489,7 +498,7 @@
             <xsl:attribute name="name">BR-FR-CDV-CL-04 — Liste fermée de valeurs pour MDT-59</xsl:attribute>
             <xsl:apply-templates/>
          </svrl:active-pattern>
-         <xsl:apply-templates select="/" mode="M42"/>
+         <xsl:apply-templates select="/" mode="M43"/>
          <svrl:active-pattern>
             <xsl:attribute name="document">
                <xsl:value-of select="document-uri(/)"/>
@@ -498,7 +507,7 @@
             <xsl:attribute name="name">BR-FR-CDV-CL-05 — Contrôle des statuts MDT-88 selon MDT-77</xsl:attribute>
             <xsl:apply-templates/>
          </svrl:active-pattern>
-         <xsl:apply-templates select="/" mode="M43"/>
+         <xsl:apply-templates select="/" mode="M44"/>
          <svrl:active-pattern>
             <xsl:attribute name="document">
                <xsl:value-of select="document-uri(/)"/>
@@ -507,7 +516,7 @@
             <xsl:attribute name="name">BR-FR-CDV-CL-06 — Liste fermée de codes statuts de facture</xsl:attribute>
             <xsl:apply-templates/>
          </svrl:active-pattern>
-         <xsl:apply-templates select="/" mode="M44"/>
+         <xsl:apply-templates select="/" mode="M45"/>
          <svrl:active-pattern>
             <xsl:attribute name="document">
                <xsl:value-of select="document-uri(/)"/>
@@ -516,7 +525,7 @@
             <xsl:attribute name="name">BR-FR-CDV-CL-07 — Vérification de la valeur de MDT-132</xsl:attribute>
             <xsl:apply-templates/>
          </svrl:active-pattern>
-         <xsl:apply-templates select="/" mode="M45"/>
+         <xsl:apply-templates select="/" mode="M46"/>
          <svrl:active-pattern>
             <xsl:attribute name="document">
                <xsl:value-of select="document-uri(/)"/>
@@ -525,7 +534,7 @@
             <xsl:attribute name="name">BR-FR-CDV-CL-08 — Liste fermée de valeurs pour MDT-158</xsl:attribute>
             <xsl:apply-templates/>
          </svrl:active-pattern>
-         <xsl:apply-templates select="/" mode="M46"/>
+         <xsl:apply-templates select="/" mode="M47"/>
          <svrl:active-pattern>
             <xsl:attribute name="document">
                <xsl:value-of select="document-uri(/)"/>
@@ -534,7 +543,7 @@
             <xsl:attribute name="name">BR-FR-CDV-CL-09 — Liste fermée de codes motifs de statuts</xsl:attribute>
             <xsl:apply-templates/>
          </svrl:active-pattern>
-         <xsl:apply-templates select="/" mode="M47"/>
+         <xsl:apply-templates select="/" mode="M48"/>
          <svrl:active-pattern>
             <xsl:attribute name="document">
                <xsl:value-of select="document-uri(/)"/>
@@ -543,7 +552,7 @@
             <xsl:attribute name="name">BR-FR-CDV-CL-10 — Liste fermée de codes actions de facture</xsl:attribute>
             <xsl:apply-templates/>
          </svrl:active-pattern>
-         <xsl:apply-templates select="/" mode="M48"/>
+         <xsl:apply-templates select="/" mode="M49"/>
          <svrl:active-pattern>
             <xsl:attribute name="document">
                <xsl:value-of select="document-uri(/)"/>
@@ -552,7 +561,7 @@
             <xsl:attribute name="name">BR-FR-CDV-CL-11 — Liste fermée de codes pour MDT-207</xsl:attribute>
             <xsl:apply-templates/>
          </svrl:active-pattern>
-         <xsl:apply-templates select="/" mode="M49"/>
+         <xsl:apply-templates select="/" mode="M50"/>
       </svrl:schematron-output>
    </xsl:template>
    <!--SCHEMATRON PATTERNS-->
@@ -571,7 +580,7 @@
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="custom:is-valid-document-type-code(.)">
                <xsl:attribute name="id">BR-FR-04_MDT-91</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -604,7 +613,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
                <xsl:attribute name="id">BR-FR-CDV-01_MDG-3</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -631,19 +640,19 @@
                        context="rsm:CrossDomainAcknowledgementAndResponse/rsm:ExchangedDocumentContext"/>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="./ram:GuidelineSpecifiedDocumentContextParameter/ram:ID = 'urn.cpro.gouv.fr:1p0:CDV:invoice'          or (./ram:GuidelineSpecifiedDocumentContextParameter/ram:ID = 'urn.cpro.gouv.fr:1p0:CDV:einvoicingF2' and count(../rsm:ExchangedDocument/ram:RecipientTradeParty/ram:GlobalID) = 1 and ../rsm:ExchangedDocument/ram:RecipientTradeParty/ram:GlobalID[@schemeID='0238'] = '9998' and ../rsm:ExchangedDocument/ram:RecipientTradeParty/ram:RoleCode = 'DFH')"/>
+         <xsl:when test="./ram:GuidelineSpecifiedDocumentContextParameter/ram:ID = 'urn.cpro.gouv.fr:1p0:CDV:invoice'          or (./ram:GuidelineSpecifiedDocumentContextParameter/ram:ID = 'urn.cpro.gouv.fr:1p0:CDV:einvoicingF2' and count(../rsm:ExchangedDocument/ram:RecipientTradeParty/ram:GlobalID) = 1 and ../rsm:ExchangedDocument/ram:RecipientTradeParty/ram:GlobalID[@schemeID='0238'] = '0000' and ../rsm:ExchangedDocument/ram:RecipientTradeParty/ram:RoleCode = 'DFH')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="./ram:GuidelineSpecifiedDocumentContextParameter/ram:ID = 'urn.cpro.gouv.fr:1p0:CDV:invoice' or (./ram:GuidelineSpecifiedDocumentContextParameter/ram:ID = 'urn.cpro.gouv.fr:1p0:CDV:einvoicingF2' and count(../rsm:ExchangedDocument/ram:RecipientTradeParty/ram:GlobalID) = 1 and ../rsm:ExchangedDocument/ram:RecipientTradeParty/ram:GlobalID[@schemeID='0238'] = '9998' and ../rsm:ExchangedDocument/ram:RecipientTradeParty/ram:RoleCode = 'DFH')">
+                                test="./ram:GuidelineSpecifiedDocumentContextParameter/ram:ID = 'urn.cpro.gouv.fr:1p0:CDV:invoice' or (./ram:GuidelineSpecifiedDocumentContextParameter/ram:ID = 'urn.cpro.gouv.fr:1p0:CDV:einvoicingF2' and count(../rsm:ExchangedDocument/ram:RecipientTradeParty/ram:GlobalID) = 1 and ../rsm:ExchangedDocument/ram:RecipientTradeParty/ram:GlobalID[@schemeID='0238'] = '0000' and ../rsm:ExchangedDocument/ram:RecipientTradeParty/ram:RoleCode = 'DFH')">
                <xsl:attribute name="id">BR-FR-CDV-02_MDT-3</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
         [BR-FR-CDV-02/MDT-3] : La valeur de MDT-3 doit être :
         - "urn.cpro.gouv.fr:1p0:CDV:invoice", ou
-        - "urn.cpro.gouv.fr:1p0:CDV:einvoicingF2" **uniquement si** il y a un unique Destinataire (Recipent) et que c'est le PPF : GlobalID = 9998 avec @shemeId = 0238 et CodeRole = DFH. 
+        - "urn.cpro.gouv.fr:1p0:CDV:einvoicingF2" **uniquement si** il y a un unique Destinataire (Recipent) et que c'est le PPF : GlobalID = 0000 avec @shemeId = 0238 et CodeRole = DFH. 
         Valeurs actuelles : "<xsl:text/>
                   <xsl:value-of select="./ram:GuidelineSpecifiedDocumentContextParameter/ram:ID"/>
                   <xsl:text/>". Nombre de Recipient : "<xsl:text/>
@@ -677,7 +686,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="ram:ID">
                <xsl:attribute name="id">BR-FR-CDV-03_MDT-4</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -708,7 +717,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
                <xsl:attribute name="id">BR-FR-CDV-04_MDG-4</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -739,7 +748,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
                <xsl:attribute name="id">BR-FR-CDV-05_MDG-9</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -770,7 +779,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
                <xsl:attribute name="id">BR-FR-CDV-06_MDT-21</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -802,12 +811,12 @@
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="../../rsm:AcknowledgementDocument/ram:TypeCode != '23' or ram:GlobalID">
                <xsl:attribute name="id">BR-FR-CDV-07_MDT-38_yes</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        [BR-FR-CDV-07/MDT-38] : Lorsque le rôle du partenaire commercial émetteur (MDT-77) est égal à "23", l'identifiant (MDT-38) doit être renseigné.
+        [BR-FR-CDV-07/MDT-38] : Lorsque le Code type du bloc Acknowledgement (MDT-77) est égal à "23", l'identifiant (MDT-38) doit être renseigné.
         Veuillez vous assurer que l'élément "ram:GlobalID" est présent dans "ram:IssuerTradeParty".
       </svrl:text>
             </svrl:failed-assert>
@@ -828,12 +837,12 @@
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="(../../rsm:AcknowledgementDocument/ram:TypeCode != '305' or count(../ram:RecipientTradeParty/ram:RoleCode='DFH') ge 0) or not(ram:GlobalID)">
                <xsl:attribute name="id">BR-FR-CDV-07_MDT-38_no</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        [BR-FR-CDV-07/MDT-38] : Lorsque le rôle du partenaire commercial émetteur (MDT-77) est égal à "305", l'identifiant (MDT-38) ne doit pas être renseigné.
+        [BR-FR-CDV-07/MDT-38] : Lorsque Code type du bloc Acknowledgement (MDT-77) est égal à "305", l'identifiant (MDT-38) ne doit pas être renseigné.
         Veuillez retirer l'élément "ram:GlobalID" de "ram:IssuerTradeParty" dans ce cas.
       </svrl:text>
             </svrl:failed-assert>
@@ -860,7 +869,7 @@
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="(ram:RoleCode = 'WK' or ram:RoleCode = 'DFH') or ram:URIUniversalCommunication/ram:URIID">
                <xsl:attribute name="id">BR-FR-CDV-08_MDT-73</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -891,7 +900,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". = '23' or . = '305'">
                <xsl:attribute name="id">BR-FR-CDV-09_MDT-77</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -924,7 +933,7 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=".">
                <xsl:attribute name="id">BR-FR-CDV-10_MDT-87</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -951,12 +960,12 @@
                        context="rsm:AcknowledgementDocument/ram:ReferenceReferencedDocument"/>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="exists(ram:FormattedIssueDateTime) or rsm:CrossDomainAcknowledgementAndResponse/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID = '501'"/>
+         <xsl:when test="exists(ram:FormattedIssueDateTime) or /rsm:CrossDomainAcknowledgementAndResponse/rsm:AcknowledgementDocument/ram:ReferenceReferencedDocument/ram:ProcessConditionCode = '501'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="exists(ram:FormattedIssueDateTime) or rsm:CrossDomainAcknowledgementAndResponse/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID = '501'">
+                                test="exists(ram:FormattedIssueDateTime) or /rsm:CrossDomainAcknowledgementAndResponse/rsm:AcknowledgementDocument/ram:ReferenceReferencedDocument/ram:ProcessConditionCode = '501'">
                <xsl:attribute name="id">BR-FR-CDV-11_MDG-35</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -988,7 +997,7 @@
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="exists(ram:ProcessConditionCode)">
                <xsl:attribute name="id">BR-FR-CDV-12_MDT-105</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -1015,18 +1024,19 @@
                        context="rsm:AcknowledgementDocument/ram:ReferenceReferencedDocument/ram:IssuerTradeParty"/>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="exists(ram:GlobalID) or /rsm:CrossDomainAcknowledgementAndResponse/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID = '501'"/>
+         <xsl:when test="exists(ram:GlobalID) or /rsm:CrossDomainAcknowledgementAndResponse/rsm:AcknowledgementDocument/ram:ReferenceReferencedDocument/ram:ProcessConditionCode = '501'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="exists(ram:GlobalID) or /rsm:CrossDomainAcknowledgementAndResponse/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID = '501'">
+                                test="exists(ram:GlobalID) or /rsm:CrossDomainAcknowledgementAndResponse/rsm:AcknowledgementDocument/ram:ReferenceReferencedDocument/ram:ProcessConditionCode = '501'">
                <xsl:attribute name="id">BR-FR-CDV-13_MDT-129</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        [BR-FR-CDV-13/MDT-129] : L'identifiant du partenaire commercial émetteur (MDT-129) est obligatoire,
-        sauf si MDT-105 (ram:ID dans BusinessProcessSpecifiedDocumentContextParameter) est égal à "501".
+        [BR-FR-CDV-13/MDT-129] : L'identifiant du vendeur émetteur de la facture (en direct ou pour son compte) (MDT-129) est obligatoire,
+        sauf si MDT-105 est égal à "501".
+        En cas de présence, une valeur au moins doit correspondre à l'Identifiant légal du VENDEUR tel que présent dans la facture en BT-30.
       </svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
@@ -1047,19 +1057,17 @@
                        context="rsm:AcknowledgementDocument/ram:ReferenceReferencedDocument"/>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="not(ram:ProcessConditionCode = '212') or          ram:SpecifiedDocumentStatus/ram:SpecifiedDocumentCharacteristic[ram:TypeCode = 'MEN' and ram:ValueAmount]"/>
+         <xsl:when test="not(ram:ProcessConditionCode = '212') or          ((count(ram:SpecifiedDocumentStatus/ram:SpecifiedDocumentCharacteristic[ram:TypeCode = 'MEN']) ge 1 )         and (count(ram:SpecifiedDocumentStatus/ram:SpecifiedDocumentCharacteristic[ram:TypeCode = 'MEN']) = count(ram:SpecifiedDocumentStatus/ram:SpecifiedDocumentCharacteristic[ram:TypeCode = 'MEN' and ram:ValueAmount and ram:ValuePercent])))"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="not(ram:ProcessConditionCode = '212') or ram:SpecifiedDocumentStatus/ram:SpecifiedDocumentCharacteristic[ram:TypeCode = 'MEN' and ram:ValueAmount]">
+                                test="not(ram:ProcessConditionCode = '212') or ((count(ram:SpecifiedDocumentStatus/ram:SpecifiedDocumentCharacteristic[ram:TypeCode = 'MEN']) ge 1 ) and (count(ram:SpecifiedDocumentStatus/ram:SpecifiedDocumentCharacteristic[ram:TypeCode = 'MEN']) = count(ram:SpecifiedDocumentStatus/ram:SpecifiedDocumentCharacteristic[ram:TypeCode = 'MEN' and ram:ValueAmount and ram:ValuePercent])))">
                <xsl:attribute name="id">BR-FR-CDV-14_MDT-207</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        [BR-FR-CDV-14/MDT-207] : Lorsque le statut de traitement (MDT-105) est "212" (encaissé), il doit exister au moins un bloc "ram:SpecifiedDocumentCharacteristic" avec :
-        - un "ram:TypeCode" égal à "MEN"
-        - et une valeur "ram:ValueAmount" renseignée.
+        [BR-FR-CDV-14/MDT-207] : Si le statut est "Encaissé" (MDT-105 = 212), ALORS il doit y avoir au moins 1 Bloc MDG-43 avec une valeur de MDT-207 = MEN et tous les blocs MDG-43 avec une valeur MDT-207 = "MEN" doivent contenir une valeur MDT-215 (Montant) et une valeur de MDT-224 (pourcentage de TVA).
         Veuillez vérifier la présence et le contenu de ces éléments.
       </svrl:text>
             </svrl:failed-assert>
@@ -1071,8 +1079,8 @@
    <xsl:template match="@*|node()" priority="-2" mode="M37">
       <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M37"/>
    </xsl:template>
-   <!--PATTERN BR-FR-CDV-15BR-FR-CDV-14 — Vérification des caractéristiques en cas de statut "Encaissé"-->
-   <svrl:text xmlns:svrl="http://purl.oclc.org/dsdl/svrl">BR-FR-CDV-14 — Vérification des caractéristiques en cas de statut "Encaissé"</svrl:text>
+   <!--PATTERN BR-FR-CDV-15BR-FR-CDV-15 — Vérification de la présence d'un Motif quand nécessaire. -->
+   <svrl:text xmlns:svrl="http://purl.oclc.org/dsdl/svrl">BR-FR-CDV-15 — Vérification de la présence d'un Motif quand nécessaire. </svrl:text>
    <!--RULE -->
    <xsl:template match="rsm:AcknowledgementDocument/ram:ReferenceReferencedDocument/ram:ProcessConditionCode"
                  priority="1000"
@@ -1086,7 +1094,7 @@
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="not((.) = '210' or (.) = '213' or (.) = '501' or (.) = '207' or (.) = '206' or (.) = '208') or (((.) = '210' or (.) = '213' or (.) = '501' or (.) = '207' or (.) = '206' or (.) = '208') and ../ram:SpecifiedDocumentStatus/ram:ReasonCode)">
                <xsl:attribute name="id">BR-FR-CDV-15_MDT-113</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -1105,34 +1113,27 @@
    <xsl:template match="@*|node()" priority="-2" mode="M38">
       <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M38"/>
    </xsl:template>
-   <!--PATTERN BR-FR-CDV-CL-01BR-FR-CDV-CL-01 — Liste fermée de valeurs pour MDT-2-->
-   <svrl:text xmlns:svrl="http://purl.oclc.org/dsdl/svrl">BR-FR-CDV-CL-01 — Liste fermée de valeurs pour MDT-2</svrl:text>
+   <!--PATTERN BR-FR-CDV-16BR-FR-CDV-16 — Présence obligatoire de MDT-124-2-->
+   <svrl:text xmlns:svrl="http://purl.oclc.org/dsdl/svrl">BR-FR-CDV-16 — Présence obligatoire de MDT-124-2</svrl:text>
    <!--RULE -->
-   <xsl:template match="rsm:CrossDomainAcknowledgementAndResponse/rsm:ExchangedDocumentContext"
+   <xsl:template match="rsm:AcknowledgementDocument/ram:ReferenceReferencedDocument/ram:SpecifiedDocumentStatus"
                  priority="1000"
                  mode="M39">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="rsm:CrossDomainAcknowledgementAndResponse/rsm:ExchangedDocumentContext"/>
-      <xsl:variable name="TestPPF"
-                    select="(count(../rsm:ExchangedDocument/ram:RecipientTradeParty/ram:GlobalID) = 1 and ../rsm:ExchangedDocument/ram:RecipientTradeParty/ram:GlobalID[@schemeID='0238'] = '9998' and ../rsm:ExchangedDocument/ram:RecipientTradeParty/ram:RoleCode = 'DFH')"/>
+                       context="rsm:AcknowledgementDocument/ram:ReferenceReferencedDocument/ram:SpecifiedDocumentStatus"/>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="(not($TestPPF) and (./ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID = 'REGULATED' or . = 'NON_REGULATED' or . = 'B2C' or . = 'B2BINT' or . = 'OUTOFSCOPE')) or ($TestPPF and (string-length(normalize-space(./ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID)) &lt;= 3))"/>
+         <xsl:when test="exists(ram:SequenceNumeric)"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="(not($TestPPF) and (./ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID = 'REGULATED' or . = 'NON_REGULATED' or . = 'B2C' or . = 'B2BINT' or . = 'OUTOFSCOPE')) or ($TestPPF and (string-length(normalize-space(./ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID)) &lt;= 3))">
-               <xsl:attribute name="id">BR-FR-CDV-CL-01_MDT-2</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+                                test="exists(ram:SequenceNumeric)">
+               <xsl:attribute name="id">BR-FR-CDV-16_MDT-124-2</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
-        [BR-FR-CDV-CL-01/MDT-2] : La valeur de MDT-2 doit être l'une des suivantes : "REGULATED", "NON_REGULATED", "B2C", "B2BINT", "OUTOFSCOPE" sauf pour un CDV pour le PPF pourlequel le nombre de caractères DOIT être inférieur à 3. 
-        Valeur actuelle : CDV PPF ? (true) : "<xsl:text/>
-                  <xsl:value-of select="$TestPPF"/>
-                  <xsl:text/>" - Valeur MDT-2 : "<xsl:text/>
-                  <xsl:value-of select="./ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID"/>
-                  <xsl:text/>". Veuillez corriger cette valeur si nécessaire.
+        [BR-FR-CDV-16/MDT-124-2] : Le numéro incrémental de détail de statut (MDT-124-2) est obligatoire si un détail de statut (MDG-37) est présent.
       </svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
@@ -1143,10 +1144,48 @@
    <xsl:template match="@*|node()" priority="-2" mode="M39">
       <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M39"/>
    </xsl:template>
+   <!--PATTERN BR-FR-CDV-CL-01BR-FR-CDV-CL-01 — Liste fermée de valeurs pour MDT-2-->
+   <svrl:text xmlns:svrl="http://purl.oclc.org/dsdl/svrl">BR-FR-CDV-CL-01 — Liste fermée de valeurs pour MDT-2</svrl:text>
+   <!--RULE -->
+   <xsl:template match="rsm:CrossDomainAcknowledgementAndResponse/rsm:ExchangedDocumentContext"
+                 priority="1000"
+                 mode="M40">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="rsm:CrossDomainAcknowledgementAndResponse/rsm:ExchangedDocumentContext"/>
+      <xsl:variable name="TestPPF"
+                    select="(count(../rsm:ExchangedDocument/ram:RecipientTradeParty/ram:GlobalID) = 1 and ../rsm:ExchangedDocument/ram:RecipientTradeParty/ram:GlobalID[@schemeID='0238'] = '0000' and ../rsm:ExchangedDocument/ram:RecipientTradeParty/ram:RoleCode = 'DFH')"/>
+      <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="(not($TestPPF) and (ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID = ('REGULATED' ,'NON_REGULATED','B2C' ,'B2CINT','B2BINT', 'OUTOFSCOPE'))) or ($TestPPF and (string-length(normalize-space(ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID)) &lt;= 3))"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="(not($TestPPF) and (ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID = ('REGULATED' ,'NON_REGULATED','B2C' ,'B2CINT','B2BINT', 'OUTOFSCOPE'))) or ($TestPPF and (string-length(normalize-space(ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID)) &lt;= 3))">
+               <xsl:attribute name="id">BR-FR-CDV-CL-01_MDT-2</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>
+        [BR-FR-CDV-CL-01/MDT-2] : La valeur de MDT-2 doit être l'une des suivantes : "REGULATED", "NON_REGULATED", "B2C", "B2CINT", "B2BINT", "OUTOFSCOPE" sauf pour un CDV pour le PPF pourlequel le nombre de caractères DOIT être inférieur à 3. 
+        Valeur actuelle : CDV PPF ? (true) : "<xsl:text/>
+                  <xsl:value-of select="$TestPPF"/>
+                  <xsl:text/>" - Valeur MDT-2 : "<xsl:text/>
+                  <xsl:value-of select="ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID"/>
+                  <xsl:text/>". Veuillez corriger cette valeur si nécessaire.
+      </svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M40"/>
+   </xsl:template>
+   <xsl:template match="text()" priority="-1" mode="M40"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M40">
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M40"/>
+   </xsl:template>
    <!--PATTERN BR-FR-CDV-CL-02BR-FR-CDV-CL-02 — Contrôle de cohérence entre MDT-77 et MDT-21-->
    <svrl:text xmlns:svrl="http://purl.oclc.org/dsdl/svrl">BR-FR-CDV-CL-02 — Contrôle de cohérence entre MDT-77 et MDT-21</svrl:text>
    <!--RULE -->
-   <xsl:template match="rsm:ExchangedDocument" priority="1000" mode="M40">
+   <xsl:template match="rsm:ExchangedDocument" priority="1000" mode="M41">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="rsm:ExchangedDocument"/>
       <!--ASSERT -->
       <xsl:choose>
@@ -1155,7 +1194,7 @@
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="not(../rsm:AcknowledgementDocument/ram:TypeCode = '305') or ram:SenderTradeParty/ram:RoleCode = 'WK'">
                <xsl:attribute name="id">BR-FR-CDV-CL-02_MDT-21_305</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -1175,7 +1214,7 @@
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="not(../rsm:AcknowledgementDocument/ram:TypeCode = '23') or ram:SenderTradeParty/ram:RoleCode = 'BY' or ram:SenderTradeParty/ram:RoleCode = 'AB' or ram:SenderTradeParty/ram:RoleCode = 'DL' or ram:SenderTradeParty/ram:RoleCode = 'SE' or ram:SenderTradeParty/ram:RoleCode = 'SR' or ram:SenderTradeParty/ram:RoleCode = 'WK' or ram:SenderTradeParty/ram:RoleCode = 'PE' or ram:SenderTradeParty/ram:RoleCode = 'PR' or ram:SenderTradeParty/ram:RoleCode = 'II' or ram:SenderTradeParty/ram:RoleCode = 'IV'">
                <xsl:attribute name="id">BR-FR-CDV-CL-02_MDT-21_23</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -1189,16 +1228,16 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M40"/>
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M41"/>
    </xsl:template>
-   <xsl:template match="text()" priority="-1" mode="M40"/>
-   <xsl:template match="@*|node()" priority="-2" mode="M40">
-      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M40"/>
+   <xsl:template match="text()" priority="-1" mode="M41"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M41">
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M41"/>
    </xsl:template>
    <!--PATTERN BR-FR-CDV-CL-03BR-FR-CDV-CL-03 — Contrôle de cohérence entre MDT-77 et MDT-40-->
    <svrl:text xmlns:svrl="http://purl.oclc.org/dsdl/svrl">BR-FR-CDV-CL-03 — Contrôle de cohérence entre MDT-77 et MDT-40</svrl:text>
    <!--RULE -->
-   <xsl:template match="rsm:ExchangedDocument" priority="1000" mode="M41">
+   <xsl:template match="rsm:ExchangedDocument" priority="1000" mode="M42">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="rsm:ExchangedDocument"/>
       <!--ASSERT -->
       <xsl:choose>
@@ -1207,7 +1246,7 @@
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="not(../rsm:AcknowledgementDocument/ram:TypeCode = '305') or ram:IssuerTradeParty/ram:RoleCode = 'WK'">
                <xsl:attribute name="id">BR-FR-CDV-CL-03_MDT-40_305</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -1227,7 +1266,7 @@
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="not(../rsm:AcknowledgementDocument/ram:TypeCode = '23') or ram:IssuerTradeParty/ram:RoleCode = 'BY' or ram:IssuerTradeParty/ram:RoleCode = 'AB' or ram:IssuerTradeParty/ram:RoleCode = 'DL' or ram:IssuerTradeParty/ram:RoleCode = 'SE' or ram:IssuerTradeParty/ram:RoleCode = 'SR' or ram:IssuerTradeParty/ram:RoleCode = 'PE' or ram:IssuerTradeParty/ram:RoleCode = 'PR' or ram:IssuerTradeParty/ram:RoleCode = 'II' or ram:IssuerTradeParty/ram:RoleCode = 'IV'">
                <xsl:attribute name="id">BR-FR-CDV-CL-03_MDT-40_23</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -1241,18 +1280,18 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M41"/>
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M42"/>
    </xsl:template>
-   <xsl:template match="text()" priority="-1" mode="M41"/>
-   <xsl:template match="@*|node()" priority="-2" mode="M41">
-      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M41"/>
+   <xsl:template match="text()" priority="-1" mode="M42"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M42">
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M42"/>
    </xsl:template>
    <!--PATTERN BR-FR-CDV-CL-04BR-FR-CDV-CL-04 — Liste fermée de valeurs pour MDT-59-->
    <svrl:text xmlns:svrl="http://purl.oclc.org/dsdl/svrl">BR-FR-CDV-CL-04 — Liste fermée de valeurs pour MDT-59</svrl:text>
    <!--RULE -->
    <xsl:template match="rsm:ExchangedDocument/ram:RecipientTradeParty/ram:RoleCode"
                  priority="1000"
-                 mode="M42">
+                 mode="M43">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="rsm:ExchangedDocument/ram:RecipientTradeParty/ram:RoleCode"/>
       <!--ASSERT -->
@@ -1262,7 +1301,7 @@
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test=". = 'BY' or . = 'AB' or . = 'DL' or . = 'SE' or . = 'SR' or . = 'PE' or . = 'PR' or . = 'II' or . = 'IV' or . = 'WK' or . = 'DFH'">
                <xsl:attribute name="id">BR-FR-CDV-CL-04_MDT-59</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -1276,18 +1315,18 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M42"/>
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M43"/>
    </xsl:template>
-   <xsl:template match="text()" priority="-1" mode="M42"/>
-   <xsl:template match="@*|node()" priority="-2" mode="M42">
-      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M42"/>
+   <xsl:template match="text()" priority="-1" mode="M43"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M43">
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M43"/>
    </xsl:template>
    <!--PATTERN BR-FR-CDV-CL-05BR-FR-CDV-CL-05 — Contrôle des statuts MDT-88 selon MDT-77-->
    <svrl:text xmlns:svrl="http://purl.oclc.org/dsdl/svrl">BR-FR-CDV-CL-05 — Contrôle des statuts MDT-88 selon MDT-77</svrl:text>
    <!--RULE -->
    <xsl:template match="rsm:AcknowledgementDocument/ram:ReferenceReferencedDocument"
                  priority="1000"
-                 mode="M43">
+                 mode="M44">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="rsm:AcknowledgementDocument/ram:ReferenceReferencedDocument"/>
       <!--ASSERT -->
@@ -1297,7 +1336,7 @@
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="../ram:TypeCode != '305' or ram:StatusCode = '10' or ram:StatusCode = '51' or ram:StatusCode = '43' or ram:StatusCode = '8' or ram:StatusCode = '48' or not(ram:StatusCode)">
                <xsl:attribute name="id">BR-FR-CDV-CL-05_MDT-88_305</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -1313,18 +1352,18 @@
       </xsl:choose>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="../ram:TypeCode != '23' or          ram:StatusCode = '45' or          ram:StatusCode = '39' or          ram:StatusCode = '37' or          ram:StatusCode = '50' or          ram:StatusCode = '49' or          ram:StatusCode = '47' or          ram:StatusCode = '46' or          ram:StatusCode = '1'or         not(ram:StatusCode)"/>
+         <xsl:when test="../ram:TypeCode != '23' or          ram:StatusCode = '45' or          ram:StatusCode = '39' or          ram:StatusCode = '37' or          ram:StatusCode = '50' or          ram:StatusCode = '49' or          ram:StatusCode = '47' or          ram:StatusCode = '46' or          ram:StatusCode = '1'or         ram:StatusCode = '5'or         not(ram:StatusCode)"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="../ram:TypeCode != '23' or ram:StatusCode = '45' or ram:StatusCode = '39' or ram:StatusCode = '37' or ram:StatusCode = '50' or ram:StatusCode = '49' or ram:StatusCode = '47' or ram:StatusCode = '46' or ram:StatusCode = '1'or not(ram:StatusCode)">
+                                test="../ram:TypeCode != '23' or ram:StatusCode = '45' or ram:StatusCode = '39' or ram:StatusCode = '37' or ram:StatusCode = '50' or ram:StatusCode = '49' or ram:StatusCode = '47' or ram:StatusCode = '46' or ram:StatusCode = '1'or ram:StatusCode = '5'or not(ram:StatusCode)">
                <xsl:attribute name="id">BR-FR-CDV-CL-05_MDT-88_23</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
         [BR-FR-CDV-CL-05/MDT-88] : Lorsque MDT-77 = "23" (Phase Traitement), si présent, MDT-88 doit être l’un des codes suivants :
-        "45", "39", "37", "50", "49", "47", "46", "1".
+        "45", "39", "37", "50", "49", "47", "46", "1", "5" (pour les autres statuts)
         Valeur actuelle : "<xsl:text/>
                   <xsl:value-of select="ram:StatusCode"/>
                   <xsl:text/>".
@@ -1332,18 +1371,18 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M43"/>
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M44"/>
    </xsl:template>
-   <xsl:template match="text()" priority="-1" mode="M43"/>
-   <xsl:template match="@*|node()" priority="-2" mode="M43">
-      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M43"/>
+   <xsl:template match="text()" priority="-1" mode="M44"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M44">
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M44"/>
    </xsl:template>
    <!--PATTERN BR-FR-CDV-CL-06BR-FR-CDV-CL-06 — Liste fermée de codes statuts de facture-->
    <svrl:text xmlns:svrl="http://purl.oclc.org/dsdl/svrl">BR-FR-CDV-CL-06 — Liste fermée de codes statuts de facture</svrl:text>
    <!--RULE -->
    <xsl:template match="rsm:AcknowledgementDocument/ram:ReferenceReferencedDocument/ram:ProcessConditionCode"
                  priority="1001"
-                 mode="M44">
+                 mode="M45">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="rsm:AcknowledgementDocument/ram:ReferenceReferencedDocument/ram:ProcessConditionCode"/>
       <!--ASSERT -->
@@ -1367,12 +1406,12 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M44"/>
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M45"/>
    </xsl:template>
    <!--RULE -->
    <xsl:template match="rsm:AcknowledgementDocument/ram:ReferenceReferencedDocument/ram:SpecifiedDocumentStatus/ram:ProcessConditionCode"
                  priority="1000"
-                 mode="M44">
+                 mode="M45">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="rsm:AcknowledgementDocument/ram:ReferenceReferencedDocument/ram:SpecifiedDocumentStatus/ram:ProcessConditionCode"/>
       <!--ASSERT -->
@@ -1396,18 +1435,18 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M44"/>
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M45"/>
    </xsl:template>
-   <xsl:template match="text()" priority="-1" mode="M44"/>
-   <xsl:template match="@*|node()" priority="-2" mode="M44">
-      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M44"/>
+   <xsl:template match="text()" priority="-1" mode="M45"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M45">
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M45"/>
    </xsl:template>
    <!--PATTERN BR-FR-CDV-CL-07BR-FR-CDV-CL-07 — Vérification de la valeur de MDT-132-->
    <svrl:text xmlns:svrl="http://purl.oclc.org/dsdl/svrl">BR-FR-CDV-CL-07 — Vérification de la valeur de MDT-132</svrl:text>
    <!--RULE -->
    <xsl:template match="rsm:AcknowledgementDocument/ram:ReferenceReferencedDocument/ram:IssuerTradeParty/ram:RoleCode"
                  priority="1000"
-                 mode="M45">
+                 mode="M46">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="rsm:AcknowledgementDocument/ram:ReferenceReferencedDocument/ram:IssuerTradeParty/ram:RoleCode"/>
       <!--ASSERT -->
@@ -1416,47 +1455,12 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". = 'SE'">
                <xsl:attribute name="id">BR-FR-CDV-CL-07_MDT-132</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>
         [BR-FR-CDV-CL-07/MDT-132] : Le rôle du partenaire commercial émetteur (MDT-132) doit être "SE" (Vendeur).
-        Valeur actuelle : "<xsl:text/>
-                  <xsl:value-of select="."/>
-                  <xsl:text/>". Veuillez corriger cette valeur si nécessaire.
-      </svrl:text>
-            </svrl:failed-assert>
-         </xsl:otherwise>
-      </xsl:choose>
-      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M45"/>
-   </xsl:template>
-   <xsl:template match="text()" priority="-1" mode="M45"/>
-   <xsl:template match="@*|node()" priority="-2" mode="M45">
-      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M45"/>
-   </xsl:template>
-   <!--PATTERN BR-FR-CDV-CL-08BR-FR-CDV-CL-08 — Liste fermée de valeurs pour MDT-158-->
-   <svrl:text xmlns:svrl="http://purl.oclc.org/dsdl/svrl">BR-FR-CDV-CL-08 — Liste fermée de valeurs pour MDT-158</svrl:text>
-   <!--RULE -->
-   <xsl:template match="rsm:AcknowledgementDocument/ram:ReferenceReferencedDocument/ram:RecipientTradeParty/ram:RoleCode"
-                 priority="1000"
-                 mode="M46">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="rsm:AcknowledgementDocument/ram:ReferenceReferencedDocument/ram:RecipientTradeParty/ram:RoleCode"/>
-      <!--ASSERT -->
-      <xsl:choose>
-         <xsl:when test=". = 'BY' or . = 'AB' or . = 'DL' or . = 'SE' or . = 'SR' or          . = 'WK' or . = 'DFH' or . = 'PE' or . = 'PR' or          . = 'II' or . = 'IV'"/>
-         <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test=". = 'BY' or . = 'AB' or . = 'DL' or . = 'SE' or . = 'SR' or . = 'WK' or . = 'DFH' or . = 'PE' or . = 'PR' or . = 'II' or . = 'IV'">
-               <xsl:attribute name="id">BR-FR-CDV-CL-08_MDT-158</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
-               <xsl:attribute name="location">
-                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-               </xsl:attribute>
-               <svrl:text>
-        [BR-FR-CDV-CL-08/MDT-158] : Le rôle du partenaire commercial destinataire (MDT-158) doit être dans la liste suivante :
-        "BY", "AB", "DL", "SE", "SR", "WK", "DFH", "PE", "PR", "II", "IV".
         Valeur actuelle : "<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>". Veuillez corriger cette valeur si nécessaire.
@@ -1470,12 +1474,47 @@
    <xsl:template match="@*|node()" priority="-2" mode="M46">
       <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M46"/>
    </xsl:template>
+   <!--PATTERN BR-FR-CDV-CL-08BR-FR-CDV-CL-08 — Liste fermée de valeurs pour MDT-158-->
+   <svrl:text xmlns:svrl="http://purl.oclc.org/dsdl/svrl">BR-FR-CDV-CL-08 — Liste fermée de valeurs pour MDT-158</svrl:text>
+   <!--RULE -->
+   <xsl:template match="rsm:AcknowledgementDocument/ram:ReferenceReferencedDocument/ram:RecipientTradeParty/ram:RoleCode"
+                 priority="1000"
+                 mode="M47">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="rsm:AcknowledgementDocument/ram:ReferenceReferencedDocument/ram:RecipientTradeParty/ram:RoleCode"/>
+      <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test=". = 'BY' or . = 'AB' or . = 'DL' or . = 'SE' or . = 'SR' or          . = 'WK' or . = 'DFH' or . = 'PE' or . = 'PR' or          . = 'II' or . = 'IV'"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test=". = 'BY' or . = 'AB' or . = 'DL' or . = 'SE' or . = 'SR' or . = 'WK' or . = 'DFH' or . = 'PE' or . = 'PR' or . = 'II' or . = 'IV'">
+               <xsl:attribute name="id">BR-FR-CDV-CL-08_MDT-158</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>
+        [BR-FR-CDV-CL-08/MDT-158] : Le rôle du partenaire commercial destinataire (MDT-158) doit être dans la liste suivante :
+        "BY", "AB", "DL", "SE", "SR", "WK", "DFH", "PE", "PR", "II", "IV".
+        Valeur actuelle : "<xsl:text/>
+                  <xsl:value-of select="."/>
+                  <xsl:text/>". Veuillez corriger cette valeur si nécessaire.
+      </svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M47"/>
+   </xsl:template>
+   <xsl:template match="text()" priority="-1" mode="M47"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M47">
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M47"/>
+   </xsl:template>
    <!--PATTERN BR-FR-CDV-CL-09BR-FR-CDV-CL-09 — Liste fermée de codes motifs de statuts-->
    <svrl:text xmlns:svrl="http://purl.oclc.org/dsdl/svrl">BR-FR-CDV-CL-09 — Liste fermée de codes motifs de statuts</svrl:text>
    <!--RULE -->
    <xsl:template match="rsm:AcknowledgementDocument/ram:ReferenceReferencedDocument/ram:SpecifiedDocumentStatus/ram:ReasonCode"
                  priority="1000"
-                 mode="M47">
+                 mode="M48">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="rsm:AcknowledgementDocument/ram:ReferenceReferencedDocument/ram:SpecifiedDocumentStatus/ram:ReasonCode"/>
       <!--ASSERT -->
@@ -1485,7 +1524,7 @@
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="custom:is-valid-status-reason-code(.)">
                <xsl:attribute name="id">BR-FR-CDV-CL-09_MDT-113</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -1493,7 +1532,8 @@
         [BR-FR-CDV-CL-09/MDT-113] : Le code motif de statut (MDT-113) : "<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" n'est pas dans la liste des codes autorisés :
-        "NON_TRANSMISE", "JUSTIF_ABS", "ROUTAGE_ERR", "AUTRE", "COORD_BANC_ERR", "TX_TVA_ERR", "MONTANTTOTAL_ERR", "CALCUL_ERR", "NON_CONFORME", "DOUBLON", "DEST_INC", "DEST_ERR", "TRANSAC_INC", "EMMET_INC", "CONTRAT_TERM", "DOUBLE_FACT", "CMD_ERR", "ADR_ERR", "SIRET_ERR", "CODE_ROUTAGE_ERR", "REF_CT_ABSENT", "REF_ERR", "PU_ERR", "REM_ERR", "QTE_ERR", "ART_ERR", "MODPAI_ERR", "QUALITE_ERR", "LIVR_INCOMP", "REJ_SEMAN", "REJ_UNI", "REJ_COH", "REJ_ADR", "REJ_CONT_B2G", "REJ_REF_PJ", "REJ_ASS_PJ", "IRR_VIDE_F", "IRR_TYPE_F", "IRR_SYNTAX", "IRR_TAILLE_PJ", "IRR_NOM_PJ", "IRR_VID_PJ", "IRR_EXT_DOC", "IRR_TAILLE_F", "IRR_ANTIVIRUS".
+        "RETRAIT_MAN_SERV", "ST_CT_NON_DECLAR", "SUPPR_COMP_AVOIR", "TRANSF_PMNT_REGIE", "CONTACT_ACHTR", 
+        "NON_TRANSMISE", "JUSTIF_ABS", "ROUTAGE_ERR", "AUTRE", "COORD_BANC_ERR", "TX_TVA_ERR", "MONTANTTOTAL_ERR", "CALCUL_ERR", "NON_CONFORME", "DOUBLON", "DEST_INC", "DEST_ERR", "TRANSAC_INC", "EMMET_INC", "CONTRAT_TERM", "DOUBLE_FACT", "CMD_ERR", "ADR_ERR", "SIRET_ERR", "CODE_ROUTAGE_ERR", "REF_CT_ABSENT", "REF_ERR", "PU_ERR", "REM_ERR", "QTE_ERR", "ART_ERR", "MODPAI_ERR", "QUALITE_ERR", "LIVR_INCOMP", "REJ_SEMAN", "REJ_UNI", "REJ_COH", "REJ_ADR", "REJ_CONT_B2G", "REJ_REF_PJ", "REJ_ASS_PJ", "IRR_VIDE_F", "IRR_TYPE_F", "IRR_SYNTAX", "IRR_TAILLE_PJ", "IRR_NOM_PJ", "IRR_VID_PJ", "IRR_EXT_DOC", "IRR_TAILLE_F", "IRR_ANTIVIRUS", "IRR_NOM_F".
         Veuillez corriger cette valeur si nécessaire.
       </svrl:text>
             </svrl:failed-assert>
@@ -1506,7 +1546,7 @@
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="(../../ram:ProcessConditionCode != '200' and (not(../ram:ProcessConditionCode) or ../ram:ProcessConditionCode != '200' )) or (../../ram:ProcessConditionCode = '200' and ../ram:ProcessConditionCode != '200' ) or (.) = 'NON_TRANSMISE'">
                <xsl:attribute name="id">BR-FR-CDV-CL-09_MDT-113_200</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -1526,7 +1566,7 @@
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="(../../ram:ProcessConditionCode != '213' and (not(../ram:ProcessConditionCode) or ../ram:ProcessConditionCode != '213' )) or (../../ram:ProcessConditionCode = '213' and ../ram:ProcessConditionCode != '213' ) or (.) = 'MONTANTTOTAL_ERR' or (.) = 'CALCUL_ERR' or (.) = 'DOUBLON' or (.) = 'DEST_INC' or (.) = 'ADR_ERR' or (.) = 'REJ_SEMAN' or (.) = 'REJ_UNI' or (.) = 'REJ_COH' or (.) = 'REJ_ADR' or (.) = 'REJ_CONT_B2G' or (.) = 'REJ_REF_PJ' or (.) = 'REJ_ASS_PJ'">
                <xsl:attribute name="id">BR-FR-CDV-CL-09_MDT-113_213</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -1542,12 +1582,12 @@
       </xsl:choose>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="(../../ram:ProcessConditionCode != '210' and (not(../ram:ProcessConditionCode) or ../ram:ProcessConditionCode != '210' )) or (../../ram:ProcessConditionCode = '210' and ../ram:ProcessConditionCode != '210' )         or (.) = 'TX_TVA_ERR' or (.) = 'MONTANTTOTAL_ERR' or (.) = 'CALCUL_ERR' or (.) = 'NON_CONFORME' or (.) = 'DOUBLON' or (.) = 'DEST_ERR'         or (.) = 'TRANSAC_INC' or (.) = 'EMMET_INC' or (.) = 'CONTRAT_TERM' or (.) = 'DOUBLE_FACT' or (.) = 'CMD_ERR' or (.) = 'ADR_ERR' or (.) = 'REF_CT_ABSENT'"/>
+         <xsl:when test="(../../ram:ProcessConditionCode != '210' and (not(../ram:ProcessConditionCode) or ../ram:ProcessConditionCode != '210' )) or (../../ram:ProcessConditionCode = '210' and ../ram:ProcessConditionCode != '210' )         or (/rsm:CrossDomainAcknowledgementAndResponse/rsm:ExchangedDocument/ram:SenderTradeParty/ram:GlobalID[@schemeID = '0238'] = '9999')          or (.) = 'TX_TVA_ERR' or (.) = 'MONTANTTOTAL_ERR' or (.) = 'CALCUL_ERR' or (.) = 'NON_CONFORME' or (.) = 'DOUBLON' or (.) = 'DEST_ERR'         or (.) = 'TRANSAC_INC' or (.) = 'EMMET_INC' or (.) = 'CONTRAT_TERM' or (.) = 'DOUBLE_FACT' or (.) = 'CMD_ERR' or (.) = 'ADR_ERR' or (.) = 'REF_CT_ABSENT'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="(../../ram:ProcessConditionCode != '210' and (not(../ram:ProcessConditionCode) or ../ram:ProcessConditionCode != '210' )) or (../../ram:ProcessConditionCode = '210' and ../ram:ProcessConditionCode != '210' ) or (.) = 'TX_TVA_ERR' or (.) = 'MONTANTTOTAL_ERR' or (.) = 'CALCUL_ERR' or (.) = 'NON_CONFORME' or (.) = 'DOUBLON' or (.) = 'DEST_ERR' or (.) = 'TRANSAC_INC' or (.) = 'EMMET_INC' or (.) = 'CONTRAT_TERM' or (.) = 'DOUBLE_FACT' or (.) = 'CMD_ERR' or (.) = 'ADR_ERR' or (.) = 'REF_CT_ABSENT'">
+                                test="(../../ram:ProcessConditionCode != '210' and (not(../ram:ProcessConditionCode) or ../ram:ProcessConditionCode != '210' )) or (../../ram:ProcessConditionCode = '210' and ../ram:ProcessConditionCode != '210' ) or (/rsm:CrossDomainAcknowledgementAndResponse/rsm:ExchangedDocument/ram:SenderTradeParty/ram:GlobalID[@schemeID = '0238'] = '9999') or (.) = 'TX_TVA_ERR' or (.) = 'MONTANTTOTAL_ERR' or (.) = 'CALCUL_ERR' or (.) = 'NON_CONFORME' or (.) = 'DOUBLON' or (.) = 'DEST_ERR' or (.) = 'TRANSAC_INC' or (.) = 'EMMET_INC' or (.) = 'CONTRAT_TERM' or (.) = 'DOUBLE_FACT' or (.) = 'CMD_ERR' or (.) = 'ADR_ERR' or (.) = 'REF_CT_ABSENT'">
                <xsl:attribute name="id">BR-FR-CDV-CL-09_MDT-113_210</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -1563,12 +1603,33 @@
       </xsl:choose>
       <!--ASSERT -->
       <xsl:choose>
+         <xsl:when test="(../../ram:ProcessConditionCode != '210' and (not(../ram:ProcessConditionCode) or ../ram:ProcessConditionCode != '210' )) or (../../ram:ProcessConditionCode = '210' and ../ram:ProcessConditionCode != '210' )         or not(exists(//rsm:ExchangedDocument/ram:SenderTradeParty/ram:GlobalID)) or //rsm:ExchangedDocument/ram:SenderTradeParty/ram:GlobalID[@schemeID = '0238'] != '9999'         or (//rsm:ExchangedDocument/ram:SenderTradeParty/ram:GlobalID[@schemeID = '0238'] = '9999'         and ((.) = 'RETRAIT_MAN_SERV' or (.) = 'ST_CT_NON_DECLAR' or (.) = 'SUPPR_COMP_AVOIR' or (.) = 'TRANSF_PMNT_REGIE' or (.) = 'AUTRE' or (.) = 'COORD_BANC_ERR'         or (.) = 'TX_TVA_ERR' or (.) = 'MONTANTTOTAL_ERR' or (.) = 'CALCUL_ERR' or (.) = 'NON_CONFORME' or (.) = 'DOUBLON' or (.) = 'DEST_ERR'         or (.) = 'TRANSAC_INC' or (.) = 'EMMET_INC' or (.) = 'CONTRAT_TERM' or (.) = 'DOUBLE_FACT' or (.) = 'CMD_ERR' or (.) = 'ADR_ERR' or (.) = 'REF_CT_ABSENT' or (.) = 'LIVR_INCOMP'))"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="(../../ram:ProcessConditionCode != '210' and (not(../ram:ProcessConditionCode) or ../ram:ProcessConditionCode != '210' )) or (../../ram:ProcessConditionCode = '210' and ../ram:ProcessConditionCode != '210' ) or not(exists(//rsm:ExchangedDocument/ram:SenderTradeParty/ram:GlobalID)) or //rsm:ExchangedDocument/ram:SenderTradeParty/ram:GlobalID[@schemeID = '0238'] != '9999' or (//rsm:ExchangedDocument/ram:SenderTradeParty/ram:GlobalID[@schemeID = '0238'] = '9999' and ((.) = 'RETRAIT_MAN_SERV' or (.) = 'ST_CT_NON_DECLAR' or (.) = 'SUPPR_COMP_AVOIR' or (.) = 'TRANSF_PMNT_REGIE' or (.) = 'AUTRE' or (.) = 'COORD_BANC_ERR' or (.) = 'TX_TVA_ERR' or (.) = 'MONTANTTOTAL_ERR' or (.) = 'CALCUL_ERR' or (.) = 'NON_CONFORME' or (.) = 'DOUBLON' or (.) = 'DEST_ERR' or (.) = 'TRANSAC_INC' or (.) = 'EMMET_INC' or (.) = 'CONTRAT_TERM' or (.) = 'DOUBLE_FACT' or (.) = 'CMD_ERR' or (.) = 'ADR_ERR' or (.) = 'REF_CT_ABSENT' or (.) = 'LIVR_INCOMP'))">
+               <xsl:attribute name="id">BR-FR-CDV-CL-09_MDT-113_210B2G</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>
+        [BR-FR-CDV-CL-09/MDT-113_210B2G] : SEULEMENT B2G : Le code motif de statut (MDT-113) : "<xsl:text/>
+                  <xsl:value-of select="."/>
+                  <xsl:text/>", n'est pas dans la liste des codes autorisés pour le statut REFUSÉE B2G (210) :
+        "RETRAIT_MAN_SERV", "ST_CT_NON_DECLAR", "SUPPR_COMP_AVOIR", "TRANSF_PMNT_REGIE", "CONTACT_ACHTR", "AUTRE", "COORD_BANC_ERR", "TX_TVA_ERR", "MONTANTTOTAL_ERR", "CALCUL_ERR", "NON_CONFORME", "DOUBLON", "DEST_ERR", "TRANSAC_INC", "EMMET_INC", "CONTRAT_TERM", "DOUBLE_FACT", "CMD_ERR", "ADR_ERR", "REF_CT_ABSENT", "LIVR_INCOMP".
+        Veuillez corriger cette valeur si nécessaire.
+      </svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <!--ASSERT -->
+      <xsl:choose>
          <xsl:when test="(../../ram:ProcessConditionCode != '207' and (not(../ram:ProcessConditionCode) or ../ram:ProcessConditionCode != '207' )) or (../../ram:ProcessConditionCode = '207' and ../ram:ProcessConditionCode != '207' )         or (.) = 'AUTRE' or (.) = 'COORD_BANC_ERR' or (.) = 'TX_TVA_ERR' or (.) = 'MONTANTTOTAL_ERR' or (.) = 'CALCUL_ERR' or (.) = 'NON_CONFORME' or (.) = 'DOUBLON'         or (.) = 'DEST_INC' or (.) = 'DEST_ERR' or (.) = 'TRANSAC_INC' or (.) = 'EMMET_INC' or (.) = 'CONTRAT_TERM' or (.) = 'DOUBLE_FACT' or (.) = 'CMD_ERR'         or (.) = 'ADR_ERR' or (.) = 'SIRET_ERR' or (.) = 'CODE_ROUTAGE_ERR' or (.) = 'REF_CT_ABSENT' or (.) = 'REF_ERR' or (.) = 'PU_ERR' or (.) = 'REM_ERR'         or (.) = 'QTE_ERR' or (.) = 'ART_ERR' or (.) = 'MODPAI_ERR' or (.) = 'QUALITE_ERR' or (.) = 'LIVR_INCOMP'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="(../../ram:ProcessConditionCode != '207' and (not(../ram:ProcessConditionCode) or ../ram:ProcessConditionCode != '207' )) or (../../ram:ProcessConditionCode = '207' and ../ram:ProcessConditionCode != '207' ) or (.) = 'AUTRE' or (.) = 'COORD_BANC_ERR' or (.) = 'TX_TVA_ERR' or (.) = 'MONTANTTOTAL_ERR' or (.) = 'CALCUL_ERR' or (.) = 'NON_CONFORME' or (.) = 'DOUBLON' or (.) = 'DEST_INC' or (.) = 'DEST_ERR' or (.) = 'TRANSAC_INC' or (.) = 'EMMET_INC' or (.) = 'CONTRAT_TERM' or (.) = 'DOUBLE_FACT' or (.) = 'CMD_ERR' or (.) = 'ADR_ERR' or (.) = 'SIRET_ERR' or (.) = 'CODE_ROUTAGE_ERR' or (.) = 'REF_CT_ABSENT' or (.) = 'REF_ERR' or (.) = 'PU_ERR' or (.) = 'REM_ERR' or (.) = 'QTE_ERR' or (.) = 'ART_ERR' or (.) = 'MODPAI_ERR' or (.) = 'QUALITE_ERR' or (.) = 'LIVR_INCOMP'">
                <xsl:attribute name="id">BR-FR-CDV-CL-09_MDT-113_207</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -1590,7 +1651,7 @@
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="(../../ram:ProcessConditionCode != '206' and (not(../ram:ProcessConditionCode) or ../ram:ProcessConditionCode != '206' )) or (../../ram:ProcessConditionCode = '206' and ../ram:ProcessConditionCode != '206' ) or (.) = 'AUTRE' or (.) = 'CMD_ERR' or (.) = 'SIRET_ERR' or (.) = 'CODE_ROUTAGE_ERR' or (.) = 'REF_CT_ABSENT' or (.) = 'REF_ERR' or (.) = 'PU_ERR' or (.) = 'REM_ERR' or (.) = 'QTE_ERR' or (.) = 'ART_ERR' or (.) = 'MODPAI_ERR' or (.) = 'QUALITE_ERR' or (.) = 'LIVR_INCOMP'">
                <xsl:attribute name="id">BR-FR-CDV-CL-09_MDT-113_206</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -1611,7 +1672,7 @@
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="(../../ram:ProcessConditionCode != '208' and (not(../ram:ProcessConditionCode) or ../ram:ProcessConditionCode != '208' )) or (../../ram:ProcessConditionCode = '208' and ../ram:ProcessConditionCode != '208' ) or (.) = 'JUSTIF_ABS' or (.) = 'COORD_BANC_ERR' or (.) = 'CMD_ERR' or (.) = 'SIRET_ERR' or (.) = 'CODE_ROUTAGE_ERR' or (.) = 'REF_CT_ABSENT' or (.) = 'REF_ERR'">
                <xsl:attribute name="id">BR-FR-CDV-CL-09_MDT-113_208</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -1632,7 +1693,7 @@
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="(../../ram:ProcessConditionCode != '221' and (not(../ram:ProcessConditionCode) or ../ram:ProcessConditionCode != '221' )) or (../../ram:ProcessConditionCode = '221' and ../ram:ProcessConditionCode != '221' ) or (.) = 'ROUTAGE_ERR'">
                <xsl:attribute name="id">BR-FR-CDV-CL-09_MDT-113_221</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -1647,12 +1708,12 @@
       </xsl:choose>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="(../../ram:ProcessConditionCode != '501' and (not(../ram:ProcessConditionCode) or ../ram:ProcessConditionCode != '501' )) or (../../ram:ProcessConditionCode = '501' and ../ram:ProcessConditionCode != '501' )         or (.) = 'IRR_VIDE_F'  or (.) = 'IRR_TYPE_F'  or (.) = 'IRR_SYNTAX'  or (.) = 'IRR_TAILLE_PJ'  or (.) = 'IRR_NOM_PJ'  or (.) = 'IRR_VID_PJ'  or (.) = 'IRR_EXT_DOC'  or (.) = 'IRR_TAILLE_F'  or (.) = 'IRR_ANTIVIRUS'"/>
+         <xsl:when test="(../../ram:ProcessConditionCode != '501' and (not(../ram:ProcessConditionCode) or ../ram:ProcessConditionCode != '501' )) or (../../ram:ProcessConditionCode = '501' and ../ram:ProcessConditionCode != '501' )         or (.) = 'IRR_VIDE_F'  or (.) = 'IRR_TYPE_F'  or (.) = 'IRR_SYNTAX'  or (.) = 'IRR_TAILLE_PJ'  or (.) = 'IRR_NOM_PJ'  or (.) = 'IRR_VID_PJ'  or (.) = 'IRR_EXT_DOC'  or (.) = 'IRR_TAILLE_F'  or (.) = 'IRR_ANTIVIRUS' or (.) = 'IRR_NOM_F'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="(../../ram:ProcessConditionCode != '501' and (not(../ram:ProcessConditionCode) or ../ram:ProcessConditionCode != '501' )) or (../../ram:ProcessConditionCode = '501' and ../ram:ProcessConditionCode != '501' ) or (.) = 'IRR_VIDE_F' or (.) = 'IRR_TYPE_F' or (.) = 'IRR_SYNTAX' or (.) = 'IRR_TAILLE_PJ' or (.) = 'IRR_NOM_PJ' or (.) = 'IRR_VID_PJ' or (.) = 'IRR_EXT_DOC' or (.) = 'IRR_TAILLE_F' or (.) = 'IRR_ANTIVIRUS'">
+                                test="(../../ram:ProcessConditionCode != '501' and (not(../ram:ProcessConditionCode) or ../ram:ProcessConditionCode != '501' )) or (../../ram:ProcessConditionCode = '501' and ../ram:ProcessConditionCode != '501' ) or (.) = 'IRR_VIDE_F' or (.) = 'IRR_TYPE_F' or (.) = 'IRR_SYNTAX' or (.) = 'IRR_TAILLE_PJ' or (.) = 'IRR_NOM_PJ' or (.) = 'IRR_VID_PJ' or (.) = 'IRR_EXT_DOC' or (.) = 'IRR_TAILLE_F' or (.) = 'IRR_ANTIVIRUS' or (.) = 'IRR_NOM_F'">
                <xsl:attribute name="id">BR-FR-CDV-CL-09_MDT-113_501</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -1660,23 +1721,23 @@
         [BR-FR-CDV-CL-09/MDT-113_501] : Le code motif de statut (MDT-113) : "<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>", n'est pas dans la liste des codes autorisés pour le statut IRRECEVABLE (501) :
-        "IRR_VIDE_F", "IRR_TYPE_F", "IRR_SYNTAX", "IRR_TAILLE_PJ", "IRR_NOM_PJ", "IRR_VID_PJ", "IRR_EXT_DOC, "IRR_TAILLE_F", "IRR_ANTIVIRUS". Veuillez corriger cette valeur si nécessaire.
+        "IRR_VIDE_F", "IRR_TYPE_F", "IRR_SYNTAX", "IRR_TAILLE_PJ", "IRR_NOM_PJ", "IRR_VID_PJ", "IRR_EXT_DOC, "IRR_TAILLE_F", "IRR_ANTIVIRUS, IRR_NOM_F". Veuillez corriger cette valeur si nécessaire.
       </svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M47"/>
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M48"/>
    </xsl:template>
-   <xsl:template match="text()" priority="-1" mode="M47"/>
-   <xsl:template match="@*|node()" priority="-2" mode="M47">
-      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M47"/>
+   <xsl:template match="text()" priority="-1" mode="M48"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M48">
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M48"/>
    </xsl:template>
    <!--PATTERN BR-FR-CDV-CL-10BR-FR-CDV-CL-10 — Liste fermée de codes actions de facture-->
    <svrl:text xmlns:svrl="http://purl.oclc.org/dsdl/svrl">BR-FR-CDV-CL-10 — Liste fermée de codes actions de facture</svrl:text>
    <!--RULE -->
    <xsl:template match="rsm:AcknowledgementDocument/ram:ReferenceReferencedDocument/ram:SpecifiedDocumentStatus/ram:RequestedActionCode"
                  priority="1000"
-                 mode="M48">
+                 mode="M49">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="rsm:AcknowledgementDocument/ram:ReferenceReferencedDocument/ram:SpecifiedDocumentStatus/ram:RequestedActionCode"/>
       <!--ASSERT -->
@@ -1686,7 +1747,7 @@
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="custom:is-valid-invoice-action-code(.)">
                <xsl:attribute name="id">BR-FR-CDV-CL-10_MDT-121</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -1700,18 +1761,18 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M48"/>
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M49"/>
    </xsl:template>
-   <xsl:template match="text()" priority="-1" mode="M48"/>
-   <xsl:template match="@*|node()" priority="-2" mode="M48">
-      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M48"/>
+   <xsl:template match="text()" priority="-1" mode="M49"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M49">
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M49"/>
    </xsl:template>
    <!--PATTERN BR-FR-CDV-CL-11BR-FR-CDV-CL-11 — Liste fermée de codes pour MDT-207-->
    <svrl:text xmlns:svrl="http://purl.oclc.org/dsdl/svrl">BR-FR-CDV-CL-11 — Liste fermée de codes pour MDT-207</svrl:text>
    <!--RULE -->
    <xsl:template match="rsm:AcknowledgementDocument/ram:ReferenceReferencedDocument/ram:SpecifiedDocumentStatus/ram:SpecifiedDocumentCharacteristic/ram:TypeCode"
                  priority="1000"
-                 mode="M49">
+                 mode="M50">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="rsm:AcknowledgementDocument/ram:ReferenceReferencedDocument/ram:SpecifiedDocumentStatus/ram:SpecifiedDocumentCharacteristic/ram:TypeCode"/>
       <!--ASSERT -->
@@ -1721,7 +1782,7 @@
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test=". = 'MEN' or . = 'MPA' or . = 'RAP' or . = 'ESC' or . = 'RAB' or . = 'REM' or . = 'MAP' or . = 'MAPTTC' or . = 'MNA' or . = 'MNATTC' or . = 'CBB' or . = 'DIV' or . = 'DVA' or . = 'MAJ'">
                <xsl:attribute name="id">BR-FR-CDV-CL-11_MDT-207</xsl:attribute>
-               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -1735,10 +1796,10 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M49"/>
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M50"/>
    </xsl:template>
-   <xsl:template match="text()" priority="-1" mode="M49"/>
-   <xsl:template match="@*|node()" priority="-2" mode="M49">
-      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M49"/>
+   <xsl:template match="text()" priority="-1" mode="M50"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M50">
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M50"/>
    </xsl:template>
 </xsl:stylesheet>

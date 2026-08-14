@@ -307,7 +307,7 @@ module Sch
         %w(BR-FR-Flux2-Schematron-CII_V1.3.1.sch)
         # CDAR CrossDomainAcknowledgementAndResponse
       when ->(v) { v.start_with?('urn.cpro.gouv.fr:1p0:CDV') }
-        %w(BR-FR-CDV-Schematron-CDAR_V1.3.1.sch)
+        %w(BR-FR-CDV-Schematron-CDAR_V1.4.0.03.sch)
       # AE PINT Invoice v1.0, AE PINT CreditNote v1.0
       when 'urn:peppol:pint:billing-1@ae-1'
         schemas = %w(PINT-billing-1-shared.sch PINT-AE-billing-1-aligned.sch)
