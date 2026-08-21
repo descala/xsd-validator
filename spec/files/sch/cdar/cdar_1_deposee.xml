@@ -30,7 +30,7 @@
                <ram:RoleCode>WK</ram:RoleCode>  <!-- MDT-40 (Code rôle) : WK -->
           </ram:IssuerTradeParty>
           <ram:RecipientTradeParty>
-               <ram:GlobalID schemeID="0238">9998</ram:GlobalID>  <!-- MDT-57t (-) : 9998 -->
+               <ram:GlobalID schemeID="0238">0000</ram:GlobalID>  <!-- MDT-57t (-) : 0000 (V1.4 : le PPF est 0000, plus 9998) -->
                <ram:Name>PPF</ram:Name>  <!-- MDT-58t (-) : PPF -->
                <ram:RoleCode>DFH</ram:RoleCode>  <!-- MDT-59t (-) : DFH -->
           </ram:RecipientTradeParty>
