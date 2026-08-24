@@ -6,6 +6,7 @@ module Sch
 
     CBC = "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
     RAM = "urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100"
+    RSM = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100"
 
     class ValidationError < RuntimeError
     end
@@ -191,16 +192,25 @@ module Sch
 
       # Factur-X Profil BASIC WL
       when 'urn:factur-x.eu:1p0:basicwl'
-        %w(FACTUR-X_BASIC-WL.sch)
+        add_br_fr_schematron_if_french(%w(FACTUR-X_BASIC-WL.sch), doc_nokogiri)
 
-      # Factur-X Profil EN 16931 (COMFORT)
-      # Factur-X Profil BASIC
-      when 'urn:cen.eu:en16931:2017', 'urn:cen.eu:en16931:2017#compliant#urn:factur-x.eu:1p0:basic'
+      # Factur-X Profil BASIC (outside the mandatory French set: never BR-FR)
+      when 'urn:cen.eu:en16931:2017#compliant#urn:factur-x.eu:1p0:basic'
         %w(EN16931-CII-validation-preprocessed.sch)
 
-      # Factur-X Profil EXTENDED
+      # Factur-X Profil EN 16931 (COMFORT) (mandatory French set)
+      when 'urn:cen.eu:en16931:2017'
+        add_br_fr_schematron_if_french(%w(EN16931-CII-validation-preprocessed.sch), doc_nokogiri)
+
+      # Factur-X Profil EXTENDED (mandatory French set)
       when 'urn:cen.eu:en16931:2017#conformant#urn:factur-x.eu:1p0:extended'
-        %w(FACTUR-X_EXTENDED.sch)
+        add_br_fr_schematron_if_french(%w(FACTUR-X_EXTENDED.sch), doc_nokogiri)
+
+      # Factur-X EXTENDED-CTC-FR (no compiled profile schematron until FNFE 1.4.0;
+      # AFNOR examples use the dot form, the XP Z12-012 text the colon form)
+      when 'urn:cen.eu:en16931:2017#conformant#urn.cpro.gouv.fr:1p0:extended-ctc-fr',
+           'urn:cen.eu:en16931:2017#conformant#urn:cpro.gouv.fr:1p0:extended-ctc-fr'
+        %w(BR-FR-Flux2-Schematron-CII_V1.3.1.sch)
 
       # NL CIUS / SimplerInvoicing
       when 'urn:cen.eu:en16931:2017#compliant#urn:fdc:nen.nl:nlcius:v1.0'
@@ -359,6 +369,20 @@ module Sch
     end
 
     private
+
+    # Valid BT-23 process codes ("cadre de facturation") per BR-FR-08 V1.4 — the
+    # French character of a Factur-X (ZUGFeRD and Peppol BIS never carry these).
+    VALID_FR_PROCESS_CODES = %w(B1 S1 M1 B2 S2 M2 S3 B4 S4 M4 S5 S6 B7 S7 B8 S8 M8 B9 S9 M9)
+
+    # Appends the BR-FR Flux 2 CII schematron when the CII carries a French
+    # process code in BT-23 (any repeat counts, BR-FR-08 evaluates all).
+    def add_br_fr_schematron_if_french(schematrons, doc_nokogiri)
+      bt23_values = doc_nokogiri.xpath('/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID',
+                                       rsm: RSM, ram: RAM).map { |node| node.text.strip }
+      return schematrons if (VALID_FR_PROCESS_CODES & bt23_values).empty?
+
+      schematrons + %w(BR-FR-Flux2-Schematron-CII_V1.3.1.sch)
+    end
 
     def xslt_path(name)
       File.expand_path("../compiled/#{name}.xslt", __FILE__)

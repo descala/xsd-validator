@@ -104,6 +104,17 @@ RSpec.describe Sch::Validator do
       'spec/files/sch/factur-x/factur-x-basic-wl.xml' => ['FACTUR-X_BASIC-WL.sch'],
       'spec/files/sch/factur-x/factur-x-en16931.xml' => ['EN16931-CII-validation-preprocessed.sch'],
       'spec/files/sch/factur-x/factur-x-extended.xml' => ['FACTUR-X_EXTENDED.sch'],
+      # Factur-X France (#72838): a French BT-23 process code adds BR-FR to the
+      # mandatory-set profiles; BASIC, outside that set, keeps only its own schematron.
+      'spec/files/sch/factur-x/factur-x-fr-en16931.xml' =>
+        ['EN16931-CII-validation-preprocessed.sch', 'BR-FR-Flux2-Schematron-CII_V1.3.1.sch'],
+      'spec/files/sch/factur-x/factur-x-fr-extended.xml' =>
+        ['FACTUR-X_EXTENDED.sch', 'BR-FR-Flux2-Schematron-CII_V1.3.1.sch'],
+      'spec/files/sch/factur-x/factur-x-fr-basic-wl.xml' =>
+        ['FACTUR-X_BASIC-WL.sch', 'BR-FR-Flux2-Schematron-CII_V1.3.1.sch'],
+      'spec/files/sch/factur-x/factur-x-fr-basic.xml' => ['EN16931-CII-validation-preprocessed.sch'],
+      'spec/files/sch/factur-x/factur-x-fr-extended-ctc-dot.xml' => ['BR-FR-Flux2-Schematron-CII_V1.3.1.sch'],
+      'spec/files/sch/factur-x/factur-x-fr-extended-ctc-colon.xml' => ['BR-FR-Flux2-Schematron-CII_V1.3.1.sch'],
       'spec/files/sch/cii/xrechnung-cii_3.0-wrong.xml' => ['EN16931-CII-validation.sch', 'XRechnung-CII-validation_3.0.sch'],
       'spec/files/sch/cii/xrechnung-cii_2.3-wrong.xml' => ['EN16931-CII-validation.sch', 'XRechnung-CII-validation_2.3.sch'],
       'spec/files/sch/cii/xrechnung-cii_2.2.xml' => ['EN16931-CII-validation.sch', 'XRechnung-CII-validation_2.2.sch'],
