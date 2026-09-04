@@ -210,7 +210,7 @@ module Sch
       # AFNOR examples use the dot form, the XP Z12-012 text the colon form)
       when 'urn:cen.eu:en16931:2017#conformant#urn.cpro.gouv.fr:1p0:extended-ctc-fr',
            'urn:cen.eu:en16931:2017#conformant#urn:cpro.gouv.fr:1p0:extended-ctc-fr'
-        %w(BR-FR-Flux2-Schematron-CII_V1.3.1.sch)
+        %w(BR-FR-Flux2-Schematron-CII_V1.4.0.04.sch)
 
       # NL CIUS / SimplerInvoicing
       when 'urn:cen.eu:en16931:2017#compliant#urn:fdc:nen.nl:nlcius:v1.0'
@@ -309,12 +309,12 @@ module Sch
       when 'urn:cen.eu:en16931:2017#compliant#urn:peppol:france:billing:cius:1.0',
         'urn:cen.eu:en16931:2017#conformant#urn:peppol:france:billing:extended:1.0'
         if doc_nokogiri.root.name == 'Invoice'
-          %w(BR-FR-Flux2-Schematron-UBL_V1.3.1.sch)
+          %w(BR-FR-Flux2-Schematron-UBL_V1.4.0.04.sch)
         else
-          %w(BR-FR-Flux2-Schematron-CII_V1.3.1.sch)
+          %w(BR-FR-Flux2-Schematron-CII_V1.4.0.04.sch)
         end
       when 'urn:cen.eu:en16931:2017#conformant#urn:peppol:france:billing:Factur-X:1.0'
-        %w(BR-FR-Flux2-Schematron-CII_V1.3.1.sch)
+        %w(BR-FR-Flux2-Schematron-CII_V1.4.0.04.sch)
         # CDAR CrossDomainAcknowledgementAndResponse
       when ->(v) { v.start_with?('urn.cpro.gouv.fr:1p0:CDV') }
         %w(BR-FR-CDV-Schematron-CDAR_V1.4.0.03.sch)
@@ -381,7 +381,7 @@ module Sch
                                        rsm: RSM, ram: RAM).map { |node| node.text.strip }
       return schematrons if (VALID_FR_PROCESS_CODES & bt23_values).empty?
 
-      schematrons + %w(BR-FR-Flux2-Schematron-CII_V1.3.1.sch)
+      schematrons + %w(BR-FR-Flux2-Schematron-CII_V1.4.0.04.sch)
     end
 
     def xslt_path(name)

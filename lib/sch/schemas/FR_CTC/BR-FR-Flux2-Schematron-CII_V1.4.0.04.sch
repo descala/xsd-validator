@@ -2,11 +2,12 @@
 
 <!--
 
-    Schematron Licensed under European Union Public Licence (EUPL) version 1.3.1
+    Schematron Licensed under European Union Public Licence (EUPL) version 1.4.0
     Réalisé par Quentin Houard et Cyrille Sautereau pour le compte du FNFE-MPE.
 
 -->
-<!-- Schematron 20260430_BR-FR-Flux2-Schematron-CII_V1.3.1 - last update 2026 04 30 -->
+<!-- Schematron BR-FR-Flux2-Schematron-CII_V1.4.0.04 - last fix04 2026 09 04
+  Mode "FATAL" APPLICABLE EN RECEPTION AU PLUS TARD LE 1ER OCTOBRE 2026 ET EN EMISSION A COMPTER DU 1ER OCTOBRE 2026 -->
 
 <schema xmlns="http://purl.oclc.org/dsdl/schematron"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -44,9 +45,9 @@
     <xsl:variable name="isFormatValid" select="matches($shortDate, '^20\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$')"/>
     
     <!-- Extraction des composantes -->
-    <xsl:variable name="year" select="number(substring($shortDate, 1, 4))"/>
-    <xsl:variable name="month" select="number(substring($shortDate, 5, 2))"/>
-    <xsl:variable name="day" select="number(substring($shortDate, 7, 2))"/>
+    <xsl:variable name="year" select="xs:decimal(substring($shortDate, 1, 4))"/>
+    <xsl:variable name="month" select="xs:decimal(substring($shortDate, 5, 2))"/>
+    <xsl:variable name="day" select="xs:decimal(substring($shortDate, 7, 2))"/>
     
     <!-- Calcul année bissextile -->
     <xsl:variable name="isLeapYear"
@@ -72,11 +73,11 @@
     <xsl:sequence select="$code = tokenize($custom:document-type-codes, '\s+')"/>
   </xsl:function>
   
-  <!-- BR-FR-08 : Type de facture -->
+  <!-- BR-FR-08 : Type de facture V1.4 Ajout Cadre 9 -->
   <xsl:function name="custom:is-valid-billing-mode" as="xs:boolean">
     <xsl:param name="code" as="xs:string?"/>
     <xsl:variable name="custom:billing-modes" as="xs:string"
-      select="'B1 S1 M1 B2 S2 M2 S3 B4 S4 M4 S5 S6 B7 S7 B8 S8 M8'"/>
+      select="'B1 S1 M1 B2 S2 M2 S3 B4 S4 M4 S5 S6 B7 S7 B8 S8 M8 B9 S9 M9'"/>
     <xsl:sequence select="$code = tokenize($custom:billing-modes, '\s+')"/>
   </xsl:function>
   
@@ -90,7 +91,7 @@
   <!-- BR-FR-11, 12, 13 et 20 : Code traitement BAR -->
   <xsl:function name="custom:is-valid-bar-treatment" as="xs:boolean">
     <xsl:param name="value" as="xs:string?"/>
-    <xsl:sequence select="$value = ('B2B', 'B2BINT', 'B2C', 'OUTOFSCOPE', 'ARCHIVEONLY')"/>
+    <xsl:sequence select="$value = ('B2B', 'B2BINT', 'B2C', 'B2CINT', 'OUTOFSCOPE', 'ARCHIVEONLY')"/>
   </xsl:function>
   
   <!-- BR-FR-12 : Codes EAS autorisés -->
@@ -162,15 +163,23 @@
     <xsl:sequence select="matches($amount, '^\d{1,19}(\.\d{1,6})?$') and string-length(replace($amount, '\.', '')) le 19"/>
   </xsl:function>
   
+  <!-- BR-FR-DEC-03 : prix unitaires 19 positions, max 6 décimales positif ou négatif -->
+  <xsl:function name="custom:is-valid-decimal-19-6" as="xs:boolean">
+    <xsl:param name="amount" as="xs:string?"/>
+    <xsl:sequence select="matches($amount, '^[-]?\d{1,19}(\.\d{1,6})?$') and string-length(replace($amount, '\.', '')) le 19"/>
+  </xsl:function>
+  
   <!-- BR-FR-DEC-04 : taux de TVA positifs, 4 positions, max 2 décimales -->
   <xsl:function name="custom:is-valid-percent-4-2-positive" as="xs:boolean">
     <xsl:param name="percent" as="xs:string?"/>
     <xsl:sequence select="matches($percent, '^\d{1,4}(\.\d{1,2})?$') and string-length(replace($percent, '\.', '')) le 4"/>
   </xsl:function>
   
-  <!-- BR-FR-MV-XX : fonction de test du cadre de facturation B8, S8, M8 - CYS4 XPATH Corrigé -->
+  <!-- BR-FR-MV-XX : fonction de test du cadre de facturation B8, S8, M8 - CYS4 XPATH Corrigé V1.4 Fonction simplifiée 
   
+  Corrected V1.4 for M9, S9 , B9 facture bi-directionnelle -->
   
+  <!--
   <xsl:function name="custom:isSpecialContract" as="xs:boolean">
     <xsl:param name="context" as="element()?"/>
     <xsl:sequence select="
@@ -182,6 +191,31 @@
       )
       "/>
   </xsl:function>
+  
+  -->
+
+  <xsl:function name="custom:isSpecialContract" as="xs:boolean">
+    <xsl:param name="context" as="element()?"/>
+    <xsl:sequence select="
+      exists($context/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID)
+      and normalize-space($context/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID) = ('S8', 'B8', 'M8', 'S9', 'B9', 'M9')"/>
+  </xsl:function>
+
+
+  <xsl:function name="custom:isSpecialContractMV" as="xs:boolean">
+    <xsl:param name="context" as="element()?"/>
+    <xsl:sequence select="
+      exists($context/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID)
+      and normalize-space($context/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID) = ('S8', 'B8', 'M8')"/>
+  </xsl:function>
+  
+  <xsl:function name="custom:isSpecialContractBD" as="xs:boolean">
+    <xsl:param name="context" as="element()?"/>
+    <xsl:sequence select="
+      exists($context/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID)
+      and normalize-space($context/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID) = ('S9', 'B9', 'M9')"/>
+  </xsl:function>
+
 
   <!-- Règles de validation CII -->
   <pattern id="BR-FR-01_BR-FR-02">
@@ -189,11 +223,11 @@
     
     <!-- BT-1 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:ID">
-      <assert test="string-length(.) le 35" flag="warning" id="BR-FR-01_BT-1">
+      <assert test="string-length(.) le 35" flag="fatal" id="BR-FR-01_BT-1">
         BR-FR-01/BT-1 : L'identifiant de facture (ram:ID) ne doit pas dépasser 35 caractères. Valeur actuelle : "<value-of select='.'/>".
         Veuillez vérifier que l'identifiant respecte cette limite.
       </assert>
-      <assert test="custom:is-valid-id-format(.)" flag="warning" id="BR-FR-02_BT-1">
+      <assert test="custom:is-valid-id-format(.)" flag="fatal" id="BR-FR-02_BT-1">
         BR-FR-02/BT-1 : L'identifiant de facture (ram:ID) contient des caractères non autorisés. Valeur actuelle : "<value-of select='.'/>".
         Seuls les caractères alphanumériques et les symboles + - _ / sont autorisés, sans espaces.
       </assert>
@@ -201,11 +235,11 @@
     
     <!-- BT-25 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceReferencedDocument/ram:IssuerAssignedID">
-      <assert test="string-length(.) le 35" flag="warning" id="BR-FR-01_BT-25">
+      <assert test="string-length(.) le 35" flag="fatal" id="BR-FR-01_BT-25">
         BR-FR-01/BT-25 : L'identifiant de facture référencée (ram:IssuerAssignedID) ne doit pas dépasser 35 caractères. Valeur actuelle : "<value-of select='.'/>".
         Veuillez vérifier que l'identifiant respecte cette limite.
       </assert>
-      <assert test="custom:is-valid-id-format(.)" flag="warning" id="BR-FR-02_BT-25">
+      <assert test="custom:is-valid-id-format(.)" flag="fatal" id="BR-FR-02_BT-25">
         BR-FR-02/BT-25 : L'identifiant de facture référencée (ram:IssuerAssignedID) contient des caractères non autorisés. Valeur actuelle : "<value-of select='.'/>".
         Seuls les caractères alphanumériques et les symboles + - _ / sont autorisés, sans espaces.
       </assert>
@@ -213,11 +247,11 @@
     
     <!-- EXT-FR-FE-136 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeSettlement/ram:InvoiceReferencedDocument/ram:IssuerAssignedID">
-      <assert test="string-length(.) le 35" flag="warning" id="BR-FR-01_EXT-FR-FE-136">
+      <assert test="string-length(.) le 35" flag="fatal" id="BR-FR-01_EXT-FR-FE-136">
         BR-FR-01/EXT-FR-FE-136 : L'identifiant de facture référencée en ligne (ram:IssuerAssignedID) ne doit pas dépasser 35 caractères. Valeur actuelle : "<value-of select='.'/>".
         Veuillez vérifier que l'identifiant respecte cette limite.
       </assert>
-      <assert test="custom:is-valid-id-format(.)" flag="warning" id="BR-FR-02_EXT-FR-FE-136">
+      <assert test="custom:is-valid-id-format(.)" flag="fatal" id="BR-FR-02_EXT-FR-FE-136">
         BR-FR-02/EXT-FR-FE-136 : L'identifiant de facture référencée en ligne (ram:IssuerAssignedID) contient des caractères non autorisés. Valeur actuelle : "<value-of select='.'/>".
         Seuls les caractères alphanumériques et les symboles + - _ / sont autorisés, sans espaces.
       </assert>
@@ -231,7 +265,7 @@
     <!-- BT-2 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:IssueDateTime/udt:DateTimeString">  
       <assert test="custom:is-valid-date-format(.)"
-        flag="warning" id="BR-FR-03_BT-2">
+        flag="fatal" id="BR-FR-03_BT-2">
         BR-FR-03/BT-2 : La date d’émission (udt:DateTimeString) doit contenir une année comprise entre 2000 et 2099, au format AAAAMMJJ. Valeur actuelle : "<value-of select="."/>".
         Veuillez vérifier que l’année est correcte et que le format est conforme.
       </assert>  
@@ -240,7 +274,7 @@
     <!-- BT-7 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax/ram:TaxPointDate/udt:DateString">  
       <assert test="custom:is-valid-date-format(.)"
-        flag="warning" id="BR-FR-03_BT-7">
+        flag="fatal" id="BR-FR-03_BT-7">
         BR-FR-03/BT-7 : La date de fait générateur de la taxe (udt:DateString) doit contenir une année entre 2000 et 2099. Valeur actuelle : "<value-of select="."/>".
         Veuillez vérifier la validité de la date.
       </assert>  
@@ -249,7 +283,7 @@
     <!-- BT-9 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:DueDateDateTime/udt:DateTimeString">  
       <assert test="custom:is-valid-date-format(.)"
-        flag="warning" id="BR-FR-03_BT-9">
+        flag="fatal" id="BR-FR-03_BT-9">
         BR-FR-03/BT-9 : La date d’échéance (udt:DateTimeString) doit contenir une année entre 2000 et 2099. Valeur actuelle : "<value-of select="."/>".
         Veuillez vérifier la validité de la date.
       </assert>  
@@ -258,7 +292,7 @@
     <!-- BT-26 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString">  
       <assert test="custom:is-valid-date-format(.)"
-        flag="warning" id="BR-FR-03_BT-26">
+        flag="fatal" id="BR-FR-03_BT-26">
         BR-FR-03/BT-26 : La date d’émission de la facture référencée (qdt:DateTimeString) doit contenir une année entre 2000 et 2099. Valeur actuelle : "<value-of select="."/>".
         Veuillez vérifier la validité de la date.
       </assert>  
@@ -267,7 +301,7 @@
     <!-- BT-72 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ActualDeliverySupplyChainEvent/ram:OccurrenceDateTime/udt:DateTimeString">  
       <assert test="custom:is-valid-date-format(.)"
-        flag="warning" id="BR-FR-03_BT-72">
+        flag="fatal" id="BR-FR-03_BT-72">
         BR-FR-03/BT-72 : La date de livraison effective (udt:DateTimeString) doit contenir une année entre 2000 et 2099. Valeur actuelle : "<value-of select="."/>".
         Veuillez vérifier la validité de la date.
       </assert>  
@@ -276,7 +310,7 @@
     <!-- BT-73 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:BillingSpecifiedPeriod/ram:StartDateTime/udt:DateTimeString">  
       <assert test="custom:is-valid-date-format(.)"
-        flag="warning" id="BR-FR-03_BT-73">
+        flag="fatal" id="BR-FR-03_BT-73">
         BR-FR-03/BT-73 : La date de début de période de facturation (udt:DateTimeString) doit contenir une année entre 2000 et 2099. Valeur actuelle : "<value-of select="."/>".
         Veuillez vérifier la validité de la date.
       </assert>  
@@ -285,7 +319,7 @@
     <!-- BT-74 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:BillingSpecifiedPeriod/ram:EndDateTime/udt:DateTimeString">  
       <assert test="custom:is-valid-date-format(.)"
-        flag="warning" id="BR-FR-03_BT-74">
+        flag="fatal" id="BR-FR-03_BT-74">
         BR-FR-03/BT-74 : La date de fin de période de facturation (udt:DateTimeString) doit contenir une année entre 2000 et 2099. Valeur actuelle : "<value-of select="."/>".
         Veuillez vérifier la validité de la date.
       </assert>  
@@ -294,7 +328,7 @@
     <!-- EXT-FR-FE-138 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeSettlement/ram:InvoiceReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString">  
       <assert test="custom:is-valid-date-format(.)"
-        flag="warning" id="BR-FR-03_EXT-FR-FE-138">
+        flag="fatal" id="BR-FR-03_EXT-FR-FE-138">
         BR-FR-03/EXT-FR-FE-138 : La date d’émission de la facture référencée en ligne (qdt:DateTimeString) doit contenir une année entre 2000 et 2099. Valeur actuelle : "<value-of select="."/>".
         Veuillez vérifier la validité de la date.
       </assert>  
@@ -303,7 +337,7 @@
     <!-- EXT-FR-FE-158 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeDelivery/ram:ActualDeliverySupplyChainEvent/ram:OccurrenceDateTime/udt:DateTimeString">  
       <assert test="custom:is-valid-date-format(.)"
-        flag="warning" id="BR-FR-03_EXT-FR-FE-158">
+        flag="fatal" id="BR-FR-03_EXT-FR-FE-158">
         BR-FR-03/EXT-FR-FE-158 : La date de livraison effective en ligne (udt:DateTimeString) doit contenir une année entre 2000 et 2099. Valeur actuelle : "<value-of select="."/>".
         Veuillez vérifier la validité de la date.
       </assert>  
@@ -312,7 +346,7 @@
     <!-- BT-134 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeSettlement/ram:BillingSpecifiedPeriod/ram:StartDateTime/udt:DateTimeString">  
       <assert test="custom:is-valid-date-format(.)"
-        flag="warning" id="BR-FR-03_EXT-FR-FE-134">
+        flag="fatal" id="BR-FR-03_EXT-FR-FE-134">
         BR-FR-03/BT-134 : La date de début de période de facturation en ligne (udt:DateTimeString) doit contenir une année entre 2000 et 2099. Valeur actuelle : "<value-of select="."/>".
         Veuillez vérifier la validité de la date.
       </assert>  
@@ -321,7 +355,7 @@
     <!-- BT-135 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeSettlement/ram:BillingSpecifiedPeriod/ram:EndDateTime/udt:DateTimeString">  
       <assert test="custom:is-valid-date-format(.)"
-        flag="warning" id="BR-FR-03_EXT-FR-FE-135">
+        flag="fatal" id="BR-FR-03_EXT-FR-FE-135">
         BR-FR-03/BT-135 : La date de fin de période de facturation en ligne (udt:DateTimeString) doit contenir une année entre 2000 et 2099. Valeur actuelle : "<value-of select="."/>".
         Veuillez vérifier la validité de la date.
       </assert>  
@@ -334,7 +368,7 @@
     <!-- BT-3 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:TypeCode">  
       <assert test="custom:is-valid-document-type-code(.)"
-        flag="warning" id="BR-FR-04_BT-3">
+        flag="fatal" id="BR-FR-04_BT-3">
         BR-FR-04/BT-3 : Le code type de document (ram:TypeCode) n’est pas autorisé. Valeurs acceptées :
         380, 389, 393, 501, 386, 500, 384, 471, 472, 473, 261, 262, 381, 396, 502, 503.
         Valeur actuelle : "<value-of select="."/>".
@@ -345,7 +379,7 @@
     <!-- EXT-FR-FE-02 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceReferencedDocument/ram:TypeCode">  
       <assert test="custom:is-valid-document-type-code(.)"
-        flag="warning" id="BR-FR-04_EXT-FR-FE-02">
+        flag="fatal" id="BR-FR-04_EXT-FR-FE-02">
         BR-FR-04/EXT-FR-FE-02 : Le code type de document référencé (ram:TypeCode) n’est pas autorisé. Valeurs acceptées :
         380, 389, 393, 501, 386, 500, 384, 471, 472, 473, 261, 262, 381, 396, 502, 503.
         Valeur actuelle : "<value-of select="."/>".
@@ -356,7 +390,7 @@
     <!-- EXT-FR-FE-137 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeSettlement/ram:InvoiceReferencedDocument/ram:TypeCode">  
       <assert test="custom:is-valid-document-type-code(.)"
-        flag="warning" id="BR-FR-04_EXT-FR-FE-137">
+        flag="fatal" id="BR-FR-04_EXT-FR-FE-137">
         BR-FR-04/EXT-FR-FE-137 : Le code type de document référencé en ligne (ram:TypeCode) n’est pas autorisé. Valeurs acceptées :
         380, 389, 393, 501, 386, 500, 384, 471, 472, 473, 261, 262, 381, 396, 502, 503.
         Valeur actuelle : "<value-of select="."/>".
@@ -371,15 +405,15 @@
     <rule context="rsm:CrossIndustryInvoice/rsm:ExchangedDocument">
       <let name="notes" value="ram:IncludedNote"/>
       
-      <assert test="exists($notes[ram:SubjectCode = 'PMT'])" flag="warning" id="BR-FR-05_BT-22_PMT">
+      <assert test="exists($notes[ram:SubjectCode = 'PMT'])" flag="fatal" id="BR-FR-05_BT-22_PMT">
         BR-FR-05/BT-22 : La mention relative aux frais de recouvrement (code PMT) est absente. Elle est obligatoire dans les notes (BG-1).
       </assert>
       
-      <assert test="exists($notes[ram:SubjectCode = 'PMD'])" flag="warning" id="BR-FR-05_BT-22_PMD">
+      <assert test="exists($notes[ram:SubjectCode = 'PMD'])" flag="fatal" id="BR-FR-05_BT-22_PMD">
         BR-FR-05/BT-22 : La mention relative aux pénalités de retard (code PMD) est absente. Elle est obligatoire dans les notes (BG-1).
       </assert>
       
-      <assert test="exists($notes[ram:SubjectCode = 'AAB'])" flag="warning" id="BR-FR-05_BT-22_AAB">
+      <assert test="exists($notes[ram:SubjectCode = 'AAB'])" flag="fatal" id="BR-FR-05_BT-22_AAB">
         BR-FR-05/BT-22 : La mention relative à l’escompte ou à son absence (code AAB) est absente. Elle est obligatoire dans les notes (BG-1).
       </assert>
     </rule>
@@ -392,34 +426,35 @@
       <let name="notes" value="ram:IncludedNote"/>
       
       <!-- PMT -->
-      <assert test="count($notes[ram:SubjectCode = 'PMT']) le 1" flag="warning" id="BR-FR-06_BT-21_PMT">
+      <assert test="count($notes[ram:SubjectCode = 'PMT']) le 1" flag="fatal" id="BR-FR-06_BT-21_PMT">
         BR-FR-06/BT-21 : Le code sujet PMT (indemnité forfaitaire pour frais de recouvrement) ne doit apparaître qu'une seule fois dans les notes (BG-1).
       </assert>
       
       <!-- PMD -->
-      <assert test="count($notes[ram:SubjectCode = 'PMD']) le 1" flag="warning" id="BR-FR-06_BT-21_PMD">
+      <assert test="count($notes[ram:SubjectCode = 'PMD']) le 1" flag="fatal" id="BR-FR-06_BT-21_PMD">
         BR-FR-06/BT-21 : Le code sujet PMD (pénalités de retard) ne doit apparaître qu'une seule fois dans les notes (BG-1).
       </assert>
       
       <!-- AAB -->
-      <assert test="count($notes[ram:SubjectCode = 'AAB']) le 1" flag="warning" id="BR-FR-06_BT-21_AAB">
+      <assert test="count($notes[ram:SubjectCode = 'AAB']) le 1" flag="fatal" id="BR-FR-06_BT-21_AAB">
         BR-FR-06/BT-21 : Le code sujet AAB (mention d’escompte ou d’absence d’escompte) ne doit apparaître qu'une seule fois dans les notes (BG-1).
       </assert>
       
       <!-- TXD -->
-      <assert test="count($notes[ram:SubjectCode = 'TXD']) le 1" flag="warning" id="BR-FR-06_BT-21_TXD">
+      <assert test="count($notes[ram:SubjectCode = 'TXD']) le 1" flag="fatal" id="BR-FR-06_BT-21_TXD">
         BR-FR-06/BT-21 : Le code sujet TXD (mention de taxe) ne doit apparaître qu'une seule fois dans les notes (BG-1).
       </assert>
     </rule>
   </pattern>
   <pattern id="BR-FR-08">
     <title>BR-FR-08 — Validation du mode de facturation (BT-23)</title>
-    
-    <rule context="rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID">
-      <assert test="custom:is-valid-billing-mode(.)"
-        flag="warning" id="BR-FR-08_BT-23">
-        BR-FR-08/BT-23 : La valeur du mode de facturation (ram:ID) n’est pas autorisée. Valeurs acceptées : B1, S1, M1, B2, S2, M2, B4, S4, M4, S5, S6, B7, S7.
-        Valeur actuelle : "<value-of select="."/>".
+ 
+    <!-- BT-23  V1.4 Ajout de l'obligation de présence -->
+    <rule context="rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext">
+      <assert test="custom:is-valid-billing-mode(ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID) and exists(ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID)"
+        flag="fatal" id="BR-FR-08_BT-23">
+        BR-FR-08/BT-23 : La valeur du mode de facturation (ram:ID) est absente ou n’est pas autorisée. Valeurs acceptées : B1, S1, M1, B2, S2, M2, S3, B4, S4, M4, S5, S6, B7, S7, B8, S8, M8, B9, S9, M9.
+        Valeur actuelle : "<value-of select="ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID"/>".
         Veuillez utiliser une valeur conforme à la liste des modes de facturation autorisés.
       </assert>
     </rule>
@@ -431,7 +466,7 @@
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty">
       <let name="siret" value="ram:GlobalID[@schemeID='0009']"/>
       <let name="siren" value="ram:SpecifiedLegalOrganization/ram:ID[@schemeID='0002']"/>
-      <assert test="not($siret) or custom:check-siret-siren-coherence($siret[1], $siren)" flag="warning" id="BR-FR-09_BT-29">
+      <assert test="not($siret) or custom:check-siret-siren-coherence($siret[1], $siren)" flag="fatal" id="BR-FR-09_BT-29">
         BR-FR-09/BT-29 : Le SIRET doit contenir 14 chiffres et commencer par le SIREN. SIRET : "<value-of select="$siret"/>", SIREN : "<value-of select="$siren"/>".
       </assert>
     </rule>
@@ -440,7 +475,7 @@
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty">
       <let name="siret" value="ram:GlobalID[@schemeID='0009']"/>
       <let name="siren" value="ram:SpecifiedLegalOrganization/ram:ID[@schemeID='0002']"/>
-      <assert test="not($siret) or custom:check-siret-siren-coherence($siret[1], $siren)" flag="warning" id="BR-FR-09_BT-46">
+      <assert test="not($siret) or custom:check-siret-siren-coherence($siret[1], $siren)" flag="fatal" id="BR-FR-09_BT-46">
         BR-FR-09/BT-46 : Le SIRET doit contenir 14 chiffres et commencer par le SIREN. SIRET : "<value-of select="$siret"/>", SIREN : "<value-of select="$siren"/>".
       </assert>
     </rule>
@@ -449,7 +484,7 @@
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty">
       <let name="siret" value="ram:GlobalID[@schemeID='0009']"/>
       <let name="siren" value="if (string(ram:SpecifiedLegalOrganization/ram:ID[@schemeID='0002'])) then ram:SpecifiedLegalOrganization/ram:ID[@schemeID='0002'] else substring($siret, 1, 9)"/>
-      <assert test="not($siret) or custom:check-siret-siren-coherence($siret[1], $siren)" flag="warning" id="BR-FR-09_BT-60">
+      <assert test="not($siret) or custom:check-siret-siren-coherence($siret[1], $siren)" flag="fatal" id="BR-FR-09_BT-60">
         BR-FR-09/BT-60 : Le SIRET doit contenir 14 chiffres et commencer par le SIREN. SIRET : "<value-of select="$siret"/>", SIREN : "<value-of select="$siren"/>".
       </assert>
     </rule>
@@ -458,7 +493,7 @@
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty">
       <let name="siret" value="ram:GlobalID[@schemeID='0009']"/>
       <let name="siren" value="if (string(ram:SpecifiedLegalOrganization/ram:ID[@schemeID='0002'])) then ram:SpecifiedLegalOrganization/ram:ID[@schemeID='0002'] else substring($siret, 1, 9)"/>
-      <assert test="not($siret) or custom:check-siret-siren-coherence($siret[1], $siren)" flag="warning" id="BR-FR-09_EXT-FR-FE-06">
+      <assert test="not($siret) or custom:check-siret-siren-coherence($siret[1], $siren)" flag="fatal" id="BR-FR-09_EXT-FR-FE-06">
         BR-FR-09/EXT-FR-FE-06 : Le SIRET doit contenir 14 chiffres et commencer par le SIREN. SIRET : "<value-of select="$siret"/>", SIREN : "<value-of select="$siren"/>".
       </assert>
     </rule>
@@ -467,7 +502,7 @@
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty">
       <let name="siret" value="ram:GlobalID[@schemeID='0009']"/>
       <let name="siren" value="if (string(ram:SpecifiedLegalOrganization/ram:ID[@schemeID='0002'])) then ram:SpecifiedLegalOrganization/ram:ID[@schemeID='0002'] else substring($siret, 1, 9)"/>
-      <assert test="not($siret) or custom:check-siret-siren-coherence($siret[1], $siren)" flag="warning" id="BR-FR-09_EXT-FR-FE-46">
+      <assert test="not($siret) or custom:check-siret-siren-coherence($siret[1], $siren)" flag="fatal" id="BR-FR-09_EXT-FR-FE-46">
         BR-FR-09/EXT-FR-FE-46 : Le SIRET doit contenir 14 chiffres et commencer par le SIREN. SIRET : "<value-of select="$siret"/>", SIREN : "<value-of select="$siren"/>".
       </assert>
     </rule>
@@ -476,7 +511,7 @@
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty">
       <let name="siret" value="ram:GlobalID[@schemeID='0009']"/>
       <let name="siren" value="if (string(ram:SpecifiedLegalOrganization/ram:ID[@schemeID='0002'])) then ram:SpecifiedLegalOrganization/ram:ID[@schemeID='0002'] else substring($siret, 1, 9)"/>
-      <assert test="not($siret) or custom:check-siret-siren-coherence($siret[1], $siren)" flag="warning" id="BR-FR-09_EXT-FR-FE-69">
+      <assert test="not($siret) or custom:check-siret-siren-coherence($siret[1], $siren)" flag="fatal" id="BR-FR-09_EXT-FR-FE-69">
         BR-FR-09/EXT-FR-FE-69 : Le SIRET doit contenir 14 chiffres et commencer par le SIREN. SIRET : "<value-of select="$siret"/>", SIREN : "<value-of select="$siren"/>".
       </assert>
     </rule>
@@ -485,7 +520,7 @@
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty">
       <let name="siret" value="ram:GlobalID[@schemeID='0009']"/>
       <let name="siren" value="if (string(ram:SpecifiedLegalOrganization/ram:ID[@schemeID='0002'])) then ram:SpecifiedLegalOrganization/ram:ID[@schemeID='0002'] else substring($siret, 1, 9)"/> 
-      <assert test="not($siret) or custom:check-siret-siren-coherence($siret[1], $siren)" flag="warning" id="BR-FR-09_EXT-FR-FE-92">
+      <assert test="not($siret) or custom:check-siret-siren-coherence($siret[1], $siren)" flag="fatal" id="BR-FR-09_EXT-FR-FE-92">
         BR-FR-09/EXT-FR-FE-92 : Le SIRET doit contenir 14 chiffres et commencer par le SIREN. SIRET : "<value-of select="$siret"/>", SIREN : "<value-of select="$siren"/>".
       </assert>
     </rule>
@@ -494,7 +529,7 @@
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty">
       <let name="siret" value="ram:GlobalID[@schemeID='0009']"/>
       <let name="siren" value="if (string(ram:SpecifiedLegalOrganization/ram:ID[@schemeID='0002'])) then ram:SpecifiedLegalOrganization/ram:ID[@schemeID='0002'] else substring($siret, 1, 9)"/>
-      <assert test="not($siret) or custom:check-siret-siren-coherence($siret[1], $siren)" flag="warning" id="BR-FR-09_EXT-FR-FE-115">
+      <assert test="not($siret) or custom:check-siret-siren-coherence($siret[1], $siren)" flag="fatal" id="BR-FR-09_EXT-FR-FE-115">
         BR-FR-09/EXT-FR-FE-115 : Le SIRET doit contenir 14 chiffres et commencer par le SIREN. SIRET : "<value-of select="$siret"/>", SIREN : "<value-of select="$siren"/>".
       </assert>
     </rule>
@@ -504,7 +539,7 @@
       <let name="siret" value="ram:GlobalID[@schemeID='0009']"/>
       <!-- <let name="siren" value="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:ID"/> -->
       <let name="siren" value="if (string(ram:SpecifiedLegalOrganization/ram:ID[@schemeID='0002'])) then ram:SpecifiedLegalOrganization/ram:ID[@schemeID='0002'] else substring($siret, 1, 9)"/>
-      <assert test="not($siret) or custom:check-siret-siren-coherence($siret[1], $siren)" flag="warning" id="BR-FR-09_BT-71">
+      <assert test="not($siret) or custom:check-siret-siren-coherence($siret[1], $siren)" flag="fatal" id="BR-FR-09_BT-71">
         BR-FR-09/BT-71 : Le SIRET doit contenir 14 chiffres et commencer par le SIREN. SIRET : "<value-of select="$siret"/>", SIREN : "<value-of select="$siren"/>".
       </assert>
     </rule>
@@ -513,7 +548,7 @@
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeDelivery/ram:ShipToTradeParty">
       <let name="siret" value="ram:GlobalID[@schemeID='0009']"/>
       <let name="siren" value="if (string(ram:SpecifiedLegalOrganization/ram:ID[@schemeID='0002'])) then ram:SpecifiedLegalOrganization/ram:ID[@schemeID='0002'] else substring($siret, 1, 9)"/>
-      <assert test="not($siret) or custom:check-siret-siren-coherence($siret[1], $siren)" flag="warning" id="BR-FR-09_EXT-FR-FE-146">
+      <assert test="not($siret) or custom:check-siret-siren-coherence($siret[1], $siren)" flag="fatal" id="BR-FR-09_EXT-FR-FE-146">
         BR-FR-09/EXT-FR-FE-146 : Le SIRET doit contenir 14 chiffres et commencer par le SIREN. SIRET : "<value-of select="$siret"/>", SIREN : "<value-of select="$siren"/>".
       </assert>
     </rule>
@@ -524,7 +559,7 @@
     
     <rule context="rsm:CrossIndustryInvoice">
       <let name="siren" value="rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeID = '0002']"/> <!-- [@schemeID = '0002'] -->
-      <assert test="$siren and matches(normalize-space($siren), '^\d{9}$')" flag="warning" id="BR-FR-10_BT-30">
+      <assert test="$siren and matches(normalize-space($siren), '^\d{9}$')" flag="fatal" id="BR-FR-10_BT-30">
         BR-FR-10/BT-30 : Le SIREN du vendeur (ram:ID) est obligatoire et doit être composé exactement de 9 chiffres. Valeur actuelle : "<value-of select="$siren"/>".
         Veuillez renseigner un identifiant SIREN valide.
       </assert>
@@ -538,7 +573,7 @@
       <let name="barTreatment" value="rsm:ExchangedDocument/ram:IncludedNote[ram:SubjectCode = 'BAR']/ram:Content"/>
       <let name="siren" value="rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeID = '0002']"/>
       
-      <assert test="not($barTreatment = 'B2B') or matches($siren, '^\d{9}$')" flag="warning" id="BR-FR-11_BT-47">
+      <assert test="not($barTreatment = 'B2B') or matches($siren, '^\d{9}$')" flag="fatal" id="BR-FR-11_BT-47">
         BR-FR-11/BT-47 : Si une note contient le code sujet BAR avec la valeur 'B2B', alors le SIREN de l’acheteur (BT-47, ram:ID) est obligatoire et doit être composé exactement de 9 chiffres. Valeur actuelle : "<value-of select="$siren"/>".
         Veuillez renseigner un identifiant SIREN valide.
       </assert>
@@ -551,7 +586,7 @@
     <rule context="rsm:CrossIndustryInvoice">
       <let name="endpointID" value="rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:URIUniversalCommunication/ram:URIID"/>
       
-      <assert test="string($endpointID)" flag="warning" id="BR-FR-12_BT-49">
+      <assert test="string($endpointID)" flag="fatal" id="BR-FR-12_BT-49">
         BR-FR-12/BT-49 : Le BT-49  est obligatoire.
         Valeur actuelle : BT-49="<value-of select="$endpointID"/>".
       </assert>
@@ -564,7 +599,7 @@
     <rule context="rsm:CrossIndustryInvoice">
       <let name="endpointID" value="rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:URIUniversalCommunication/ram:URIID"/>
       
-      <assert test="string($endpointID)" flag="warning" id="BR-FR-13_BT-34">
+      <assert test="string($endpointID)" flag="fatal" id="BR-FR-13_BT-34">
         BR-FR-13/BT-34 : Le BT-34  est obligatoire.
         Valeur actuelle : BT-34="<value-of select="$endpointID"/>".
       </assert>
@@ -577,10 +612,10 @@
     <!-- BT-95 et BT-102 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge/ram:CategoryTradeTax">
       <let name="categoryCode" value="ram:CategoryCode"/>
-      <assert test="custom:is-valid-vat-category-code($categoryCode)" flag="warning" id="BR-FR-15_BT-95_BT-102">
+      <assert test="custom:is-valid-vat-category-code($categoryCode)" flag="fatal" id="BR-FR-15_BT-95_BT-102">
         BR-FR-15/BT-95 ou BT-102 : Code de catégorie de TVA invalide. Valeur actuelle : "<value-of select="$categoryCode"/>". Veuillez utiliser un code valide : S, E, AE, K, G, O, Z.
       </assert>
-      <assert test="not($categoryCode = ('L', 'M'))" flag="warning" id="BR-FR-15_BT-95_BT-102_LM">
+      <assert test="not($categoryCode = ('L', 'M'))" flag="fatal" id="BR-FR-15_BT-95_BT-102_LM">
         BR-FR-15/BT-95 ou BT-102 : Les codes 'L' et 'M' ne sont pas pertinents en France. Valeur actuelle : "<value-of select="$categoryCode"/>".
       </assert>
     </rule>
@@ -588,10 +623,10 @@
     <!-- BT-118 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax">
       <let name="categoryCode" value="ram:CategoryCode"/>
-      <assert test="custom:is-valid-vat-category-code($categoryCode)" flag="warning" id="BR-FR-15_BT-95_BT-118">
+      <assert test="custom:is-valid-vat-category-code($categoryCode)" flag="fatal" id="BR-FR-15_BT-95_BT-118">
         BR-FR-15/BT-118 : Code de catégorie de TVA invalide. Valeur actuelle : "<value-of select="$categoryCode"/>". Veuillez utiliser un code valide : S, E, AE, K, G, O, Z.
       </assert>
-      <assert test="not($categoryCode = ('L', 'M'))" flag="warning" id="BR-FR-15_BT-95_BT-118_LM">
+      <assert test="not($categoryCode = ('L', 'M'))" flag="fatal" id="BR-FR-15_BT-95_BT-118_LM">
         BR-FR-15/BT-118 : Les codes 'L' et 'M' ne sont pas pertinents en France. Valeur actuelle : "<value-of select="$categoryCode"/>".
       </assert>
     </rule>
@@ -601,10 +636,10 @@
       <let name="categoryCode" value="ram:CategoryCode"/>
       <assert test="custom:is-valid-vat-category-code($categoryCode) 
         or (not($categoryCode) and (../../ram:AssociatedDocumentLineDocument/ram:LineStatusReasonCode = 'GROUP' or ../../ram:AssociatedDocumentLineDocument/ram:LineStatusReasonCode = 'INFORMATION'))" 
-        flag="warning" id="BR-FR-15_BT-95_BT-151">
+        flag="fatal" id="BR-FR-15_BT-95_BT-151">
         BR-FR-15/BT-151 : Code de catégorie de TVA invalide. Valeur actuelle : "<value-of select="$categoryCode"/>". Veuillez utiliser un code valide : S, E, AE, K, G, O, Z.
       </assert>
-      <assert test="not($categoryCode = ('L', 'M'))" flag="warning" id="BR-FR-15_BT-95_BT-151_LM">
+      <assert test="not($categoryCode = ('L', 'M'))" flag="fatal" id="BR-FR-15_BT-95_BT-151_LM">
         BR-FR-15/BT-151 : Les codes 'L' et 'M' ne sont pas pertinents en France. Valeur actuelle : "<value-of select="$categoryCode"/>".
       </assert>
     </rule>
@@ -615,7 +650,7 @@
     <!-- BT-96 et BT-103 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge/ram:CategoryTradeTax">
       <let name="rate" value="string(ram:RateApplicablePercent)"/>
-      <assert test="not($rate) or custom:is-valid-vat-rate($rate)" flag="warning" id="BR-FR-16_BT-96_BT-103">
+      <assert test="not($rate) or custom:is-valid-vat-rate($rate)" flag="fatal" id="BR-FR-16_BT-96_BT-103">
         BR-FR-16/BT-96 ou BT-103 : Le taux de TVA (BT-96) doit être exprimé en pourcentage sans symbole « % » et faire partie des valeurs autorisées. Taux fourni : "<value-of select="$rate"/>".
       </assert>
     </rule>
@@ -623,7 +658,7 @@
     <!-- BT-119 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax">
       <let name="rate" value="string(ram:RateApplicablePercent)"/>
-      <assert test="not($rate) or custom:is-valid-vat-rate($rate)" flag="warning" id="BR-FR-16_BT-119">
+      <assert test="not($rate) or custom:is-valid-vat-rate($rate)" flag="fatal" id="BR-FR-16_BT-119">
         BR-FR-16/BT-119 : Le taux de TVA (BT-119) doit être exprimé en pourcentage sans symbole « % » et faire partie des valeurs autorisées. Taux fourni : "<value-of select="$rate"/>".
       </assert>
     </rule>
@@ -631,7 +666,7 @@
     <!-- BT-152 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeSettlement/ram:ApplicableTradeTax">
       <let name="rate" value="string(ram:RateApplicablePercent)"/>
-      <assert test="not($rate) or custom:is-valid-vat-rate($rate)" flag="warning" id="BR-FR-16_BT-152">
+      <assert test="not($rate) or custom:is-valid-vat-rate($rate)" flag="fatal" id="BR-FR-16_BT-152">
         BR-FR-16/BT-152 : Le taux de TVA (BT-152) doit être exprimé en pourcentage sans symbole « % » et faire partie des valeurs autorisées. Taux fourni : "<value-of select="$rate"/>".
       </assert>
     </rule>
@@ -641,7 +676,7 @@
     
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[ram:TypeCode = '916']">
       <let name="code" value="normalize-space(ram:Name)"/>
-      <assert test="not($code) or custom:is-valid-attachment-code($code)" flag="warning" id="BR-FR-17_BT-123">
+      <assert test="not($code) or custom:is-valid-attachment-code($code)" flag="fatal" id="BR-FR-17_BT-123">
         BR-FR-17/BT-123 : Le code de qualification de la pièce jointe "<value-of select="$code"/>" est invalide. Il doit appartenir à la liste des codes autorisés. Veuillez corriger la valeur de BT-123.
       </assert>
     </rule>
@@ -652,7 +687,7 @@
     <rule context="rsm:CrossIndustryInvoice">
       <let name="lisibleCount" value="count(rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[ram:Name = 'LISIBLE'])"/>
       
-      <assert test="$lisibleCount le 1" flag="warning" id="BR-FR-18_BT-123">
+      <assert test="$lisibleCount le 1" flag="fatal" id="BR-FR-18_BT-123">
         BR-FR-18/BT-123 : Il ne peut y avoir **qu’un seul** document additionnel (BG-24) dont la description (BT-123) est "LISIBLE".
         Nombre de documents trouvés : <value-of select="$lisibleCount"/>.
         Veuillez supprimer les doublons ou corriger les descriptions.
@@ -665,8 +700,8 @@
     <rule context="rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:IncludedNote[ram:SubjectCode = 'BAR']">
       <let name="barTreatment" value="ram:Content"/>
       
-      <assert test="custom:is-valid-bar-treatment($barTreatment)" flag="warning" id="BR-FR-20_BT-21">
-        BR-FR-20/BT-21 : Lorsqu’une note a pour code sujet « BAR » (BT-21), la valeur associée (BT-22, contenu de la note) doit être l’une des suivantes : B2B, B2BINT, B2C, OUTOFSCOPE, ARCHIVEONLY.
+      <assert test="custom:is-valid-bar-treatment($barTreatment)" flag="fatal" id="BR-FR-20_BT-21">
+        BR-FR-20/BT-21 : Lorsqu’une note a pour code sujet « BAR » (BT-21), la valeur associée (BT-22, contenu de la note) doit être l’une des suivantes : B2B, B2BINT, B2C, B2CINT, OUTOFSCOPE, ARCHIVEONLY.
         Valeur fournie : "<value-of select="$barTreatment"/>". Veuillez corriger la valeur ou retirer le code sujet « BAR ».
       </assert>
     </rule>
@@ -685,7 +720,7 @@
       <let name="isExcludedDocType" value="$docType = ('389', '501', '500', '471', '473', '261', '502')"/>
       
       <!-- Contrôle -->
-      <assert test="not($isB2B and not($isExcludedDocType)) or (starts-with($endpointID, $siren) and $endpointSchemeID = '0225')" flag="warning"  id="BR-FR-21_BT-49">
+      <assert test="not($isB2B and not($isExcludedDocType)) or (starts-with($endpointID, $siren) and $endpointSchemeID = '0225')" flag="fatal"  id="BR-FR-21_BT-49">
         BR-FR-21/BT-49 : Si le traitement est BAR/B2B et que le type de document (BT-3) n’est pas en autofacture (389, 501, 500, 471, 473, 261, 502), alors le BT-49 (EndpointID) doit commencer par le SIREN (BT-47) et le BT-49-1 (schemeID) doit être égal à "0225".
         Valeurs actuelles : EndpointID="<value-of select="$endpointID"/>", schemeID="<value-of select="$endpointSchemeID"/>", SIREN="<value-of select="$siren"/>".
       </assert>
@@ -705,7 +740,7 @@
       <let name="isExcludedDocType" value="$docType = ('389', '501', '500', '471', '473', '261', '502')"/>
       
       <!-- Contrôle -->
-      <assert test="not($isB2B and $isExcludedDocType) or (starts-with($endpointID, $siren) and $endpointSchemeID = '0225')" flag="warning" id="BR-FR-22_BT-34">
+      <assert test="not($isB2B and $isExcludedDocType) or (starts-with($endpointID, $siren) and $endpointSchemeID = '0225')" flag="fatal" id="BR-FR-22_BT-34">
         BR-FR-22/BT-34 : Si le traitement est BAR/B2B et que le type de document (BT-3) est en autofacture (389, 501, 500, 471, 473, 261, 502), alors le BT-34 (EndpointID du vendeur) doit commencer par le SIREN (BT-30) et le BT-34-1 (schemeID) doit être égal à "0225".
         Valeurs actuelles : EndpointID="<value-of select="$endpointID"/>", schemeID="<value-of select="$endpointSchemeID"/>", SIREN="<value-of select="$siren"/>".
       </assert>
@@ -716,7 +751,7 @@
     
     <!-- BT-34 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:URIUniversalCommunication/ram:URIID[@schemeID='0225']">
-      <assert test="custom:is-valid-schemeid-format(.)" flag="warning" id="BR-FR-23_BT-34">
+      <assert test="custom:is-valid-schemeid-format(.)" flag="fatal" id="BR-FR-23_BT-34">
         BR-FR-23/BT-34 : L'adresse électronique (ram:URIID) ne respecte pas le format autorisé. Valeur actuelle : "<value-of select='.'/>".
         Seuls les caractères alphanumériques et les symboles "-", "_", "." sont autorisés.
       </assert>
@@ -724,7 +759,7 @@
     
     <!-- BT-49 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:URIUniversalCommunication/ram:URIID[@schemeID='0225']">
-      <assert test="custom:is-valid-schemeid-format(.)" flag="warning" id="BR-FR-23_BT-49">
+      <assert test="custom:is-valid-schemeid-format(.)" flag="fatal" id="BR-FR-23_BT-49">
         BR-FR-23/BT-49 : L'adresse électronique (ram:URIID) ne respecte pas le format autorisé. Valeur actuelle : "<value-of select='.'/>".
         Seuls les caractères alphanumériques et les symboles "-", "_", "." sont autorisés.
       </assert>
@@ -732,7 +767,7 @@
     
     <!-- EXT-FR-FE-12 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:URIUniversalCommunication/ram:URIID[@schemeID='0225']">
-      <assert test="custom:is-valid-schemeid-format(.)" flag="warning"  id="BR-FR-23_EXT-FR-FE-12">
+      <assert test="custom:is-valid-schemeid-format(.)" flag="fatal"  id="BR-FR-23_EXT-FR-FE-12">
         BR-FR-23/EXT-FR-FE-12 : L'adresse électronique (ram:URIID) ne respecte pas le format autorisé. Valeur actuelle : "<value-of select='.'/>".
         Seuls les caractères alphanumériques et les symboles "-", "_", "." sont autorisés.
       </assert>
@@ -740,7 +775,7 @@
     
     <!-- EXT-FR-FE-29 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:URIUniversalCommunication/ram:URIID[@schemeID='0225']">
-      <assert test="custom:is-valid-schemeid-format(.)" flag="warning"  id="BR-FR-23_EXT-FR-FE-29">
+      <assert test="custom:is-valid-schemeid-format(.)" flag="fatal"  id="BR-FR-23_EXT-FR-FE-29">
         BR-FR-23/EXT-FR-FE-29 : L'adresse électronique (ram:URIID) ne respecte pas le format autorisé. Valeur actuelle : "<value-of select='.'/>".
         Seuls les caractères alphanumériques et les symboles "-", "_", "." sont autorisés.
       </assert>
@@ -748,7 +783,7 @@
     
     <!-- EXT-FR-FE-52 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:URIUniversalCommunication/ram:URIID[@schemeID='0225']">
-      <assert test="custom:is-valid-schemeid-format(.)" flag="warning"  id="BR-FR-23_EXT-FR-FE-52">
+      <assert test="custom:is-valid-schemeid-format(.)" flag="fatal"  id="BR-FR-23_EXT-FR-FE-52">
         BR-FR-23/EXT-FR-FE-52 : L'adresse électronique (ram:URIID) ne respecte pas le format autorisé. Valeur actuelle : "<value-of select='.'/>".
         Seuls les caractères alphanumériques et les symboles "-", "_", "." sont autorisés.
       </assert>
@@ -756,7 +791,7 @@
     
     <!-- EXT-FR-FE-75 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:URIUniversalCommunication/ram:URIID[@schemeID='0225']">
-      <assert test="custom:is-valid-schemeid-format(.)" flag="warning"  id="BR-FR-23_EXT-FR-FE-75">
+      <assert test="custom:is-valid-schemeid-format(.)" flag="fatal"  id="BR-FR-23_EXT-FR-FE-75">
         BR-FR-23/EXT-FR-FE-75 : L'adresse électronique (ram:URIID) ne respecte pas le format autorisé. Valeur actuelle : "<value-of select='.'/>".
         Seuls les caractères alphanumériques et les symboles "-", "_", "." sont autorisés.
       </assert>
@@ -764,7 +799,7 @@
     
     <!-- EXT-FR-FE-98 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:URIUniversalCommunication/ram:URIID[@schemeID='0225']">
-      <assert test="custom:is-valid-schemeid-format(.)" flag="warning"  id="BR-FR-23_EXT-FR-FE-98">
+      <assert test="custom:is-valid-schemeid-format(.)" flag="fatal"  id="BR-FR-23_EXT-FR-FE-98">
         BR-FR-23/EXT-FR-FE-98 : L'adresse électronique (ram:URIID) ne respecte pas le format autorisé. Valeur actuelle : "<value-of select='.'/>".
         Seuls les caractères alphanumériques et les symboles "-", "_", "." sont autorisés.
       </assert>
@@ -772,7 +807,7 @@
     
     <!-- EXT-FR-FE-121 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:URIUniversalCommunication/ram:URIID[@schemeID='0225']">
-      <assert test="custom:is-valid-schemeid-format(.)" flag="warning"  id="BR-FR-23_EXT-FR-FE-121">
+      <assert test="custom:is-valid-schemeid-format(.)" flag="fatal"  id="BR-FR-23_EXT-FR-FE-121">
         BR-FR-23/EXT-FR-FE-121 : L'adresse électronique (ram:URIID) ne respecte pas le format autorisé. Valeur actuelle : "<value-of select='.'/>".
         Seuls les caractères alphanumériques et les symboles "-", "_", "." sont autorisés.
       </assert>
@@ -783,7 +818,7 @@
     
     <!-- BT-29 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:GlobalID[@schemeID='0224']">
-      <assert test="custom:is-valid-schemeid-format(.)" flag="warning" id="BR-FR-24_BT-29">
+      <assert test="custom:is-valid-schemeid-format(.)" flag="fatal" id="BR-FR-24_BT-29">
         BR-FR-24/BT-29 : L'identifiant privé (ram:GlobalID) ne respecte pas le format autorisé. Valeur actuelle : "<value-of select='.'/>".
         Seuls les caractères alphanumériques et les symboles "-", "_", "." sont autorisés.
       </assert>
@@ -791,7 +826,7 @@
     
     <!-- BT-46 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:GlobalID[@schemeID='0224']">
-      <assert test="custom:is-valid-schemeid-format(.)" flag="warning" id="BR-FR-24_BT-46">
+      <assert test="custom:is-valid-schemeid-format(.)" flag="fatal" id="BR-FR-24_BT-46">
         BR-FR-24/BT-46 : L'identifiant privé (ram:GlobalID) ne respecte pas le format autorisé. Valeur actuelle : "<value-of select='.'/>".
         Seuls les caractères alphanumériques et les symboles "-", "_", "." sont autorisés.
       </assert>
@@ -802,7 +837,7 @@
     
     <!-- BT-34 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:URIUniversalCommunication/ram:URIID">
-      <assert test="string-length(.) le 125" flag="warning" id="BR-FR-25_BT-34">
+      <assert test="string-length(.) le 125" flag="fatal" id="BR-FR-25_BT-34">
         BR-FR-25/BT-34 : L'adresse électronique (ram:URIID) dépasse 125 caractères. Valeur actuelle : "<value-of select='.'/>".
         Veuillez raccourcir cette valeur pour respecter la limite.
       </assert>
@@ -810,7 +845,7 @@
     
     <!-- BT-49 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:URIUniversalCommunication/ram:URIID">
-      <assert test="string-length(.) le 125" flag="warning" id="BR-FR-25_BT-49">
+      <assert test="string-length(.) le 125" flag="fatal" id="BR-FR-25_BT-49">
         BR-FR-25/BT-49 : L'adresse électronique (ram:URIID) dépasse 125 caractères. Valeur actuelle : "<value-of select='.'/>".
         Veuillez raccourcir cette valeur pour respecter la limite.
       </assert>
@@ -818,7 +853,7 @@
     
     <!-- EXT-FR-FE-12 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty/ram:URIUniversalCommunication/ram:URIID">
-      <assert test="string-length(.) le 125" flag="warning" id="BR-FR-25_EXT-FR-FE-12">
+      <assert test="string-length(.) le 125" flag="fatal" id="BR-FR-25_EXT-FR-FE-12">
         BR-FR-25/EXT-FR-FE-12 : L'adresse électronique (ram:URIID) dépasse 125 caractères. Valeur actuelle : "<value-of select='.'/>".
         Veuillez raccourcir cette valeur pour respecter la limite.
       </assert>
@@ -826,7 +861,7 @@
     
     <!-- EXT-FR-FE-29 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty/ram:URIUniversalCommunication/ram:URIID">
-      <assert test="string-length(.) le 125" flag="warning" id="BR-FR-25_EXT-FR-FE-29">
+      <assert test="string-length(.) le 125" flag="fatal" id="BR-FR-25_EXT-FR-FE-29">
         BR-FR-25/EXT-FR-FE-29 : L'adresse électronique (ram:URIID) dépasse 125 caractères. Valeur actuelle : "<value-of select='.'/>".
         Veuillez raccourcir cette valeur pour respecter la limite.
       </assert>
@@ -834,7 +869,7 @@
     
     <!-- EXT-FR-FE-52 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty/ram:URIUniversalCommunication/ram:URIID">
-      <assert test="string-length(.) le 125" flag="warning" id="BR-FR-25_EXT-FR-FE-52">
+      <assert test="string-length(.) le 125" flag="fatal" id="BR-FR-25_EXT-FR-FE-52">
         BR-FR-25/EXT-FR-FE-52 : L'adresse électronique (ram:URIID) dépasse 125 caractères. Valeur actuelle : "<value-of select='.'/>".
         Veuillez raccourcir cette valeur pour respecter la limite.
       </assert>
@@ -842,7 +877,7 @@
     
     <!-- EXT-FR-FE-75 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty/ram:URIUniversalCommunication/ram:URIID">
-      <assert test="string-length(.) le 125" flag="warning" id="BR-FR-25_EXT-FR-FE-75">
+      <assert test="string-length(.) le 125" flag="fatal" id="BR-FR-25_EXT-FR-FE-75">
         BR-FR-25/EXT-FR-FE-75 : L'adresse électronique (ram:URIID) dépasse 125 caractères. Valeur actuelle : "<value-of select='.'/>".
         Veuillez raccourcir cette valeur pour respecter la limite.
       </assert>
@@ -850,7 +885,7 @@
     
     <!-- EXT-FR-FE-98 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:URIUniversalCommunication/ram:URIID">
-      <assert test="string-length(.) le 125" flag="warning" id="BR-FR-25_EXT-FR-FE-98">
+      <assert test="string-length(.) le 125" flag="fatal" id="BR-FR-25_EXT-FR-FE-98">
         BR-FR-25/EXT-FR-FE-98 : L'adresse électronique (ram:URIID) dépasse 125 caractères. Valeur actuelle : "<value-of select='.'/>".
         Veuillez raccourcir cette valeur pour respecter la limite.
       </assert>
@@ -858,7 +893,7 @@
     
     <!-- EXT-FR-FE-121 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty/ram:URIUniversalCommunication/ram:URIID">
-      <assert test="string-length(.) le 125" flag="warning" id="BR-FR-25_EXT-FR-FE-121">
+      <assert test="string-length(.) le 125" flag="fatal" id="BR-FR-25_EXT-FR-FE-121">
         BR-FR-25/EXT-FR-FE-121 : L'adresse électronique (ram:URIID) dépasse 125 caractères. Valeur actuelle : "<value-of select='.'/>".
         Veuillez raccourcir cette valeur pour respecter la limite.
       </assert>
@@ -869,7 +904,7 @@
     
     <!-- BT-29 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:GlobalID[@schemeID='0224']">
-      <assert test="string-length(.) le 100" flag="warning" id="BR-FR-26_BT-29">
+      <assert test="string-length(.) le 100" flag="fatal" id="BR-FR-26_BT-29">
         BR-FR-26/BT-29 : L'identifiant privé (ram:GlobalID) dépasse 100 caractères. Valeur actuelle : "<value-of select='.'/>".
         Veuillez raccourcir cette valeur pour respecter la limite.
       </assert>
@@ -877,7 +912,7 @@
     
     <!-- BT-46 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:GlobalID[@schemeID='0224']">
-      <assert test="string-length(.) le 100" flag="warning" id="BR-FR-26_BT-46">
+      <assert test="string-length(.) le 100" flag="fatal" id="BR-FR-26_BT-46">
         BR-FR-26/BT-46 : L'identifiant privé (ram:GlobalID) dépasse 100 caractères. Valeur actuelle : "<value-of select='.'/>".
         Veuillez raccourcir cette valeur pour respecter la limite.
       </assert>
@@ -890,7 +925,7 @@
     <!-- BG-32 : Vérification dans ApplicableProductCharacteristic -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedTradeProduct/ram:ApplicableProductCharacteristic">
       <assert test="ram:Description or ram:TypeCode"
-        flag="warning" id="BR-FR-27_BG-32">
+        flag="fatal" id="BR-FR-27_BG-32">
         BR-FR-27/BG-32 : Le groupe Attribut d’article (BG-32) doit contenir soit un nom d’attribut d’article (BT-160 : ram:Description), soit un code d’attribut d’article (EXT-FR-FE-159 : ram:TypeCode).
         Aucun des deux éléments n’a été trouvé dans le contexte ApplicableProductCharacteristic.
         Veuillez ajouter au moins l’un des deux éléments pour respecter la structure attendue.
@@ -900,7 +935,7 @@
     <!-- BT-160 : Vérification de la présence du nom -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedTradeProduct/ram:ApplicableProductCharacteristic/ram:Description">
       <assert test="normalize-space(.) != ''"
-        flag="warning" id="BR-FR-27_BT-160">
+        flag="fatal" id="BR-FR-27_BT-160">
         BR-FR-27/BT-160 : Le nom d’attribut d’article (ram:Description) ne doit pas être vide.
         Valeur actuelle : "<value-of select="."/>".
         Veuillez fournir un nom d’attribut valide ou utiliser un code à la place.
@@ -910,7 +945,7 @@
     <!-- EXT-FR-FE-159 : Vérification de la présence du code -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedTradeProduct/ram:ApplicableProductCharacteristic/ram:TypeCode">
       <assert test="normalize-space(.) != ''"
-        flag="warning" id="BR-FR-27_EXT-FR-FE-159">
+        flag="fatal" id="BR-FR-27_EXT-FR-FE-159">
         BR-FR-27/EXT-FR-FE-159 : Le code d’attribut d’article (ram:TypeCode) ne doit pas être vide.
         Valeur actuelle : "<value-of select="."/>".
         Veuillez fournir un code d’attribut valide ou utiliser un nom à la place.
@@ -918,45 +953,15 @@
     </rule>
   </pattern>
   
-  <pattern id="BR-FR-28">
+  <pattern id="BR-FR-28"> <!-- Correction V1.4.0  une seule règle suffit (et déjà dans le profil EXTENDED BR-FREXT-51-2) -->
     <title>BR-FR-28 — Validation de la valeur d’attribut d’article (BG-32)</title>
-    
-    <!-- BG-32 : Vérification dans ApplicableProductCharacteristic - VCYS3 : et pas les deux -->
-    <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedTradeProduct/ram:ApplicableProductCharacteristic">
-      <assert test="(ram:Value or (ram:ValueMeasure and ram:ValueMeasure/@unitCode)) and not(ram:Value and (ram:ValueMeasure and ram:ValueMeasure/@unitCode))"
-        flag="warning" id="BR-FR-28_BT-161-1">
-        BR-FR-28/BT-161 : Le groupe Attribut d’article (BG-32) doit contenir soit une valeur d’attribut (BT-161 : ram:Value), soit une valeur d’attribut avec unité de mesure (EXT-FR-FE-160 : ram:ValueMeasure) accompagnée de son unité (EXT-FR-FE-161 : @unitCode), et pas les deux.
-        Veuillez fournir une valeur d’attribut ou une valeur mesurée avec son unité, et pas les deux.
-      </assert>
-    </rule>
-    
-    <!-- BT-161 : Vérification de la valeur simple -->
-    <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedTradeProduct/ram:ApplicableProductCharacteristic/ram:Value">
-      <assert test="normalize-space(.) != ''"
-        flag="warning" id="BR-FR-28_BT-161-2">
-        BR-FR-28/BT-161 : La valeur d’attribut (ram:Value) ne doit pas être vide.
-        Valeur actuelle : "<value-of select="."/>".
-        Veuillez fournir une valeur d’attribut valide ou utiliser une mesure avec unité.
-      </assert>
-    </rule>
-    
-    <!-- EXT-FR-FE-160 : Vérification de la valeur mesurée -->
-    <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedTradeProduct/ram:ApplicableProductCharacteristic/ram:ValueMeasure">
-      <assert test="normalize-space(.) != ''"
-        flag="warning" id="BR-FR-28_EXT-FR-FE-160">
-        BR-FR-28/EXT-FR-FE-160 : La valeur mesurée (ram:ValueMeasure) ne doit pas être vide.
-        Valeur actuelle : "<value-of select="."/>".
-        Veuillez fournir une valeur mesurée valide accompagnée de son unité.
-      </assert>
-    </rule>
-    
-    <!-- EXT-FR-FE-161 : Vérification de l’unité de mesure -->
-    <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedTradeProduct/ram:ApplicableProductCharacteristic/ram:ValueMeasure/@unitCode">
-      <assert test="normalize-space(.) != ''"
-        flag="warning" id="BR-FR-28_EXT-FR-FE-161">
-        BR-FR-28/EXT-FR-FE-161 : L’unité de mesure (@unitCode) ne doit pas être vide lorsqu’une valeur mesurée est fournie.
-        Valeur actuelle : "<value-of select="."/>".
-        Veuillez spécifier une unité de mesure conforme.
+  
+    <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedTradeProduct/ram:ApplicableProductCharacteristic">  
+      <assert test="(exists(ram:Value) and not(exists(ram:ValueMeasure))) or (not(exists(ram:Value)) and (exists(ram:ValueMeasure[@unitCode!=''])))"
+        flag="fatal" id="BR-FR-28-Value">
+        [BR-FR-28] : La valeur d’attribut (ram:Value) ou la valeur (ram:ValueMeasure avec unité de mesure) doivent être présents, mais pas les deux
+        Valeur actuelle Value : "<value-of select="ram:Value"/>", Valeur actuelle Value Quantity : "<value-of select="ram:ValueMeasure"/>". unité de mesure : "<value-of select="ram:ValueMeasure/@unitCode"/>"
+        Veuillez fournir une valeur d’attribut valide ou utiliser une Valeur avec unité de mesure.
       </assert>
     </rule>
   </pattern>
@@ -967,7 +972,7 @@
     <!-- Contexte : ApplicableHeaderTradeAgreement -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement">
       <assert test="count(ram:AdditionalReferencedDocument[ram:ReferenceTypeCode='AFL']) &lt;= 1 and count(ram:AdditionalReferencedDocument[ram:ReferenceTypeCode='AVV']) &lt;= 1"
-        flag="warning" id="BR-FR-29_BT-18">
+        flag="fatal" id="BR-FR-29_BT-18">
         BR-FR-29/BT-18 : Parmi les identifiants d’objets facturés (BT-18), les schémas d’identification "AFL" et "AVV" ne doivent être présents qu’une seule fois chacun.
         Actuellement : AFL = <value-of select="count(ram:AdditionalReferencedDocument[ram:ReferenceTypeCode='AFL'])"/> occurrence(s), AVV = <value-of select="count(ram:AdditionalReferencedDocument[ram:ReferenceTypeCode='AVV'])"/> occurrence(s).
         Veuillez supprimer les doublons pour respecter la règle.
@@ -977,7 +982,7 @@
     <!-- Vérification individuelle AFL -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[ram:ReferenceTypeCode='AFL']/ram:IssuerAssignedID">
       <assert test="normalize-space(.) != ''"
-        flag="warning" id="BR-FR-29_AFL">
+        flag="fatal" id="BR-FR-29_AFL">
         BR-FR-29/AFL : L’identifiant associé au schéma "AFL" (ram:IssuerAssignedID) ne doit pas être vide.
         Valeur actuelle : "<value-of select="."/>".
       </assert>
@@ -986,7 +991,7 @@
     <!-- Vérification individuelle AVV -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[ram:ReferenceTypeCode='AVV']/ram:IssuerAssignedID">
       <assert test="normalize-space(.) != ''"
-        flag="warning" id="BR-FR-29_AVV">
+        flag="fatal" id="BR-FR-29_AVV">
         BR-FR-29/AVV : L’identifiant associé au schéma "AVV" (ram:IssuerAssignedID) ne doit pas être vide.
         Valeur actuelle : "<value-of select="."/>".
       </assert>
@@ -999,7 +1004,7 @@
     <!-- Contexte : ApplicableHeaderTradeAgreement -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem">
       <assert test="count(ram:AdditionalReferencedDocument[ram:ReferenceTypeCode='AFL']) &lt;= 1 and count(ram:AdditionalReferencedDocument[ram:ReferenceTypeCode='AVV']) &lt;= 1"
-        flag="warning" id="BR-FR-30_BT-128">
+        flag="fatal" id="BR-FR-30_BT-128">
         BR-FR-30/BT-128 : Parmi les identifiants d’objets facturés à la ligne (BT-128), les schémas d’identification "AFL" et "AVV" ne doivent être présents qu’une seule fois chacun.
         Actuellement : AFL = <value-of select="count(ram:AdditionalReferencedDocument[ram:ReferenceTypeCode='AFL'])"/> occurrence(s), AVV = <value-of select="count(ram:AdditionalReferencedDocument[ram:ReferenceTypeCode='AVV'])"/> occurrence(s).
         Veuillez supprimer les doublons pour respecter la règle.
@@ -1009,7 +1014,7 @@
     <!-- Vérification individuelle AFL -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:AdditionalReferencedDocument[ram:ReferenceTypeCode='AFL']/ram:IssuerAssignedID">
       <assert test="normalize-space(.) != ''"
-        flag="warning" id="BR-FR-30_AFL">
+        flag="fatal" id="BR-FR-30_AFL">
         BR-FR-30/AFL : L’identifiant associé au schéma "AFL" (ram:IssuerAssignedID) ne doit pas être vide.
         Valeur actuelle : "<value-of select="."/>".
       </assert>
@@ -1018,7 +1023,7 @@
     <!-- Vérification individuelle AVV -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:AdditionalReferencedDocument[ram:ReferenceTypeCode='AVV']/ram:IssuerAssignedID">
       <assert test="normalize-space(.) != ''"
-        flag="warning" id="BR-FR-30_AVV">
+        flag="fatal" id="BR-FR-30_AVV">
         BR-FR-30/AVV : L’identifiant associé au schéma "AVV" (ram:IssuerAssignedID) ne doit pas être vide.
         Valeur actuelle : "<value-of select="."/>".
       </assert>
@@ -1029,19 +1034,38 @@
   <pattern id="BR-FR-31">
     <title>BR-FR-31 — Note avec code sujet BAR : une seule valeur possible dans la liste </title>
     
-    <!-- Vérification présence d'une seule valeur codée (B2B, B2BINT, ...) avec code sujet BAR -->
+    <!-- Vérification présence d'une seule valeur codée (B2B, B2BINT, ...) avec code sujet BAR - V1.4 Ajout B2CINT -->
     <rule context="rsm:CrossIndustryInvoice/rsm:ExchangedDocument">
       <let name="barNotes" value="ram:IncludedNote[ram:SubjectCode = 'BAR']"/>
-      <let name="barCount" value="count($barNotes[normalize-space(ram:Content) = 'B2B' or normalize-space(ram:Content) = 'B2BINT' or normalize-space(ram:Content) = 'B2C' or normalize-space(ram:Content) = 'OUTOFSCOPE' or normalize-space(ram:Content) = 'ARCHIVEONLY'])"/>
+      <let name="barCount" value="count($barNotes[normalize-space(ram:Content) = 'B2B' or normalize-space(ram:Content) = 'B2BINT' or normalize-space(ram:Content) = 'B2C' or normalize-space(ram:Content) = 'B2CINT' or normalize-space(ram:Content) = 'OUTOFSCOPE' or normalize-space(ram:Content) = 'ARCHIVEONLY'])"/>
       
-      <assert test="$barCount &lt;= 1" flag="warning" id="BR-FR-30_BT-21">
-        BR-FR-30/BT-21 : Lorsque plusieurs notes ont le code sujet « BAR » (BT-21), Il ne peut y avoir qu'une seule valeur associée (BT-22, contenu de la note) parmi l’une des suivantes : B2B, B2BINT, B2C, OUTOFSCOPE, ARCHIVEONLY.
+      <assert test="$barCount &lt;= 1" flag="fatal" id="BR-FR-31_BT-21">
+        BR-FR-31/BT-21 : Lorsque plusieurs notes ont le code sujet « BAR » (BT-21), Il ne peut y avoir qu'une seule valeur associée (BT-22, contenu de la note) parmi l’une des suivantes : B2B, B2BINT, B2C, OUTOFSCOPE, ARCHIVEONLY.
         Valeur fournie : "<value-of select="$barNotes"/>" , Nombre de valeurs présentes (pas plus de 1) : <value-of select="$barCount"/>  "/>". Veuillez corriger la valeur ou retirer le code sujet « BAR ».
       </assert>
-    </rule> 
-    
-    
+    </rule>         
   </pattern> 
+  
+  <pattern id="BR-FR-32">
+    <title>BR-FR-32 — Le SIREN contient exactement 9 chiffres </title>
+    
+    <!-- Vérification que les SIREN sont composés de 9 chiffres matches($siret, '^\d{14}$') -->
+    <rule context="//ram:SpecifiedLegalOrganization/ram:ID[@schemeID = '0002']">
+     
+      <assert test="matches(normalize-space(.), '^\d{9}$')" flag="fatal" id="BR-FR-32-LEGALID">
+        BR-FR-32/LEGALID : Tout identifiant légal d'une Partie avec schemeID = '0002' DOIT être composé de 9 chiffres.
+      </assert>
+    </rule>  
+    
+    <rule context="//ram:GlobalID[@schemeID = '0002' or @schemeID='0231']">
+      
+      <assert test="matches(normalize-space(.), '^\d{9}$')" flag="fatal" id="BR-FR-32-GLOBALID">
+        BR-FR-32/ID : Tout identifiant d'une Partie avec schemeID = '0231' ou '0002' DOIT être composé de 9 chiffres.
+      </assert>
+    </rule>    
+    
+  </pattern>  
+  
   
   <pattern id="BR-FR-CO-03">
     <title>BR-FR-CO-03 — Présence obligatoire du contrat et de la période de facturation si type de facture = 262 (Avoir Remise Globale)</title>
@@ -1053,7 +1077,7 @@
       <let name="billingPeriodEnd" value="rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:BillingSpecifiedPeriod/ram:EndDateTime/udt:DateTimeString"/>
       
       <assert test="not($typeCode = '262') or (string($contractReference) and string($billingPeriodStart) and string($billingPeriodEnd))"
-        flag="warning" id="BR-FR-CO-03_BT-3">
+        flag="fatal" id="BR-FR-CO-03_BT-3">
         BR-FR-CO-03/BT-3 : Si le code type de la facture (BT-3) est égal à 262 (Avoir Remise Globale), alors :
         - Le numéro de contrat (BT-12) doit être présent
         - La période de facturation (BG-14) doit être renseignée (dates de début et de fin).
@@ -1070,12 +1094,14 @@
     <!--  <let name="refCount" value="count($references[ram:IssuerAssignedID and ram:FormattedIssueDateTime/udt:DateTimeString])"/> -->
       <let name="refCount" value="count($references)"/>
       
-      <assert test="not($typeCode = ('384', '471', '472', '473')) or $refCount = 1" flag="warning"  id="BR-FR-CO-04_BT-4">
+      <assert test="not($typeCode = ('384', '471', '472', '473')) or $refCount = 1" flag="fatal"  id="BR-FR-CO-04_BT-4">
         BR-FR-CO-04/BT-3 : Si le type de facture (BT-3) est une facture rectificative (384, 471, 472, 473), alors **une et une seule** référence à une facture antérieure (BT-25) avec sa date (BT-26) doit être présente.
         Nombre de références valides trouvées : <value-of select="$refCount"/>.
       </assert>
     </rule>
   </pattern>
+  
+  <!-- V1.4.0 - Corrected to exclude GROUP and INFORMATION lines -->
   <pattern id="BR-FR-CO-05">
     <title>BR-FR-CO-05 — Référence obligatoire à une facture antérieure pour les avoirs (BT-3)</title>
     
@@ -1083,18 +1109,18 @@
       <let name="typeCode" value="rsm:ExchangedDocument/ram:TypeCode"/>
       <let name="headerRefs" value="rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceReferencedDocument"/>
       <let name="headerRefCount" value="count($headerRefs[ram:IssuerAssignedID and ram:FormattedIssueDateTime/qdt:DateTimeString])"/>
-      <let name="lineRefsValid" value="every $line in rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem satisfies 
+      <let name="lineRefsValid" value="every $line in rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[not(ram:AssociatedDocumentLineDocument/ram:LineStatusReasonCode) or ram:AssociatedDocumentLineDocument/ram:LineStatusReasonCode = 'DETAIL'] satisfies 
         exists($line/ram:SpecifiedLineTradeSettlement/ram:InvoiceReferencedDocument[ram:IssuerAssignedID and ram:FormattedIssueDateTime/qdt:DateTimeString])"/>
       
-      <assert test="not($typeCode = ('261', '381', '396', '502', '503')) or ($headerRefCount ge 1 or $lineRefsValid)" flag="warning" id="BR-FR-CO-05_BT-3">
+      <assert test="not($typeCode = ('261', '381', '396', '502', '503')) or ($headerRefCount ge 1 or $lineRefsValid)" flag="fatal" id="BR-FR-CO-05_BT-3">
         BR-FR-CO-05/BT-3 : Si le type de facture (BT-3) est un avoir (261, 381, 396, 502, 503), alors :
         - soit au moins une référence à une facture antérieure (BT-25) avec sa date (BT-26) doit être présente au niveau entête,
-        - soit chaque ligne (BG-25) doit contenir une référence à une facture antérieure (EXT-FR-FE-136) avec sa date (EXT-FR-FE-138).
+        - soit chaque ligne (BG-25) sans subtype (EXT-FR-FE-163) ou avec subtype 'DETAIL' doit contenir une référence à une facture antérieure (EXT-FR-FE-136) avec sa date (EXT-FR-FE-138).
         Références entête trouvées : <value-of select="$headerRefCount"/>.
       </assert>
     </rule>
   </pattern>
-  <pattern id="BR-FR-CO-07">
+  <pattern id="BR-FR-CO-07"> <!-- fix04 : correction du test en cas de multiplicité de date d'échéance du fait de multiplicité de PaymentTerms §profil EXTENDED de Factur-X -->
     <title>BR-FR-CO-07 — La date d’échéance (BT-9) doit être postérieure ou égale à la date de facture (BT-2), sauf cas particuliers</title>
     
     <rule context="rsm:CrossIndustryInvoice">
@@ -1103,9 +1129,9 @@
       <let name="typeCode" value="rsm:ExchangedDocument/ram:TypeCode"/>
       <let name="frameworkCode" value="rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID"/> <!-- CYS4 Correction Xpath -->
       
-      <assert test="not(string($dueDate)) or 
-        ($typeCode = ('386', '500', '503') or $frameworkCode = ('B2', 'S2', 'M2') or $dueDate ge $issueDate)"
-        flag="warning" id="BR-FR-CO-07_BT-9">
+      <assert test="not($dueDate[normalize-space(.)]) or 
+        ($typeCode = ('386', '500', '503') or $frameworkCode = ('B2', 'S2', 'M2') or (every $dt in $dueDate satisfies $dt ge $issueDate))"
+        flag="fatal" id="BR-FR-CO-07_BT-9">
         BR-FR-CO-07/BT-9 : La date d’échéance (BT-9), si présente, doit être postérieure ou égale à la date de facture (BT-2),
         sauf si la facture est de type acompte (386, 500, 503) ou si le cadre de facturation (BT-23) est B2, S2 ou M2.
         Valeurs actuelles : Date facture = "<value-of select="$issueDate"/>", Date échéance = "<value-of select="$dueDate"/>", Type = "<value-of select="$typeCode"/>", Cadre = "<value-of select="$frameworkCode"/>".
@@ -1119,13 +1145,13 @@
       <let name="frameworkCode" value="rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID"/>
       <let name="typeCode" value="rsm:ExchangedDocument/ram:TypeCode"/>
       
-      <assert test="not($frameworkCode = ('B4', 'S4', 'M4')) or not($typeCode = ('386', '500', '503'))" flag="warning" id="BR-FR-CO-08_BT-23">
+      <assert test="not($frameworkCode = ('B4', 'S4', 'M4')) or not($typeCode = ('386', '500', '503'))" flag="fatal" id="BR-FR-CO-08_BT-23">
         BR-FR-CO-08/BT-23 : Si le cadre de facturation (BT-23) est B4, S4 ou M4 (factures définitives après acompte), alors le type de facture (BT-3) ne peut pas être une facture ou un avoir d’acompte (386, 500, 503).
         Valeurs actuelles : BT-23="<value-of select="$frameworkCode"/>", BT-3="<value-of select="$typeCode"/>".
       </assert>
     </rule>
   </pattern>
-  <pattern id="BR-FR-CO-09"> <!-- CYS3 CORRECTION Xpath BT-113 et Ajouter number(.) pour comparer des montants et nombres -->
+  <pattern id="BR-FR-CO-09"> <!-- CYS3 CORRECTION Xpath BT-113 et Ajouter number(.) pour comparer des montants et nombres - fix04 remplacer number par xs:decimal + correction test présence DueDate -->
     <title>BR-FR-CO-09 — Contrôle des montants et de la date d’échéance pour les factures déjà payées (BT-23)</title>
     
     <rule context="rsm:CrossIndustryInvoice">
@@ -1136,17 +1162,17 @@
       <let name="dueAmount" value="rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:DuePayableAmount"/>
       <let name="dueDate" value="rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:DueDateDateTime/udt:DateTimeString"/>
       
-      <assert test="not($isPaidMode) or (number($paidAmount) = number($totalAmount))" flag="warning" id="BR-FR-CO-09_BT-23-1">
+      <assert test="not($isPaidMode) or (xs:decimal($paidAmount) = xs:decimal($totalAmount))" flag="fatal" id="BR-FR-CO-09_BT-23-1">
         BR-FR-CO-09/BT-23 : Si le cadre de facturation (BT-23) est B2, S2 ou M2 (facture déjà payée), alors le montant déjà payé (BT-113) doit être égal au montant total TTC (BT-112).
         Montant payé : <value-of select="$paidAmount"/>, Montant total : <value-of select="$totalAmount"/>.
       </assert>
       
-      <assert test="not($isPaidMode) or (number($dueAmount) = 0)" flag="warning" id="BR-FR-CO-09_BT-23-2">
+      <assert test="not($isPaidMode) or (xs:decimal($dueAmount) = 0)" flag="fatal" id="BR-FR-CO-09_BT-23-2">
         BR-FR-CO-09/BT-23 : Si le cadre de facturation (BT-23) est B2, S2 ou M2, alors le net à payer (BT-115) doit être égal à 0.
         Net à payer : <value-of select="$dueAmount"/>.
       </assert>
       
-      <assert test="not($isPaidMode) or string($dueDate)" flag="warning" id="BR-FR-CO-09_BT-23-3">
+      <assert test="not($isPaidMode) or $dueDate[normalize-space(.)]" flag="fatal" id="BR-FR-CO-09_BT-23-3">
         BR-FR-CO-09/BT-23 : Si le cadre de facturation (BT-23) est B2, S2 ou M2, alors la date d’échéance (BT-9) doit être renseignée et correspondre à la date de paiement.
         Date d’échéance actuelle : <value-of select="$dueDate"/>.
       </assert>
@@ -1160,12 +1186,12 @@
     <rule context="rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty">
       
       <!-- Règle 1 : Chaque GlobalID doit avoir un @schemeID -->
-      <assert test="every $id in ram:GlobalID satisfies $id/@schemeID" flag="warning" id="BR-FR-CO-10_BT-29-1">
+      <assert test="every $id in ram:GlobalID satisfies $id/@schemeID" flag="fatal" id="BR-FR-CO-10_BT-29-1">
         BR-FR-CO-10/BT-29 : Si l’identifiant global du vendeur (BT-29) est renseigné, alors son schéma (BT-29-1) doit également être renseigné.
       </assert>
       
       <!-- Règle 2 : Unicité des schemeID -->
-      <assert test="count(distinct-values(ram:GlobalID/@schemeID)) = count(ram:GlobalID/@schemeID)" flag="warning" id="BR-FR-CO-10_BT-29-2">
+      <assert test="count(distinct-values(ram:GlobalID/@schemeID)) = count(ram:GlobalID/@schemeID)" flag="fatal" id="BR-FR-CO-10_BT-29-2">
         BR-FR-CO-10/BT-29 : Chaque schemeID ne peut apparaître qu’une seule fois dans l'identifiant privé du vendeur (BT-29).
       </assert>
       
@@ -1173,11 +1199,11 @@
     
     <rule context="rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty">
       
-      <assert test="every $id in ram:GlobalID satisfies $id/@schemeID" flag="warning" id="BR-FR-CO-10_BT-46-1">
+      <assert test="every $id in ram:GlobalID satisfies $id/@schemeID" flag="fatal" id="BR-FR-CO-10_BT-46-1">
         BR-FR-CO-10/BT-46 : Si l’identifiant global de l'acheteur (BT-46) est renseigné, alors son schéma (BT-46-1) doit également être renseigné.
       </assert>
       
-      <assert test="count(distinct-values(ram:GlobalID/@schemeID)) = count(ram:GlobalID/@schemeID)" flag="warning" id="BR-FR-CO-10_BT-46-2">
+      <assert test="count(distinct-values(ram:GlobalID/@schemeID)) = count(ram:GlobalID/@schemeID)" flag="fatal" id="BR-FR-CO-10_BT-46-2">
         BR-FR-CO-10/BT-46 : Chaque schemeID ne peut apparaître qu’une seule fois dans l'identifiant privé de l'acheteur (BT-46).
       </assert>
       
@@ -1185,11 +1211,11 @@
     
     <rule context="rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty">
       
-      <assert test="every $id in ram:GlobalID satisfies $id/@schemeID" flag="warning" id="BR-FR-CO-10_BT-60-1">
+      <assert test="every $id in ram:GlobalID satisfies $id/@schemeID" flag="fatal" id="BR-FR-CO-10_BT-60-1">
         BR-FR-CO-10/BT-60 : Si l’identifiant global du bénéficiaire (BT-60) est renseigné, alors son schéma (BT-60-1) doit également être renseigné.
       </assert>
       
-      <assert test="count(distinct-values(ram:GlobalID/@schemeID)) = count(ram:GlobalID/@schemeID)" flag="warning" id="BR-FR-CO-10_BT-60-2">
+      <assert test="count(distinct-values(ram:GlobalID/@schemeID)) = count(ram:GlobalID/@schemeID)" flag="fatal" id="BR-FR-CO-10_BT-60-2">
         BR-FR-CO-10/BT-60 : Chaque schemeID ne peut apparaître qu’une seule fois dans l'identifiant privé du bénéficiaire (BT-60).
       </assert>
       
@@ -1197,11 +1223,11 @@
     
     <rule context="rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty">
       
-      <assert test="every $id in ram:GlobalID satisfies $id/@schemeID" flag="warning" id="BR-FR-CO-10_EXT-FR-FE-06-1">
+      <assert test="every $id in ram:GlobalID satisfies $id/@schemeID" flag="fatal" id="BR-FR-CO-10_EXT-FR-FE-06-1">
         BR-FR-CO-10/EXT-FR-FE-06 : Si l’identifiant global de l'agent d'acheteur (EXT-FR-FE-06) est renseigné, alors son schéma (EXT-FR-FE-07) doit également être renseigné.
       </assert>
       
-      <assert test="count(distinct-values(ram:GlobalID/@schemeID)) = count(ram:GlobalID/@schemeID)" flag="warning" id="BR-FR-CO-10_EXT-FR-FE-06-2">
+      <assert test="count(distinct-values(ram:GlobalID/@schemeID)) = count(ram:GlobalID/@schemeID)" flag="fatal" id="BR-FR-CO-10_EXT-FR-FE-06-2">
         BR-FR-CO-10/EXT-FR-FE-06 : Chaque schemeID ne peut apparaître qu’une seule fois ans l'identifiant privé de l'agent d'acheteur (EXT-FR-FE-06).
       </assert>
       
@@ -1209,11 +1235,11 @@
     
     <rule context="rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty">
       
-      <assert test="every $id in ram:GlobalID satisfies $id/@schemeID" flag="warning" id="BR-FR-CO-10_EXT-FR-FE-46-1">
+      <assert test="every $id in ram:GlobalID satisfies $id/@schemeID" flag="fatal" id="BR-FR-CO-10_EXT-FR-FE-46-1">
         BR-FR-CO-10/EXT-FR-FE-46 : Si l’identifiant global du payeur (EXT-FR-FE-46) est renseigné, alors son schéma (EXT-FR-FE-47) doit également être renseigné.
       </assert>
 
-      <assert test="count(distinct-values(ram:GlobalID/@schemeID)) = count(ram:GlobalID/@schemeID)" flag="warning" id="BR-FR-CO-10_EXT-FR-FE-46-2">
+      <assert test="count(distinct-values(ram:GlobalID/@schemeID)) = count(ram:GlobalID/@schemeID)" flag="fatal" id="BR-FR-CO-10_EXT-FR-FE-46-2">
         BR-FR-CO-10/EXT-FR-FE-46 : Chaque schemeID ne peut apparaître qu’une seule fois ans l'identifiant privé du payeur (EXT-FR-FE-46).
       </assert>
       
@@ -1221,35 +1247,36 @@
  
     <rule context="rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty">
         
-      <assert test="every $id in ram:GlobalID satisfies $id/@schemeID" flag="warning" id="BR-FR-CO-10_EXT-FR-FE-69-1">
+      <assert test="every $id in ram:GlobalID satisfies $id/@schemeID" flag="fatal" id="BR-FR-CO-10_EXT-FR-FE-69-1">
           BR-FR-CO-10/EXT-FR-FE-69 : Si l’identifiant global de l'agent du vendeur (EXT-FR-FE-69) est renseigné, alors son schéma (EXT-FR-FE-70) doit également être renseigné.
         </assert>
         
-      <assert test="count(distinct-values(ram:GlobalID/@schemeID)) = count(ram:GlobalID/@schemeID)" flag="warning" id="BR-FR-CO-10_EXT-FR-FE-69-2">
+      <assert test="count(distinct-values(ram:GlobalID/@schemeID)) = count(ram:GlobalID/@schemeID)" flag="fatal" id="BR-FR-CO-10_EXT-FR-FE-69-2">
           BR-FR-CO-10/EXT-FR-FE-69 : Chaque schemeID ne peut apparaître qu’une seule fois ans l'identifiant privé de l'agent du vendeur (EXT-FR-FE-69).
         </assert>
         
     </rule> 
     
-    <rule context="SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty">
+    <!-- V1.4 Correction Xpath (rsm missing) -->
+    <rule context="rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty">
       
-      <assert test="every $id in ram:GlobalID satisfies $id/@schemeID" flag="warning" id="BR-FR-CO-10_EXT-FR-FE-92-1">
+      <assert test="every $id in ram:GlobalID satisfies $id/@schemeID" flag="fatal" id="BR-FR-CO-10_EXT-FR-FE-92-1">
         BR-FR-CO-10/EXT-FR-FE-92 : Si l’identifiant global du facturé à (EXT-FR-FE-92) est renseigné, alors son schéma (EXT-FR-FE-92-1) doit également être renseigné.
       </assert>
       
-      <assert test="count(distinct-values(ram:GlobalID/@schemeID)) = count(ram:GlobalID/@schemeID)" flag="warning" id="BR-FR-CO-10_EXT-FR-FE-92-2">
+      <assert test="count(distinct-values(ram:GlobalID/@schemeID)) = count(ram:GlobalID/@schemeID)" flag="fatal" id="BR-FR-CO-10_EXT-FR-FE-92-2">
         BR-FR-CO-10/EXT-FR-FE-92 : Chaque schemeID ne peut apparaître qu’une seule fois ans l'identifiant privé du facturé à (EXT-FR-FE-92).
       </assert>
       
     </rule> 
       
-    <rule context="SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty">
+    <rule context="rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty">
       
-      <assert test="every $id in ram:GlobalID satisfies $id/@schemeID" flag="warning" id="BR-FR-CO-10_EXT-FR-FE-115-1">
+      <assert test="every $id in ram:GlobalID satisfies $id/@schemeID" flag="fatal" id="BR-FR-CO-10_EXT-FR-FE-115-1">
         BR-FR-CO-10/EXT-FR-FE-115 : Si l’identifiant global du facturant (EXT-FR-FE-115) est renseigné, alors son schéma (EXT-FR-FE-116) doit également être renseigné.
       </assert>
       
-      <assert test="count(distinct-values(ram:GlobalID/@schemeID)) = count(ram:GlobalID/@schemeID)" flag="warning" id="BR-FR-CO-10_EXT-FR-FE-115-2">
+      <assert test="count(distinct-values(ram:GlobalID/@schemeID)) = count(ram:GlobalID/@schemeID)" flag="fatal" id="BR-FR-CO-10_EXT-FR-FE-115-2">
         BR-FR-CO-10/EXT-FR-FE-115 : Chaque schemeID ne peut apparaître qu’une seule fois ans l'identifiant privé du facturant (EXT-FR-FE-115).
       </assert>
       
@@ -1257,11 +1284,11 @@
   
     <rule context="rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty">
       
-      <assert test="every $id in ram:GlobalID satisfies $id/@schemeID" flag="warning" id="BR-FR-CO-10_BT-71-1">
+      <assert test="every $id in ram:GlobalID satisfies $id/@schemeID" flag="fatal" id="BR-FR-CO-10_BT-71-1">
         BR-FR-CO-10/BT-71 : Si l’identifiant global du livré à (BT-71) est renseigné, alors son schéma (BT-71-1) doit également être renseigné.
       </assert>
       
-      <assert test="count(distinct-values(ram:GlobalID/@schemeID)) = count(ram:GlobalID/@schemeID)" flag="warning" id="BR-FR-CO-10_BT-71-2">
+      <assert test="count(distinct-values(ram:GlobalID/@schemeID)) = count(ram:GlobalID/@schemeID)" flag="fatal" id="BR-FR-CO-10_BT-71-2">
         BR-FR-CO-10/BT-71 : Chaque schemeID ne peut apparaître qu’une seule fois ans l'identifiant privé du livré à (BT-71).
       </assert>
       
@@ -1269,11 +1296,11 @@
     
     <rule context="rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeDelivery/ram:ShipToTradeParty">
       
-      <assert test="every $id in ram:GlobalID satisfies $id/@schemeID" flag="warning" id="BR-FR-CO-10_EXT-FR-FE-146-1">
-        BR-FR-CO-10/EXT-FR-FE-146 : Si l’identifiant global du livré à à la ligne (EXT-FR-FE-146 ) est renseigné, alors son schéma (EXT-FR-FE-147) doit également être renseigné.
+      <assert test="every $id in ram:GlobalID satisfies $id/@schemeID" flag="fatal" id="BR-FR-CO-10_EXT-FR-FE-146-1">
+        BR-FR-CO-10/EXT-FR-FE-146 : Si l’identifiant global du livré à à la ligne (EXT-FR-FE-146 ) est renseigné, alors son schéma (EXT-FR-FE-148) doit également être renseigné.
       </assert>
       
-      <assert test="count(distinct-values(ram:GlobalID/@schemeID)) = count(ram:GlobalID/@schemeID)" flag="warning" id="BR-FR-CO-10_EXT-FR-FE-146-2">
+      <assert test="count(distinct-values(ram:GlobalID/@schemeID)) = count(ram:GlobalID/@schemeID)" flag="fatal" id="BR-FR-CO-10_EXT-FR-FE-146-2">
         BR-FR-CO-10/EXT-FR-FE-146  : Chaque schemeID ne peut apparaître qu’une seule fois ans l'identifiant privé du livré à à la ligne (EXT-FR-FE-146 ).
       </assert>
       
@@ -1290,7 +1317,7 @@
       <let name="taxAmountEUR" value="rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxTotalAmount[@currencyID='EUR']"/>
       
       <assert test="not($invoiceCurrency != 'EUR') or 
-        ($accountingCurrency = 'EUR' and string($taxAmountEUR))" flag="warning" id="BR-FR-CO-12_BT-5">
+        ($accountingCurrency = 'EUR' and string($taxAmountEUR))" flag="fatal" id="BR-FR-CO-12_BT-5">
         BR-FR-CO-12/BT-5 : Si la devise de facture (BT-5) est différente de EUR, alors :
         - la devise de comptabilité (BT-6) doit être présente et égale à EUR,
         - le montant de TVA en devise de comptabilité (BT-111) doit être renseigné,
@@ -1306,7 +1333,7 @@
       <let name="isAU" value="exists(rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:GlobalID[@schemeID = '0231'])"/>
       <let name="hasTXDNote" value="exists(rsm:ExchangedDocument/ram:IncludedNote[ram:SubjectCode = 'TXD' and ram:Content = 'MEMBRE_ASSUJETTI_UNIQUE'])"/>
       
-      <assert test="not($isAU) or $hasTXDNote" flag="warning" id="BR-FR-CO-14_BT-29-1">
+      <assert test="not($isAU) or $hasTXDNote" flag="fatal" id="BR-FR-CO-14_BT-29-1">
         BR-FR-CO-14/BT-29-1 : Si le schéma d’identification du vendeur (BT-29-1) est '0231', cela signifie qu’il est membre d’un assujetti unique.
         Dans ce cas, une note (BG-1) avec le code sujet 'TXD' (BT-21) et le texte 'MEMBRE_ASSUJETTI_UNIQUE' (BT-22) doit être présente.
       </assert>
@@ -1320,7 +1347,7 @@
       <let name="fiscalRep" value="rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty"/>
       <let name="fiscalVAT" value="$fiscalRep/ram:SpecifiedTaxRegistration/ram:ID[@schemeID = 'VA']"/>
       
-      <assert test="not($isAU) or (exists($fiscalRep) and string($fiscalVAT))" flag="warning" id="BR-FR-CO-15_BT-29-1">
+      <assert test="not($isAU) or (exists($fiscalRep) and string($fiscalVAT))" flag="fatal" id="BR-FR-CO-15_BT-29-1">
         BR-FR-CO-15/BT-29-1 : Si le vendeur est membre d’un assujetti unique (BT-29-1 = 0231), alors le bloc représentant fiscal (BG-11) doit être présent et contenir le numéro de TVA de l’assujetti unique (BT-63).
         État actuel : représentant fiscal <value-of select="if (exists($fiscalRep)) then 'présent' else 'absent'"/>, numéro de TVA = "<value-of select="$fiscalVAT"/>".
       </assert>
@@ -1332,96 +1359,96 @@
     <!-- BT-92 et BT-99 -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge/ram:ActualAmount">
       <let name="amount" value="normalize-space(.)"/>
-      <assert flag="warning" id="BR-FR-DEC-01_BT-92_BT-99" test="custom:is-valid-decimal-19-2(normalize-space(.))">BR-FR-DEC-01/BT-92/BT-99 : Le montant « &lt;value-of select="."/&gt; » est invalide. Il doit comporter au plus 2 décimales, être exprimé avec un point comme séparateur, et ne pas dépasser 19 caractères (hors séparateur). Le signe « - » est autorisé. Veuillez corriger ce montant.</assert></rule>
+      <assert flag="fatal" id="BR-FR-DEC-01_BT-92_BT-99" test="custom:is-valid-decimal-19-2(normalize-space(.))">BR-FR-DEC-01/BT-92/BT-99 : Le montant « &lt;value-of select="."/&gt; » est invalide. Il doit comporter au plus 2 décimales, être exprimé avec un point comme séparateur, et ne pas dépasser 19 caractères (hors séparateur). Le signe « - » est autorisé. Veuillez corriger ce montant.</assert></rule>
     <!-- BT-93 et BT-100 -->
     <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge/ram:BasisAmount">
       <let name="amount" value="normalize-space(.)"/>
-      <assert flag="warning" id="BR-FR-DEC-01_BT-93_BT-100" test="custom:is-valid-decimal-19-2(normalize-space(.))">BR-FR-DEC-01/BT-93 : Le montant « &lt;value-of select="."/&gt; » est invalide. Il doit comporter au plus 2 décimales, être exprimé avec un point comme séparateur, et ne pas dépasser 19 caractères (hors séparateur). Le signe « - » est autorisé. Veuillez corriger ce montant.</assert></rule>
+      <assert flag="fatal" id="BR-FR-DEC-01_BT-93_BT-100" test="custom:is-valid-decimal-19-2(normalize-space(.))">BR-FR-DEC-01/BT-93 : Le montant « &lt;value-of select="."/&gt; » est invalide. Il doit comporter au plus 2 décimales, être exprimé avec un point comme séparateur, et ne pas dépasser 19 caractères (hors séparateur). Le signe « - » est autorisé. Veuillez corriger ce montant.</assert></rule>
     
     <!-- BT-106 -->
     <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:LineTotalAmount">
       <let name="amount" value="normalize-space(.)"/>
-      <assert flag="warning" id="BR-FR-DEC-01_BT-106" test="custom:is-valid-decimal-19-2(normalize-space(.))">BR-FR-DEC-01/BT-106 : Le montant « &lt;value-of select="."/&gt; » est invalide. Il doit comporter au plus 2 décimales, être exprimé avec un point comme séparateur, et ne pas dépasser 19 caractères (hors séparateur). Le signe « - » est autorisé. Veuillez corriger ce montant.</assert></rule>
+      <assert flag="fatal" id="BR-FR-DEC-01_BT-106" test="custom:is-valid-decimal-19-2(normalize-space(.))">BR-FR-DEC-01/BT-106 : Le montant « &lt;value-of select="."/&gt; » est invalide. Il doit comporter au plus 2 décimales, être exprimé avec un point comme séparateur, et ne pas dépasser 19 caractères (hors séparateur). Le signe « - » est autorisé. Veuillez corriger ce montant.</assert></rule>
     <!-- BT-107 -->
     <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:AllowanceTotalAmount">
       <let name="amount" value="normalize-space(.)"/>
-      <assert flag="warning" id="BR-FR-DEC-01_BT-107" test="custom:is-valid-decimal-19-2(normalize-space(.))">BR-FR-DEC-01/BT-107 : Le montant « &lt;value-of select="."/&gt; » est invalide. Il doit comporter au plus 2 décimales, être exprimé avec un point comme séparateur, et ne pas dépasser 19 caractères (hors séparateur). Le signe « - » est autorisé. Veuillez corriger ce montant.</assert></rule>
+      <assert flag="fatal" id="BR-FR-DEC-01_BT-107" test="custom:is-valid-decimal-19-2(normalize-space(.))">BR-FR-DEC-01/BT-107 : Le montant « &lt;value-of select="."/&gt; » est invalide. Il doit comporter au plus 2 décimales, être exprimé avec un point comme séparateur, et ne pas dépasser 19 caractères (hors séparateur). Le signe « - » est autorisé. Veuillez corriger ce montant.</assert></rule>
     <!-- BT-108 -->
     <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:ChargeTotalAmount">
       <let name="amount" value="normalize-space(.)"/>
-      <assert flag="warning" id="BR-FR-DEC-01_BT-108" test="custom:is-valid-decimal-19-2(normalize-space(.))">BR-FR-DEC-01/BT-108 : Le montant « &lt;value-of select="."/&gt; » est invalide. Il doit comporter au plus 2 décimales, être exprimé avec un point comme séparateur, et ne pas dépasser 19 caractères (hors séparateur). Le signe « - » est autorisé. Veuillez corriger ce montant.</assert></rule>
+      <assert flag="fatal" id="BR-FR-DEC-01_BT-108" test="custom:is-valid-decimal-19-2(normalize-space(.))">BR-FR-DEC-01/BT-108 : Le montant « &lt;value-of select="."/&gt; » est invalide. Il doit comporter au plus 2 décimales, être exprimé avec un point comme séparateur, et ne pas dépasser 19 caractères (hors séparateur). Le signe « - » est autorisé. Veuillez corriger ce montant.</assert></rule>
     <!-- BT-109 -->
     <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxBasisTotalAmount">
       <let name="amount" value="normalize-space(.)"/>
-      <assert flag="warning" id="BR-FR-DEC-01_BT-109" test="custom:is-valid-decimal-19-2(normalize-space(.))">BR-FR-DEC-01/BT-109 : Le montant « &lt;value-of select="."/&gt; » est invalide. Il doit comporter au plus 2 décimales, être exprimé avec un point comme séparateur, et ne pas dépasser 19 caractères (hors séparateur). Le signe « - » est autorisé. Veuillez corriger ce montant.</assert></rule>
+      <assert flag="fatal" id="BR-FR-DEC-01_BT-109" test="custom:is-valid-decimal-19-2(normalize-space(.))">BR-FR-DEC-01/BT-109 : Le montant « &lt;value-of select="."/&gt; » est invalide. Il doit comporter au plus 2 décimales, être exprimé avec un point comme séparateur, et ne pas dépasser 19 caractères (hors séparateur). Le signe « - » est autorisé. Veuillez corriger ce montant.</assert></rule>
     <!-- BT-110 -->
     <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxTotalAmount">
       <let name="amount" value="normalize-space(.)"/>
-      <assert flag="warning" id="BR-FR-DEC-01_BT-110" test="custom:is-valid-decimal-19-2(normalize-space(.))">BR-FR-DEC-01/BT-110 : Le montant « &lt;value-of select="."/&gt; » est invalide. Il doit comporter au plus 2 décimales, être exprimé avec un point comme séparateur, et ne pas dépasser 19 caractères (hors séparateur). Le signe « - » est autorisé. Veuillez corriger ce montant.</assert></rule>
+      <assert flag="fatal" id="BR-FR-DEC-01_BT-110" test="custom:is-valid-decimal-19-2(normalize-space(.))">BR-FR-DEC-01/BT-110 : Le montant « &lt;value-of select="."/&gt; » est invalide. Il doit comporter au plus 2 décimales, être exprimé avec un point comme séparateur, et ne pas dépasser 19 caractères (hors séparateur). Le signe « - » est autorisé. Veuillez corriger ce montant.</assert></rule>
     <!-- BT-111 -->
     <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxTotalAmount">
       <let name="amount" value="normalize-space(.)"/>
-      <assert flag="warning" id="BR-FR-DEC-01_BT-111" test="custom:is-valid-decimal-19-2(normalize-space(.))">BR-FR-DEC-01/BT-111 : Le montant « &lt;value-of select="."/&gt; » est invalide. Il doit comporter au plus 2 décimales, être exprimé avec un point comme séparateur, et ne pas dépasser 19 caractères (hors séparateur). Le signe « - » est autorisé. Veuillez corriger ce montant.</assert></rule>
+      <assert flag="fatal" id="BR-FR-DEC-01_BT-111" test="custom:is-valid-decimal-19-2(normalize-space(.))">BR-FR-DEC-01/BT-111 : Le montant « &lt;value-of select="."/&gt; » est invalide. Il doit comporter au plus 2 décimales, être exprimé avec un point comme séparateur, et ne pas dépasser 19 caractères (hors séparateur). Le signe « - » est autorisé. Veuillez corriger ce montant.</assert></rule>
     <!-- BT-112 -->
     <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:GrandTotalAmount">
       <let name="amount" value="normalize-space(.)"/>
-      <assert test="custom:is-valid-decimal-19-2($amount)" flag="warning" id="BR-FR-DEC-01_BT-112">
+      <assert test="custom:is-valid-decimal-19-2($amount)" flag="fatal" id="BR-FR-DEC-01_BT-112">
         BR-FR-DEC-01/BT-112 : Le montant « <value-of select="$amount"/> » est invalide. Il doit comporter au plus 2 décimales, être exprimé avec un point comme séparateur, et ne pas dépasser 19 caractères (hors séparateur). Le signe « - » est autorisé. Veuillez corriger ce montant.
       </assert>
     </rule>
     <!-- BT-113 -->
     <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TotalPrepaidAmount">
       <let name="amount" value="normalize-space(.)"/>
-      <assert test="custom:is-valid-decimal-19-2($amount)" flag="warning" id="BR-FR-DEC-01_BT-113">
+      <assert test="custom:is-valid-decimal-19-2($amount)" flag="fatal" id="BR-FR-DEC-01_BT-113">
         BR-FR-DEC-01/BT-113 : Le montant « <value-of select="$amount"/> » est invalide. Il doit comporter au plus 2 décimales, être exprimé avec un point comme séparateur, et ne pas dépasser 19 caractères (hors séparateur). Le signe « - » est autorisé. Veuillez corriger ce montant.
       </assert>
     </rule>
     <!-- BT-114 -->
     <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:RoundingAmount">
       <let name="amount" value="normalize-space(.)"/>
-      <assert test="custom:is-valid-decimal-19-2($amount)" flag="warning" id="BR-FR-DEC-01_BT-114">
+      <assert test="custom:is-valid-decimal-19-2($amount)" flag="fatal" id="BR-FR-DEC-01_BT-114">
         BR-FR-DEC-01/BT-114 : Le montant « <value-of select="$amount"/> » est invalide. Il doit comporter au plus 2 décimales, être exprimé avec un point comme séparateur, et ne pas dépasser 19 caractères (hors séparateur). Le signe « - » est autorisé. Veuillez corriger ce montant.
       </assert>
     </rule>
     <!-- BT-115 -->
     <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:DuePayableAmount">
       <let name="amount" value="normalize-space(.)"/>
-      <assert test="custom:is-valid-decimal-19-2($amount)" flag="warning" id="BR-FR-DEC-01_BT-115">
+      <assert test="custom:is-valid-decimal-19-2($amount)" flag="fatal" id="BR-FR-DEC-01_BT-115">
         BR-FR-DEC-01/BT-115 : Le montant « <value-of select="$amount"/> » est invalide. Il doit comporter au plus 2 décimales, être exprimé avec un point comme séparateur, et ne pas dépasser 19 caractères (hors séparateur). Le signe « - » est autorisé. Veuillez corriger ce montant.
       </assert>
     </rule>
     <!-- BT-116 -->
     <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax/ram:BasisAmount">
       <let name="amount" value="normalize-space(.)"/>
-      <assert test="custom:is-valid-decimal-19-2($amount)" flag="warning" id="BR-FR-DEC-01_BT-116">
+      <assert test="custom:is-valid-decimal-19-2($amount)" flag="fatal" id="BR-FR-DEC-01_BT-116">
         BR-FR-DEC-01/BT-116 : Le montant « <value-of select="$amount"/> » est invalide. Il doit comporter au plus 2 décimales, être exprimé avec un point comme séparateur, et ne pas dépasser 19 caractères (hors séparateur). Le signe « - » est autorisé. Veuillez corriger ce montant.
       </assert>
     </rule>
     <!-- BT-117 -->
     <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax/ram:CalculatedAmount">
       <let name="amount" value="normalize-space(.)"/>
-      <assert test="custom:is-valid-decimal-19-2($amount)" flag="warning" id="BR-FR-DEC-01_BT-117">
+      <assert test="custom:is-valid-decimal-19-2($amount)" flag="fatal" id="BR-FR-DEC-01_BT-117">
         BR-FR-DEC-01/BT-117 : Le montant « <value-of select="$amount"/> » est invalide. Il doit comporter au plus 2 décimales, être exprimé avec un point comme séparateur, et ne pas dépasser 19 caractères (hors séparateur). Le signe « - » est autorisé. Veuillez corriger ce montant.
       </assert>
     </rule>
     <!-- BT-131 -->
     <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeSettlementLineMonetarySummation/ram:LineTotalAmount">
       <let name="amount" value="normalize-space(.)"/>
-      <assert test="custom:is-valid-decimal-19-2($amount)" flag="warning" id="BR-FR-DEC-01_BT-131">
+      <assert test="custom:is-valid-decimal-19-2($amount)" flag="fatal" id="BR-FR-DEC-01_BT-131">
         BR-FR-DEC-01/BT-131 : Le montant « <value-of select="$amount"/> » est invalide. Il doit comporter au plus 2 décimales, être exprimé avec un point comme séparateur, et ne pas dépasser 19 caractères (hors séparateur). Le signe « - » est autorisé. Veuillez corriger ce montant.
       </assert>
     </rule>
     <!-- BT-136 et BT-141 -->
     <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeAllowanceCharge/ram:ActualAmount">
       <let name="amount" value="normalize-space(.)"/>
-      <assert test="custom:is-valid-decimal-19-2($amount)" flag="warning" id="BR-FR-DEC-01_BT-136_BT-141">
+      <assert test="custom:is-valid-decimal-19-2($amount)" flag="fatal" id="BR-FR-DEC-01_BT-136_BT-141">
         BR-FR-DEC-01/BT-136 : Le montant « <value-of select="$amount"/> » est invalide. Il doit comporter au plus 2 décimales, être exprimé avec un point comme séparateur, et ne pas dépasser 19 caractères (hors séparateur). Le signe « - » est autorisé. Veuillez corriger ce montant.
       </assert>
     </rule>
     <!-- BT-137 et BT-142 -->
     <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeAllowanceCharge/ram:BasisAmount">
       <let name="amount" value="normalize-space(.)"/>
-      <assert test="custom:is-valid-decimal-19-2($amount)" flag="warning" id="BR-FR-DEC-01_BT-137_BT-142">
+      <assert test="custom:is-valid-decimal-19-2($amount)" flag="fatal" id="BR-FR-DEC-01_BT-137_BT-142">
         BR-FR-DEC-01/BT-137 : Le montant « <value-of select="$amount"/> » est invalide. Il doit comporter au plus 2 décimales, être exprimé avec un point comme séparateur, et ne pas dépasser 19 caractères (hors séparateur). Le signe « - » est autorisé. Veuillez corriger ce montant.
       </assert>
     </rule>
@@ -1433,7 +1460,7 @@
     
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeDelivery/ram:BilledQuantity">
       <let name="quantity" value="normalize-space(.)"/>
-      <assert test="custom:is-valid-decimal-19-4($quantity)" flag="warning" id="BR-FR-DEC-02_BT-129">
+      <assert test="custom:is-valid-decimal-19-4($quantity)" flag="fatal" id="BR-FR-DEC-02_BT-129">
         BR-FR-DEC-02/BT-129 : La quantité « <value-of select="$quantity"/> » est invalide. Elle doit :
         - être un nombre avec au plus 4 décimales (séparateur « . »),
         - contenir au maximum 19 caractères (hors séparateur),
@@ -1445,7 +1472,7 @@
     <!-- -->
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeAgreement/ram:NetPriceProductTradePrice/ram:BasisQuantity">
       <let name="quantity" value="normalize-space(.)"/>
-      <assert test="custom:is-valid-decimal-19-4($quantity)" flag="warning" id="BR-FR-DEC-02_BT-149">
+      <assert test="custom:is-valid-decimal-19-4($quantity)" flag="fatal" id="BR-FR-DEC-02_BT-149">
         BR-FR-DEC-02/BT-149 : La quantité « <value-of select="$quantity"/> » est invalide. Elle doit :
         - être un nombre avec au plus 4 décimales (séparateur « . »),
         - contenir au maximum 19 caractères (hors séparateur),
@@ -1456,14 +1483,14 @@
     
     
   </pattern>
-  <pattern id="BR-FR-DEC-03">
+  <pattern id="BR-FR-DEC-03"> <!-- V1.4 : les PU euvent être négatifs si Bi-directionnel -->
     <title>BR-FR-DEC-03 — Format des montants positifs (max 19 caractères, 6 décimales, séparateur « . »)</title>
     
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeAgreement/ram:NetPriceProductTradePrice/ram:ChargeAmount">
       <let name="amount" value="normalize-space(.)"/>
-      <assert test="custom:is-valid-decimal-19-6-positive($amount)" flag="warning" id="BR-FR-DEC-03_BT-146">
+      <assert test="(custom:isSpecialContractBD(/rsm:CrossIndustryInvoice) and custom:is-valid-decimal-19-6($amount)) or (not(custom:isSpecialContractBD(/rsm:CrossIndustryInvoice)) and custom:is-valid-decimal-19-6-positive($amount))" flag="fatal" id="BR-FR-DEC-03_BT-146">
         BR-FR-DEC-03/BT-146 : Le montant « <value-of select="$amount"/> » est invalide. Il doit :
-        - être un nombre strictement positif (sans signe « - »),
+        - être un nombre strictement positif (sans signe « - »), sauf si Cadre de Facturation (BT-23) est S9, M9 ou B9 (bi-directionnel)
         - comporter au plus 6 décimales (séparateur « . »),
         - contenir au maximum 19 caractères (hors séparateur).
         Veuillez corriger ce montant pour respecter le format requis.
@@ -1472,9 +1499,9 @@
     
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge/ram:ActualAmount">
       <let name="amount" value="normalize-space(.)"/>
-      <assert test="custom:is-valid-decimal-19-6-positive($amount)" flag="warning" id="BR-FR-DEC-03_BT-147">
+      <assert test="(custom:isSpecialContractBD(/rsm:CrossIndustryInvoice) and custom:is-valid-decimal-19-6($amount)) or (not(custom:isSpecialContractBD(/rsm:CrossIndustryInvoice)) and custom:is-valid-decimal-19-6-positive($amount))" flag="fatal" id="BR-FR-DEC-03_BT-147">
         BR-FR-DEC-03/BT-147 : Le montant « <value-of select="$amount"/> » est invalide. Il doit :
-        - être un nombre strictement positif (sans signe « - »),
+        - être un nombre strictement positif (sans signe « - »), sauf si Cadre de Facturation (BT-23) est S9, M9 ou B9 (bi-directionnel)
         - comporter au plus 6 décimales (séparateur « . »),
         - contenir au maximum 19 caractères (hors séparateur).
         Veuillez corriger ce montant pour respecter le format requis.
@@ -1483,9 +1510,9 @@
     
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:ChargeAmount">
       <let name="amount" value="normalize-space(.)"/>
-      <assert test="custom:is-valid-decimal-19-6-positive($amount)" flag="warning" id="BR-FR-DEC-03_BT-148">
+      <assert test="(custom:isSpecialContractBD(/rsm:CrossIndustryInvoice) and custom:is-valid-decimal-19-6($amount)) or (not(custom:isSpecialContractBD(/rsm:CrossIndustryInvoice)) and custom:is-valid-decimal-19-6-positive($amount))" flag="fatal" id="BR-FR-DEC-03_BT-148">
         BR-FR-DEC-03/BT-148 : Le montant « <value-of select="$amount"/> » est invalide. Il doit :
-        - être un nombre strictement positif (sans signe « - »),
+        - être un nombre strictement positif (sans signe « - »), sauf si Cadre de Facturation (BT-23) est S9, M9 ou B9 (bi-directionnel)
         - comporter au plus 6 décimales (séparateur « . »),
         - contenir au maximum 19 caractères (hors séparateur).
         Veuillez corriger ce montant pour respecter le format requis.
@@ -1497,7 +1524,7 @@
     
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge/ram:CategoryTradeTax/ram:RateApplicablePercent">
       <let name="rate" value="normalize-space(.)"/>
-      <assert test="custom:is-valid-percent-4-2-positive($rate)" flag="warning" id="BR-FR-DEC-04_BT-96_BT-103">
+      <assert test="custom:is-valid-percent-4-2-positive($rate)" flag="fatal" id="BR-FR-DEC-04_BT-96_BT-103">
         BR-FR-DEC-04/BT-96 ou BT-103 : Le taux de TVA « <value-of select="$rate"/> » est invalide. Il doit :
         - être un nombre strictement positif (sans signe « - »),
         - comporter au plus 2 décimales (séparateur « . »),
@@ -1508,7 +1535,7 @@
     
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax/ram:RateApplicablePercent">
       <let name="rate" value="normalize-space(.)"/>
-      <assert test="custom:is-valid-percent-4-2-positive($rate)" flag="warning" id="BR-FR-DEC-04_BT-119">
+      <assert test="custom:is-valid-percent-4-2-positive($rate)" flag="fatal" id="BR-FR-DEC-04_BT-119">
         BR-FR-DEC-04/BT-119 : Le taux de TVA « <value-of select="$rate"/> » est invalide. Il doit :
         - être un nombre strictement positif (sans signe « - »),
         - comporter au plus 2 décimales (séparateur « . »),
@@ -1519,7 +1546,7 @@
     
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeSettlement/ram:ApplicableTradeTax/ram:RateApplicablePercent">
       <let name="rate" value="normalize-space(.)"/>
-      <assert test="custom:is-valid-percent-4-2-positive($rate)" flag="warning" id="BR-FR-DEC-04_BT-152">
+      <assert test="custom:is-valid-percent-4-2-positive($rate)" flag="fatal" id="BR-FR-DEC-04_BT-152">
         BR-FR-DEC-04/BT-152 : Le taux de TVA « <value-of select="$rate"/> » est invalide. Il doit :
         - être un nombre strictement positif (sans signe « - »),
         - comporter au plus 2 décimales (séparateur « . »),
@@ -1532,14 +1559,14 @@
   
   
   <pattern id="BR-FR-MV-01">
-    <title>BR-FR-MV-01 — Vérification du sous-type de ligne lorsque le cadre de facturation est S8, B8 ou M8</title>
+    <title>BR-FR-MV-01 — Vérification du sous-type de ligne lorsque le cadre de facturation est S8, B8, M8 ou S9, B9, M9 </title>
     
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:AssociatedDocumentLineDocument/ram:LineStatusReasonCode">
       <assert test="not(custom:isSpecialContract(/rsm:CrossIndustryInvoice)) 
         or (normalize-space(.) != '')"
         flag="fatal"
         id="BR-FR-MV-01_EXT-FR-FE-163">
-        BR-FR-MV-01/EXT-FR-FE-163 : Lorsque le cadre de facturation (BT-23) est S8, B8 ou M8, chaque ligne (BG-25) doit contenir un sous-type de ligne (ram:LineStatusReasonCode). Valeur actuelle : "<value-of select='.'/>".
+        BR-FR-MV-01/EXT-FR-FE-163 : Lorsque le cadre de facturation (BT-23) est S8, B8, M8 ou S9, B9, M9, chaque ligne (BG-25) doit contenir un sous-type de ligne (ram:LineStatusReasonCode). Valeur actuelle : "<value-of select='.'/>".
         Veuillez vérifier que le sous-type est renseigné, Veuillez vérifier que le sous-type est renseigné pour toutes les lignes.
       </assert>
     </rule>
@@ -1549,7 +1576,7 @@
     <title>BR-FR-MV-02 — Vérification de la présence d'une ligne GROUP sans parent lorsque le cadre de facturation est S8, B8 ou M8</title>
     
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction">
-      <assert test="not(custom:isSpecialContract(/rsm:CrossIndustryInvoice)) or (count(ram:IncludedSupplyChainTradeLineItem[ram:AssociatedDocumentLineDocument/ram:LineStatusReasonCode = 'GROUP' and not(ram:AssociatedDocumentLineDocument/ram:ParentLineID)]) &gt;= 1)"
+      <assert test="not(custom:isSpecialContractMV(/rsm:CrossIndustryInvoice)) or (count(ram:IncludedSupplyChainTradeLineItem[ram:AssociatedDocumentLineDocument/ram:LineStatusReasonCode = 'GROUP' and not(ram:AssociatedDocumentLineDocument/ram:ParentLineID)]) &gt;= 1)"
         flag="fatal"
         id="BR-FR-MV-02_EXT-FR-FE-163">
         BR-FR-MV-02/EXT-FR-FE-163 : Lorsque le cadre de facturation (BT-23) est S8, B8 ou M8, la facture doit contenir au moins une ligne (BG-25) avec le sous-type de ligne (ram:LineStatusReasonCode) égal à "GROUP" et sans identifiant de ligne parent (ram:ParentLineID).
@@ -1558,9 +1585,37 @@
     </rule>
   </pattern>
   
+  <pattern id="BR-FR-BD-02">
+  <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction">
+    
+    <assert test="not(custom:isSpecialContractBD(/rsm:CrossIndustryInvoice)) or (count(ram:IncludedSupplyChainTradeLineItem[ram:AssociatedDocumentLineDocument/ram:LineStatusReasonCode = 'GROUP' and not(ram:AssociatedDocumentLineDocument/ram:ParentLineID)]) = 2)"
+      flag="fatal"
+      id="BR-FR-BD-02_EXT-FR-FE-163">
+      BR-FR-BD-02/EXT-FR-FE-163 : Lorsque le cadre de facturation (BT-23) est S9, B9 ou M9, la facture doit contenir exactement deux ligne (BG-25) avec le sous-type de ligne (ram:LineStatusReasonCode) égal à "GROUP" et sans identifiant de ligne parent (ram:ParentLineID).
+      Veuillez vérifier que cette ligne est présente.
+    </assert>
+    
+    <assert test="not(custom:isSpecialContractBD(/rsm:CrossIndustryInvoice)) or (count(ram:IncludedSupplyChainTradeLineItem[ram:AssociatedDocumentLineDocument/ram:LineStatusReasonCode = 'GROUP' and not(ram:AssociatedDocumentLineDocument/ram:ParentLineID) 
+      and ram:SpecifiedLineTradeAgreement/ram:ItemSellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID = ../ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID]) = 1)"
+      flag="fatal"
+      id="BR-FR-BD-02_BT-31">
+      BR-FR-BD-02/BT-31 : Lorsque le cadre de facturation (BT-23) est S9, B9 ou M9, la facture doit contenir exactement deux ligne (BG-25) avec le sous-type de ligne (ram:LineStatusReasonCode) égal à "GROUP" et sans identifiant de ligne parent (ram:ParentLineID),
+      pour lesquelles l'une a pour ID legal Vendeur à la ligne (EXT-FR-FE-167) l'ID légal du VENDEUR (BT-30). Veuillez vérifier qu'il y a une ligne GROUP avec ID Vendeur de ligne = ID VENDEUR (BT-30).
+    </assert>
+    
+    <assert test="not(custom:isSpecialContractBD(/rsm:CrossIndustryInvoice)) or (count(ram:IncludedSupplyChainTradeLineItem[ram:AssociatedDocumentLineDocument/ram:LineStatusReasonCode = 'GROUP' and not(ram:AssociatedDocumentLineDocument/ram:ParentLineID) 
+      and ram:SpecifiedLineTradeAgreement/ram:ItemSellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID = ../ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:ID]) = 1)"
+      flag="fatal"
+      id="BR-FR-BD-02_BT-47">
+      BR-FR-BD-02/BT-47 : Lorsque le cadre de facturation (BT-23) est S9, B9 ou M9, la facture doit contenir exactement deux ligne (BG-25) avec le sous-type de ligne (ram:LineStatusReasonCode) égal à "GROUP" et sans identifiant de ligne parent (ram:ParentLineID),
+      pour lesquelles l'une a pour ID légale de Vendeur à la ligne (EXT-FR-FE-167) l'ID légal de l'ACHETEUR (BT-47). Veuillez vérifier qu'il y a une ligne GROUP avec ID Vendeur de ligne = ID ACHETEUR (BT-47).
+    </assert>
+    
+  </rule>
+  </pattern> 
   
   <pattern id="BR-FR-MV-03">     <!-- CYS' Règles revues -->
-    <title>BR-FR-MV-03 — Vérification des données obligatoires pour les lignes GROUP sans parent lorsque le cadre de facturation est S8, B8 ou M8</title>
+    <title>BR-FR-MV-03 — Vérification des données obligatoires pour les lignes GROUP sans parent lorsque le cadre de facturation est S8, B8, M8 ou S9, B9, M9</title>
     
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[ram:AssociatedDocumentLineDocument/ram:LineStatusReasonCode = 'GROUP' and not(ram:AssociatedDocumentLineDocument/ram:ParentLineID)]">
       
@@ -1569,7 +1624,7 @@
         flag="fatal"
         id="BR-FR-MV-03_EXT-FR-FE-164"> BR-FR-MV-03/EXT-FR-FE-164 : 
         Ligne : <value-of select='./ram:AssociatedDocumentLineDocument/ram:LineID'/> : Valeur actuelle : "<value-of select='./ram:SpecifiedLineTradeAgreement/ram:ItemSellerTradeParty/ram:Name'/>".
-        Lorsque le cadre de facturation (BT-23) est S8, B8 ou M8 et que la ligne est de type GROUP sans parent, le nom du vendeur (ram:Name) doit être renseigné. 
+        Lorsque le cadre de facturation (BT-23) est S8, B8, M8 ou S9, B9, M9 et que la ligne est de type GROUP sans parent, le nom du vendeur (ram:Name) doit être renseigné. 
       </assert>
 
       <!-- EXT-FR-FE-167 : ID légal du vendeur -->
@@ -1577,7 +1632,7 @@
         flag="fatal"
         id="BR-FR-MV-03_EXT-FR-FE-167"> BR-FR-MV-03/EXT-FR-FE-167 : 
         Ligne : <value-of select='./ram:AssociatedDocumentLineDocument/ram:LineID'/> : Valeur actuelle : "<value-of select='./ram:SpecifiedLineTradeAgreement/ram:ItemSellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID'/>".
-        Lorsque le cadre de facturation (BT-23) est S8, B8 ou M8 et que la ligne est de type GROUP sans parent, l'identifiant du vendeur (ram:ID) doit être renseigné.
+        Lorsque le cadre de facturation (BT-23) est S8, B8, M8 ou S9, B9, M9 et que la ligne est de type GROUP sans parent, l'identifiant du vendeur (ram:ID) doit être renseigné.
       </assert>
       
       <!-- EXT-FR-FE-177 : Code pays du vendeur -->
@@ -1585,7 +1640,7 @@
         flag="fatal"
         id="BR-FR-MV-03_EXT-FR-FE-177"> BR-FR-MV-03/EXT-FR-FE-177 : 
         Ligne : <value-of select='./ram:AssociatedDocumentLineDocument/ram:LineID'/> : Valeur actuelle : "<value-of select='./ram:SpecifiedLineTradeAgreement/ram:ItemSellerTradeParty/ram:PostalTradeAddress/ram:CountryID'/>'.
-        Lorsque le cadre de facturation (BT-23) est S8, B8 ou M8 et que la ligne est de type GROUP sans parent, le code pays du vendeur (ram:CountryID) doit être renseigné.
+        Lorsque le cadre de facturation (BT-23) est S8, B8, M8 ou S9, B9, M9 et que la ligne est de type GROUP sans parent, le code pays du vendeur (ram:CountryID) doit être renseigné.
       </assert>
       
       <!-- EXT-FR-FE-181 : Montant total TVA en devise de facture et en devise de comptabilisation si existe -->
@@ -1648,11 +1703,11 @@
         /ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeSettlementLineMonetarySummation/ram:LineTotalAmount)"/>
       
       <assert test="not(custom:isSpecialContract(/rsm:CrossIndustryInvoice)) 
-        or (abs(number(ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeSettlementLineMonetarySummation/ram:LineTotalAmount) - $sumsubline) &lt;= 0.01 * $numberline)"
+        or (abs(xs:decimal(ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeSettlementLineMonetarySummation/ram:LineTotalAmount) - $sumsubline) &lt;= 0.01 * $numberline)"
         flag="fatal"
         id="BR-FR-MV-05_EXT-FR-FE-BG-12">
         BR-FR-MV-05/EXT-FR-FE-BG-12 : Ligne GROUP : <value-of select='$grouplineID'/>, Somme Sous lignes : <value-of select='$sumsubline'/>, Nbre sous-lignes: <value-of select='$numberline'/>. Valeur actuelle : "<value-of select='ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeSettlementLineMonetarySummation/ram:LineTotalAmount'/>". 
-        Lorsque le cadre de facturation (BT-23) est S8, B8 ou M8, le total HT (BT-131 : ram:LineTotalAmount) de la ligne GROUP doit être égal (tolérance ±0,01 * nombre de sous-lignes) à la somme des totaux HT des lignes enfants dont le ParentLineID correspond à l'identifiant de la ligne GROUP (ram:LineID).
+        Lorsque le cadre de facturation (BT-23) est S8, B8, M8 ou S9, B9, M9, le total HT (BT-131 : ram:LineTotalAmount) de la ligne GROUP doit être égal (tolérance ±0,01 * nombre de sous-lignes) à la somme des totaux HT des lignes enfants dont le ParentLineID correspond à l'identifiant de la ligne GROUP (ram:LineID).
       </assert>
     </rule>
   </pattern>
@@ -1672,7 +1727,7 @@
         flag="fatal"
         id="BR-FR-MV-06_EXT-FR-FE-167">
         BR-FR-MV-06/EXT-FR-FE-167 : IDligne <value-of select='./ram:AssociatedDocumentLineDocument/ram:LineID'/>, ID parent ligne <value-of select='$parentlineID'/>, legalID : <value-of select='$legalID'/>, ParentlegalID : <value-of select='$legalIDParent'/>.
-        Lorsque le cadre de facturation (BT-23) est S8, B8 ou M8, chaque ligne (BG-25) doit contenir un identifiant légal de vendeur (ram:ID). Si la ligne a un identifiant de ligne parent (ram:ParentLineID), cet identifiant doit être identique à celui de la ligne parent.
+        Lorsque le cadre de facturation (BT-23) est S8, B8, M8 ou S9, B9, M9, chaque ligne (BG-25) doit contenir un identifiant légal de vendeur (ram:ID). Si la ligne a un identifiant de ligne parent (ram:ParentLineID), cet identifiant doit être identique à celui de la ligne parent.
       </assert>
     </rule>
   </pattern>
@@ -1691,7 +1746,7 @@
         flag="fatal"
         id="BR-FR-MV-07_BT-128">
         BR-FR-MV-07/BT-128 : IDligne <value-of select='./ram:AssociatedDocumentLineDocument/ram:LineID'/>, ID parent ligne <value-of select='$parentlineID'/>, numfact en ligne <value-of select='$numfact'/>, numfact ligne parent : <value-of select='$numfactparent'/>. 
-        Lorsque le cadre de facturation (BT-23) est S8, B8 ou M8, chaque ligne (BG-25) doit contenir un numéro de facture codifié AFL (ram:IssuerAssignedID). Si la ligne a un identifiant de ligne parent (ram:ParentLineID), ce numéro doit être identique à celui de la ligne parent.
+        Lorsque le cadre de facturation (BT-23) est S8, B8, M8 ou S9, B9, M9, chaque ligne (BG-25) doit contenir un numéro de facture codifié AFL (ram:IssuerAssignedID). Si la ligne a un identifiant de ligne parent (ram:ParentLineID), ce numéro doit être identique à celui de la ligne parent.
       </assert>
     </rule>
   </pattern>
@@ -1724,11 +1779,11 @@
       <let name="invcurrency" value="../ram:ApplicableHeaderTradeSettlement/ram:InvoiceCurrencyCode"/>
       
       <assert test="not(custom:isSpecialContract(/rsm:CrossIndustryInvoice)) 
-        or (abs(number(./ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeSettlementLineMonetarySummation/ram:TaxTotalAmount[@currencyID = $invcurrency]) - $sumvat) &lt;= 0.01)"
+        or (abs(xs:decimal(./ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeSettlementLineMonetarySummation/ram:TaxTotalAmount[@currencyID = $invcurrency]) - $sumvat) &lt;= 0.01)"
         flag="fatal"
         id="BR-FR-MV-09_EXT-FR-FE-181">
         BR-FR-MV-09/EXT-FR-FE-181 : Id Line Group : <value-of select='./ram:AssociatedDocumentLineDocument/ram:LineID'/>, Numfact: <value-of select='$numfact'/>, Total TVA : <value-of select='./ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeSettlementLineMonetarySummation/ram:TaxTotalAmount[@currencyID = $invcurrency]'/>, Somme TVA : <value-of select='$sumvat'/>. 
-        Lorsque le cadre de facturation (BT-23) est S8, B8 ou M8, le montant total TVA de la ligne GROUP (EXT-FR-FE-181) doit être égal  à la somme des montants de TVA des ventilations TVA (BT-117) dont la raison d'exemption (ram:ExemptionReason) commence par le numéro de facture en ligne (BT-128 avec ReferenceTypeCode = AFL) entre #.
+        Lorsque le cadre de facturation (BT-23) est S8, B8, M8 ou S9, B9, M9, le montant total TVA de la ligne GROUP (EXT-FR-FE-181) doit être égal  à la somme des montants de TVA des ventilations TVA (BT-117) dont la raison d'exemption (ram:ExemptionReason) commence par le numéro de facture en ligne (BT-128 avec ReferenceTypeCode = AFL) entre #.
       </assert>
     </rule>
   </pattern>
@@ -1737,49 +1792,54 @@
   <pattern id="BR-FR-MV-10"> <!-- CYS4 revu [ram:AssociatedDocumentLineDocument/ram:ParentLineID = $parentlineID]  and ram:AssociatedDocumentLineDocument/ram:LineStatusReasonCode = 'DETAIL' -->
     <title>BR-FR-MV-10 — Vérification de la cohérence du montant total avec TVA pour une ligne GROUP</title>
     
-    <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[ram:AssociatedDocumentLineDocument/ram:LineStatusReasonCode = 'GROUP'
+ <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[ram:AssociatedDocumentLineDocument/ram:LineStatusReasonCode = 'GROUP'
       and not(ram:AssociatedDocumentLineDocument/ram:ParentLineID)]">
       
       <let name="invcurrency" value="../ram:ApplicableHeaderTradeSettlement/ram:InvoiceCurrencyCode"/>
       <let name="parentlineID" value="./ram:AssociatedDocumentLineDocument/ram:LineID"/>
-      <let name="nbligne" value="count(/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[ram:AssociatedDocumentLineDocument/ram:ParentLineID = $parentlineID and ram:AssociatedDocumentLineDocument/ram:LineStatusReasonCode = 'DETAIL'])"/>
+      <let name="nbligne" value="count(/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[ram:AssociatedDocumentLineDocument/ram:ParentLineID = $parentlineID and ram:AssociatedDocumentLineDocument/ram:LineStatusReasonCode = ('DETAIL', 'GROUP')])"/>
       
+   <!-- V1.4.0.04 fix04 : correction pour intégrer les lignes GROUP dans le calcul du nb de lignes + xs:decimal() au lieu de number() -->
       <assert test="not(custom:isSpecialContract(/rsm:CrossIndustryInvoice)) 
         or not(./ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeSettlementLineMonetarySummation/ram:GrandTotalAmount)
         or (normalize-space(./ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeSettlementLineMonetarySummation/ram:GrandTotalAmount) != '' 
-        and abs(number(./ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeSettlementLineMonetarySummation/ram:GrandTotalAmount) 
-        - number(./ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeSettlementLineMonetarySummation/ram:LineTotalAmount) 
-        - number(./ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeSettlementLineMonetarySummation/ram:TaxTotalAmount[@currencyID = $invcurrency])) &lt;= 0.01 * $nbligne)"      
+        and abs(xs:decimal(./ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeSettlementLineMonetarySummation/ram:GrandTotalAmount) 
+        - xs:decimal(./ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeSettlementLineMonetarySummation/ram:LineTotalAmount) 
+        - xs:decimal(./ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeSettlementLineMonetarySummation/ram:TaxTotalAmount[@currencyID = $invcurrency])) &lt;= 0.01 * $nbligne)"      
         flag="fatal"
         id="BR-FR-MV-10_EXT-FR-FE-184">
         BR-FR-MV-10/EXT-FR-FE-184 : Id Line Group : <value-of select='./ram:AssociatedDocumentLineDocument/ram:LineID'/>, nb sous-ligne : <value-of select='$nbligne'/>, 
         TTC : <value-of select='./ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeSettlementLineMonetarySummation/ram:GrandTotalAmount'/>,
         TVA : <value-of select='./ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeSettlementLineMonetarySummation/ram:TaxTotalAmount[@currencyID = $invcurrency]'/>,
         HT : <value-of select='./ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeSettlementLineMonetarySummation/ram:LineTotalAmount'/>
-        Lorsque le cadre de facturation (BT-23) est S8, B8 ou M8, si le montant total avec TVA (ram:GrandTotalAmount) est présent pour une ligne GROUP sans parent, alors la différence entre ce montant et la somme du montant HT (ram:LineTotalAmount) et du montant TVA (ram:TaxTotalAmount) doit être inférieure ou égale à 0,01 × le nombre de sous-lignes DETAIL. Valeur actuelle : "<value-of select='.'/>'.
+        Lorsque le cadre de facturation (BT-23) est S8, B8, M8 ou S9, B9, M9, si le montant total avec TVA (ram:GrandTotalAmount) est présent pour une ligne GROUP sans parent, alors la différence entre ce montant et la somme du montant HT (ram:LineTotalAmount) et du montant TVA (ram:TaxTotalAmount) doit être inférieure ou égale à 0,01 × le nombre de sous-lignes DETAIL ou GROUP. Valeur actuelle : "<value-of select='.'/>'.
       </assert>
-    </rule>
+    </rule> 
   </pattern>
-  
+ 
+ 
   <pattern id="BR-FR-MV-11">
     <title>BR-FR-MV-11 — Vérification de la cohérence entre l'identifiant de facture à la ligne (AFL) et le numéro de facture (BT-1) pour le Vendeur principal</title>
     
     <let name="sellerID" value="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID"/>
     <let name="invID" value="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:ID"/>
+    <let name="nbSubinvoiceSeller" value="count(//ram:IncludedSupplyChainTradeLineItem[ram:SpecifiedLineTradeAgreement/ram:ItemSellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID = $sellerID
+      and ram:AssociatedDocumentLineDocument/ram:LineStatusReasonCode = 'GROUP' and not(ram:AssociatedDocumentLineDocument/ram:ParentLineID)]/ram:SpecifiedLineTradeSettlement/ram:AdditionalReferencedDocument[(ram:ReferenceTypeCode = 'AFL') and (ram:TypeCode = '130') and (ram:IssuerAssignedID = $invID)])"/>
     
     <rule context="rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[ram:SpecifiedLineTradeAgreement/ram:ItemSellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID = $sellerID
       and ram:AssociatedDocumentLineDocument/ram:LineStatusReasonCode = 'GROUP' and not(ram:AssociatedDocumentLineDocument/ram:ParentLineID)]">
       
-      <let name="lineinvID" value="./ram:SpecifiedLineTradeSettlement/ram:AdditionalReferencedDocument[(ram:ReferenceTypeCode = 'AFL') and (ram:TypeCode = '130')]/ram:IssuerAssignedID"/>
-      <assert test="not(custom:isSpecialContract(/rsm:CrossIndustryInvoice)) or $lineinvID = $invID"
+      <let name="numFactLine" value="normalize-space(ram:SpecifiedLineTradeSettlement/ram:AdditionalReferencedDocument[(ram:ReferenceTypeCode = 'AFL') and (ram:TypeCode = '130')]/ram:IssuerAssignedID)"/>
+
+      <assert test="not(custom:isSpecialContract(/rsm:CrossIndustryInvoice)) or ($nbSubinvoiceSeller = 1) or ($nbSubinvoiceSeller = 0 and $numFactLine = $invID) or ($nbSubinvoiceSeller > 1 and $numFactLine != $invID)"
         flag="fatal"
         id="BR-FR-MV-11_BT-128">
         BR-FR-MV-11/BT-128 : ID Seller : <value-of select='$sellerID'/>, NB ligne GROUP seller : <value-of select='./ram:AssociatedDocumentLineDocument/ram:LineID'/>
-        Numero de facture (BT-1) : <value-of select='$invID'/>, num fact en ligne <value-of select='$lineinvID'/>. 
-        Lorsque le cadre de facturation (BT-23) est S8, B8 ou M8 et que le vendeur principal (BG-4) dispose d'un groupe de lignes, l'identifiant de facture à la ligne (ram:IssuerAssignedID avec ReferenceTypeCode = AFL) doit être identique au numéro de facture (ram:ID dans ExchangedDocument).
+        Numero de facture (BT-1) : <value-of select='$invID'/>, Nb de Ligne GROUP avec Num fact : <value-of select='$nbSubinvoiceSeller'/>, NumFact de ligne : <value-of select='$numFactLine'/>. 
+        [BR-FR-MV-11/BT-128]Lorsque le cadre de facturation (BT-23) est S8, B8, M8 ou S9, B9, M9, si le Vendeur principal identifié dans le bloc Vendeur (BG-4) de la facture au travers de son identifiant légal (BT-30) dispose d'un groupe de lignes de facturation, alors il doit exister au moins une ligne (BG-25) avec sous-type de ligne (EXT-FR-FE-163) = "GROUP" et sans identifiant de ligne Parent (EXT-FR-FE-162), pour laquelle le numéro de facture à la ligne (Valeur de BT-128 avec BT-128-1 = AFL) est égal au numéro de facture (BT-1).
       </assert>
     </rule>
-  </pattern>
+  </pattern> 
   
   <pattern id="BR-FR-MV-12">
     <title>BR-FR-MV-12 — Vérification de l'unicité des numéros de facture AFL pour les lignes GROUP sans parent</title>
@@ -1791,7 +1851,7 @@
         /ram:IssuerAssignedID[. = preceding::ram:IssuerAssignedID])"
         flag="fatal"
         id="BR-FR-MV-12_BT-128">
-        BR-FR-MV-12/BT-128 : Lorsque le cadre de facturation (BT-23) est S8, B8 ou M8, les numéros de facture à la ligne (ram:IssuerAssignedID avec ReferenceTypeCode = AFL) pour les lignes GROUP sans parent doivent être uniques. Veuillez vérifier que chaque numéro est distinct.
+        BR-FR-MV-12/BT-128 : Lorsque le cadre de facturation (BT-23) est S8, B8, M8 ou S9, B9, M9, les numéros de facture à la ligne (ram:IssuerAssignedID avec ReferenceTypeCode = AFL) pour les lignes GROUP sans parent doivent être uniques. Veuillez vérifier que chaque numéro est distinct.
       </assert>
     </rule>
   </pattern>
@@ -1800,13 +1860,68 @@
     <title>BR-FR-MV-13 — Vérification que le code type de facture (BT-3) n'est pas un type auto-facturé interdit</title>
     
     <rule context="rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:TypeCode">
-      <assert test="not(custom:isSpecialContract(/rsm:CrossIndustryInvoice)) 
+      <assert test="not(custom:isSpecialContractMV(/rsm:CrossIndustryInvoice)) 
         or (normalize-space(.) != '' 
         and not(. = '389' or . = '261' or . = '501' or . = '500' or . = '502' or . = '471' or . = '473'))"
         flag="fatal"
         id="BR-FR-MV-13_BT-3">
         BR-FR-MV-13/BT-3 : Lorsque le cadre de facturation (BT-23) est S8, B8 ou M8, le code type de facture (ram:TypeCode) ne doit pas être l'un des types auto-facturés suivants : 389, 261, 501, 500, 502, 471, 473. Valeur actuelle : "<value-of select='.'/>'.
       </assert>
+    </rule>
+  </pattern>
+  
+  <pattern id="BR-FR-BD-13">
+    <title>BR-FR-BD-13 — Vérification que le code type de facture (BT-3) est de type auto-facturé </title>
+    
+    <rule context="rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:TypeCode">
+      <assert test="not(custom:isSpecialContractBD(/rsm:CrossIndustryInvoice)) 
+        or (normalize-space(.) != '' 
+        and (normalize-space(.)) = ('389','261','501','500','502','471','473'))"
+        flag="fatal"
+        id="BR-FR-BD-13_BT-3">
+        BR-FR-BD-13/BT-3 : Lorsque le cadre de facturation (BT-23) est S9, B9 ou M9, le code type de facture (ram:TypeCode) DOIT être l'un des types auto-facturés suivants : 389, 261, 501, 500, 502, 471, 473. Valeur actuelle : "<value-of select='.'/>'.
+      </assert>
+    </rule>
+  </pattern>
+  
+  
+  <pattern id="BR-FR-MV-14">
+    <title>BR-FR-MV-14 — Facture antérieure pour une facture rectificative ou un Avoir Multi-Vendeur </title>
+    
+    <rule context="rsm:CrossIndustryInvoice[rsm:ExchangedDocument/ram:TypeCode = ('384','472','381','396','503')]/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[ram:AssociatedDocumentLineDocument/ram:LineStatusReasonCode = 'GROUP' and not(ram:AssociatedDocumentLineDocument/ram:ParentLineID)]">
+      <assert test="not(custom:isSpecialContractMV(/rsm:CrossIndustryInvoice)) or exists(ram:SpecifiedLineTradeSettlement/ram:InvoiceReferencedDocument/ram:IssuerAssignedID)"
+        flag="fatal"
+        id="BR-FR-MV-14-EXT-FR-FE-136">
+        BR-FR-MV-14-EXT-FR-FE-136 : Num Facture antérieure manquant ligne <value-of select='ram:AssociatedDocumentLineDocument/ram:LineID'/> : Lorsque le cadre de facturation (BT-23) est S8, B8 ou M8, et pour les factures rectificatives et avoirs chaque ligne (BG-25) avec un sous-type de ligne (EXT-FR-FE-163) égal à "GROUP" et sans identifiant de ligne Parent (EXT-FR-FE-162) doit comprendre un identifiant de facture antérieure à la ligne (EXT-FR-FE-136) ainsi que sa date (EXT-FR-FE-138).
+      </assert>
+      
+      <assert test="not(custom:isSpecialContractMV(/rsm:CrossIndustryInvoice)) or exists(ram:SpecifiedLineTradeSettlement/ram:InvoiceReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString)"
+        flag="fatal"
+        id="BR-FR-MV-14-EXT-FR-FE-138">
+        BR-FR-MV-14-EXT-FR-FE-138 : Date Facture antérieure manquant ligne <value-of select='ram:AssociatedDocumentLineDocument/ram:LineID'/> : Lorsque le cadre de facturation (BT-23) est S8, B8 ou M8, et pour les factures rectificatives et avoirs chaque ligne (BG-25) avec un sous-type de ligne (EXT-FR-FE-163) égal à "GROUP" et sans identifiant de ligne Parent (EXT-FR-FE-162) doit comprendre un identifiant de facture antérieure à la ligne (EXT-FR-FE-136) ainsi que sa date (EXT-FR-FE-138).
+      </assert>
+      
+    </rule>
+  </pattern>
+  
+  
+  <pattern id="BR-FR-BD-14">
+    <title>BR-FR-BD-14 — Facture antérieure pour une facture rectificative ou un Avoir Bidirectionnel </title>
+
+    <rule context="rsm:CrossIndustryInvoice[rsm:ExchangedDocument/ram:TypeCode = ('261','471','473','502')]/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem[ram:AssociatedDocumentLineDocument/ram:LineStatusReasonCode = 'GROUP' and not(ram:AssociatedDocumentLineDocument/ram:ParentLineID)]">
+
+      <assert test="not(custom:isSpecialContractBD(/rsm:CrossIndustryInvoice)) or exists(ram:SpecifiedLineTradeSettlement/ram:InvoiceReferencedDocument/ram:IssuerAssignedID)"
+        flag="fatal"
+        id="BR-FR-BD-14-EXT-FR-FE-136">
+        BR-FR-BD-14-EXT-FR-FE-136 : Num Facture antérieure manquant ligne <value-of select='ram:AssociatedDocumentLineDocument/ram:LineID'/> : Lorsque le cadre de facturation (BT-23) est S9, B9 ou M9, et pour les factures rectificatives et avoirs chaque ligne (BG-25) avec un sous-type de ligne (EXT-FR-FE-163) égal à "GROUP" et sans identifiant de ligne Parent (EXT-FR-FE-162) doit comprendre un identifiant de facture antérieure à la ligne (EXT-FR-FE-136) ainsi que sa date (EXT-FR-FE-138).
+      </assert>
+      
+      <assert test="not(custom:isSpecialContractBD(/rsm:CrossIndustryInvoice)) or exists(ram:SpecifiedLineTradeSettlement/ram:InvoiceReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString)"
+        flag="fatal"
+        id="BR-FR-BD-14-EXT-FR-FE-138">
+        BR-FR-BD-14-EXT-FR-FE-138 : Date Facture antérieure manquant ligne <value-of select='ram:AssociatedDocumentLineDocument/ram:LineID'/> : Lorsque le cadre de facturation (BT-23) est S9, B9 ou M9, et pour les factures rectificatives et avoirs chaque ligne (BG-25) avec un sous-type de ligne (EXT-FR-FE-163) égal à "GROUP" et sans identifiant de ligne Parent (EXT-FR-FE-162) doit comprendre un identifiant de facture antérieure à la ligne (EXT-FR-FE-136) ainsi que sa date (EXT-FR-FE-138).
+      </assert>
+      
     </rule>
   </pattern>
   
