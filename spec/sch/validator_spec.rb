@@ -21,6 +21,15 @@ RSpec.describe Sch::Validator do
     end
   end
 
+  # EXTENDED-CTC-FR-UBL.sch (#89461 F6) not in sweep; needs explicit zero-error check (CII covered).
+  it 'validates the UBL EXTENDED-CTC-FR fixtures clean with the FNFE profile schematron' do
+    ['spec/files/xsd/ubl-invoice-fr-extended-ctc-dot.xml',
+     'spec/files/xsd/ubl-invoice-fr-extended-ctc-colon.xml'].each do |filename|
+      result = sch_validate(File.read(filename))
+      expect(result).to eq([[], []]), "Error validating fixture #{filename}: #{result}"
+    end
+  end
+
   it 'raises ValidationError for an invalid CIUS pt' do
     doc=File.read('spec/files/sch/invoice-cius-pt-wrong.xml')
     expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationError, /FATAL: .*BR-CIUS-PT-18/)
@@ -120,8 +129,10 @@ RSpec.describe Sch::Validator do
       'spec/files/sch/factur-x/factur-x-fr-basic-wl.xml' =>
         ['FACTUR-X_BASIC-WL.sch', 'BR-FR-Flux2-Schematron-CII_V1.4.0.04.sch'],
       'spec/files/sch/factur-x/factur-x-fr-basic.xml' => ['EN16931-CII-validation-preprocessed.sch'],
-      'spec/files/sch/factur-x/factur-x-fr-extended-ctc-dot.xml' => ['BR-FR-Flux2-Schematron-CII_V1.4.0.04.sch'],
-      'spec/files/sch/factur-x/factur-x-fr-extended-ctc-colon.xml' => ['BR-FR-Flux2-Schematron-CII_V1.4.0.04.sch'],
+      'spec/files/sch/factur-x/factur-x-fr-extended-ctc-dot.xml' =>
+        ['EXTENDED-CTC-FR-CII.sch', 'BR-FR-Flux2-Schematron-CII_V1.4.0.04.sch'],
+      'spec/files/sch/factur-x/factur-x-fr-extended-ctc-colon.xml' =>
+        ['EXTENDED-CTC-FR-CII.sch', 'BR-FR-Flux2-Schematron-CII_V1.4.0.04.sch'],
       'spec/files/sch/cii/xrechnung-cii_3.0-wrong.xml' => ['EN16931-CII-validation.sch', 'XRechnung-CII-validation_3.0.sch'],
       'spec/files/sch/cii/xrechnung-cii_2.3-wrong.xml' => ['EN16931-CII-validation.sch', 'XRechnung-CII-validation_2.3.sch'],
       'spec/files/sch/cii/xrechnung-cii_2.2.xml' => ['EN16931-CII-validation.sch', 'XRechnung-CII-validation_2.2.sch'],
@@ -143,8 +154,10 @@ RSpec.describe Sch::Validator do
       # real UBL) must resolve UBL schematrons, not silently fall back to CII ones.
       'spec/files/xsd/ubl-invoice-fr-en16931.xml' => ['CEN-EN16931-UBL.sch', 'BR-FR-Flux2-Schematron-UBL_V1.3.1.sch'],
       'spec/files/xsd/ubl-invoice-fr-en16931-generic.xml' => ['CEN-EN16931-UBL.sch'],
-      'spec/files/xsd/ubl-invoice-fr-extended-ctc-dot.xml' => ['BR-FR-Flux2-Schematron-UBL_V1.3.1.sch'],
-      'spec/files/xsd/ubl-invoice-fr-extended-ctc-colon.xml' => ['BR-FR-Flux2-Schematron-UBL_V1.3.1.sch'],
+      'spec/files/xsd/ubl-invoice-fr-extended-ctc-dot.xml' =>
+        ['EXTENDED-CTC-FR-UBL.sch', 'BR-FR-Flux2-Schematron-UBL_V1.3.1.sch'],
+      'spec/files/xsd/ubl-invoice-fr-extended-ctc-colon.xml' =>
+        ['EXTENDED-CTC-FR-UBL.sch', 'BR-FR-Flux2-Schematron-UBL_V1.3.1.sch'],
       # Pre-existing gap: the Peppol-URN CIUS/Extended branch only checked
       # root.name == 'Invoice', so a CreditNote fell through to the CII file.
       'spec/files/xsd/ubl-credit-note-fr-cius.xml' => ['BR-FR-Flux2-Schematron-UBL_V1.3.1.sch'],

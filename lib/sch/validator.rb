@@ -213,16 +213,16 @@ module Sch
       when 'urn:cen.eu:en16931:2017#conformant#urn:factur-x.eu:1p0:extended'
         add_br_fr_schematron_if_french(%w(FACTUR-X_EXTENDED.sch), doc_nokogiri)
 
-      # Factur-X EXTENDED-CTC-FR (no compiled profile schematron until FNFE 1.4.0;
+      # Factur-X EXTENDED-CTC-FR (FNFE V1.4.0.04, applicable from 2026-10-01;
       # AFNOR examples use the dot form, the XP Z12-012 text the colon form) — also
       # reachable from UBL (#89461's UblFrProfileDetection); already unambiguously
       # French, no BT-23 guard needed unlike the bare-EN16931 branch above.
       when 'urn:cen.eu:en16931:2017#conformant#urn.cpro.gouv.fr:1p0:extended-ctc-fr',
            'urn:cen.eu:en16931:2017#conformant#urn:cpro.gouv.fr:1p0:extended-ctc-fr'
         if %w(Invoice CreditNote).include?(doc_nokogiri.root.name)
-          %w(BR-FR-Flux2-Schematron-UBL_V1.3.1.sch)
+          %w(EXTENDED-CTC-FR-UBL.sch BR-FR-Flux2-Schematron-UBL_V1.3.1.sch)
         else
-          %w(BR-FR-Flux2-Schematron-CII_V1.4.0.04.sch)
+          %w(EXTENDED-CTC-FR-CII.sch BR-FR-Flux2-Schematron-CII_V1.4.0.04.sch)
         end
 
       # NL CIUS / SimplerInvoicing
