@@ -152,15 +152,15 @@ RSpec.describe Sch::Validator do
       # Bare EN16931 / extended-ctc-fr BT-24 reaching a UBL root (#89461's
       # UblFrProfileDetection is the first code path that makes this happen from
       # real UBL) must resolve UBL schematrons, not silently fall back to CII ones.
-      'spec/files/xsd/ubl-invoice-fr-en16931.xml' => ['CEN-EN16931-UBL.sch', 'BR-FR-Flux2-Schematron-UBL_V1.3.1.sch'],
+      'spec/files/xsd/ubl-invoice-fr-en16931.xml' => ['CEN-EN16931-UBL.sch', 'BR-FR-Flux2-Schematron-UBL_V1.4.0.04.sch'],
       'spec/files/xsd/ubl-invoice-fr-en16931-generic.xml' => ['CEN-EN16931-UBL.sch'],
       'spec/files/xsd/ubl-invoice-fr-extended-ctc-dot.xml' =>
-        ['EXTENDED-CTC-FR-UBL.sch', 'BR-FR-Flux2-Schematron-UBL_V1.3.1.sch'],
+        ['EXTENDED-CTC-FR-UBL.sch', 'BR-FR-Flux2-Schematron-UBL_V1.4.0.04.sch'],
       'spec/files/xsd/ubl-invoice-fr-extended-ctc-colon.xml' =>
-        ['EXTENDED-CTC-FR-UBL.sch', 'BR-FR-Flux2-Schematron-UBL_V1.3.1.sch'],
+        ['EXTENDED-CTC-FR-UBL.sch', 'BR-FR-Flux2-Schematron-UBL_V1.4.0.04.sch'],
       # Pre-existing gap: the Peppol-URN CIUS/Extended branch only checked
       # root.name == 'Invoice', so a CreditNote fell through to the CII file.
-      'spec/files/xsd/ubl-credit-note-fr-cius.xml' => ['BR-FR-Flux2-Schematron-UBL_V1.3.1.sch'],
+      'spec/files/xsd/ubl-credit-note-fr-cius.xml' => ['BR-FR-Flux2-Schematron-UBL_V1.4.0.04.sch'],
       'spec/files/sch/cdar/cdar_1_deposee.xml' => ['BR-FR-CDV-Schematron-CDAR_V1.4.0.03.sch'],
       'spec/files/sch/f10/f10-report-transactions.xml' => ['BR-FR-Flux10-Schematron_V1.0.sch'],
       'spec/files/sch/f10/f10-report-payments.xml' => ['BR-FR-Flux10-Schematron_V1.0.sch'],

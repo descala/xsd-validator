@@ -220,7 +220,7 @@ module Sch
       when 'urn:cen.eu:en16931:2017#conformant#urn.cpro.gouv.fr:1p0:extended-ctc-fr',
            'urn:cen.eu:en16931:2017#conformant#urn:cpro.gouv.fr:1p0:extended-ctc-fr'
         if %w(Invoice CreditNote).include?(doc_nokogiri.root.name)
-          %w(EXTENDED-CTC-FR-UBL.sch BR-FR-Flux2-Schematron-UBL_V1.3.1.sch)
+          %w(EXTENDED-CTC-FR-UBL.sch BR-FR-Flux2-Schematron-UBL_V1.4.0.04.sch)
         else
           %w(EXTENDED-CTC-FR-CII.sch BR-FR-Flux2-Schematron-CII_V1.4.0.04.sch)
         end
@@ -402,7 +402,7 @@ module Sch
     def add_br_fr_schematron_if_french_ubl(schematrons, doc_nokogiri)
       return schematrons if (VALID_FR_PROCESS_CODES & bt23_values_ubl(doc_nokogiri)).empty?
 
-      schematrons + %w(BR-FR-Flux2-Schematron-UBL_V1.3.1.sch)
+      schematrons + %w(BR-FR-Flux2-Schematron-UBL_V1.4.0.04.sch)
     end
 
     # BT-23 ("Cadre de Facturation") from ProfileID (AFNOR) or from an
