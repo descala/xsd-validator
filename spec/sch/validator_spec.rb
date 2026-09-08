@@ -154,6 +154,11 @@ RSpec.describe Sch::Validator do
       # real UBL) must resolve UBL schematrons, not silently fall back to CII ones.
       'spec/files/xsd/ubl-invoice-fr-en16931.xml' => ['CEN-EN16931-UBL.sch', 'BR-FR-Flux2-Schematron-UBL_V1.4.0.04.sch'],
       'spec/files/xsd/ubl-invoice-fr-en16931-generic.xml' => ['CEN-EN16931-UBL.sch'],
+      # Chorus Pro B2G addressing legitimately carries two buyer PartyIdentification
+      # elements (SIRET 0009 + code service 0224, BT-46) — valid under BR-FR-Flux2 but
+      # fatal under the base CEN rule UBL-SR-16 (max one). Drop CEN-EN16931-UBL.sch
+      # rather than layering BR-FR on top of a rule it can never satisfy.
+      'spec/files/xsd/ubl-invoice-fr-en16931-b2g-dual-identifier.xml' => ['BR-FR-Flux2-Schematron-UBL_V1.4.0.04.sch'],
       'spec/files/xsd/ubl-invoice-fr-extended-ctc-dot.xml' =>
         ['EXTENDED-CTC-FR-UBL.sch', 'BR-FR-Flux2-Schematron-UBL_V1.4.0.04.sch'],
       'spec/files/xsd/ubl-invoice-fr-extended-ctc-colon.xml' =>

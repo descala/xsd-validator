@@ -399,10 +399,22 @@ module Sch
 
     # UBL sibling of add_br_fr_schematron_if_french: same BT-23 guard, read the
     # UBL way. Mirrors b2b_app's DocumentType::UblFrProfileDetection#french?.
+    #
+    # Chorus Pro B2G addressing legitimately carries two buyer PartyIdentification
+    # elements (SIRET 0009 + code service 0224, BT-46) — valid under BR-FR-Flux2 but
+    # fatal under the base CEN rule UBL-SR-16 (max one). Layering BR-FR on top of
+    # +schematrons+ can never satisfy that combination, so drop the base instead.
     def add_br_fr_schematron_if_french_ubl(schematrons, doc_nokogiri)
       return schematrons if (VALID_FR_PROCESS_CODES & bt23_values_ubl(doc_nokogiri)).empty?
+      return %w(BR-FR-Flux2-Schematron-UBL_V1.4.0.04.sch) if buyer_party_identification_count(doc_nokogiri) > 1
 
       schematrons + %w(BR-FR-Flux2-Schematron-UBL_V1.4.0.04.sch)
+    end
+
+    # @return [Integer] number of buyer cac:PartyIdentification/cbc:ID elements (BT-46)
+    def buyer_party_identification_count(doc_nokogiri)
+      doc_nokogiri.xpath('/*/cac:AccountingCustomerParty/cac:Party/cac:PartyIdentification/cbc:ID',
+                          cac: CAC, cbc: CBC).size
     end
 
     # BT-23 ("Cadre de Facturation") from ProfileID (AFNOR) or from an
