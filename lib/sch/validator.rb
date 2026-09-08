@@ -5,6 +5,7 @@ module Sch
   module Validator
 
     CBC = "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+    CAC = "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
     RAM = "urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100"
     RSM = "urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100"
 
@@ -198,19 +199,31 @@ module Sch
       when 'urn:cen.eu:en16931:2017#compliant#urn:factur-x.eu:1p0:basic'
         %w(EN16931-CII-validation-preprocessed.sch)
 
-      # Factur-X Profil EN 16931 (COMFORT) (mandatory French set)
+      # Factur-X Profil EN 16931 (COMFORT) (mandatory French set) — same bare URN
+      # is also the UBL France CIUS BT-24 (#89461's UblFrProfileDetection), so
+      # root-awareness matters here, unlike most other branches in this case.
       when 'urn:cen.eu:en16931:2017'
-        add_br_fr_schematron_if_french(%w(EN16931-CII-validation-preprocessed.sch), doc_nokogiri)
+        if %w(Invoice CreditNote).include?(doc_nokogiri.root.name)
+          add_br_fr_schematron_if_french_ubl(%w(CEN-EN16931-UBL.sch), doc_nokogiri)
+        else
+          add_br_fr_schematron_if_french(%w(EN16931-CII-validation-preprocessed.sch), doc_nokogiri)
+        end
 
       # Factur-X Profil EXTENDED (mandatory French set)
       when 'urn:cen.eu:en16931:2017#conformant#urn:factur-x.eu:1p0:extended'
         add_br_fr_schematron_if_french(%w(FACTUR-X_EXTENDED.sch), doc_nokogiri)
 
-      # Factur-X EXTENDED-CTC-FR (no compiled profile schematron until FNFE 1.4.0;
-      # AFNOR examples use the dot form, the XP Z12-012 text the colon form)
+      # Factur-X EXTENDED-CTC-FR (FNFE V1.4.0.04, applicable from 2026-10-01;
+      # AFNOR examples use the dot form, the XP Z12-012 text the colon form) — also
+      # reachable from UBL (#89461's UblFrProfileDetection); already unambiguously
+      # French, no BT-23 guard needed unlike the bare-EN16931 branch above.
       when 'urn:cen.eu:en16931:2017#conformant#urn.cpro.gouv.fr:1p0:extended-ctc-fr',
            'urn:cen.eu:en16931:2017#conformant#urn:cpro.gouv.fr:1p0:extended-ctc-fr'
-        %w(BR-FR-Flux2-Schematron-CII_V1.3.1.sch)
+        if %w(Invoice CreditNote).include?(doc_nokogiri.root.name)
+          %w(EXTENDED-CTC-FR-UBL.sch BR-FR-Flux2-Schematron-UBL_V1.4.0.04.sch)
+        else
+          %w(EXTENDED-CTC-FR-CII.sch BR-FR-Flux2-Schematron-CII_V1.4.0.04.sch)
+        end
 
       # NL CIUS / SimplerInvoicing
       when 'urn:cen.eu:en16931:2017#compliant#urn:fdc:nen.nl:nlcius:v1.0'
@@ -308,13 +321,13 @@ module Sch
         pint_schemas_to_validate(schemas, parts)
       when 'urn:cen.eu:en16931:2017#compliant#urn:peppol:france:billing:cius:1.0',
         'urn:cen.eu:en16931:2017#conformant#urn:peppol:france:billing:extended:1.0'
-        if doc_nokogiri.root.name == 'Invoice'
-          %w(BR-FR-Flux2-Schematron-UBL_V1.3.1.sch)
+        if %w(Invoice CreditNote).include?(doc_nokogiri.root.name)
+          %w(BR-FR-Flux2-Schematron-UBL_V1.4.0.04.sch)
         else
-          %w(BR-FR-Flux2-Schematron-CII_V1.3.1.sch)
+          %w(BR-FR-Flux2-Schematron-CII_V1.4.0.04.sch)
         end
       when 'urn:cen.eu:en16931:2017#conformant#urn:peppol:france:billing:Factur-X:1.0'
-        %w(BR-FR-Flux2-Schematron-CII_V1.3.1.sch)
+        %w(BR-FR-Flux2-Schematron-CII_V1.4.0.04.sch)
         # CDAR CrossDomainAcknowledgementAndResponse
       when ->(v) { v.start_with?('urn.cpro.gouv.fr:1p0:CDV') }
         %w(BR-FR-CDV-Schematron-CDAR_V1.4.0.03.sch)
@@ -381,7 +394,26 @@ module Sch
                                        rsm: RSM, ram: RAM).map { |node| node.text.strip }
       return schematrons if (VALID_FR_PROCESS_CODES & bt23_values).empty?
 
-      schematrons + %w(BR-FR-Flux2-Schematron-CII_V1.3.1.sch)
+      schematrons + %w(BR-FR-Flux2-Schematron-CII_V1.4.0.04.sch)
+    end
+
+    # UBL sibling of add_br_fr_schematron_if_french: same BT-23 guard, read the
+    # UBL way. Mirrors b2b_app's DocumentType::UblFrProfileDetection#french?.
+    def add_br_fr_schematron_if_french_ubl(schematrons, doc_nokogiri)
+      return schematrons if (VALID_FR_PROCESS_CODES & bt23_values_ubl(doc_nokogiri)).empty?
+
+      schematrons + %w(BR-FR-Flux2-Schematron-UBL_V1.4.0.04.sch)
+    end
+
+    # BT-23 ("Cadre de Facturation") from ProfileID (AFNOR) or from an
+    # AdditionalDocumentReference tagged CADRE_DE_FACTURATION (Peppol BIS).
+    def bt23_values_ubl(doc_nokogiri)
+      values = doc_nokogiri.xpath('/*/cbc:ProfileID', cbc: CBC).map { |node| node.text.strip }
+      cadre = doc_nokogiri.xpath('//cac:AdditionalDocumentReference', cac: CAC).find do |node|
+        node.at_xpath('cbc:DocumentDescription', cbc: CBC)&.text&.strip == 'CADRE_DE_FACTURATION'
+      end&.at_xpath('cbc:ID', cbc: CBC)&.text&.strip
+      values << cadre if cadre
+      values
     end
 
     def xslt_path(name)
