@@ -26,6 +26,17 @@ module Schematron
       end
     end
 
+    # Validates +xml+ against the compiled stylesheet already on disk at +stylesheet_path+.
+    #
+    # .validate copies the stylesheet into /tmp, which makes /tmp its base URI. A stylesheet that
+    # resolves a sibling resource at run time then silently reads nothing: the Factur-X profiles
+    # look their code lists up with document('FACTUR-X_<profile>_codedb.xml'), and saxon returns an
+    # empty sequence for the missing file rather than failing. Passing the real path keeps the base
+    # URI on the directory that holds those companion files.
+    def self.validate_stylesheet(stylesheet_path, xml)
+      create_temp_file(xml) { |temp_xml| execute_transform(stylesheet_path, temp_xml.path) }
+    end
+
     def self.get_errors(validation_result)
       result = []
 
