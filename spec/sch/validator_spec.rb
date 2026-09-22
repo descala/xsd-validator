@@ -30,6 +30,34 @@ RSpec.describe Sch::Validator do
     end
   end
 
+  # The FNFE Factur-X profile schematrons put no flag on their asserts, and ResultHandler kept only the
+  # flagged ones, so a broken rule reached nobody: MINIMUM, BASIC WL and EXTENDED reported every document
+  # as valid. The break here is 10 cents on a 5-line invoice, clear of the 0,01-per-line tolerance that
+  # BR-FXEXT-CO-15 allows.
+  it 'reports an unflagged failed-assert as an error' do
+    doc = File.read('spec/files/sch/factur-x/fnfe-extended-total-wrong.xml')
+
+    errors, warnings = sch_validate(doc)
+
+    expect(errors).to include(/\AERROR: \[BR-FXEXT-CO-15\]/)
+    expect(warnings).to be_empty
+  end
+
+  # Each Factur-X profile reads its code lists from FACTUR-X_<profile>_codedb.xml with document(), resolved
+  # against the stylesheet's own directory. Validating from a copy in /tmp returns nothing for every one of
+  # those lookups, so each coded value fails its assert ("Value of 'ram:TypeCode' is not allowed") on
+  # documents that are perfectly valid. These three are FNFE's own conformance examples plus our MINIMUM
+  # fixture, and all of them carry coded values.
+  it 'resolves the Factur-X code lists rather than rejecting every coded value' do
+    ['spec/files/sch/factur-x/fnfe-extended-uc13.xml',
+     'spec/files/sch/factur-x/fnfe-basic-wl-f20260023.xml',
+     'spec/files/sch/factur-x/factur-x-minimum.xml'].each do |filename|
+      errors, = sch_validate(File.read(filename))
+
+      expect(errors).to be_empty, "Error validating fixture #{filename}: #{errors}"
+    end
+  end
+
   it 'raises ValidationError for an invalid CIUS pt' do
     doc=File.read('spec/files/sch/invoice-cius-pt-wrong.xml')
     expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationError, /FATAL: .*BR-CIUS-PT-18/)
@@ -115,19 +143,19 @@ RSpec.describe Sch::Validator do
 
   context 'check choose correct schematrons' do
     files = {
-      'spec/files/sch/factur-x/factur-x-minimum.xml' => ['FACTUR-X_MINIMUM.sch'],
+      'spec/files/sch/factur-x/factur-x-minimum.xml' => ['FACTUR-X_MINIMUM_V1.0.sch'],
       'spec/files/sch/factur-x/factur-x-basic.xml' => ['EN16931-CII-validation-preprocessed.sch'],
-      'spec/files/sch/factur-x/factur-x-basic-wl.xml' => ['FACTUR-X_BASIC-WL.sch'],
+      'spec/files/sch/factur-x/factur-x-basic-wl.xml' => ['FACTUR-X_BASIC-WL_V1.09.2.sch'],
       'spec/files/sch/factur-x/factur-x-en16931.xml' => ['EN16931-CII-validation-preprocessed.sch'],
-      'spec/files/sch/factur-x/factur-x-extended.xml' => ['FACTUR-X_EXTENDED.sch'],
+      'spec/files/sch/factur-x/factur-x-extended.xml' => ['FACTUR-X_EXTENDED_V1.09.2.sch'],
       # Factur-X France (#72838): a French BT-23 process code adds BR-FR to the
       # mandatory-set profiles; BASIC, outside that set, keeps only its own schematron.
       'spec/files/sch/factur-x/factur-x-fr-en16931.xml' =>
         ['EN16931-CII-validation-preprocessed.sch', 'BR-FR-Flux2-Schematron-CII_V1.4.0.04.sch'],
       'spec/files/sch/factur-x/factur-x-fr-extended.xml' =>
-        ['FACTUR-X_EXTENDED.sch', 'BR-FR-Flux2-Schematron-CII_V1.4.0.04.sch'],
+        ['FACTUR-X_EXTENDED_V1.09.2.sch', 'BR-FR-Flux2-Schematron-CII_V1.4.0.04.sch'],
       'spec/files/sch/factur-x/factur-x-fr-basic-wl.xml' =>
-        ['FACTUR-X_BASIC-WL.sch', 'BR-FR-Flux2-Schematron-CII_V1.4.0.04.sch'],
+        ['FACTUR-X_BASIC-WL_V1.09.2.sch', 'BR-FR-Flux2-Schematron-CII_V1.4.0.04.sch'],
       'spec/files/sch/factur-x/factur-x-fr-basic.xml' => ['EN16931-CII-validation-preprocessed.sch'],
       'spec/files/sch/factur-x/factur-x-fr-extended-ctc-dot.xml' =>
         ['EXTENDED-CTC-FR-CII.sch', 'BR-FR-Flux2-Schematron-CII_V1.4.0.04.sch'],
@@ -166,7 +194,7 @@ RSpec.describe Sch::Validator do
       # Pre-existing gap: the Peppol-URN CIUS/Extended branch only checked
       # root.name == 'Invoice', so a CreditNote fell through to the CII file.
       'spec/files/xsd/ubl-credit-note-fr-cius.xml' => ['BR-FR-Flux2-Schematron-UBL_V1.4.0.04.sch'],
-      'spec/files/sch/cdar/cdar_1_deposee.xml' => ['BR-FR-CDV-Schematron-CDAR_V1.4.0.03.sch'],
+      'spec/files/sch/cdar/cdar_1_deposee.xml' => ['BR-FR-CDV-Schematron-CDAR_V1.4.0.04.sch'],
       'spec/files/sch/f10/f10-report-transactions.xml' => ['BR-FR-Flux10-Schematron_V1.0.sch'],
       'spec/files/sch/f10/f10-report-payments.xml' => ['BR-FR-Flux10-Schematron_V1.0.sch'],
       'spec/files/sch/f10/f10-report-bi2b-foreign-rate-wrong.xml' => ['BR-FR-Flux10-Schematron_V1.0.sch'],
