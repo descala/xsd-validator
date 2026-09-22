@@ -69,7 +69,7 @@ module Sch
       errors = []
       warnings = []
       schematrons(doc, parts).each do |schematron_file|
-        validation_result = Schematron::XSLT2.validate_stylesheet(xslt_path(schematron_file), doc)
+        validation_result = Schematron::XSLT2.validate_stylesheet_file(xslt_path(schematron_file), doc)
         result_handler = ResultHandler.new(validation_result)
         errors += result_handler.errors
         warnings = warnings + result_handler.warnings
@@ -89,7 +89,7 @@ module Sch
       warnings = []
       schematrons ||= schematrons(doc, parts)
       schematrons.each do |schematron_file|
-        validation_result = Schematron::XSLT2.validate_stylesheet(xslt_path(schematron_file), doc)
+        validation_result = Schematron::XSLT2.validate_stylesheet_file(xslt_path(schematron_file), doc)
         result_handler = ResultHandler.new(validation_result)
         result_handler.errors.each do |error|
           errors << [schematron_file, error]
