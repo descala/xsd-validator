@@ -52,6 +52,21 @@ RSpec.describe Xsd::Validator do
     expect { xsd_validate!(doc) }.to raise_error(Xsd::Validator::ValidationError, /amount/)
   end
 
+  it 'raises UnknownCustomizationIdError for a CII extension (#conformant#) it does not list' do
+    doc = File.read('spec/files/xsd/factur-x/factur-x-extended.xml')
+      .sub('urn:cen.eu:en16931:2017#conformant#urn:factur-x.eu:1p0:extended',
+           'urn:cen.eu:en16931:2017#conformant#urn:example:unlisted:extended')
+    expect { root_namespace_xsd(doc) }
+      .to raise_error(Xsd::Validator::UnknownCustomizationIdError, /urn:example:unlisted:extended/)
+  end
+
+  it 'routes the #conformant# spelling of Factur-X EN 16931 to the EN 16931 XSD' do
+    doc = File.read('spec/files/xsd/factur-x/factur-x-en16931.xml')
+      .sub('<ram:ID>urn:cen.eu:en16931:2017</ram:ID>',
+           '<ram:ID>urn:cen.eu:en16931:2017#conformant#urn:factur-x.eu:1p0:en16931</ram:ID>')
+    expect(root_namespace_xsd(doc)).to match(/FACTUR-X_EN16931\.xsd\z/)
+  end
+
   it 'validates spec files' do
     Dir["spec/files/xsd/**/*.xml"].each do |filename|
       next if filename =~ /wrong/
@@ -67,6 +82,8 @@ RSpec.describe Xsd::Validator do
       'spec/files/xsd/factur-x/factur-x-basic-wl.xml' => /FACTUR-X_BASIC-WL.xsd/,
       'spec/files/xsd/factur-x/factur-x-en16931.xml' => /FACTUR-X_EN16931.xsd/,
       'spec/files/xsd/factur-x/factur-x-extended.xml' => /FACTUR-X_EXTENDED.xsd/,
+      'spec/files/xsd/factur-x/factur-x-fr-extended-ctc-dot.xml' => /FACTUR-X_EXTENDED.xsd/,
+      'spec/files/xsd/factur-x/factur-x-fr-extended-ctc-colon.xml' => /FACTUR-X_EXTENDED.xsd/,
       'spec/files/xsd/cii/zugferd_1.xml' => /FACTUR-X_EN16931.xsd/,
       'spec/files/sch/cii/xrechnung-cii_3.0-wrong.xml' => 'CrossIndustryInvoice_100pD16B.xsd',
       'spec/files/sch/cii/xrechnung-cii_3.0_extension-wrong.xml' => 'CrossIndustryInvoice_100pD16B.xsd',
