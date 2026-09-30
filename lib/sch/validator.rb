@@ -1,3 +1,4 @@
+require 'fileutils'
 require 'nokogiri'
 require_relative '../../vendor/schematron-wrapper-saxon/lib/schematron'
 
@@ -24,7 +25,7 @@ module Sch
       end
 
       def errors
-        build_result('fatal') + build_result('error')
+        build_result('fatal') + build_result('error') + unflagged_errors
       end
 
       def warnings
@@ -32,15 +33,30 @@ module Sch
       end
 
       def build_result(flag)
+        collect("//svrl:failed-assert[@flag='#{flag}']|//svrl:successful-report[@flag='#{flag}']", flag)
+      end
+
+      # The FNFE Factur-X profile schematrons leave the severity off their asserts: of the 943 asserts in
+      # FACTUR-X_EXTENDED 1.09.2, only 22 carry a flag. A failed assert is a rule the document broke, so an
+      # unflagged one is an error.
+      #
+      # successful-report is deliberately left out. Those 521 elements are conformance notices ("Element
+      # 'ram:Description' is marked as not used in the given context") that fire on valid documents, and
+      # counting them would bury the real findings.
+      def unflagged_errors
+        collect('//svrl:failed-assert[not(@flag)]', 'error')
+      end
+
+      def collect(xpath, label)
         result = []
-        @document.xpath("//svrl:failed-assert[@flag='#{flag}']|//svrl:successful-report[@flag='#{flag}']").each do |element|
+        @document.xpath(xpath).each do |element|
           h = element.attributes.map{|k,v| [k, v.to_s]}.to_h
           h.delete('test')
           description = element.xpath('./svrl:text').text.strip
           if description !~ /#{h['id']}/
             description = "[#{h['id']}] #{description}"
           end
-          result << "#{flag.upcase}: #{description} #{h}"
+          result << "#{label.upcase}: #{description} #{h}"
         end
         result
       end
@@ -53,8 +69,7 @@ module Sch
       errors = []
       warnings = []
       schematrons(doc, parts).each do |schematron_file|
-        compiled_schematron = File.read(xslt_path(schematron_file))
-        validation_result = Schematron::XSLT2.validate(compiled_schematron, doc)
+        validation_result = Schematron::XSLT2.validate_stylesheet_file(xslt_path(schematron_file), doc)
         result_handler = ResultHandler.new(validation_result)
         errors += result_handler.errors
         warnings = warnings + result_handler.warnings
@@ -74,8 +89,7 @@ module Sch
       warnings = []
       schematrons ||= schematrons(doc, parts)
       schematrons.each do |schematron_file|
-        compiled_schematron = File.read(xslt_path(schematron_file))
-        validation_result = Schematron::XSLT2.validate(compiled_schematron, doc)
+        validation_result = Schematron::XSLT2.validate_stylesheet_file(xslt_path(schematron_file), doc)
         result_handler = ResultHandler.new(validation_result)
         result_handler.errors.each do |error|
           errors << [schematron_file, error]
@@ -189,11 +203,11 @@ module Sch
 
       # Factur-X Profil MINIMUM
       when 'urn:factur-x.eu:1p0:minimum'
-        %w(FACTUR-X_MINIMUM.sch)
+        %w(FACTUR-X_MINIMUM_V1.0.sch)
 
       # Factur-X Profil BASIC WL
       when 'urn:factur-x.eu:1p0:basicwl'
-        add_br_fr_schematron_if_french(%w(FACTUR-X_BASIC-WL.sch), doc_nokogiri)
+        add_br_fr_schematron_if_french(%w(FACTUR-X_BASIC-WL_V1.09.2.sch), doc_nokogiri)
 
       # Factur-X Profil BASIC (outside the mandatory French set: never BR-FR)
       when 'urn:cen.eu:en16931:2017#compliant#urn:factur-x.eu:1p0:basic'
@@ -211,7 +225,7 @@ module Sch
 
       # Factur-X Profil EXTENDED (mandatory French set)
       when 'urn:cen.eu:en16931:2017#conformant#urn:factur-x.eu:1p0:extended'
-        add_br_fr_schematron_if_french(%w(FACTUR-X_EXTENDED.sch), doc_nokogiri)
+        add_br_fr_schematron_if_french(%w(FACTUR-X_EXTENDED_V1.09.2.sch), doc_nokogiri)
 
       # Factur-X EXTENDED-CTC-FR (FNFE V1.4.0.04, applicable from 2026-10-01;
       # AFNOR examples use the dot form, the XP Z12-012 text the colon form) — also
@@ -330,7 +344,7 @@ module Sch
         %w(BR-FR-Flux2-Schematron-CII_V1.4.0.04.sch)
         # CDAR CrossDomainAcknowledgementAndResponse
       when ->(v) { v.start_with?('urn.cpro.gouv.fr:1p0:CDV') }
-        %w(BR-FR-CDV-Schematron-CDAR_V1.4.0.03.sch)
+        %w(BR-FR-CDV-Schematron-CDAR_V1.4.0.04.sch)
       # AE PINT Invoice v1.0, AE PINT CreditNote v1.0
       when 'urn:peppol:pint:billing-1@ae-1'
         schemas = %w(PINT-billing-1-shared.sch PINT-AE-billing-1-aligned.sch)
@@ -363,12 +377,22 @@ module Sch
 
 
     # Creates compiled xslt
+    #
+    # The glob names the directories holding standalone schematrons rather than recursing: cii/abstract,
+    # cii/codelist and their siblings are fragments the preprocessed files already include, and compiling
+    # one on its own yields nothing usable.
     def self.compile
       Dir.chdir('lib/sch/schemas/') do
-        Dir["*.sch","*/*.sch","xrechnung/*/*/*.sch","PINT/*/*.sch"].each do |schematron_file|
+        Dir["*.sch","*/*.sch","cii/preprocessed/*.sch","factur-x/*/*.sch","xrechnung/*/*/*.sch","PINT/*/*.sch"].each do |schematron_file|
           cache_xslt = "../compiled/#{File.basename(schematron_file)}.xslt"
           compiled_schematron = schematron_compile(schematron_file)
           File.write(cache_xslt, compiled_schematron)
+        end
+        # The Factur-X profiles look their code lists up at run time with
+        # document('FACTUR-X_<profile>_codedb.xml'), resolved against the stylesheet's own directory, so
+        # those companion files have to sit beside the compiled stylesheets and not only beside the sources.
+        Dir["factur-x/*/*_codedb.xml"].each do |codedb|
+          FileUtils.cp(codedb, "../compiled/#{File.basename(codedb)}")
         end
       end
     end

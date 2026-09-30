@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <xsl:stylesheet xmlns:iso="http://purl.oclc.org/dsdl/schematron"
-                 xmlns:qdt="urn:un:unece:uncefact:data:standard:QualifiedDataType:100"
-                 xmlns:ram="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100"
-                 xmlns:rsm="urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100"
-                 xmlns:schold="http://www.ascc.net/xml/schematron"
-                 xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:100"
-                 xmlns:xhtml="http://www.w3.org/1999/xhtml"
-                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                 version="1.0"><!--Implementers: please note that overriding process-prolog or process-root is 
+                xmlns:qdt="urn:un:unece:uncefact:data:standard:QualifiedDataType:100"
+                xmlns:ram="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100"
+                xmlns:rsm="urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100"
+                xmlns:schold="http://www.ascc.net/xml/schematron"
+                xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:100"
+                xmlns:xhtml="http://www.w3.org/1999/xhtml"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                version="1.0"><!--Implementers: please note that overriding process-prolog or process-root is 
     the preferred method for meta-stylesheets to use where possible. -->
    <xsl:param name="archiveDirParameter"/>
    <xsl:param name="archiveNameParameter"/>
@@ -20,10 +20,10 @@
    <!--PHASES-->
    <!--PROLOG-->
    <xsl:output xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                method="xml"
-                omit-xml-declaration="no"
-                standalone="yes"
-                indent="yes"/>
+               method="xml"
+               omit-xml-declaration="no"
+               standalone="yes"
+               indent="yes"/>
    <!--XSD TYPES FOR XSLT2-->
    <!--KEYS AND FUNCTIONS-->
    <!--DEFAULT RULES-->
@@ -41,7 +41,7 @@
          <xsl:when test="namespace-uri()=''">
             <xsl:value-of select="name()"/>
             <xsl:variable name="p_1"
-                           select="1+    count(preceding-sibling::*[name()=name(current())])"/>
+                          select="1+    count(preceding-sibling::*[name()=name(current())])"/>
             <xsl:if test="$p_1&gt;1 or following-sibling::*[name()=name(current())]">[<xsl:value-of select="$p_1"/>]</xsl:if>
          </xsl:when>
          <xsl:otherwise>
@@ -49,7 +49,7 @@
             <xsl:value-of select="local-name()"/>
             <xsl:text>']</xsl:text>
             <xsl:variable name="p_2"
-                           select="1+   count(preceding-sibling::*[local-name()=local-name(current())])"/>
+                          select="1+   count(preceding-sibling::*[local-name()=local-name(current())])"/>
             <xsl:if test="$p_2&gt;1 or following-sibling::*[local-name()=local-name(current())]">[<xsl:value-of select="$p_2"/>]</xsl:if>
          </xsl:otherwise>
       </xsl:choose>
@@ -149,8 +149,8 @@
    <!--SCHEMA SETUP-->
    <xsl:template match="/">
       <svrl:schematron-output xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                               title="Schema for FACTUR-X; 1.0; ACCOUNTING INFORMATION, No XML Invoice, (MINIMUM)"
-                               schemaVersion="iso">
+                              title="Schema for FACTUR-X; 1.0; ACCOUNTING INFORMATION, No XML Invoice, (MINIMUM)"
+                              schemaVersion="iso">
          <xsl:comment>
             <xsl:value-of select="$archiveDirParameter"/>   
 		 <xsl:value-of select="$archiveNameParameter"/>  
@@ -158,13 +158,13 @@
 		 <xsl:value-of select="$fileDirParameter"/>
          </xsl:comment>
          <svrl:ns-prefix-in-attribute-values uri="urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100"
-                                              prefix="rsm"/>
+                                             prefix="rsm"/>
          <svrl:ns-prefix-in-attribute-values uri="urn:un:unece:uncefact:data:standard:QualifiedDataType:100"
-                                              prefix="qdt"/>
+                                             prefix="qdt"/>
          <svrl:ns-prefix-in-attribute-values uri="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100"
-                                              prefix="ram"/>
+                                             prefix="ram"/>
          <svrl:ns-prefix-in-attribute-values uri="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:100"
-                                              prefix="udt"/>
+                                             prefix="udt"/>
          <svrl:active-pattern>
             <xsl:attribute name="document">
                <xsl:value-of select="document-uri(/)"/>
@@ -2122,675 +2122,13 @@
    </xsl:template>
    <!--SCHEMATRON PATTERNS-->
    <svrl:text xmlns:svrl="http://purl.oclc.org/dsdl/svrl">Schema for FACTUR-X; 1.0; ACCOUNTING INFORMATION, No XML Invoice, (MINIMUM)</svrl:text>
-
-   <xsl:variable name="codedb">
-   <codedb xmlns="http://purl.oclc.org/dsdl/schematron">
-
-      <cl id="1">
-         <enumeration value="80"/>
-         <enumeration value="81"/>
-         <enumeration value="82"/>
-         <enumeration value="83"/>
-         <enumeration value="84"/>
-         <enumeration value="130"/>
-         <enumeration value="202"/>
-         <enumeration value="203"/>
-         <enumeration value="204"/>
-         <enumeration value="211"/>
-         <enumeration value="261"/>
-         <enumeration value="262"/>
-         <enumeration value="295"/>
-         <enumeration value="296"/>
-         <enumeration value="308"/>
-         <enumeration value="325"/>
-         <enumeration value="326"/>
-         <enumeration value="380"/>
-         <enumeration value="381"/>
-         <enumeration value="383"/>
-         <enumeration value="384"/>
-         <enumeration value="385"/>
-         <enumeration value="386"/>
-         <enumeration value="387"/>
-         <enumeration value="388"/>
-         <enumeration value="389"/>
-         <enumeration value="390"/>
-         <enumeration value="393"/>
-         <enumeration value="394"/>
-         <enumeration value="395"/>
-         <enumeration value="396"/>
-         <enumeration value="420"/>
-         <enumeration value="456"/>
-         <enumeration value="457"/>
-         <enumeration value="458"/>
-         <enumeration value="527"/>
-         <enumeration value="575"/>
-         <enumeration value="623"/>
-         <enumeration value="633"/>
-         <enumeration value="751"/>
-         <enumeration value="780"/>
-         <enumeration value="875"/>
-         <enumeration value="876"/>
-         <enumeration value="877"/>
-         <enumeration value="935"/>
-      </cl>
-      <cl id="2">
-         <enumeration value="102"/>
-      </cl>
-      <cl id="3">
-         <enumeration value="0002"/>
-         <enumeration value="0003"/>
-         <enumeration value="0004"/>
-         <enumeration value="0005"/>
-         <enumeration value="0006"/>
-         <enumeration value="0007"/>
-         <enumeration value="0008"/>
-         <enumeration value="0009"/>
-         <enumeration value="0010"/>
-         <enumeration value="0011"/>
-         <enumeration value="0012"/>
-         <enumeration value="0013"/>
-         <enumeration value="0014"/>
-         <enumeration value="0015"/>
-         <enumeration value="0016"/>
-         <enumeration value="0017"/>
-         <enumeration value="0018"/>
-         <enumeration value="0019"/>
-         <enumeration value="0020"/>
-         <enumeration value="0021"/>
-         <enumeration value="0022"/>
-         <enumeration value="0023"/>
-         <enumeration value="0024"/>
-         <enumeration value="0025"/>
-         <enumeration value="0026"/>
-         <enumeration value="0027"/>
-         <enumeration value="0028"/>
-         <enumeration value="0029"/>
-         <enumeration value="0030"/>
-         <enumeration value="0031"/>
-         <enumeration value="0032"/>
-         <enumeration value="0033"/>
-         <enumeration value="0034"/>
-         <enumeration value="0035"/>
-         <enumeration value="0036"/>
-         <enumeration value="0037"/>
-         <enumeration value="0038"/>
-         <enumeration value="0039"/>
-         <enumeration value="0040"/>
-         <enumeration value="0041"/>
-         <enumeration value="0042"/>
-         <enumeration value="0043"/>
-         <enumeration value="0044"/>
-         <enumeration value="0045"/>
-         <enumeration value="0046"/>
-         <enumeration value="0047"/>
-         <enumeration value="0048"/>
-         <enumeration value="0049"/>
-         <enumeration value="0050"/>
-         <enumeration value="0051"/>
-         <enumeration value="0052"/>
-         <enumeration value="0053"/>
-         <enumeration value="0054"/>
-         <enumeration value="0055"/>
-         <enumeration value="0056"/>
-         <enumeration value="0057"/>
-         <enumeration value="0058"/>
-         <enumeration value="0059"/>
-         <enumeration value="0060"/>
-         <enumeration value="0061"/>
-         <enumeration value="0062"/>
-         <enumeration value="0063"/>
-         <enumeration value="0064"/>
-         <enumeration value="0065"/>
-         <enumeration value="0066"/>
-         <enumeration value="0067"/>
-         <enumeration value="0068"/>
-         <enumeration value="0069"/>
-         <enumeration value="0070"/>
-         <enumeration value="0071"/>
-         <enumeration value="0072"/>
-         <enumeration value="0073"/>
-         <enumeration value="0074"/>
-         <enumeration value="0075"/>
-         <enumeration value="0076"/>
-         <enumeration value="0077"/>
-         <enumeration value="0078"/>
-         <enumeration value="0079"/>
-         <enumeration value="0080"/>
-         <enumeration value="0081"/>
-         <enumeration value="0082"/>
-         <enumeration value="0083"/>
-         <enumeration value="0084"/>
-         <enumeration value="0085"/>
-         <enumeration value="0086"/>
-         <enumeration value="0087"/>
-         <enumeration value="0088"/>
-         <enumeration value="0089"/>
-         <enumeration value="0090"/>
-         <enumeration value="0091"/>
-         <enumeration value="0093"/>
-         <enumeration value="0094"/>
-         <enumeration value="0095"/>
-         <enumeration value="0096"/>
-         <enumeration value="0097"/>
-         <enumeration value="0098"/>
-         <enumeration value="0099"/>
-         <enumeration value="0100"/>
-         <enumeration value="0101"/>
-         <enumeration value="0102"/>
-         <enumeration value="0104"/>
-         <enumeration value="0105"/>
-         <enumeration value="0106"/>
-         <enumeration value="0107"/>
-         <enumeration value="0108"/>
-         <enumeration value="0109"/>
-         <enumeration value="0110"/>
-         <enumeration value="0111"/>
-         <enumeration value="0112"/>
-         <enumeration value="0113"/>
-         <enumeration value="0114"/>
-         <enumeration value="0115"/>
-         <enumeration value="0116"/>
-         <enumeration value="0117"/>
-         <enumeration value="0118"/>
-         <enumeration value="0119"/>
-         <enumeration value="0120"/>
-         <enumeration value="0121"/>
-         <enumeration value="0122"/>
-         <enumeration value="0123"/>
-         <enumeration value="0124"/>
-         <enumeration value="0125"/>
-         <enumeration value="0126"/>
-         <enumeration value="0127"/>
-         <enumeration value="0128"/>
-         <enumeration value="0129"/>
-         <enumeration value="0130"/>
-         <enumeration value="0131"/>
-         <enumeration value="0132"/>
-         <enumeration value="0133"/>
-         <enumeration value="0134"/>
-         <enumeration value="0135"/>
-         <enumeration value="0136"/>
-         <enumeration value="0137"/>
-         <enumeration value="0138"/>
-         <enumeration value="0139"/>
-         <enumeration value="0140"/>
-         <enumeration value="0141"/>
-         <enumeration value="0142"/>
-         <enumeration value="0143"/>
-         <enumeration value="0144"/>
-         <enumeration value="0145"/>
-         <enumeration value="0146"/>
-         <enumeration value="0147"/>
-         <enumeration value="0148"/>
-         <enumeration value="0149"/>
-         <enumeration value="0150"/>
-         <enumeration value="0151"/>
-         <enumeration value="0152"/>
-         <enumeration value="0153"/>
-         <enumeration value="0154"/>
-         <enumeration value="0155"/>
-         <enumeration value="0156"/>
-         <enumeration value="0157"/>
-         <enumeration value="0158"/>
-         <enumeration value="0159"/>
-         <enumeration value="0160"/>
-         <enumeration value="0161"/>
-         <enumeration value="0162"/>
-         <enumeration value="0163"/>
-         <enumeration value="0164"/>
-         <enumeration value="0165"/>
-         <enumeration value="0166"/>
-         <enumeration value="0167"/>
-         <enumeration value="0168"/>
-         <enumeration value="0169"/>
-         <enumeration value="0170"/>
-         <enumeration value="0171"/>
-         <enumeration value="0172"/>
-         <enumeration value="0173"/>
-         <enumeration value="0174"/>
-         <enumeration value="0175"/>
-         <enumeration value="0176"/>
-         <enumeration value="0177"/>
-         <enumeration value="0178"/>
-         <enumeration value="0179"/>
-         <enumeration value="0180"/>
-         <enumeration value="0183"/>
-         <enumeration value="0184"/>
-         <enumeration value="0185"/>
-         <enumeration value="0186"/>
-         <enumeration value="0187"/>
-         <enumeration value="0188"/>
-         <enumeration value="0189"/>
-         <enumeration value="0190"/>
-         <enumeration value="0191"/>
-         <enumeration value="0192"/>
-         <enumeration value="0193"/>
-         <enumeration value="0194"/>
-         <enumeration value="0195"/>
-         <enumeration value="0196"/>
-         <enumeration value="0197"/>
-         <enumeration value="0198"/>
-         <enumeration value="0199"/>
-         <enumeration value="0200"/>
-         <enumeration value="0201"/>
-         <enumeration value="0202"/>
-         <enumeration value="0203"/>
-         <enumeration value="0204"/>
-         <enumeration value="0205"/>
-         <enumeration value="0206"/>
-         <enumeration value="0207"/>
-         <enumeration value="0208"/>
-         <enumeration value="0209"/>
-         <enumeration value="0210"/>
-         <enumeration value="0211"/>
-         <enumeration value="0212"/>
-         <enumeration value="0213"/>
-      </cl>
-      <cl id="4">
-         <enumeration value="FC"/>
-         <enumeration value="VA"/>
-      </cl>
-      <cl id="5">
-         <enumeration value="0002"/>
-         <enumeration value="0003"/>
-         <enumeration value="0004"/>
-         <enumeration value="0005"/>
-         <enumeration value="0006"/>
-         <enumeration value="0007"/>
-         <enumeration value="0008"/>
-         <enumeration value="0009"/>
-         <enumeration value="0010"/>
-         <enumeration value="0011"/>
-         <enumeration value="0012"/>
-         <enumeration value="0013"/>
-         <enumeration value="0014"/>
-         <enumeration value="0015"/>
-         <enumeration value="0016"/>
-         <enumeration value="0017"/>
-         <enumeration value="0018"/>
-         <enumeration value="0019"/>
-         <enumeration value="0020"/>
-         <enumeration value="0021"/>
-         <enumeration value="0022"/>
-         <enumeration value="0023"/>
-         <enumeration value="0024"/>
-         <enumeration value="0025"/>
-         <enumeration value="0026"/>
-         <enumeration value="0027"/>
-         <enumeration value="0028"/>
-         <enumeration value="0029"/>
-         <enumeration value="0030"/>
-         <enumeration value="0031"/>
-         <enumeration value="0032"/>
-         <enumeration value="0033"/>
-         <enumeration value="0034"/>
-         <enumeration value="0035"/>
-         <enumeration value="0036"/>
-         <enumeration value="0037"/>
-         <enumeration value="0038"/>
-         <enumeration value="0039"/>
-         <enumeration value="0040"/>
-         <enumeration value="0041"/>
-         <enumeration value="0042"/>
-         <enumeration value="0043"/>
-         <enumeration value="0044"/>
-         <enumeration value="0045"/>
-         <enumeration value="0046"/>
-         <enumeration value="0047"/>
-         <enumeration value="0048"/>
-         <enumeration value="0049"/>
-         <enumeration value="0050"/>
-         <enumeration value="0051"/>
-         <enumeration value="0052"/>
-         <enumeration value="0053"/>
-         <enumeration value="0054"/>
-         <enumeration value="0055"/>
-         <enumeration value="0056"/>
-         <enumeration value="0057"/>
-         <enumeration value="0058"/>
-         <enumeration value="0059"/>
-         <enumeration value="0060"/>
-         <enumeration value="0061"/>
-         <enumeration value="0062"/>
-         <enumeration value="0063"/>
-         <enumeration value="0064"/>
-         <enumeration value="0065"/>
-         <enumeration value="0066"/>
-         <enumeration value="0067"/>
-         <enumeration value="0068"/>
-         <enumeration value="0069"/>
-         <enumeration value="0070"/>
-         <enumeration value="0071"/>
-         <enumeration value="0072"/>
-         <enumeration value="0073"/>
-         <enumeration value="0074"/>
-         <enumeration value="0075"/>
-         <enumeration value="0076"/>
-         <enumeration value="0077"/>
-         <enumeration value="0078"/>
-         <enumeration value="0079"/>
-         <enumeration value="0080"/>
-         <enumeration value="0081"/>
-         <enumeration value="0082"/>
-         <enumeration value="0083"/>
-         <enumeration value="0084"/>
-         <enumeration value="0085"/>
-         <enumeration value="0086"/>
-         <enumeration value="0087"/>
-         <enumeration value="0088"/>
-         <enumeration value="0089"/>
-         <enumeration value="0090"/>
-         <enumeration value="0091"/>
-         <enumeration value="0093"/>
-         <enumeration value="0094"/>
-         <enumeration value="0095"/>
-         <enumeration value="0096"/>
-         <enumeration value="0097"/>
-         <enumeration value="0098"/>
-         <enumeration value="0099"/>
-         <enumeration value="0100"/>
-         <enumeration value="0101"/>
-         <enumeration value="0102"/>
-         <enumeration value="0104"/>
-         <enumeration value="0105"/>
-         <enumeration value="0106"/>
-         <enumeration value="0107"/>
-         <enumeration value="0108"/>
-         <enumeration value="0109"/>
-         <enumeration value="0110"/>
-         <enumeration value="0111"/>
-         <enumeration value="0112"/>
-         <enumeration value="0113"/>
-         <enumeration value="0114"/>
-         <enumeration value="0115"/>
-         <enumeration value="0116"/>
-         <enumeration value="0117"/>
-         <enumeration value="0118"/>
-         <enumeration value="0119"/>
-         <enumeration value="0120"/>
-         <enumeration value="0121"/>
-         <enumeration value="0122"/>
-         <enumeration value="0123"/>
-         <enumeration value="0124"/>
-         <enumeration value="0125"/>
-         <enumeration value="0126"/>
-         <enumeration value="0127"/>
-         <enumeration value="0128"/>
-         <enumeration value="0129"/>
-         <enumeration value="0130"/>
-         <enumeration value="0131"/>
-         <enumeration value="0132"/>
-         <enumeration value="0133"/>
-         <enumeration value="0134"/>
-         <enumeration value="0135"/>
-         <enumeration value="0136"/>
-         <enumeration value="0137"/>
-         <enumeration value="0138"/>
-         <enumeration value="0139"/>
-         <enumeration value="0140"/>
-         <enumeration value="0141"/>
-         <enumeration value="0142"/>
-         <enumeration value="0143"/>
-         <enumeration value="0144"/>
-         <enumeration value="0145"/>
-         <enumeration value="0146"/>
-         <enumeration value="0147"/>
-         <enumeration value="0148"/>
-         <enumeration value="0149"/>
-         <enumeration value="0150"/>
-         <enumeration value="0151"/>
-         <enumeration value="0152"/>
-         <enumeration value="0153"/>
-         <enumeration value="0154"/>
-         <enumeration value="0155"/>
-         <enumeration value="0156"/>
-         <enumeration value="0157"/>
-         <enumeration value="0158"/>
-         <enumeration value="0159"/>
-         <enumeration value="0160"/>
-         <enumeration value="0161"/>
-         <enumeration value="0162"/>
-         <enumeration value="0163"/>
-         <enumeration value="0164"/>
-         <enumeration value="0165"/>
-         <enumeration value="0166"/>
-         <enumeration value="0167"/>
-         <enumeration value="0168"/>
-         <enumeration value="0169"/>
-         <enumeration value="0170"/>
-         <enumeration value="0171"/>
-         <enumeration value="0172"/>
-         <enumeration value="0173"/>
-         <enumeration value="0174"/>
-         <enumeration value="0175"/>
-         <enumeration value="0176"/>
-         <enumeration value="0177"/>
-         <enumeration value="0178"/>
-         <enumeration value="0179"/>
-         <enumeration value="0180"/>
-         <enumeration value="0183"/>
-         <enumeration value="0184"/>
-         <enumeration value="0185"/>
-         <enumeration value="0186"/>
-         <enumeration value="0187"/>
-         <enumeration value="0188"/>
-         <enumeration value="0189"/>
-         <enumeration value="0190"/>
-         <enumeration value="0191"/>
-         <enumeration value="0192"/>
-         <enumeration value="0193"/>
-         <enumeration value="0194"/>
-         <enumeration value="0195"/>
-         <enumeration value="0196"/>
-         <enumeration value="0197"/>
-         <enumeration value="0198"/>
-         <enumeration value="0199"/>
-         <enumeration value="0200"/>
-         <enumeration value="0201"/>
-         <enumeration value="0202"/>
-         <enumeration value="0203"/>
-         <enumeration value="0204"/>
-         <enumeration value="0205"/>
-         <enumeration value="0206"/>
-         <enumeration value="0207"/>
-         <enumeration value="0208"/>
-         <enumeration value="0209"/>
-         <enumeration value="0210"/>
-         <enumeration value="0211"/>
-         <enumeration value="0212"/>
-         <enumeration value="0213"/>
-      </cl>
-      <cl id="6">
-         <enumeration value="AED"/>
-         <enumeration value="AFN"/>
-         <enumeration value="ALL"/>
-         <enumeration value="AMD"/>
-         <enumeration value="ANG"/>
-         <enumeration value="AOA"/>
-         <enumeration value="ARS"/>
-         <enumeration value="AUD"/>
-         <enumeration value="AWG"/>
-         <enumeration value="AZN"/>
-         <enumeration value="BAM"/>
-         <enumeration value="BBD"/>
-         <enumeration value="BDT"/>
-         <enumeration value="BGN"/>
-         <enumeration value="BHD"/>
-         <enumeration value="BIF"/>
-         <enumeration value="BMD"/>
-         <enumeration value="BND"/>
-         <enumeration value="BOB"/>
-         <enumeration value="BOV"/>
-         <enumeration value="BRL"/>
-         <enumeration value="BSD"/>
-         <enumeration value="BTN"/>
-         <enumeration value="BWP"/>
-         <enumeration value="BYN"/>
-         <enumeration value="BZD"/>
-         <enumeration value="CAD"/>
-         <enumeration value="CDF"/>
-         <enumeration value="CHE"/>
-         <enumeration value="CHF"/>
-         <enumeration value="CHW"/>
-         <enumeration value="CLF"/>
-         <enumeration value="CLP"/>
-         <enumeration value="CNY"/>
-         <enumeration value="COP"/>
-         <enumeration value="COU"/>
-         <enumeration value="CRC"/>
-         <enumeration value="CUC"/>
-         <enumeration value="CUP"/>
-         <enumeration value="CVE"/>
-         <enumeration value="CZK"/>
-         <enumeration value="DJF"/>
-         <enumeration value="DKK"/>
-         <enumeration value="DOP"/>
-         <enumeration value="DZD"/>
-         <enumeration value="EGP"/>
-         <enumeration value="ERN"/>
-         <enumeration value="ETB"/>
-         <enumeration value="EUR"/>
-         <enumeration value="FJD"/>
-         <enumeration value="FKP"/>
-         <enumeration value="GBP"/>
-         <enumeration value="GEL"/>
-         <enumeration value="GHS"/>
-         <enumeration value="GIP"/>
-         <enumeration value="GMD"/>
-         <enumeration value="GNF"/>
-         <enumeration value="GTQ"/>
-         <enumeration value="GYD"/>
-         <enumeration value="HKD"/>
-         <enumeration value="HNL"/>
-         <enumeration value="HRK"/>
-         <enumeration value="HTG"/>
-         <enumeration value="HUF"/>
-         <enumeration value="IDR"/>
-         <enumeration value="ILS"/>
-         <enumeration value="INR"/>
-         <enumeration value="IQD"/>
-         <enumeration value="IRR"/>
-         <enumeration value="ISK"/>
-         <enumeration value="JMD"/>
-         <enumeration value="JOD"/>
-         <enumeration value="JPY"/>
-         <enumeration value="KES"/>
-         <enumeration value="KGS"/>
-         <enumeration value="KHR"/>
-         <enumeration value="KMF"/>
-         <enumeration value="KPW"/>
-         <enumeration value="KRW"/>
-         <enumeration value="KWD"/>
-         <enumeration value="KYD"/>
-         <enumeration value="KZT"/>
-         <enumeration value="LAK"/>
-         <enumeration value="LBP"/>
-         <enumeration value="LKR"/>
-         <enumeration value="LRD"/>
-         <enumeration value="LSL"/>
-         <enumeration value="LYD"/>
-         <enumeration value="MAD"/>
-         <enumeration value="MDL"/>
-         <enumeration value="MGA"/>
-         <enumeration value="MKD"/>
-         <enumeration value="MMK"/>
-         <enumeration value="MNT"/>
-         <enumeration value="MOP"/>
-         <enumeration value="MRU"/>
-         <enumeration value="MUR"/>
-         <enumeration value="MVR"/>
-         <enumeration value="MWK"/>
-         <enumeration value="MXN"/>
-         <enumeration value="MXV"/>
-         <enumeration value="MYR"/>
-         <enumeration value="MZN"/>
-         <enumeration value="NAD"/>
-         <enumeration value="NGN"/>
-         <enumeration value="NIO"/>
-         <enumeration value="NOK"/>
-         <enumeration value="NPR"/>
-         <enumeration value="NZD"/>
-         <enumeration value="OMR"/>
-         <enumeration value="PAB"/>
-         <enumeration value="PEN"/>
-         <enumeration value="PGK"/>
-         <enumeration value="PHP"/>
-         <enumeration value="PKR"/>
-         <enumeration value="PLN"/>
-         <enumeration value="PYG"/>
-         <enumeration value="QAR"/>
-         <enumeration value="RON"/>
-         <enumeration value="RSD"/>
-         <enumeration value="RUB"/>
-         <enumeration value="RWF"/>
-         <enumeration value="SAR"/>
-         <enumeration value="SBD"/>
-         <enumeration value="SCR"/>
-         <enumeration value="SDG"/>
-         <enumeration value="SEK"/>
-         <enumeration value="SGD"/>
-         <enumeration value="SHP"/>
-         <enumeration value="SLL"/>
-         <enumeration value="SOS"/>
-         <enumeration value="SRD"/>
-         <enumeration value="SSP"/>
-         <enumeration value="STN"/>
-         <enumeration value="SVC"/>
-         <enumeration value="SYP"/>
-         <enumeration value="SZL"/>
-         <enumeration value="THB"/>
-         <enumeration value="TJS"/>
-         <enumeration value="TMT"/>
-         <enumeration value="TND"/>
-         <enumeration value="TOP"/>
-         <enumeration value="TRY"/>
-         <enumeration value="TTD"/>
-         <enumeration value="TWD"/>
-         <enumeration value="TZS"/>
-         <enumeration value="UAH"/>
-         <enumeration value="UGX"/>
-         <enumeration value="USD"/>
-         <enumeration value="USN"/>
-         <enumeration value="UYI"/>
-         <enumeration value="UYU"/>
-         <enumeration value="UYW"/>
-         <enumeration value="UZS"/>
-         <enumeration value="VES"/>
-         <enumeration value="VND"/>
-         <enumeration value="VUV"/>
-         <enumeration value="WST"/>
-         <enumeration value="XAF"/>
-         <enumeration value="XAG"/>
-         <enumeration value="XAU"/>
-         <enumeration value="XBA"/>
-         <enumeration value="XBB"/>
-         <enumeration value="XBC"/>
-         <enumeration value="XBD"/>
-         <enumeration value="XCD"/>
-         <enumeration value="XDR"/>
-         <enumeration value="XOF"/>
-         <enumeration value="XPD"/>
-         <enumeration value="XPF"/>
-         <enumeration value="XPF"/>
-         <enumeration value="XPT"/>
-         <enumeration value="XSU"/>
-         <enumeration value="XTS"/>
-         <enumeration value="XUA"/>
-         <enumeration value="XXX"/>
-         <enumeration value="YER"/>
-         <enumeration value="ZAR"/>
-         <enumeration value="ZMW"/>
-         <enumeration value="ZWL"/>
-      </cl>
-   </codedb>
-   </xsl:variable>
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument"
-                  priority="1000"
-                  mode="M5">
+                 priority="1000"
+                 mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(ram:TypeCode)=1"/>
@@ -2813,10 +2151,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:CategoryCode"
-                  priority="1000"
-                  mode="M6">
+                 priority="1000"
+                 mode="M6">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:CategoryCode"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:CategoryCode"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -2836,10 +2174,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:ControlRequirementIndicator"
-                  priority="1000"
-                  mode="M7">
+                 priority="1000"
+                 mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:ControlRequirementIndicator"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:ControlRequirementIndicator"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -2859,10 +2197,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:CopyIndicator"
-                  priority="1000"
-                  mode="M8">
+                 priority="1000"
+                 mode="M8">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:CopyIndicator"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:CopyIndicator"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -2882,10 +2220,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:EffectiveSpecifiedPeriod"
-                  priority="1000"
-                  mode="M9">
+                 priority="1000"
+                 mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:EffectiveSpecifiedPeriod"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:EffectiveSpecifiedPeriod"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -2905,10 +2243,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:GlobalID"
-                  priority="1000"
-                  mode="M10">
+                 priority="1000"
+                 mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:GlobalID"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:GlobalID"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -2928,10 +2266,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:ID[@schemeAgencyID]"
-                  priority="1000"
-                  mode="M11">
+                 priority="1000"
+                 mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:ID[@schemeAgencyID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:ID[@schemeAgencyID]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -2951,10 +2289,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:ID[@schemeAgencyName]"
-                  priority="1000"
-                  mode="M12">
+                 priority="1000"
+                 mode="M12">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:ID[@schemeAgencyName]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:ID[@schemeAgencyName]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -2974,10 +2312,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:ID[@schemeDataURI]"
-                  priority="1000"
-                  mode="M13">
+                 priority="1000"
+                 mode="M13">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:ID[@schemeDataURI]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:ID[@schemeDataURI]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -2997,10 +2335,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:ID[@schemeID]"
-                  priority="1000"
-                  mode="M14">
+                 priority="1000"
+                 mode="M14">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:ID[@schemeID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:ID[@schemeID]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -3020,10 +2358,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:ID[@schemeName]"
-                  priority="1000"
-                  mode="M15">
+                 priority="1000"
+                 mode="M15">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:ID[@schemeName]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:ID[@schemeName]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -3043,10 +2381,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:ID[@schemeURI]"
-                  priority="1000"
-                  mode="M16">
+                 priority="1000"
+                 mode="M16">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:ID[@schemeURI]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:ID[@schemeURI]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -3066,10 +2404,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:ID[@schemeVersionID]"
-                  priority="1000"
-                  mode="M17">
+                 priority="1000"
+                 mode="M17">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:ID[@schemeVersionID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:ID[@schemeVersionID]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -3089,10 +2427,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:IncludedNote"
-                  priority="1000"
-                  mode="M18">
+                 priority="1000"
+                 mode="M18">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:IncludedNote"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:IncludedNote"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -3112,10 +2450,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:IssueDateTime/udt:DateTime"
-                  priority="1000"
-                  mode="M19">
+                 priority="1000"
+                 mode="M19">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:IssueDateTime/udt:DateTime"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:IssueDateTime/udt:DateTime"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -3135,17 +2473,17 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:IssueDateTime/udt:DateTimeString[@format]"
-                  priority="1000"
-                  mode="M20">
+                 priority="1000"
+                 mode="M20">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:IssueDateTime/udt:DateTimeString[@format]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:IssueDateTime/udt:DateTimeString[@format]"/>
       <xsl:variable name="codeValue2" select="@format"/>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="$codedb/codedb/cl[@id=2]/enumeration[@value=$codeValue2]"/>
+         <xsl:when test="document('FACTUR-X_MINIMUM_codedb.xml')//cl[@id=2]/enumeration[@value=$codeValue2]"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="$codedb/codedb/cl[@id=2]/enumeration[@value=$codeValue2]">
+                                test="document('FACTUR-X_MINIMUM_codedb.xml')//cl[@id=2]/enumeration[@value=$codeValue2]">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -3163,10 +2501,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:IssuerTradeParty"
-                  priority="1000"
-                  mode="M21">
+                 priority="1000"
+                 mode="M21">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:IssuerTradeParty"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:IssuerTradeParty"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -3186,10 +2524,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:LanguageID"
-                  priority="1000"
-                  mode="M22">
+                 priority="1000"
+                 mode="M22">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:LanguageID"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:LanguageID"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -3209,10 +2547,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:Name"
-                  priority="1000"
-                  mode="M23">
+                 priority="1000"
+                 mode="M23">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:Name"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:Name"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -3232,10 +2570,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:PreviousRevisionID"
-                  priority="1000"
-                  mode="M24">
+                 priority="1000"
+                 mode="M24">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:PreviousRevisionID"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:PreviousRevisionID"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -3255,10 +2593,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:Purpose"
-                  priority="1000"
-                  mode="M25">
+                 priority="1000"
+                 mode="M25">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:Purpose"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:Purpose"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -3278,10 +2616,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:PurposeCode"
-                  priority="1000"
-                  mode="M26">
+                 priority="1000"
+                 mode="M26">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:PurposeCode"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:PurposeCode"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -3301,10 +2639,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:RevisionDateTime"
-                  priority="1000"
-                  mode="M27">
+                 priority="1000"
+                 mode="M27">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:RevisionDateTime"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:RevisionDateTime"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -3324,10 +2662,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:RevisionID"
-                  priority="1000"
-                  mode="M28">
+                 priority="1000"
+                 mode="M28">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:RevisionID"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:RevisionID"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -3347,17 +2685,17 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:TypeCode"
-                  priority="1000"
-                  mode="M29">
+                 priority="1000"
+                 mode="M29">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:TypeCode"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:TypeCode"/>
       <xsl:variable name="codeValue1" select="."/>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="$codedb/codedb/cl[@id=1]/enumeration[@value=$codeValue1]"/>
+         <xsl:when test="document('FACTUR-X_MINIMUM_codedb.xml')//cl[@id=1]/enumeration[@value=$codeValue1]"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="$codedb/codedb/cl[@id=1]/enumeration[@value=$codeValue1]">
+                                test="document('FACTUR-X_MINIMUM_codedb.xml')//cl[@id=1]/enumeration[@value=$codeValue1]">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -3375,10 +2713,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:TypeCode[@listAgencyID]"
-                  priority="1000"
-                  mode="M30">
+                 priority="1000"
+                 mode="M30">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:TypeCode[@listAgencyID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:TypeCode[@listAgencyID]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -3398,10 +2736,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:TypeCode[@listID]"
-                  priority="1000"
-                  mode="M31">
+                 priority="1000"
+                 mode="M31">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:TypeCode[@listID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:TypeCode[@listID]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -3421,10 +2759,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:TypeCode[@listURI]"
-                  priority="1000"
-                  mode="M32">
+                 priority="1000"
+                 mode="M32">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:TypeCode[@listURI]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:TypeCode[@listURI]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -3444,10 +2782,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:TypeCode[@listVersionID]"
-                  priority="1000"
-                  mode="M33">
+                 priority="1000"
+                 mode="M33">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:TypeCode[@listVersionID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:TypeCode[@listVersionID]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -3467,10 +2805,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:TypeCode[@name]"
-                  priority="1000"
-                  mode="M34">
+                 priority="1000"
+                 mode="M34">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:TypeCode[@name]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:TypeCode[@name]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -3490,10 +2828,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:VersionID"
-                  priority="1000"
-                  mode="M35">
+                 priority="1000"
+                 mode="M35">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:VersionID"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:VersionID"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -3513,16 +2851,16 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext"
-                  priority="1000"
-                  mode="M36">
+                 priority="1000"
+                 mode="M36">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(ram:BusinessProcessSpecifiedDocumentContextParameter)&lt;=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(ram:BusinessProcessSpecifiedDocumentContextParameter)&lt;=1">
+                                test="count(ram:BusinessProcessSpecifiedDocumentContextParameter)&lt;=1">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -3536,7 +2874,7 @@
          <xsl:when test="count(ram:GuidelineSpecifiedDocumentContextParameter)=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(ram:GuidelineSpecifiedDocumentContextParameter)=1">
+                                test="count(ram:GuidelineSpecifiedDocumentContextParameter)=1">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -3554,10 +2892,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:ApplicationSpecifiedDocumentContextParameter"
-                  priority="1000"
-                  mode="M37">
+                 priority="1000"
+                 mode="M37">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:ApplicationSpecifiedDocumentContextParameter"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:ApplicationSpecifiedDocumentContextParameter"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -3577,10 +2915,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BIMSpecifiedDocumentContextParameter"
-                  priority="1000"
-                  mode="M38">
+                 priority="1000"
+                 mode="M38">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BIMSpecifiedDocumentContextParameter"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BIMSpecifiedDocumentContextParameter"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -3600,10 +2938,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter"
-                  priority="1000"
-                  mode="M39">
+                 priority="1000"
+                 mode="M39">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(ram:ID)=1"/>
@@ -3626,10 +2964,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID[@schemeAgencyID]"
-                  priority="1000"
-                  mode="M40">
+                 priority="1000"
+                 mode="M40">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID[@schemeAgencyID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID[@schemeAgencyID]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -3649,10 +2987,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID[@schemeAgencyName]"
-                  priority="1000"
-                  mode="M41">
+                 priority="1000"
+                 mode="M41">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID[@schemeAgencyName]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID[@schemeAgencyName]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -3672,10 +3010,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID[@schemeDataURI]"
-                  priority="1000"
-                  mode="M42">
+                 priority="1000"
+                 mode="M42">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID[@schemeDataURI]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID[@schemeDataURI]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -3695,10 +3033,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID[@schemeID]"
-                  priority="1000"
-                  mode="M43">
+                 priority="1000"
+                 mode="M43">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID[@schemeID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID[@schemeID]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -3718,10 +3056,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID[@schemeName]"
-                  priority="1000"
-                  mode="M44">
+                 priority="1000"
+                 mode="M44">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID[@schemeName]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID[@schemeName]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -3741,10 +3079,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID[@schemeURI]"
-                  priority="1000"
-                  mode="M45">
+                 priority="1000"
+                 mode="M45">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID[@schemeURI]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID[@schemeURI]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -3764,10 +3102,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID[@schemeVersionID]"
-                  priority="1000"
-                  mode="M46">
+                 priority="1000"
+                 mode="M46">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID[@schemeVersionID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID[@schemeVersionID]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -3787,10 +3125,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:SpecifiedDocumentVersion"
-                  priority="1000"
-                  mode="M47">
+                 priority="1000"
+                 mode="M47">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:SpecifiedDocumentVersion"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:SpecifiedDocumentVersion"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -3810,10 +3148,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:Value"
-                  priority="1000"
-                  mode="M48">
+                 priority="1000"
+                 mode="M48">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:Value"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:Value"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -3833,10 +3171,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter"
-                  priority="1000"
-                  mode="M49">
+                 priority="1000"
+                 mode="M49">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(ram:ID)=1"/>
@@ -3859,10 +3197,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID[@schemeAgencyID]"
-                  priority="1000"
-                  mode="M50">
+                 priority="1000"
+                 mode="M50">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID[@schemeAgencyID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID[@schemeAgencyID]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -3882,10 +3220,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID[@schemeAgencyName]"
-                  priority="1000"
-                  mode="M51">
+                 priority="1000"
+                 mode="M51">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID[@schemeAgencyName]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID[@schemeAgencyName]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -3905,10 +3243,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID[@schemeDataURI]"
-                  priority="1000"
-                  mode="M52">
+                 priority="1000"
+                 mode="M52">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID[@schemeDataURI]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID[@schemeDataURI]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -3928,10 +3266,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID[@schemeID]"
-                  priority="1000"
-                  mode="M53">
+                 priority="1000"
+                 mode="M53">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID[@schemeID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID[@schemeID]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -3951,10 +3289,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID[@schemeName]"
-                  priority="1000"
-                  mode="M54">
+                 priority="1000"
+                 mode="M54">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID[@schemeName]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID[@schemeName]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -3974,10 +3312,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID[@schemeURI]"
-                  priority="1000"
-                  mode="M55">
+                 priority="1000"
+                 mode="M55">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID[@schemeURI]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID[@schemeURI]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -3997,10 +3335,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID[@schemeVersionID]"
-                  priority="1000"
-                  mode="M56">
+                 priority="1000"
+                 mode="M56">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID[@schemeVersionID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID[@schemeVersionID]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -4020,10 +3358,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:SpecifiedDocumentVersion"
-                  priority="1000"
-                  mode="M57">
+                 priority="1000"
+                 mode="M57">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:SpecifiedDocumentVersion"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:SpecifiedDocumentVersion"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -4043,10 +3381,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:Value"
-                  priority="1000"
-                  mode="M58">
+                 priority="1000"
+                 mode="M58">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:Value"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:Value"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -4066,10 +3404,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:MessageStandardSpecifiedDocumentContextParameter"
-                  priority="1000"
-                  mode="M59">
+                 priority="1000"
+                 mode="M59">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:MessageStandardSpecifiedDocumentContextParameter"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:MessageStandardSpecifiedDocumentContextParameter"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -4089,10 +3427,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:ScenarioSpecifiedDocumentContextParameter"
-                  priority="1000"
-                  mode="M60">
+                 priority="1000"
+                 mode="M60">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:ScenarioSpecifiedDocumentContextParameter"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:ScenarioSpecifiedDocumentContextParameter"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -4112,10 +3450,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:SpecifiedTransactionID"
-                  priority="1000"
-                  mode="M61">
+                 priority="1000"
+                 mode="M61">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:SpecifiedTransactionID"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:SpecifiedTransactionID"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -4135,10 +3473,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:SubsetSpecifiedDocumentContextParameter"
-                  priority="1000"
-                  mode="M62">
+                 priority="1000"
+                 mode="M62">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:SubsetSpecifiedDocumentContextParameter"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:SubsetSpecifiedDocumentContextParameter"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -4158,10 +3496,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:TestIndicator"
-                  priority="1000"
-                  mode="M63">
+                 priority="1000"
+                 mode="M63">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:TestIndicator"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:TestIndicator"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -4181,16 +3519,16 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement"
-                  priority="1000"
-                  mode="M64">
+                 priority="1000"
+                 mode="M64">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(ram:SellerTradeParty)=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(ram:SellerTradeParty)=1">
+                                test="count(ram:SellerTradeParty)=1">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -4204,7 +3542,7 @@
          <xsl:when test="count(ram:BuyerTradeParty)=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(ram:BuyerTradeParty)=1">
+                                test="count(ram:BuyerTradeParty)=1">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -4222,10 +3560,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument"
-                  priority="1000"
-                  mode="M65">
+                 priority="1000"
+                 mode="M65">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -4245,10 +3583,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ApplicableTradeDeliveryTerms"
-                  priority="1000"
-                  mode="M66">
+                 priority="1000"
+                 mode="M66">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ApplicableTradeDeliveryTerms"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ApplicableTradeDeliveryTerms"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -4268,10 +3606,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty"
-                  priority="1000"
-                  mode="M67">
+                 priority="1000"
+                 mode="M67">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -4291,10 +3629,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAssignedAccountantTradeParty"
-                  priority="1000"
-                  mode="M68">
+                 priority="1000"
+                 mode="M68">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAssignedAccountantTradeParty"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAssignedAccountantTradeParty"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -4314,16 +3652,16 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument"
-                  priority="1000"
-                  mode="M69">
+                 priority="1000"
+                 mode="M69">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(ram:IssuerAssignedID)=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(ram:IssuerAssignedID)=1">
+                                test="count(ram:IssuerAssignedID)=1">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -4341,10 +3679,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:AttachedSpecifiedBinaryFile"
-                  priority="1000"
-                  mode="M70">
+                 priority="1000"
+                 mode="M70">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:AttachedSpecifiedBinaryFile"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:AttachedSpecifiedBinaryFile"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -4364,10 +3702,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:AttachmentBinaryObject"
-                  priority="1000"
-                  mode="M71">
+                 priority="1000"
+                 mode="M71">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:AttachmentBinaryObject"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:AttachmentBinaryObject"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -4387,10 +3725,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:CopyIndicator"
-                  priority="1000"
-                  mode="M72">
+                 priority="1000"
+                 mode="M72">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:CopyIndicator"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:CopyIndicator"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -4410,10 +3748,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:EffectiveSpecifiedPeriod"
-                  priority="1000"
-                  mode="M73">
+                 priority="1000"
+                 mode="M73">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:EffectiveSpecifiedPeriod"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:EffectiveSpecifiedPeriod"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -4433,10 +3771,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:FormattedIssueDateTime"
-                  priority="1000"
-                  mode="M74">
+                 priority="1000"
+                 mode="M74">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:FormattedIssueDateTime"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:FormattedIssueDateTime"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -4456,10 +3794,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:GlobalID"
-                  priority="1000"
-                  mode="M75">
+                 priority="1000"
+                 mode="M75">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:GlobalID"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:GlobalID"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -4479,10 +3817,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:Information"
-                  priority="1000"
-                  mode="M76">
+                 priority="1000"
+                 mode="M76">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:Information"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:Information"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -4502,10 +3840,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:IssuerAssignedID[@schemeAgencyID]"
-                  priority="1000"
-                  mode="M77">
+                 priority="1000"
+                 mode="M77">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:IssuerAssignedID[@schemeAgencyID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:IssuerAssignedID[@schemeAgencyID]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -4525,10 +3863,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:IssuerAssignedID[@schemeAgencyName]"
-                  priority="1000"
-                  mode="M78">
+                 priority="1000"
+                 mode="M78">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:IssuerAssignedID[@schemeAgencyName]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:IssuerAssignedID[@schemeAgencyName]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -4548,10 +3886,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:IssuerAssignedID[@schemeDataURI]"
-                  priority="1000"
-                  mode="M79">
+                 priority="1000"
+                 mode="M79">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:IssuerAssignedID[@schemeDataURI]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:IssuerAssignedID[@schemeDataURI]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -4571,10 +3909,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:IssuerAssignedID[@schemeID]"
-                  priority="1000"
-                  mode="M80">
+                 priority="1000"
+                 mode="M80">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:IssuerAssignedID[@schemeID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:IssuerAssignedID[@schemeID]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -4594,10 +3932,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:IssuerAssignedID[@schemeName]"
-                  priority="1000"
-                  mode="M81">
+                 priority="1000"
+                 mode="M81">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:IssuerAssignedID[@schemeName]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:IssuerAssignedID[@schemeName]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -4617,10 +3955,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:IssuerAssignedID[@schemeURI]"
-                  priority="1000"
-                  mode="M82">
+                 priority="1000"
+                 mode="M82">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:IssuerAssignedID[@schemeURI]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:IssuerAssignedID[@schemeURI]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -4640,10 +3978,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:IssuerAssignedID[@schemeVersionID]"
-                  priority="1000"
-                  mode="M83">
+                 priority="1000"
+                 mode="M83">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:IssuerAssignedID[@schemeVersionID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:IssuerAssignedID[@schemeVersionID]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -4663,10 +4001,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:IssuerTradeParty"
-                  priority="1000"
-                  mode="M84">
+                 priority="1000"
+                 mode="M84">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:IssuerTradeParty"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:IssuerTradeParty"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -4686,10 +4024,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:LineID"
-                  priority="1000"
-                  mode="M85">
+                 priority="1000"
+                 mode="M85">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:LineID"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:LineID"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -4709,10 +4047,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:Name"
-                  priority="1000"
-                  mode="M86">
+                 priority="1000"
+                 mode="M86">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:Name"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:Name"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -4732,10 +4070,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:PreviousRevisionID"
-                  priority="1000"
-                  mode="M87">
+                 priority="1000"
+                 mode="M87">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:PreviousRevisionID"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:PreviousRevisionID"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -4755,10 +4093,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:ReferenceTypeCode"
-                  priority="1000"
-                  mode="M88">
+                 priority="1000"
+                 mode="M88">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:ReferenceTypeCode"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:ReferenceTypeCode"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -4778,10 +4116,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:RevisionID"
-                  priority="1000"
-                  mode="M89">
+                 priority="1000"
+                 mode="M89">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:RevisionID"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:RevisionID"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -4801,10 +4139,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:SectionName"
-                  priority="1000"
-                  mode="M90">
+                 priority="1000"
+                 mode="M90">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:SectionName"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:SectionName"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -4824,10 +4162,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:StatusCode"
-                  priority="1000"
-                  mode="M91">
+                 priority="1000"
+                 mode="M91">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:StatusCode"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:StatusCode"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -4847,10 +4185,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:TypeCode"
-                  priority="1000"
-                  mode="M92">
+                 priority="1000"
+                 mode="M92">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:TypeCode"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:TypeCode"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -4870,10 +4208,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:URIID"
-                  priority="1000"
-                  mode="M93">
+                 priority="1000"
+                 mode="M93">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:URIID"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:URIID"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -4893,10 +4231,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerReference[@languageID]"
-                  priority="1000"
-                  mode="M94">
+                 priority="1000"
+                 mode="M94">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerReference[@languageID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerReference[@languageID]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -4916,10 +4254,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerReference[@languageLocaleID]"
-                  priority="1000"
-                  mode="M95">
+                 priority="1000"
+                 mode="M95">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerReference[@languageLocaleID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerReference[@languageLocaleID]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -4939,10 +4277,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerRequisitionerTradeParty"
-                  priority="1000"
-                  mode="M96">
+                 priority="1000"
+                 mode="M96">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerRequisitionerTradeParty"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerRequisitionerTradeParty"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -4962,10 +4300,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty"
-                  priority="1000"
-                  mode="M97">
+                 priority="1000"
+                 mode="M97">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -4985,10 +4323,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty"
-                  priority="1000"
-                  mode="M98">
+                 priority="1000"
+                 mode="M98">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(ram:Name)=1"/>
@@ -5011,10 +4349,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:DefinedTradeContact"
-                  priority="1000"
-                  mode="M99">
+                 priority="1000"
+                 mode="M99">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:DefinedTradeContact"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:DefinedTradeContact"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -5034,10 +4372,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:Description"
-                  priority="1000"
-                  mode="M100">
+                 priority="1000"
+                 mode="M100">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:Description"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:Description"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -5057,10 +4395,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:EndPointURIUniversalCommunication"
-                  priority="1000"
-                  mode="M101">
+                 priority="1000"
+                 mode="M101">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:EndPointURIUniversalCommunication"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:EndPointURIUniversalCommunication"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -5080,10 +4418,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:GlobalID"
-                  priority="1000"
-                  mode="M102">
+                 priority="1000"
+                 mode="M102">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:GlobalID"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:GlobalID"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -5103,10 +4441,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:ID"
-                  priority="1000"
-                  mode="M103">
+                 priority="1000"
+                 mode="M103">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:ID"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:ID"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -5126,10 +4464,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:LogoAssociatedSpecifiedBinaryFile"
-                  priority="1000"
-                  mode="M104">
+                 priority="1000"
+                 mode="M104">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:LogoAssociatedSpecifiedBinaryFile"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:LogoAssociatedSpecifiedBinaryFile"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -5149,10 +4487,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:Name[@languageID]"
-                  priority="1000"
-                  mode="M105">
+                 priority="1000"
+                 mode="M105">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:Name[@languageID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:Name[@languageID]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -5172,10 +4510,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:Name[@languageLocaleID]"
-                  priority="1000"
-                  mode="M106">
+                 priority="1000"
+                 mode="M106">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:Name[@languageLocaleID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:Name[@languageLocaleID]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -5195,10 +4533,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:PostalTradeAddress"
-                  priority="1000"
-                  mode="M107">
+                 priority="1000"
+                 mode="M107">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:PostalTradeAddress"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:PostalTradeAddress"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -5218,10 +4556,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:RoleCode"
-                  priority="1000"
-                  mode="M108">
+                 priority="1000"
+                 mode="M108">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:RoleCode"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:RoleCode"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -5241,10 +4579,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization"
-                  priority="1000"
-                  mode="M109">
+                 priority="1000"
+                 mode="M109">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(ram:ID)=1"/>
@@ -5267,10 +4605,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:AuthorizedLegalRegistration"
-                  priority="1000"
-                  mode="M110">
+                 priority="1000"
+                 mode="M110">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:AuthorizedLegalRegistration"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:AuthorizedLegalRegistration"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -5290,10 +4628,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeAgencyID]"
-                  priority="1000"
-                  mode="M111">
+                 priority="1000"
+                 mode="M111">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeAgencyID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeAgencyID]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -5313,10 +4651,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeAgencyName]"
-                  priority="1000"
-                  mode="M112">
+                 priority="1000"
+                 mode="M112">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeAgencyName]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeAgencyName]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -5336,10 +4674,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeDataURI]"
-                  priority="1000"
-                  mode="M113">
+                 priority="1000"
+                 mode="M113">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeDataURI]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeDataURI]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -5359,17 +4697,17 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeID]"
-                  priority="1000"
-                  mode="M114">
+                 priority="1000"
+                 mode="M114">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeID]"/>
       <xsl:variable name="codeValue5" select="@schemeID"/>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="$codedb/codedb/cl[@id=5]/enumeration[@value=$codeValue5]"/>
+         <xsl:when test="document('FACTUR-X_MINIMUM_codedb.xml')//cl[@id=5]/enumeration[@value=$codeValue5]"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="$codedb/codedb/cl[@id=5]/enumeration[@value=$codeValue5]">
+                                test="document('FACTUR-X_MINIMUM_codedb.xml')//cl[@id=5]/enumeration[@value=$codeValue5]">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -5387,10 +4725,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeName]"
-                  priority="1000"
-                  mode="M115">
+                 priority="1000"
+                 mode="M115">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeName]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeName]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -5410,10 +4748,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeURI]"
-                  priority="1000"
-                  mode="M116">
+                 priority="1000"
+                 mode="M116">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeURI]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeURI]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -5433,10 +4771,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeVersionID]"
-                  priority="1000"
-                  mode="M117">
+                 priority="1000"
+                 mode="M117">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeVersionID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeVersionID]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -5456,10 +4794,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:LegalClassificationCode"
-                  priority="1000"
-                  mode="M118">
+                 priority="1000"
+                 mode="M118">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:LegalClassificationCode"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:LegalClassificationCode"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -5479,10 +4817,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:Name"
-                  priority="1000"
-                  mode="M119">
+                 priority="1000"
+                 mode="M119">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:Name"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:Name"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -5502,10 +4840,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress"
-                  priority="1000"
-                  mode="M120">
+                 priority="1000"
+                 mode="M120">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -5525,10 +4863,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:TradingBusinessName"
-                  priority="1000"
-                  mode="M121">
+                 priority="1000"
+                 mode="M121">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:TradingBusinessName"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:TradingBusinessName"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -5548,10 +4886,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedTaxRegistration"
-                  priority="1000"
-                  mode="M122">
+                 priority="1000"
+                 mode="M122">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedTaxRegistration"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedTaxRegistration"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -5571,10 +4909,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:URIUniversalCommunication"
-                  priority="1000"
-                  mode="M123">
+                 priority="1000"
+                 mode="M123">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:URIUniversalCommunication"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:URIUniversalCommunication"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -5594,10 +4932,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ContractReferencedDocument"
-                  priority="1000"
-                  mode="M124">
+                 priority="1000"
+                 mode="M124">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ContractReferencedDocument"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ContractReferencedDocument"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -5617,10 +4955,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:DemandForecastReferencedDocument"
-                  priority="1000"
-                  mode="M125">
+                 priority="1000"
+                 mode="M125">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:DemandForecastReferencedDocument"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:DemandForecastReferencedDocument"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -5640,10 +4978,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:OrderResponseReferencedDocument"
-                  priority="1000"
-                  mode="M126">
+                 priority="1000"
+                 mode="M126">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:OrderResponseReferencedDocument"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:OrderResponseReferencedDocument"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -5663,10 +5001,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:PriceListReferencedDocument"
-                  priority="1000"
-                  mode="M127">
+                 priority="1000"
+                 mode="M127">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:PriceListReferencedDocument"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:PriceListReferencedDocument"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -5686,10 +5024,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty"
-                  priority="1000"
-                  mode="M128">
+                 priority="1000"
+                 mode="M128">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -5709,10 +5047,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:PromotionalDealReferencedDocument"
-                  priority="1000"
-                  mode="M129">
+                 priority="1000"
+                 mode="M129">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:PromotionalDealReferencedDocument"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:PromotionalDealReferencedDocument"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -5732,10 +5070,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:PurchaseConditionsReferencedDocument"
-                  priority="1000"
-                  mode="M130">
+                 priority="1000"
+                 mode="M130">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:PurchaseConditionsReferencedDocument"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:PurchaseConditionsReferencedDocument"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -5755,10 +5093,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:QuotationReferencedDocument"
-                  priority="1000"
-                  mode="M131">
+                 priority="1000"
+                 mode="M131">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:QuotationReferencedDocument"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:QuotationReferencedDocument"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -5778,10 +5116,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:Reference"
-                  priority="1000"
-                  mode="M132">
+                 priority="1000"
+                 mode="M132">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:Reference"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:Reference"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -5801,10 +5139,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:RequisitionerReferencedDocument"
-                  priority="1000"
-                  mode="M133">
+                 priority="1000"
+                 mode="M133">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:RequisitionerReferencedDocument"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:RequisitionerReferencedDocument"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -5824,10 +5162,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty"
-                  priority="1000"
-                  mode="M134">
+                 priority="1000"
+                 mode="M134">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -5847,10 +5185,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerAssignedAccountantTradeParty"
-                  priority="1000"
-                  mode="M135">
+                 priority="1000"
+                 mode="M135">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerAssignedAccountantTradeParty"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerAssignedAccountantTradeParty"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -5870,10 +5208,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerOrderReferencedDocument"
-                  priority="1000"
-                  mode="M136">
+                 priority="1000"
+                 mode="M136">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerOrderReferencedDocument"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerOrderReferencedDocument"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -5893,10 +5231,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty"
-                  priority="1000"
-                  mode="M137">
+                 priority="1000"
+                 mode="M137">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -5916,10 +5254,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty"
-                  priority="1000"
-                  mode="M138">
+                 priority="1000"
+                 mode="M138">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(ram:Name)=1"/>
@@ -5938,7 +5276,7 @@
          <xsl:when test="count(ram:PostalTradeAddress)=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(ram:PostalTradeAddress)=1">
+                                test="count(ram:PostalTradeAddress)=1">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -5952,7 +5290,7 @@
          <xsl:when test="count(ram:SpecifiedTaxRegistration)&lt;=2"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(ram:SpecifiedTaxRegistration)&lt;=2">
+                                test="count(ram:SpecifiedTaxRegistration)&lt;=2">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -5970,10 +5308,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:DefinedTradeContact"
-                  priority="1000"
-                  mode="M139">
+                 priority="1000"
+                 mode="M139">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:DefinedTradeContact"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:DefinedTradeContact"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -5993,10 +5331,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:Description"
-                  priority="1000"
-                  mode="M140">
+                 priority="1000"
+                 mode="M140">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:Description"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:Description"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6016,10 +5354,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:EndPointURIUniversalCommunication"
-                  priority="1000"
-                  mode="M141">
+                 priority="1000"
+                 mode="M141">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:EndPointURIUniversalCommunication"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:EndPointURIUniversalCommunication"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6039,10 +5377,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:GlobalID"
-                  priority="1000"
-                  mode="M142">
+                 priority="1000"
+                 mode="M142">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:GlobalID"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:GlobalID"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6062,10 +5400,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:ID"
-                  priority="1000"
-                  mode="M143">
+                 priority="1000"
+                 mode="M143">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:ID"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:ID"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6085,10 +5423,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:LogoAssociatedSpecifiedBinaryFile"
-                  priority="1000"
-                  mode="M144">
+                 priority="1000"
+                 mode="M144">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:LogoAssociatedSpecifiedBinaryFile"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:LogoAssociatedSpecifiedBinaryFile"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6108,10 +5446,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:Name[@languageID]"
-                  priority="1000"
-                  mode="M145">
+                 priority="1000"
+                 mode="M145">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:Name[@languageID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:Name[@languageID]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6131,10 +5469,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:Name[@languageLocaleID]"
-                  priority="1000"
-                  mode="M146">
+                 priority="1000"
+                 mode="M146">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:Name[@languageLocaleID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:Name[@languageLocaleID]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6154,10 +5492,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress"
-                  priority="1000"
-                  mode="M147">
+                 priority="1000"
+                 mode="M147">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(ram:CountryID)=1"/>
@@ -6180,10 +5518,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:AdditionalStreetName"
-                  priority="1000"
-                  mode="M148">
+                 priority="1000"
+                 mode="M148">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:AdditionalStreetName"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:AdditionalStreetName"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6203,10 +5541,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:AttentionOf"
-                  priority="1000"
-                  mode="M149">
+                 priority="1000"
+                 mode="M149">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:AttentionOf"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:AttentionOf"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6226,10 +5564,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:BuildingName"
-                  priority="1000"
-                  mode="M150">
+                 priority="1000"
+                 mode="M150">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:BuildingName"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:BuildingName"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6249,10 +5587,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:BuildingNumber"
-                  priority="1000"
-                  mode="M151">
+                 priority="1000"
+                 mode="M151">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:BuildingNumber"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:BuildingNumber"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6272,10 +5610,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CareOf"
-                  priority="1000"
-                  mode="M152">
+                 priority="1000"
+                 mode="M152">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CareOf"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CareOf"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6295,10 +5633,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CityName"
-                  priority="1000"
-                  mode="M153">
+                 priority="1000"
+                 mode="M153">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CityName"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CityName"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6318,10 +5656,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CitySubDivisionName"
-                  priority="1000"
-                  mode="M154">
+                 priority="1000"
+                 mode="M154">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CitySubDivisionName"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CitySubDivisionName"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6341,10 +5679,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CountryID[@schemeAgencyID]"
-                  priority="1000"
-                  mode="M155">
+                 priority="1000"
+                 mode="M155">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CountryID[@schemeAgencyID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CountryID[@schemeAgencyID]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6364,10 +5702,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CountryID[@schemeID]"
-                  priority="1000"
-                  mode="M156">
+                 priority="1000"
+                 mode="M156">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CountryID[@schemeID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CountryID[@schemeID]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6387,10 +5725,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CountryID[@schemeVersionID]"
-                  priority="1000"
-                  mode="M157">
+                 priority="1000"
+                 mode="M157">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CountryID[@schemeVersionID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CountryID[@schemeVersionID]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6410,10 +5748,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CountryName"
-                  priority="1000"
-                  mode="M158">
+                 priority="1000"
+                 mode="M158">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CountryName"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CountryName"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6433,10 +5771,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionID"
-                  priority="1000"
-                  mode="M159">
+                 priority="1000"
+                 mode="M159">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionID"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionID"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6456,10 +5794,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName"
-                  priority="1000"
-                  mode="M160">
+                 priority="1000"
+                 mode="M160">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6479,10 +5817,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:DepartmentName"
-                  priority="1000"
-                  mode="M161">
+                 priority="1000"
+                 mode="M161">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:DepartmentName"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:DepartmentName"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6502,10 +5840,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:ID"
-                  priority="1000"
-                  mode="M162">
+                 priority="1000"
+                 mode="M162">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:ID"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:ID"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6525,10 +5863,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:LineFive"
-                  priority="1000"
-                  mode="M163">
+                 priority="1000"
+                 mode="M163">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:LineFive"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:LineFive"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6548,10 +5886,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:LineFour"
-                  priority="1000"
-                  mode="M164">
+                 priority="1000"
+                 mode="M164">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:LineFour"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:LineFour"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6571,10 +5909,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:LineOne"
-                  priority="1000"
-                  mode="M165">
+                 priority="1000"
+                 mode="M165">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:LineOne"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:LineOne"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6594,10 +5932,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:LineThree"
-                  priority="1000"
-                  mode="M166">
+                 priority="1000"
+                 mode="M166">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:LineThree"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:LineThree"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6617,10 +5955,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:LineTwo"
-                  priority="1000"
-                  mode="M167">
+                 priority="1000"
+                 mode="M167">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:LineTwo"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:LineTwo"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6640,10 +5978,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:PostOfficeBox"
-                  priority="1000"
-                  mode="M168">
+                 priority="1000"
+                 mode="M168">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:PostOfficeBox"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:PostOfficeBox"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6663,10 +6001,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:PostcodeCode"
-                  priority="1000"
-                  mode="M169">
+                 priority="1000"
+                 mode="M169">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:PostcodeCode"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:PostcodeCode"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6686,10 +6024,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:StreetName"
-                  priority="1000"
-                  mode="M170">
+                 priority="1000"
+                 mode="M170">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:StreetName"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:StreetName"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6709,10 +6047,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:RoleCode"
-                  priority="1000"
-                  mode="M171">
+                 priority="1000"
+                 mode="M171">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:RoleCode"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:RoleCode"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6732,10 +6070,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:AuthorizedLegalRegistration"
-                  priority="1000"
-                  mode="M172">
+                 priority="1000"
+                 mode="M172">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:AuthorizedLegalRegistration"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:AuthorizedLegalRegistration"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6755,10 +6093,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeAgencyID]"
-                  priority="1000"
-                  mode="M173">
+                 priority="1000"
+                 mode="M173">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeAgencyID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeAgencyID]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6778,10 +6116,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeAgencyName]"
-                  priority="1000"
-                  mode="M174">
+                 priority="1000"
+                 mode="M174">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeAgencyName]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeAgencyName]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6801,10 +6139,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeDataURI]"
-                  priority="1000"
-                  mode="M175">
+                 priority="1000"
+                 mode="M175">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeDataURI]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeDataURI]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6824,17 +6162,17 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeID]"
-                  priority="1000"
-                  mode="M176">
+                 priority="1000"
+                 mode="M176">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeID]"/>
       <xsl:variable name="codeValue3" select="@schemeID"/>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="$codedb/codedb/cl[@id=3]/enumeration[@value=$codeValue3]"/>
+         <xsl:when test="document('FACTUR-X_MINIMUM_codedb.xml')//cl[@id=3]/enumeration[@value=$codeValue3]"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="$codedb/codedb/cl[@id=3]/enumeration[@value=$codeValue3]">
+                                test="document('FACTUR-X_MINIMUM_codedb.xml')//cl[@id=3]/enumeration[@value=$codeValue3]">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -6852,10 +6190,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeName]"
-                  priority="1000"
-                  mode="M177">
+                 priority="1000"
+                 mode="M177">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeName]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeName]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6875,10 +6213,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeURI]"
-                  priority="1000"
-                  mode="M178">
+                 priority="1000"
+                 mode="M178">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeURI]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeURI]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6898,10 +6236,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeVersionID]"
-                  priority="1000"
-                  mode="M179">
+                 priority="1000"
+                 mode="M179">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeVersionID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeVersionID]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6921,10 +6259,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:LegalClassificationCode"
-                  priority="1000"
-                  mode="M180">
+                 priority="1000"
+                 mode="M180">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:LegalClassificationCode"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:LegalClassificationCode"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6944,10 +6282,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:Name"
-                  priority="1000"
-                  mode="M181">
+                 priority="1000"
+                 mode="M181">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:Name"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:Name"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6967,10 +6305,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress"
-                  priority="1000"
-                  mode="M182">
+                 priority="1000"
+                 mode="M182">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -6990,10 +6328,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:TradingBusinessName"
-                  priority="1000"
-                  mode="M183">
+                 priority="1000"
+                 mode="M183">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:TradingBusinessName"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:TradingBusinessName"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -7013,10 +6351,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration"
-                  priority="1000"
-                  mode="M184">
+                 priority="1000"
+                 mode="M184">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(ram:ID)=1"/>
@@ -7039,10 +6377,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:AssociatedRegisteredTax"
-                  priority="1000"
-                  mode="M185">
+                 priority="1000"
+                 mode="M185">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:AssociatedRegisteredTax"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:AssociatedRegisteredTax"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -7062,10 +6400,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID"
-                  priority="1000"
-                  mode="M186">
+                 priority="1000"
+                 mode="M186">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="@schemeID"/>
@@ -7088,10 +6426,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeAgencyID]"
-                  priority="1000"
-                  mode="M187">
+                 priority="1000"
+                 mode="M187">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeAgencyID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeAgencyID]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -7111,10 +6449,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeAgencyName]"
-                  priority="1000"
-                  mode="M188">
+                 priority="1000"
+                 mode="M188">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeAgencyName]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeAgencyName]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -7134,10 +6472,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeDataURI]"
-                  priority="1000"
-                  mode="M189">
+                 priority="1000"
+                 mode="M189">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeDataURI]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeDataURI]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -7157,17 +6495,17 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeID]"
-                  priority="1000"
-                  mode="M190">
+                 priority="1000"
+                 mode="M190">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeID]"/>
       <xsl:variable name="codeValue4" select="@schemeID"/>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="$codedb/codedb/cl[@id=4]/enumeration[@value=$codeValue4]"/>
+         <xsl:when test="document('FACTUR-X_MINIMUM_codedb.xml')//cl[@id=4]/enumeration[@value=$codeValue4]"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="$codedb/codedb/cl[@id=4]/enumeration[@value=$codeValue4]">
+                                test="document('FACTUR-X_MINIMUM_codedb.xml')//cl[@id=4]/enumeration[@value=$codeValue4]">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -7185,10 +6523,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeName]"
-                  priority="1000"
-                  mode="M191">
+                 priority="1000"
+                 mode="M191">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeName]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeName]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -7208,10 +6546,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeURI]"
-                  priority="1000"
-                  mode="M192">
+                 priority="1000"
+                 mode="M192">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeURI]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeURI]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -7231,10 +6569,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeVersionID]"
-                  priority="1000"
-                  mode="M193">
+                 priority="1000"
+                 mode="M193">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeVersionID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeVersionID]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -7254,10 +6592,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:URIUniversalCommunication"
-                  priority="1000"
-                  mode="M194">
+                 priority="1000"
+                 mode="M194">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:URIUniversalCommunication"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:URIUniversalCommunication"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -7277,10 +6615,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SpecifiedProcuringProject"
-                  priority="1000"
-                  mode="M195">
+                 priority="1000"
+                 mode="M195">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SpecifiedProcuringProject"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SpecifiedProcuringProject"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -7300,10 +6638,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SupplyInstructionReferencedDocument"
-                  priority="1000"
-                  mode="M196">
+                 priority="1000"
+                 mode="M196">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SupplyInstructionReferencedDocument"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SupplyInstructionReferencedDocument"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -7323,10 +6661,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:UltimateCustomerOrderReferencedDocument"
-                  priority="1000"
-                  mode="M197">
+                 priority="1000"
+                 mode="M197">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:UltimateCustomerOrderReferencedDocument"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:UltimateCustomerOrderReferencedDocument"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -7346,10 +6684,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ActualDeliverySupplyChainEvent"
-                  priority="1000"
-                  mode="M198">
+                 priority="1000"
+                 mode="M198">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ActualDeliverySupplyChainEvent"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ActualDeliverySupplyChainEvent"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -7369,10 +6707,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ActualDespatchSupplyChainEvent"
-                  priority="1000"
-                  mode="M199">
+                 priority="1000"
+                 mode="M199">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ActualDespatchSupplyChainEvent"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ActualDespatchSupplyChainEvent"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -7392,10 +6730,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ActualPickUpSupplyChainEvent"
-                  priority="1000"
-                  mode="M200">
+                 priority="1000"
+                 mode="M200">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ActualPickUpSupplyChainEvent"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ActualPickUpSupplyChainEvent"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -7415,10 +6753,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ActualReceiptSupplyChainEvent"
-                  priority="1000"
-                  mode="M201">
+                 priority="1000"
+                 mode="M201">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ActualReceiptSupplyChainEvent"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ActualReceiptSupplyChainEvent"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -7438,10 +6776,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:AdditionalReferencedDocument"
-                  priority="1000"
-                  mode="M202">
+                 priority="1000"
+                 mode="M202">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:AdditionalReferencedDocument"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:AdditionalReferencedDocument"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -7461,10 +6799,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ConsumptionReportReferencedDocument"
-                  priority="1000"
-                  mode="M203">
+                 priority="1000"
+                 mode="M203">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ConsumptionReportReferencedDocument"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ConsumptionReportReferencedDocument"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -7484,10 +6822,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:DeliveryNoteReferencedDocument"
-                  priority="1000"
-                  mode="M204">
+                 priority="1000"
+                 mode="M204">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:DeliveryNoteReferencedDocument"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:DeliveryNoteReferencedDocument"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -7507,10 +6845,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:DespatchAdviceReferencedDocument"
-                  priority="1000"
-                  mode="M205">
+                 priority="1000"
+                 mode="M205">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:DespatchAdviceReferencedDocument"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:DespatchAdviceReferencedDocument"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -7530,10 +6868,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:PackingListReferencedDocument"
-                  priority="1000"
-                  mode="M206">
+                 priority="1000"
+                 mode="M206">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:PackingListReferencedDocument"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:PackingListReferencedDocument"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -7553,10 +6891,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:PreviousDeliverySupplyChainEvent"
-                  priority="1000"
-                  mode="M207">
+                 priority="1000"
+                 mode="M207">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:PreviousDeliverySupplyChainEvent"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:PreviousDeliverySupplyChainEvent"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -7576,10 +6914,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ReceivingAdviceReferencedDocument"
-                  priority="1000"
-                  mode="M208">
+                 priority="1000"
+                 mode="M208">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ReceivingAdviceReferencedDocument"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ReceivingAdviceReferencedDocument"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -7599,10 +6937,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:RelatedSupplyChainConsignment"
-                  priority="1000"
-                  mode="M209">
+                 priority="1000"
+                 mode="M209">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:RelatedSupplyChainConsignment"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:RelatedSupplyChainConsignment"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -7622,10 +6960,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty"
-                  priority="1000"
-                  mode="M210">
+                 priority="1000"
+                 mode="M210">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -7645,10 +6983,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty"
-                  priority="1000"
-                  mode="M211">
+                 priority="1000"
+                 mode="M211">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -7668,10 +7006,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty"
-                  priority="1000"
-                  mode="M212">
+                 priority="1000"
+                 mode="M212">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -7691,16 +7029,16 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement"
-                  priority="1000"
-                  mode="M213">
+                 priority="1000"
+                 mode="M213">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(ram:InvoiceCurrencyCode)=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(ram:InvoiceCurrencyCode)=1">
+                                test="count(ram:InvoiceCurrencyCode)=1">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -7714,7 +7052,7 @@
          <xsl:when test="count(ram:SpecifiedTradeSettlementHeaderMonetarySummation)=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(ram:SpecifiedTradeSettlementHeaderMonetarySummation)=1">
+                                test="count(ram:SpecifiedTradeSettlementHeaderMonetarySummation)=1">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -7732,10 +7070,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax"
-                  priority="1000"
-                  mode="M214">
+                 priority="1000"
+                 mode="M214">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -7755,10 +7093,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:BillingSpecifiedPeriod"
-                  priority="1000"
-                  mode="M215">
+                 priority="1000"
+                 mode="M215">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:BillingSpecifiedPeriod"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:BillingSpecifiedPeriod"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -7778,10 +7116,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:CreditReason"
-                  priority="1000"
-                  mode="M216">
+                 priority="1000"
+                 mode="M216">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:CreditReason"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:CreditReason"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -7801,10 +7139,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:CreditReasonCode"
-                  priority="1000"
-                  mode="M217">
+                 priority="1000"
+                 mode="M217">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:CreditReasonCode"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:CreditReasonCode"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -7824,10 +7162,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:CreditorReferenceID"
-                  priority="1000"
-                  mode="M218">
+                 priority="1000"
+                 mode="M218">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:CreditorReferenceID"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:CreditorReferenceID"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -7847,10 +7185,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:CreditorReferenceIssuerID"
-                  priority="1000"
-                  mode="M219">
+                 priority="1000"
+                 mode="M219">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:CreditorReferenceIssuerID"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:CreditorReferenceIssuerID"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -7870,10 +7208,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:CreditorReferenceType"
-                  priority="1000"
-                  mode="M220">
+                 priority="1000"
+                 mode="M220">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:CreditorReferenceType"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:CreditorReferenceType"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -7893,10 +7231,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:CreditorReferenceTypeCode"
-                  priority="1000"
-                  mode="M221">
+                 priority="1000"
+                 mode="M221">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:CreditorReferenceTypeCode"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:CreditorReferenceTypeCode"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -7916,10 +7254,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:DuePayableAmount"
-                  priority="1000"
-                  mode="M222">
+                 priority="1000"
+                 mode="M222">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:DuePayableAmount"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:DuePayableAmount"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -7939,10 +7277,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:FactoringAgreementReferencedDocument"
-                  priority="1000"
-                  mode="M223">
+                 priority="1000"
+                 mode="M223">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:FactoringAgreementReferencedDocument"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:FactoringAgreementReferencedDocument"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -7962,10 +7300,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:FactoringListReferencedDocument"
-                  priority="1000"
-                  mode="M224">
+                 priority="1000"
+                 mode="M224">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:FactoringListReferencedDocument"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:FactoringListReferencedDocument"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -7985,10 +7323,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceApplicableTradeCurrencyExchange"
-                  priority="1000"
-                  mode="M225">
+                 priority="1000"
+                 mode="M225">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceApplicableTradeCurrencyExchange"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceApplicableTradeCurrencyExchange"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8008,10 +7346,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceCurrencyCode[@listAgencyID]"
-                  priority="1000"
-                  mode="M226">
+                 priority="1000"
+                 mode="M226">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceCurrencyCode[@listAgencyID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceCurrencyCode[@listAgencyID]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8031,10 +7369,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceCurrencyCode[@listID]"
-                  priority="1000"
-                  mode="M227">
+                 priority="1000"
+                 mode="M227">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceCurrencyCode[@listID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceCurrencyCode[@listID]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8054,10 +7392,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceCurrencyCode[@listURI]"
-                  priority="1000"
-                  mode="M228">
+                 priority="1000"
+                 mode="M228">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceCurrencyCode[@listURI]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceCurrencyCode[@listURI]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8077,10 +7415,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceCurrencyCode[@listVersionID]"
-                  priority="1000"
-                  mode="M229">
+                 priority="1000"
+                 mode="M229">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceCurrencyCode[@listVersionID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceCurrencyCode[@listVersionID]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8100,10 +7438,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceDateTime"
-                  priority="1000"
-                  mode="M230">
+                 priority="1000"
+                 mode="M230">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceDateTime"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceDateTime"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8123,10 +7461,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceIssuerReference"
-                  priority="1000"
-                  mode="M231">
+                 priority="1000"
+                 mode="M231">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceIssuerReference"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceIssuerReference"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8146,10 +7484,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceReferencedDocument"
-                  priority="1000"
-                  mode="M232">
+                 priority="1000"
+                 mode="M232">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceReferencedDocument"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceReferencedDocument"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8169,10 +7507,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty"
-                  priority="1000"
-                  mode="M233">
+                 priority="1000"
+                 mode="M233">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8192,10 +7530,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty"
-                  priority="1000"
-                  mode="M234">
+                 priority="1000"
+                 mode="M234">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8215,10 +7553,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:LetterOfCreditReferencedDocument"
-                  priority="1000"
-                  mode="M235">
+                 priority="1000"
+                 mode="M235">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:LetterOfCreditReferencedDocument"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:LetterOfCreditReferencedDocument"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8238,10 +7576,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:NextInvoiceDateTime"
-                  priority="1000"
-                  mode="M236">
+                 priority="1000"
+                 mode="M236">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:NextInvoiceDateTime"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:NextInvoiceDateTime"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8261,10 +7599,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayableSpecifiedTradeAccountingAccount"
-                  priority="1000"
-                  mode="M237">
+                 priority="1000"
+                 mode="M237">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayableSpecifiedTradeAccountingAccount"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayableSpecifiedTradeAccountingAccount"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8284,10 +7622,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty"
-                  priority="1000"
-                  mode="M238">
+                 priority="1000"
+                 mode="M238">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8307,10 +7645,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty"
-                  priority="1000"
-                  mode="M239">
+                 priority="1000"
+                 mode="M239">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8330,10 +7668,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PaymentApplicableTradeCurrencyExchange"
-                  priority="1000"
-                  mode="M240">
+                 priority="1000"
+                 mode="M240">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PaymentApplicableTradeCurrencyExchange"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PaymentApplicableTradeCurrencyExchange"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8353,10 +7691,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PaymentCurrencyCode"
-                  priority="1000"
-                  mode="M241">
+                 priority="1000"
+                 mode="M241">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PaymentCurrencyCode"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PaymentCurrencyCode"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8376,10 +7714,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PaymentReference"
-                  priority="1000"
-                  mode="M242">
+                 priority="1000"
+                 mode="M242">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PaymentReference"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PaymentReference"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8399,10 +7737,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ProFormaInvoiceReferencedDocument"
-                  priority="1000"
-                  mode="M243">
+                 priority="1000"
+                 mode="M243">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ProFormaInvoiceReferencedDocument"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ProFormaInvoiceReferencedDocument"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8422,10 +7760,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PurchaseSpecifiedTradeAccountingAccount"
-                  priority="1000"
-                  mode="M244">
+                 priority="1000"
+                 mode="M244">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PurchaseSpecifiedTradeAccountingAccount"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PurchaseSpecifiedTradeAccountingAccount"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8445,10 +7783,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ReceivableSpecifiedTradeAccountingAccount"
-                  priority="1000"
-                  mode="M245">
+                 priority="1000"
+                 mode="M245">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ReceivableSpecifiedTradeAccountingAccount"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ReceivableSpecifiedTradeAccountingAccount"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8468,10 +7806,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SalesSpecifiedTradeAccountingAccount"
-                  priority="1000"
-                  mode="M246">
+                 priority="1000"
+                 mode="M246">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SalesSpecifiedTradeAccountingAccount"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SalesSpecifiedTradeAccountingAccount"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8491,10 +7829,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedAdvancePayment"
-                  priority="1000"
-                  mode="M247">
+                 priority="1000"
+                 mode="M247">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedAdvancePayment"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedAdvancePayment"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8514,10 +7852,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedFinancialAdjustment"
-                  priority="1000"
-                  mode="M248">
+                 priority="1000"
+                 mode="M248">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedFinancialAdjustment"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedFinancialAdjustment"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8537,10 +7875,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedLogisticsServiceCharge"
-                  priority="1000"
-                  mode="M249">
+                 priority="1000"
+                 mode="M249">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedLogisticsServiceCharge"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedLogisticsServiceCharge"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8560,10 +7898,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge"
-                  priority="1000"
-                  mode="M250">
+                 priority="1000"
+                 mode="M250">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8583,10 +7921,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms"
-                  priority="1000"
-                  mode="M251">
+                 priority="1000"
+                 mode="M251">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8606,10 +7944,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementFinancialCard"
-                  priority="1000"
-                  mode="M252">
+                 priority="1000"
+                 mode="M252">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementFinancialCard"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementFinancialCard"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8629,16 +7967,16 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation"
-                  priority="1000"
-                  mode="M253">
+                 priority="1000"
+                 mode="M253">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(ram:TaxBasisTotalAmount)=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(ram:TaxBasisTotalAmount)=1">
+                                test="count(ram:TaxBasisTotalAmount)=1">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -8652,7 +7990,7 @@
          <xsl:when test="count(ram:TaxTotalAmount)&lt;=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(ram:TaxTotalAmount)&lt;=1">
+                                test="count(ram:TaxTotalAmount)&lt;=1">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -8666,7 +8004,7 @@
          <xsl:when test="count(ram:GrandTotalAmount)=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(ram:GrandTotalAmount)=1">
+                                test="count(ram:GrandTotalAmount)=1">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -8680,7 +8018,7 @@
          <xsl:when test="count(ram:DuePayableAmount)=1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="count(ram:DuePayableAmount)=1">
+                                test="count(ram:DuePayableAmount)=1">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -8698,10 +8036,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:AllowanceTotalAmount"
-                  priority="1000"
-                  mode="M254">
+                 priority="1000"
+                 mode="M254">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:AllowanceTotalAmount"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:AllowanceTotalAmount"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8721,10 +8059,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:ChargeTotalAmount"
-                  priority="1000"
-                  mode="M255">
+                 priority="1000"
+                 mode="M255">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:ChargeTotalAmount"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:ChargeTotalAmount"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8744,10 +8082,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:DuePayableAmount[@currencyCodeListVersionID]"
-                  priority="1000"
-                  mode="M256">
+                 priority="1000"
+                 mode="M256">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:DuePayableAmount[@currencyCodeListVersionID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:DuePayableAmount[@currencyCodeListVersionID]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8767,10 +8105,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:DuePayableAmount[@currencyID]"
-                  priority="1000"
-                  mode="M257">
+                 priority="1000"
+                 mode="M257">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:DuePayableAmount[@currencyID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:DuePayableAmount[@currencyID]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8790,10 +8128,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:GrandTotalAmount[@currencyCodeListVersionID]"
-                  priority="1000"
-                  mode="M258">
+                 priority="1000"
+                 mode="M258">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:GrandTotalAmount[@currencyCodeListVersionID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:GrandTotalAmount[@currencyCodeListVersionID]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8813,10 +8151,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:GrandTotalAmount[@currencyID]"
-                  priority="1000"
-                  mode="M259">
+                 priority="1000"
+                 mode="M259">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:GrandTotalAmount[@currencyID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:GrandTotalAmount[@currencyID]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8836,10 +8174,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:GrossLineTotalAmount"
-                  priority="1000"
-                  mode="M260">
+                 priority="1000"
+                 mode="M260">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:GrossLineTotalAmount"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:GrossLineTotalAmount"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8859,10 +8197,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:InformationAmount"
-                  priority="1000"
-                  mode="M261">
+                 priority="1000"
+                 mode="M261">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:InformationAmount"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:InformationAmount"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8882,10 +8220,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:LineTotalAmount"
-                  priority="1000"
-                  mode="M262">
+                 priority="1000"
+                 mode="M262">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:LineTotalAmount"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:LineTotalAmount"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8905,10 +8243,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:NetIncludingTaxesLineTotalAmount"
-                  priority="1000"
-                  mode="M263">
+                 priority="1000"
+                 mode="M263">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:NetIncludingTaxesLineTotalAmount"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:NetIncludingTaxesLineTotalAmount"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8928,10 +8266,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:NetLineTotalAmount"
-                  priority="1000"
-                  mode="M264">
+                 priority="1000"
+                 mode="M264">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:NetLineTotalAmount"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:NetLineTotalAmount"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8951,10 +8289,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:ProductValueExcludingTobaccoTaxInformationAmount"
-                  priority="1000"
-                  mode="M265">
+                 priority="1000"
+                 mode="M265">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:ProductValueExcludingTobaccoTaxInformationAmount"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:ProductValueExcludingTobaccoTaxInformationAmount"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8974,10 +8312,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:RetailValueExcludingTaxInformationAmount"
-                  priority="1000"
-                  mode="M266">
+                 priority="1000"
+                 mode="M266">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:RetailValueExcludingTaxInformationAmount"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:RetailValueExcludingTaxInformationAmount"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -8997,10 +8335,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:RoundingAmount"
-                  priority="1000"
-                  mode="M267">
+                 priority="1000"
+                 mode="M267">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:RoundingAmount"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:RoundingAmount"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -9020,10 +8358,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxBasisTotalAmount[@currencyCodeListVersionID]"
-                  priority="1000"
-                  mode="M268">
+                 priority="1000"
+                 mode="M268">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxBasisTotalAmount[@currencyCodeListVersionID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxBasisTotalAmount[@currencyCodeListVersionID]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -9043,10 +8381,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxBasisTotalAmount[@currencyID]"
-                  priority="1000"
-                  mode="M269">
+                 priority="1000"
+                 mode="M269">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxBasisTotalAmount[@currencyID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxBasisTotalAmount[@currencyID]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -9066,10 +8404,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxTotalAmount[@currencyCodeListVersionID]"
-                  priority="1000"
-                  mode="M270">
+                 priority="1000"
+                 mode="M270">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxTotalAmount[@currencyCodeListVersionID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxTotalAmount[@currencyCodeListVersionID]"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -9089,17 +8427,17 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxTotalAmount[@currencyID]"
-                  priority="1000"
-                  mode="M271">
+                 priority="1000"
+                 mode="M271">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxTotalAmount[@currencyID]"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxTotalAmount[@currencyID]"/>
       <xsl:variable name="codeValue6" select="@currencyID"/>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="$codedb/codedb/cl[@id=6]/enumeration[@value=$codeValue6]"/>
+         <xsl:when test="document('FACTUR-X_MINIMUM_codedb.xml')//cl[@id=6]/enumeration[@value=$codeValue6]"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="$codedb/codedb/cl[@id=6]/enumeration[@value=$codeValue6]">
+                                test="document('FACTUR-X_MINIMUM_codedb.xml')//cl[@id=6]/enumeration[@value=$codeValue6]">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -9117,10 +8455,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TotalAllowanceChargeAmount"
-                  priority="1000"
-                  mode="M272">
+                 priority="1000"
+                 mode="M272">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TotalAllowanceChargeAmount"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TotalAllowanceChargeAmount"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -9140,10 +8478,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TotalDepositFeeInformationAmount"
-                  priority="1000"
-                  mode="M273">
+                 priority="1000"
+                 mode="M273">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TotalDepositFeeInformationAmount"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TotalDepositFeeInformationAmount"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -9163,10 +8501,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TotalDiscountAmount"
-                  priority="1000"
-                  mode="M274">
+                 priority="1000"
+                 mode="M274">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TotalDiscountAmount"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TotalDiscountAmount"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -9186,10 +8524,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TotalPrepaidAmount"
-                  priority="1000"
-                  mode="M275">
+                 priority="1000"
+                 mode="M275">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TotalPrepaidAmount"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TotalPrepaidAmount"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -9209,10 +8547,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TotalRetailValueInformationAmount"
-                  priority="1000"
-                  mode="M276">
+                 priority="1000"
+                 mode="M276">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TotalRetailValueInformationAmount"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TotalRetailValueInformationAmount"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -9232,10 +8570,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementPaymentMeans"
-                  priority="1000"
-                  mode="M277">
+                 priority="1000"
+                 mode="M277">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementPaymentMeans"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementPaymentMeans"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -9255,10 +8593,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SubtotalCalculatedTradeTax"
-                  priority="1000"
-                  mode="M278">
+                 priority="1000"
+                 mode="M278">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SubtotalCalculatedTradeTax"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SubtotalCalculatedTradeTax"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -9278,10 +8616,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:TaxApplicableTradeCurrencyExchange"
-                  priority="1000"
-                  mode="M279">
+                 priority="1000"
+                 mode="M279">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:TaxApplicableTradeCurrencyExchange"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:TaxApplicableTradeCurrencyExchange"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -9301,10 +8639,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:TaxCurrencyCode"
-                  priority="1000"
-                  mode="M280">
+                 priority="1000"
+                 mode="M280">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:TaxCurrencyCode"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:TaxCurrencyCode"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -9324,10 +8662,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:UltimatePayeeTradeParty"
-                  priority="1000"
-                  mode="M281">
+                 priority="1000"
+                 mode="M281">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:UltimatePayeeTradeParty"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:UltimatePayeeTradeParty"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -9347,10 +8685,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem"
-                  priority="1000"
-                  mode="M282">
+                 priority="1000"
+                 mode="M282">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
@@ -9370,10 +8708,10 @@
    <!--PATTERN -->
    <!--RULE -->
    <xsl:template match="/rsm:CrossIndustryInvoice/rsm:ValuationBreakdownStatement"
-                  priority="1000"
-                  mode="M283">
+                 priority="1000"
+                 mode="M283">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                        context="/rsm:CrossIndustryInvoice/rsm:ValuationBreakdownStatement"/>
+                       context="/rsm:CrossIndustryInvoice/rsm:ValuationBreakdownStatement"/>
       <!--REPORT -->
       <xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">

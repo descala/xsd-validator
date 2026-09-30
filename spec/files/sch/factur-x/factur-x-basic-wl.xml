@@ -153,7 +153,6 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             </ram:PayerPartyDebtorFinancialAccount>
             <ram:PayeePartyCreditorFinancialAccount>
                <ram:IBANID>FR76 1254 2547 2569 8542 5874 698</ram:IBANID>
-               <ram:ProprietaryID>LOC BANK ACCOUNT</ram:ProprietaryID>
             </ram:PayeePartyCreditorFinancialAccount>
          </ram:SpecifiedTradeSettlementPaymentMeans>
          <ram:ApplicableTradeTax>

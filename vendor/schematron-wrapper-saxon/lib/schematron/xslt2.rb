@@ -1,4 +1,5 @@
 require 'nokogiri'
+require 'shellwords'
 
 module Schematron
   module XSLT2
@@ -26,6 +27,17 @@ module Schematron
       end
     end
 
+    # Validates +xml+ against the compiled stylesheet already on disk at +stylesheet_path+.
+    #
+    # .validate copies the stylesheet into /tmp, which makes /tmp its base URI. A stylesheet that
+    # resolves a sibling resource at run time then silently reads nothing: the Factur-X profiles
+    # look their code lists up with document('FACTUR-X_<profile>_codedb.xml'), and saxon returns an
+    # empty sequence for the missing file rather than failing. Passing the real path keeps the base
+    # URI on the directory that holds those companion files.
+    def self.validate_stylesheet_file(stylesheet_path, xml)
+      create_temp_file(xml) { |temp_xml| execute_transform(stylesheet_path, temp_xml.path) }
+    end
+
     def self.get_errors(validation_result)
       result = []
 
@@ -45,6 +57,20 @@ module Schematron
 
     private
 
+    # The command below is handed to a shell, so every interpolated path is quoted. This matters
+    # more since validation stopped copying the stylesheet to a temp file: -xsl: used to carry a
+    # machine-generated Tempfile path and now carries the installation path plus a schematron name,
+    # which a caller of Sch::Validator.sch_validate_with_schematron_linked supplies.
+    #
+    # LIB_PATH ends in a glob (bin/lib/*) that java, not the shell, is meant to expand; quoting it
+    # keeps the shell's hands off it, which is the behaviour we already relied on.
+    #
+    # Shellwords is POSIX syntax and cmd.exe does not understand backslash escapes, so on Windows
+    # the value is passed through unchanged, exactly as before.
+    def self.shell_quote(value)
+      Gem.win_platform? ? value : Shellwords.escape(value)
+    end
+
     def self.process_includes(content_to_transform)
       create_temp_file(content_to_transform) { |temp_file| execute_transform(DSDL_INCLUDES_PATH, temp_file.path) }
     end
@@ -61,7 +87,7 @@ module Schematron
       sep, null = Gem.win_platform? ? [';', 'nul'] : [':', '/dev/null']
 
       if ENV['XSD_VALIDATOR_C']
-        cmd = "cd #{File.expand_path(File.dirname(__FILE__))}/../../../saxonC_v12.4.2/command && ./transform"
+        cmd = "cd #{shell_quote(File.expand_path(File.dirname(__FILE__)))}/../../../saxonC_v12.4.2/command && ./transform"
       else
         cmd = "java "
 
@@ -72,11 +98,11 @@ module Schematron
         cmd << " -XX:+UseSerialGC"
         cmd << " -XX:-UsePerfData"
         cmd << " -Xshare:auto"
-        cmd << " -cp #{EXE_PATH + sep + LIB_PATH + sep}. net.sf.saxon.Transform"
+        cmd << " -cp #{shell_quote(EXE_PATH + sep + LIB_PATH + sep + '.')} net.sf.saxon.Transform"
       end
 
-      cmd << " -xsl:#{stylesheet}"
-      cmd << " -s:#{schema}"
+      cmd << " -xsl:#{shell_quote(stylesheet)}"
+      cmd << " -s:#{shell_quote(schema)}"
 
       if allow_foreign
         cmd << ' allow-foreign=true'

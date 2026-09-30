@@ -257,7 +257,6 @@ WEEE-Reg-Nr.: DE87654321
       <ram:SpecifiedTradeProduct>
         <ram:GlobalID schemeID="0160">4100130013294</ram:GlobalID>
         <ram:SellerAssignedID>2031</ram:SellerAssignedID>
-        <ram:BuyerAssignedID/>
         <ram:Name>Bierbrau Pils 20/0500</ram:Name>
         <ram:Description>EAN-VKE: 4100130913297</ram:Description>
         <ram:ApplicableProductCharacteristic>
@@ -295,7 +294,6 @@ WEEE-Reg-Nr.: DE87654321
       <ram:SpecifiedTradeProduct>
         <ram:GlobalID schemeID="0160">2001015001325</ram:GlobalID>
         <ram:SellerAssignedID>1805</ram:SellerAssignedID>
-        <ram:BuyerAssignedID/>
         <ram:Name>Leergutpfand 20 x 0,5l</ram:Name>
         <ram:ApplicableProductCharacteristic>
           <ram:Description>Verpackung</ram:Description>
