@@ -411,28 +411,74 @@ module Sch
     # French character of a Factur-X (ZUGFeRD and Peppol BIS never carry these).
     VALID_FR_PROCESS_CODES = %w(B1 S1 M1 B2 S2 M2 S3 B4 S4 M4 S5 S6 B7 S7 B8 S8 M8 B9 S9 M9)
 
-    # Appends the BR-FR Flux 2 CII schematron when the CII carries a French
-    # process code in BT-23 (any repeat counts, BR-FR-08 evaluates all).
+    # Identifier schemes marking a party as French: 0225 (FRCTC electronic
+    # address), 0002 (SIREN), 0009 (SIRET).
+    FR_PARTY_SCHEMES = %w(0225 0002 0009)
+
+    # Appends the BR-FR Flux 2 CII schematron when the CII is French: valid cadre
+    # in BT-23 (any repeats, BR-FR-08 evaluates all), or both seller and buyer
+    # French. Parties fallback prevents invalid BT-23 from disabling the very rule
+    # (BR-FR-08) that rejects it (#90948). Seller-only French is insufficient
+    # (FR→foreign is e-reporting).
     def add_br_fr_schematron_if_french(schematrons, doc_nokogiri)
       bt23_values = doc_nokogiri.xpath('/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID',
                                        rsm: RSM, ram: RAM).map { |node| node.text.strip }
-      return schematrons if (VALID_FR_PROCESS_CODES & bt23_values).empty?
+      return schematrons if (VALID_FR_PROCESS_CODES & bt23_values).empty? && !french_parties_cii?(doc_nokogiri)
 
       schematrons + %w(BR-FR-Flux2-Schematron-CII_V1.4.0.04.sch)
     end
 
-    # UBL sibling of add_br_fr_schematron_if_french: same BT-23 guard, read the
-    # UBL way. Mirrors b2b_app's DocumentType::UblFrProfileDetection#french?.
+    # UBL sibling of add_br_fr_schematron_if_french: same guard (cadre or French
+    # parties), read the UBL way. Mirrors b2b_app's
+    # DocumentType::UblFrProfileDetection#french?.
     #
     # Chorus Pro B2G addressing legitimately carries two buyer PartyIdentification
     # elements (SIRET 0009 + code service 0224, BT-46) — valid under BR-FR-Flux2 but
     # fatal under the base CEN rule UBL-SR-16 (max one). Layering BR-FR on top of
     # +schematrons+ can never satisfy that combination, so drop the base instead.
     def add_br_fr_schematron_if_french_ubl(schematrons, doc_nokogiri)
-      return schematrons if (VALID_FR_PROCESS_CODES & bt23_values_ubl(doc_nokogiri)).empty?
+      return schematrons if (VALID_FR_PROCESS_CODES & bt23_values_ubl(doc_nokogiri)).empty? && !french_parties_ubl?(doc_nokogiri)
       return %w(BR-FR-Flux2-Schematron-UBL_V1.4.0.04.sch) if buyer_party_identification_count(doc_nokogiri) > 1
 
       schematrons + %w(BR-FR-Flux2-Schematron-UBL_V1.4.0.04.sch)
+    end
+
+    # Whether both AccountingSupplierParty and AccountingCustomerParty are French
+    # (see french_party?).
+    # @return [Boolean]
+    def french_parties_ubl?(doc_nokogiri)
+      %w(AccountingSupplierParty AccountingCustomerParty).all? do |role|
+        french_party?(doc_nokogiri.at_xpath("/*/cac:#{role}/cac:Party", cac: CAC),
+                      'cac:PostalAddress/cac:Country/cbc:IdentificationCode',
+                      'cbc:EndpointID | cac:PartyIdentification/cbc:ID | cac:PartyLegalEntity/cbc:CompanyID',
+                      { cac: CAC, cbc: CBC })
+      end
+    end
+
+    # CII sibling of french_parties_ubl?: SellerTradeParty and BuyerTradeParty.
+    # @return [Boolean]
+    def french_parties_cii?(doc_nokogiri)
+      %w(SellerTradeParty BuyerTradeParty).all? do |role|
+        french_party?(doc_nokogiri.at_xpath("/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:#{role}",
+                                            rsm: RSM, ram: RAM),
+                      'ram:PostalTradeAddress/ram:CountryID',
+                      'ram:URIUniversalCommunication/ram:URIID | ram:GlobalID | ram:SpecifiedLegalOrganization/ram:ID',
+                      { ram: RAM })
+      end
+    end
+
+    # Whether party is French: postal country FR or any identifier scheme in
+    # FR_PARTY_SCHEMES. Monaco excluded pending real case.
+    # @param party [Nokogiri::XML::Node, nil]
+    # @param country_xpath [String] relative to party
+    # @param id_xpath [String] relative to party, union of identifier nodes with @schemeID
+    # @param namespaces [Hash]
+    # @return [Boolean]
+    def french_party?(party, country_xpath, id_xpath, namespaces)
+      return false unless party
+
+      party.at_xpath(country_xpath, namespaces)&.text&.strip == 'FR' ||
+        party.xpath(id_xpath, namespaces).any? { |node| FR_PARTY_SCHEMES.include?(node['schemeID']) }
     end
 
     # @return [Integer] number of buyer cac:PartyIdentification/cbc:ID elements (BT-46)

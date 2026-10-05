@@ -4,7 +4,7 @@ RSpec.describe 'Schematron::XSLT2' do
     files = {
       'spec/files/sch/factur-x/factur-x-minimum.xml' => 'FACTUR-X_MINIMUM_V1.0.sch.xslt',
       'spec/files/sch/factur-x/factur-x-basic.xml' => 'EN16931-CII-validation-preprocessed.sch.xslt',
-      'spec/files/sch/factur-x/factur-x-basic-wl.xml' => 'FACTUR-X_BASIC-WL_V1.09.2.sch.xslt',
+      'spec/files/sch/factur-x/factur-x-basic-wl-wrong.xml' => 'FACTUR-X_BASIC-WL_V1.09.2.sch.xslt',
       'spec/files/sch/factur-x/factur-x-extended.xml' => 'FACTUR-X_EXTENDED_V1.09.2.sch.xslt'
     }
     files.each do |file_path, xslt|

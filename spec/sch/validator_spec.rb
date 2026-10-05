@@ -100,6 +100,11 @@ RSpec.describe Sch::Validator do
     expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationError, /FATAL: .*BR-FR-06\/BT-21/)
   end
 
+  it 'raises ValidationError for a FR→FR UBL invoice whose BT-23 is not a cadre code' do
+    doc=File.read('spec/files/xsd/ubl-invoice-fr-en16931-bt23-composite.xml')
+    expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationError, /FATAL: .*BR-FR-08\/BT-23/)
+  end
+
   # G1.24 admits French rates only, no exception for foreign suppliers.
   it 'raises ValidationError for an F10 report carrying a non-French VAT rate' do
     doc=File.read('spec/files/sch/f10/f10-report-bi2b-foreign-rate-wrong.xml')
@@ -145,7 +150,10 @@ RSpec.describe Sch::Validator do
     files = {
       'spec/files/sch/factur-x/factur-x-minimum.xml' => ['FACTUR-X_MINIMUM_V1.0.sch'],
       'spec/files/sch/factur-x/factur-x-basic.xml' => ['EN16931-CII-validation-preprocessed.sch'],
-      'spec/files/sch/factur-x/factur-x-basic-wl.xml' => ['FACTUR-X_BASIC-WL_V1.09.2.sch'],
+      # FR→FR BASIC WL with Chorus Pro BT-23 "A1": French by parties (#90948), so BR-FR runs and
+      # BR-FR-08 rejects A1 (not a cadre code).
+      'spec/files/sch/factur-x/factur-x-basic-wl-wrong.xml' =>
+        ['FACTUR-X_BASIC-WL_V1.09.2.sch', 'BR-FR-Flux2-Schematron-CII_V1.4.0.04.sch'],
       'spec/files/sch/factur-x/factur-x-en16931.xml' => ['EN16931-CII-validation-preprocessed.sch'],
       'spec/files/sch/factur-x/factur-x-extended.xml' => ['FACTUR-X_EXTENDED_V1.09.2.sch'],
       # Factur-X France (#72838): a French BT-23 process code adds BR-FR to the
@@ -181,7 +189,20 @@ RSpec.describe Sch::Validator do
       # UblFrProfileDetection is the first code path that makes this happen from
       # real UBL) must resolve UBL schematrons, not silently fall back to CII ones.
       'spec/files/xsd/ubl-invoice-fr-en16931.xml' => ['CEN-EN16931-UBL.sch', 'BR-FR-Flux2-Schematron-UBL_V1.4.0.04.sch'],
-      'spec/files/xsd/ubl-invoice-fr-en16931-generic.xml' => ['CEN-EN16931-UBL.sch'],
+      # Non-cadre BT-23 between French parties is still French (#90948): BR-FR applies and BR-FR-08
+      # evaluates the BT-23.
+      'spec/files/xsd/ubl-invoice-fr-en16931-generic.xml' => ['CEN-EN16931-UBL.sch', 'BR-FR-Flux2-Schematron-UBL_V1.4.0.04.sch'],
+      # #90948: BR-FR applies when BT-23 is a valid cadre OR both seller and buyer are French (country FR
+      # or scheme 0225/0002/0009). FR→foreign is e-reporting (flux 10.1), excluded from BR-FR.
+      'spec/files/xsd/ubl-invoice-fr-en16931-bt23-composite.xml' => ['CEN-EN16931-UBL.sch', 'BR-FR-Flux2-Schematron-UBL_V1.4.0.04.sch'],
+      'spec/files/xsd/ubl-invoice-fr-en16931-foreign-buyer.xml' => ['CEN-EN16931-UBL.sch', 'BR-FR-Flux2-Schematron-UBL_V1.4.0.04.sch'],
+      'spec/files/xsd/ubl-invoice-fr-en16931-bt23-composite-foreign-buyer.xml' => ['CEN-EN16931-UBL.sch'],
+      'spec/files/xsd/ubl-invoice-fr-en16931-bt23-composite-buyer-0225.xml' => ['CEN-EN16931-UBL.sch', 'BR-FR-Flux2-Schematron-UBL_V1.4.0.04.sch'],
+      'spec/files/xsd/factur-x/factur-x-fr-en16931-bt23-composite.xml' =>
+        ['EN16931-CII-validation-preprocessed.sch', 'BR-FR-Flux2-Schematron-CII_V1.4.0.04.sch'],
+      'spec/files/xsd/factur-x/factur-x-fr-en16931-foreign-buyer.xml' =>
+        ['EN16931-CII-validation-preprocessed.sch', 'BR-FR-Flux2-Schematron-CII_V1.4.0.04.sch'],
+      'spec/files/xsd/factur-x/factur-x-fr-en16931-bt23-composite-foreign-buyer.xml' => ['EN16931-CII-validation-preprocessed.sch'],
       # Chorus Pro B2G addressing legitimately carries two buyer PartyIdentification
       # elements (SIRET 0009 + code service 0224, BT-46) — valid under BR-FR-Flux2 but
       # fatal under the base CEN rule UBL-SR-16 (max one). Drop CEN-EN16931-UBL.sch
