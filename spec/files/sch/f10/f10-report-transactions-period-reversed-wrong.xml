@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ReportDocument>
+    <Id>25</Id>
+    <Name>Test Seller SARL-Declaration-2026-07-29</Name>
+    <IssueDateTime>
+      <DateTimeString>20260729110746</DateTimeString>
+    </IssueDateTime>
+    <TypeCode>IN</TypeCode>
+    <Sender>
+      <Id schemeId="0238">0327</Id>
+      <Name>B2Brouter</Name>
+      <RoleCode>WK</RoleCode>
+      <URIUniversalCommunication>
+        <URIID>support@b2brouter.net</URIID>
+      </URIUniversalCommunication>
+    </Sender>
+    <Issuer>
+      <Id schemeId="0002">215172143</Id>
+      <Name>Test Seller SARL</Name>
+      <RoleCode>SE</RoleCode>
+      <URIUniversalCommunication>
+        <URIID>test@test.com</URIID>
+      </URIUniversalCommunication>
+    </Issuer>
+  </ReportDocument>
+  <TransactionsReport>
+    <ReportPeriod>
+      <StartDate>20260601</StartDate>
+      <EndDate>20260610</EndDate>
+    </ReportPeriod>
+    <Invoice>
+      <ID>SCH-INV-1</ID>
+      <IssueDate>20260603</IssueDate>
+      <TypeCode>380</TypeCode>
+      <CurrencyCode>EUR</CurrencyCode>
+      <TaxDueDateTypeCode>3</TaxDueDateTypeCode>
+      <InvoicePeriod>
+        <StartDate>20260603</StartDate>
+        <EndDate>20260602</EndDate>
+      </InvoicePeriod>
+      <BusinessProcess>
+        <ID>B1</ID>
+        <TypeID>urn.cpro.gouv.fr:1p0:ereporting</TypeID>
+      </BusinessProcess>
+      <Seller>
+        <CompanyId schemeId="0002">215172143</CompanyId>
+        <TaxRegistrationId qualifyingId="VAT">FR65215172143</TaxRegistrationId>
+        <PostalAddress>
+          <CountryId>FR</CountryId>
+        </PostalAddress>
+      </Seller>
+      <Buyer>
+        <CompanyId schemeId="0223">ESB63276174</CompanyId>
+        <TaxRegistrationId qualifyingId="VAT">ESB63276174</TaxRegistrationId>
+        <PostalAddress>
+          <CountryId>ES</CountryId>
+        </PostalAddress>
+      </Buyer>
+      <MonetaryTotal>
+        <TaxExclusiveAmount>1000.00</TaxExclusiveAmount>
+        <TaxAmount CurrencyCode="EUR">200.00</TaxAmount>
+      </MonetaryTotal>
+      <TaxSubTotal>
+        <TaxableAmount>1000.00</TaxableAmount>
+        <TaxAmount>200.00</TaxAmount>
+        <TaxCategory>
+          <Code>S</Code>
+          <Percent>20.00</Percent>
+        </TaxCategory>
+      </TaxSubTotal>
+    </Invoice>
+  </TransactionsReport>
+</Report>

@@ -149,7 +149,7 @@
    <!--SCHEMA SETUP-->
    <xsl:template match="/">
       <svrl:schematron-output xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                              title="PPF — Flux 10 e-reporting — v1.8"
+                              title="PPF — Flux 10 e-reporting — Schématron AIFE v1.0 (annexe 7 v1.8) + G7.07/G6.20 de l'annexe 7 v1.9 (B2Brouter)"
                               schemaVersion="ISO19757-3">
          <xsl:comment>
             <xsl:value-of select="$archiveDirParameter"/>   
@@ -593,8 +593,8 @@
             <xsl:attribute name="document">
                <xsl:value-of select="document-uri(/)"/>
             </xsl:attribute>
-            <xsl:attribute name="id">F10-PERIODE-FAC-G6.25</xsl:attribute>
-            <xsl:attribute name="name">F10-PERIODE-FAC-G6.25</xsl:attribute>
+            <xsl:attribute name="id">F10-PERIODE-FAC-G6.20</xsl:attribute>
+            <xsl:attribute name="name">F10-PERIODE-FAC-G6.20</xsl:attribute>
             <xsl:apply-templates/>
          </svrl:active-pattern>
          <xsl:apply-templates select="/" mode="M49"/>
@@ -719,8 +719,8 @@
             <xsl:attribute name="document">
                <xsl:value-of select="document-uri(/)"/>
             </xsl:attribute>
-            <xsl:attribute name="id">F10-LIGNE-G6.25</xsl:attribute>
-            <xsl:attribute name="name">F10-LIGNE-G6.25</xsl:attribute>
+            <xsl:attribute name="id">F10-LIGNE-G6.20</xsl:attribute>
+            <xsl:attribute name="name">F10-LIGNE-G6.20</xsl:attribute>
             <xsl:apply-templates/>
          </svrl:active-pattern>
          <xsl:apply-templates select="/" mode="M63"/>
@@ -962,8 +962,8 @@
             <xsl:attribute name="document">
                <xsl:value-of select="document-uri(/)"/>
             </xsl:attribute>
-            <xsl:attribute name="id">F10-PMT-ENCAISSEMENT-G1.16</xsl:attribute>
-            <xsl:attribute name="name">F10-PMT-ENCAISSEMENT-G1.16</xsl:attribute>
+            <xsl:attribute name="id">F10-PMT-ENCAISSEMENT-G7.07</xsl:attribute>
+            <xsl:attribute name="name">F10-PMT-ENCAISSEMENT-G7.07</xsl:attribute>
             <xsl:apply-templates/>
          </svrl:active-pattern>
          <xsl:apply-templates select="/" mode="M90"/>
@@ -998,8 +998,8 @@
             <xsl:attribute name="document">
                <xsl:value-of select="document-uri(/)"/>
             </xsl:attribute>
-            <xsl:attribute name="id">F10-PMT-AGREGE-G1.16</xsl:attribute>
-            <xsl:attribute name="name">F10-PMT-AGREGE-G1.16</xsl:attribute>
+            <xsl:attribute name="id">F10-PMT-AGREGE-G7.07</xsl:attribute>
+            <xsl:attribute name="name">F10-PMT-AGREGE-G7.07</xsl:attribute>
             <xsl:apply-templates/>
          </svrl:active-pattern>
          <xsl:apply-templates select="/" mode="M94"/>
@@ -1024,7 +1024,7 @@
       </svrl:schematron-output>
    </xsl:template>
    <!--SCHEMATRON PATTERNS-->
-   <svrl:text xmlns:svrl="http://purl.oclc.org/dsdl/svrl">PPF — Flux 10 e-reporting — v1.8</svrl:text>
+   <svrl:text xmlns:svrl="http://purl.oclc.org/dsdl/svrl">PPF — Flux 10 e-reporting — Schématron AIFE v1.0 (annexe 7 v1.8) + G7.07/G6.20 de l'annexe 7 v1.9 (B2Brouter)</svrl:text>
    <!--PATTERN F10-TRANSMISSION-G1.104-->
    <!--RULE -->
    <xsl:template match="/Report/ReportDocument/Id" priority="1000" mode="M1">
@@ -2567,7 +2567,7 @@
    <xsl:template match="@*|node()" priority="-2" mode="M48">
       <xsl:apply-templates select="*" mode="M48"/>
    </xsl:template>
-   <!--PATTERN F10-PERIODE-FAC-G6.25-->
+   <!--PATTERN F10-PERIODE-FAC-G6.20-->
    <!--RULE -->
    <xsl:template match="/Report/TransactionsReport/Invoice/InvoicePeriod[StartDate and EndDate]"
                  priority="1000"
@@ -2576,14 +2576,14 @@
                        context="/Report/TransactionsReport/Invoice/InvoicePeriod[StartDate and EndDate]"/>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="EndDate &gt; StartDate"/>
+         <xsl:when test="EndDate &gt;= StartDate"/>
          <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="EndDate &gt; StartDate">
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="EndDate &gt;= StartDate">
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[G6.25] La date de fin de période de facturation ne peut pas être antérieure ou égale à la date de début. | Source : Annexe 7 v1.8 G6.25</svrl:text>
+               <svrl:text>[G6.20] La date de fin de période de facturation ne peut pas être antérieure à la date de début. | Source : Annexe 7 v1.9 G6.20</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -3107,7 +3107,7 @@
    <xsl:template match="@*|node()" priority="-2" mode="M62">
       <xsl:apply-templates select="*" mode="M62"/>
    </xsl:template>
-   <!--PATTERN F10-LIGNE-G6.25-->
+   <!--PATTERN F10-LIGNE-G6.20-->
    <!--RULE -->
    <xsl:template match="/Report/TransactionsReport/Invoice/Line/InvoicePeriod[StartDate and EndDate]"
                  priority="1000"
@@ -3116,14 +3116,14 @@
                        context="/Report/TransactionsReport/Invoice/Line/InvoicePeriod[StartDate and EndDate]"/>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="EndDate &gt; StartDate"/>
+         <xsl:when test="EndDate &gt;= StartDate"/>
          <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="EndDate &gt; StartDate">
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="EndDate &gt;= StartDate">
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[G6.25] La date de fin de période de ligne ne peut pas être antérieure ou égale à la date de début. | Source : Annexe 7 v1.8 G6.25</svrl:text>
+               <svrl:text>[G6.20] La date de fin de période de ligne ne peut pas être antérieure à la date de début. | Source : Annexe 7 v1.9 G6.20</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -4191,7 +4191,7 @@
    <xsl:template match="@*|node()" priority="-2" mode="M89">
       <xsl:apply-templates select="*" mode="M89"/>
    </xsl:template>
-   <!--PATTERN F10-PMT-ENCAISSEMENT-G1.16-->
+   <!--PATTERN F10-PMT-ENCAISSEMENT-G7.07-->
    <!--RULE -->
    <xsl:template match="/Report/PaymentsReport/Invoice/Payment/SubTotals/Amount"
                  priority="1000"
@@ -4200,17 +4200,17 @@
                        context="/Report/PaymentsReport/Invoice/Payment/SubTotals/Amount"/>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="matches(., '^\d+(\.\d{1,6})?$')"/>
+         <xsl:when test="matches(., '^-?\d+(\.\d{1,6})?$')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="matches(., '^\d+(\.\d{1,6})?$')">
+                                test="matches(., '^-?\d+(\.\d{1,6})?$')">
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[G1.16] <xsl:text/>
+               <svrl:text>[G7.07] <xsl:text/>
                   <xsl:value-of select="name(.)"/>
-                  <xsl:text/> : doit comporter au maximum 6 décimales, sans signe négatif, avec un séparateur point. | Source : Annexe 7 v1.8 G1.16</svrl:text>
+                  <xsl:text/> : doit comporter au maximum 6 décimales avec un séparateur point (signe négatif autorisé). | Source : Annexe 7 v1.9 G7.07</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -4224,9 +4224,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[G1.16] <xsl:text/>
+               <svrl:text>[G7.07] <xsl:text/>
                   <xsl:value-of select="name(.)"/>
-                  <xsl:text/> : ne peut pas dépasser 19 chiffres hors séparateur. | Source : Annexe 7 v1.8 G1.16</svrl:text>
+                  <xsl:text/> : ne peut pas dépasser 19 positions hors séparateur, signe négatif compris. | Source : Annexe 7 v1.9 G7.07</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -4330,7 +4330,7 @@
    <xsl:template match="@*|node()" priority="-2" mode="M93">
       <xsl:apply-templates select="*" mode="M93"/>
    </xsl:template>
-   <!--PATTERN F10-PMT-AGREGE-G1.16-->
+   <!--PATTERN F10-PMT-AGREGE-G7.07-->
    <!--RULE -->
    <xsl:template match="/Report/PaymentsReport/Transactions/Payment/SubTotals/Amount"
                  priority="1000"
@@ -4339,17 +4339,17 @@
                        context="/Report/PaymentsReport/Transactions/Payment/SubTotals/Amount"/>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="matches(., '^\d+(\.\d{1,6})?$')"/>
+         <xsl:when test="matches(., '^-?\d+(\.\d{1,6})?$')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="matches(., '^\d+(\.\d{1,6})?$')">
+                                test="matches(., '^-?\d+(\.\d{1,6})?$')">
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[G1.16] <xsl:text/>
+               <svrl:text>[G7.07] <xsl:text/>
                   <xsl:value-of select="name(.)"/>
-                  <xsl:text/> : doit comporter au maximum 6 décimales, sans signe négatif, avec un séparateur point. | Source : Annexe 7 v1.8 G1.16</svrl:text>
+                  <xsl:text/> : doit comporter au maximum 6 décimales avec un séparateur point (signe négatif autorisé). | Source : Annexe 7 v1.9 G7.07</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -4363,9 +4363,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[G1.16] <xsl:text/>
+               <svrl:text>[G7.07] <xsl:text/>
                   <xsl:value-of select="name(.)"/>
-                  <xsl:text/> : ne peut pas dépasser 19 chiffres hors séparateur. | Source : Annexe 7 v1.8 G1.16</svrl:text>
+                  <xsl:text/> : ne peut pas dépasser 19 positions hors séparateur, signe négatif compris. | Source : Annexe 7 v1.9 G7.07</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
