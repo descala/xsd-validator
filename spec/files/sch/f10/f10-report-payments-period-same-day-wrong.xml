@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ReportDocument>
+    <Id>26</Id>
+    <Name>Test Seller SARL-Declaration-2026-07-29</Name>
+    <IssueDateTime>
+      <DateTimeString>20260729110746</DateTimeString>
+    </IssueDateTime>
+    <TypeCode>IN</TypeCode>
+    <Sender>
+      <Id schemeId="0238">0327</Id>
+      <Name>B2Brouter</Name>
+      <RoleCode>WK</RoleCode>
+      <URIUniversalCommunication>
+        <URIID>support@b2brouter.net</URIID>
+      </URIUniversalCommunication>
+    </Sender>
+    <Issuer>
+      <Id schemeId="0002">215172143</Id>
+      <Name>Test Seller SARL</Name>
+      <RoleCode>SE</RoleCode>
+      <URIUniversalCommunication>
+        <URIID>test@test.com</URIID>
+      </URIUniversalCommunication>
+    </Issuer>
+  </ReportDocument>
+  <PaymentsReport>
+    <ReportPeriod>
+      <StartDate>20260601</StartDate>
+      <EndDate>20260601</EndDate>
+    </ReportPeriod>
+    <Invoice>
+      <InvoiceID>SCH-PAY-1</InvoiceID>
+      <IssueDate>20260603</IssueDate>
+      <Payment>
+        <Date>20250710</Date>
+        <SubTotals>
+          <TaxPercent>20.00</TaxPercent>
+          <CurrencyCode>EUR</CurrencyCode>
+          <Amount>1200.00</Amount>
+        </SubTotals>
+      </Payment>
+    </Invoice>
+  </PaymentsReport>
+</Report>
