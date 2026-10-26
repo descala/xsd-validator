@@ -165,6 +165,16 @@ RSpec.describe Sch::Validator do
     expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationError, /FATAL: .*G6\.25/)
   end
 
+  it 'raises ValidationError for an F10 line with a negative unit price' do
+    doc=File.read('spec/files/sch/f10/f10-report-transactions-price-negative-wrong.xml')
+    expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationError, /FATAL: .*G1\.16.*sans signe négatif/)
+  end
+
+  it 'raises ValidationError for a non-EUR F10 invoice whose total excluding VAT misses its bases' do
+    doc=File.read('spec/files/sch/f10/f10-report-transactions-usd-total-wrong.xml')
+    expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationError, /FATAL: .*G1\.53.*hors taxe/)
+  end
+
   it 'raises ValidationError for an F1 extract identifying a party without SIREN' do
     doc=File.read('spec/files/sch/f1/f1-extract-scheme-wrong.xml')
     expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationError, /FATAL: .*G1\.63/)

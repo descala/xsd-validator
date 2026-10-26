@@ -149,7 +149,7 @@
    <!--SCHEMA SETUP-->
    <xsl:template match="/">
       <svrl:schematron-output xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                              title="PPF — Flux 10 e-reporting — Schématron AIFE v1.0 (annexe 7 v1.8) + G7.07/G6.20 de l'annexe 7 v1.9 (B2Brouter)"
+                              title="PPF — Flux 10 e-reporting — Schématron AIFE v1.1 (annexe 7 v1.8) + G7.07/G6.20 de l'annexe 7 v1.9 (B2Brouter)"
                               schemaVersion="ISO19757-3">
          <xsl:comment>
             <xsl:value-of select="$archiveDirParameter"/>   
@@ -1024,7 +1024,7 @@
       </svrl:schematron-output>
    </xsl:template>
    <!--SCHEMATRON PATTERNS-->
-   <svrl:text xmlns:svrl="http://purl.oclc.org/dsdl/svrl">PPF — Flux 10 e-reporting — Schématron AIFE v1.0 (annexe 7 v1.8) + G7.07/G6.20 de l'annexe 7 v1.9 (B2Brouter)</svrl:text>
+   <svrl:text xmlns:svrl="http://purl.oclc.org/dsdl/svrl">PPF — Flux 10 e-reporting — Schématron AIFE v1.1 (annexe 7 v1.8) + G7.07/G6.20 de l'annexe 7 v1.9 (B2Brouter)</svrl:text>
    <!--PATTERN F10-TRANSMISSION-G1.104-->
    <!--RULE -->
    <xsl:template match="/Report/ReportDocument/Id" priority="1000" mode="M1">
@@ -2799,11 +2799,11 @@
    </xsl:template>
    <!--PATTERN F10-TOTAL-G1.53-->
    <!--RULE -->
-   <xsl:template match="/Report/TransactionsReport/Invoice[CurrencyCode = 'EUR']"
+   <xsl:template match="/Report/TransactionsReport/Invoice"
                  priority="1000"
                  mode="M55">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/Report/TransactionsReport/Invoice[CurrencyCode = 'EUR']"/>
+                       context="/Report/TransactionsReport/Invoice"/>
       <xsl:variable name="totalHT" select="number(MonetaryTotal/TaxExclusiveAmount)"/>
       <xsl:variable name="sommeBasesHT" select="sum(TaxSubTotal/TaxableAmount)"/>
       <xsl:variable name="totalTVA" select="number(MonetaryTotal/TaxAmount)"/>
@@ -2834,10 +2834,10 @@
       </xsl:choose>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="not(MonetaryTotal/TaxAmount) or not($amountsTVAValides) or (abs($totalTVA - $sommeTVA) &lt;= $toleranceTVA)"/>
+         <xsl:when test="not(CurrencyCode = 'EUR') or not(MonetaryTotal/TaxAmount) or not($amountsTVAValides) or (abs($totalTVA - $sommeTVA) &lt;= $toleranceTVA)"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="not(MonetaryTotal/TaxAmount) or not($amountsTVAValides) or (abs($totalTVA - $sommeTVA) &lt;= $toleranceTVA)">
+                                test="not(CurrencyCode = 'EUR') or not(MonetaryTotal/TaxAmount) or not($amountsTVAValides) or (abs($totalTVA - $sommeTVA) &lt;= $toleranceTVA)">
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -3826,11 +3826,11 @@
    </xsl:template>
    <!--PATTERN F10-TRANSAC-G1.53-->
    <!--RULE -->
-   <xsl:template match="/Report/TransactionsReport/Transactions[TransactionsCurrency = 'EUR']"
+   <xsl:template match="/Report/TransactionsReport/Transactions"
                  priority="1000"
                  mode="M81">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/Report/TransactionsReport/Transactions[TransactionsCurrency = 'EUR']"/>
+                       context="/Report/TransactionsReport/Transactions"/>
       <xsl:variable name="totalHT" select="number(TaxExclusiveAmount)"/>
       <xsl:variable name="sommeBasesHT" select="sum(TaxSubtotal/TaxableAmount)"/>
       <xsl:variable name="totalTVA" select="number(TaxTotal)"/>
@@ -3861,10 +3861,10 @@
       </xsl:choose>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="not($amountsTVAValides) or abs($totalTVA - $sommeTVA) &lt;= $toleranceTVA"/>
+         <xsl:when test="not(TransactionsCurrency = 'EUR') or not($amountsTVAValides) or abs($totalTVA - $sommeTVA) &lt;= $toleranceTVA"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="not($amountsTVAValides) or abs($totalTVA - $sommeTVA) &lt;= $toleranceTVA">
+                                test="not(TransactionsCurrency = 'EUR') or not($amountsTVAValides) or abs($totalTVA - $sommeTVA) &lt;= $toleranceTVA">
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
