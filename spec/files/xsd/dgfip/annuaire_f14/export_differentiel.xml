@@ -1,0 +1,98 @@
+<AnnuaireConsultationF14>
+    <HorodateProduction>20261026030138</HorodateProduction>
+    <DernierHorodateProduction>20261025030135</DernierHorodateProduction>
+    <TypeFlux>D</TypeFlux>
+    <BlocUnitesLegales>
+        <UniteLegale>
+            <IdInstance>103</IdInstance>
+            <MotifPresence>P</MotifPresence>
+            <Statut>A</Statut>
+            <IdSIREN qualifiant="0002">100000025</IdSIREN>
+            <Nom>PLATEFORME EXEMPLE</Nom>
+            <TypeEntite>A</TypeEntite>
+            <Diffusible>O</Diffusible>
+        </UniteLegale>
+    </BlocUnitesLegales>
+    <BlocCodesRoutage>
+        <CodeRoutage>
+            <IdInstance>302</IdInstance>
+            <MotifPresence>P</MotifPresence>
+            <Statut>I</Statut>
+            <IdSIRET qualifiant="0009">10000000900108</IdSIRET>
+            <IdRoutage qualifiant="0224">COMPTA</IdRoutage>
+            <Nom>COMPTABILITE</Nom>
+            <CodePays>FR</CodePays>
+            <EngagementJuridique>false</EngagementJuridique>
+        </CodeRoutage>
+        <CodeRoutage>
+            <IdInstance>302</IdInstance>
+            <MotifPresence>S</MotifPresence>
+            <Statut>I</Statut>
+            <IdSIRET qualifiant="0009">10000000900108</IdSIRET>
+            <IdRoutage qualifiant="0224">COMPTA</IdRoutage>
+            <Nom>COMPTABILITE</Nom>
+            <CodePays>FR</CodePays>
+            <EngagementJuridique>false</EngagementJuridique>
+        </CodeRoutage>
+    </BlocCodesRoutage>
+    <BlocLignesAnnuaire>
+        <LigneAnnuaire>
+            <IdInstance>504</IdInstance>
+            <MotifPresence>N</MotifPresence>
+            <Nature>D</Nature>
+            <DateEffet>
+                <DateDebut>20261026</DateDebut>
+                <DateFinEffective>99991231</DateFinEffective>
+            </DateEffet>
+            <InfoAdressage>
+                <Identifiant>100000017</Identifiant>
+                <IdLinSIREN qualifiant="0002">100000017</IdLinSIREN>
+            </InfoAdressage>
+            <IdPlateforme>0028</IdPlateforme>
+        </LigneAnnuaire>
+        <LigneAnnuaire>
+            <IdInstance>504</IdInstance>
+            <MotifPresence>P</MotifPresence>
+            <Nature>D</Nature>
+            <DateEffet>
+                <DateDebut>20261026</DateDebut>
+                <DateFinEffective>99991231</DateFinEffective>
+            </DateEffet>
+            <InfoAdressage>
+                <Identifiant>100000017</Identifiant>
+                <IdLinSIREN qualifiant="0002">100000017</IdLinSIREN>
+            </InfoAdressage>
+            <IdPlateforme>0028</IdPlateforme>
+        </LigneAnnuaire>
+        <LigneAnnuaire>
+            <IdInstance>505</IdInstance>
+            <MotifPresence>N</MotifPresence>
+            <Nature>M</Nature>
+            <DateEffet>
+                <DateDebut>20261101</DateDebut>
+                <DateFinEffective>99991231</DateFinEffective>
+            </DateEffet>
+            <InfoAdressage>
+                <Identifiant>100000017_FACTURES</Identifiant>
+                <IdLinSIREN qualifiant="0002">100000017</IdLinSIREN>
+                <Suffixe>FACTURES</Suffixe>
+            </InfoAdressage>
+            <IdPlateforme>9998</IdPlateforme>
+        </LigneAnnuaire>
+        <LigneAnnuaire>
+            <IdInstance>501</IdInstance>
+            <MotifPresence>S</MotifPresence>
+            <Nature>D</Nature>
+            <DateEffet>
+                <DateDebut>20260902</DateDebut>
+                <DateFin>20261026</DateFin>
+                <DateFinEffective>20261026</DateFinEffective>
+            </DateEffet>
+            <InfoAdressage>
+                <Identifiant>100000009</Identifiant>
+                <IdLinSIREN qualifiant="0002">100000009</IdLinSIREN>
+            </InfoAdressage>
+            <IdPlateforme>0028</IdPlateforme>
+        </LigneAnnuaire>
+    </BlocLignesAnnuaire>
+</AnnuaireConsultationF14>
