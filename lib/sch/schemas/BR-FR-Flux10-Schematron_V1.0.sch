@@ -3,7 +3,7 @@
         queryBinding="xslt2"
         schemaVersion="ISO19757-3">
 
-  <title>PPF — Flux 10 e-reporting — v1.8</title>
+  <title>PPF — Flux 10 e-reporting — Schématron AIFE v1.1 (annexe 7 v1.8) + G7.07/G6.20 de l'annexe 7 v1.9 (B2Brouter)</title>
 
   <pattern id="F10-TRANSMISSION-G1.104">
     <rule context="/Report/ReportDocument/Id">
@@ -413,10 +413,10 @@
     </rule>
   </pattern>
 
-  <pattern id="F10-PERIODE-FAC-G6.25">
+  <pattern id="F10-PERIODE-FAC-G6.20">
     <rule context="/Report/TransactionsReport/Invoice/InvoicePeriod[StartDate and EndDate]">
-      <assert test="EndDate &gt; StartDate" flag="fatal"
-        >[G6.25] La date de fin de période de facturation ne peut pas être antérieure ou égale à la date de début. | Source : Annexe 7 v1.8 G6.25</assert>
+      <assert test="EndDate &gt;= StartDate" flag="fatal"
+        >[G6.20] La date de fin de période de facturation ne peut pas être antérieure à la date de début. | Source : Annexe 7 v1.9 G6.20</assert>
     </rule>
   </pattern>
 
@@ -465,7 +465,7 @@
   </pattern>
 
   <pattern id="F10-TOTAL-G1.53">
-    <rule context="/Report/TransactionsReport/Invoice[CurrencyCode = 'EUR']">
+    <rule context="/Report/TransactionsReport/Invoice">
       <let name="totalHT"      value="number(MonetaryTotal/TaxExclusiveAmount)"/>
       <let name="sommeBasesHT" value="sum(TaxSubTotal/TaxableAmount)"/>
       <let name="totalTVA"     value="number(MonetaryTotal/TaxAmount)"/>
@@ -477,7 +477,7 @@
 
       <assert test="not(MonetaryTotal/TaxExclusiveAmount) or not($amountsHTValides) or (abs($totalHT - $sommeBasesHT) &lt;= $toleranceHT)" flag="fatal"
         >[G1.53] Le montant total hors taxe (<value-of select="$totalHT"/>) doit être égal à la somme des bases d'imposition TVA (<value-of select="$sommeBasesHT"/>), avec une tolérance de 0,01 EUR par montant HT additionné. | Source : Annexe 7 v1.8 G1.53</assert>
-      <assert test="not(MonetaryTotal/TaxAmount) or not($amountsTVAValides) or (abs($totalTVA - $sommeTVA) &lt;= $toleranceTVA)" flag="fatal"
+      <assert test="not(CurrencyCode = 'EUR') or not(MonetaryTotal/TaxAmount) or not($amountsTVAValides) or (abs($totalTVA - $sommeTVA) &lt;= $toleranceTVA)" flag="fatal"
         >[G1.53] Le montant total de TVA (<value-of select="$totalTVA"/>) doit être égal à la somme des montants de TVA par ventilation (<value-of select="$sommeTVA"/>), avec une tolérance de 0,01 EUR par montant TVA additionné. | Source : Annexe 7 v1.8 G1.53</assert>
     </rule>
   </pattern>
@@ -544,10 +544,10 @@
     </rule>
   </pattern>
 
-  <pattern id="F10-LIGNE-G6.25">
+  <pattern id="F10-LIGNE-G6.20">
     <rule context="/Report/TransactionsReport/Invoice/Line/InvoicePeriod[StartDate and EndDate]">
-      <assert test="EndDate &gt; StartDate" flag="fatal"
-        >[G6.25] La date de fin de période de ligne ne peut pas être antérieure ou égale à la date de début. | Source : Annexe 7 v1.8 G6.25</assert>
+      <assert test="EndDate &gt;= StartDate" flag="fatal"
+        >[G6.20] La date de fin de période de ligne ne peut pas être antérieure à la date de début. | Source : Annexe 7 v1.9 G6.20</assert>
     </rule>
   </pattern>
 
@@ -706,7 +706,7 @@
   </pattern>
 
   <pattern id="F10-TRANSAC-G1.53">
-    <rule context="/Report/TransactionsReport/Transactions[TransactionsCurrency = 'EUR']">
+    <rule context="/Report/TransactionsReport/Transactions">
       <let name="totalHT"      value="number(TaxExclusiveAmount)"/>
       <let name="sommeBasesHT" value="sum(TaxSubtotal/TaxableAmount)"/>
       <let name="totalTVA"     value="number(TaxTotal)"/>
@@ -717,7 +717,7 @@
       <let name="amountsTVAValides" value="every $m in (TaxTotal, TaxSubtotal/TaxTotal) satisfies (matches(string($m), '^-?\d+(\.\d{1,2})?$') and string-length(translate(string($m), '.', '')) &lt;= 19)"/>
       <assert test="not($amountsHTValides) or abs($totalHT - $sommeBasesHT) &lt;= $toleranceHT" flag="fatal"
         >[G1.53] TaxExclusiveAmount (<value-of select="$totalHT"/>) doit être égal à la somme TaxableAmount (<value-of select="$sommeBasesHT"/>), avec une tolérance de 0,01 EUR par montant HT additionné. | Source : Annexe 7 v1.8 G1.53</assert>
-      <assert test="not($amountsTVAValides) or abs($totalTVA - $sommeTVA) &lt;= $toleranceTVA" flag="fatal"
+      <assert test="not(TransactionsCurrency = 'EUR') or not($amountsTVAValides) or abs($totalTVA - $sommeTVA) &lt;= $toleranceTVA" flag="fatal"
         >[G1.53] TaxTotal (<value-of select="$totalTVA"/>) doit être égal à la somme TaxSubtotal/TaxTotal (<value-of select="$sommeTVA"/>), avec une tolérance de 0,01 EUR par montant TVA additionné. | Source : Annexe 7 v1.8 G1.53</assert>
     </rule>
   </pattern>
@@ -802,12 +802,12 @@
     </rule>
   </pattern>
 
-  <pattern id="F10-PMT-ENCAISSEMENT-G1.16">
+  <pattern id="F10-PMT-ENCAISSEMENT-G7.07">
     <rule context="/Report/PaymentsReport/Invoice/Payment/SubTotals/Amount">
-      <assert test="matches(., '^\d+(\.\d{1,6})?$')" flag="fatal"
-        >[G1.16] <name/> : doit comporter au maximum 6 décimales, sans signe négatif, avec un séparateur point. | Source : Annexe 7 v1.8 G1.16</assert>
+      <assert test="matches(., '^-?\d+(\.\d{1,6})?$')" flag="fatal"
+        >[G7.07] <name/> : doit comporter au maximum 6 décimales avec un séparateur point (signe négatif autorisé). | Source : Annexe 7 v1.9 G7.07</assert>
       <assert test="string-length(translate(., '.', '')) &lt;= 19" flag="fatal"
-        >[G1.16] <name/> : ne peut pas dépasser 19 chiffres hors séparateur. | Source : Annexe 7 v1.8 G1.16</assert>
+        >[G7.07] <name/> : ne peut pas dépasser 19 positions hors séparateur, signe négatif compris. | Source : Annexe 7 v1.9 G7.07</assert>
     </rule>
   </pattern>
 
@@ -837,12 +837,12 @@
     </rule>
   </pattern>
 
-  <pattern id="F10-PMT-AGREGE-G1.16">
+  <pattern id="F10-PMT-AGREGE-G7.07">
     <rule context="/Report/PaymentsReport/Transactions/Payment/SubTotals/Amount">
-      <assert test="matches(., '^\d+(\.\d{1,6})?$')" flag="fatal"
-        >[G1.16] <name/> : doit comporter au maximum 6 décimales, sans signe négatif, avec un séparateur point. | Source : Annexe 7 v1.8 G1.16</assert>
+      <assert test="matches(., '^-?\d+(\.\d{1,6})?$')" flag="fatal"
+        >[G7.07] <name/> : doit comporter au maximum 6 décimales avec un séparateur point (signe négatif autorisé). | Source : Annexe 7 v1.9 G7.07</assert>
       <assert test="string-length(translate(., '.', '')) &lt;= 19" flag="fatal"
-        >[G1.16] <name/> : ne peut pas dépasser 19 chiffres hors séparateur. | Source : Annexe 7 v1.8 G1.16</assert>
+        >[G7.07] <name/> : ne peut pas dépasser 19 positions hors séparateur, signe négatif compris. | Source : Annexe 7 v1.9 G7.07</assert>
     </rule>
   </pattern>
 

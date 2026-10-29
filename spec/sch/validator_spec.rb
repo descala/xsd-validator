@@ -116,6 +116,65 @@ RSpec.describe Sch::Validator do
     expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationError, /FATAL: .*G8\.01/)
   end
 
+  # Annexe 7 v1.9: TT-95/TT-99 use G7.07 (signed amount), not G1.16 (unsigned price) (#95372).
+  it 'does not raise for an F10 payments report with negative 10.2 and 10.4 amounts' do
+    doc=File.read('spec/files/sch/f10/f10-report-payments-negative.xml')
+    expect { sch_validate!(doc) }.not_to raise_error
+  end
+
+  it 'raises ValidationError for an F10 payment amount with more than 6 decimals' do
+    doc=File.read('spec/files/sch/f10/f10-report-payments-negative-decimals-wrong.xml')
+    expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationError, /FATAL: .*G7\.07.*6 décimales/)
+  end
+
+  # G7.07 counts the minus sign among the 19 positions.
+  it 'raises ValidationError for a negative F10 payment amount over 19 positions' do
+    doc=File.read('spec/files/sch/f10/f10-report-payments-negative-length-wrong.xml')
+    expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationError, /FATAL: .*G7\.07.*19 positions/)
+  end
+
+  it 'raises ValidationError for an F10 payment amount with a plus sign' do
+    doc=File.read('spec/files/sch/f10/f10-report-payments-plus-sign-wrong.xml')
+    expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationError, /FATAL: .*G7\.07/)
+  end
+
+  # Annexe 7 v1.9: invoice and line periods (TT-42/TT-43, TT-65/TT-66) follow G6.20, which accepts a one-day period.
+  it 'does not raise for an F10 invoice period starting and ending the same day' do
+    doc=File.read('spec/files/sch/f10/f10-report-transactions-period-same-day.xml')
+    expect { sch_validate!(doc) }.not_to raise_error
+  end
+
+  it 'raises ValidationError for an F10 invoice period ending before it starts' do
+    doc=File.read('spec/files/sch/f10/f10-report-transactions-period-reversed-wrong.xml')
+    expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationError, /FATAL: .*G6\.20/)
+  end
+
+  it 'does not raise for an F10 line period starting and ending the same day' do
+    doc=File.read('spec/files/sch/f10/f10-report-transactions-line-period-same-day.xml')
+    expect { sch_validate!(doc) }.not_to raise_error
+  end
+
+  it 'raises ValidationError for an F10 line period ending before it starts' do
+    doc=File.read('spec/files/sch/f10/f10-report-transactions-line-period-reversed-wrong.xml')
+    expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationError, /FATAL: .*G6\.20.*ligne/)
+  end
+
+  # The transmission period (TT-89/TT-90) stays under G6.25.
+  it 'raises ValidationError for an F10 payments period starting and ending the same day' do
+    doc=File.read('spec/files/sch/f10/f10-report-payments-period-same-day-wrong.xml')
+    expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationError, /FATAL: .*G6\.25/)
+  end
+
+  it 'raises ValidationError for an F10 line with a negative unit price' do
+    doc=File.read('spec/files/sch/f10/f10-report-transactions-price-negative-wrong.xml')
+    expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationError, /FATAL: .*G1\.16.*sans signe négatif/)
+  end
+
+  it 'raises ValidationError for a non-EUR F10 invoice whose total excluding VAT misses its bases' do
+    doc=File.read('spec/files/sch/f10/f10-report-transactions-usd-total-wrong.xml')
+    expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationError, /FATAL: .*G1\.53.*hors taxe/)
+  end
+
   it 'raises ValidationError for an F1 extract identifying a party without SIREN' do
     doc=File.read('spec/files/sch/f1/f1-extract-scheme-wrong.xml')
     expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationError, /FATAL: .*G1\.63/)
@@ -218,6 +277,9 @@ RSpec.describe Sch::Validator do
       'spec/files/sch/cdar/cdar_1_deposee.xml' => ['BR-FR-CDV-Schematron-CDAR_V1.4.0.04.sch'],
       'spec/files/sch/f10/f10-report-transactions.xml' => ['BR-FR-Flux10-Schematron_V1.0.sch'],
       'spec/files/sch/f10/f10-report-payments.xml' => ['BR-FR-Flux10-Schematron_V1.0.sch'],
+      'spec/files/sch/f10/f10-report-payments-negative.xml' => ['BR-FR-Flux10-Schematron_V1.0.sch'],
+      'spec/files/sch/f10/f10-report-transactions-period-same-day.xml' => ['BR-FR-Flux10-Schematron_V1.0.sch'],
+      'spec/files/sch/f10/f10-report-transactions-line-period-same-day.xml' => ['BR-FR-Flux10-Schematron_V1.0.sch'],
       'spec/files/sch/f10/f10-report-bi2b-foreign-rate-wrong.xml' => ['BR-FR-Flux10-Schematron_V1.0.sch'],
       'spec/files/sch/f1/f1-extract-invoice.xml' => ['PPF_Flux1_UBL_1_8_DEMARRAGE_v0_2.sch'],
       'spec/files/sch/f1/f1-extract-creditnote.xml' => ['PPF_Flux1_UBL_1_8_DEMARRAGE_v0_2.sch'],
