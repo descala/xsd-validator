@@ -1,0 +1,142 @@
+<AnnuaireConsultationF14>
+    <HorodateProduction>20261025040137</HorodateProduction>
+    <TypeFlux>C</TypeFlux>
+    <BlocUnitesLegales>
+        <UniteLegale>
+            <IdInstance>101</IdInstance>
+            <MotifPresence>C</MotifPresence>
+            <Statut>A</Statut>
+            <IdSIREN qualifiant="0002">100000009</IdSIREN>
+            <Nom>EXEMPLE INDUSTRIES</Nom>
+            <TypeEntite>A</TypeEntite>
+            <Diffusible>O</Diffusible>
+        </UniteLegale>
+        <UniteLegale>
+            <IdInstance>102</IdInstance>
+            <MotifPresence>C</MotifPresence>
+            <Statut>A</Statut>
+            <IdSIREN qualifiant="0002">100000017</IdSIREN>
+            <Nom>[ND]</Nom>
+            <TypeEntite>A</TypeEntite>
+            <Diffusible>P</Diffusible>
+        </UniteLegale>
+    </BlocUnitesLegales>
+    <BlocEtablissements>
+        <Etablissement>
+            <IdInstance>201</IdInstance>
+            <MotifPresence>C</MotifPresence>
+            <Statut>A</Statut>
+            <IdSIRET qualifiant="0009">10000000900108</IdSIRET>
+            <TypeEtablissement>P</TypeEtablissement>
+            <Nom>EXEMPLE INDUSTRIES SIEGE</Nom>
+            <LigneAdresse1>1 RUE DE L'EXEMPLE</LigneAdresse1>
+            <Localite>LYON</Localite>
+            <CP>69001</CP>
+            <CodePays>FR</CodePays>
+            <Diffusible>O</Diffusible>
+        </Etablissement>
+        <Etablissement>
+            <IdInstance>202</IdInstance>
+            <MotifPresence>C</MotifPresence>
+            <Statut>A</Statut>
+            <IdSIRET qualifiant="0009">10000001700101</IdSIRET>
+            <TypeEtablissement>P</TypeEtablissement>
+            <Nom>[ND]</Nom>
+            <LigneAdresse1>[ND]</LigneAdresse1>
+            <Localite>NANTES</Localite>
+            <CP>[ND]</CP>
+            <CodePays>FR</CodePays>
+            <DonneesB2G>
+                <EngagementJuridique>false</EngagementJuridique>
+                <Service>false</Service>
+                <EngJurServ>false</EngJurServ>
+                <MOA>false</MOA>
+                <MOAunique>false</MOAunique>
+                <StatutMiseEnPaiement>false</StatutMiseEnPaiement>
+            </DonneesB2G>
+            <Diffusible>P</Diffusible>
+        </Etablissement>
+    </BlocEtablissements>
+    <BlocCodesRoutage>
+        <CodeRoutage>
+            <IdInstance>301</IdInstance>
+            <MotifPresence>C</MotifPresence>
+            <Statut>A</Statut>
+            <IdSIRET qualifiant="0009">10000000900108</IdSIRET>
+            <IdRoutage qualifiant="0224">ACHATS</IdRoutage>
+            <Nom>SERVICE ACHATS</Nom>
+            <CodePays>FR</CodePays>
+            <EngagementJuridique>false</EngagementJuridique>
+        </CodeRoutage>
+    </BlocCodesRoutage>
+    <BlocIdPlateformesReception>
+        <IdPlateformeReception>
+            <IdInstance>401</IdInstance>
+            <MotifPresence>C</MotifPresence>
+            <Statut>A</Statut>
+            <TypePlateforme>PDP</TypePlateforme>
+            <Matricule>0028</Matricule>
+            <IdSIREN qualifiant="0002">100000025</IdSIREN>
+            <Nom>PLATEFORME EXEMPLE</Nom>
+            <NomCommercial>EXEMPLE PA</NomCommercial>
+            <DateDebutImmatriculation>20250901</DateDebutImmatriculation>
+        </IdPlateformeReception>
+        <IdPlateformeReception>
+            <IdInstance>402</IdInstance>
+            <MotifPresence>C</MotifPresence>
+            <Statut>A</Statut>
+            <TypePlateforme>PPF</TypePlateforme>
+            <Matricule>9998</Matricule>
+            <Nom>PORTAIL PUBLIC DE FACTURATION</Nom>
+            <DateDebutImmatriculation>20250624</DateDebutImmatriculation>
+        </IdPlateformeReception>
+    </BlocIdPlateformesReception>
+    <BlocLignesAnnuaire>
+        <LigneAnnuaire>
+            <IdInstance>501</IdInstance>
+            <MotifPresence>C</MotifPresence>
+            <Nature>D</Nature>
+            <DateEffet>
+                <DateDebut>20260902</DateDebut>
+                <DateFinEffective>99991231</DateFinEffective>
+            </DateEffet>
+            <InfoAdressage>
+                <Identifiant>100000009</Identifiant>
+                <IdLinSIREN qualifiant="0002">100000009</IdLinSIREN>
+            </InfoAdressage>
+            <IdPlateforme>0028</IdPlateforme>
+        </LigneAnnuaire>
+        <LigneAnnuaire>
+            <IdInstance>502</IdInstance>
+            <MotifPresence>C</MotifPresence>
+            <Nature>D</Nature>
+            <DateEffet>
+                <DateDebut>20260902</DateDebut>
+                <DateFinEffective>99991231</DateFinEffective>
+            </DateEffet>
+            <InfoAdressage>
+                <Identifiant>100000009_10000000900108_ACHATS</Identifiant>
+                <IdLinSIREN qualifiant="0002">100000009</IdLinSIREN>
+                <IdLinSIRET qualifiant="0009">10000000900108</IdLinSIRET>
+                <IdLinRoutage qualifiant="0224">ACHATS</IdLinRoutage>
+            </InfoAdressage>
+            <IdPlateforme>0028</IdPlateforme>
+        </LigneAnnuaire>
+        <LigneAnnuaire>
+            <IdInstance>503</IdInstance>
+            <MotifPresence>V</MotifPresence>
+            <Nature>D</Nature>
+            <DateEffet>
+                <DateDebut>20261101</DateDebut>
+                <DateFin>20991231</DateFin>
+                <DateFinEffective>20991231</DateFinEffective>
+            </DateEffet>
+            <InfoAdressage>
+                <Identifiant>100000017_FACTURES</Identifiant>
+                <IdLinSIREN qualifiant="0002">100000017</IdLinSIREN>
+                <Suffixe>FACTURES</Suffixe>
+            </InfoAdressage>
+            <IdPlateforme>9998</IdPlateforme>
+        </LigneAnnuaire>
+    </BlocLignesAnnuaire>
+</AnnuaireConsultationF14>

@@ -144,6 +144,9 @@ module Xsd
       when nil
         if doc.root&.name == 'Report'
           schema_path('dgfip/tax_report_f10/ereporting.xsd')
+        elsif doc.root&.name == 'AnnuaireConsultationF14'
+          # DGFiP Annuaire export (F14), full or differential; v3.2, no namespace either
+          schema_path('dgfip/annuaire_f14/consultation/Annuaire_Consultation_F14.xsd')
         else
           raise StandardError.new("XML does not have a root namespace")
         end

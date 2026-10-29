@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<!-- Attributs -->
+   <xs:simpleType name="DateType">
+	   <xs:restriction base="xs:token">
+		   <xs:pattern value="\d{4}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])"/>
+	   </xs:restriction>
+   </xs:simpleType>
+
+	<xs:simpleType name="HorodateType">
+		<xs:restriction base="xs:token">
+			<xs:pattern value="\d{4}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])(2[0-3]|[01][0-9])([0-5][0-9])([0-5][0-9])"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="IdentifiantSIRENType">
+		<xs:restriction base="xs:token">
+			<xs:pattern value="[0-9]{9}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="IdentifiantSIRETType">
+		<xs:restriction base="xs:token">
+			<xs:pattern value="[0-9]{14}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="IdentifiantMatriculePlateformeType">
+		<xs:restriction base="xs:token">
+			<xs:pattern value="[0-9]{4}"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+
+	<xs:complexType name="IdSirenType">
+
+		<xs:simpleContent>
+			<xs:extension base="IdentifiantSIRENType">
+				<xs:attribute name="qualifiant" type="xs:token" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="IdSiretType">
+		<xs:simpleContent>
+			<xs:extension base="IdentifiantSIRETType">
+				<xs:attribute name="qualifiant" type="xs:token" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="IdCodesRoutageType">
+		<xs:simpleContent>
+			<xs:extension base="xs:token">
+				<xs:attribute name="qualifiant" type="xs:token" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="InfoAdressageConsultationType">
+		<xs:sequence>
+			<xs:element name="Identifiant" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="IdLinSIREN" type="IdSirenType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="IdLinSIRET" type="IdSiretType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="IdLinRoutage" type="IdCodesRoutageType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Suffixe" type="xs:string" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="InfoAdressageActualisationType">
+		<xs:sequence>
+			<xs:element name="Identifiant" minOccurs="1" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="IdLinSIREN" type="IdSirenType" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="IdLinSIRET" type="IdSiretType" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="IdLinRoutage" type="IdCodesRoutageType" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="Suffixe" type="xs:string" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="PeriodeEffetConsultationType">
+		<xs:sequence>
+			<xs:element name="DateDebut" type="DateType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="DateFin" type="DateType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="DateFinEffective" type="DateType" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Fin des Attributs -->
+
+	<!-- Types communs aux flux F11 et F14 -->
+	<xs:complexType name="UnitesLegalesType">
+		<xs:annotation>
+			<xs:documentation source="BN/BN">Bloc des Unites Legales</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="UniteLegale" minOccurs="1" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="IdInstance" type="xs:integer" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="MotifPresence" type="xs:string" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="Statut" type="xs:string" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="IdSIREN" type="IdSirenType" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="Nom" type="xs:string" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="TypeEntite" type="xs:string" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="Diffusible" type="xs:string" minOccurs="1" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EtablissementsType">
+		<xs:annotation>
+			<xs:documentation source="BN/BN">Bloc des Etablissements</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Etablissement" minOccurs="1" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="IdInstance" type="xs:integer" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="MotifPresence" type="xs:string" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="Statut" type="xs:string" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="IdSIRET" type="IdSiretType" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="TypeEtablissement" type="xs:string" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="Nom" type="xs:string" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="LigneAdresse1" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="LigneAdresse2" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="LigneAdresse3" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="Localite" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="CP" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="SubdivisionPays" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="CodePays" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="DonneesB2G" minOccurs="0" maxOccurs="1">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="EngagementJuridique" type="xs:boolean" minOccurs="1" maxOccurs="1"/>
+									<xs:element name="Service" type="xs:boolean" minOccurs="1" maxOccurs="1"/>
+									<xs:element name="EngJurServ" type="xs:boolean" minOccurs="1" maxOccurs="1"/>
+									<xs:element name="MOA" type="xs:boolean" minOccurs="1" maxOccurs="1"/>
+									<xs:element name="MOAunique" type="xs:boolean" minOccurs="1" maxOccurs="1"/>
+									<xs:element name="StatutMiseEnPaiement" type="xs:boolean" minOccurs="1" maxOccurs="1"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Diffusible" type="xs:string" minOccurs="1" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CodesRoutageConsultationType">
+		<xs:annotation>
+			<xs:documentation source="BN/BN">Bloc des Codes routage</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CodeRoutage" minOccurs="1" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="IdInstance" type="xs:integer" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="MotifPresence" type="xs:string" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="Statut" type="xs:string" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="IdSIRET" type="IdSiretType" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="IdRoutage" type="IdCodesRoutageType" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="Nom" type="xs:string" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="LigneAdresse1" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="LigneAdresse2" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="LigneAdresse3" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="Localite" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="CP" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="SubdivisionPays" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="CodePays" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="EngagementJuridique" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="IdPlateformesReceptionType">
+		<xs:annotation>
+			<xs:documentation source="BN/BN">Bloc d'identification des Plateformes de réception</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="IdPlateformeReception" minOccurs="1" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="IdInstance" type="xs:integer" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="MotifPresence" type="xs:string" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="Statut" type="xs:string" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="TypePlateforme" type="xs:string" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="Matricule" type="IdentifiantMatriculePlateformeType" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="IdSIREN" type="IdSirenType" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="Nom" type="xs:string" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="NomCommercial" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="Contact" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="DateDebutImmatriculation" type="DateType" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="DateFinImmatriculation" type="DateType" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Types spécifiques au flux F14 -->	
+	<xs:complexType name="LignesAnnuaireF14Type">
+		<xs:annotation>
+			<xs:documentation source="BN/BN">Bloc des Lignes d'annuaire</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="LigneAnnuaire" minOccurs="1" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="IdInstance" type="xs:integer" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="MotifPresence" type="xs:string" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="Nature" type="xs:string" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="DateEffet" type="PeriodeEffetConsultationType" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="InfoAdressage" type="InfoAdressageConsultationType" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="IdPlateforme" type="IdentifiantMatriculePlateformeType" minOccurs="1" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Types spécifiques au flux F11 -->
+	<xs:complexType name="LignesAnnuaireF11Type">
+		<xs:annotation>
+			<xs:documentation source="BN/BN">Bloc des Lignes d'annuaire</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="LigneAnnuaire" minOccurs="1" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="IdInstance" type="xs:integer" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="MotifPresence" type="xs:string" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="Nature" type="xs:string" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="DateEffet" type="PeriodeEffetConsultationType" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="InfoAdressage" type="InfoAdressageConsultationType" minOccurs="1" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Types spécifiques aux flux F12-F13 -->
+	<xs:complexType name="CodesRoutageActualisationType">
+		<xs:annotation>
+			<xs:documentation source="BN/BN">Actualisation Bloc des Codes routage</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CodeRoutage" minOccurs="1" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Statut" type="xs:string" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="IdSIRET" type="IdSiretType" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="IdRoutage" type="IdCodesRoutageType" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="Nom" type="xs:string" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="LigneAdresse1" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="LigneAdresse2" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="LigneAdresse3" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="Localite" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="CP" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="SubdivisionPays" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="CodePays" type="xs:string" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LignesAnnuaireActualisationType">
+		<xs:annotation>
+			<xs:documentation source="BN/BN">Actualisation Bloc des Lignes d'annuaire</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="LigneAnnuaire" minOccurs="1" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Nature" type="xs:string" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="DateEffet" minOccurs="1" maxOccurs="1" >
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="DateDebut" type="DateType" minOccurs="1" maxOccurs="1" />
+									<xs:element name="DateFin" type="DateType" minOccurs="0" maxOccurs="1" />
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="InfoAdressage" type="InfoAdressageActualisationType" minOccurs="1" maxOccurs="1" />
+						<xs:element name="IdPlateforme" type="IdentifiantMatriculePlateformeType" minOccurs="1" maxOccurs="1" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

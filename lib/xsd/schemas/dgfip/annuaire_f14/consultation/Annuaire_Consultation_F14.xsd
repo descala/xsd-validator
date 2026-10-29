@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:include schemaLocation="../common/Annuaire_Commun.xsd"/>
+	
+	<xs:element name="AnnuaireConsultationF14" type="AnnuaireConsultationF14Type"/>
+	
+
+	
+	<xs:complexType name="AnnuaireConsultationF14Type">
+		<xs:sequence>
+			<xs:element name="HorodateProduction" type="HorodateType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="DernierHorodateProduction" type="HorodateType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="TypeFlux" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="BlocUnitesLegales" type="UnitesLegalesType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="BlocEtablissements" type="EtablissementsType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="BlocCodesRoutage" type="CodesRoutageConsultationType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="BlocIdPlateformesReception" type="IdPlateformesReceptionType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="BlocLignesAnnuaire" type="LignesAnnuaireF14Type" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
