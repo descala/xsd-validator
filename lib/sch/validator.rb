@@ -102,8 +102,9 @@ module Sch
       # Read the document-level CustomizationID (direct child of the root element). Using the
       # descendant axis (//) would also match a CustomizationID inside an embedded document - e.g.
       # the UBL invoice carried in a SK TDD's pxs:ReportedDocument - and .text would concatenate
-      # both into a string that matches no branch.
-      customization_id = doc_nokogiri.xpath('/*/cbc:CustomizationID', cbc: CBC).text
+      # both into a string that matches no branch. Schematrons compare it with normalize-space,
+      # so surrounding whitespace is stripped here too.
+      customization_id = doc_nokogiri.xpath('/*/cbc:CustomizationID', cbc: CBC).text.strip
       if customization_id.empty?
         customization_id = doc_nokogiri.xpath('//ram:GuidelineSpecifiedDocumentContextParameter/ram:ID', ram: RAM).text
       end
@@ -131,6 +132,10 @@ module Sch
       # PEPPOL Invoice Response 3.0 (T111)
       when 'urn:fdc:peppol.eu:poacc:trns:invoice_response:3'
         %w(PEPPOLBIS-T111.sch)
+
+      # Peppol Message Level Status (package 1.1.0, schematron 1.0.1): a C3 answer about one received message
+      when 'urn:peppol:edec:mls:1.0'
+        %w(peppol-mls-1.0.1.sch)
 
       # PEPPOL Despatch Advice transaction 3.1 (T16)
       when 'urn:fdc:peppol.eu:poacc:trns:despatch_advice:3'
