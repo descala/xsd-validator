@@ -93,6 +93,11 @@ RSpec.describe Sch::Validator do
     expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationError, /FATAL: .*ibr-tdd-06/)
   end
 
+  it 'raises ValidationError for a negative Peppol MLS without any issue' do
+    doc=File.read('spec/files/sch/mls/mls-re-without-issue-wrong.xml')
+    expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationError, /FATAL: .*SCH-MLS-23/)
+  end
+
   # V1.4.0 turns the whole BR-FR Flux 2 rule set fatal; under V1.3.1 this same document
   # produced a warning only, so we passed invoices that receivers went on to reject (#89917).
   it 'raises ValidationError for a CIUS-FR UBL invoice repeating a BT-21 note subject code' do
@@ -287,6 +292,9 @@ RSpec.describe Sch::Validator do
       'spec/files/f1/f1-extract-foreign-currency.xml' => ['PPF_Flux1_UBL_1_8_DEMARRAGE_v0_2.sch'],
       'spec/files/sch/PINT_AE_invoice.xml' => ['PINT-billing-1-shared.sch', 'PINT-AE-billing-1-aligned.sch'],
       'spec/files/sch/sk-tdd.xml' => ['Peppol-Slovak-Republic-TDD.sch'],
+      'spec/files/sch/mls/MessageLevelStatus_Example_AP.xml' => ['peppol-mls-1.0.1.sch'],
+      # RE3 indents its CustomizationID, which the dispatch strips.
+      'spec/files/sch/mls/MessageLevelStatus_Example_RE3.xml' => ['peppol-mls-1.0.1.sch'],
       'spec/files/sch/SG_order_balance.xml' => ['SGBIS-TOB.sch'],
     }
     files.each do |file_path, schematrons|
