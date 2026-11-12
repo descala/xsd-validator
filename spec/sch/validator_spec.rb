@@ -98,6 +98,20 @@ RSpec.describe Sch::Validator do
     expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationError, /FATAL: .*SCH-MLS-23/)
   end
 
+  # Peppol France URNs ran BR-FR only, so these passed and the receiver rejected them
+  # hours later (C3). Must fail on the profile rule (#96235).
+  {
+    'ubl-cius-bt107-wrong.xml' => 'BR-CO-11',
+    'cii-cius-bt107-wrong.xml' => 'BR-CO-11',
+    'ubl-extended-bt107-wrong.xml' => 'BR-FREXT-CO-11',
+    'cii-extended-bt107-wrong.xml' => 'BR-FREXT-CO-11'
+  }.each do |fixture, rule|
+    it "raises ValidationError on #{rule} for the Peppol France #{fixture}" do
+      doc = File.read("spec/files/sch/peppol-fr/#{fixture}")
+      expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationError, /\[#{rule}\]/)
+    end
+  end
+
   # V1.4.0 turns the whole BR-FR Flux 2 rule set fatal; under V1.3.1 this same document
   # produced a warning only, so we passed invoices that receivers went on to reject (#89917).
   it 'raises ValidationError for a CIUS-FR UBL invoice repeating a BT-21 note subject code' do
@@ -247,8 +261,15 @@ RSpec.describe Sch::Validator do
       'spec/files/xsd/peppol-selfbilling-base.xml' => ['CEN-EN16931-UBL.sch', 'PEPPOL-EN16931-UBL-SB.sch'],
       'spec/files/xsd/peppol-selfbilling-creditnote.xml' => ['CEN-EN16931-UBL.sch', 'PEPPOL-EN16931-UBL-SB.sch'],
       'spec/files/sch/invoice-se-wrong-identifier.xml' => ['CEN-EN16931-UBL.sch', 'PEPPOL-EN16931-UBL.sch'],
-      'spec/files/sch/invoice-ubl-cius-fr.xml' => ['BR-FR-Flux2-Schematron-UBL_V1.4.0.04.sch'],
-      'spec/files/sch/invoice-cii-cius-fr.xml' => ['BR-FR-Flux2-Schematron-CII_V1.4.0.04.sch'],
+      'spec/files/sch/invoice-ubl-cius-fr.xml' => ['CEN-EN16931-UBL.sch', 'BR-FR-Flux2-Schematron-UBL_V1.4.0.04.sch'],
+      # Despite its name, this fixture carries the Peppol France Extended URN.
+      'spec/files/sch/invoice-cii-cius-fr.xml' => ['EXTENDED-CTC-FR-CII.sch', 'BR-FR-Flux2-Schematron-CII_V1.4.0.04.sch'],
+      'spec/files/sch/peppol-fr/cii-cius.xml' =>
+        ['EN16931-CII-validation-preprocessed.sch', 'BR-FR-Flux2-Schematron-CII_V1.4.0.04.sch'],
+      'spec/files/sch/peppol-fr/ubl-extended.xml' => ['EXTENDED-CTC-FR-UBL.sch', 'BR-FR-Flux2-Schematron-UBL_V1.4.0.04.sch'],
+      # Same Chorus Pro exception as the bare-EN16931 B2G fixture above: two BT-46 drop
+      # CEN (UBL-SR-16) (#96235).
+      'spec/files/sch/peppol-fr/ubl-cius-b2g-dual-identifier.xml' => ['BR-FR-Flux2-Schematron-UBL_V1.4.0.04.sch'],
       # Bare EN16931 / extended-ctc-fr BT-24 reaching a UBL root (#89461's
       # UblFrProfileDetection is the first code path that makes this happen from
       # real UBL) must resolve UBL schematrons, not silently fall back to CII ones.
@@ -278,7 +299,7 @@ RSpec.describe Sch::Validator do
         ['EXTENDED-CTC-FR-UBL.sch', 'BR-FR-Flux2-Schematron-UBL_V1.4.0.04.sch'],
       # Pre-existing gap: the Peppol-URN CIUS/Extended branch only checked
       # root.name == 'Invoice', so a CreditNote fell through to the CII file.
-      'spec/files/xsd/ubl-credit-note-fr-cius.xml' => ['BR-FR-Flux2-Schematron-UBL_V1.4.0.04.sch'],
+      'spec/files/xsd/ubl-credit-note-fr-cius.xml' => ['CEN-EN16931-UBL.sch', 'BR-FR-Flux2-Schematron-UBL_V1.4.0.04.sch'],
       'spec/files/sch/cdar/cdar_1_deposee.xml' => ['BR-FR-CDV-Schematron-CDAR_V1.4.0.04.sch'],
       'spec/files/sch/f10/f10-report-transactions.xml' => ['BR-FR-Flux10-Schematron_V1.0.sch'],
       'spec/files/sch/f10/f10-report-payments.xml' => ['BR-FR-Flux10-Schematron_V1.0.sch'],

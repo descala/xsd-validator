@@ -120,7 +120,6 @@
         </ram:SpecifiedLegalOrganization>
         <ram:DefinedTradeContact>
           <ram:PersonName>MME CONTACT</ram:PersonName>  <!-- BT-41 (Point de contact vendeur) : MME CONTACT -->
-          <ram:DepartmentName>DEP ADV</ram:DepartmentName>  <!-- BT-41-0 (Point de contact vendeur) : DEP ADV -->
           <ram:TelephoneUniversalCommunication>
             <ram:CompleteNumber>01 02 03 54 87</ram:CompleteNumber>  <!-- BT-42 (Numéro de téléphone du contact vendeur) : 01 02 03 54 87 -->
           </ram:TelephoneUniversalCommunication>
@@ -151,7 +150,6 @@ Identifiant du schéma (GlobalID)) : 3654789851 -->
         </ram:SpecifiedLegalOrganization>
         <ram:DefinedTradeContact>
           <ram:PersonName>Contact ACHETEUR</ram:PersonName>  <!-- BT-56 (Point de contact acheteur) : Contact ACHETEUR -->
-          <ram:DepartmentName>DEP COMPTAFOUR</ram:DepartmentName>  <!-- BT-56-0 (0) : DEP COMPTAFOUR -->
           <ram:TelephoneUniversalCommunication>
             <ram:CompleteNumber>01 01 25 45 87</ram:CompleteNumber>  <!-- BT-57 (Numéro de téléphone du contact acheteur) : 01 01 25 45 87 -->
           </ram:TelephoneUniversalCommunication>

@@ -232,12 +232,18 @@ module Sch
       when 'urn:cen.eu:en16931:2017#conformant#urn:factur-x.eu:1p0:extended'
         add_br_fr_schematron_if_french(%w(FACTUR-X_EXTENDED_V1.09.2.sch), doc_nokogiri)
 
-      # Factur-X EXTENDED-CTC-FR (FNFE V1.4.0.04, applicable from 2026-10-01;
-      # AFNOR examples use the dot form, the XP Z12-012 text the colon form) — also
-      # reachable from UBL (#89461's UblFrProfileDetection); already unambiguously
-      # French, no BT-23 guard needed unlike the bare-EN16931 branch above.
+      # Factur-X EXTENDED-CTC-FR (FNFE V1.4.0.04, from 2026-10-01; AFNOR examples use
+      # the dot form, XP Z12-012 the colon form). Also reached from UBL (#89461
+      # UblFrProfileDetection). Unambiguously French, so no BT-23 guard (unlike the
+      # bare-EN16931 branch above).
+      # Peppol France Extended (urn:peppol:france:billing:extended:1.0) declares the
+      # same profile: EXTENDED-CTC-FR + BR-FR (#96235). Previously ran BR-FR only,
+      # letting through invoices the receiver rejected on profile rules (BR-FREXT-*,
+      # BR-42). No CEN: EXTENDED-CTC-FR replaces some EN16931 rules with laxer ones
+      # (XP Z12-014 §4.1.2).
       when 'urn:cen.eu:en16931:2017#conformant#urn.cpro.gouv.fr:1p0:extended-ctc-fr',
-           'urn:cen.eu:en16931:2017#conformant#urn:cpro.gouv.fr:1p0:extended-ctc-fr'
+           'urn:cen.eu:en16931:2017#conformant#urn:cpro.gouv.fr:1p0:extended-ctc-fr',
+           'urn:cen.eu:en16931:2017#conformant#urn:peppol:france:billing:extended:1.0'
         if %w(Invoice CreditNote).include?(doc_nokogiri.root.name)
           %w(EXTENDED-CTC-FR-UBL.sch BR-FR-Flux2-Schematron-UBL_V1.4.0.04.sch)
         else
@@ -338,12 +344,17 @@ module Sch
       when 'urn:peppol:pint:billing-1@my-1'
         schemas = %w(PINT-billing-1-shared.sch PINT-MY-billing-1-aligned.sch)
         pint_schemas_to_validate(schemas, parts)
-      when 'urn:cen.eu:en16931:2017#compliant#urn:peppol:france:billing:cius:1.0',
-        'urn:cen.eu:en16931:2017#conformant#urn:peppol:france:billing:extended:1.0'
+
+      # Peppol France CIUS: EN16931 profile (CEN for UBL, EN16931 CII) plus BR-FR, as
+      # the bare EN16931 URN above (#96235). XP Z12-014 §4.2.1 asks the issuing PA to
+      # check the profile before the reform rules. No French guard, unlike the bare
+      # URN: this URN is French by definition, so BR-FR always runs. The norm does not
+      # map Peppol France URNs to schematrons; this mapping is our decision.
+      when 'urn:cen.eu:en16931:2017#compliant#urn:peppol:france:billing:cius:1.0'
         if %w(Invoice CreditNote).include?(doc_nokogiri.root.name)
-          %w(BR-FR-Flux2-Schematron-UBL_V1.4.0.04.sch)
+          ubl_profile_with_br_fr(%w(CEN-EN16931-UBL.sch), doc_nokogiri)
         else
-          %w(BR-FR-Flux2-Schematron-CII_V1.4.0.04.sch)
+          %w(EN16931-CII-validation-preprocessed.sch BR-FR-Flux2-Schematron-CII_V1.4.0.04.sch)
         end
       when 'urn:cen.eu:en16931:2017#conformant#urn:peppol:france:billing:Factur-X:1.0'
         %w(BR-FR-Flux2-Schematron-CII_V1.4.0.04.sch)
@@ -435,14 +446,30 @@ module Sch
 
     # UBL sibling of add_br_fr_schematron_if_french: same guard (cadre or French
     # parties), read the UBL way. Mirrors b2b_app's
-    # DocumentType::UblFrProfileDetection#french?.
+    # DocumentType::UblFrProfileDetection#french?. Two-buyer Chorus case: see
+    # ubl_profile_with_br_fr.
     #
-    # Chorus Pro B2G addressing legitimately carries two buyer PartyIdentification
-    # elements (SIRET 0009 + code service 0224, BT-46) — valid under BR-FR-Flux2 but
-    # fatal under the base CEN rule UBL-SR-16 (max one). Layering BR-FR on top of
-    # +schematrons+ can never satisfy that combination, so drop the base instead.
+    # @param schematrons [Array<String>] base profile schematrons
+    # @param doc_nokogiri [Nokogiri::XML::Document]
+    # @return [Array<String>]
     def add_br_fr_schematron_if_french_ubl(schematrons, doc_nokogiri)
       return schematrons if (VALID_FR_PROCESS_CODES & bt23_values_ubl(doc_nokogiri)).empty? && !french_parties_ubl?(doc_nokogiri)
+
+      ubl_profile_with_br_fr(schematrons, doc_nokogiri)
+    end
+
+    # Adds BR-FR-Flux2 UBL to the base profile schematrons. When the buyer has more
+    # than one PartyIdentification, the base is dropped instead: Chorus Pro B2G
+    # addressing (SIRET 0009 + service code 0224, BT-46) is valid under BR-FR-Flux2
+    # but fails the base CEN rule UBL-SR-16 (max one), which layering BR-FR on top
+    # can never satisfy.
+    # Shared by the bare-EN16931 UBL branch and the Peppol France CIUS UBL branch.
+    #
+    # @param schematrons [Array<String>] base profile schematrons
+    # @param doc_nokogiri [Nokogiri::XML::Document]
+    # @return [Array<String>] schematrons plus BR-FR-Flux2 UBL, or BR-FR-Flux2 UBL
+    #   alone for the multi-PartyIdentification case
+    def ubl_profile_with_br_fr(schematrons, doc_nokogiri)
       return %w(BR-FR-Flux2-Schematron-UBL_V1.4.0.04.sch) if buyer_party_identification_count(doc_nokogiri) > 1
 
       schematrons + %w(BR-FR-Flux2-Schematron-UBL_V1.4.0.04.sch)
