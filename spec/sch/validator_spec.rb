@@ -58,6 +58,15 @@ RSpec.describe Sch::Validator do
     end
   end
 
+  it 'rejects on a CDAR an MDT-91 invoice type code outside BR-FR-04' do
+    doc = File.read('spec/files/sch/cdar/cdar_1_deposee.xml')
+      .sub('<ram:TypeCode>380</ram:TypeCode>', '<ram:TypeCode>999</ram:TypeCode>')
+
+    errors, = sch_validate(doc)
+
+    expect(errors).to include(/\AFATAL: \[BR-FR-04_MDT-91\]/)
+  end
+
   it 'raises ValidationError for an invalid CIUS pt' do
     doc=File.read('spec/files/sch/invoice-cius-pt-wrong.xml')
     expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationError, /FATAL: .*BR-CIUS-PT-18/)
