@@ -74,7 +74,7 @@ RSpec.describe Xsd::Validator do
     doc = File.read('spec/files/xsd/factur-x/factur-x-en16931.xml')
       .sub('<ram:ID>urn:cen.eu:en16931:2017</ram:ID>',
            '<ram:ID>urn:cen.eu:en16931:2017#conformant#urn:factur-x.eu:1p0:en16931</ram:ID>')
-    expect(root_namespace_xsd(doc)).to match(/FACTUR-X_EN16931\.xsd\z/)
+    expect(root_namespace_xsd(doc)).to match(%r{factur-x/en16931/FACTUR-X_EN16931\.xsd\z})
   end
 
   it 'accepts on a CDAR the BR-FR-04 invoice type codes that UNTDID 1001 D22A lacks' do
@@ -95,25 +95,63 @@ RSpec.describe Xsd::Validator do
     end
   end
 
+  # BG-3 (ram:InvoiceReferencedDocument) is 0..n in Factur-X EN16931 and BASIC since they are based on CII D22B. The
+  # CII namespace fallback (cii_en16931/, where XRechnung CII 2.x lands) keeps one.
+  context 'with two ram:InvoiceReferencedDocument (BG-3)' do
+    def with_two_references(filename, guideline_id = nil)
+      reference = '<ram:InvoiceReferencedDocument><ram:IssuerAssignedID>F-1</ram:IssuerAssignedID>' \
+                  '</ram:InvoiceReferencedDocument>'
+      closing = '</ram:SpecifiedTradeSettlementHeaderMonetarySummation>'
+      doc = File.read(filename).sub(closing, "#{closing}#{reference * 2}")
+      guideline_id ? doc.sub(%r{<ram:ID>urn:cen\.eu:en16931:2017[^<]*</ram:ID>}, "<ram:ID>#{guideline_id}</ram:ID>") : doc
+    end
+
+    {
+      'spec/files/xsd/factur-x/factur-x-en16931.xml' => 'urn:cen.eu:en16931:2017',
+      'spec/files/xsd/factur-x/factur-x-basic.xml' => 'urn:cen.eu:en16931:2017#compliant#urn:factur-x.eu:1p0:basic'
+    }.each do |filename, guideline_id|
+      it "validates #{guideline_id}" do
+        expect(xsd_validate(with_two_references(filename))).to eq([])
+      end
+    end
+
+    it 'validates urn:cen.eu:en16931:2017#conformant#urn:factur-x.eu:1p0:en16931' do
+      doc = with_two_references('spec/files/xsd/factur-x/factur-x-en16931.xml',
+                                'urn:cen.eu:en16931:2017#conformant#urn:factur-x.eu:1p0:en16931')
+      expect(xsd_validate(doc)).to eq([])
+    end
+
+    it 'refuses the second one on the CII namespace fallback (XRechnung CII 2.1)' do
+      filename = 'spec/files/sch/cii/xrechnung-cii_2.1.xml'
+      expect(xsd_validate(File.read(filename))).to eq([])
+      expect(xsd_validate(with_two_references(filename)).join).to match(/InvoiceReferencedDocument/)
+    end
+  end
+
+  it 'has no xmlns link pointing at a missing schema' do
+    dangling = Dir['lib/xsd/xmlns/*'].select { |link| File.symlink?(link) && !File.exist?(link) }
+    expect(dangling).to eq([])
+  end
+
   context 'check choose correct validator xsd path' do
     files = {
       'spec/files/xsd/factur-x/factur-x-minimum.xml' => /FACTUR-X_MINIMUM.xsd/,
       'spec/files/xsd/factur-x/factur-x-basic.xml' => /FACTUR-X_BASIC.xsd/,
       'spec/files/xsd/factur-x/factur-x-basic-wl.xml' => /FACTUR-X_BASIC-WL.xsd/,
-      'spec/files/xsd/factur-x/factur-x-en16931.xml' => /FACTUR-X_EN16931.xsd/,
+      'spec/files/xsd/factur-x/factur-x-en16931.xml' => %r{factur-x/en16931/FACTUR-X_EN16931\.xsd},
       'spec/files/xsd/factur-x/factur-x-extended.xml' => /FACTUR-X_EXTENDED.xsd/,
       'spec/files/xsd/factur-x/factur-x-fr-extended-ctc-dot.xml' => /FACTUR-X_EXTENDED.xsd/,
       'spec/files/xsd/factur-x/factur-x-fr-extended-ctc-colon.xml' => /FACTUR-X_EXTENDED.xsd/,
-      'spec/files/xsd/cii/zugferd_1.xml' => /FACTUR-X_EN16931.xsd/,
+      'spec/files/xsd/cii/zugferd_1.xml' => %r{cii_en16931/FACTUR-X_EN16931\.xsd},
       'spec/files/sch/cii/xrechnung-cii_3.0-wrong.xml' => 'CrossIndustryInvoice_100pD16B.xsd',
       'spec/files/sch/cii/xrechnung-cii_3.0_extension-wrong.xml' => 'CrossIndustryInvoice_100pD16B.xsd',
       'spec/files/xsd/cii/france_billing_cius.xml' => 'CrossIndustryInvoice_100pD22B.xsd',
       'spec/files/xsd/cii/france_billing_extended.xml' => 'CrossIndustryInvoice_100pD22B.xsd',
       'spec/files/xsd/factur-x/factur-x-france-billing.xml' => 'CrossIndustryInvoice_100pD22B.xsd',
-      'spec/files/sch/cii/xrechnung-cii_2.3-wrong.xml' => 'FACTUR-X_EN16931.xsd',
-      'spec/files/sch/cii/xrechnung-cii_2.2-wrong.xml' => 'FACTUR-X_EN16931.xsd',
-      'spec/files/sch/cii/xrechnung-cii_2.1.xml' => 'FACTUR-X_EN16931.xsd',
-      'spec/files/sch/cii/xrechnung-cii_2.0.xml' => 'FACTUR-X_EN16931.xsd',
+      'spec/files/sch/cii/xrechnung-cii_2.3-wrong.xml' => 'cii_en16931/FACTUR-X_EN16931.xsd',
+      'spec/files/sch/cii/xrechnung-cii_2.2-wrong.xml' => 'cii_en16931/FACTUR-X_EN16931.xsd',
+      'spec/files/sch/cii/xrechnung-cii_2.1.xml' => 'cii_en16931/FACTUR-X_EN16931.xsd',
+      'spec/files/sch/cii/xrechnung-cii_2.0.xml' => 'cii_en16931/FACTUR-X_EN16931.xsd',
       'spec/files/xsd/fatturapa/IT01234567890_FPA03.xml' => '/fatturapa/Schema_del_file_xml_FatturaPA_v1.2.3.xsd',
       'spec/files/xsd/peppol-selfbilling-base.xml' => /UBL-Invoice-2.1.xsd/,
       'spec/files/xsd/peppol-selfbilling-creditnote.xml' => /UBL-CreditNote-2.1.xsd/,
