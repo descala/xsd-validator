@@ -102,6 +102,22 @@ RSpec.describe Sch::Validator do
     expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationError, /FATAL: .*ibr-tdd-06/)
   end
 
+  # One fixture per schematron of the SK TDD set: TDD choreography, CEN EN 16931 and Peppol EN 16931.
+  it 'raises ValidationError for a SK TDD issue time without time zone' do
+    doc=File.read('spec/files/sch/sk_tdd/issue-time-without-timezone-wrong.xml')
+    expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationError, /FATAL: .*ibr-tdd-05/)
+  end
+
+  it 'raises ValidationError for a SK TDD exempt VAT breakdown without exemption reason' do
+    doc=File.read('spec/files/sch/sk_tdd/vat-category-E-without-exemption-reason-wrong.xml')
+    expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationError, /FATAL: .*BR-E-10/)
+  end
+
+  it 'raises ValidationError for a SK TDD reporting party with an invalid GLN' do
+    doc=File.read('spec/files/sch/sk_tdd/reporting-party-invalid-gln-wrong.xml')
+    expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationError, /FATAL: .*PEPPOL-COMMON-R040/)
+  end
+
   it 'raises ValidationError for a negative Peppol MLS without any issue' do
     doc=File.read('spec/files/sch/mls/mls-re-without-issue-wrong.xml')
     expect { sch_validate!(doc) }.to raise_error(Sch::Validator::ValidationError, /FATAL: .*SCH-MLS-23/)
@@ -300,7 +316,9 @@ RSpec.describe Sch::Validator do
       # Non-EUR F1 resolves too — the patched G1.53 validates it instead of crashing.
       'spec/files/f1/f1-extract-foreign-currency.xml' => ['PPF_Flux1_UBL_1_8_DEMARRAGE_v0_2.sch'],
       'spec/files/sch/PINT_AE_invoice.xml' => ['PINT-billing-1-shared.sch', 'PINT-AE-billing-1-aligned.sch'],
-      'spec/files/sch/sk-tdd.xml' => ['Peppol-Slovak-Republic-TDD.sch'],
+      'spec/files/sch/sk-tdd.xml' => ['Peppol-Slovak-Republic-TDD-CEN-EN16931-UBL.sch',
+                                      'Peppol-Slovak-Republic-TDD-PEPPOL-EN16931-UBL.sch',
+                                      'Peppol-Slovak-Republic-TDD.sch'],
       'spec/files/sch/mls/MessageLevelStatus_Example_AP.xml' => ['peppol-mls-1.0.1.sch'],
       # RE3 indents its CustomizationID, which the dispatch strips.
       'spec/files/sch/mls/MessageLevelStatus_Example_RE3.xml' => ['peppol-mls-1.0.1.sch'],

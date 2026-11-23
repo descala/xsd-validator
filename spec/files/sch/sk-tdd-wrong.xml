@@ -16,7 +16,7 @@
 	</pxs:TaxAuthority>
 	
 	<pxs:ReportingParty>
-		<cbc:EndpointID schemeID="0088">9482348239847239874</cbc:EndpointID>
+		<cbc:EndpointID schemeID="0088">9482348239846</cbc:EndpointID>
 	</pxs:ReportingParty>
 	<pxs:ReceivingParty>
 		<cbc:EndpointID schemeID="0242">FR23342</cbc:EndpointID>
