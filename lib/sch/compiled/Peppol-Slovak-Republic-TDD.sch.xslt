@@ -187,6 +187,15 @@
             <xsl:apply-templates/>
          </svrl:active-pattern>
          <xsl:apply-templates select="/" mode="M7"/>
+         <svrl:active-pattern>
+            <xsl:attribute name="document">
+               <xsl:value-of select="document-uri(/)"/>
+            </xsl:attribute>
+            <xsl:attribute name="id">sk-corrected-invoice</xsl:attribute>
+            <xsl:attribute name="name">sk-corrected-invoice</xsl:attribute>
+            <xsl:apply-templates/>
+         </svrl:active-pattern>
+         <xsl:apply-templates select="/" mode="M8"/>
       </svrl:schematron-output>
    </xsl:template>
    <!--SCHEMATRON PATTERNS-->
@@ -195,16 +204,13 @@
    <xsl:variable name="cl_dtc" select="' S R D '"/>
    <xsl:variable name="cl_ds" select="' D IC INTL '"/>
    <xsl:variable name="cl_rr" select="' C2 C3 '"/>
-   <xsl:variable name="cl_currency"
-                 select="' AED AFN ALL AMD ANG AOA ARS AUD AWG AZN BAM BBD BDT BGN BHD BIF BMD BND BOB BOV BRL BSD BTN BWP BYN BZD CAD CDF CHE CHF CHW CLF CLP CNY COP COU CRC CUP CVE CZK DJF DKK DOP DZD EGP ERN ETB EUR FJD FKP GBP GEL GHS GIP GMD GNF GTQ GYD HKD HNL HTG HUF IDR ILS INR IQD IRR ISK JMD JOD JPY KES KGS KHR KMF KPW KRW KWD KYD KZT LAK LBP LKR LRD LSL LYD MAD MDL MGA MKD MMK MNT MOP MRU MUR MVR MWK MXN MXV MYR MZN NAD NGN NIO NOK NPR NZD OMR PAB PEN PGK PHP PKR PLN PYG QAR RON RSD RUB RWF SAR SBD SCR SDG SEK SGD SHP SLE SOS SRD SSP STD SVC SYP SZL THB TJS TMT TND TOP TRY TTD TWD TZS UAH UGX USD USN UYI UYU UYW UZS VED VES VND VUV WST XAF XAG XAU XBA XBB XBC XBD XCD XDR XOF XPD XPF XPT XSU XTS XUA YER ZAR ZMW ZWG XXX CNH '"/>
    <xsl:variable name="regex_pidscheme" select="'^[0-9]{4}$'"/>
    <!--RULE -->
-   <xsl:template match="/pxs:TaxData" priority="1051" mode="M7">
+   <xsl:template match="/pxs:TaxData" priority="1050" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="/pxs:TaxData"/>
       <xsl:variable name="dtc" select="normalize-space(pxs:TaxDataTypeCode)"/>
       <xsl:variable name="ds" select="normalize-space(pxs:DocumentScope)"/>
       <xsl:variable name="rr" select="normalize-space(pxs:ReporterRole)"/>
-      <xsl:variable name="rtCount" select="count(pxs:ReportedTransaction)"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(*[not(self::cbc:CustomizationID or self::cbc:ProfileID or self::cbc:UUID or self::cbc:IssueDate or self::cbc:IssueTime or self::pxs:TaxDataTypeCode or self::pxs:DocumentScope or self::pxs:TaxAuthority or self::pxs:ReporterRole or self::pxs:ReportingParty or self::pxs:ReceivingParty or self::pxs:ReportersRepresentative or self::pxs:ReportedTransaction or self::pxs:ReportedDocument)]) = 0"/>
@@ -216,7 +222,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-00] – The pxs:TaxData element MUST NOT contain elements other than cbc:CustomizationID (TDT-001), cbc:ProfileID (TDT-002), cbc:UUID (TDT-003), cbc:IssueDate (TDT-004), cbc:IssueTime (TDT-005), pxs:TaxDataTypeCode (TDT-007), pxs:DocumentScope (TDT-006), pxs:TaxAuthority (TDT-TDG-04), pxs:ReporterRole (TDT-012), pxs:ReportingParty (TDG-05), pxs:ReceivingParty (TDG-06), pxs:ReportersRepresentative (TDG-07), pxs:ReportedTransaction (TDG-01), and pxs:ReportedDocument (TDG-02).</svrl:text>
+               <svrl:text>[ibr-tdd-00] - The pxs:TaxData element MUST NOT contain elements other than cbc:CustomizationID (TDT-001), cbc:ProfileID (TDT-002), cbc:UUID (TDT-003), cbc:IssueDate (TDT-004), cbc:IssueTime (TDT-005), pxs:TaxDataTypeCode (TDT-007), pxs:DocumentScope (TDT-006), pxs:TaxAuthority (TDG-04), pxs:ReporterRole (TDT-012), pxs:ReportingParty (TDG-05), pxs:ReceivingParty (TDG-06), pxs:ReportersRepresentative (TDG-07), pxs:ReportedTransaction (TDG-01), and pxs:ReportedDocument (TDG-02).</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -231,7 +237,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-01] – The cbc:CustomizationID (TDT-001) element MUST have the value 'urn:peppol:taxdata:sk-1'.</svrl:text>
+               <svrl:text>[ibr-tdd-01] - The cbc:CustomizationID (TDT-001) element MUST have the value 'urn:peppol:taxdata:sk-1'.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -246,7 +252,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-02] – The cbc:ProfileID (TDT-002) element MUST have the value 'urn:peppol:taxreporting'.</svrl:text>
+               <svrl:text>[ibr-tdd-02] - The cbc:ProfileID (TDT-002) element MUST have the value 'urn:peppol:taxreporting'.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -260,7 +266,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-03] – The cbc:UUID (TDT-003) element MUST be present.</svrl:text>
+               <svrl:text>[ibr-tdd-03] - The cbc:UUID (TDT-003) element MUST be present.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -275,22 +281,22 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-04] – The cbc:IssueDate (TDT-004) element MUST NOT contain timezone information.</svrl:text>
+               <svrl:text>[ibr-tdd-04] - The cbc:IssueDate (TDT-004) element MUST NOT contain timezone information.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="matches(normalize-space(cbc:IssueTime), '^(?:([01]\d|2[0-3]):[0-5]\d:[0-5]\d|24:00:00)(\.\d+)?(?:Z|[+-]\d{2}:\d{2})?$')"/>
+         <xsl:when test="matches(normalize-space(cbc:IssueTime), '^(?:([01]\d|2[0-3]):[0-5]\d:[0-5]\d|24:00:00)(\.\d+)?(?:Z|[+-]\d{2}:\d{2})$')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="matches(normalize-space(cbc:IssueTime), '^(?:([01]\d|2[0-3]):[0-5]\d:[0-5]\d|24:00:00)(\.\d+)?(?:Z|[+-]\d{2}:\d{2})?$')">
+                                test="matches(normalize-space(cbc:IssueTime), '^(?:([01]\d|2[0-3]):[0-5]\d:[0-5]\d|24:00:00)(\.\d+)?(?:Z|[+-]\d{2}:\d{2})$')">
                <xsl:attribute name="id">ibr-tdd-05</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-05] – The cbc:IssueTime (TDT-005) element MUST contain timezone information.</svrl:text>
+               <svrl:text>[ibr-tdd-05] - The cbc:IssueTime (TDT-005) element MUST contain timezone information.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -305,7 +311,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-06] – The pxs:TaxDataTypeCode (TDT-007) element MUST be coded according to the applicable code list.</svrl:text>
+               <svrl:text>[ibr-tdd-06] - The pxs:TaxDataTypeCode (TDT-007) element MUST be coded according to the applicable code list.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -320,7 +326,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-08] – The pxs:DocumentScope (TDT-006) element MUST be coded according to the applicable code list.</svrl:text>
+               <svrl:text>[ibr-tdd-08] - The pxs:DocumentScope (TDT-006) element MUST be coded according to the applicable code list.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -335,7 +341,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-09] – The pxs:ReporterRole (TDT-012) element MUST be coded according to the applicable code list.</svrl:text>
+               <svrl:text>[ibr-tdd-09] - The pxs:ReporterRole (TDT-012) element MUST be coded according to the applicable code list.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -349,7 +355,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-10] – The pxs:TaxData element MUST contain a pxs:TaxAuthority (TDG-04) element.</svrl:text>
+               <svrl:text>[ibr-tdd-10] - The pxs:TaxData element MUST contain a pxs:TaxAuthority (TDG-04) element.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -364,14 +370,14 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-11] – Exactly one pxs:ReportedTransaction (TDG-01) element MUST be present.</svrl:text>
+               <svrl:text>[ibr-tdd-11] - Exactly one pxs:ReportedTransaction (TDG-01) element MUST be present.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
       <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M7"/>
    </xsl:template>
    <!--RULE -->
-   <xsl:template match="pxs:TaxData/pxs:TaxAuthority" priority="1050" mode="M7">
+   <xsl:template match="pxs:TaxData/pxs:TaxAuthority" priority="1049" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="pxs:TaxData/pxs:TaxAuthority"/>
       <!--ASSERT -->
@@ -381,10 +387,11 @@
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="count(*[not(self::cbc:ID or self::cbc:Name)]) = 0">
                <xsl:attribute name="id">ibr-tdd-12</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-12] – The pxs:TaxAuthority (TDG-04) element MUST NOT contain elements other than cbc:ID (TDT-010) and cbc:Name (TDT-011).</svrl:text>
+               <svrl:text>[ibr-tdd-12] - The pxs:TaxAuthority (TDG-04) element MUST NOT contain elements other than cbc:ID (TDT-010) and cbc:Name (TDT-011).</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -398,14 +405,14 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-13] – The pxs:TaxAuthority (TDG-04) element MUST contain the cbc:ID (TDT-010) element.</svrl:text>
+               <svrl:text>[ibr-tdd-13] - The pxs:TaxAuthority (TDG-04) element MUST contain the cbc:ID (TDT-010) element.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
       <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M7"/>
    </xsl:template>
    <!--RULE -->
-   <xsl:template match="/pxs:TaxData/pxs:ReportingParty" priority="1049" mode="M7">
+   <xsl:template match="/pxs:TaxData/pxs:ReportingParty" priority="1048" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/pxs:TaxData/pxs:ReportingParty"/>
       <!--ASSERT -->
@@ -419,7 +426,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-14] – The pxs:ReportingParty (TDG-05) element MUST NOT contain elements other than cbc:EndpointID (TDT-013).</svrl:text>
+               <svrl:text>[ibr-tdd-14] - The pxs:ReportingParty (TDG-05) element MUST NOT contain elements other than cbc:EndpointID (TDT-013).</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -433,7 +440,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-15] – The cbc:EndpointID (TDT-013) element of pxs:ReportingParty (TDG-05) MUST be present.</svrl:text>
+               <svrl:text>[ibr-tdd-15] - The cbc:EndpointID (TDT-013) element of pxs:ReportingParty (TDG-05) MUST be present.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -448,7 +455,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-16] – The scheme identifier (TDT-013-1) attribute of cbc:EndpointID (TDT-013) MUST be present.</svrl:text>
+               <svrl:text>[ibr-tdd-16] - The scheme identifier (TDT-013-1) attribute of cbc:EndpointID (TDT-013) MUST be present.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -463,14 +470,14 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-17] – The scheme identifier (TDT-013-1) attribute of cbc:EndpointID (TDT-013) MUST be a Peppol Participant Identifier Scheme.</svrl:text>
+               <svrl:text>[ibr-tdd-17] - The scheme identifier (TDT-013-1) attribute of cbc:EndpointID (TDT-013) MUST be a Peppol Participant Identifier Scheme.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
       <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M7"/>
    </xsl:template>
    <!--RULE -->
-   <xsl:template match="/pxs:TaxData/pxs:ReceivingParty" priority="1048" mode="M7">
+   <xsl:template match="/pxs:TaxData/pxs:ReceivingParty" priority="1047" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/pxs:TaxData/pxs:ReceivingParty"/>
       <!--ASSERT -->
@@ -484,7 +491,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-18] – The pxs:ReceivingParty (TDG-06) element MUST NOT contain elements other than cbc:EndpointID (TDT-014).</svrl:text>
+               <svrl:text>[ibr-tdd-18] - The pxs:ReceivingParty (TDG-06) element MUST NOT contain elements other than cbc:EndpointID (TDT-014).</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -498,7 +505,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-19] – The cbc:EndpointID (TDT-014) element of pxs:ReceivingParty (TDG-06) MUST be present.</svrl:text>
+               <svrl:text>[ibr-tdd-19] - The cbc:EndpointID (TDT-014) element of pxs:ReceivingParty (TDG-06) MUST be present.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -513,7 +520,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-20] The scheme identifier (TDT-014-1) attribute of Receiving party (TDG-06) endpoint ID (TDT-014) MUST be present and MUST refer to an SPID ('0242').</svrl:text>
+               <svrl:text>[ibr-tdd-20] - The scheme identifier (TDT-014-1) attribute of Receiving party (TDG-06) endpoint ID (TDT-014) MUST be present and MUST refer to an SPID ('0242').</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -521,7 +528,7 @@
    </xsl:template>
    <!--RULE -->
    <xsl:template match="/pxs:TaxData/pxs:ReportersRepresentative"
-                 priority="1047"
+                 priority="1046"
                  mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/pxs:TaxData/pxs:ReportersRepresentative"/>
@@ -537,7 +544,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-21] – The cac:ReportersRepresentative (TDG-07) element MUST NOT contain elements other than cac:PartyIdentification (TDG-08).</svrl:text>
+               <svrl:text>[ibr-tdd-21] - The pxs:ReportersRepresentative (TDG-07) element MUST NOT contain elements other than cac:PartyIdentification (TDG-08).</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -551,9 +558,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-22] – Exactly one cbc:ID (TDT-015) element MUST be present within cac:PartyIdentification (TDG-08) <xsl:text/>
-                  <xsl:value-of select="$pidCount"/>
-                  <xsl:text/> instead</svrl:text>
+               <svrl:text>[ibr-tdd-22] - Exactly one cbc:ID (TDT-015) element MUST be present within cac:PartyIdentification (TDG-08).</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -568,7 +573,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-23] – The scheme identifier(TDT-015-1) attribute of Reporter's Representative party (TDG-08) ID MUST be present and MUST refer to an SPID ('0242').</svrl:text>
+               <svrl:text>[ibr-tdd-23] - The scheme identifier (TDT-015-1) attribute of Reporter's Representative party (TDG-08) ID MUST be present and MUST refer to an SPID ('0242').</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -576,7 +581,7 @@
    </xsl:template>
    <!--RULE -->
    <xsl:template match="/pxs:TaxData/pxs:ReportedTransaction"
-                 priority="1046"
+                 priority="1045"
                  mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/pxs:TaxData/pxs:ReportedTransaction"/>
@@ -591,7 +596,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-24] – The cac:ReportedDocument (TDG-02) element MUST be present.</svrl:text>
+               <svrl:text>[ibr-tdd-24] - The pxs:ReportedDocument (TDG-02) element MUST be present.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -599,7 +604,7 @@
    </xsl:template>
    <!--RULE -->
    <xsl:template match="/pxs:TaxData/pxs:ReportedTransaction/pxs:ReportedDocument"
-                 priority="1045"
+                 priority="1044"
                  mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/pxs:TaxData/pxs:ReportedTransaction/pxs:ReportedDocument"/>
@@ -614,7 +619,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-25] – The cac:ReportedDocument element MUST NOT contain elements other than cbc:CustomizationID (BT-024), cbc:ProfileID (BT-023), cbc:ID (BT-001), cbc:UUID (TDT-017), cbc:IssueDate (BT-002), cbc:IssueTime, pxs:DocumentTypeCode (BT-003), cbc:Note (BT-022), cbc:TaxPointDate (BT-007), cbc:DocumentCurrencyCode (BT-005), cbc:TaxCurrencyCode (BT-006), cac:InvoicePeriod (BG-14), cac:BillingReference (BG-03), cac:AccountingSupplierParty (BG-04), cac:AccountingCustomerParty (BG-07), cac:TaxRepresentativeParty (BG-11), cac:Delivery (BG-13), cac:PaymentMeans (BG-16), cac:AllowanceCharge (BG-20, BG-21), cac:TaxTotal (BT-110, BG-37), pxs:MonetaryTotal (BG-22), and pxs:DocumentLine (BG-25).</svrl:text>
+               <svrl:text>[ibr-tdd-25] - The pxs:ReportedDocument element MUST NOT contain elements other than cbc:CustomizationID (BT-024), cbc:ProfileID (BT-023), cbc:ID (BT-001), cbc:UUID (TDT-017), cbc:IssueDate (BT-002), cbc:IssueTime, pxs:DocumentTypeCode (BT-003), cbc:Note (BT-022), cbc:TaxPointDate (BT-007), cbc:DocumentCurrencyCode (BT-005), cbc:TaxCurrencyCode (BT-006), cac:InvoicePeriod (BG-14), cac:BillingReference (BG-03), cac:AccountingSupplierParty (BG-04), cac:AccountingCustomerParty (BG-07), cac:TaxRepresentativeParty (BG-11), cac:Delivery (BG-13), cac:PaymentMeans (BG-16), cac:AllowanceCharge (BG-20, BG-21), cac:TaxTotal (BT-110, BG-37), pxs:MonetaryTotal (BG-22), and pxs:DocumentLine (BG-25).</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -632,11 +637,41 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
+      <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="exists(cac:AccountingSupplierParty/cac:Party)"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="exists(cac:AccountingSupplierParty/cac:Party)">
+               <xsl:attribute name="id">ibr-tdd-29</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>[ibr-tdd-29] - The SELLER (BG-04) MUST be present.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="exists(cac:AccountingCustomerParty/cac:Party)"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="exists(cac:AccountingCustomerParty/cac:Party)">
+               <xsl:attribute name="id">ibr-tdd-36</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>[ibr-tdd-36] - The BUYER (BG-07) MUST be present.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
       <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M7"/>
    </xsl:template>
    <!--RULE -->
    <xsl:template match="/pxs:TaxData/pxs:ReportedTransaction/pxs:ReportedDocument/cac:InvoicePeriod"
-                 priority="1044"
+                 priority="1043"
                  mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/pxs:TaxData/pxs:ReportedTransaction/pxs:ReportedDocument/cac:InvoicePeriod"/>
@@ -651,7 +686,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-26] – The cac:InvoicePeriod (BG-14) element MUST NOT contain elements other than cbc:StartDate (BT-073), cbc:EndDate (BT-074), and cbc:DescriptionCode (BT-008).</svrl:text>
+               <svrl:text>[ibr-tdd-26] - The cac:InvoicePeriod (BG-14) element MUST NOT contain elements other than cbc:StartDate (BT-073), cbc:EndDate (BT-074), and cbc:DescriptionCode (BT-008).</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -659,7 +694,7 @@
    </xsl:template>
    <!--RULE -->
    <xsl:template match="/pxs:TaxData/pxs:ReportedTransaction/pxs:ReportedDocument/pxs:DocumentLine/cac:InvoicePeriod"
-                 priority="1043"
+                 priority="1042"
                  mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/pxs:TaxData/pxs:ReportedTransaction/pxs:ReportedDocument/pxs:DocumentLine/cac:InvoicePeriod"/>
@@ -674,7 +709,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-27] – The cac:InvoicePeriod (BG-14) element at line level, MUST NOT contain elements other than cbc:StartDate (BT-073) and cbc:EndDate (BT-074).</svrl:text>
+               <svrl:text>[ibr-tdd-27] - The cac:InvoicePeriod (BG-26) element at document line level MUST NOT contain elements other than cbc:StartDate (BT-134) and cbc:EndDate (BT-135).</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -682,7 +717,7 @@
    </xsl:template>
    <!--RULE -->
    <xsl:template match="/pxs:TaxData/pxs:ReportedTransaction/pxs:ReportedDocument/cac:BillingReference/cac:InvoiceDocumentReference"
-                 priority="1042"
+                 priority="1041"
                  mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="/pxs:TaxData/pxs:ReportedTransaction/pxs:ReportedDocument/cac:BillingReference/cac:InvoiceDocumentReference"/>
@@ -697,29 +732,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-28] – The cac:InvoiceDocumentReference element MUST NOT contain elements other than cbc:ID (BT-025) and cbc:IssueDate (BT-026).</svrl:text>
-            </svrl:failed-assert>
-         </xsl:otherwise>
-      </xsl:choose>
-      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M7"/>
-   </xsl:template>
-   <!--RULE -->
-   <xsl:template match="/pxs:TaxData/pxs:ReportedTransaction/pxs:ReportedDocument/cac:AccountingSupplierParty"
-                 priority="1041"
-                 mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/pxs:TaxData/pxs:ReportedTransaction/pxs:ReportedDocument/cac:AccountingSupplierParty"/>
-      <!--ASSERT -->
-      <xsl:choose>
-         <xsl:when test="exists(cac:Party)"/>
-         <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="exists(cac:Party)">
-               <xsl:attribute name="id">ibr-tdd-29</xsl:attribute>
-               <xsl:attribute name="flag">fatal</xsl:attribute>
-               <xsl:attribute name="location">
-                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-               </xsl:attribute>
-               <svrl:text>[ibr-tdd-29] – The SELLER (BG-04) MUST be present.</svrl:text>
+               <svrl:text>[ibr-tdd-28] - The cac:InvoiceDocumentReference element MUST NOT contain elements other than cbc:ID (BT-025) and cbc:IssueDate (BT-026).</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -742,7 +755,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-30] – The cac:Party element MUST NOT contain elements other than cac:PostalAddress (BG-05) and optionally cac:PartyTaxScheme.</svrl:text>
+               <svrl:text>[ibr-tdd-30] - The cac:Party element MUST NOT contain elements other than cac:PostalAddress (BG-05) and optionally cac:PartyTaxScheme.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -765,7 +778,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-31] – The cac:PostalAddress (BG-05) element MUST NOT contain elements other than cac:Country.</svrl:text>
+               <svrl:text>[ibr-tdd-31] - The cac:PostalAddress (BG-05) element MUST NOT contain elements other than cac:Country.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -788,7 +801,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-32] – The cac:Country element MUST NOT contain elements other than cbc:IdentificationCode (BT-040).</svrl:text>
+               <svrl:text>[ibr-tdd-32] - The cac:Country element MUST NOT contain elements other than cbc:IdentificationCode (BT-040).</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -811,7 +824,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-33] – The value of cac:PartyTaxScheme/cac:TaxScheme/cbc:ID MUST be VAT.</svrl:text>
+               <svrl:text>[ibr-tdd-33] - The value of cac:PartyTaxScheme/cac:TaxScheme/cbc:ID MUST be 'VAT'.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -826,7 +839,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-34] – The cac:PartyTaxScheme element MUST NOT contain elements other than cbc:CompanyID (BT-031) and cac:TaxScheme.</svrl:text>
+               <svrl:text>[ibr-tdd-34] - The cac:PartyTaxScheme element MUST NOT contain elements other than cbc:CompanyID (BT-031) and cac:TaxScheme.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -849,7 +862,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-35] – The cac:TaxScheme element MUST NOT contain elements other than cbc:ID.</svrl:text>
+               <svrl:text>[ibr-tdd-35] - The cac:TaxScheme element MUST NOT contain elements other than cbc:ID.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -863,20 +876,6 @@
                        context="/pxs:TaxData/pxs:ReportedTransaction/pxs:ReportedDocument/cac:AccountingCustomerParty"/>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="exists(cac:Party)"/>
-         <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="exists(cac:Party)">
-               <xsl:attribute name="id">ibr-tdd-36</xsl:attribute>
-               <xsl:attribute name="flag">fatal</xsl:attribute>
-               <xsl:attribute name="location">
-                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-               </xsl:attribute>
-               <svrl:text>[ibr-tdd-36] – The BUYER (BG-07) MUST be present.</svrl:text>
-            </svrl:failed-assert>
-         </xsl:otherwise>
-      </xsl:choose>
-      <!--ASSERT -->
-      <xsl:choose>
          <xsl:when test="count(*[not(self::cac:Party)]) = 0"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -886,7 +885,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-37] – The cac:AccountingCustomerParty (BG-07) element MUST NOT contain elements other than cac:Party.</svrl:text>
+               <svrl:text>[ibr-tdd-37] - The cac:AccountingCustomerParty (BG-07) element MUST NOT contain elements other than cac:Party.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -909,7 +908,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-38] – The cac:Party element MUST NOT contain elements other than cac:PostalAddress (BG-08), cac:PartyLegalEntity, and optionally cac:PartyTaxScheme.</svrl:text>
+               <svrl:text>[ibr-tdd-38] - The cac:Party element MUST NOT contain elements other than cac:PostalAddress (BG-08), cac:PartyLegalEntity, and optionally cac:PartyTaxScheme.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -932,7 +931,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-39] – The cac:PostalAddress (BG-08) element MUST NOT contain elements other than cac:Country.</svrl:text>
+               <svrl:text>[ibr-tdd-39] - The cac:PostalAddress (BG-08) element MUST NOT contain elements other than cac:Country.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -955,7 +954,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-40] – The cac:Country element MUST NOT contain elements other than cbc:IdentificationCode (BT-055).</svrl:text>
+               <svrl:text>[ibr-tdd-40] - The cac:Country element MUST NOT contain elements other than cbc:IdentificationCode (BT-055).</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -978,7 +977,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-41] – The value of cac:PartyTaxScheme/cac:TaxScheme/cbc:ID MUST be 'VAT'.</svrl:text>
+               <svrl:text>[ibr-tdd-41] - The value of cac:PartyTaxScheme/cac:TaxScheme/cbc:ID MUST be 'VAT'.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -993,7 +992,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-42] – The cac:PartyTaxScheme element MUST NOT contain elements other than cbc:CompanyID (BT-048) and cac:TaxScheme.</svrl:text>
+               <svrl:text>[ibr-tdd-42] - The cac:PartyTaxScheme element MUST NOT contain elements other than cbc:CompanyID (BT-048) and cac:TaxScheme.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1016,7 +1015,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-43] – The cac:TaxScheme element MUST NOT contain elements other than cbc:ID.</svrl:text>
+               <svrl:text>[ibr-tdd-43] - The cac:TaxScheme element MUST NOT contain elements other than cbc:ID.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1030,27 +1029,27 @@
                        context="/pxs:TaxData/pxs:ReportedTransaction/pxs:ReportedDocument/cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity"/>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="count(*[not(self::cbc:RegistrationName)]) = 0"/>
+         <xsl:when test="count(*[not(self::cbc:RegistrationName or self::cbc:CompanyID)]) = 0"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="count(*[not(self::cbc:RegistrationName)]) = 0">
+                                test="count(*[not(self::cbc:RegistrationName or self::cbc:CompanyID)]) = 0">
                <xsl:attribute name="id">ibr-tdd-86</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-86] – The cac:PartyLegalEntity element MUST NOT contain elements other than cbc:RegistrationName (BT-044).</svrl:text>
+               <svrl:text>[ibr-tdd-86] - The cac:PartyLegalEntity element MUST NOT contain elements other than cbc:RegistrationName (BT-044) and cbc:CompanyID (BT-047).</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
       <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M7"/>
    </xsl:template>
    <!--RULE -->
-   <xsl:template match="/pxs:TaxData/pxs:ReportedTransaction/pxs:ReportedDocument/cac:AccountingCustomerParty/cac:TaxRepresentativeParty"
+   <xsl:template match="/pxs:TaxData/pxs:ReportedTransaction/pxs:ReportedDocument/cac:TaxRepresentativeParty"
                  priority="1028"
                  mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="/pxs:TaxData/pxs:ReportedTransaction/pxs:ReportedDocument/cac:AccountingCustomerParty/cac:TaxRepresentativeParty"/>
+                       context="/pxs:TaxData/pxs:ReportedTransaction/pxs:ReportedDocument/cac:TaxRepresentativeParty"/>
       <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="count(*[not(self::cac:PostalAddress or self::cac:PartyTaxScheme)]) = 0"/>
@@ -1062,7 +1061,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-44] – The cac:TaxRepresentativeParty (BG-11) element MUST NOT contain elements other than cac:PostalAddress (BG-12) and optionally cac:PartyTaxScheme.</svrl:text>
+               <svrl:text>[ibr-tdd-44] - The cac:TaxRepresentativeParty (BG-11) element MUST NOT contain elements other than cac:PostalAddress (BG-12) and cac:PartyTaxScheme.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1085,7 +1084,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-45] – The cac:PostalAddress (BG-12) element MUST NOT contain elements other than cac:Country.</svrl:text>
+               <svrl:text>[ibr-tdd-45] - The cac:PostalAddress (BG-12) element MUST NOT contain elements other than cac:Country.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1108,7 +1107,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-46] – The cac:Country element MUST NOT contain elements other than cbc:IdentificationCode (BT-069).</svrl:text>
+               <svrl:text>[ibr-tdd-46] - The cac:Country element MUST NOT contain elements other than cbc:IdentificationCode (BT-069).</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1131,7 +1130,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-85] – The cac:Delivery (BG-13) element MUST NOT contain elements other than cbc:ActualDeliveryDate (BT-072).</svrl:text>
+               <svrl:text>[ibr-tdd-85] - The cac:Delivery (BG-13) element MUST NOT contain elements other than cbc:ActualDeliveryDate (BT-072).</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1154,7 +1153,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-47] – The value of cac:PartyTaxScheme/cac:TaxScheme/cbc:ID MUST be 'VAT'.</svrl:text>
+               <svrl:text>[ibr-tdd-47] - The value of cac:PartyTaxScheme/cac:TaxScheme/cbc:ID MUST be 'VAT'.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1169,7 +1168,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-48] – The cac:PartyTaxScheme element MUST NOT contain elements other than cbc:CompanyID (BT-063) and cac:TaxScheme.</svrl:text>
+               <svrl:text>[ibr-tdd-48] - The cac:PartyTaxScheme element MUST NOT contain elements other than cbc:CompanyID (BT-063) and cac:TaxScheme.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1192,7 +1191,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-49] – The cac:TaxScheme element MUST NOT contain elements other than cbc:ID.</svrl:text>
+               <svrl:text>[ibr-tdd-49] - The cac:TaxScheme element MUST NOT contain elements other than cbc:ID.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1215,7 +1214,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-50] – The cac:PaymentMeans (BG-16) element MUST NOT contain elements other than cbc:PaymentMeansCode (BT-081), cbc:PaymentID (BT-083), cac:CardAccount (BG-18), cac:PayeeFinancialAccount (BG-17), and cac:PaymentMandate (BG-19).</svrl:text>
+               <svrl:text>[ibr-tdd-50] - The cac:PaymentMeans (BG-16) element MUST NOT contain elements other than cbc:PaymentMeansCode (BT-081), cbc:PaymentID (BT-083), cac:CardAccount (BG-18), cac:PayeeFinancialAccount (BG-17), and cac:PaymentMandate (BG-19).</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1238,7 +1237,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-51] – The cbc:PaymentMeansCode (BT-081) element MUST NOT have attributes other than 'name' (BT-082).</svrl:text>
+               <svrl:text>[ibr-tdd-51] - The cbc:PaymentMeansCode (BT-081) element MUST NOT have attributes other than 'name' (BT-082).</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1261,7 +1260,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-52] – The cac:CardAccount (BG-18) element MUST NOT contain elements other than cbc:PrimaryAccountNumberID (BT-087), cbc:NetworkID, and cbc:HolderName (BT-088).</svrl:text>
+               <svrl:text>[ibr-tdd-52] - The cac:CardAccount (BG-18) element MUST NOT contain elements other than cbc:PrimaryAccountNumberID (BT-087), cbc:NetworkID, and cbc:HolderName (BT-088).</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1284,7 +1283,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-53] – The cac:PayeeFinancialAccount (BG-17) element MUST NOT contain elements other than cbc:ID (BT-084) and cac:FinancialInstitutionBranch.</svrl:text>
+               <svrl:text>[ibr-tdd-53] - The cac:PayeeFinancialAccount (BG-17) element MUST NOT contain elements other than cbc:ID (BT-084) and cac:FinancialInstitutionBranch.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1307,7 +1306,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-54] – The cac:FinancialInstitutionBranch element MUST NOT contain elements other than cbc:ID (BT-086).</svrl:text>
+               <svrl:text>[ibr-tdd-54] - The cac:FinancialInstitutionBranch element MUST NOT contain elements other than cbc:ID (BT-086).</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1330,7 +1329,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-55] – The cac:PaymentMandate (BG-19) element MUST NOT contain elements other than cbc:ID (BT-089) and cac:PayerFinancialAccount.</svrl:text>
+               <svrl:text>[ibr-tdd-55] - The cac:PaymentMandate (BG-19) element MUST NOT contain elements other than cbc:ID (BT-089) and cac:PayerFinancialAccount.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1353,7 +1352,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-56] – The cac:PayerFinancialAccount element MUST NOT contain elements other than cbc:ID (BT-091).</svrl:text>
+               <svrl:text>[ibr-tdd-56] - The cac:PayerFinancialAccount element MUST NOT contain elements other than cbc:ID (BT-091).</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1376,7 +1375,22 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-57] – The cac:AllowanceCharge (Document level: BG-20, BG-21) element MUST NOT contain elements other than cbc:ChargeIndicator, cbc:AllowanceChargeReasonCode (BT-098, BT-105), cbc:AllowanceChargeReason (BT-097, BT-104), cbc:MultiplierFactorNumeric (BT-094, BT-101), cbc:Amount (BT-092, BT-099), cbc:BaseAmount (BT-093, BT-100), and cac:TaxCategory.</svrl:text>
+               <svrl:text>[ibr-tdd-57] - The cac:AllowanceCharge (Document level: BG-20, BG-21) element MUST NOT contain elements other than cbc:ChargeIndicator, cbc:AllowanceChargeReasonCode (BT-098, BT-105), cbc:AllowanceChargeReason (BT-097, BT-104), cbc:MultiplierFactorNumeric (BT-094, BT-101), cbc:Amount (BT-092, BT-099), cbc:BaseAmount (BT-093, BT-100), and cac:TaxCategory.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="every $e in cbc:Amount satisfies exists($e/@currencyID)"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="every $e in cbc:Amount satisfies exists($e/@currencyID)">
+               <xsl:attribute name="id">ibr-tdd-58</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>[ibr-tdd-58] - The cbc:Amount (BT-092, BT-099) element MUST have the attribute 'currencyID'.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1386,12 +1400,27 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="count(cbc:Amount/@*[not(local-name() = 'currencyID')]) = 0">
-               <xsl:attribute name="id">ibr-tdd-58</xsl:attribute>
+               <xsl:attribute name="id">ibr-tdd-89</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-58] – The cbc:Amount (BT-092, BT-099) element MUST have the attribute 'currencyID'.</svrl:text>
+               <svrl:text>[ibr-tdd-89] - The cbc:Amount (BT-092, BT-099) element MUST NOT have attributes other than 'currencyID'.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="every $e in cbc:BaseAmount satisfies exists($e/@currencyID)"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="every $e in cbc:BaseAmount satisfies exists($e/@currencyID)">
+               <xsl:attribute name="id">ibr-tdd-59</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>[ibr-tdd-59] - The cbc:BaseAmount (BT-093, BT-100) element MUST have the attribute 'currencyID'.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1401,12 +1430,12 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="count(cbc:BaseAmount/@*[not(local-name() = 'currencyID')]) = 0">
-               <xsl:attribute name="id">ibr-tdd-59</xsl:attribute>
+               <xsl:attribute name="id">ibr-tdd-90</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-59] – The cbc:BaseAmount (BT-093, BT-100) element MUST have the attribute 'currencyID'.</svrl:text>
+               <svrl:text>[ibr-tdd-90] - The cbc:BaseAmount (BT-093, BT-100) element MUST NOT have attributes other than 'currencyID'.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1429,7 +1458,22 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-60] – The cac:AllowanceCharge (Document line level: BG-27, BG-28) element MUST NOT contain elements other than cbc:ChargeIndicator, cbc:AllowanceChargeReasonCode (BT-140, BT-145), cbc:AllowanceChargeReason (BT-139, BT-144), cbc:MultiplierFactorNumeric (BT-138, BT-143), cbc:Amount (BT-136, BT-141), and cbc:BaseAmount (BT-137, BT-142).</svrl:text>
+               <svrl:text>[ibr-tdd-60] - The cac:AllowanceCharge (Document line level: BG-27, BG-28) element MUST NOT contain elements other than cbc:ChargeIndicator, cbc:AllowanceChargeReasonCode (BT-140, BT-145), cbc:AllowanceChargeReason (BT-139, BT-144), cbc:MultiplierFactorNumeric (BT-138, BT-143), cbc:Amount (BT-136, BT-141), and cbc:BaseAmount (BT-137, BT-142).</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="every $e in cbc:Amount satisfies exists($e/@currencyID)"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="every $e in cbc:Amount satisfies exists($e/@currencyID)">
+               <xsl:attribute name="id">ibr-tdd-61</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>[ibr-tdd-61] - The cbc:Amount (BT-136, BT-141) element MUST have the attribute 'currencyID'.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1439,12 +1483,27 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="count(cbc:Amount/@*[not(local-name() = 'currencyID')]) = 0">
-               <xsl:attribute name="id">ibr-tdd-61</xsl:attribute>
+               <xsl:attribute name="id">ibr-tdd-91</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-61] – The cbc:Amount (BT-136, BT-141) element MUST have the attribute 'currencyID'.</svrl:text>
+               <svrl:text>[ibr-tdd-91] - The cbc:Amount (BT-136, BT-141) element MUST NOT have attributes other than 'currencyID'.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="every $e in cbc:BaseAmount satisfies exists($e/@currencyID)"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="every $e in cbc:BaseAmount satisfies exists($e/@currencyID)">
+               <xsl:attribute name="id">ibr-tdd-62</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>[ibr-tdd-62] - The cbc:BaseAmount (BT-137, BT-142) element MUST have the attribute 'currencyID'.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1454,12 +1513,12 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="count(cbc:BaseAmount/@*[not(local-name() = 'currencyID')]) = 0">
-               <xsl:attribute name="id">ibr-tdd-62</xsl:attribute>
+               <xsl:attribute name="id">ibr-tdd-92</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-62] – The cbc:BaseAmount (BT-137, BT-142) element MUST have the attribute 'currencyID'.</svrl:text>
+               <svrl:text>[ibr-tdd-92] - The cbc:BaseAmount (BT-137, BT-142) element MUST NOT have attributes other than 'currencyID'.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1482,7 +1541,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-63] – The cac:TaxCategory element MUST NOT contain elements other than cbc:ID (BT-095, BT-102), cbc:Percent (BT-096, BT-103), and cac:TaxScheme.</svrl:text>
+               <svrl:text>[ibr-tdd-63] - The cac:TaxCategory element MUST NOT contain elements other than cbc:ID (BT-095, BT-102), cbc:Percent (BT-096, BT-103), and cac:TaxScheme.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1505,7 +1564,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-64] – The cac:TaxScheme element MUST NOT contain elements other than cbc:ID.</svrl:text>
+               <svrl:text>[ibr-tdd-64] - The cac:TaxScheme element MUST NOT contain elements other than cbc:ID.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1528,7 +1587,22 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-65] – The cac:TaxTotal element MUST NOT contain elements other than cbc:TaxAmount (BT-110, BT-111) and cac:TaxSubtotal (BG-23).</svrl:text>
+               <svrl:text>[ibr-tdd-65] - The cac:TaxTotal element MUST NOT contain elements other than cbc:TaxAmount (BT-110, BT-111) and cac:TaxSubtotal (BG-23).</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="every $e in cbc:TaxAmount satisfies exists($e/@currencyID)"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="every $e in cbc:TaxAmount satisfies exists($e/@currencyID)">
+               <xsl:attribute name="id">ibr-tdd-66</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>[ibr-tdd-66] - The cbc:TaxAmount (BT-110, BT-111) element MUST have the attribute 'currencyID'.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1538,12 +1612,12 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="count(cbc:TaxAmount/@*[not(local-name() = 'currencyID')]) = 0">
-               <xsl:attribute name="id">ibr-tdd-66</xsl:attribute>
+               <xsl:attribute name="id">ibr-tdd-93</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-66] – The cbc:TaxAmount (BT-110, BT-111) element MUST have the attribute 'currencyID'.</svrl:text>
+               <svrl:text>[ibr-tdd-93] - The cbc:TaxAmount (BT-110, BT-111) element MUST NOT have attributes other than 'currencyID'.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1566,7 +1640,22 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-67] – The cac:TaxSubtotal (BG-23) element MUST NOT contain elements other than cbc:TaxableAmount (BT-116), cbc:TaxAmount (BT-117), and cac:TaxCategory.</svrl:text>
+               <svrl:text>[ibr-tdd-67] - The cac:TaxSubtotal (BG-23) element MUST NOT contain elements other than cbc:TaxableAmount (BT-116), cbc:TaxAmount (BT-117), and cac:TaxCategory.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="every $e in cbc:TaxableAmount satisfies exists($e/@currencyID)"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="every $e in cbc:TaxableAmount satisfies exists($e/@currencyID)">
+               <xsl:attribute name="id">ibr-tdd-68</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>[ibr-tdd-68] - The cbc:TaxableAmount (BT-116) element MUST have the attribute 'currencyID'.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1576,12 +1665,27 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="count(cbc:TaxableAmount/@*[not(local-name() = 'currencyID')]) = 0">
-               <xsl:attribute name="id">ibr-tdd-68</xsl:attribute>
+               <xsl:attribute name="id">ibr-tdd-94</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-68] – The cbc:TaxableAmount (BT-116) element MUST have the attribute 'currencyID'.</svrl:text>
+               <svrl:text>[ibr-tdd-94] - The cbc:TaxableAmount (BT-116) element MUST NOT have attributes other than 'currencyID'.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="every $e in cbc:TaxAmount satisfies exists($e/@currencyID)"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="every $e in cbc:TaxAmount satisfies exists($e/@currencyID)">
+               <xsl:attribute name="id">ibr-tdd-69</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>[ibr-tdd-69] - The cbc:TaxAmount (BT-117) element MUST have the attribute 'currencyID'.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1591,12 +1695,12 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="count(cbc:TaxAmount/@*[not(local-name() = 'currencyID')]) = 0">
-               <xsl:attribute name="id">ibr-tdd-69</xsl:attribute>
+               <xsl:attribute name="id">ibr-tdd-95</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-69] – The cbc:TaxAmount (BT-117) element MUST have the attribute 'currencyID'.</svrl:text>
+               <svrl:text>[ibr-tdd-95] - The cbc:TaxAmount (BT-117) element MUST NOT have attributes other than 'currencyID'.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1619,7 +1723,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-70] – The cac:TaxCategory element MUST NOT contain elements other than cbc:ID (BT-118), cbc:Percent (BT-119), cbc:TaxExemptionReasonCode (BT-121), cbc:TaxExemptionReason (BT-120), and cac:TaxScheme.</svrl:text>
+               <svrl:text>[ibr-tdd-70] - The cac:TaxCategory element MUST NOT contain elements other than cbc:ID (BT-118), cbc:Percent (BT-119), cbc:TaxExemptionReasonCode (BT-121), cbc:TaxExemptionReason (BT-120), and cac:TaxScheme.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1642,7 +1746,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-71] – The cac:TaxScheme element MUST NOT contain elements other than cbc:ID.</svrl:text>
+               <svrl:text>[ibr-tdd-71] - The cac:TaxScheme element MUST NOT contain elements other than cbc:ID.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1665,7 +1769,22 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-72] – The pxs:MonetaryTotal (BG-22) element MUST NOT contain elements other than cbc:LineExtensionAmount (BT-106), cbc:TaxExclusiveAmount (BT-109), cbc:TaxInclusiveAmount (BT-112), cbc:AllowanceTotalAmount (BT-107), cbc:ChargeTotalAmount (BT-108), cbc:PrepaidAmount (BT-113), cbc:PayableRoundingAmount (BT-114), and cbc:PayableAmount (BT-115).</svrl:text>
+               <svrl:text>[ibr-tdd-72] - The pxs:MonetaryTotal (BG-22) element MUST NOT contain elements other than cbc:LineExtensionAmount (BT-106), cbc:TaxExclusiveAmount (BT-109), cbc:TaxInclusiveAmount (BT-112), cbc:AllowanceTotalAmount (BT-107), cbc:ChargeTotalAmount (BT-108), cbc:PrepaidAmount (BT-113), cbc:PayableRoundingAmount (BT-114), and cbc:PayableAmount (BT-115).</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="every $e in (cbc:LineExtensionAmount, cbc:TaxExclusiveAmount, cbc:TaxInclusiveAmount, cbc:AllowanceTotalAmount, cbc:ChargeTotalAmount, cbc:PrepaidAmount, cbc:PayableRoundingAmount, cbc:PayableAmount) satisfies exists($e/@currencyID)"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="every $e in (cbc:LineExtensionAmount, cbc:TaxExclusiveAmount, cbc:TaxInclusiveAmount, cbc:AllowanceTotalAmount, cbc:ChargeTotalAmount, cbc:PrepaidAmount, cbc:PayableRoundingAmount, cbc:PayableAmount) satisfies exists($e/@currencyID)">
+               <xsl:attribute name="id">ibr-tdd-73</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>[ibr-tdd-73] - All amount (BT-106, BT-109, BT-112, BT-107, BT-108, BT-113, BT-114, BT-115) elements within pxs:MonetaryTotal (BG-22) MUST have the attribute 'currencyID'.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1675,12 +1794,12 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="count(*[self::cbc:LineExtensionAmount or self::cbc:TaxExclusiveAmount or self::cbc:TaxInclusiveAmount or self::cbc:AllowanceTotalAmount or self::cbc:ChargeTotalAmount or self::cbc:PrepaidAmount or self::cbc:PayableAmount]/@*[not(local-name() = 'currencyID')]) = 0">
-               <xsl:attribute name="id">ibr-tdd-73</xsl:attribute>
+               <xsl:attribute name="id">ibr-tdd-96</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-73] – All amount (BT-106, BT-109, BT-112, BT-107, BT-108, BT-113, BT-114, BT-115) elements within pxs:MonetaryTotal (BG-22) MUST have the attribute 'currencyID'.</svrl:text>
+               <svrl:text>[ibr-tdd-96] - The amount elements (BT-106, BT-109, BT-112, BT-107, BT-108, BT-113, BT-115) within pxs:MonetaryTotal (BG-22) MUST NOT have attributes other than 'currencyID'.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1703,7 +1822,22 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-74] – The pxs:DocumentLine (BG-25) element MUST NOT contain elements other than cbc:ID (BT-126), cbc:Note (BT-127), cbc:InvoicedQuantity (BT-129), cbc:LineExtensionAmount (BT-131), cac:InvoicePeriod (BG-26), cac:AllowanceCharge (BG-27, BG-28), cac:Item (BG-31), and cac:Price (BG-29).</svrl:text>
+               <svrl:text>[ibr-tdd-74] - The pxs:DocumentLine (BG-25) element MUST NOT contain elements other than cbc:ID (BT-126), cbc:Note (BT-127), cbc:InvoicedQuantity (BT-129), cbc:LineExtensionAmount (BT-131), cac:InvoicePeriod (BG-26), cac:AllowanceCharge (BG-27, BG-28), cac:Item (BG-31), and cac:Price (BG-29).</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="every $e in cbc:InvoicedQuantity satisfies exists($e/@unitCode)"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="every $e in cbc:InvoicedQuantity satisfies exists($e/@unitCode)">
+               <xsl:attribute name="id">ibr-tdd-75</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>[ibr-tdd-75] - The cbc:InvoicedQuantity (BT-129) element MUST have the attribute 'unitCode' (BT-130).</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1713,12 +1847,27 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="count(cbc:InvoicedQuantity/@*[not(local-name() = 'unitCode')]) = 0">
-               <xsl:attribute name="id">ibr-tdd-75</xsl:attribute>
+               <xsl:attribute name="id">ibr-tdd-97</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-75] – The cbc:InvoicedQuantity (BT-129) element MUST have the attribute 'unitCode' (BT-130).</svrl:text>
+               <svrl:text>[ibr-tdd-97] - The cbc:InvoicedQuantity (BT-129) element MUST NOT have attributes other than 'unitCode' (BT-130).</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="every $e in cbc:LineExtensionAmount satisfies exists($e/@currencyID)"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="every $e in cbc:LineExtensionAmount satisfies exists($e/@currencyID)">
+               <xsl:attribute name="id">ibr-tdd-76</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>[ibr-tdd-76] - The cbc:LineExtensionAmount (BT-131) element MUST have the attribute 'currencyID'.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1728,12 +1877,12 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="count(cbc:LineExtensionAmount/@*[not(local-name() = 'currencyID')]) = 0">
-               <xsl:attribute name="id">ibr-tdd-76</xsl:attribute>
+               <xsl:attribute name="id">ibr-tdd-98</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-76] – The cbc:LineExtensionAmount (BT-131) element MUST have the attribute 'currencyID'.</svrl:text>
+               <svrl:text>[ibr-tdd-98] - The cbc:LineExtensionAmount (BT-131) element MUST NOT have attributes other than 'currencyID'.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1756,7 +1905,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-77] – The cac:Item (BG-31) element MUST NOT contain elements other than cbc:Description (BT-154), cbc:Name (BT-153), cac:CommodityClassification, and cac:ClassifiedTaxCategory (BG-30).</svrl:text>
+               <svrl:text>[ibr-tdd-77] - The cac:Item (BG-31) element MUST NOT contain elements other than cbc:Description (BT-154), cbc:Name (BT-153), cac:CommodityClassification, and cac:ClassifiedTaxCategory (BG-30).</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1779,22 +1928,37 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-78] – The cac:CommodityClassification element MUST NOT contain elements other than cbc:ItemClassificationCode (BT-158).</svrl:text>
+               <svrl:text>[ibr-tdd-78] - The cac:CommodityClassification element MUST NOT contain elements other than cbc:ItemClassificationCode (BT-158).</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="count(cbc:ItemClassificationCode/@*[not(local-name() = 'listID')]) = 0"/>
+         <xsl:when test="every $e in cbc:ItemClassificationCode satisfies exists($e/@listID)"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="count(cbc:ItemClassificationCode/@*[not(local-name() = 'listID')]) = 0">
+                                test="every $e in cbc:ItemClassificationCode satisfies exists($e/@listID)">
                <xsl:attribute name="id">ibr-tdd-79</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-79] – The cbc:ItemClassificationCode (BT-158) element MUST have the attribute 'listID' (BT-158-1).</svrl:text>
+               <svrl:text>[ibr-tdd-79] - The cbc:ItemClassificationCode (BT-158) element MUST have the attribute 'listID' (BT-158-1).</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="count(cbc:ItemClassificationCode/@*[not(local-name() = 'listID' or local-name() = 'listVersionID')]) = 0"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="count(cbc:ItemClassificationCode/@*[not(local-name() = 'listID' or local-name() = 'listVersionID')]) = 0">
+               <xsl:attribute name="id">ibr-tdd-99</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>[ibr-tdd-99] - The cbc:ItemClassificationCode (BT-158) element MUST NOT have attributes other than 'listID' (BT-158-1) and 'listVersionID' (BT-158-2).</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1817,7 +1981,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-80] – The cac:ClassifiedTaxCategory (BG-30) element MUST NOT contain elements other than cbc:ID (BT-151), cbc:Percent (BT-152), and cac:TaxScheme.</svrl:text>
+               <svrl:text>[ibr-tdd-80] - The cac:ClassifiedTaxCategory (BG-30) element MUST NOT contain elements other than cbc:ID (BT-151), cbc:Percent (BT-152), and cac:TaxScheme.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1840,7 +2004,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-81] – The cac:TaxScheme element MUST NOT contain elements other than cbc:ID.</svrl:text>
+               <svrl:text>[ibr-tdd-81] - The cac:TaxScheme element MUST NOT contain elements other than cbc:ID.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1854,16 +2018,31 @@
                        context="/pxs:TaxData/pxs:ReportedTransaction/pxs:ReportedDocument/pxs:DocumentLine/cac:Price"/>
       <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="count(*[not(self::cbc:PriceAmount or self::cbc:BaseQuantity)]) = 0"/>
+         <xsl:when test="count(*[not(self::cbc:PriceAmount)]) = 0"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="count(*[not(self::cbc:PriceAmount or self::cbc:BaseQuantity)]) = 0">
+                                test="count(*[not(self::cbc:PriceAmount)]) = 0">
                <xsl:attribute name="id">ibr-tdd-82</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-82] – The cac:Price (BG-29) element MUST NOT contain elements other than cbc:PriceAmount (BT-146).</svrl:text>
+               <svrl:text>[ibr-tdd-82] - The cac:Price (BG-29) element MUST NOT contain elements other than cbc:PriceAmount (BT-146).</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="every $e in cbc:PriceAmount satisfies exists($e/@currencyID)"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="every $e in cbc:PriceAmount satisfies exists($e/@currencyID)">
+               <xsl:attribute name="id">ibr-tdd-83</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>[ibr-tdd-83] - The cbc:PriceAmount (BT-146) element MUST have the attribute 'currencyID'.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1873,12 +2052,12 @@
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="count(cbc:PriceAmount/@*[not(local-name() = 'currencyID')]) = 0">
-               <xsl:attribute name="id">ibr-tdd-83</xsl:attribute>
+               <xsl:attribute name="id">ibr-tdd-100</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-83] – The cbc:PriceAmount (BT-146) element MUST have the attribute 'currencyID'.</svrl:text>
+               <svrl:text>[ibr-tdd-100] - The cbc:PriceAmount (BT-146) element MUST NOT have attributes other than 'currencyID'.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1901,7 +2080,7 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[ibr-tdd-84] – The cac:BillingReference (BG-03) element MUST NOT contain elements other than cac:InvoiceDocumentReference.</svrl:text>
+               <svrl:text>[ibr-tdd-84] - The cac:BillingReference (BG-03) element MUST NOT contain elements other than cac:InvoiceDocumentReference.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -1910,5 +2089,37 @@
    <xsl:template match="text()" priority="-1" mode="M7"/>
    <xsl:template match="@*|node()" priority="-2" mode="M7">
       <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M7"/>
+   </xsl:template>
+   <!--PATTERN sk-corrected-invoice-->
+   <!--RULE -->
+   <xsl:template match="/pxs:TaxData/pxs:ReportedTransaction/pxs:ReportedDocument"
+                 priority="1000"
+                 mode="M8">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="/pxs:TaxData/pxs:ReportedTransaction/pxs:ReportedDocument"/>
+      <xsl:variable name="sellerCountry"
+                    select="upper-case(normalize-space(cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode))"/>
+      <xsl:variable name="buyerCountry"
+                    select="upper-case(normalize-space(cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode))"/>
+      <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="not($sellerCountry = 'SK' and $buyerCountry = 'SK' and normalize-space(pxs:DocumentTypeCode) = '384') or exists(cac:BillingReference)"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="not($sellerCountry = 'SK' and $buyerCountry = 'SK' and normalize-space(pxs:DocumentTypeCode) = '384') or exists(cac:BillingReference)">
+               <xsl:attribute name="id">ibr-tdd-88</xsl:attribute>
+               <xsl:attribute name="flag">warning</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>[ibr-tdd-88] - If the Seller country code (BT-040) and the Buyer country code (BT-055) are both 'SK', and the Document type code (BT-003) is '384' (Corrected invoice), the PRECEDING DOCUMENT/INVOICE REFERENCE (BG-03) SHOULD be provided at least once.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M8"/>
+   </xsl:template>
+   <xsl:template match="text()" priority="-1" mode="M8"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M8">
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M8"/>
    </xsl:template>
 </xsl:stylesheet>
