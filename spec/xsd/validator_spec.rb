@@ -118,6 +118,40 @@ RSpec.describe Xsd::Validator do
     end
   end
 
+  # BG-16 (ram:SpecifiedTradeSettlementPaymentMeans) is 0..n in Factur-X EN16931 and BASIC 1.09.2: one block per
+  # creditor account. The CII namespace fallback (cii_en16931/) and the other Factur-X profiles admit several as well.
+  context 'with several ram:SpecifiedTradeSettlementPaymentMeans (BG-16)' do
+    def with_two_more_payment_means(filename, guideline_id = nil)
+      payment_means = %w[DE91100000000123456789 FR7630006000011234567890189].map do |iban|
+        '<ram:SpecifiedTradeSettlementPaymentMeans><ram:TypeCode>58</ram:TypeCode>' \
+          "<ram:PayeePartyCreditorFinancialAccount><ram:IBANID>#{iban}</ram:IBANID>" \
+          '</ram:PayeePartyCreditorFinancialAccount></ram:SpecifiedTradeSettlementPaymentMeans>'
+      end.join
+      # The first ram:ApplicableTradeTax of the header settlement: the payment means go right before it.
+      doc = File.read(filename).sub(/(<ram:ApplicableHeaderTradeSettlement>.*?)(<ram:ApplicableTradeTax>)/m) do
+        "#{Regexp.last_match(1)}#{payment_means}#{Regexp.last_match(2)}"
+      end
+      guideline_id ? doc.sub(%r{<ram:ID>urn:cen\.eu:en16931:2017[^<]*</ram:ID>}, "<ram:ID>#{guideline_id}</ram:ID>") : doc
+    end
+
+    {
+      'spec/files/xsd/factur-x/factur-x-en16931.xml' => 'urn:cen.eu:en16931:2017',
+      'spec/files/xsd/factur-x/factur-x-basic.xml' => 'urn:cen.eu:en16931:2017#compliant#urn:factur-x.eu:1p0:basic'
+    }.each do |filename, guideline_id|
+      it "validates #{guideline_id}" do
+        doc = with_two_more_payment_means(filename)
+        expect(doc.scan('<ram:SpecifiedTradeSettlementPaymentMeans>').size).to be >= 2
+        expect(xsd_validate(doc)).to eq([])
+      end
+    end
+
+    it 'validates urn:cen.eu:en16931:2017#conformant#urn:factur-x.eu:1p0:en16931' do
+      doc = with_two_more_payment_means('spec/files/xsd/factur-x/factur-x-en16931.xml',
+                                        'urn:cen.eu:en16931:2017#conformant#urn:factur-x.eu:1p0:en16931')
+      expect(xsd_validate(doc)).to eq([])
+    end
+  end
+
   it 'has no xmlns link pointing at a missing schema' do
     dangling = Dir['lib/xsd/xmlns/*'].select { |link| File.symlink?(link) && !File.exist?(link) }
     expect(dangling).to eq([])
