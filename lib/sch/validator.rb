@@ -356,11 +356,13 @@ module Sch
         pint_schemas_to_validate(schemas, parts)
 
       # SK Tax Data Document (TDD) - pxs:TaxData
-      # The EN16931 (CEN/PEPPOL-EN16931-UBL) schematrons validate a UBL Invoice/CreditNote and do
-      # not apply to the pxs:TaxData wrapper (confirmed against the OpenPeppol TDD testbed SVRL,
-      # which runs only the TDD schematron).
+      # The TDD release ships three artefacts: TDD copies of the CEN and Peppol EN16931 rules, whose
+      # contexts sit under pxs:ReportedDocument, plus the TDD choreography rules. The generic UBL
+      # CEN/PEPPOL schematrons do not apply: their contexts never match the pxs:TaxData wrapper.
       when 'urn:peppol:taxdata:sk-1'
-        %w(Peppol-Slovak-Republic-TDD.sch)
+        %w(Peppol-Slovak-Republic-TDD-CEN-EN16931-UBL.sch
+           Peppol-Slovak-Republic-TDD-PEPPOL-EN16931-UBL.sch
+           Peppol-Slovak-Republic-TDD.sch)
 
       # PPF Flux 1 e-invoicing extract (Profil de Base) — trajectoire DÉMARRAGE.
       # AIFE delivery v1.0 (Note de conception, 31/07/2026); files keep AIFE's own

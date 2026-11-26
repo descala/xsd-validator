@@ -77,6 +77,16 @@ RSpec.describe Xsd::Validator do
     expect(root_namespace_xsd(doc)).to match(%r{factur-x/en16931/FACTUR-X_EN16931\.xsd\z})
   end
 
+  it 'accepts on a CDAR the BR-FR-04 invoice type codes that UNTDID 1001 D22A lacks' do
+    cdar = File.read('spec/files/xsd/cdar/cdar_1_deposee.xml')
+
+    %w(471 472 473 500 501 502 503).each do |code|
+      doc = cdar.sub('<ram:TypeCode>380</ram:TypeCode>', "<ram:TypeCode>#{code}</ram:TypeCode>")
+
+      expect(xsd_validate(doc)).to eq([]), "MDT-91 #{code} rejected"
+    end
+  end
+
   it 'validates spec files' do
     Dir["spec/files/xsd/**/*.xml"].each do |filename|
       next if filename =~ /wrong/
